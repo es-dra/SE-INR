@@ -51,7 +51,12 @@ def make_data_loaders():
 
 def prepare_training():
     if config.get('resume') is not None:
-        sv_file = torch.load(config['resume'])
+        resume_cfg = config['resume']
+        if isinstance(resume_cfg, dict):
+            sv_file = torch.load(resume_cfg['path'],
+                                 map_location=torch.device(resume_cfg.get('map_location', 'cuda')))
+        else:
+            sv_file = torch.load(resume_cfg)
         model = models.make(sv_file['model'], load_sd=True).cuda()
         optimizer = utils.make_optimizer(
             model.parameters(), sv_file['optimizer'], load_sd=True)
@@ -67,10 +72,12 @@ def prepare_training():
         optimizer = utils.make_optimizer(
             model.parameters(), config['optimizer'])
         epoch_start = 1
-        if config.get('multi_step_lr') is None:
-            lr_scheduler = None
-        else:
+        if config.get('cosine_lr') is not None:
+            lr_scheduler = CosineAnnealingLR(optimizer, **config['cosine_lr'])
+        elif config.get('multi_step_lr') is not None:
             lr_scheduler = MultiStepLR(optimizer, **config['multi_step_lr'])
+        else:
+            lr_scheduler = None
 
     log('model: #params={}'.format(utils.compute_num_params(model, text=True)))
     return model, optimizer, epoch_start, lr_scheduler
@@ -250,14 +257,19 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.device
+    # If --device was explicitly passed (not just the default), use it.
+    # Otherwise, respect the inherited CUDA_VISIBLE_DEVICES from parent shell.
+    import sys
+    if '--device' in sys.argv:
+        os.environ['CUDA_VISIBLE_DEVICES'] = args.device
+    # else: keep inherited CUDA_VISIBLE_DEVICES from parent environment
 
     import yaml
     import torch
     import torch.nn as nn
     from tqdm import tqdm
     from torch.utils.data import DataLoader
-    from torch.optim.lr_scheduler import MultiStepLR
+    from torch.optim.lr_scheduler import MultiStepLR, CosineAnnealingLR
     
     import datasets
     import models

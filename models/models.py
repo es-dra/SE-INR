@@ -11,7 +11,7 @@ def register(name):
     return decorator
 
 
-def make(model_spec, args=None, load_sd=False):
+def make(model_spec, args=None, load_sd=False, strict=True):
     if args is not None:
         model_args = copy.deepcopy(model_spec['args'])
         model_args.update(args)
@@ -19,5 +19,5 @@ def make(model_spec, args=None, load_sd=False):
         model_args = model_spec['args']
     model = models[model_spec['name']](**model_args)
     if load_sd:
-        model.load_state_dict(model_spec['sd'])
+        model.load_state_dict(model_spec['sd'], strict=strict)
     return model

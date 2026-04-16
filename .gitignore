@@ -1,0 +1,32 @@
+# Experiment logs (personal learning)
+log/
+
+# Training outputs
+save/
+save_test/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data
+Data/
+
+# Checkpoints
+*.pth
+*.pt
+
+# Logs
+*.log
+training_log*.txt
+
+# Mac
+.DS_Store

@@ -1,3 +1,16 @@
+"""
+SE-INR: Stage 0 - Log-Frequency Positional Encoding
+
+仅替换 LIIF 的标准 Fourier PE 为 Log-Freq PE，MLP decoder 完全不变。
+目标：验证 Log-Freq PE 本身不损害性能。
+
+核心设计（按 Doc1_SE_INR_Architecture_Plan）：
+- K=24 频率通道，对数等距分布 ω_k = ω_min * exp(k * Δω)
+- ω_min=1.0, ω_max=64.0
+- 对 2D 坐标 δ = (δ_x, δ_y) 编码为 [K×4]：每频率 4 分量 [sin(ω_k·δ_x), cos(ω_k·δ_x), sin(ω_k·δ_y), cos(ω_k·δ_y)]
+- MLP 输入改为 [feat, log_freq_pe(rel_coord), cell]，MLP 结构不变
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -5,14 +18,75 @@ import torch.nn.functional as F
 import models
 from models import register
 from utils import make_coord
-import numpy as np
 
 
-@register('liif_old')
-class LIIF(nn.Module):
+class LogFreqPE(nn.Module):
+    """
+    对数频率位置编码器。
+
+    频率集合：ω_k = ω_min * exp(k * Δω), k = 0, 1, ..., K-1
+    其中 Δω = log(ω_max / ω_min) / (K - 1)
+
+    对 2D 坐标 δ = (δ_x, δ_y) 编码为：
+        [sin(ω_0·δ_x), cos(ω_0·δ_x), sin(ω_0·δ_y), cos(ω_0·δ_y),
+         sin(ω_1·δ_x), cos(ω_1·δ_x), sin(ω_1·δ_y), cos(ω_1·δ_y),
+         ...,
+         sin(ω_{K-1}·δ_x), cos(ω_{K-1}·δ_x), sin(ω_{K-1}·δ_y), cos(ω_{K-1}·δ_y)]
+
+    输出形状：[B, Q, K, 4] → reshape 为 [B, Q, K*4]
+    """
+
+    def __init__(self, K=24, omega_min=1.0, omega_max=64.0):
+        super().__init__()
+        self.K = K
+        self.omega_min = omega_min
+        self.omega_max = omega_max
+
+        # 预计算对数等距频率（无可学习参数）
+        delta_omega = (math.log(omega_max) - math.log(omega_min)) / (K - 1)
+        self.register_buffer(
+            'frequencies',
+            torch.tensor([omega_min * math.exp(k * delta_omega) for k in range(K)])
+        )
+
+    def forward(self, rel_coord):
+        """
+        rel_coord: [B, Q, 2] 相对坐标，归一化到 [-1, 1]
+        返回:     [B, Q, K*4] 对数频率 PE
+        """
+        B, Q = rel_coord.shape[:2]
+        freq = self.frequencies.view(1, 1, self.K)           # [1, 1, K]
+
+        delta_x = rel_coord[:, :, 0:1]                        # [B, Q, 1]
+        delta_y = rel_coord[:, :, 1:2]                        # [B, Q, 1]
+
+        # [B, Q, K, 1] * [1, 1, K] = [B, Q, K]
+        wx = (delta_x * freq).unsqueeze(-1)                   # [B, Q, K, 1]
+        wy = (delta_y * freq).unsqueeze(-1)                   # [B, Q, K, 1]
+
+        pe = torch.cat([
+            torch.sin(wx), torch.cos(wx),
+            torch.sin(wy), torch.cos(wy)
+        ], dim=-1)                                             # [B, Q, K, 4]
+
+        return pe.view(B, Q, self.K * 4)                       # [B, Q, K*4]
+
+
+import math
+
+
+@register('se-inr')
+class SEINR(nn.Module):
+    """
+    Stage 0 实现：Log-Freq PE + 标准 LIIF MLP
+
+    仅替换 rel_coord 的编码方式（2D → K*4D Log-Freq PE），
+    MLP decoder 结构与 LIIF 完全一致。
+    """
 
     def __init__(self, encoder_spec, imnet_spec=None,
-                 local_ensemble=True, feat_unfold=True, cell_decode=True):
+                 local_ensemble=True, feat_unfold=True, cell_decode=True,
+                 K=24, omega_min=1.0, omega_max=64.0):
         super().__init__()
         self.local_ensemble = local_ensemble
         self.feat_unfold = feat_unfold
@@ -20,11 +94,16 @@ class LIIF(nn.Module):
 
         self.encoder = models.make(encoder_spec)
 
+        # Log-Freq PE 模块（Stage 0 的核心改动）
+        self.log_freq_pe = LogFreqPE(K=K, omega_min=omega_min, omega_max=omega_max)
+        self.K = K
+        pe_out_dim = K * 4  # 96 for K=24
+
         if imnet_spec is not None:
             imnet_in_dim = self.encoder.out_dim
             if self.feat_unfold:
                 imnet_in_dim *= 9
-            imnet_in_dim += 2 # attach coord
+            imnet_in_dim += pe_out_dim   # 用 Log-Freq PE 替换标准 2D 坐标
             if self.cell_decode:
                 imnet_in_dim += 2
             self.imnet = models.make(imnet_spec, args={'in_dim': imnet_in_dim})
@@ -71,6 +150,7 @@ class LIIF(nn.Module):
                 coord_[:, :, 0] += vx * rx + eps_shift
                 coord_[:, :, 1] += vy * ry + eps_shift
                 coord_.clamp_(-1 + 1e-6, 1 - 1e-6)
+
                 q_feat = F.grid_sample(
                     feat, coord_.flip(-1).unsqueeze(1),
                     mode='nearest', align_corners=False)[:, :, 0, :] \
@@ -80,9 +160,13 @@ class LIIF(nn.Module):
                     mode='nearest', align_corners=False)[:, :, 0, :] \
                     .permute(0, 2, 1)
                 rel_coord = coord - q_coord
-                rel_coord[:, :, 0] *= feat.shape[-2] ##q 这里很重要，这做到了以低分辨率的象素精度为单位1
+                rel_coord[:, :, 0] *= feat.shape[-2]
                 rel_coord[:, :, 1] *= feat.shape[-1]
-                inp = torch.cat([q_feat, rel_coord], dim=-1)
+
+                # === 核心改动：用 Log-Freq PE 替换标准 2D 坐标 ===
+                pe = self.log_freq_pe(rel_coord)              # [B, Q, K*4]
+
+                inp = torch.cat([q_feat, pe], dim=-1)         # [B, Q, feat+pe_dim]
 
                 if self.cell_decode:
                     rel_cell = cell.clone()
@@ -96,7 +180,6 @@ class LIIF(nn.Module):
 
                 area = torch.abs(rel_coord[:, :, 0] * rel_coord[:, :, 1])
                 areas.append(area + 1e-9)
-#        print(rel_coord[:, :, 0])
 
         tot_area = torch.stack(areas).sum(dim=0)
         if self.local_ensemble:
@@ -110,54 +193,3 @@ class LIIF(nn.Module):
     def forward(self, inp, coord, cell):
         self.gen_feat(inp)
         return self.query_rgb(coord, cell)
-    
-    
-    
-    def ImfunctionObserve(self, ind,  shave = 10):
-        feat = self.feat
-        feat = feat[ind, :, shave:-shave, shave:-shave].unsqueeze(0)
-#        pred = feat
-
-
-        if self.feat_unfold:
-            feat = F.unfold(feat, 3, padding=1).view(
-                feat.shape[0], feat.shape[1] * 9, feat.shape[2], feat.shape[3])
-
-        B,C,H,W = feat.size()
-        q_feat = feat.permute(0,2,3,1) 
-        q_feat = torch.cat([q_feat, torch.ones(B,H,W,2).to(feat.device)], dim = 3)
-#        bs, q = q_feat.shape[:2]
-#        inp = torch.cat([q_feat, rel_coord], dim=-1)                
-        X = self.coordGen() # pxpx2
-        p1,p2,_ = X.size()
-        X = torch.cat([torch.ones(p1,p2,C).to(feat.device),X], 2)
-
-        if self.cell_decode:
-            X = torch.cat([X, torch.ones( p1, p2,2).to(feat.device)], dim=2)
-            q_feat = torch.cat([q_feat, torch.ones(B,H,W,2).to(feat.device)], dim=3)
-                        
-        inp = q_feat.unsqueeze(3).unsqueeze(3)*X.unsqueeze(0).unsqueeze(0).unsqueeze(0) # BxHxWXp1xp2x(C+4)
-#        print(inp.size())
-        pred = self.imnet(inp.view(B*H*W*p1*p2, -1)).view(B, H,  W, p1, p2, -1)
-
-        return pred
-    
-    
-    def coordGen(self, Num = 60):
-        x = np.arange(-Num,Num+1)/Num
-        x = np.tile(x, [2*Num+1, 1])
-        x = torch.Tensor(x).to(feat.device)
-        y = x.permute(1,0)
-        X = torch.stack([x,y], dim=2)
-        return X
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    

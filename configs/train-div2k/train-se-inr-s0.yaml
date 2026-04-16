@@ -1,3 +1,19 @@
+# Stage 0: Log-Freq PE 隔离验证
+#
+# 目标：验证 Log-Freq PE 本身不损害性能。
+# 仅替换 LIIF 的标准 Fourier PE 为 Log-Freq PE，MLP decoder 完全不变。
+#
+# 对比基准：LIIF (train-edsr-baseline-liif.yaml)
+#   - MLP input: feat(2304) + coord(2) + cell(2) = 2308
+#   - MLP hidden: [256, 256, 256, 256]
+#
+# Stage 0 实验：
+#   - Log-Freq PE: K=24, ω∈[1, 64] → 96维
+#   - MLP input: feat(2304) + pe(96) + cell(2) = 2402
+#   - MLP hidden: [256, 256, 256, 256] (结构完全不变)
+#
+# 成功标准：PSNR ≥ LIIF baseline - 0.1 dB
+
 train_dataset:
   dataset:
     name: image-folder
@@ -29,33 +45,42 @@ val_dataset:
       scale_max: 4
       sample_q: 2304
   batch_size: 16
-  
 
 data_norm:
   inp: {sub: [0.5], div: [0.5]}
   gt: {sub: [0.5], div: [0.5]}
 
 model:
-  name: liif_old
+  name: se-inr
   args:
     encoder_spec:
       name: edsr-baseline
       args:
         no_upsampling: true
+    # Stage 0 核心配置：Log-Freq PE 参数
+    K: 24
+    omega_min: 1.0
+    omega_max: 64.0
+    # MLP 保持与 LIIF 完全一致
     imnet_spec:
       name: mlp
       args:
         out_dim: 3
         hidden_list: [256, 256, 256, 256]
+    # LIIF 标准配置（不变）
+    local_ensemble: true
+    feat_unfold: true
+    cell_decode: true
 
 optimizer:
   name: adam
   args:
     lr: 1.e-4
+
 epoch_max: 1000
 multi_step_lr:
-  milestones: [200, 400, 600, 800]
+  milestones: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900]
   gamma: 0.5
 
 epoch_val: 1
-epoch_save: 50
+epoch_save: 100

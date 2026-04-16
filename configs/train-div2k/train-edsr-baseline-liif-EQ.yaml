@@ -50,20 +50,9 @@ model:
         hidden_list: [512, 256, 256, 256]
     tranNum: 4
     cell_decode: true
-    feat_unfold: false
+    feat_unfold: true
     local_ensemble: true
         
-Im_dataset:
-  dataset:
-    name: paired-image-folders
-    args:
-      root_path_1: ../Data/benchmark/ImTest/LR_bicubic/X4
-      root_path_2: ../Data/benchmark/ImTest/HR
-  wrapper:
-    name: sr-implicit-paired
-    args: {}
-  batch_size: 1
-eval_type: benchmark-4
 
 optimizer:
   name: adam

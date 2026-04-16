@@ -1,3 +1,6 @@
+# 继续训练配置：从 epoch-last.pth (epoch 890) 继续到 1000
+# Stage 1: SE-Decoder
+
 train_dataset:
   dataset:
     name: image-folder
@@ -29,33 +32,41 @@ val_dataset:
       scale_max: 4
       sample_q: 2304
   batch_size: 16
-  
 
 data_norm:
   inp: {sub: [0.5], div: [0.5]}
   gt: {sub: [0.5], div: [0.5]}
 
 model:
-  name: liif_old
+  name: se-inr-s1
   args:
     encoder_spec:
       name: edsr-baseline
       args:
         no_upsampling: true
-    imnet_spec:
-      name: mlp
-      args:
-        out_dim: 3
-        hidden_list: [256, 256, 256, 256]
+    K: 24
+    omega_min: 1.0
+    omega_max: 64.0
+    C_h: 64
+    num_layers: 2
+    kernel_size: 3
+    local_ensemble: true
+    feat_unfold: true
 
 optimizer:
   name: adam
   args:
     lr: 1.e-4
+
 epoch_max: 1000
 multi_step_lr:
-  milestones: [200, 400, 600, 800]
+  milestones: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900]
   gamma: 0.5
 
 epoch_val: 1
 epoch_save: 50
+
+# 继续训练关键配置
+resume:
+  path: /workspace/SE-INR/Equivariant-ASISR/save/se-inr-s1-1000-correct_1/epoch-last.pth
+  map_location: cpu

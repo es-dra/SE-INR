@@ -69,7 +69,7 @@ class LIIF(nn.Module):
         rx = 2 / feat.shape[-2] / 2
         ry = 2 / feat.shape[-1] / 2
 
-        feat_coord = make_coord(feat.shape[-2:], flatten=False).cuda() \
+        feat_coord = make_coord(feat.shape[-2:], flatten=False).to(feat.device) \
             .permute(2, 0, 1) \
             .unsqueeze(0).expand(feat.shape[0], 2, *feat.shape[-2:])
 
@@ -138,16 +138,16 @@ class LIIF(nn.Module):
 
         B,C,H,W = feat.size()
         q_feat = feat.permute(0,2,3,1) 
-        q_feat = torch.cat([q_feat, torch.ones(B,H,W,2).cuda()], dim = 3)
+        q_feat = torch.cat([q_feat, torch.ones(B,H,W,2).to(feat.device)], dim = 3)
 #        bs, q = q_feat.shape[:2]
 #        inp = torch.cat([q_feat, rel_coord], dim=-1)                
         X = self.coordGen() # pxpx2
         p1,p2,_ = X.size()
-        X = torch.cat([torch.ones(p1,p2,C).cuda(),X], 2)
+        X = torch.cat([torch.ones(p1,p2,C).to(feat.device),X], 2)
 
         if self.cell_decode:
-            X = torch.cat([X, torch.ones( p1, p2,2).cuda()], dim=2)
-            q_feat = torch.cat([q_feat, torch.ones(B,H,W,2).cuda()], dim=3)
+            X = torch.cat([X, torch.ones( p1, p2,2).to(feat.device)], dim=2)
+            q_feat = torch.cat([q_feat, torch.ones(B,H,W,2).to(feat.device)], dim=3)
                         
         inp = q_feat.unsqueeze(3).unsqueeze(3)*X.unsqueeze(0).unsqueeze(0).unsqueeze(0) # BxHxWXp1xp2x(C+4)
 #        print(inp.size())
@@ -157,12 +157,15 @@ class LIIF(nn.Module):
     
     
     def coordGen(self, Num = 60):
-        x = np.arange(-Num,Num+1)/Num
-        x = np.tile(x, [2*Num+1, 1])
-        x = torch.Tensor(x).cuda()
-        y = x.permute(1,0)
-        X = torch.stack([x,y], dim=2)
-        return X
+        # Cache on first call, move to appropriate device on subsequent calls
+        if not hasattr(self, '_coord_cache') or self._coord_cache[0] != Num:
+            x = np.arange(-Num,Num+1)/Num
+            x = np.tile(x, [2*Num+1, 1])
+            x = torch.Tensor(x)
+            y = x.permute(1,0)
+            X = torch.stack([x,y], dim=2)
+            self._coord_cache = (Num, X)
+        return self._coord_cache[1]
         
         
         

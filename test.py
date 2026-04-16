@@ -29,7 +29,9 @@ def batched_predict(model, inp, coord, cell, bsize):
 
 
 def eval_psnr(loader, model, data_norm=None, eval_type=None, eval_bsize=None,
-              verbose=False,args = None, ImNumber = 0, window_size = None):
+              verbose=False, args=None, ImNumber=0, window_size=None, device=None):
+    if device is None:
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model.eval()
 
     if data_norm is None:
@@ -38,11 +40,11 @@ def eval_psnr(loader, model, data_norm=None, eval_type=None, eval_bsize=None,
             'gt': {'sub': [0], 'div': [1]}
         }
     t = data_norm['inp']
-    inp_sub = torch.FloatTensor(t['sub']).view(1, -1, 1, 1).cuda()
-    inp_div = torch.FloatTensor(t['div']).view(1, -1, 1, 1).cuda()
+    inp_sub = torch.FloatTensor(t['sub']).view(1, -1, 1, 1).to(device)
+    inp_div = torch.FloatTensor(t['div']).view(1, -1, 1, 1).to(device)
     t = data_norm['gt']
-    gt_sub = torch.FloatTensor(t['sub']).view(1, 1, -1).cuda()
-    gt_div = torch.FloatTensor(t['div']).view(1, 1, -1).cuda()
+    gt_sub = torch.FloatTensor(t['sub']).view(1, 1, -1).to(device)
+    gt_div = torch.FloatTensor(t['div']).view(1, 1, -1).to(device)
 
     if eval_type is None:
         metric_fn = utils.calc_psnr
@@ -61,7 +63,7 @@ def eval_psnr(loader, model, data_norm=None, eval_type=None, eval_bsize=None,
     pbar = tqdm(loader, leave=False, desc='val')
     for batch in pbar:
         for k, v in batch.items():
-            batch[k] = v.cuda()
+            batch[k] = v.to(device)
 
         inp = (batch['inp'] - inp_sub) / inp_div
         
@@ -76,8 +78,8 @@ def eval_psnr(loader, model, data_norm=None, eval_type=None, eval_bsize=None,
             inp = torch.cat([inp, torch.flip(inp, [2])], 2)[:, :, :h_old + h_pad, :]
             inp = torch.cat([inp, torch.flip(inp, [3])], 3)[:, :, :, :w_old + w_pad]
             
-            coord = utils.make_coord((scale*(h_old+h_pad), scale*(w_old+w_pad))).unsqueeze(0).cuda()
-            cell = torch.ones_like(coord)
+            coord = utils.make_coord((scale*(h_old+h_pad), scale*(w_old+w_pad))).unsqueeze(0).to(device)
+            cell = torch.ones_like(coord).to(device)
             cell[:, :, 0] *= 2 / inp.shape[-2] / scale
             cell[:, :, 1] *= 2 / inp.shape[-1] / scale
             # print('window_size = {:d}'.format(window_size))
@@ -140,8 +142,6 @@ if __name__ == '__main__':
     # parser.add_argument('--window', default='0')
     args = parser.parse_args()
 
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.device
-
     with open(args.config, 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -151,13 +151,14 @@ if __name__ == '__main__':
     loader = DataLoader(dataset, batch_size=spec['batch_size'],
         num_workers=8, pin_memory=True)
 
-    model_spec = torch.load(args.model)['model']
-    model = models.make(model_spec, load_sd=True).cuda()
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    model_spec = torch.load(args.model, map_location='cpu')['model']
+    model = models.make(model_spec, load_sd=True, strict=False).to(device)
 
     res = eval_psnr(loader, model,
         data_norm=config.get('data_norm'),
         eval_type=config.get('eval_type'),
         eval_bsize=config.get('eval_bsize'),
         window_size=config.get('window_size'),
-        verbose=True)
+        verbose=True, device=device)
     print('result: {:.4f}'.format(res))
