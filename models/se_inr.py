@@ -1,16 +1,15 @@
 """
-SE-INR: Stage 0 - Log-Frequency Positional Encoding
+SE-INR: Scale-Equivariant Implicit Neural Representation
 
-仅替换 LIIF 的标准 Fourier PE 为 Log-Freq PE，MLP decoder 完全不变。
-目标：验证 Log-Freq PE 本身不损害性能。
-
-核心设计（按 Doc1_SE_INR_Architecture_Plan）：
-- K=24 频率通道，对数等距分布 ω_k = ω_min * exp(k * Δω)
-- ω_min=1.0, ω_max=64.0
-- 对 2D 坐标 δ = (δ_x, δ_y) 编码为 [K×4]：每频率 4 分量 [sin(ω_k·δ_x), cos(ω_k·δ_x), sin(ω_k·δ_y), cos(ω_k·δ_y)]
-- MLP 输入改为 [feat, log_freq_pe(rel_coord), cell]，MLP 结构不变
+Architecture:
+- PolarLogFreqPE: Polar coordinate log-frequency positional encoding
+- AdditiveInjection: Additive feature fusion
+- SE-Decoder: 1D convolution along frequency axis (GELU, bias=False)
+- GaussianScaleReadout: Gaussian soft interpolation scale readout
+- ResidualBranch: Scale-specific detail branch with learnable alpha
 """
 
+import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -20,108 +19,252 @@ from models import register
 from utils import make_coord
 
 
-class LogFreqPE(nn.Module):
+class PolarLogFreqPE(nn.Module):
     """
-    对数频率位置编码器。
+    Polar coordinate log-frequency positional encoding.
 
-    频率集合：ω_k = ω_min * exp(k * Δω), k = 0, 1, ..., K-1
-    其中 Δω = log(ω_max / ω_min) / (K - 1)
+    rho = log(||dx|| + softplus(eps_raw))  [smooth, JIT-compatible]
+    theta = atan2(dy, dx)
 
-    对 2D 坐标 δ = (δ_x, δ_y) 编码为：
-        [sin(ω_0·δ_x), cos(ω_0·δ_x), sin(ω_0·δ_y), cos(ω_0·δ_y),
-         sin(ω_1·δ_x), cos(ω_1·δ_x), sin(ω_1·δ_y), cos(ω_1·δ_y),
-         ...,
-         sin(ω_{K-1}·δ_x), cos(ω_{K-1}·δ_x), sin(ω_{K-1}·δ_y), cos(ω_{K-1}·δ_y)]
+    Frequency encoding along rho: [sin(w_k * rho), cos(w_k * rho)] for k=0..K-1
+    Angular encoding: [sin(m * theta), cos(m * theta)] for m=1..M
 
-    输出形状：[B, Q, K, 4] → reshape 为 [B, Q, K*4]
+    Output: [B, Q, K, D_pe] where D_pe = 2 + 2*M
     """
 
-    def __init__(self, K=24, omega_min=1.0, omega_max=64.0):
+    def __init__(self, K=24, omega_min=1.0, omega_max=30.0, M=8):
         super().__init__()
         self.K = K
+        self.M = M
         self.omega_min = omega_min
         self.omega_max = omega_max
+        self.D_pe = 2 + 2 * M
 
-        # 预计算对数等距频率（无可学习参数）
         delta_omega = (math.log(omega_max) - math.log(omega_min)) / (K - 1)
         self.register_buffer(
             'frequencies',
             torch.tensor([omega_min * math.exp(k * delta_omega) for k in range(K)])
         )
+        self.delta_omega = delta_omega
+
+        self.eps_raw = nn.Parameter(torch.tensor(-5.0))
 
     def forward(self, rel_coord):
         """
-        rel_coord: [B, Q, 2] 相对坐标，归一化到 [-1, 1]
-        返回:     [B, Q, K*4] 对数频率 PE
+        rel_coord: [B, Q, 2] relative coordinates in LR pixel units
+        Returns:   [B, Q, K, D_pe]
         """
         B, Q = rel_coord.shape[:2]
-        freq = self.frequencies.view(1, 1, self.K)           # [1, 1, K]
 
-        delta_x = rel_coord[:, :, 0:1]                        # [B, Q, 1]
-        delta_y = rel_coord[:, :, 1:2]                        # [B, Q, 1]
+        eps = F.softplus(self.eps_raw)
+        r_sq = (rel_coord * rel_coord).sum(dim=-1, keepdim=True)
+        rho = 0.5 * torch.log(r_sq + eps)
+        theta = torch.atan2(rel_coord[..., 1:2], rel_coord[..., 0:1] + eps)
 
-        # [B, Q, K, 1] * [1, 1, K] = [B, Q, K]
-        wx = (delta_x * freq).unsqueeze(-1)                   # [B, Q, K, 1]
-        wy = (delta_y * freq).unsqueeze(-1)                   # [B, Q, K, 1]
+        freq = self.frequencies.view(1, 1, self.K)
+        wr = (rho * freq).unsqueeze(-1)
+        E_rho = torch.cat([torch.sin(wr), torch.cos(wr)], dim=-1)
 
-        pe = torch.cat([
-            torch.sin(wx), torch.cos(wx),
-            torch.sin(wy), torch.cos(wy)
-        ], dim=-1)                                             # [B, Q, K, 4]
+        m_vals = torch.arange(1, self.M + 1, device=theta.device, dtype=theta.dtype)
+        m_theta = theta * m_vals.view(1, 1, self.M)
+        E_theta = torch.cat([torch.sin(m_theta), torch.cos(m_theta)], dim=-1)
+        E_theta = E_theta.unsqueeze(2).expand(B, Q, self.K, 2 * self.M)
 
-        return pe.view(B, Q, self.K * 4)                       # [B, Q, K*4]
+        E = torch.cat([E_rho, E_theta], dim=-1)
+        return E
 
 
-import math
+class AdditiveInjection(nn.Module):
+    """
+    Additive feature injection: h = pe_proj(E) + z_proj(z).unsqueeze(1)
+    z_proj is shared across all frequency positions (equivariance-safe).
+    """
+
+    def __init__(self, feat_dim, D_pe=18, C_h=128):
+        super().__init__()
+        self.C_h = C_h
+        self.pe_proj = nn.Linear(D_pe, C_h, bias=False)
+        self.z_proj = nn.Linear(feat_dim, C_h, bias=True)
+
+    def forward(self, z, pe):
+        """
+        z:  [B*Q, feat_dim] encoder features
+        pe: [B, Q, K, D_pe] positional encoding
+        Returns: [B, Q, K, C_h]
+        """
+        B, Q, K = pe.shape[:3]
+
+        pe_flat = pe.view(B * Q, K, -1)
+        h_pe = self.pe_proj(pe_flat)
+        z_proj = self.z_proj(z)
+        h = h_pe + z_proj.unsqueeze(1)
+
+        return h.view(B, Q, K, self.C_h)
+
+
+class SEDecoderLayer(nn.Module):
+    """
+    SE-Decoder single layer: 1D convolution along frequency axis + residual.
+    Conv1d preserves translation equivariance. bias=False. GELU activation.
+    """
+
+    def __init__(self, C_h, kernel_size=3):
+        super().__init__()
+        padding = kernel_size // 2
+        self.conv = nn.Conv1d(
+            C_h, C_h, kernel_size,
+            padding=padding, bias=False
+        )
+        self.act = nn.GELU()
+
+    def forward(self, h):
+        return self.act(self.conv(h)) + h
+
+
+class SEDecoder(nn.Module):
+    """
+    SE-Decoder: multi-layer 1D convolution along frequency axis.
+    3 layers of Conv1d with residual connections.
+    """
+
+    def __init__(self, C_h=128, num_layers=3, kernel_size=3):
+        super().__init__()
+        self.layers = nn.ModuleList([
+            SEDecoderLayer(C_h, kernel_size)
+            for _ in range(num_layers)
+        ])
+
+    def forward(self, h):
+        for layer in self.layers:
+            h = layer(h)
+        return h
+
+
+class GaussianScaleReadout(nn.Module):
+    """
+    Gaussian soft interpolation scale readout.
+
+    tau = (K-1) * (log s - log s_min) / (log s_max_ood - log s_min), clamp(0, K-1)
+    alpha_k = softmax(-(k - tau)^2 / (2 * sigma^2))
+    y_eq = sum_k alpha_k * to_rgb_k(H_k)  (per-position projection)
+    """
+
+    def __init__(self, C_h, K, inp_size, s_min=1.0, s_max_ood=30.0, sigma=0.8):
+        super().__init__()
+        self.C_h = C_h
+        self.K = K
+        self.sigma = sigma
+        self.inp_size = inp_size
+        self.s_min = s_min
+        self.s_max_ood = s_max_ood
+        self.register_buffer('k_idx', torch.arange(K, dtype=torch.float32))
+
+        self.to_rgb_weight = nn.Parameter(torch.empty(K, 3, C_h))
+        self.to_rgb_bias = nn.Parameter(torch.zeros(K, 3))
+        with torch.no_grad():
+            for k in range(K):
+                nn.init.kaiming_uniform_(self.to_rgb_weight[k], a=math.sqrt(5))
+
+    def _compute_tau(self, cell):
+        cell_geomean = (cell[:, 0] * cell[:, 1]).sqrt().clamp(min=1e-10)
+        log_s = math.log(2.0 / self.inp_size) - torch.log(cell_geomean)
+        tau = (self.K - 1) * (log_s - math.log(self.s_min)) / \
+              (math.log(self.s_max_ood) - math.log(self.s_min))
+        tau = tau.clamp(0, self.K - 1)
+        return tau
+
+    def forward(self, h, cell):
+        """
+        h:    [B*Q, C_h, K]
+        cell: [B*Q, 2]
+        Returns: [B*Q, 3]
+        """
+        BQ, C_h, K = h.shape
+
+        tau = self._compute_tau(cell)
+
+        k_idx = self.k_idx.view(1, K)
+        alpha = -(k_idx - tau.unsqueeze(1)) ** 2 / (2 * self.sigma ** 2)
+        alpha = F.softmax(alpha, dim=1)
+
+        h_perm = h.permute(0, 2, 1)
+        rgb_k = torch.einsum('bkc,koc->bko', h_perm, self.to_rgb_weight) + self.to_rgb_bias
+
+        y_eq = (alpha.unsqueeze(-1) * rgb_k).sum(dim=1)
+        return y_eq
+
+
+class ResidualBranch(nn.Module):
+    """
+    Residual branch for scale-specific details.
+    MLP: [z, rel_coord, cell] -> 256 -> 256 -> 3
+    """
+
+    def __init__(self, feat_dim, hidden_dim=256):
+        super().__init__()
+        in_dim = feat_dim + 4
+        self.layers = nn.Sequential(
+            nn.Linear(in_dim, hidden_dim),
+            nn.ReLU(inplace=True),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(inplace=True),
+            nn.Linear(hidden_dim, 3)
+        )
+
+    def forward(self, z, rel_coord, cell):
+        """
+        z:         [B*Q, feat_dim]
+        rel_coord: [B*Q, 2]
+        cell:      [B*Q, 2]
+        Returns:   [B*Q, 3]
+        """
+        inp = torch.cat([z, rel_coord, cell], dim=-1)
+        return self.layers(inp)
 
 
 @register('se-inr')
 class SEINR(nn.Module):
     """
-    Stage 0 实现：Log-Freq PE + 标准 LIIF MLP
+    Scale-Equivariant Implicit Neural Representation.
 
-    仅替换 rel_coord 的编码方式（2D → K*4D Log-Freq PE），
-    MLP decoder 结构与 LIIF 完全一致。
+    y = y_eq + sigmoid(alpha_raw) * y_res, alpha_raw init 0 -> alpha=0.5
     """
 
-    def __init__(self, encoder_spec, imnet_spec=None,
-                 local_ensemble=True, feat_unfold=True, cell_decode=True,
-                 K=24, omega_min=1.0, omega_max=64.0):
+    def __init__(self, encoder_spec,
+                 K=24, omega_min=1.0, omega_max=30.0, M=8,
+                 C_h=128, num_layers=3, kernel_size=3,
+                 sigma=0.8, s_min=1.0, s_max_ood=30.0,
+                 local_ensemble=True, feat_unfold=False,
+                 inp_size=48):
         super().__init__()
         self.local_ensemble = local_ensemble
         self.feat_unfold = feat_unfold
-        self.cell_decode = cell_decode
+        self.K = K
+        self.C_h = C_h
 
         self.encoder = models.make(encoder_spec)
 
-        # Log-Freq PE 模块（Stage 0 的核心改动）
-        self.log_freq_pe = LogFreqPE(K=K, omega_min=omega_min, omega_max=omega_max)
-        self.K = K
-        pe_out_dim = K * 4  # 96 for K=24
+        self.polar_pe = PolarLogFreqPE(K=K, omega_min=omega_min, omega_max=omega_max, M=M)
+        delta_omega = (math.log(omega_max) - math.log(omega_min)) / (K - 1)
+        self.delta_omega = delta_omega
+        D_pe = 2 + 2 * M
 
-        if imnet_spec is not None:
-            imnet_in_dim = self.encoder.out_dim
-            if self.feat_unfold:
-                imnet_in_dim *= 9
-            imnet_in_dim += pe_out_dim   # 用 Log-Freq PE 替换标准 2D 坐标
-            if self.cell_decode:
-                imnet_in_dim += 2
-            self.imnet = models.make(imnet_spec, args={'in_dim': imnet_in_dim})
-        else:
-            self.imnet = None
+        feat_dim = self.encoder.out_dim
+        if feat_unfold:
+            feat_dim *= 9
+
+        self.add_inj = AdditiveInjection(feat_dim, D_pe=D_pe, C_h=C_h)
+        self.se_decoder = SEDecoder(C_h=C_h, num_layers=num_layers, kernel_size=kernel_size)
+        self.scale_readout = GaussianScaleReadout(C_h, K, inp_size, s_min, s_max_ood, sigma)
+        self.res_branch = ResidualBranch(feat_dim, hidden_dim=256)
+        self.alpha_raw = nn.Parameter(torch.zeros(1))
 
     def gen_feat(self, inp):
         self.feat = self.encoder(inp)
         return self.feat
 
-    def query_rgb(self, coord, cell=None):
+    def query_rgb(self, coord, cell=None, return_eq=False, cons_ratio=None):
         feat = self.feat
-
-        if self.imnet is None:
-            ret = F.grid_sample(feat, coord.flip(-1).unsqueeze(1),
-                mode='nearest', align_corners=False)[:, :, 0, :] \
-                .permute(0, 2, 1)
-            return ret
 
         if self.feat_unfold:
             feat = F.unfold(feat, 3, padding=1).view(
@@ -134,7 +277,6 @@ class SEINR(nn.Module):
         else:
             vx_lst, vy_lst, eps_shift = [0], [0], 0
 
-        # field radius (global: [-1, 1])
         rx = 2 / feat.shape[-2] / 2
         ry = 2 / feat.shape[-1] / 2
 
@@ -144,6 +286,8 @@ class SEINR(nn.Module):
 
         preds = []
         areas = []
+        y_eq_preds = [] if return_eq else None
+
         for vx in vx_lst:
             for vy in vy_lst:
                 coord_ = coord.clone()
@@ -163,20 +307,42 @@ class SEINR(nn.Module):
                 rel_coord[:, :, 0] *= feat.shape[-2]
                 rel_coord[:, :, 1] *= feat.shape[-1]
 
-                # === 核心改动：用 Log-Freq PE 替换标准 2D 坐标 ===
-                pe = self.log_freq_pe(rel_coord)              # [B, Q, K*4]
+                B, Q = coord.shape[:2]
+                z = q_feat.reshape(B * Q, -1)
 
-                inp = torch.cat([q_feat, pe], dim=-1)         # [B, Q, feat+pe_dim]
+                if cons_ratio is not None:
+                    rel_coord_pe = rel_coord * cons_ratio
+                    cell_readout = cell / cons_ratio
+                else:
+                    rel_coord_pe = rel_coord
+                    cell_readout = cell
 
-                if self.cell_decode:
-                    rel_cell = cell.clone()
-                    rel_cell[:, :, 0] *= feat.shape[-2]
-                    rel_cell[:, :, 1] *= feat.shape[-1]
-                    inp = torch.cat([inp, rel_cell], dim=-1)
+                pe = self.polar_pe(rel_coord_pe)
 
-                bs, q = coord.shape[:2]
-                pred = self.imnet(inp.view(bs * q, -1)).view(bs, q, -1)
+                h = self.add_inj(z, pe)
+
+                h = h.permute(0, 1, 3, 2)
+                h = h.reshape(B * Q, self.C_h, self.K)
+                h = self.se_decoder(h)
+
+                cell_b_r = cell_readout[:, 0, :]
+                cell_bq_r = cell_b_r.unsqueeze(1).expand(B, Q, 2).reshape(B * Q, 2)
+
+                y_eq = self.scale_readout(h, cell_bq_r)
+                y_eq = y_eq.view(B, Q, 3)
+
+                cell_b = cell[:, 0, :]
+                cell_bq = cell_b.unsqueeze(1).expand(B, Q, 2).reshape(B * Q, 2)
+
+                rel_coord_bq = rel_coord.reshape(B * Q, 2)
+                y_res = self.res_branch(z, rel_coord_bq, cell_bq)
+                y_res = y_res.view(B, Q, 3)
+
+                pred = y_eq + torch.sigmoid(self.alpha_raw) * y_res
+
                 preds.append(pred)
+                if return_eq:
+                    y_eq_preds.append(y_eq)
 
                 area = torch.abs(rel_coord[:, :, 0] * rel_coord[:, :, 1])
                 areas.append(area + 1e-9)
@@ -188,8 +354,15 @@ class SEINR(nn.Module):
         ret = 0
         for pred, area in zip(preds, areas):
             ret = ret + pred * (area / tot_area).unsqueeze(-1)
+
+        if return_eq:
+            ret_eq = 0
+            for y_eq, area in zip(y_eq_preds, areas):
+                ret_eq = ret_eq + y_eq * (area / tot_area).unsqueeze(-1)
+            return ret, ret_eq
+
         return ret
 
-    def forward(self, inp, coord, cell):
+    def forward(self, inp, coord, cell, return_eq=False, cons_ratio=None):
         self.gen_feat(inp)
-        return self.query_rgb(coord, cell)
+        return self.query_rgb(coord, cell, return_eq=return_eq, cons_ratio=cons_ratio)

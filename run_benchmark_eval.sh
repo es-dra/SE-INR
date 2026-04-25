@@ -7,7 +7,7 @@ cd $BASE
 MODELS=(
     "save/edsr-baseline-liif/epoch-best.pth:LIIF_baseline"
     "save/edsr-baseline-liif-EQ/epoch-best.pth:LIIF_EQ"
-    "save/se-inr-s0/epoch-best.pth:SE_INR_S0"
+    "save/se-inr/epoch-best.pth:SE_INR"
 )
 
 BENCHMARKS=("Set5" "Set14" "BSD100" "Urban100")

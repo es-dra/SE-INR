@@ -16,6 +16,12 @@
         epoch_max:
         (multi_step_lr):
             milestones: []; gamma: 0.5
+        (cosine_lr):
+            T_max: ; eta_min:
+        (warmup_cosine_lr):
+            warmup_steps: ; eta_min:
+        (lambda_cons): float (default 0.0)
+        (grad_clip): float (default None)
         (resume): *.pth
 
         (epoch_val): ; (epoch_save):
@@ -38,7 +44,7 @@ def make_data_loader(spec, tag=''):
         log('  {}: shape={}'.format(k, tuple(v.shape)))
 
     loader = DataLoader(dataset, batch_size=spec['batch_size'],
-        shuffle=(tag == 'train'), num_workers=8, pin_memory=True)
+        shuffle=(tag == 'train'), num_workers=2, persistent_workers=True, pin_memory=True)
     return loader
 
 
@@ -49,7 +55,21 @@ def make_data_loaders():
     return train_loader, val_loader, Im_loader
 
 
-def prepare_training():
+def get_cosine_schedule_with_warmup(optimizer, num_warmup_steps, num_training_steps, eta_min=0):
+    def lr_lambda(current_step):
+        if current_step < num_warmup_steps:
+            return float(current_step) / float(max(1, num_warmup_steps))
+        progress = float(current_step - num_warmup_steps) / float(
+            max(1, num_training_steps - num_warmup_steps))
+        return max(eta_min / optimizer.defaults['lr'],
+                   0.5 * (1.0 + math.cos(math.pi * progress)))
+    return LambdaLR(optimizer, lr_lambda)
+
+
+def prepare_training(train_loader=None):
+    epoch_max = config['epoch_max']
+    step_scheduler = False
+
     if config.get('resume') is not None:
         resume_cfg = config['resume']
         if isinstance(resume_cfg, dict):
@@ -61,18 +81,37 @@ def prepare_training():
         optimizer = utils.make_optimizer(
             model.parameters(), sv_file['optimizer'], load_sd=True)
         epoch_start = sv_file['epoch'] + 1
-        if config.get('multi_step_lr') is None:
-            lr_scheduler = None
-        else:
+        if config.get('warmup_cosine_lr') is not None and train_loader is not None:
+            warmup_cfg = config['warmup_cosine_lr']
+            warmup_steps = warmup_cfg['warmup_steps']
+            eta_min = warmup_cfg.get('eta_min', 1e-7)
+            total_steps = epoch_max * len(train_loader)
+            lr_scheduler = get_cosine_schedule_with_warmup(
+                optimizer, warmup_steps, total_steps, eta_min)
+            step_scheduler = True
+        elif config.get('cosine_lr') is not None:
+            lr_scheduler = CosineAnnealingLR(optimizer, **config['cosine_lr'])
+        elif config.get('multi_step_lr') is not None:
             lr_scheduler = MultiStepLR(optimizer, **config['multi_step_lr'])
-        for _ in range(epoch_start - 1):
-            lr_scheduler.step()
+        else:
+            lr_scheduler = None
+        if not step_scheduler:
+            for _ in range(epoch_start - 1):
+                lr_scheduler.step() if lr_scheduler else None
     else:
         model = models.make(config['model']).cuda()
         optimizer = utils.make_optimizer(
             model.parameters(), config['optimizer'])
         epoch_start = 1
-        if config.get('cosine_lr') is not None:
+        if config.get('warmup_cosine_lr') is not None and train_loader is not None:
+            warmup_cfg = config['warmup_cosine_lr']
+            warmup_steps = warmup_cfg['warmup_steps']
+            eta_min = warmup_cfg.get('eta_min', 1e-7)
+            total_steps = epoch_max * len(train_loader)
+            lr_scheduler = get_cosine_schedule_with_warmup(
+                optimizer, warmup_steps, total_steps, eta_min)
+            step_scheduler = True
+        elif config.get('cosine_lr') is not None:
             lr_scheduler = CosineAnnealingLR(optimizer, **config['cosine_lr'])
         elif config.get('multi_step_lr') is not None:
             lr_scheduler = MultiStepLR(optimizer, **config['multi_step_lr'])
@@ -80,13 +119,16 @@ def prepare_training():
             lr_scheduler = None
 
     log('model: #params={}'.format(utils.compute_num_params(model, text=True)))
-    return model, optimizer, epoch_start, lr_scheduler
+    return model, optimizer, epoch_start, lr_scheduler, step_scheduler
 
 
-def train(train_loader, model, optimizer):
+def train(train_loader, model, optimizer, lr_scheduler=None, step_scheduler=False,
+          lambda_cons=0.0, grad_clip=None, use_amp=False):
     model.train()
     loss_fn = nn.L1Loss()
     train_loss = utils.Averager()
+
+    scaler = torch.amp.GradScaler('cuda', enabled=use_amp)
 
     data_norm = config['data_norm']
     t = data_norm['inp']
@@ -101,16 +143,40 @@ def train(train_loader, model, optimizer):
             batch[k] = v.cuda()
 
         inp = (batch['inp'] - inp_sub) / inp_div
-        pred = model(inp, batch['coord'], batch['cell'])
-
         gt = (batch['gt'] - gt_sub) / gt_div
-        loss = loss_fn(pred, gt)
+
+        with torch.amp.autocast('cuda', enabled=use_amp):
+            if lambda_cons > 0:
+                pred, y_eq1 = model(inp, batch['coord'], batch['cell'], return_eq=True)
+                loss_main = loss_fn(pred, gt)
+
+                B = batch['cell'].shape[0]
+                cons_ratio = torch.rand(B, 1, 1, device=batch['cell'].device) * 1.5 + 0.5
+
+                with torch.no_grad():
+                    _, y_eq2 = model(inp, batch['coord'], batch['cell'],
+                                     return_eq=True, cons_ratio=cons_ratio)
+
+                loss_cons = F.mse_loss(y_eq1, y_eq2.detach())
+                loss = loss_main + lambda_cons * loss_cons
+            else:
+                pred = model(inp, batch['coord'], batch['cell'])
+                loss = loss_fn(pred, gt)
 
         train_loss.add(loss.item())
 
         optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        scaler.scale(loss).backward()
+
+        if grad_clip is not None:
+            scaler.unscale_(optimizer)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+
+        scaler.step(optimizer)
+        scaler.update()
+
+        if step_scheduler and lr_scheduler is not None:
+            lr_scheduler.step()
 
         pred = None; loss = None
 
@@ -118,9 +184,11 @@ def train(train_loader, model, optimizer):
 
 
 def main(config_, save_path, args=None):
-    global config, log#, writer
+    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.deterministic = False
+
+    global config, log
     config = config_
-#    log, writer = utils.set_save_path(save_path)
     log = utils.set_save_path(save_path)
     with open(os.path.join(save_path, 'config.yaml'), 'w') as f:
         yaml.dump(config, f, sort_keys=False)
@@ -131,10 +199,8 @@ def main(config_, save_path, args=None):
             'inp': {'sub': [0], 'div': [1]},
             'gt': {'sub': [0], 'div': [1]}
         }
-    
-    
 
-    model, optimizer, epoch_start, lr_scheduler = prepare_training()
+    model, optimizer, epoch_start, lr_scheduler, step_scheduler = prepare_training(train_loader)
 
     n_gpus = len(os.environ['CUDA_VISIBLE_DEVICES'].split(','))
     if n_gpus > 1:
@@ -145,9 +211,11 @@ def main(config_, save_path, args=None):
     epoch_save = config.get('epoch_save')
     max_val_v = -1e18
 
+    lambda_cons = config.get('lambda_cons', 0.0)
+    grad_clip = config.get('grad_clip', None)
+
     timer = utils.Timer()
     currEpoch = 0
-        #show the temp images for observe the initail performance
     if args.show_tempImage:
         args.save_path = save_path
         if not os.path.exists(save_path+'/temp_Images'):
@@ -158,16 +226,14 @@ def main(config_, save_path, args=None):
         t_epoch_start = timer.t()
         log_info = ['epoch {}/{}'.format(epoch, epoch_max)]
 
-#        writer.add_scalar('lr', optimizer.param_groups[0]['lr'], epoch)
-
         if args.show_tempImage:
             eval_psnr(Im_loader, model,
                 data_norm=config['data_norm'],
                 eval_type=config.get('eval_type'),
-                eval_bsize=config.get('eval_bsize'), 
+                eval_bsize=config.get('eval_bsize'),
                 window_size = config.get('window_size'),
                 args = args, ImNumber = epoch-1)
-        # print(epoch)
+
         if epoch == 1:
             if n_gpus > 1:
                 model_ = model.module
@@ -182,17 +248,19 @@ def main(config_, save_path, args=None):
                 'optimizer': optimizer_spec,
                 'epoch': epoch
             }
-    
+
             model.train()
             torch.save(sv_file, os.path.join(save_path, 'epoch-ini.pth'))
 
 
-        train_loss = train(train_loader, model, optimizer)
-        if lr_scheduler is not None:
+        train_loss = train(train_loader, model, optimizer,
+                           lr_scheduler=lr_scheduler, step_scheduler=step_scheduler,
+                           lambda_cons=lambda_cons, grad_clip=grad_clip,
+                           use_amp=config.get('use_amp', False))
+        if not step_scheduler and lr_scheduler is not None:
             lr_scheduler.step()
 
         log_info.append('train: loss={:.4f}'.format(train_loss))
-#        writer.add_scalars('loss', {'train': train_loss}, epoch)
 
         if n_gpus > 1:
             model_ = model.module
@@ -214,7 +282,6 @@ def main(config_, save_path, args=None):
         if (epoch_save is not None) and (epoch % epoch_save == 0):
             torch.save(sv_file,
                 os.path.join(save_path, 'epoch-{}.pth'.format(epoch)))
-            # currEpoch = epoch
 
         if (epoch_val is not None) and (epoch % epoch_val == 0):
             if n_gpus > 1 and (config.get('eval_bsize') is not None):
@@ -227,7 +294,6 @@ def main(config_, save_path, args=None):
                 eval_bsize=config.get('eval_bsize'))
 
             log_info.append('val: psnr={:.4f}'.format(val_res))
-            #writer.add_scalars('psnr', {'val': val_res}, epoch)
             if val_res > max_val_v:
                 max_val_v = val_res
                 torch.save(sv_file, os.path.join(save_path, 'epoch-best.pth'))
@@ -239,13 +305,13 @@ def main(config_, save_path, args=None):
         log_info.append('{} {}/{}'.format(t_epoch, t_elapsed, t_all))
 
         log(', '.join(log_info))
-        #writer.flush()
 
 
 if __name__ == '__main__':
-    
+
     import argparse
     import os
+    import math
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default = 'configs/train-div2k/train_edsr-baseline-liif.yaml' )
@@ -257,20 +323,18 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # If --device was explicitly passed (not just the default), use it.
-    # Otherwise, respect the inherited CUDA_VISIBLE_DEVICES from parent shell.
     import sys
     if '--device' in sys.argv:
         os.environ['CUDA_VISIBLE_DEVICES'] = args.device
-    # else: keep inherited CUDA_VISIBLE_DEVICES from parent environment
 
     import yaml
     import torch
     import torch.nn as nn
+    import torch.nn.functional as F
     from tqdm import tqdm
     from torch.utils.data import DataLoader
-    from torch.optim.lr_scheduler import MultiStepLR, CosineAnnealingLR
-    
+    from torch.optim.lr_scheduler import MultiStepLR, CosineAnnealingLR, LambdaLR
+
     import datasets
     import models
     import utils
@@ -284,7 +348,7 @@ if __name__ == '__main__':
     save_name = args.name
     if save_name is None:
         save_name = '_' + args.config.split('/')[-1][:-len('.yaml')]
-    if args.tag is not None:
+    if args.tag is not None and args.tag != '':
         save_name += '_' + args.tag
     save_path = os.path.join(args.saveFolder, save_name)
 

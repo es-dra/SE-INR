@@ -1,6 +1,3 @@
-# Stage 1: SE-Decoder (FiLM Fusion + 1D Conv + Scale Readout) - 1000 epochs
-# 正确配置: feat_unfold=true, num_layers=2, C_h=64
-
 train_dataset:
   dataset:
     name: image-folder
@@ -12,6 +9,7 @@ train_dataset:
     name: sr-implicit-downsampled
     args:
       inp_size: 48
+      scale_min: 1
       scale_max: 4
       augment: true
       sample_q: 2304
@@ -38,32 +36,41 @@ data_norm:
   gt: {sub: [0.5], div: [0.5]}
 
 model:
-  name: se-inr-s1
+  name: se-inr
   args:
     encoder_spec:
       name: edsr-baseline
       args:
         no_upsampling: true
-    # Stage 1 核心配置 (正确设置)
     K: 24
     omega_min: 1.0
-    omega_max: 64.0
-    C_h: 64
-    num_layers: 2
+    omega_max: 30.0
+    M: 8
+    C_h: 128
+    num_layers: 3
     kernel_size: 3
-    # LIIF 标准配置 (正确)
+    sigma: 0.8
+    s_min: 1.0
+    s_max_ood: 30.0
     local_ensemble: true
     feat_unfold: true
+    inp_size: 48
 
 optimizer:
   name: adam
   args:
     lr: 1.e-4
 
-epoch_max: 1000
-multi_step_lr:
-  milestones: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900]
-  gamma: 0.5
+lambda_cons: 0.0
 
+warmup_cosine_lr:
+  warmup_steps: 5000
+  eta_min: 1.0e-7
+
+resume: ./save/se-inr_unfold/epoch-last.pth
+
+epoch_max: 1000
 epoch_val: 1
 epoch_save: 50
+
+grad_clip: 1.0

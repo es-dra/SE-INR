@@ -1,0 +1,77 @@
+# SE-INR: PolarLogFreqPE + AdditiveInjection + GELU SE-Decoder
+#         + GaussianScaleReadout + ResidualBranch + L_cons
+
+train_dataset:
+  dataset:
+    name: image-folder
+    args:
+      root_path: ../Data/DIV2K_train_HR
+      repeat: 20
+      cache: in_memory
+  wrapper:
+    name: sr-implicit-downsampled
+    args:
+      inp_size: 48
+      scale_min: 1
+      scale_max: 4
+      augment: true
+      sample_q: 2304
+  batch_size: 16
+
+val_dataset:
+  dataset:
+    name: image-folder
+    args:
+      root_path: ../Data/DIV2K_valid_HR
+      first_k: 10
+      repeat: 160
+      cache: in_memory
+  wrapper:
+    name: sr-implicit-downsampled
+    args:
+      inp_size: 48
+      scale_max: 4
+      sample_q: 2304
+  batch_size: 16
+
+data_norm:
+  inp: {sub: [0.5], div: [0.5]}
+  gt: {sub: [0.5], div: [0.5]}
+
+model:
+  name: se-inr
+  args:
+    encoder_spec:
+      name: edsr-baseline
+      args:
+        no_upsampling: true
+    K: 24
+    omega_min: 1.0
+    omega_max: 30.0
+    M: 8
+    C_h: 128
+    num_layers: 3
+    kernel_size: 3
+    sigma: 0.8
+    s_min: 1.0
+    s_max_ood: 30.0
+    local_ensemble: true
+    feat_unfold: false
+    inp_size: 48
+
+optimizer:
+  name: adam
+  args:
+    lr: 1.e-4
+
+lambda_cons: 0.0
+
+warmup_cosine_lr:
+  warmup_steps: 5000
+  eta_min: 1.0e-7
+
+epoch_max: 1000
+epoch_val: 1
+epoch_save: 50
+
+grad_clip: 1.0
