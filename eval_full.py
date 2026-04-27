@@ -145,10 +145,12 @@ def main():
 
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
 
-    # Phase 0/1/2: LIIF and LTE baselines will be added after their respective training runs
-    # SC-INR will be added in Phase 1
+    # Phase 0: LIIF, LTE baselines, and LTE-NoC ablation
+    # LTE/LTE-NoC paths are placeholders - update after training completes
     MODELS = {
         'LIIF': 'save/edsr-baseline-liif/epoch-best.pth',
+        'LTE': 'save/_train-lte/epoch-best.pth',
+        'LTE-NoC': 'save/_train-lte-noc/epoch-best.pth',
     }
 
     BENCHMARKS = ['Set5', 'Set14', 'BSD100', 'Urban100']
