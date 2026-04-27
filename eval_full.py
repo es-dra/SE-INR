@@ -146,9 +146,10 @@ def main():
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
 
     # Phase 0: LIIF, LTE baselines, and LTE-NoC ablation
-    # LTE/LTE-NoC paths are placeholders - update after training completes
+    # Checkpoint paths follow train.py save_name convention:
+    #   train-{name}.yaml -> save/_{name}/epoch-best.pth
     MODELS = {
-        'LIIF': 'save/edsr-baseline-liif/epoch-best.pth',
+        'LIIF': 'save/_train-liif/epoch-best.pth',
         'LTE': 'save/_train-lte/epoch-best.pth',
         'LTE-NoC': 'save/_train-lte-noc/epoch-best.pth',
     }
