@@ -3,3 +3,4 @@ from . import edsr
 from . import mlp
 from . import liif_old
 from . import lte
+from . import lte_noc
