@@ -137,25 +137,45 @@ def run_eval(model_path, benchmark, scale, device, data_root='/workspace/SE-INR/
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--device', type=str, default='0')
-    parser.add_argument('--output', type=str, default='eval_results.json')
-    parser.add_argument('--skip_existing', action='store_true')
+    parser = argparse.ArgumentParser(description='Evaluate models on benchmark datasets')
+    parser.add_argument('--device', type=str, default='0', help='GPU device id')
+    parser.add_argument('--output', type=str, default='eval_results.json', help='Output JSON file')
+    parser.add_argument('--skip_existing', action='store_true', help='Skip already evaluated combinations')
+    parser.add_argument('--models', type=str, default=None,
+                        help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,LTE-NoC". If not set, evaluate all.')
+    parser.add_argument('--scales', type=str, default=None,
+                        help='Comma-separated list of scales to evaluate, e.g., "2,3,4,6". If not set, evaluate all.')
     args = parser.parse_args()
 
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
 
-    # Phase 0: LIIF, LTE baselines, and LTE-NoC ablation
-    # Checkpoint paths (existing LIIF was trained with --name edsr-baseline-liif)
-    MODELS = {
+    # Available models for evaluation
+    ALL_MODELS = {
         'LIIF': 'save/edsr-baseline-liif/epoch-best.pth',
+        'LIIF-EQ': 'save/edsr-baseline-liif-EQ/epoch-best.pth',
         'LTE': 'save/edsr-baseline-lte/epoch-best.pth',
         'LTE-NoC': 'save/edsr-baseline-lte-noc/epoch-best.pth',
     }
 
+    # Filter by --models argument if provided, otherwise evaluate all available
+    if args.models:
+        model_names = [m.strip() for m in args.models.split(',')]
+        MODELS = {k: v for k, v in ALL_MODELS.items() if k in model_names}
+        missing = set(model_names) - set(ALL_MODELS.keys())
+        if missing:
+            print(f"Warning: models not found: {missing}")
+    else:
+        MODELS = ALL_MODELS
+
     BENCHMARKS = ['Set5', 'Set14', 'BSD100', 'Urban100']
     ID_SCALES = [2, 3, 4]
     OOD_SCALES = [6, 8, 12, 16, 24, 30]
+
+    # Filter by --scales argument if provided
+    all_scales = ID_SCALES + OOD_SCALES
+    if args.scales:
+        scale_list = [int(s.strip()) for s in args.scales.split(',')]
+        all_scales = [s for s in all_scales if s in scale_list]
 
     results = {}
     if args.skip_existing and os.path.exists(args.output):
@@ -163,7 +183,6 @@ def main():
             results = json.load(f)
         print(f"Loaded existing results from {args.output}")
 
-    total = len(MODELS) * len(BENCHMARKS) * (len(ID_SCALES) + len(OOD_SCALES))
     done = 0
 
     for model_name, model_path in MODELS.items():
@@ -182,7 +201,6 @@ def main():
             if benchmark not in results[model_name]:
                 results[model_name][benchmark] = {}
 
-            all_scales = ID_SCALES + OOD_SCALES
             for scale in all_scales:
                 scale_key = f'x{scale}'
 
