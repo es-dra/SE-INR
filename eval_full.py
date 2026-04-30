@@ -155,6 +155,7 @@ def main():
         'LIIF-EQ': 'save/edsr-baseline-liif-EQ/epoch-best.pth',
         'LTE': 'save/edsr-baseline-lte/epoch-best.pth',
         'LTE-NoC': 'save/edsr-baseline-lte-noc/epoch-best.pth',
+        'SC-INR': 'save/sc-inr-k16_1/epoch-best.pth',
     }
 
     # Filter by --models argument if provided, otherwise evaluate all available

@@ -5,37 +5,42 @@ import torch.nn.functional as F
 import models
 from models import register
 from utils import make_coord
+from models import B_Conv as fn
+from models import e_linear as en
 
-import numpy as np
 
-@register('lte')
+
+# import numpy as np
+
+@register('lte_eq')
 class LTE(nn.Module):
 
-    def __init__(self, encoder_spec, imnet_spec=None, hidden_dim=256, local_ensemble=True, upinput = True, kernel_size = 3):
-        super().__init__()        
-        self.encoder = models.make(encoder_spec)
-        self.coef = nn.Conv2d(self.encoder.out_dim, hidden_dim, kernel_size, padding=1)
-        self.freq = nn.Conv2d(self.encoder.out_dim, hidden_dim, kernel_size, padding=1)
-        self.phase = nn.Linear(2, hidden_dim//2, bias=False)        
+    def __init__(self, encoder_spec, imnet_spec=None, hidden_dim=256, local_ensemble=True, tranNum = 1, kernel_size = 5, upinput = True,  corrd_scale = 1):
+        super().__init__()
+        # self.encoder = models.make(encoder_spec)
         self.local_ensemble = local_ensemble
         self.upinput = upinput
-
-        self.imnet = models.make(imnet_spec, args={'in_dim': hidden_dim})
+        self.corrd_scale = corrd_scale
+        self.tranNum = tranNum
+        self.encoder = models.make(encoder_spec, args = {'tranNum':tranNum})
+        self.coef = fn.Fconv_PCA(kernel_size,self.encoder.out_dim//tranNum,hidden_dim//tranNum,tranNum=tranNum,padding=kernel_size//2)
+        self.freq = fn.Fconv_PCA(kernel_size,self.encoder.out_dim//tranNum,hidden_dim//tranNum,tranNum=tranNum,padding=kernel_size//2)
+        self.phase   = en.EQ_linear_inter(2, hidden_dim//2//tranNum, tranNum, bias = False)#这里有
+        self.freqLayer = en.EQ_lte_input(tranNum)
+        self.imnet = models.make(imnet_spec, args={'tranNum': tranNum, 'in_dim':hidden_dim})
 
     def gen_feat(self, inp):
         self.inp = inp
-        device = inp.device
-        self.feat_coord = make_coord(inp.shape[-2:], flatten=False).to(device) \
+        self.feat_coord = make_coord(inp.shape[-2:], flatten=False).to(inp.device) \
             .permute(2, 0, 1) \
             .unsqueeze(0).expand(inp.shape[0], 2, *inp.shape[-2:])
 
-        self.feat = self.encoder(inp)
-        self.coeff = self.coef(self.feat)
-        self.freqq = self.freq(self.feat)
-        return self.feat
+        feat = self.encoder(inp)
+        self.coeff = self.coef(feat)
+        self.freqq = self.freq(feat)
 
     def query_rgb(self, coord, cell=None):
-        feat = self.feat
+        # feat = self.feat
         coef = self.coeff
         freq = self.freqq
 
@@ -46,11 +51,8 @@ class LTE(nn.Module):
         else:
             vx_lst, vy_lst, eps_shift = [0], [0], 0
 
-        eps_shift = 1e-6 
-
-        # field radius (global: [-1, 1])
-        rx = 2 / feat.shape[-2] / 2
-        ry = 2 / feat.shape[-1] / 2
+        rx = 2 / coef.shape[-2] / 2
+        ry = 2 / coef.shape[-1] / 2
 
         feat_coord = self.feat_coord
 
@@ -76,31 +78,33 @@ class LTE(nn.Module):
                     mode='nearest', align_corners=False)[:, :, 0, :] \
                     .permute(0, 2, 1)
                 rel_coord = coord - q_coord
-                rel_coord[:, :, 0] *= feat.shape[-2]
-                rel_coord[:, :, 1] *= feat.shape[-1]
-                
+                rel_coord[:, :, 0] *= coef.shape[-2]
+                rel_coord[:, :, 1] *= coef.shape[-1]
+
                 # prepare cell
                 rel_cell = cell.clone()
-                rel_cell[:, :, 0] *= feat.shape[-2]
-                rel_cell[:, :, 1] *= feat.shape[-1]
-                
-                # basis generation
+                rel_cell[:, :, 0] *= coef.shape[-2]
+                rel_cell[:, :, 1] *= coef.shape[-1]
+                rel_cellx = rel_cell[:, :, 0].unsqueeze(2).repeat([1,1,self.tranNum])
+                rel_celly = rel_cell[:, :, 1].unsqueeze(2).repeat([1,1,self.tranNum])
+                rel_cell_eq = torch.cat([rel_cellx, rel_celly], dim = -1)
                 bs, q = coord.shape[:2]
-                q_freq = torch.stack(torch.split(q_freq, 2, dim=-1), dim=-1)
-                q_freq = torch.mul(q_freq, rel_coord.unsqueeze(-1))
-                q_freq = torch.sum(q_freq, dim=-2)
-                q_freq += self.phase(rel_cell.view((bs * q, -1))).view(bs, q, -1)
-                q_freq = torch.cat((torch.cos(np.pi*q_freq), torch.sin(np.pi*q_freq)), dim=-1)
+                q_phase = self.phase(rel_cell_eq.reshape((bs * q, -1)))
 
-                inp = torch.mul(q_coef, q_freq)            
+                # basis generation
+                inp = self.freqLayer(q_freq.reshape(bs*q, -1),q_coef.reshape(bs*q, -1),q_phase,rel_coord.reshape(bs*q, -1)*self.corrd_scale)
+                # inp = torch.cat([q_coef.view(bs*q, -1), rel_coord.view(bs*q, -1)], dim=-1)
+                # print(inp.shape)
 
-                pred = self.imnet(inp.contiguous().view(bs * q, -1)).view(bs, q, -1)
+                pred = self.imnet(inp).reshape(bs, q, -1)
                 preds.append(pred)
 
                 area = torch.abs(rel_coord[:, :, 0] * rel_coord[:, :, 1])
                 areas.append(area + 1e-9)
 
         tot_area = torch.stack(areas).sum(dim=0)
+        # t = areas[0]; areas[0] = areas[3]; areas[3] = t
+        # t = areas[1]; areas[1] = areas[2]; areas[2] = t
         if self.local_ensemble:
             t = areas[0]; areas[0] = areas[3]; areas[3] = t
             t = areas[1]; areas[1] = areas[2]; areas[2] = t
@@ -110,8 +114,8 @@ class LTE(nn.Module):
             ret = ret + pred * (area / tot_area).unsqueeze(-1)
         if self.upinput:
             ret += F.grid_sample(self.inp, coord.flip(-1).unsqueeze(1), mode='bilinear',\
-                      padding_mode='border', align_corners=False)[:, :, 0, :] \
-                      .permute(0, 2, 1)
+                          padding_mode='border', align_corners=False)[:, :, 0, :] \
+                          .permute(0, 2, 1)
         return ret
 
     def forward(self, inp, coord, cell):
