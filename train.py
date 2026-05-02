@@ -202,7 +202,7 @@ def main(config_, save_path, args=None):
 
     model, optimizer, epoch_start, lr_scheduler, step_scheduler = prepare_training(train_loader)
 
-    n_gpus = len(os.environ['CUDA_VISIBLE_DEVICES'].split(','))
+    n_gpus = len(os.environ.get('CUDA_VISIBLE_DEVICES', '0').split(','))
     if n_gpus > 1:
         model = nn.parallel.DataParallel(model)
 

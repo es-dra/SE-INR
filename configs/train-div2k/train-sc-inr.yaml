@@ -1,5 +1,6 @@
-# SC-INR Phase 1 Training Config (Path B - learnable ω)
-# K=16, log-spaced ω_init ∈ [0.1, 4.0], all ω learnable
+# SC-INR Training Config
+# Fixed log-polar frequency basis, analytic sinc weights
+# hidden_dim=256, num_freqs=128, num_angles=8, freq∈[0.1, 2.0]
 
 train_dataset:
   dataset:
@@ -44,8 +45,17 @@ model:
       name: edsr-baseline
       args:
         no_upsampling: true
+    imnet_spec:
+      name: mlp
+      args:
+        out_dim: 3
+        hidden_list: [256, 256, 256]
     hidden_dim: 256
-    K: 16
+    num_freqs: 128
+    num_angles: 8
+    freq_min: 0.1
+    freq_max: 2.0
+    learn_phase: true
 
 optimizer:
   name: adam

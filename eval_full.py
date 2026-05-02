@@ -86,7 +86,9 @@ def eval_psnr(loader, model, data_norm, eval_type, eval_bsize, device):
     return val_res.item()
 
 
-def make_test_config(benchmark, scale, data_root='/workspace/SE-INR/Data'):
+def make_test_config(benchmark, scale, data_root=None):
+    if data_root is None:
+        data_root = os.environ.get('SEINR_DATA_ROOT', os.path.join(os.path.dirname(__file__), '..', 'Data'))
     return {
         'test_dataset': {
             'dataset': {
@@ -113,7 +115,7 @@ def make_test_config(benchmark, scale, data_root='/workspace/SE-INR/Data'):
     }
 
 
-def run_eval(model_path, benchmark, scale, device, data_root='/workspace/SE-INR/Data'):
+def run_eval(model_path, benchmark, scale, device, data_root=None):
     config = make_test_config(benchmark, scale, data_root)
 
     spec = config['test_dataset']
@@ -149,16 +151,28 @@ def main():
 
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
 
-    # Available models for evaluation
-    ALL_MODELS = {
-        'LIIF': 'save/edsr-baseline-liif/epoch-best.pth',
-        'LIIF-EQ': 'save/edsr-baseline-liif-EQ/epoch-best.pth',
-        'LTE': 'save/edsr-baseline-lte/epoch-best.pth',
-        'LTE-NoC': 'save/edsr-baseline-lte-noc/epoch-best.pth',
-        'SC-INR': 'save/sc-inr-k16_1/epoch-best.pth',
+    # Auto-discover models from save/ directory
+    # Each subdirectory in save/ with an epoch-best.pth is a model
+    SAVE_ROOT = 'save'
+    MODEL_NAMES = {
+        'edsr-baseline-liif': 'LIIF',
+        'edsr-baseline-liif-EQ': 'LIIF-EQ',
+        'edsr-baseline-lte': 'LTE',
+        'edsr-baseline-lte-noc': 'LTE-NoC',
+        'edsr-baseline-lte-eq': 'LTE-EQ',
+        'sc-inr': 'SC-INR',
     }
 
-    # Filter by --models argument if provided, otherwise evaluate all available
+    ALL_MODELS = {}
+    for dir_name, model_name in MODEL_NAMES.items():
+        pth = os.path.join(SAVE_ROOT, dir_name, 'epoch-best.pth')
+        if os.path.exists(pth):
+            ALL_MODELS[model_name] = pth
+
+    if not ALL_MODELS:
+        print("Warning: no models with epoch-best.pth found in save/")
+
+    # Filter by --models argument if provided, otherwise evaluate all discovered
     if args.models:
         model_names = [m.strip() for m in args.models.split(',')]
         MODELS = {k: v for k, v in ALL_MODELS.items() if k in model_names}

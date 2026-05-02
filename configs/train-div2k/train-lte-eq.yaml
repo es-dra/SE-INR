@@ -1,7 +1,3 @@
-# LTE-EQ: LTE with Rotation-Equivariant Encoder
-# Uses steerable convolutions (Fconv_PCA) for equivariant feature extraction
-# Restored from original project (commit 4a53b9e)
-
 train_dataset:
   dataset:
     name: image-folder
@@ -17,7 +13,6 @@ train_dataset:
       augment: true
       sample_q: 2304
   batch_size: 16
-
 val_dataset:
   dataset:
     name: image-folder
@@ -33,11 +28,17 @@ val_dataset:
       scale_max: 4
       sample_q: 2304
   batch_size: 16
-
 data_norm:
-  inp: {sub: [0.5], div: [0.5]}
-  gt: {sub: [0.5], div: [0.5]}
-
+  inp:
+    sub:
+    - 0.5
+    div:
+    - 0.5
+  gt:
+    sub:
+    - 0.5
+    div:
+    - 0.5
 model:
   name: lte_eq
   args:
@@ -51,19 +52,24 @@ model:
       name: e_mlp_lte
       args:
         out_dim: 3
-        hidden_list: [256, 256, 256]
+        hidden_list:
+        - 256
+        - 256
+        - 256
     hidden_dim: 256
     tranNum: 4
     kernel_size: 5
-
 optimizer:
   name: adam
   args:
-    lr: 1.e-4
+    lr: 0.0001
 epoch_max: 1000
 multi_step_lr:
-  milestones: [200, 400, 600, 800]
+  milestones:
+  - 200
+  - 400
+  - 600
+  - 800
   gamma: 0.5
-
 epoch_val: 1
 epoch_save: 100
