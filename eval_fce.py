@@ -243,6 +243,7 @@ def main():
         'LTE':     ('save/edsr-baseline-lte/epoch-best.pth',     'lte'),
         'LTE-NoC': ('save/edsr-baseline-lte-noc/epoch-best.pth', 'lte-noc'),
         'SC-INR':  ('save/sc-inr/epoch-best.pth',                 'sc-inr'),
+        'PhaseZ':  ('save/edsr-baseline-lte-phase-z/epoch-best.pth', 'lte'),
     }
 
     # Parse scale pairs: these define which cell sizes to compare

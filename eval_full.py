@@ -160,6 +160,7 @@ def main():
         'edsr-baseline-lte': 'LTE',
         'edsr-baseline-lte-noc': 'LTE-NoC',
         'edsr-baseline-lte-eq': 'LTE-EQ',
+        'edsr-baseline-lte-phase-z': 'PhaseZ',
         'sc-inr': 'SC-INR',
     }
 
@@ -193,10 +194,12 @@ def main():
         all_scales = [s for s in all_scales if s in scale_list]
 
     results = {}
-    if args.skip_existing and os.path.exists(args.output):
+    if os.path.exists(args.output):
         with open(args.output, 'r') as f:
             results = json.load(f)
         print(f"Loaded existing results from {args.output}")
+    if args.skip_existing:
+        print("--skip_existing: will skip already-evaluated combinations")
 
     done = 0
 

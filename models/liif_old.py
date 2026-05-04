@@ -145,12 +145,15 @@ class LIIF(nn.Module):
     
     
     def coordGen(self, Num = 60):
-        x = np.arange(-Num,Num+1)/Num
-        x = np.tile(x, [2*Num+1, 1])
-        x = torch.Tensor(x).to(feat.device)
-        y = x.permute(1,0)
-        X = torch.stack([x,y], dim=2)
-        return X
+        # Cache on first call, move to appropriate device on subsequent calls
+        if not hasattr(self, '_coord_cache') or self._coord_cache[0] != Num:
+            x = np.arange(-Num, Num + 1) / Num
+            x = np.tile(x, [2 * Num + 1, 1])
+            x = torch.Tensor(x)
+            y = x.permute(1, 0)
+            X = torch.stack([x, y], dim=2)
+            self._coord_cache = (Num, X)
+        return self._coord_cache[1].to(self.feat.device)
         
         
         

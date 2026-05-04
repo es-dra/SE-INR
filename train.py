@@ -316,7 +316,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default = 'configs/train-div2k/train_edsr-baseline-liif.yaml' )
     parser.add_argument('--name', default=None)
-    parser.add_argument('--tag', default='1')
+    parser.add_argument('--tag', default='')
     parser.add_argument('--device', default='0')
     parser.add_argument('--show_tempImage', action='store_true')
     parser.add_argument('--saveFolder', default='./save')
@@ -347,7 +347,11 @@ if __name__ == '__main__':
 
     save_name = args.name
     if save_name is None:
-        save_name = '_' + args.config.split('/')[-1][:-len('.yaml')]
+        # Derive from config filename: 'train-div2k/train-lte.yaml' → 'lte'
+        basename = args.config.split('/')[-1][:-len('.yaml')]
+        if basename.startswith('train-'):
+            basename = basename[len('train-'):]
+        save_name = basename
     if args.tag is not None and args.tag != '':
         save_name += '_' + args.tag
     save_path = os.path.join(args.saveFolder, save_name)

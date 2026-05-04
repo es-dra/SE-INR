@@ -2,7 +2,7 @@ test_dataset:
   dataset:
     name: image-folder
     args:
-      root_path: /workspace/SE-INR/Data/Urban100/HR
+      root_path: ../../Data/Urban100/HR
   wrapper:
     name: sr-implicit-downsampled
     args:

@@ -17,8 +17,9 @@ from tqdm import tqdm
 import models, datasets, utils
 
 
-def eval_psnr_for_model(model, loader, device, data_norm):
-    """Evaluate PSNR on a dataset loader."""
+def eval_psnr_for_model(model, loader, device, data_norm, scale):
+    """Evaluate PSNR using standard benchmark metric (grayscale + shave)."""
+    import math
     t = data_norm['inp']
     inp_sub = torch.FloatTensor(t['sub']).view(1, -1, 1, 1).to(device)
     inp_div = torch.FloatTensor(t['div']).view(1, -1, 1, 1).to(device)
@@ -33,12 +34,23 @@ def eval_psnr_for_model(model, loader, device, data_norm):
             for k, v in batch.items():
                 batch[k] = v.to(device)
             inp = (batch['inp'] - inp_sub) / inp_div
-            pred = model(inp, batch['coord'], batch['cell'])
+            coord = batch['coord']
+            cell = batch['cell']
+            pred = model(inp, coord, cell)
             pred = pred * gt_div + gt_sub
             pred.clamp_(0, 1)
-            mse = ((pred - batch['gt']) ** 2).mean().item()
-            val_res.add(mse, inp.shape[0])
-    return -10 * math.log10(val_res.item())
+
+            ih, iw = batch['inp'].shape[-2:]
+            s = math.sqrt(batch['coord'].shape[1] / (ih * iw))
+            shape = [batch['inp'].shape[0], round(ih * s), round(iw * s), 3]
+            batch['gt'] = batch['gt'].view(*shape).permute(0, 3, 1, 2).contiguous()
+            shape = [batch['inp'].shape[0], round(ih * s), round(iw * s), 3]
+            pred = pred.view(*shape).permute(0, 3, 1, 2).contiguous()
+            pred = pred[..., :batch['gt'].shape[-2], :batch['gt'].shape[-1]]
+
+            res = utils.calc_psnr(pred, batch['gt'], dataset='benchmark', scale=scale)
+            val_res.add(res.item(), inp.shape[0])
+    return val_res.item()
 
 
 def make_loader(benchmark, scale, data_root, batch_size=1):
@@ -90,7 +102,7 @@ def main():
 
             # LTE (normal)
             lte_model.eval()
-            psnr_lte = eval_psnr_for_model(lte_model, loader, device, data_norm)
+            psnr_lte = eval_psnr_for_model(lte_model, loader, device, data_norm, scale)
 
             # Reload loader (exhausted by first eval)
             loader = make_loader(benchmark, scale, data_root)
@@ -98,14 +110,14 @@ def main():
             # LTE (phase=0) — causal intervention: zero out phase weights
             orig_weight = lte_model.phase.weight.data.clone()
             lte_model.phase.weight.data.zero_()
-            psnr_zero = eval_psnr_for_model(lte_model, loader, device, data_norm)
+            psnr_zero = eval_psnr_for_model(lte_model, loader, device, data_norm, scale)
             lte_model.phase.weight.data.copy_(orig_weight)  # Restore
 
             # Reload
             loader = make_loader(benchmark, scale, data_root)
 
             # LTE-NoC
-            psnr_noc = eval_psnr_for_model(noc_model, loader, device, data_norm)
+            psnr_noc = eval_psnr_for_model(noc_model, loader, device, data_norm, scale)
 
             tag = 'ID' if scale <= 4 else 'OOD'
             print(f'  x{scale:<3} {tag}:  LTE={psnr_lte:.2f}  '

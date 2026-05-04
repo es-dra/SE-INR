@@ -64,8 +64,7 @@ def log(obj, filename='log.txt'):
 def ensure_path(path, remove=True):
     basename = os.path.basename(path.rstrip('/'))
     if os.path.exists(path):
-        if remove and (basename.startswith('_')
-                or input('{} exists, remove? (y/[n]): '.format(path)) == 'y'):
+        if remove and basename.startswith('_'):
             shutil.rmtree(path)
             os.makedirs(path)
     else:

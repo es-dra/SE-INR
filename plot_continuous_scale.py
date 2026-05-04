@@ -40,6 +40,15 @@ def plot_continuous_psnr(data, output_dir, annotate=True, smooth_window=1,
     }
     DEFAULT_STYLE = {'color': '#8172B2', 'ls': '-.', 'lw': 1.5, 'marker': None}
 
+    # Normalize keys: accept both "1.0" and "x1.0" formats
+    normalized = {}
+    for mname, model_data in data.items():
+        normalized[mname] = {}
+        for k, v in model_data.items():
+            s = float(k.lstrip('x'))
+            normalized[mname][f'x{s}'] = v
+    data = normalized
+
     # Collect all scales
     all_scales = set()
     for model_data in data.values():

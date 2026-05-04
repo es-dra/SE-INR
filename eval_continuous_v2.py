@@ -50,7 +50,13 @@ class ContinuousBenchmark:
         self.model.eval()
 
     def eval_image_at_scale(self, img_path, scale):
-        """Evaluate one image at a specific scale factor using benchmark-style evaluation."""
+        """Evaluate one image at a specific scale factor using benchmark-style evaluation.
+
+        Matches SRImplicitDownsampled pipeline exactly:
+        1. Crop HR to round(h_lr*s) x round(w_lr*s) first
+        2. Create LR via BICUBIC downsample of cropped HR
+        3. Predict at target resolution using cropped HR as GT
+        """
         img_hr_pil = Image.open(img_path).convert('RGB')
 
         w_hr, h_hr = img_hr_pil.size  # PIL returns (W, H)
@@ -59,9 +65,15 @@ class ContinuousBenchmark:
         target_h = int(round(h_lr * scale))
         target_w = int(round(w_lr * scale))
 
-        # Create LR via direct resize (benchmark style)
-        img_lr_pil = img_hr_pil.resize((w_lr, h_lr), Image.BICUBIC)
+        # Crop HR first (matching SRImplicitDownsampled: img[:, :round(h_lr*s), :round(w_lr*s)])
+        img_hr_cropped_pil = img_hr_pil.crop((0, 0, target_w, target_h))
+
+        # Create LR from cropped HR (matching resize_fn in wrappers.py)
+        img_lr_pil = img_hr_cropped_pil.resize((w_lr, h_lr), Image.BICUBIC)
         img_lr = transforms.ToTensor()(img_lr_pil).unsqueeze(0).to(self.device)
+
+        # GT is the cropped HR (exact alignment with LR)
+        img_hr_cropped = transforms.ToTensor()(img_hr_cropped_pil).to(self.device)
 
         # Normalization (same as benchmark / eval_full.py)
         inp_sub = torch.tensor([0.5]).view(1, -1, 1, 1).to(self.device)
@@ -92,18 +104,15 @@ class ContinuousBenchmark:
         pred = pred * gt_div + gt_sub
         pred.clamp_(0, 1)
 
-        # Reshape to image using correct ordering (same as eval_full.py)
-        # s = sqrt(N / (h_lr * w_lr)) where s ≈ scale
-        # But due to rounding in target_h/target_w, s is approximate
-        # Use s = scale directly for exact scaling
-        s = scale
-        shape = [1, round(h_lr * s), round(w_lr * s), 3]
+        # Reshape to image (matching eval_full.py: pred.view(*shape).permute(0,3,1,2))
+        shape = [1, target_h, target_w, 3]
         pred_img = pred.view(*shape).permute(0, 3, 1, 2).contiguous()
 
-        # GT image - use actual pred size (not target_h/target_w which may be rounded)
-        img_hr_tensor = transforms.ToTensor()(img_hr_pil).to(self.device)
-        actual_h, actual_w = pred_img.shape[-2], pred_img.shape[-1]
-        gt = img_hr_tensor[:, :actual_h, :actual_w].unsqueeze(0)
+        # GT: cropped HR, reshaped to match (matching eval_full.py: gt.view(*shape).permute(0,3,1,2))
+        gt = img_hr_cropped.unsqueeze(0)
+
+        # Clip pred to gt size for safety (matching eval_full.py: pred[..., :gt.shape[-2], :gt.shape[-1]])
+        pred_img = pred_img[..., :gt.shape[-2], :gt.shape[-1]]
 
         # Use benchmark-style calc_psnr for proper grayscale + shave handling
         psnr = utils.calc_psnr(pred_img, gt, dataset='benchmark', scale=int(round(scale)), rgb_range=1)
@@ -134,6 +143,8 @@ def main():
     parser.add_argument('--dataset', type=str, default='set5',
                         choices=['set5', 'bsd100', 'set14', 'urban100', 'all'],
                         help='Dataset to evaluate on (default: set5)')
+    parser.add_argument('--models', type=str, default=None,
+                        help='Comma-separated models to evaluate. Default: all available')
     args = parser.parse_args()
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -148,8 +159,13 @@ def main():
         'LIIF': 'save/edsr-baseline-liif/epoch-best.pth',
         'LTE': 'save/edsr-baseline-lte/epoch-best.pth',
         'LTE-NoC': 'save/edsr-baseline-lte-noc/epoch-best.pth',
+        'SC-INR': 'save/sc-inr/epoch-best.pth',
+        'PhaseZ': 'save/edsr-baseline-lte-phase-z/epoch-best.pth',
     }
 
+    if args.models:
+        model_names = [m.strip() for m in args.models.split(',')]
+        MODELS = {k: v for k, v in MODELS.items() if k in model_names}
     available = {k: v for k, v in MODELS.items() if os.path.exists(v)}
     if not available:
         print('No models found!')
@@ -171,12 +187,15 @@ def main():
 
         print(f"  Completed {len(scales)} scale points on {len(target_datasets)} dataset(s)")
 
-    # Save JSON per dataset
+    # Save JSON per dataset — merge with existing data if present
     for ds_name in target_datasets:
         ds_results = {}
+        json_path = f'eval_continuous_{ds_name}.json'
+        if os.path.exists(json_path):
+            with open(json_path) as f:
+                ds_results = json.load(f)
         for model_name in available:
             ds_results[model_name] = all_results[f"{model_name}_{ds_name}"]
-        json_path = f'eval_continuous_{ds_name}.json'
         with open(json_path, 'w') as f:
             json.dump(ds_results, f, indent=2)
         print(f"Saved {json_path}")
@@ -184,8 +203,10 @@ def main():
     # Generate plot per dataset
     for ds_name in target_datasets:
         plt.figure(figsize=(12, 8))
-        colors = {'LIIF': '#1f77b4', 'LTE': '#ff7f0e', 'LTE-NoC': '#2ca02c'}
-        markers = {'LIIF': 'o', 'LTE': 's', 'LTE-NoC': '^'}
+        colors = {'LIIF': '#1f77b4', 'LTE': '#ff7f0e', 'LTE-NoC': '#2ca02c',
+                  'SC-INR': '#d62728'}
+        markers = {'LIIF': 'o', 'LTE': 's', 'LTE-NoC': '^',
+                   'SC-INR': 'D'}
 
         ds_results = {k: v for k, v in all_results.items() if k.endswith(f'_{ds_name}')}
         for model_name in available:

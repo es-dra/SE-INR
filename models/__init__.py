@@ -8,6 +8,7 @@ from . import lte
 from . import lte_noc
 from . import lte_phase_z
 from . import sc_inr
+from . import sc_inr_phase2
 from . import e_linear
 from . import e_mlp_2
 from . import e_mlp_lte
