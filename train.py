@@ -184,12 +184,28 @@ def train(train_loader, model, optimizer, lr_scheduler=None, step_scheduler=Fals
 
 
 def main(config_, save_path, args=None):
-    torch.backends.cudnn.benchmark = True
-    torch.backends.cudnn.deterministic = False
+    seed = getattr(args, 'seed', None) if args is not None else None
+    deterministic = getattr(args, 'deterministic', False) if args is not None else False
+    if seed is not None:
+        import random
+        import numpy as np
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+
+    torch.backends.cudnn.benchmark = not deterministic
+    torch.backends.cudnn.deterministic = deterministic
 
     global config, log
     config = config_
+    if seed is not None:
+        config['seed'] = seed
+    config['deterministic'] = deterministic
     log = utils.set_save_path(save_path)
+    log('seed: {}'.format(seed))
+    log('deterministic: {}'.format(deterministic))
+    log('CUDA_VISIBLE_DEVICES: {}'.format(os.environ.get('CUDA_VISIBLE_DEVICES', 'unset')))
     with open(os.path.join(save_path, 'config.yaml'), 'w') as f:
         yaml.dump(config, f, sort_keys=False)
 
@@ -320,6 +336,8 @@ if __name__ == '__main__':
     parser.add_argument('--device', default='0')
     parser.add_argument('--show_tempImage', action='store_true')
     parser.add_argument('--saveFolder', default='./save')
+    parser.add_argument('--seed', type=int, default=None)
+    parser.add_argument('--deterministic', action='store_true')
 
     args = parser.parse_args()
 

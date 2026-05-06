@@ -1,0 +1,9 @@
+model,seeds,n,id_mean,id_std,ood_mean,ood_std
+LIIF,1,1,30.9992,nan,22.7111,nan
+LIIF-EQ,1,1,31.1205,nan,22.7469,nan
+LTE,1,1,31.0450,nan,22.6917,nan
+LTE-EQ,1,1,31.0672,nan,22.7030,nan
+LTE-NoCell,1,1,30.8416,nan,22.6620,nan
+LTE-FeaturePhase,1,1,30.8960,nan,22.6910,nan
+SC-INR-Fixed,1,1,30.9942,nan,22.7096,nan
+SC-INR-Adaptive,1,1,31.0515,nan,22.7471,nan

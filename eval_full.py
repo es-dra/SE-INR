@@ -142,6 +142,7 @@ def main():
     parser = argparse.ArgumentParser(description='Evaluate models on benchmark datasets')
     parser.add_argument('--device', type=str, default='0', help='GPU device id')
     parser.add_argument('--output', type=str, default='results/benchmark.json', help='Output JSON file')
+    parser.add_argument('--save_root', type=str, default='save', help='Root directory containing model subdirectories')
     parser.add_argument('--skip_existing', action='store_true', help='Skip already evaluated combinations')
     parser.add_argument('--models', type=str, default=None,
                         help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,LTE-NoC". If not set, evaluate all.')
@@ -153,7 +154,7 @@ def main():
 
     # Auto-discover models from save/ directory
     # Each subdirectory in save/ with an epoch-best.pth is a model
-    SAVE_ROOT = 'save'
+    SAVE_ROOT = args.save_root
     MODEL_NAMES = {
         'liif': 'LIIF',
         'liif-eq': 'LIIF-EQ',

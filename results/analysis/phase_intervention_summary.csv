@@ -1,0 +1,4 @@
+model,id_avg,ood_avg
+LTE,31.0450,22.6917
+LTE-phase0,30.4192,22.5391
+LTE-NoCell,30.8416,22.6620
