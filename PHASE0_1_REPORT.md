@@ -2,11 +2,11 @@
 
 ## 评估流水线修正
 
-**Bug**: `eval_continuous_v2.py` 中，LR 图像从完整 HR 生成，而非先裁剪 HR 到 `round(h_lr*s)` 后再生成。导致 LR 与 GT 不对齐，系统性偏差 ~1-5 dB。
+**Bug**: `eval_continuous.py` 中，LR 图像从完整 HR 生成，而非先裁剪 HR 到 `round(h_lr*s)` 后再生成。导致 LR 与 GT 不对齐，系统性偏差 ~1-5 dB。
 
 **Fix**: 先裁剪 HR（`img_hr_pil.crop((0, 0, target_w, target_h))`），再从裁剪后 HR 生成 LR，GT 直接使用裁剪后 HR。与 benchmark (`eval_full.py` / `SRImplicitDownsampled`) 完全一致。
 
-**验证**: 修正后四个模型在所有离散 benchmark 尺度 (x2-x30) 的连续 PSNR 与 `eval_results.json` 的 max|diff| < 0.005 dB。
+**验证**: 修正后四个模型在所有离散 benchmark 尺度 (x2-x30) 的连续 PSNR 与 `results/benchmark.json` 的 max|diff| < 0.005 dB。
 
 ---
 
@@ -42,7 +42,7 @@
 
 ---
 
-## 二、Benchmark 评估 (eval_results.json)
+## 二、Benchmark 评估 (results/benchmark.json)
 
 ### 四数据集四模型汇总 (PSNR dB)
 
@@ -76,7 +76,7 @@
 
 ---
 
-## 三、BSD100 连续 PSNR (eval_continuous_bsd100.json, 已修正)
+## 三、BSD100 连续 PSNR (results/continuous/bsd100.json, 已修正)
 
 ### 59 尺度曲线 (r ∈ [1, 30], step 0.5)
 
@@ -222,7 +222,7 @@ SC-INR       0.0000     0.0000     0.0000     0.0000     0.0000
 │ 命题 2: 移除 h_p(c) 改善 OOD                                      │
 │   旧结论: NoC > LTE 在 50/52 OOD 尺度                             │
 │   新结论: NoC ≈ LTE 在 OOD (差异 < 0.02 dB)                       │
-│   旧结论是 eval_continuous_v2.py 中 LR/GT 不对齐的产物             │
+│   旧结论是 eval_continuous.py 中 LR/GT 不对齐的产物             │
 │   状态: ✗ 证伪 (bug fix 后差异消失)                                │
 ├──────────────────────────────────────────────────────────────────┤
 │ 命题 3: 所有模型在 ID 和 OOD 上性能基本持平                        │
@@ -300,7 +300,7 @@ SC-INR       0.0000     0.0000     0.0000     0.0000     0.0000
 | 脚本 | 用途 |
 |------|------|
 | `eval_full.py` | 离散 benchmark 评估 (Set5/Set14/BSD100/Urban100, x2-x30) |
-| `eval_continuous_v2.py` | 连续尺度 PSNR 评估 (59 scales, r∈[1,30], 步长 0.5) |
+| `eval_continuous.py` | 连续尺度 PSNR 评估 (59 scales, r∈[1,30], 步长 0.5) |
 | `eval_fce.py` | 函数一致性误差 (固定 z, 变 c) |
 | `analyze_phase_consistency.py` | Phase Shift 频率带分析 |
 | `plot_continuous_scale.py` | 连续 PSNR 曲线绘制 |
@@ -310,13 +310,13 @@ SC-INR       0.0000     0.0000     0.0000     0.0000     0.0000
 
 | 文件 | 内容 |
 |------|------|
-| `eval_results.json` | Benchmark PSNR (4 数据集 × 4 模型) |
-| `eval_continuous_bsd100.json` | BSD100 连续 PSNR (59 scales, 已修正) |
-| `eval_continuous_Set5.json` | Set5 连续 PSNR (59 scales, 旧数据未更新) |
-| `fce_results.json` | FCE (LTE, NoC, SC-INR) |
-| `phase_intervention_results.json` | 因果干预结果 |
+| `results/benchmark.json` | Benchmark PSNR (4 数据集 × 多模型 × x2-x30) |
+| `results/continuous/bsd100.json` | BSD100 连续 PSNR (59 scales, 已修正) |
+| `results/continuous/set5.json` | Set5 连续 PSNR (59 scales, 已修正) |
+| `results/fce.json` | FCE 结果；当前工作区文件可能只包含最近一次运行的子集 |
+| `results/phase_intervention.json` | 因果干预结果 |
 
 ---
 
 *报告生成时间: 2026-05-03*
-*关键修正: eval_continuous_v2.py HR crop 顺序 bug 已修复并验证*
+*关键修正: eval_continuous.py HR crop 顺序 bug 已修复并验证*

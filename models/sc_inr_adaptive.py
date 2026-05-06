@@ -47,8 +47,9 @@ def init_log_polar_freqs(num_freqs, num_angles, freq_min, freq_max):
     return torch.FloatTensor(freqs)  # [K, 2]
 
 
-@register('sc_inr_phase2')
-class SCINRPhase2(nn.Module):
+@register('sc_inr_adaptive')
+@register('sc_inr_phase2')  # Backward compatibility for existing checkpoints.
+class SCINRAdaptive(nn.Module):
     """
     SC-INR Phase 2: Data-driven omega_k(z) with phi=0.
 

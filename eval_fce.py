@@ -234,16 +234,16 @@ def main():
     parser.add_argument('--max_images', type=int, default=20)
     parser.add_argument('--num_queries', type=int, default=512)
     parser.add_argument('--device', type=str, default='0')
-    parser.add_argument('--output', type=str, default='fce_results.json')
+    parser.add_argument('--output', type=str, default='results/fce.json')
     args = parser.parse_args()
 
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
 
     ALL_MODELS = {
-        'LTE':     ('save/edsr-baseline-lte/epoch-best.pth',     'lte'),
-        'LTE-NoC': ('save/edsr-baseline-lte-noc/epoch-best.pth', 'lte-noc'),
-        'SC-INR':  ('save/sc-inr/epoch-best.pth',                 'sc-inr'),
-        'PhaseZ':  ('save/edsr-baseline-lte-phase-z/epoch-best.pth', 'lte'),
+        'LTE':     ('save/lte/epoch-best.pth',     'lte'),
+        'LTE-NoCell': ('save/lte-no-cell/epoch-best.pth', 'lte-noc'),
+        'SC-INR-Fixed':  ('save/sc-inr-fixed/epoch-best.pth', 'sc-inr'),
+        'LTE-FeaturePhase':  ('save/lte-feature-phase/epoch-best.pth', 'lte'),
     }
 
     # Parse scale pairs: these define which cell sizes to compare

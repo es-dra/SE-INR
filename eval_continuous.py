@@ -5,9 +5,9 @@ Evaluates LIIF, LTE, LTE-NoC on Set5/BSD100 at scales r ∈ [1, 30], step 0.5.
 Output: comparison plot and JSON of results.
 
 Usage:
-    python eval_continuous_v2.py --dataset set5     # Set5 only (default)
-    python eval_continuous_v2.py --dataset bsd100   # BSD100 only
-    python eval_continuous_v2.py --dataset all      # Both datasets
+    python eval_continuous.py --dataset set5     # Set5 only (default)
+    python eval_continuous.py --dataset bsd100   # BSD100 only
+    python eval_continuous.py --dataset all      # Both datasets
 """
 import os
 import sys
@@ -156,11 +156,14 @@ def main():
         target_datasets = [args.dataset]
 
     MODELS = {
-        'LIIF': 'save/edsr-baseline-liif/epoch-best.pth',
-        'LTE': 'save/edsr-baseline-lte/epoch-best.pth',
-        'LTE-NoC': 'save/edsr-baseline-lte-noc/epoch-best.pth',
-        'SC-INR': 'save/sc-inr/epoch-best.pth',
-        'PhaseZ': 'save/edsr-baseline-lte-phase-z/epoch-best.pth',
+        'LIIF': 'save/liif/epoch-best.pth',
+        'LIIF-EQ': 'save/liif-eq/epoch-best.pth',
+        'LTE': 'save/lte/epoch-best.pth',
+        'LTE-NoCell': 'save/lte-no-cell/epoch-best.pth',
+        'LTE-EQ': 'save/lte-eq/epoch-best.pth',
+        'SC-INR-Fixed': 'save/sc-inr-fixed/epoch-best.pth',
+        'LTE-FeaturePhase': 'save/lte-feature-phase/epoch-best.pth',
+        'SC-INR-Adaptive': 'save/sc-inr-adaptive/epoch-best.pth',
     }
 
     if args.models:
@@ -190,7 +193,7 @@ def main():
     # Save JSON per dataset — merge with existing data if present
     for ds_name in target_datasets:
         ds_results = {}
-        json_path = f'eval_continuous_{ds_name}.json'
+        json_path = os.path.join('results', 'continuous', f'{ds_name}.json')
         if os.path.exists(json_path):
             with open(json_path) as f:
                 ds_results = json.load(f)
@@ -203,10 +206,13 @@ def main():
     # Generate plot per dataset
     for ds_name in target_datasets:
         plt.figure(figsize=(12, 8))
-        colors = {'LIIF': '#1f77b4', 'LTE': '#ff7f0e', 'LTE-NoC': '#2ca02c',
-                  'SC-INR': '#d62728'}
-        markers = {'LIIF': 'o', 'LTE': 's', 'LTE-NoC': '^',
-                   'SC-INR': 'D'}
+        colors = {'LIIF': '#1f77b4', 'LIIF-EQ': '#17becf', 'LTE': '#ff7f0e',
+                  'LTE-NoCell': '#2ca02c', 'LTE-EQ': '#bcbd22',
+                  'SC-INR-Fixed': '#d62728', 'LTE-FeaturePhase': '#9467bd',
+                  'SC-INR-Adaptive': '#8c564b'}
+        markers = {'LIIF': 'o', 'LIIF-EQ': 'v', 'LTE': 's', 'LTE-NoCell': '^',
+                   'LTE-EQ': '<', 'SC-INR-Fixed': 'D', 'LTE-FeaturePhase': '>',
+                   'SC-INR-Adaptive': 'p'}
 
         ds_results = {k: v for k, v in all_results.items() if k.endswith(f'_{ds_name}')}
         for model_name in available:
@@ -220,7 +226,7 @@ def main():
 
         plt.xlabel('Scale Factor (r)', fontsize=12)
         plt.ylabel('PSNR (dB)', fontsize=12)
-        plt.title(f'Continuous PSNR Curve on {ds_name.upper()}\nLIIF vs LTE vs LTE-NoC', fontsize=14)
+        plt.title(f'Continuous PSNR Curve on {ds_name.upper()}', fontsize=14)
         plt.legend(fontsize=11)
         plt.grid(True, alpha=0.3)
         plt.xlim(0.5, 31)
@@ -233,7 +239,7 @@ def main():
         plt.text(17, 40, 'OOD', fontsize=10, ha='center', color='red')
 
         plt.tight_layout()
-        png_path = f'eval_continuous_{ds_name}.png'
+        png_path = os.path.join('results', 'figures', f'continuous_{ds_name}.png')
         plt.savefig(png_path, dpi=150)
         print(f"Plot saved to {png_path}")
 

@@ -314,7 +314,7 @@ if __name__ == '__main__':
     import math
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default = 'configs/train-div2k/train_edsr-baseline-liif.yaml' )
+    parser.add_argument('--config', default='configs/train-div2k/train-liif.yaml')
     parser.add_argument('--name', default=None)
     parser.add_argument('--tag', default='')
     parser.add_argument('--device', default='0')

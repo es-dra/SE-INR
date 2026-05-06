@@ -3,12 +3,12 @@ from . import edsr
 from . import mlp
 from . import edsr_eq
 from . import liif
-from . import liif_old
+from . import liif_eq
 from . import lte
 from . import lte_noc
 from . import lte_phase_z
-from . import sc_inr
-from . import sc_inr_phase2
+from . import sc_inr_fixed
+from . import sc_inr_adaptive
 from . import e_linear
 from . import e_mlp_2
 from . import e_mlp_lte

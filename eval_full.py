@@ -141,7 +141,7 @@ def run_eval(model_path, benchmark, scale, device, data_root=None):
 def main():
     parser = argparse.ArgumentParser(description='Evaluate models on benchmark datasets')
     parser.add_argument('--device', type=str, default='0', help='GPU device id')
-    parser.add_argument('--output', type=str, default='eval_results.json', help='Output JSON file')
+    parser.add_argument('--output', type=str, default='results/benchmark.json', help='Output JSON file')
     parser.add_argument('--skip_existing', action='store_true', help='Skip already evaluated combinations')
     parser.add_argument('--models', type=str, default=None,
                         help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,LTE-NoC". If not set, evaluate all.')
@@ -155,13 +155,14 @@ def main():
     # Each subdirectory in save/ with an epoch-best.pth is a model
     SAVE_ROOT = 'save'
     MODEL_NAMES = {
-        'edsr-baseline-liif': 'LIIF',
-        'edsr-baseline-liif-EQ': 'LIIF-EQ',
-        'edsr-baseline-lte': 'LTE',
-        'edsr-baseline-lte-noc': 'LTE-NoC',
-        'edsr-baseline-lte-eq': 'LTE-EQ',
-        'edsr-baseline-lte-phase-z': 'PhaseZ',
-        'sc-inr': 'SC-INR',
+        'liif': 'LIIF',
+        'liif-eq': 'LIIF-EQ',
+        'lte': 'LTE',
+        'lte-no-cell': 'LTE-NoCell',
+        'lte-eq': 'LTE-EQ',
+        'lte-feature-phase': 'LTE-FeaturePhase',
+        'sc-inr-fixed': 'SC-INR-Fixed',
+        'sc-inr-adaptive': 'SC-INR-Adaptive',
     }
 
     ALL_MODELS = {}

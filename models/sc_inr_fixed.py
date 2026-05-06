@@ -70,8 +70,9 @@ def init_log_polar_freqs(
     return torch.FloatTensor(freqs)  # [K, 2]
 
 
-@register('sc_inr')
-class SCINR(nn.Module):
+@register('sc_inr_fixed')
+@register('sc_inr')  # Backward compatibility for existing checkpoints.
+class SCINRFixed(nn.Module):
     """
     SC-INR with fixed log-spaced frequency basis and analytic sinc weights.
 

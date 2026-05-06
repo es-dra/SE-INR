@@ -89,7 +89,7 @@ def main():
     device = 'cuda:0'
 
     # Load SC-INR model
-    ckpt = torch.load('save/sc-inr/epoch-best.pth', map_location='cpu')
+    ckpt = torch.load('save/sc-inr-fixed/epoch-best.pth', map_location='cpu')
     model = models.make(ckpt['model'], load_sd=True, strict=False).to(device)
     model.eval()
 

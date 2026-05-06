@@ -1,102 +1,40 @@
-# Rot-E ASISR
-Code of "Rotation Equivariant Arbitrary-scale Image Super-Resolution"  
+# SE-INR / SC-INR ASISR
 
-    configs\             : Folder for Storing Configuration Files
-    datasets\            : Codes for reading samples for different datasets
-    exampleImage\        : An example image for conducting equivariance observation experiments
-    models\              : Code of different rotataion equivariant encoders and INRs
-    EQ_Observe.py        : Code for conducting equivariance observation experiments
-    test.py              : Code for testing the trained models 
-    test_swin.py         : Code for testing the trained models whose encoder is swinIR method 
-    train.py             : Code for training the ASISR models
-    utils.py             : Code of functions that may be utilized
-    Supplementary Material.pdf: Supplementary Material
-    
-    
-We make efforts to construct a rotation equivariant ASISR method in this study. Specifically, we elaborately redesign basic architectures of INR and encoder modules, incorporating intrinsic rotation equivariance capabilities beyond those of conventional ASISR networks. Through such amelioration, the ASISR task can, for the first time, be implemented with end-to-end rotational equivariance maintained from input to output throughout the network flow.
+This repository is a research codebase derived from Rot-E ASISR for arbitrary-scale image super-resolution (ASISR). The current working direction studies scale-consistent implicit neural representations for out-of-distribution scale generalization.
 
-<p align = "center">  
-    <img src="https://github.com/XieQi2015/ImageFolder/blob/master/EQ-ASISR/Fig2.png"/>
-</p>
+## Project scope
 
-<p align = "center">  
-Figure 1. Illustration of overall rotation equivariant arbitrary-scale image super-resolution
-</p>
+The codebase keeps the original LIIF/LTE and rotation-equivariant Rot-E baselines, and adds scale-consistency ablations around LTE-style Fourier decoding.
 
+Current model families:
 
-The experimental resutls on two typical framework, ESDR-LIIF and Swin-LTE  (representing the most basic and SOTA ASISR, respectively ), are as follows:
+- `liif`: standard LIIF baseline.
+- `lte`: standard LTE baseline with cell-conditioned phase.
+- `lte-no-cell`: LTE ablation with the cell-conditioned phase removed.
+- `lte-feature-phase`: LTE ablation where phase is predicted from local feature `z` rather than cell `c`.
+- `sc_inr_fixed`: SC-INR Phase 1, fixed log-polar frequency basis with analytic sinc sampling weights.
+- `sc_inr_adaptive`: SC-INR Phase 2, data-driven local frequency `omega(z)` with analytic sinc sampling weights and `phi=0`.
+- `liif_eq` / `lte_eq` related configs and modules: inherited Rot-E rotation-equivariant baselines.
 
-<p align = "center">  
-<img src="https://github.com/XieQi2015/ImageFolder/blob/master/EQ-ASISR/all.gif"  width="700" />
-</p>
+## Main entry points
 
-<p align = "center">  
-Figure 2. Illustration of the arbitrary-scale image super-resolution performance of two typical competing ASISR methods as well as their Rot-E ameliorations, including EDSR+LIIF (with relatively simple encoder+INR modules) and SwinIR+LTE (with relatively complex encoder+INR modules).
-</p>
+- `train.py`: training entry point.
+- `test.py`: single-config evaluation entry point.
+- `eval_full.py`: discrete benchmark evaluation for Set5, Set14, BSD100, and Urban100.
+- `eval_continuous.py`: continuous-scale benchmark evaluation with corrected HR-crop/LR-generation alignment.
+- `eval_fce.py`: function consistency error evaluation.
+- `eval_phase_intervention.py`: LTE phase intervention evaluation.
 
-The capability of the proposed framework in keeping the rotation symmetry can be observed from the following figures. 
+## Important result files
 
-<p align = "center">  
-<img src="https://github.com/XieQi2015/ImageFolder/blob/master/EQ-ASISR/Liif_2_iteration.gif"  width="700" />
-</p>
+- `results/benchmark.json`: discrete benchmark results.
+- `results/continuous/set5.json`: continuous Set5 results.
+- `results/continuous/bsd100.json`: continuous BSD100 results.
+- `results/continuous/set14.json`: continuous Set14 results.
+- `results/continuous/urban100.json`: continuous Urban100 results.
+- `results/phase_intervention.json`: LTE phase intervention results.
+- `results/fce.json`: most recent FCE output.
 
-<p align = "center">  
-Figure 3. Illustration of the output local implicit image function obtained by LIIF and LIIF enhanced with the proposed method (LIIF-EQ) with different training epoches. It can be observed that the proposed LIFF-EQ consistently maintains the rotational symmetry characteristics of the data across different training epoches, whereas the original LIIF method does not.
-</p>
+## Notes
 
-<p align = "center">  
-<img src="https://github.com/XieQi2015/ImageFolder/blob/master/EQ-ASISR/Liif_rotaion.gif"  width="700" />
-</p>
-
-<p align = "center">  
-Figure 4. Illustration of the output local implicit image function obtained by LIIF and LIIF enhanced with the proposed method (LIIF-EQ) with 20 training epoches. It can be observed that the implicit function obtained by the proposed LIIF-EQ can stably rotate with the rotation of the input, whereas LIIF cannot.
-</p>
-
-
-
-
-**Usage:**    
-
-Examples for training the proposed methods:
-
-    # Train LIIF and LIIF-EQ
-    python train.py --config configs/train-div2k/train-edsr-baseline-liif.yaml
-    python train.py --config configs/train-div2k/train-edsr-baseline-liif-EQ.yaml
-
-    # Train OPE and OPE-EQ
-    python train.py --config configs/train-div2k/train-edsr-baseline-ope.yaml
-    python train.py --config configs/train-div2k/train-edsr-baseline-ope-EQ.yaml
-
-    # Train LTE and LTE-EQ
-    python train.py --config configs/train-div2k/train-edsr-baseline-lte.yaml
-    python train.py --config configs/train-div2k/train-edsr-baseline-lte-EQ.yaml
-
-Examples for conducting equivariance observation experiments
-
-    # Observe the equivariance of LIIF and LIIF-EQ
-    python EQ_Observe.py  --config configs/observation/Observe-edsr-baseline-liif.yaml
-    python EQ_Observe.py  --config configs/observation/Observe-edsr-baseline-liif-EQ.yaml
-
-    # Observe the equivariance of OPE and OPE-EQ
-    python EQ_Observe.py  --config configs/observation/Observe-edsr-baseline-ope.yaml
-    python EQ_Observe.py  --config configs/observation/Observe-edsr-baseline-ope-EQ.yaml
-
-    # Observe the equivariance of LTE and LTE-EQ
-    python EQ_Observe.py  --config configs/observation/Observe-edsr-baseline-lte.yaml
-    python EQ_Observe.py  --config configs/observation/Observe-edsr-baseline-lte-EQ.yaml
-
-    # Observe the equivariance of swinIR based LIIF and LIIF-EQ
-    python EQ_Observe.py  --config configs/observation/Observe-swinir-lte.yaml
-    python EQ_Observe.py  --config configs/observation/Observe-swinir-lte-EQ.yaml
-
-The output image of equivariance observation experiments would be like:
-
-<p align = "center">  
-<img src="https://github.com/XieQi2015/ImageFolder/blob/master/EQ-ASISR/EqExample_lte.png"  width="700" />
-</p>
-
-<p align = "center">  
-Figure 5. Illustration of the output images of original and its rotation-equivariant improvement (p16 rotation equivariant), when the network is randomly initialized with out any training.
-</p>
-
-    
+SC-INR is currently best described as scale sampling consistency, not strict mathematical scale equivariance. Paper claims and experiment summaries should be based on the current configs, logs, and result files rather than older Rot-E README text or obsolete draft sections.

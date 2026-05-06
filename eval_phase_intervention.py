@@ -5,7 +5,7 @@ Tests whether h_p(c) is the direct cause of OOD degradation.
 Compares:
   LTE (normal):  h_p(c) active
   LTE (phase=0): same checkpoint, h_p(c) forced to zero at inference
-  LTE-NoC:        separately trained without h_p(c)
+  LTE-NoCell:        separately trained without h_p(c)
 """
 
 import os, sys, math, json
@@ -77,12 +77,12 @@ def main():
                  'gt':  {'sub': [0.5], 'div': [0.5]}}
 
     # Load LTE
-    lte_ckpt = torch.load('save/edsr-baseline-lte/epoch-best.pth',
+    lte_ckpt = torch.load('save/lte/epoch-best.pth',
                           map_location='cpu')
     lte_model = models.make(lte_ckpt['model'], load_sd=True).to(device)
 
-    # Load LTE-NoC
-    noc_ckpt = torch.load('save/edsr-baseline-lte-noc/epoch-best.pth',
+    # Load LTE-NoCell
+    noc_ckpt = torch.load('save/lte-no-cell/epoch-best.pth',
                           map_location='cpu')
     noc_model = models.make(noc_ckpt['model'], load_sd=True).to(device)
 
@@ -90,7 +90,7 @@ def main():
     id_scales = [2, 3, 4]
     ood_scales = [6, 8, 12, 16, 24, 30]
 
-    all_results = {'LTE': {}, 'LTE-phase0': {}, 'LTE-NoC': {}}
+    all_results = {'LTE': {}, 'LTE-phase0': {}, 'LTE-NoCell': {}}
 
     for benchmark in benchmarks:
         print(f'\n{"="*55}')
@@ -116,7 +116,7 @@ def main():
             # Reload
             loader = make_loader(benchmark, scale, data_root)
 
-            # LTE-NoC
+            # LTE-NoCell
             psnr_noc = eval_psnr_for_model(noc_model, loader, device, data_norm, scale)
 
             tag = 'ID' if scale <= 4 else 'OOD'
@@ -127,14 +127,14 @@ def main():
 
             all_results['LTE'][f'{benchmark}_x{scale}'] = round(psnr_lte, 4)
             all_results['LTE-phase0'][f'{benchmark}_x{scale}'] = round(psnr_zero, 4)
-            all_results['LTE-NoC'][f'{benchmark}_x{scale}'] = round(psnr_noc, 4)
+            all_results['LTE-NoCell'][f'{benchmark}_x{scale}'] = round(psnr_noc, 4)
 
     # Summary
     print(f"\n{'='*65}")
     print("SUMMARY: Mean ΔPSNR vs LTE")
     print(f"{'='*65}")
     for condition, label in [('LTE-phase0', 'LTE(φ=0)-LTE'),
-                              ('LTE-NoC', 'LTE-NoC-LTE')]:
+                              ('LTE-NoCell', 'LTE-NoCell-LTE')]:
         id_deltas, ood_deltas = [], []
         for b in benchmarks:
             for s in id_scales:
@@ -149,9 +149,9 @@ def main():
               f'OOD mean={sum(ood_deltas)/len(ood_deltas):+.3f}')
 
     # Save
-    with open('phase_intervention_results.json', 'w') as f:
+    with open('results/phase_intervention.json', 'w') as f:
         json.dump(all_results, f, indent=2)
-    print('\nSaved to phase_intervention_results.json')
+    print('\nSaved to results/phase_intervention.json')
 
 
 if __name__ == '__main__':
