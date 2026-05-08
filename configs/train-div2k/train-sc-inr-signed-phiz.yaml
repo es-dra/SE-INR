@@ -1,3 +1,9 @@
+# SC-INR + PhiZ
+# Signed adaptive frequency with feature-conditioned phase:
+#   omega(z) = omega_bound * tanh(g(z))
+#   phi(z) is predicted from features only, not from cell/scale
+# Cell enters the decoder only through the analytic sinc response.
+
 train_dataset:
   dataset:
     name: image-folder
@@ -29,14 +35,13 @@ val_dataset:
       scale_max: 4
       sample_q: 2304
   batch_size: 16
-  
 
 data_norm:
   inp: {sub: [0.5], div: [0.5]}
   gt: {sub: [0.5], div: [0.5]}
 
 model:
-  name: liif
+  name: sc_inr_signed_phiz
   args:
     encoder_spec:
       name: edsr-baseline
@@ -46,7 +51,17 @@ model:
       name: mlp
       args:
         out_dim: 3
-        hidden_list: [256, 256, 256, 256]
+        hidden_list: [256, 256, 256]
+    hidden_dim: 256
+    num_freqs: 128
+    num_angles: 8
+    freq_min: 0.1
+    freq_max: 2.0
+    omega_bound: 2.1
+    learn_phase: true
+    phase_kernel_size: 1
+    phase_bias: false
+    phase_zero_init: true
 
 optimizer:
   name: adam

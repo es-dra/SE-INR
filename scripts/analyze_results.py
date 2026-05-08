@@ -36,10 +36,14 @@ import matplotlib.pyplot as plt
 ID_SCALES = ["x2", "x3", "x4"]
 OOD_SCALES = ["x6", "x8", "x12", "x16", "x24", "x30"]
 BENCHMARKS = ["Set5", "Set14", "BSD100", "Urban100"]
-CORE_MODELS = ["LIIF", "LTE", "SC-INR-Adaptive"]
+MODEL_ALIASES = {
+    "SC-INR-Adaptive": "SC-INR",
+    "SC-INR-Adaptive-Signed": "SC-INR-Signed",
+}
+CORE_MODELS = ["LIIF", "LTE", "SC-INR"]
 MODEL_ORDER = [
     "LIIF", "LIIF-EQ", "LTE", "LTE-EQ", "LTE-NoCell", "LTE-FeaturePhase",
-    "SC-INR-Fixed", "SC-INR-Adaptive",
+    "SC-INR-Fixed", "SC-INR", "SC-INR-Signed", "SC-INR+PhiZ",
 ]
 STYLE = {
     "LIIF": {"color": "#4C72B0", "ls": "--", "lw": 1.8},
@@ -49,15 +53,26 @@ STYLE = {
     "LTE-NoCell": {"color": "#55A868", "ls": ":", "lw": 1.6},
     "LTE-FeaturePhase": {"color": "#8172B2", "ls": ":", "lw": 1.6},
     "SC-INR-Fixed": {"color": "#C44E52", "ls": "--", "lw": 1.8},
-    "SC-INR-Adaptive": {"color": "#C44E52", "ls": "-", "lw": 2.4},
+    "SC-INR": {"color": "#C44E52", "ls": "-", "lw": 2.4},
+    "SC-INR-Signed": {"color": "#8B0000", "ls": "-", "lw": 2.4},
+    "SC-INR+PhiZ": {"color": "#222222", "ls": "-", "lw": 2.4},
 }
+
+
+def normalize_model_names(data: Dict[str, Any]) -> Dict[str, Any]:
+    normalized: Dict[str, Any] = {}
+    for model, value in data.items():
+        canonical = MODEL_ALIASES.get(model, model)
+        normalized[canonical] = value
+    return normalized
 
 
 def load_json(path: Path) -> Dict[str, Any]:
     if not path.exists():
         return {}
     with path.open("r") as f:
-        return json.load(f)
+        data = json.load(f)
+    return normalize_model_names(data)
 
 
 def ensure_dir(path: Path) -> None:

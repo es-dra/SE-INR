@@ -4,6 +4,7 @@ log/
 # Training outputs
 save/
 save_test/
+save-seeds/
 
 # Python
 __pycache__/
@@ -27,6 +28,8 @@ Data/
 # Logs
 *.log
 training_log*.txt
+*.pid
+logs/**/*.pid
 
 # Mac
 .DS_Store

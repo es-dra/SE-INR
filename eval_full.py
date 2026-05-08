@@ -163,7 +163,13 @@ def main():
         'lte-eq': 'LTE-EQ',
         'lte-feature-phase': 'LTE-FeaturePhase',
         'sc-inr-fixed': 'SC-INR-Fixed',
-        'sc-inr-adaptive': 'SC-INR-Adaptive',
+        'sc-inr-adaptive': 'SC-INR',
+        'sc-inr-adaptive-signed': 'SC-INR-Signed',
+        'sc-inr-phiz': 'SC-INR+PhiZ',
+    }
+    MODEL_ALIASES = {
+        'SC-INR-Adaptive': 'SC-INR',
+        'SC-INR-Adaptive-Signed': 'SC-INR-Signed',
     }
 
     ALL_MODELS = {}
@@ -177,7 +183,7 @@ def main():
 
     # Filter by --models argument if provided, otherwise evaluate all discovered
     if args.models:
-        model_names = [m.strip() for m in args.models.split(',')]
+        model_names = [MODEL_ALIASES.get(m.strip(), m.strip()) for m in args.models.split(',')]
         MODELS = {k: v for k, v in ALL_MODELS.items() if k in model_names}
         missing = set(model_names) - set(ALL_MODELS.keys())
         if missing:
@@ -199,6 +205,9 @@ def main():
     if os.path.exists(args.output):
         with open(args.output, 'r') as f:
             results = json.load(f)
+        for old_name, new_name in MODEL_ALIASES.items():
+            if old_name in results and new_name not in results:
+                results[new_name] = results.pop(old_name)
         print(f"Loaded existing results from {args.output}")
     if args.skip_existing:
         print("--skip_existing: will skip already-evaluated combinations")

@@ -7,14 +7,26 @@ Variant B (primary): omega(z) + phi=0
   - coef, sinc weights, MLP identical to Phase 1
 
 Design:
-  1. omega_conv: Conv2d(64, 2K, 3, pad=1) -> F.softplus -> [B, 2K, H, W]
+  1. omega_conv: Conv2d(64, 2K, 3, pad=1) -> omega parameterization -> [B, 2K, H, W]
   2. Per query: grid_sample omega_map -> [B, Q, K, 2] frequencies
   3. Fourier: cos/sin(pi * (omega_k * delta)) with phi=0
   4. Sinc: sinc(omega_k * c/2), analytic
   5. Amplitude modulation: coef * Fourier features
   6. MLP decoder -> RGB
 
+Optional diagnostic variant: omega(z) + phi(z)
+  - phase_conv(z) predicts K phase offsets independent of cell/scale
+  - cell still enters only through analytic sinc response
+  - the default remains phi=0 for checkpoint compatibility
+
 FCE = 0 preserved: omega_conv input is z (not c), so F does not depend on c.
+
+Compatibility note:
+  - sc_inr_adaptive keeps the original softplus-positive omega semantics for
+    existing checkpoints.
+  - sc_inr_adaptive_signed is a signed bounded tanh variant for the directional
+    omega ablation/fix.
+  - sc_inr_signed_phiz enables feature-conditioned phase on top of signed omega.
 """
 
 import math
@@ -65,6 +77,12 @@ class SCINRAdaptive(nn.Module):
         num_angles: int = 8,
         freq_min: float = 0.1,
         freq_max: float = 2.0,
+        omega_param: str = "softplus",
+        omega_bound: float | None = None,
+        learn_phase: bool = False,
+        phase_kernel_size: int = 1,
+        phase_bias: bool = False,
+        phase_zero_init: bool = True,
         local_ensemble: bool = True,
         upinput: bool = True,
         kernel_size: int = 3,
@@ -78,10 +96,25 @@ class SCINRAdaptive(nn.Module):
 
         self.hidden_dim = hidden_dim
         self.num_freqs = num_freqs
+        self.num_angles = num_angles
         self.freq_min = freq_min
         self.freq_max = freq_max
+        self.omega_param = omega_param
+        self.omega_bound = omega_bound
+        self.learn_phase = learn_phase
+        self.phase_kernel_size = phase_kernel_size
+        self.phase_bias = phase_bias
+        self.phase_zero_init = phase_zero_init
         self.local_ensemble = local_ensemble
         self.upinput = upinput
+
+        if self.omega_param not in {"softplus", "tanh_signed"}:
+            raise ValueError(f"Unsupported omega_param: {self.omega_param}")
+        if self.omega_param == "tanh_signed":
+            if self.omega_bound is None:
+                self.omega_bound = float(freq_max) * 1.05
+            if self.omega_bound <= 0:
+                raise ValueError("omega_bound must be positive for tanh_signed omega")
 
         self.encoder = models.make(encoder_spec)
 
@@ -100,9 +133,22 @@ class SCINRAdaptive(nn.Module):
         # Initialize omega_conv: bias from Phase 1 freqs for warm start
         self._init_omega_conv(num_freqs, num_angles, freq_min, freq_max)
 
-        # NOTE: No phase_conv. Phase is fixed at 0.
-        # This forces all scale adaptation through the mathematically correct
-        # channel: omega(z) -> sinc(omega * c/2).
+        # Optional feature-conditioned phase. This is a content phase phi(z),
+        # not LTE's cell-conditioned phase h_p(c).
+        if learn_phase:
+            self.phase_conv = nn.Conv2d(
+                self.encoder.out_dim,
+                num_freqs,
+                phase_kernel_size,
+                padding=phase_kernel_size // 2,
+                bias=phase_bias,
+            )
+            if phase_zero_init:
+                nn.init.zeros_(self.phase_conv.weight)
+                if self.phase_conv.bias is not None:
+                    nn.init.zeros_(self.phase_conv.bias)
+        else:
+            self.phase_conv = None
 
         self.imnet = models.make(imnet_spec, args={'in_dim': hidden_dim})
 
@@ -110,23 +156,36 @@ class SCINRAdaptive(nn.Module):
         """Initialize omega_conv so epoch-0 behavior matches Phase 1."""
         ref_freqs = init_log_polar_freqs(num_freqs, num_angles, freq_min, freq_max)
 
-        # Weight: small random, so initial output is dominated by bias
-        nn.init.normal_(self.omega_conv.weight, mean=0.0, std=0.01)
-
-        # Bias: set so that softplus(bias) ≈ ref_freqs at init
-        # softplus(x) = log(1 + exp(x))
-        # We want softplus(bias_k) = freqs_k -> bias_k = softplus_inverse(freqs_k)
-        # For f >= 0: softplus_inverse(f) = log(exp(f) - 1)
-        # For numerical safety when f is very small: use alternative
         with torch.no_grad():
             ref_flat = ref_freqs.flatten()  # [2K]
-            # softplus_inverse via log(exp(f) - 1) with clamping
-            bias_init = torch.where(
-                ref_flat > 0.05,
-                torch.log(torch.exp(ref_flat) - 1.0),  # accurate for f > 0.05
-                ref_flat - 0.6931  # approximation for small f: softplus(x) ≈ x+ln2 near 0
-            )
+            if self.omega_param == "softplus":
+                # Preserve the original Phase-2 behavior for existing checkpoints.
+                nn.init.normal_(self.omega_conv.weight, mean=0.0, std=0.01)
+                bias_init = torch.where(
+                    ref_flat > 0.05,
+                    torch.log(torch.exp(ref_flat) - 1.0),
+                    ref_flat - 0.6931,
+                )
+            else:
+                # Signed bounded omega: omega = omega_bound * tanh(raw).
+                # Zero weights give an exact log-polar initialization at epoch 0.
+                bound = float(self.omega_bound)
+                if float(ref_flat.abs().max()) >= bound:
+                    raise ValueError(
+                        f"omega_bound ({bound}) must be larger than max |ref_freq| "
+                        f"({float(ref_flat.abs().max())})"
+                    )
+                nn.init.zeros_(self.omega_conv.weight)
+                normalized = (ref_flat / bound).clamp(-1 + 1e-6, 1 - 1e-6)
+                bias_init = torch.atanh(normalized)
             self.omega_conv.bias.data = bias_init
+
+    def _parameterize_omega(self, raw_omega: torch.Tensor) -> torch.Tensor:
+        if self.omega_param == "softplus":
+            return F.softplus(raw_omega)
+        if self.omega_param == "tanh_signed":
+            return float(self.omega_bound) * torch.tanh(raw_omega)
+        raise RuntimeError(f"Unsupported omega_param: {self.omega_param}")
 
     def gen_feat(self, inp: torch.Tensor) -> torch.Tensor:
         self.inp = inp
@@ -142,7 +201,8 @@ class SCINRAdaptive(nn.Module):
 
         self.feat = self.encoder(inp)
         self.coeff = self.coef(self.feat)          # [B, hidden_dim, H, W]
-        self.omega_map = F.softplus(self.omega_conv(self.feat))  # [B, 2K, H, W], positive
+        self.omega_map = self._parameterize_omega(self.omega_conv(self.feat))  # [B, 2K, H, W]
+        self.phase_map = self.phase_conv(self.feat) if self.phase_conv is not None else None
 
         return self.feat
 
@@ -150,6 +210,7 @@ class SCINRAdaptive(nn.Module):
         feat = self.feat
         coef = self.coeff
         omega_map = self.omega_map
+        phase_map = self.phase_map
 
         if self.local_ensemble:
             vx_lst = [-1, 1]
@@ -202,8 +263,10 @@ class SCINRAdaptive(nn.Module):
 
                 # Step 1: omega_k · delta (phase=0, no phi term)
                 q_phase = torch.sum(q_omega * rel_coord.unsqueeze(-2), dim=-1)  # [B, Q, K]
+                if phase_map is not None:
+                    q_phase = q_phase + grid_fetch(phase_map)
 
-                # Step 2: Fourier features (cos + sin, phi=0)
+                # Step 2: Fourier features (cos + sin)
                 fourier_cos = torch.cos(math.pi * q_phase)  # [B, Q, K]
                 fourier_sin = torch.sin(math.pi * q_phase)  # [B, Q, K]
 
@@ -261,3 +324,41 @@ class SCINRAdaptive(nn.Module):
     def forward(self, inp, coord, cell):
         self.gen_feat(inp)
         return self.query_rgb(coord, cell)
+
+
+@register('sc_inr_adaptive_signed')
+class SCINRAdaptiveSigned(SCINRAdaptive):
+    """Signed bounded omega variant.
+
+    This class intentionally uses a separate registry name so that existing
+    sc_inr_adaptive checkpoints keep their original softplus-positive omega
+    semantics.
+    """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("omega_param", "tanh_signed")
+        super().__init__(*args, **kwargs)
+
+
+@register('sc_inr_adaptive_phiz')
+@register('sc_inr_phase2_phiz')
+@register('sc_inr_phiz')
+class SCINRAdaptivePhiZ(SCINRAdaptive):
+    """Feature-conditioned phase variant.
+
+    The phase branch predicts phi(z) only. It does not receive cell/scale, so
+    the decoder-side sampling response remains the analytic sinc term.
+    """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("learn_phase", True)
+        super().__init__(*args, **kwargs)
+
+
+@register('sc_inr_signed_phiz')
+class SCINRSignedPhiZ(SCINRAdaptivePhiZ):
+    """Signed omega plus feature-conditioned phase variant."""
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("omega_param", "tanh_signed")
+        super().__init__(*args, **kwargs)
