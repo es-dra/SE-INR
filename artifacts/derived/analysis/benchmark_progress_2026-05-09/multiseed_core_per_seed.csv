@@ -1,10 +1,10 @@
 seed,source,model,id_psnr,ood_psnr,all_psnr
 1,results/benchmark_seed1_with_signed_phiz.json,LIIF,30.999150,22.711138,25.473808
 1,results/benchmark_seed1_with_signed_phiz.json,LTE,31.044950,22.691688,25.476108
-1,results/benchmark_seed1_with_signed_phiz.json,SC-INR,31.051467,22.747071,25.515203
+1,results/benchmark_seed1_with_signed_phiz.json,SC-INR-NoPhi,31.051467,22.747071,25.515203
 2,results/seeds/benchmark_seed2.json,LIIF,31.039900,22.729117,25.499378
 2,results/seeds/benchmark_seed2.json,LTE,31.100625,22.717271,25.511722
-2,results/seeds/benchmark_seed2.json,SC-INR,31.089567,22.767996,25.541853
+2,results/seeds/benchmark_seed2.json,SC-INR-NoPhi,31.089567,22.767996,25.541853
 3,results/seeds/benchmark_seed3.json,LIIF,31.051242,22.734896,25.507011
 3,results/seeds/benchmark_seed3.json,LTE,31.090158,22.713208,25.505525
-3,results/seeds/benchmark_seed3.json,SC-INR,31.082625,22.759225,25.533692
+3,results/seeds/benchmark_seed3.json,SC-INR-NoPhi,31.082625,22.759225,25.533692

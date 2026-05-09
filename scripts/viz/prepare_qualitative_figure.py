@@ -10,7 +10,7 @@ texture crop is only a starting point for finding candidates.
 Example:
     python scripts/prepare_qualitative_figure.py \
         --dataset urban100 --image img_004.png --scale 8 \
-        --models Bicubic,LTE,SC-INR,SC-INR+PhiZ \
+        --models Bicubic,LTE,SC-INR-NoPhi,SC-INR \
         --auto_texture_crop --out results/analysis/qualitative_phiz
 """
 
@@ -275,12 +275,12 @@ def main() -> None:
     parser.add_argument("--dataset", default="urban100", choices=sorted(DATASETS.keys()))
     parser.add_argument("--image", default="img_004.png")
     parser.add_argument("--scale", type=int, default=8)
-    parser.add_argument("--models", default="Bicubic,LTE,SC-INR,SC-INR+PhiZ")
+    parser.add_argument("--models", default="Bicubic,LTE,SC-INR-NoPhi,SC-INR")
     parser.add_argument("--crop", default=None, help="Manual crop as y,x,size in HR/output coordinates.")
     parser.add_argument("--auto_texture_crop", action="store_true", help="Use highest local-variance crop as a candidate.")
     parser.add_argument("--auto_delta_crop", action="store_true",
                         help="Select a crop by local target-vs-baseline PSNR gain; writes ranked candidates.")
-    parser.add_argument("--target_model", default="SC-INR+PhiZ")
+    parser.add_argument("--target_model", default="SC-INR")
     parser.add_argument("--baseline_model", default="LTE")
     parser.add_argument("--crop_stride", type=int, default=0, help="Grid stride for --auto_delta_crop. Default: crop_size/2.")
     parser.add_argument("--min_texture_quantile", type=float, default=0.50,

@@ -35,18 +35,26 @@ def plot_continuous_psnr(data, output_dir, annotate=True, smooth_window=1,
     STYLE = {
         'LIIF':    {'color': '#4C72B0', 'ls': '--', 'lw': 1.5, 'marker': None},
         'LTE':     {'color': '#DD8452', 'ls': '-',  'lw': 2.0, 'marker': None},
-        'LTE-NoC': {'color': '#55A868', 'ls': '-',  'lw': 2.0, 'marker': None},
-        'SC-INR':  {'color': '#C44E52', 'ls': '-',  'lw': 2.5, 'marker': None},
+        'LTE-NoCellPhase': {'color': '#55A868', 'ls': '-',  'lw': 2.0, 'marker': None},
+        'SC-INR-NoPhi':  {'color': '#C44E52', 'ls': '-',  'lw': 2.0, 'marker': None},
+        'SC-INR':  {'color': '#222222', 'ls': '-',  'lw': 2.5, 'marker': None},
+    }
+    aliases = {
+        'LTE-NoC': 'LTE-NoCellPhase',
+        'LTE-NoCell': 'LTE-NoCellPhase',
+        'SC-INR+PhiZ': 'SC-INR',
+        'SC-INR-Adaptive': 'SC-INR-NoPhi',
     }
     DEFAULT_STYLE = {'color': '#8172B2', 'ls': '-.', 'lw': 1.5, 'marker': None}
 
     # Normalize keys: accept both "1.0" and "x1.0" formats
     normalized = {}
     for mname, model_data in data.items():
-        normalized[mname] = {}
+        display_name = aliases.get(mname, mname)
+        normalized[display_name] = {}
         for k, v in model_data.items():
             s = float(k.lstrip('x'))
-            normalized[mname][f'x{s}'] = v
+            normalized[display_name][f'x{s}'] = v
     data = normalized
 
     # Collect all scales
@@ -136,12 +144,12 @@ def plot_continuous_psnr(data, output_dir, annotate=True, smooth_window=1,
     plt.close()
     print(f"Saved: {path2}")
 
-    # ── Figure 3: Delta curve (LTE-NoC − LTE) ──
-    if 'LTE' in data and 'LTE-NoC' in data:
+    # ── Figure 3: Delta curve (LTE-NoCellPhase − LTE) ──
+    if 'LTE' in data and 'LTE-NoCellPhase' in data:
         fig, ax = plt.subplots(figsize=(10, 4))
         ref = data['LTE']
 
-        for mname in ['LTE-NoC']:
+        for mname in ['LTE-NoCellPhase']:
             if mname not in data:
                 continue
             model_data = data[mname]
@@ -165,7 +173,7 @@ def plot_continuous_psnr(data, output_dir, annotate=True, smooth_window=1,
         ax.fill_between(ood_scales, 0, 0, alpha=0)
         ax.set_xlabel('Scale', fontsize=12)
         ax.set_ylabel('Delta PSNR vs LTE (dB)', fontsize=12)
-        ax.set_title('PSNR Difference: LTE-NoC minus LTE — OOD region', fontsize=13)
+        ax.set_title('PSNR Difference: LTE-NoCellPhase minus LTE — OOD region', fontsize=13)
         ax.legend(fontsize=10)
         ax.grid(True, alpha=0.3)
         plt.tight_layout()
@@ -188,16 +196,16 @@ def plot_continuous_psnr(data, output_dir, annotate=True, smooth_window=1,
             print(f"  {mname:<18}: mean={np.mean(vals):.4f}  "
                   f"std={np.std(vals):.4f}")
 
-    if 'LTE' in data and 'LTE-NoC' in data:
+    if 'LTE' in data and 'LTE-NoCellPhase' in data:
         lte = data['LTE']
-        noc = data['LTE-NoC']
+        noc = data['LTE-NoCellPhase']
         wins = sum(1 for s in ood_range
                    if f'x{s}' in lte and f'x{s}' in noc
                    and noc[f'x{s}'] is not None and lte[f'x{s}'] is not None
                    and noc[f'x{s}'] > lte[f'x{s}'])
         total = sum(1 for s in ood_range
                     if f'x{s}' in lte and f'x{s}' in noc)
-        print(f"\n  LTE-NoC > LTE in OOD: {wins}/{total} "
+        print(f"\n  LTE-NoCellPhase > LTE in OOD: {wins}/{total} "
               f"({100*wins/total:.1f}%)")
 
     # x1 anomaly report

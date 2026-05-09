@@ -5,10 +5,10 @@ Tests whether h_p(c) is the direct cause of OOD degradation.
 Compares:
   LTE (normal):  h_p(c) active
   LTE (phase=0): same checkpoint, h_p(c) forced to zero at inference
-  LTE-NoCell:        separately trained without h_p(c)
+  LTE-NoCellPhase:   separately trained without h_p(c)
 """
 
-import os, sys, math, json
+import os, sys, math, json, argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,34 +75,64 @@ def make_loader(benchmark, scale, data_root, batch_size=1):
     return DataLoader(dataset, batch_size=batch_size, num_workers=0)
 
 
+def parse_csv(value, cast=str):
+    return [cast(v.strip()) for v in value.split(',') if v.strip()]
+
+
 def main():
-    device = 'cuda:0'
-    data_root = str(Path(os.environ.get('SEINR_DATA_ROOT', ROOT.parent / 'Data')))
+    parser = argparse.ArgumentParser(
+        description="Evaluate the LTE phase(cell) intervention diagnostic."
+    )
+    parser.add_argument('--device', default='0',
+                        help='CUDA device id, or "cpu". Default: 0')
+    parser.add_argument('--save_root', default='save',
+                        help='Checkpoint root containing lte/ and lte-nocellphase/.')
+    parser.add_argument('--data_root', default=None,
+                        help='Benchmark data root. Default: $SEINR_DATA_ROOT or ../Data.')
+    parser.add_argument('--output', default='results/phase_intervention.json',
+                        help='Output JSON path.')
+    parser.add_argument('--benchmarks', default='Set5,Set14,BSD100,Urban100',
+                        help='Comma-separated benchmark names.')
+    parser.add_argument('--scales', default='2,3,4,6,8,12,16,24,30',
+                        help='Comma-separated scale factors.')
+    args = parser.parse_args()
+
+    if args.device == 'cpu' or not torch.cuda.is_available():
+        device = 'cpu'
+    else:
+        device = f'cuda:{args.device}'
+
+    data_root = args.data_root
+    if data_root is None:
+        data_root = str(Path(os.environ.get('SEINR_DATA_ROOT', ROOT.parent / 'Data')))
     data_norm = {'inp': {'sub': [0.5], 'div': [0.5]},
                  'gt':  {'sub': [0.5], 'div': [0.5]}}
 
+    save_root = Path(args.save_root)
+
     # Load LTE
-    lte_ckpt = torch.load('save/lte/epoch-best.pth',
+    lte_ckpt = torch.load(save_root / 'lte' / 'epoch-best.pth',
                           map_location='cpu')
     lte_model = models.make(lte_ckpt['model'], load_sd=True).to(device)
 
-    # Load LTE-NoCell
-    noc_ckpt = torch.load('save/lte-no-cell/epoch-best.pth',
+    # Load LTE-NoCellPhase
+    noc_ckpt = torch.load(save_root / 'lte-nocellphase' / 'epoch-best.pth',
                           map_location='cpu')
     noc_model = models.make(noc_ckpt['model'], load_sd=True).to(device)
 
-    benchmarks = ['Set5', 'Set14', 'BSD100', 'Urban100']
-    id_scales = [2, 3, 4]
-    ood_scales = [6, 8, 12, 16, 24, 30]
+    benchmarks = parse_csv(args.benchmarks)
+    scales = parse_csv(args.scales, int)
+    id_scales = [s for s in scales if s <= 4]
+    ood_scales = [s for s in scales if s > 4]
 
-    all_results = {'LTE': {}, 'LTE-phase0': {}, 'LTE-NoCell': {}}
+    all_results = {'LTE': {}, 'LTE-phase0': {}, 'LTE-NoCellPhase': {}}
 
     for benchmark in benchmarks:
         print(f'\n{"="*55}')
         print(f'Benchmark: {benchmark}')
         print(f'{"="*55}')
 
-        for scale in id_scales + ood_scales:
+        for scale in scales:
             loader = make_loader(benchmark, scale, data_root)
 
             # LTE (normal)
@@ -114,14 +144,21 @@ def main():
 
             # LTE (phase=0) — causal intervention: zero out phase weights
             orig_weight = lte_model.phase.weight.data.clone()
+            orig_bias = None
+            if lte_model.phase.bias is not None:
+                orig_bias = lte_model.phase.bias.data.clone()
             lte_model.phase.weight.data.zero_()
+            if lte_model.phase.bias is not None:
+                lte_model.phase.bias.data.zero_()
             psnr_zero = eval_psnr_for_model(lte_model, loader, device, data_norm, scale)
             lte_model.phase.weight.data.copy_(orig_weight)  # Restore
+            if orig_bias is not None:
+                lte_model.phase.bias.data.copy_(orig_bias)
 
             # Reload
             loader = make_loader(benchmark, scale, data_root)
 
-            # LTE-NoCell
+            # LTE-NoCellPhase
             psnr_noc = eval_psnr_for_model(noc_model, loader, device, data_norm, scale)
 
             tag = 'ID' if scale <= 4 else 'OOD'
@@ -132,14 +169,14 @@ def main():
 
             all_results['LTE'][f'{benchmark}_x{scale}'] = round(psnr_lte, 4)
             all_results['LTE-phase0'][f'{benchmark}_x{scale}'] = round(psnr_zero, 4)
-            all_results['LTE-NoCell'][f'{benchmark}_x{scale}'] = round(psnr_noc, 4)
+            all_results['LTE-NoCellPhase'][f'{benchmark}_x{scale}'] = round(psnr_noc, 4)
 
     # Summary
     print(f"\n{'='*65}")
     print("SUMMARY: Mean ΔPSNR vs LTE")
     print(f"{'='*65}")
     for condition, label in [('LTE-phase0', 'LTE(φ=0)-LTE'),
-                              ('LTE-NoCell', 'LTE-NoCell-LTE')]:
+                              ('LTE-NoCellPhase', 'LTE-NoCellPhase-LTE')]:
         id_deltas, ood_deltas = [], []
         for b in benchmarks:
             for s in id_scales:
@@ -154,9 +191,11 @@ def main():
               f'OOD mean={sum(ood_deltas)/len(ood_deltas):+.3f}')
 
     # Save
-    with open('results/phase_intervention.json', 'w') as f:
+    output = Path(args.output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with open(output, 'w') as f:
         json.dump(all_results, f, indent=2)
-    print('\nSaved to results/phase_intervention.json')
+    print(f'\nSaved to {output}')
 
 
 if __name__ == '__main__':

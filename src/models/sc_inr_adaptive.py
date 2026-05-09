@@ -1,7 +1,7 @@
 """
 SC-INR Phase 2: Data-driven frequency basis omega_k(z).
 
-Variant B (primary): omega(z) + phi=0
+Legacy no-phase variant: omega(z) + phi=0
   - omega_conv(z) replaces fixed freqs buffer
   - Phase fixed at 0 (no phase_conv)
   - coef, sinc weights, MLP identical to Phase 1
@@ -14,7 +14,7 @@ Design:
   5. Amplitude modulation: coef * Fourier features
   6. MLP decoder -> RGB
 
-Optional diagnostic variant: omega(z) + phi(z)
+Final-candidate variant: omega(z) + phi(z)
   - phase_conv(z) predicts K phase offsets independent of cell/scale
   - cell still enters only through analytic sinc response
   - the default remains phi=0 for checkpoint compatibility
@@ -22,11 +22,10 @@ Optional diagnostic variant: omega(z) + phi(z)
 FCE = 0 preserved: omega_conv input is z (not c), so F does not depend on c.
 
 Compatibility note:
-  - sc_inr_adaptive keeps the original softplus-positive omega semantics for
-    existing checkpoints.
-  - sc_inr_adaptive_signed is a signed bounded tanh variant for the directional
-    omega ablation/fix.
-  - sc_inr_signed_phiz enables feature-conditioned phase on top of signed omega.
+  - sc_inr_adaptive is the legacy registry name for the paper display
+    variant SC-INR-NoPhi.
+  - sc_inr_adaptive_signed is the legacy registry name for SC-INR-NoPhi-Signed.
+  - sc_inr_signed_phiz is the current final-candidate SC-INR.
 """
 
 import math
@@ -63,9 +62,9 @@ def init_log_polar_freqs(num_freqs, num_angles, freq_min, freq_max):
 @register('sc_inr_phase2')  # Backward compatibility for existing checkpoints.
 class SCINRAdaptive(nn.Module):
     """
-    SC-INR Phase 2: Data-driven omega_k(z) with phi=0.
+    SC-INR-NoPhi: data-driven omega_k(z) with phi=0.
 
-    Variant B: omega(z) + phi=0 (clean theoretical design)
+    The class name is kept for checkpoint compatibility.
     """
 
     def __init__(
@@ -328,7 +327,7 @@ class SCINRAdaptive(nn.Module):
 
 @register('sc_inr_adaptive_signed')
 class SCINRAdaptiveSigned(SCINRAdaptive):
-    """Signed bounded omega variant.
+    """SC-INR-NoPhi-Signed: signed bounded omega variant.
 
     This class intentionally uses a separate registry name so that existing
     sc_inr_adaptive checkpoints keep their original softplus-positive omega
@@ -357,7 +356,7 @@ class SCINRAdaptivePhiZ(SCINRAdaptive):
 
 @register('sc_inr_signed_phiz')
 class SCINRSignedPhiZ(SCINRAdaptivePhiZ):
-    """Signed omega plus feature-conditioned phase variant."""
+    """Final-candidate SC-INR: signed omega plus feature-conditioned phase."""
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("omega_param", "tanh_signed")

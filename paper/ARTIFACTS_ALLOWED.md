@@ -7,18 +7,21 @@
 
 | 用途 | Canonical 产物 | 状态 | caveat |
 | --- | --- | --- | --- |
-| 核心 3-seed benchmark | `artifacts/derived/analysis/benchmark_progress_2026-05-09/multiseed_core_summary.csv` | cite_ok | 只覆盖核心 LIIF/LTE/SC-INR。 |
+| 核心 3-seed benchmark | `artifacts/derived/analysis/benchmark_progress_2026-05-09/multiseed_core_summary.csv` | cite_ok | 只覆盖 LIIF/LTE/SC-INR-NoPhi；旧 raw JSON 中 `SC-INR` 表示 `SC-INR-NoPhi`。 |
 | 核心 benchmark per-seed 明细 | `artifacts/derived/analysis/benchmark_progress_2026-05-09/multiseed_core_per_seed.csv` | cite_ok | 应和 mean/std 汇总一起使用。 |
-| seed1 Signed/PhiZ benchmark | `artifacts/derived/analysis/benchmark_progress_2026-05-09/seed1_signed_phiz_summary.csv` | preliminary | 新变体目前只有单 seed。 |
+| seed1 final-candidate SC-INR benchmark | `artifacts/derived/analysis/benchmark_progress_2026-05-09/seed1_signed_phiz_summary.csv` | preliminary | raw key 为 `SC-INR+PhiZ`，新变体目前只有单 seed。 |
 | seed1 SC-INR 辅助一致性 | `artifacts/derived/analysis/seed1_aux_metrics_all8/paper/consistency_table.tex` | cite_ok | 暂不包含 PhiZ。 |
 | seed1 quality/texture 辅助表 | `artifacts/derived/analysis/seed1_aux_metrics_all8/paper/quality_ssim_texture_table.tex` | cite_ok | seed1 辅助协议。 |
 | 用户确认的 qualitative 例图 | `artifacts/derived/paper_candidates/qualitative_phiz_candidates/urban100_img012_x8_delta_phiz_vs_lte.png`; `artifacts/derived/paper_candidates/qualitative_phiz_candidates/urban100_img004_x8_delta_phiz_vs_lte.png` | candidate | 只能表述为 selected examples。 |
+
+命名映射以 `paper/model_taxonomy.md` 为准。特别注意：旧 raw key `SC-INR`
+对应 `SC-INR-NoPhi`，最终候选 `SC-INR` 对应 raw key `SC-INR+PhiZ`。
 
 ## 不允许作为正文主证据
 
 - `artifacts/smoke/*`
 - `artifacts/legacy/*`
-- `artifacts/derived/analysis/overview/benchmark_seed_mean_std.csv`
+- `artifacts/derived/analysis/overview/benchmark_seed_mean_std.csv` 作为“最终候选 SC-INR 的 3-seed 证明”
 - 未人工审查的 automatic top-delta crop 排名
 - repo-local `Data/benchmark` paired-LR 结果，除非重新验证 LR/HR 一致性
 

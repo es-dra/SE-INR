@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Smoke checks for SC-INR-Adaptive-Signed.
+"""Smoke checks for SC-INR-NoPhi-Signed.
 
 This is a fast pre-training gate:
   1. signed omega initialization matches the log-polar reference;
   2. omega is signed and bounded;
   3. forward/backward are finite;
-  4. an existing softplus SC-INR-Adaptive checkpoint still loads.
+  4. an existing softplus SC-INR-NoPhi checkpoint still loads.
 """
 
 from __future__ import annotations
@@ -115,14 +115,14 @@ def check_old_checkpoint(path: Path, device: torch.device) -> None:
     model = models.make(ckpt["model"], load_sd=True, strict=False).to(device)
     omega_param = getattr(model, "omega_param", "unknown")
     if omega_param != "softplus":
-        raise AssertionError(f"old sc_inr_adaptive checkpoint should load with softplus semantics, got {omega_param}")
+        raise AssertionError(f"old SC-INR-NoPhi checkpoint should load with softplus semantics, got {omega_param}")
     print(f"old_checkpoint loaded: {path} omega_param={omega_param}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=Path, default=ROOT / "configs" / "train-div2k" / "train-sc-inr-adaptive-signed.yaml")
-    parser.add_argument("--old_checkpoint", type=Path, default=ROOT / "save" / "sc-inr-adaptive" / "epoch-best.pth")
+    parser.add_argument("--config", type=Path, default=ROOT / "configs" / "train-div2k" / "train-sc-inr-nophi-signed.yaml")
+    parser.add_argument("--old_checkpoint", type=Path, default=ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth")
     parser.add_argument("--device", default="cuda:0")
     args = parser.parse_args()
 

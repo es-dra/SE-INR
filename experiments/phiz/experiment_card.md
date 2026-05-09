@@ -1,9 +1,12 @@
-# Experiment: SC-INR+PhiZ
+# Experiment: Final-Candidate SC-INR
 
 ## Question
 
 Does feature-conditioned phase improve SC-INR reconstruction quality without
 reintroducing LTE-style cell-conditioned phase extrapolation?
+
+Paper display name: `SC-INR`. Canonical checkpoint alias: `save/sc-inr`.
+Historical raw/checkpoint key: `SC-INR+PhiZ` / `sc-inr-phiz`.
 
 ## Current Evidence
 
@@ -15,8 +18,8 @@ reintroducing LTE-style cell-conditioned phase extrapolation?
 
 Seed1 PSNR benchmark:
 
-- `SC-INR+PhiZ - LTE`: ID `+0.0738 dB`, OOD `+0.0849 dB`, All `+0.0812 dB`
-- `SC-INR+PhiZ - SC-INR`: ID `+0.0673 dB`, OOD `+0.0295 dB`, All `+0.0421 dB`
+- `SC-INR - LTE`: ID `+0.0738 dB`, OOD `+0.0849 dB`, All `+0.0812 dB`
+- `SC-INR - SC-INR-NoPhi`: ID `+0.0673 dB`, OOD `+0.0295 dB`, All `+0.0421 dB`
 
 User-confirmed qualitative candidates:
 
@@ -31,6 +34,6 @@ User-confirmed qualitative candidates:
 
 ## Next Gates
 
-- Run auxiliary metrics for `SC-INR+PhiZ`.
-- Add `SC-INR+PhiZ w/o sinc` or equivalent sinc ablation.
+- Run auxiliary metrics for final-candidate `SC-INR`.
+- Add `SC-INR w/o sinc` or equivalent sinc ablation.
 - Run multi-seed if auxiliary metrics do not reveal consistency regression.

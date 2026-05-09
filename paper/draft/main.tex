@@ -1,0 +1,260 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+
+\title{SC-INR: Decoder-Side Sampling Consistency for Arbitrary-Scale Image Super-Resolution}
+\author{Draft for internal review}
+\date{May 2026}
+
+\newcommand{\sinc}{\operatorname{sinc}}
+\newcommand{\cell}{\mathbf{c}}
+\newcommand{\coord}{\mathbf{x}}
+\newcommand{\feat}{\mathbf{z}}
+\newcommand{\freq}{\boldsymbol{\omega}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Arbitrary-scale image super-resolution (ASISR) commonly represents an image as
+a local implicit function queried at continuous output coordinates. Existing
+Fourier implicit decoders such as LTE improve high-frequency reconstruction, but
+their learned cell-conditioned phase allows the output footprint to directly
+alter the local Fourier phase. This paper studies a more constrained
+decoder-side formulation: the content function is predicted from image features,
+while the output cell enters only through an analytic sampling response. We call
+this family SC-INR. For a Fourier component observed through a box footprint,
+the average response is a product of normalized sinc terms; SC-INR uses this
+response to decouple feature-conditioned content from scale-conditioned
+observation. Our current no-phase variant gives a stable small OOD PSNR gain
+over LTE across three seeds, and substantially improves same-LR cross-scale
+observation consistency in seed1 diagnostics. A feature-conditioned phase
+variant is a promising final candidate, improving seed1 PSNR and selected
+qualitative examples, but still requires auxiliary metrics, a w/o-sinc ablation,
+and additional seeds before being claimed as the final model.
+\end{abstract}
+
+\section{Introduction}
+
+ASISR aims to recover high-resolution images at arbitrary continuous scale
+factors. Local implicit image functions, represented by coordinate-conditioned
+MLPs over image features, provide a practical route to this setting
+\citep{chen2021liif}. LTE improves this formulation by predicting local Fourier
+coefficients and frequencies from image features, enabling stronger texture
+modeling than a plain MLP \citep{lee2022lte}.
+
+The current work revisits how the output cell enters such Fourier decoders. In
+LTE, the cell is fed to a learned phase map and directly shifts the Fourier
+argument. This can improve fitting near training scales, but it also gives the
+network freedom to extrapolate cell-to-phase behavior outside the training scale
+range. From a sampling perspective, the cell has a more specific meaning: it is
+the footprint of the output pixel in the continuous domain.
+
+We therefore study \emph{decoder-side sampling consistency}. The central idea is
+to separate the feature-conditioned continuous content from the scale-conditioned
+observation. In SC-INR, the Fourier coefficient, frequency, and optional content
+phase are functions of local image features only. The output cell affects the
+decoded observation through an analytic sinc response derived from box averaging
+a Fourier component. This is not a claim of whole-network scale equivariance:
+the encoder, degradation model, and sampling protocol are not proven to commute
+with scale transformations. The contribution is instead a constrained implicit
+decoder that reduces arbitrary learned cell-conditioned extrapolation.
+
+\section{Method}
+
+\subsection{Local Fourier Decoder}
+
+Let \(E(I_{\mathrm{LR}})\) be the encoder feature map. For a query coordinate
+\(\coord\), the decoder samples a local feature \(\feat\) and forms a relative
+coordinate \(\delta\) to the local feature anchor. LTE predicts coefficients and
+frequencies from \(\feat\), but also adds a learned phase term \(h_p(\cell)\):
+\begin{equation}
+  \cos\left(\pi(\freq(\feat)^\top \delta + h_p(\cell))\right).
+\end{equation}
+This creates a cell-specific local function \(f_{\feat,\cell}\), rather than a
+single content function observed under different output footprints.
+
+\subsection{Analytic Observation Response}
+
+Consider a one-dimensional Fourier component
+\begin{equation}
+  f(x)=A\cos(\pi \omega x+\phi).
+\end{equation}
+The box-averaged observation over a cell of width \(c\) is
+\begin{equation}
+  \frac{1}{c}\int_{x_0-c/2}^{x_0+c/2} A\cos(\pi \omega x+\phi)\,dx
+  =
+  A\cos(\pi \omega x_0+\phi)\sinc\left(\frac{\omega c}{2}\right),
+\end{equation}
+where \(\sinc(t)=\sin(\pi t)/(\pi t)\). For a two-dimensional rectangular
+footprint, the separable response is
+\begin{equation}
+  W(\freq,\cell)=
+  \sinc\left(\frac{\omega_h c_h}{2}\right)
+  \sinc\left(\frac{\omega_w c_w}{2}\right).
+\end{equation}
+
+\subsection{SC-INR Variants}
+
+The final-candidate SC-INR predicts content terms from features:
+\begin{equation}
+  A=A(\feat), \qquad \freq=\freq(\feat), \qquad \phi=\phi(\feat),
+\end{equation}
+and uses signed bounded frequencies
+\begin{equation}
+  \freq(\feat)=\omega_{\max}\tanh(g_\omega(\feat)).
+\end{equation}
+The decoder input is
+\begin{equation}
+  A(\feat)\odot
+  \left[
+  \cos(\pi(\freq(\feat)^\top\delta+\phi(\feat))),
+  \sin(\pi(\freq(\feat)^\top\delta+\phi(\feat)))
+  \right]
+  \odot W(\freq(\feat),\cell).
+\end{equation}
+The feature phase \(\phi(\feat)\) does not receive cell or scale. The previous
+no-phase variant, denoted SC-INR-NoPhi, sets \(\phi=0\). We keep checkpoint and
+raw-result compatibility names separate from paper display names; in older
+result files, the raw key ``SC-INR'' refers to SC-INR-NoPhi, while the current
+final-candidate SC-INR corresponds to raw key ``SC-INR+PhiZ''.
+
+\section{Experiments}
+
+\subsection{Protocol}
+
+We use the inherited ASISR protocol with HR on-the-fly bicubic downsampling,
+avoiding the unreliable local pre-generated LR benchmark files. Models are
+trained on scales up to \(4\times\) and evaluated at in-distribution scales
+\(\{2,3,4\}\) and OOD scales \(\{6,8,12,16,24,30\}\). PSNR is reported on
+Set5, Set14, BSD100, and Urban100. Auxiliary diagnostics are currently computed
+on BSD100 and Urban100 subsets for seed1.
+
+\subsection{Seed1 Final-Candidate Benchmark}
+
+\begin{table}[H]
+\centering
+\caption{Seed1 benchmark summary. The final-candidate SC-INR is a promising
+single-seed result; multi-seed confirmation is not yet complete.}
+\label{tab:seed1}
+\begin{tabular}{lrrr}
+\toprule
+Model & ID PSNR & OOD PSNR & All PSNR \\
+\midrule
+LIIF & 30.9992 & 22.7111 & 25.4738 \\
+LTE & 31.0450 & 22.6917 & 25.4761 \\
+SC-INR-NoPhi & 31.0515 & 22.7471 & 25.5152 \\
+SC-INR-NoPhi-Signed & 31.0567 & 22.7418 & 25.5134 \\
+SC-INR & 31.1187 & 22.7766 & 25.5573 \\
+LIIF-EQ & 31.1205 & 22.7469 & 25.5381 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:seed1} shows that the final-candidate SC-INR improves seed1 OOD
+PSNR by \(+0.0849\) dB over LTE and by \(+0.0295\) dB over SC-INR-NoPhi. This
+supports the feature-conditioned phase as a useful candidate, but not yet as a
+final multi-seed conclusion.
+
+\subsection{Core Multi-Seed Result}
+
+\begin{table}[H]
+\centering
+\caption{Core three-seed benchmark for LIIF, LTE, and SC-INR-NoPhi. The stable
+multi-seed evidence currently belongs to the no-phase variant.}
+\label{tab:multiseed}
+\begin{tabular}{llrrr}
+\toprule
+Model & Split & Mean PSNR & Std. & Delta vs LTE \\
+\midrule
+LIIF & ID & 31.0301 & 0.0274 & -0.0485 \\
+LIIF & OOD & 22.7251 & 0.0124 & +0.0177 \\
+LTE & ID & 31.0786 & 0.0296 & +0.0000 \\
+LTE & OOD & 22.7074 & 0.0137 & +0.0000 \\
+SC-INR-NoPhi & ID & 31.0746 & 0.0203 & -0.0040 \\
+SC-INR-NoPhi & OOD & 22.7581 & 0.0105 & +0.0507 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:multiseed} indicates that SC-INR-NoPhi gives a stable small OOD
+PSNR gain over LTE, while its ID average is essentially tied with LTE. This is
+consistent with the intended role of decoder-side sampling consistency: improving
+scale extrapolation behavior rather than merely increasing training-scale
+fitting.
+
+\subsection{Cross-Scale Observation Consistency}
+
+\begin{table}[H]
+\centering
+\caption{Seed1 same-LR cross-scale observation consistency. Larger consistency
+PSNR indicates closer agreement when outputs at larger scales are compared to
+the \(4\times\) observation under the same LR input.}
+\label{tab:consistency}
+\begin{tabular}{llrr}
+\toprule
+Model & Dataset & Consistency PSNR & Delta vs LTE \\
+\midrule
+LTE & BSD100 & 44.1914 & +0.0000 \\
+SC-INR-NoPhi & BSD100 & 52.8053 & +8.6140 \\
+LTE & Urban100 & 39.2983 & +0.0000 \\
+SC-INR-NoPhi & Urban100 & 47.0694 & +7.7712 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The large consistency gains in Table~\ref{tab:consistency} support the mechanism
+that removing learned cell-conditioned phase and using an analytic observation
+response improves same-LR cross-scale agreement. However, diagnostic LTE
+variants with weakened cell response can also score highly on consistency; these
+numbers must be interpreted jointly with reconstruction quality.
+
+\subsection{Selected Qualitative Examples}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\linewidth}
+\centering
+\includegraphics[width=\linewidth]{figures/urban100_img012_x8.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\linewidth}
+\centering
+\includegraphics[width=\linewidth]{figures/urban100_img004_x8.png}
+\end{minipage}
+\caption{User-confirmed selected Urban100 \(8\times\) examples where the
+final-candidate SC-INR shows clearer local structure than LTE. These are
+selected examples, not evidence of average visual quality.}
+\label{fig:qualitative}
+\end{figure}
+
+\section{Limitations and Next Steps}
+
+The current evidence is not yet a complete paper claim. First, final-candidate
+SC-INR has only seed1 benchmark evidence. Second, auxiliary consistency and
+texture metrics currently cover SC-INR-NoPhi, not the final-candidate variant.
+Third, a w/o-sinc ablation is required before attributing the gain causally to
+the analytic response. Finally, PSNR does not fully measure perceptual texture
+quality; qualitative crops and texture-sensitive metrics must remain part of the
+evidence package.
+
+\section{Conclusion}
+
+SC-INR reframes output scale in Fourier implicit ASISR decoders as an
+observation footprint rather than a learned phase shortcut. The current results
+support decoder-side sampling consistency as a useful principle: SC-INR-NoPhi
+shows stable small OOD gains and substantially better cross-scale observation
+consistency, while feature-conditioned phase is a promising final-candidate
+extension. The next critical step is to close the evidence gap with auxiliary
+metrics, w/o-sinc ablation, and additional seeds for the final-candidate SC-INR.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

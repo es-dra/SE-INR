@@ -149,7 +149,7 @@ def main():
     parser.add_argument('--save_root', type=str, default='save', help='Root directory containing model subdirectories')
     parser.add_argument('--skip_existing', action='store_true', help='Skip already evaluated combinations')
     parser.add_argument('--models', type=str, default=None,
-                        help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,LTE-NoC". If not set, evaluate all.')
+                        help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,SC-INR". If not set, evaluate all.')
     parser.add_argument('--scales', type=str, default=None,
                         help='Comma-separated list of scales to evaluate, e.g., "2,3,4,6". If not set, evaluate all.')
     args = parser.parse_args()
@@ -163,17 +163,39 @@ def main():
         'liif': 'LIIF',
         'liif-eq': 'LIIF-EQ',
         'lte': 'LTE',
-        'lte-no-cell': 'LTE-NoCell',
+        'lte-no-cell': 'LTE-NoCellPhase',
+        'lte-nocellphase': 'LTE-NoCellPhase',
         'lte-eq': 'LTE-EQ',
-        'lte-feature-phase': 'LTE-FeaturePhase',
-        'sc-inr-fixed': 'SC-INR-Fixed',
-        'sc-inr-adaptive': 'SC-INR',
-        'sc-inr-adaptive-signed': 'SC-INR-Signed',
-        'sc-inr-phiz': 'SC-INR+PhiZ',
+        'lte-feature-phase': 'LTE-PhaseZ',
+        'lte-phasez': 'LTE-PhaseZ',
+        'sc-inr-fixed': 'SC-INR-FixedOmega',
+        'sc-inr-fixed-omega': 'SC-INR-FixedOmega',
+        'sc-inr-adaptive': 'SC-INR-NoPhi',
+        'sc-inr-nophi': 'SC-INR-NoPhi',
+        'sc-inr-adaptive-signed': 'SC-INR-NoPhi-Signed',
+        'sc-inr-nophi-signed': 'SC-INR-NoPhi-Signed',
+        'sc-inr-phiz': 'SC-INR',
+        'sc-inr': 'SC-INR',
     }
     MODEL_ALIASES = {
-        'SC-INR-Adaptive': 'SC-INR',
-        'SC-INR-Adaptive-Signed': 'SC-INR-Signed',
+        'LTE-NoCell': 'LTE-NoCellPhase',
+        'LTE-NoC': 'LTE-NoCellPhase',
+        'LTE-FeaturePhase': 'LTE-PhaseZ',
+        'SC-INR-Fixed': 'SC-INR-FixedOmega',
+        'SC-INR-Adaptive': 'SC-INR-NoPhi',
+        'SC-INR+PhiZ': 'SC-INR',
+        'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
+        'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
+    }
+    LEGACY_RESULT_ALIASES = {
+        'LTE-NoCell': 'LTE-NoCellPhase',
+        'LTE-NoC': 'LTE-NoCellPhase',
+        'LTE-FeaturePhase': 'LTE-PhaseZ',
+        'SC-INR-Fixed': 'SC-INR-FixedOmega',
+        'SC-INR-Adaptive': 'SC-INR-NoPhi',
+        'SC-INR+PhiZ': 'SC-INR',
+        'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
+        'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
     }
 
     ALL_MODELS = {}
@@ -209,7 +231,13 @@ def main():
     if os.path.exists(args.output):
         with open(args.output, 'r') as f:
             results = json.load(f)
-        for old_name, new_name in MODEL_ALIASES.items():
+        legacy_sc_inr_no_phi = (
+            'SC-INR+PhiZ' in results
+            or Path(args.output).name in {'benchmark.json', 'benchmark_seed2.json', 'benchmark_seed3.json'}
+        )
+        if legacy_sc_inr_no_phi and 'SC-INR' in results and 'SC-INR-NoPhi' not in results:
+            results['SC-INR-NoPhi'] = results.pop('SC-INR')
+        for old_name, new_name in LEGACY_RESULT_ALIASES.items():
             if old_name in results and new_name not in results:
                 results[new_name] = results.pop(old_name)
         print(f"Loaded existing results from {args.output}")

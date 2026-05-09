@@ -52,13 +52,19 @@ DATASETS = {
 MODEL_PATHS = {
     "LIIF": ROOT / "save" / "liif" / "epoch-best.pth",
     "LTE": ROOT / "save" / "lte" / "epoch-best.pth",
-    "LTE-NoCell": ROOT / "save" / "lte-no-cell" / "epoch-best.pth",
-    "LTE-FeaturePhase": ROOT / "save" / "lte-feature-phase" / "epoch-best.pth",
-    "SC-INR-Fixed": ROOT / "save" / "sc-inr-fixed" / "epoch-best.pth",
-    "SC-INR": ROOT / "save" / "sc-inr-adaptive" / "epoch-best.pth",
-    "SC-INR-Adaptive": ROOT / "save" / "sc-inr-adaptive" / "epoch-best.pth",
-    "SC-INR-Signed": ROOT / "save" / "sc-inr-adaptive-signed" / "epoch-best.pth",
-    "SC-INR+PhiZ": ROOT / "save" / "sc-inr-phiz" / "epoch-best.pth",
+    "LTE-NoCellPhase": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
+    "LTE-NoCell": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
+    "LTE-NoC": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
+    "LTE-PhaseZ": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
+    "LTE-FeaturePhase": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
+    "SC-INR-FixedOmega": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
+    "SC-INR-Fixed": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
+    "SC-INR-NoPhi": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
+    "SC-INR-Adaptive": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
+    "SC-INR-NoPhi-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
+    "SC-INR-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
+    "SC-INR": ROOT / "save" / "sc-inr" / "epoch-best.pth",
+    "SC-INR+PhiZ": ROOT / "save" / "sc-inr" / "epoch-best.pth",
     "LIIF-EQ": ROOT / "save" / "liif-eq" / "epoch-best.pth",
     "LTE-EQ": ROOT / "save" / "lte-eq" / "epoch-best.pth",
 }
@@ -68,13 +74,18 @@ STYLE = {
     "LIIF": "#4C72B0",
     "LIIF-EQ": "#64B5CD",
     "LTE": "#DD8452",
+    "LTE-NoCellPhase": "#55A868",
     "LTE-EQ": "#DDAA33",
     "LTE-NoCell": "#55A868",
+    "LTE-PhaseZ": "#8172B2",
     "LTE-FeaturePhase": "#8172B2",
+    "SC-INR-FixedOmega": "#C44E52",
     "SC-INR-Fixed": "#C44E52",
-    "SC-INR": "#8B0000",
+    "SC-INR-NoPhi": "#8B0000",
     "SC-INR-Adaptive": "#8B0000",
+    "SC-INR-NoPhi-Signed": "#AA3377",
     "SC-INR-Signed": "#AA3377",
+    "SC-INR": "#B22222",
     "SC-INR+PhiZ": "#B22222",
 }
 
@@ -555,7 +566,7 @@ def plot_summary(out_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--models", default="LIIF,LTE,LTE-NoCell,LTE-FeaturePhase,SC-INR-Fixed,SC-INR")
+    parser.add_argument("--models", default="LIIF,LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR-FixedOmega,SC-INR-NoPhi,SC-INR")
     parser.add_argument("--datasets", default="bsd100,urban100")
     parser.add_argument("--scales", default="4,8,16,30")
     parser.add_argument("--consistency_pairs", default="8,4;16,4;30,4")

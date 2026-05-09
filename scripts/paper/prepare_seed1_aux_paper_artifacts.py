@@ -33,15 +33,21 @@ MODEL_ORDER = [
     "LIIF-EQ",
     "LTE",
     "LTE-EQ",
-    "LTE-NoCell",
-    "LTE-FeaturePhase",
-    "SC-INR-Fixed",
-    "SC-INR",
+    "LTE-NoCellPhase",
+    "LTE-PhaseZ",
+    "SC-INR-FixedOmega",
+    "SC-INR-NoPhi",
 ]
 
 MODEL_ALIASES = {
-    "SC-INR-Adaptive": "SC-INR",
-    "SC-INR-Adaptive-Signed": "SC-INR-Signed",
+    "LTE-NoCell": "LTE-NoCellPhase",
+    "LTE-NoC": "LTE-NoCellPhase",
+    "LTE-FeaturePhase": "LTE-PhaseZ",
+    "SC-INR-Fixed": "SC-INR-FixedOmega",
+    "SC-INR": "SC-INR-NoPhi",
+    "SC-INR-Adaptive": "SC-INR-NoPhi",
+    "SC-INR-Signed": "SC-INR-NoPhi-Signed",
+    "SC-INR-Adaptive-Signed": "SC-INR-NoPhi-Signed",
 }
 
 DISPLAY_DATASET = {
@@ -54,11 +60,11 @@ STYLE = {
     "LIIF-EQ": "#64B5CD",
     "LTE": "#DD8452",
     "LTE-EQ": "#DDAA33",
-    "LTE-NoCell": "#55A868",
-    "LTE-FeaturePhase": "#8172B2",
-    "SC-INR-Fixed": "#C44E52",
-    "SC-INR": "#8B0000",
-    "SC-INR-Signed": "#AA3377",
+    "LTE-NoCellPhase": "#55A868",
+    "LTE-PhaseZ": "#8172B2",
+    "SC-INR-FixedOmega": "#C44E52",
+    "SC-INR-NoPhi": "#8B0000",
+    "SC-INR-NoPhi-Signed": "#AA3377",
 }
 
 QUALITY_METRICS = [
@@ -317,7 +323,7 @@ def write_consistency_table(out_dir: Path, consistency_agg: pd.DataFrame) -> Non
             "$\\Delta$",
         ],
         rows,
-        "Seed-1 same-LR cross-scale observation consistency, averaged over x8/x16/x30 to x4. LTE-NoCell and LTE-FeaturePhase are diagnostic baselines with weakened cell response, so their high consistency should be interpreted with reconstruction quality.",
+        "Seed-1 same-LR cross-scale observation consistency, averaged over x8/x16/x30 to x4. LTE-NoCellPhase and LTE-PhaseZ are diagnostic baselines with weakened cell response, so their high consistency should be interpreted with reconstruction quality.",
         "tab:seed1_aux_consistency",
         table_star=True,
     )
@@ -331,7 +337,7 @@ def savefig(fig: plt.Figure, out_path: Path) -> None:
 
 
 def plot_scale_gain(out_dir: Path, quality_per_scale: pd.DataFrame) -> None:
-    plot_models = ["LIIF", "LIIF-EQ", "LTE-EQ", "LTE-NoCell", "LTE-FeaturePhase", "SC-INR-Fixed", "SC-INR"]
+    plot_models = ["LIIF", "LIIF-EQ", "LTE-EQ", "LTE-NoCellPhase", "LTE-PhaseZ", "SC-INR-FixedOmega", "SC-INR-NoPhi"]
     fig, axes = plt.subplots(1, 2, figsize=(10.5, 3.7), sharey=True)
     for ax, dataset in zip(axes, ["bsd100", "urban100"]):
         for model in plot_models:
@@ -345,7 +351,7 @@ def plot_scale_gain(out_dir: Path, quality_per_scale: pd.DataFrame) -> None:
                 sub["scale_num"],
                 sub["delta_psnr_y_vs_lte"],
                 marker="o",
-                linewidth=2.0 if model == "SC-INR" else 1.3,
+                linewidth=2.0 if model == "SC-INR-NoPhi" else 1.3,
                 color=STYLE.get(model, "#888888"),
                 label=model,
             )
@@ -417,9 +423,9 @@ def plot_consistency_tradeoff(out_dir: Path, quality_split: pd.DataFrame, consis
             ax.scatter(
                 row["delta_psnr_y_vs_lte"],
                 row["delta_consistency_psnr_y_vs_lte"],
-                s=68 if model == "SC-INR" else 42,
+                s=68 if model == "SC-INR-NoPhi" else 42,
                 color=STYLE.get(model, "#888888"),
-                edgecolor="black" if model == "SC-INR" else "none",
+                edgecolor="black" if model == "SC-INR-NoPhi" else "none",
                 linewidth=0.8,
                 zorder=3,
             )
@@ -441,18 +447,18 @@ def write_key_findings(out_dir: Path, quality_split: pd.DataFrame, consistency_a
         "Inputs: `quality_summary.csv` and `consistency_summary.csv` from `seed1_aux_metrics_all8`.",
         "Quality OOD means average x8, x16, and x30. Consistency means average x8/x16/x30 -> x4.",
         "",
-        "## SC-INR vs. LTE",
+        "## SC-INR-NoPhi vs. LTE",
         "",
     ]
     for dataset in ["bsd100", "urban100"]:
         q_all = quality_split[
-            (quality_split["model"].astype(str) == "SC-INR")
+            (quality_split["model"].astype(str) == "SC-INR-NoPhi")
             & (quality_split["dataset"] == dataset)
         ]
         q_ood = q_all[q_all["split"] == "x8-x30"].iloc[0]
         q_id = q_all[q_all["split"] == "x4"].iloc[0]
         c = consistency_agg[
-            (consistency_agg["model"].astype(str) == "SC-INR")
+            (consistency_agg["model"].astype(str) == "SC-INR-NoPhi")
             & (consistency_agg["dataset"] == dataset)
         ].iloc[0]
         lines.extend([
@@ -465,14 +471,14 @@ def write_key_findings(out_dir: Path, quality_split: pd.DataFrame, consistency_a
         "",
         "## Interpretation Caveat",
         "",
-        "LTE-NoCell and LTE-FeaturePhase obtain much higher cross-scale consistency because their output is weakly conditioned on cell size. They should be treated as diagnostic controls rather than better ASISR models unless reconstruction quality and texture errors are considered jointly.",
+        "LTE-NoCellPhase and LTE-PhaseZ obtain much higher cross-scale consistency because their output is weakly conditioned on cell size. They should be treated as diagnostic controls rather than better ASISR models unless reconstruction quality and texture errors are considered jointly.",
         "",
         "## Paper Use",
         "",
         "- Use `quality_psnr_table.tex` for the compact PSNR table.",
         "- Use `quality_ssim_texture_table.tex` for perceptual/texture support.",
         "- Use `consistency_table.tex` for the same-LR cross-scale observation consistency metric.",
-        "- Use `fig_quality_consistency_tradeoff.pdf` to show that SC-INR improves consistency while preserving quality better than purely removing cell response.",
+        "- Use `fig_quality_consistency_tradeoff.pdf` to show that SC-INR-NoPhi improves consistency while preserving quality better than purely removing cell response.",
         "",
     ])
     (out_dir / "key_findings.md").write_text("\n".join(lines))

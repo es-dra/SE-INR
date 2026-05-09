@@ -13,11 +13,11 @@ This ISOLATES the decoder's c-dependence from encoder inconsistency.
 
 Expected:
   - LTE:      h_p(c) changes with c → FCE > 0 (increases with |c1-c2|)
-  - LTE-NoC:  phase=0 fixed → FCE ≈ 0
-  - SC-INR:   c only enters sinc (after F) → FCE ≈ 0
+  - LTE-NoCellPhase: phase=0 fixed → FCE ≈ 0
+  - SC-INR-NoPhi:    c only enters sinc (after F) → FCE ≈ 0
 
 Usage:
-  python eval_fce.py --models LTE,LTE-NoC \
+  python eval_fce.py --models LTE,LTE-NoCellPhase \
                      --r_pairs "2,4;2,8;2,16;4,12;4,24" \
                      --device 0
 """
@@ -70,7 +70,7 @@ def _gfetch(fmap, coord_):
 
 def extract_F_lte(model, coords, cell_tensor):
     """
-    Extract LTE / LTE-NoC basis function values at given cell size.
+    Extract LTE / LTE-NoCellPhase basis function values at given cell size.
     cell_tensor: [B, Q, 2] — the cell to use for phase computation.
     """
     feat = model.feat
@@ -230,7 +230,7 @@ def compute_fce_fixed_z(model, model_type, hr_images, scales, device,
 def main():
     parser = argparse.ArgumentParser(
         description='Function Consistency Error (corrected: fix z, vary c)')
-    parser.add_argument('--models', type=str, default='LTE,LTE-NoC')
+    parser.add_argument('--models', type=str, default='LTE,LTE-NoCellPhase')
     parser.add_argument('--r_pairs', type=str, default='2,4;2,8;2,16;4,12;4,24',
                         help='Cell pairs as r1,r2;r1,r2;...')
     parser.add_argument('--data_root', type=str,
@@ -246,9 +246,14 @@ def main():
 
     ALL_MODELS = {
         'LTE':     ('save/lte/epoch-best.pth',     'lte'),
-        'LTE-NoCell': ('save/lte-no-cell/epoch-best.pth', 'lte-noc'),
-        'SC-INR-Fixed':  ('save/sc-inr-fixed/epoch-best.pth', 'sc-inr'),
-        'LTE-FeaturePhase':  ('save/lte-feature-phase/epoch-best.pth', 'lte'),
+        'LTE-NoCellPhase': ('save/lte-nocellphase/epoch-best.pth', 'lte-noc'),
+        'LTE-NoCell': ('save/lte-nocellphase/epoch-best.pth', 'lte-noc'),
+        'LTE-NoC': ('save/lte-nocellphase/epoch-best.pth', 'lte-noc'),
+        'SC-INR-FixedOmega':  ('save/sc-inr-fixed-omega/epoch-best.pth', 'sc-inr'),
+        'SC-INR-Fixed':  ('save/sc-inr-fixed-omega/epoch-best.pth', 'sc-inr'),
+        'SC-INR-NoPhi':  ('save/sc-inr-nophi/epoch-best.pth', 'sc-inr'),
+        'LTE-PhaseZ':  ('save/lte-phasez/epoch-best.pth', 'lte'),
+        'LTE-FeaturePhase':  ('save/lte-phasez/epoch-best.pth', 'lte'),
     }
 
     # Parse scale pairs: these define which cell sizes to compare
@@ -334,7 +339,7 @@ def main():
     print(f"{'='*65}")
     for pk in pair_keys:
         lte_v = all_results.get('LTE', {}).get(pk, None)
-        noc_v = all_results.get('LTE-NoC', {}).get(pk, None)
+        noc_v = all_results.get('LTE-NoCellPhase', all_results.get('LTE-NoC', {})).get(pk, None)
         if lte_v is not None and noc_v is not None:
             ratio = lte_v / noc_v if noc_v > 0 else float('inf')
             verdict = "✓ LTE > NoC" if lte_v > noc_v else "✗ LTE < NoC (unexpected)"

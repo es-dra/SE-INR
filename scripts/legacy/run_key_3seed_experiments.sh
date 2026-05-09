@@ -51,7 +51,7 @@ run_model_pipeline() {
 
 run_model_pipeline 3 liif configs/train-div2k/train-liif.yaml LIIF 2 3
 run_model_pipeline 2 lte configs/train-div2k/train-lte.yaml LTE 2 3
-run_model_pipeline 1 sc-inr-adaptive configs/train-div2k/train-sc-inr-adaptive.yaml SC-INR 2 3
+run_model_pipeline 1 sc-inr-adaptive configs/train-div2k/train-sc-inr-adaptive.yaml SC-INR-NoPhi 2 3
 
 printf '\n[INFO] Active seed pipeline PIDs:\n'
 cat logs/seeds/*_seed2_seed3_gpu*.pid

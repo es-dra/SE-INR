@@ -6,7 +6,7 @@
 
 - `analysis/benchmark_progress_2026-05-09/`：当前核心 benchmark 和 PhiZ 阶段性汇总。
 - `analysis/seed1_aux_metrics_all8/`：seed1 辅助质量、一致性、机制分析。
-- `paper_candidates/qualitative_phiz_candidates/`：`SC-INR+PhiZ` 定性图候选池。
+- `paper_candidates/qualitative_phiz_candidates/`：最终候选 `SC-INR`（raw key `SC-INR+PhiZ`）定性图候选池。
 
 ## 使用规则
 

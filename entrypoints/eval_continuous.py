@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Continuous PSNR curve evaluation using benchmark framework.
-Evaluates LIIF, LTE, LTE-NoC on Set5/BSD100 at scales r ∈ [1, 30], step 0.5.
+Evaluates ASISR models on benchmark datasets at scales r in [1, 30], step 0.5.
 Output: comparison plot and JSON of results.
 
 Usage:
@@ -162,17 +162,23 @@ def main():
         'LIIF': 'save/liif/epoch-best.pth',
         'LIIF-EQ': 'save/liif-eq/epoch-best.pth',
         'LTE': 'save/lte/epoch-best.pth',
-        'LTE-NoCell': 'save/lte-no-cell/epoch-best.pth',
+        'LTE-NoCellPhase': 'save/lte-nocellphase/epoch-best.pth',
         'LTE-EQ': 'save/lte-eq/epoch-best.pth',
-        'SC-INR-Fixed': 'save/sc-inr-fixed/epoch-best.pth',
-        'LTE-FeaturePhase': 'save/lte-feature-phase/epoch-best.pth',
-        'SC-INR': 'save/sc-inr-adaptive/epoch-best.pth',
-        'SC-INR-Signed': 'save/sc-inr-adaptive-signed/epoch-best.pth',
-        'SC-INR+PhiZ': 'save/sc-inr-phiz/epoch-best.pth',
+        'LTE-PhaseZ': 'save/lte-phasez/epoch-best.pth',
+        'SC-INR-FixedOmega': 'save/sc-inr-fixed-omega/epoch-best.pth',
+        'SC-INR-NoPhi': 'save/sc-inr-nophi/epoch-best.pth',
+        'SC-INR-NoPhi-Signed': 'save/sc-inr-nophi-signed/epoch-best.pth',
+        'SC-INR': 'save/sc-inr/epoch-best.pth',
     }
     MODEL_ALIASES = {
-        'SC-INR-Adaptive': 'SC-INR',
-        'SC-INR-Adaptive-Signed': 'SC-INR-Signed',
+        'LTE-NoCell': 'LTE-NoCellPhase',
+        'LTE-NoC': 'LTE-NoCellPhase',
+        'LTE-FeaturePhase': 'LTE-PhaseZ',
+        'SC-INR-Fixed': 'SC-INR-FixedOmega',
+        'SC-INR-Adaptive': 'SC-INR-NoPhi',
+        'SC-INR+PhiZ': 'SC-INR',
+        'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
+        'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
     }
 
     if args.models:
@@ -216,13 +222,13 @@ def main():
     for ds_name in target_datasets:
         plt.figure(figsize=(12, 8))
         colors = {'LIIF': '#1f77b4', 'LIIF-EQ': '#17becf', 'LTE': '#ff7f0e',
-                  'LTE-NoCell': '#2ca02c', 'LTE-EQ': '#bcbd22',
-                  'SC-INR-Fixed': '#d62728', 'LTE-FeaturePhase': '#9467bd',
-                  'SC-INR': '#8c564b', 'SC-INR-Signed': '#aa3377',
-                  'SC-INR+PhiZ': '#b22222'}
-        markers = {'LIIF': 'o', 'LIIF-EQ': 'v', 'LTE': 's', 'LTE-NoCell': '^',
-                   'LTE-EQ': '<', 'SC-INR-Fixed': 'D', 'LTE-FeaturePhase': '>',
-                   'SC-INR': 'p', 'SC-INR-Signed': 'X', 'SC-INR+PhiZ': '*'}
+                  'LTE-NoCellPhase': '#2ca02c', 'LTE-EQ': '#bcbd22',
+                  'LTE-PhaseZ': '#9467bd', 'SC-INR-FixedOmega': '#d62728',
+                  'SC-INR-NoPhi': '#8c564b', 'SC-INR-NoPhi-Signed': '#aa3377',
+                  'SC-INR': '#b22222'}
+        markers = {'LIIF': 'o', 'LIIF-EQ': 'v', 'LTE': 's', 'LTE-NoCellPhase': '^',
+                   'LTE-EQ': '<', 'LTE-PhaseZ': '>', 'SC-INR-FixedOmega': 'D',
+                   'SC-INR-NoPhi': 'p', 'SC-INR-NoPhi-Signed': 'X', 'SC-INR': '*'}
 
         ds_results = {k: v for k, v in all_results.items() if k.endswith(f'_{ds_name}')}
         for model_name in available:

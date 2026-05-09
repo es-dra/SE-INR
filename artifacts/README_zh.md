@@ -10,7 +10,7 @@
 - `smoke/`：调试和 smoke 输出，不应作为论文证据引用。
 - `legacy/`：历史产物，保留用于追溯，不代表当前结论。
 - `results/`：兼容旧 `results/...` 路径的 symlink tree。
-- `logs/`：兼容旧 `logs/...` 路径，同时真实日志在 `logs/training/` 下。
+- `logs/`：训练和后台任务日志，兼容旧 `logs/...` 路径。
 
 ## 正式 Raw 结果
 
@@ -26,6 +26,10 @@
 - `derived/analysis/benchmark_progress_2026-05-09/`
 - `derived/analysis/seed1_aux_metrics_all8/`
 - `derived/paper_candidates/qualitative_phiz_candidates/`
+
+命名注意：最终候选 `SC-INR` 在当前 raw result 中仍使用历史 key
+`SC-INR+PhiZ`；旧 raw key `SC-INR` 对应 `SC-INR-NoPhi`。详见
+`paper/model_taxonomy.md`。
 
 ## 引用规则
 

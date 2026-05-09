@@ -9,6 +9,7 @@ artifacts/checkpoints/
 artifacts/data_local/
 artifacts/logs/
 artifacts/scratch/
+artifacts/smoke/
 
 # Python
 __pycache__/
@@ -34,6 +35,16 @@ Data/
 training_log*.txt
 *.pid
 logs/**/*.pid
+
+# LaTeX build byproducts
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.out
+*.toc
+*.synctex.gz
 
 # Mac
 .DS_Store

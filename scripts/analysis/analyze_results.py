@@ -37,32 +37,54 @@ ID_SCALES = ["x2", "x3", "x4"]
 OOD_SCALES = ["x6", "x8", "x12", "x16", "x24", "x30"]
 BENCHMARKS = ["Set5", "Set14", "BSD100", "Urban100"]
 MODEL_ALIASES = {
-    "SC-INR-Adaptive": "SC-INR",
-    "SC-INR-Adaptive-Signed": "SC-INR-Signed",
+    "LTE-NoCell": "LTE-NoCellPhase",
+    "LTE-NoC": "LTE-NoCellPhase",
+    "LTE-FeaturePhase": "LTE-PhaseZ",
+    "SC-INR-Adaptive": "SC-INR-NoPhi",
+    "SC-INR-Fixed": "SC-INR-FixedOmega",
+    "SC-INR+PhiZ": "SC-INR",
+    "SC-INR-Signed": "SC-INR-NoPhi-Signed",
+    "SC-INR-Adaptive-Signed": "SC-INR-NoPhi-Signed",
 }
-CORE_MODELS = ["LIIF", "LTE", "SC-INR"]
+CORE_MODELS = ["LIIF", "LTE", "SC-INR-NoPhi"]
 MODEL_ORDER = [
-    "LIIF", "LIIF-EQ", "LTE", "LTE-EQ", "LTE-NoCell", "LTE-FeaturePhase",
-    "SC-INR-Fixed", "SC-INR", "SC-INR-Signed", "SC-INR+PhiZ",
+    "LIIF", "LIIF-EQ", "LTE", "LTE-EQ", "LTE-NoCellPhase", "LTE-PhaseZ",
+    "SC-INR-FixedOmega", "SC-INR-NoPhi", "SC-INR-NoPhi-Signed", "SC-INR",
 ]
 STYLE = {
     "LIIF": {"color": "#4C72B0", "ls": "--", "lw": 1.8},
     "LIIF-EQ": {"color": "#4C72B0", "ls": "-", "lw": 1.5},
     "LTE": {"color": "#DD8452", "ls": "--", "lw": 1.8},
     "LTE-EQ": {"color": "#DD8452", "ls": "-", "lw": 1.5},
-    "LTE-NoCell": {"color": "#55A868", "ls": ":", "lw": 1.6},
-    "LTE-FeaturePhase": {"color": "#8172B2", "ls": ":", "lw": 1.6},
-    "SC-INR-Fixed": {"color": "#C44E52", "ls": "--", "lw": 1.8},
-    "SC-INR": {"color": "#C44E52", "ls": "-", "lw": 2.4},
-    "SC-INR-Signed": {"color": "#8B0000", "ls": "-", "lw": 2.4},
-    "SC-INR+PhiZ": {"color": "#222222", "ls": "-", "lw": 2.4},
+    "LTE-NoCellPhase": {"color": "#55A868", "ls": ":", "lw": 1.6},
+    "LTE-PhaseZ": {"color": "#8172B2", "ls": ":", "lw": 1.6},
+    "SC-INR-FixedOmega": {"color": "#C44E52", "ls": "--", "lw": 1.8},
+    "SC-INR-NoPhi": {"color": "#C44E52", "ls": "-", "lw": 2.0},
+    "SC-INR-NoPhi-Signed": {"color": "#8B0000", "ls": "-", "lw": 2.0},
+    "SC-INR": {"color": "#222222", "ls": "-", "lw": 2.4},
+}
+LEGACY_SCINR_NOPHI_FILES = {
+    "benchmark.json",
+    "benchmark_seed2.json",
+    "benchmark_seed3.json",
 }
 
 
-def normalize_model_names(data: Dict[str, Any]) -> Dict[str, Any]:
+def normalize_model_names(data: Dict[str, Any], source_path: Path | None = None) -> Dict[str, Any]:
+    # Older result files used raw key "SC-INR" for the no-phase adaptive
+    # variant. New paper-facing files reserve "SC-INR" for the PhiZ final
+    # candidate, so only remap the ambiguous key in known legacy contexts.
+    source_name = source_path.name if source_path is not None else ""
+    legacy_sc_inr_no_phi = (
+        "SC-INR+PhiZ" in data
+        or source_name in LEGACY_SCINR_NOPHI_FILES
+    )
     normalized: Dict[str, Any] = {}
     for model, value in data.items():
-        canonical = MODEL_ALIASES.get(model, model)
+        if model == "SC-INR" and legacy_sc_inr_no_phi:
+            canonical = "SC-INR-NoPhi"
+        else:
+            canonical = MODEL_ALIASES.get(model, model)
         normalized[canonical] = value
     return normalized
 
@@ -72,7 +94,14 @@ def load_json(path: Path) -> Dict[str, Any]:
         return {}
     with path.open("r") as f:
         data = json.load(f)
-    return normalize_model_names(data)
+    return normalize_model_names(data, path)
+
+
+def seed1_benchmark_path(root: Path) -> Path:
+    enriched = root / "results" / "benchmark_seed1_with_signed_phiz.json"
+    if enriched.exists():
+        return enriched
+    return root / "results" / "benchmark.json"
 
 
 def ensure_dir(path: Path) -> None:
@@ -126,7 +155,7 @@ def write_simple_latex_table(path: Path, headers: List[str], rows: List[List[str
 
 
 def summarize_benchmark(root: Path, out_dir: Path) -> Dict[str, Any]:
-    data = load_json(root / "results" / "benchmark.json")
+    data = load_json(seed1_benchmark_path(root))
     rows: List[Dict[str, Any]] = []
     delta_rows: List[Dict[str, Any]] = []
     for model in ordered_models(data):
@@ -199,7 +228,7 @@ def summarize_benchmark(root: Path, out_dir: Path) -> Dict[str, Any]:
 
 
 def load_seed_benchmarks(root: Path) -> Dict[int, Dict[str, Any]]:
-    seed_data: Dict[int, Dict[str, Any]] = {1: load_json(root / "results" / "benchmark.json")}
+    seed_data: Dict[int, Dict[str, Any]] = {1: load_json(seed1_benchmark_path(root))}
     seeds_dir = root / "results" / "seeds"
     for path in sorted(seeds_dir.glob("benchmark_seed*.json")):
         suffix = path.stem.replace("benchmark_seed", "")
@@ -243,7 +272,7 @@ def summarize_seeds(root: Path, out_dir: Path) -> None:
         out_dir / "benchmark_seed_mean_std.tex",
         ["Model", "Seeds", "ID Avg.", "OOD Avg."],
         latex_rows,
-        "Benchmark mean and standard deviation across available seeds. Seed 1 is the existing benchmark.json; additional seeds are loaded from results/seeds/benchmark_seed*.json when available.",
+        "Benchmark mean and standard deviation across available seeds. Seed 1 uses benchmark_seed1_with_signed_phiz.json when present; additional seeds are loaded from results/seeds/benchmark_seed*.json.",
         "tab:benchmark_seed_mean_std",
     )
 

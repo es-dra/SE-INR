@@ -1,20 +1,26 @@
-# SC-INR+PhiZ qualitative candidate crops
+# SC-INR qualitative candidate crops
 
-本目录是 `SC-INR+PhiZ` 论文视觉图候选，不是最终正文图。候选由 `scripts/prepare_qualitative_figure.py` 生成，协议是当前 benchmark 使用的 HR 现场 bicubic downsampling。
+本目录是最终候选 `SC-INR` 的论文视觉图候选，不是最终正文图。其 raw/checkpoint
+兼容名为 `SC-INR+PhiZ`。候选由 `scripts/prepare_qualitative_figure.py` 生成，
+协议是当前 benchmark 使用的 HR 现场 bicubic downsampling。
 
 ## 生成协议
 
-- 方法：`GT`、`Bicubic`、`LIIF`、`LTE`、`SC-INR`、`SC-INR+PhiZ`
-- 目标模型：`SC-INR+PhiZ`
+- 方法：`GT`、`Bicubic`、`LIIF`、`LTE`、`SC-INR-NoPhi`、`SC-INR`
+- 目标模型：`SC-INR`（raw key `SC-INR+PhiZ`）
 - 参照模型：`LTE`
 - crop 大小：`96 x 96`
-- 初筛：`--auto_delta_crop --target_model SC-INR+PhiZ --baseline_model LTE --min_texture_quantile 0.50`
+- 初筛：`--auto_delta_crop --target_model SC-INR --baseline_model LTE --min_texture_quantile 0.50`
 - 输出：
   - 每个候选的 `.png/.pdf`：full image + crop rectangle + method crops + error maps
   - 每个候选的 `_metrics.csv`：局部 crop PSNR-Y/RMSE-Y
   - 每个候选的 `_crop_candidates.csv`：按局部增益排序的候选 crop
   - `candidate_summary.csv`：所有已生成候选的汇总
   - `contact_sheet.png`：所有候选 crop 的快速人工审查图
+
+注意：部分既有图片是在展示命名调整前生成的，图中可能仍显示旧标签
+`SC-INR` / `SC-INR+PhiZ`。按当前命名应分别理解为 `SC-INR-NoPhi` /
+最终候选 `SC-INR`。正式论文图应重新导出，避免图例歧义。
 
 ## 候选排序摘要
 

@@ -47,26 +47,36 @@ DATASETS = {
 MODEL_PATHS = {
     "LIIF": ROOT / "save" / "liif" / "epoch-best.pth",
     "LTE": ROOT / "save" / "lte" / "epoch-best.pth",
-    "LTE-NoCell": ROOT / "save" / "lte-no-cell" / "epoch-best.pth",
-    "LTE-FeaturePhase": ROOT / "save" / "lte-feature-phase" / "epoch-best.pth",
-    "SC-INR-Fixed": ROOT / "save" / "sc-inr-fixed" / "epoch-best.pth",
-    "SC-INR": ROOT / "save" / "sc-inr-adaptive" / "epoch-best.pth",
-    "SC-INR-Adaptive": ROOT / "save" / "sc-inr-adaptive" / "epoch-best.pth",
-    "SC-INR-Signed": ROOT / "save" / "sc-inr-adaptive-signed" / "epoch-best.pth",
-    "SC-INR-Adaptive-Signed": ROOT / "save" / "sc-inr-adaptive-signed" / "epoch-best.pth",
-    "SC-INR+PhiZ": ROOT / "save" / "sc-inr-phiz" / "epoch-best.pth",
+    "LTE-NoCellPhase": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
+    "LTE-NoCell": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
+    "LTE-PhaseZ": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
+    "LTE-FeaturePhase": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
+    "SC-INR-FixedOmega": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
+    "SC-INR-Fixed": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
+    "SC-INR-NoPhi": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
+    "SC-INR-Adaptive": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
+    "SC-INR-NoPhi-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
+    "SC-INR-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
+    "SC-INR-Adaptive-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
+    "SC-INR": ROOT / "save" / "sc-inr" / "epoch-best.pth",
+    "SC-INR+PhiZ": ROOT / "save" / "sc-inr" / "epoch-best.pth",
 }
 
 STYLE = {
     "LIIF": "#4C72B0",
     "LTE": "#DD8452",
+    "LTE-NoCellPhase": "#55A868",
     "LTE-NoCell": "#55A868",
+    "LTE-PhaseZ": "#8172B2",
     "LTE-FeaturePhase": "#8172B2",
+    "SC-INR-FixedOmega": "#C44E52",
     "SC-INR-Fixed": "#C44E52",
-    "SC-INR": "#8B0000",
+    "SC-INR-NoPhi": "#8B0000",
     "SC-INR-Adaptive": "#8B0000",
+    "SC-INR-NoPhi-Signed": "#222222",
     "SC-INR-Signed": "#222222",
     "SC-INR-Adaptive-Signed": "#222222",
+    "SC-INR": "#B22222",
     "SC-INR+PhiZ": "#B22222",
 }
 
@@ -393,12 +403,12 @@ def main() -> None:
     parser.add_argument("--mode", choices=["response", "cell", "both"], default="both")
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "analysis" / "sampling_response")
     parser.add_argument("--device", default="cuda:0")
-    parser.add_argument("--models", default="SC-INR-Fixed,SC-INR")
+    parser.add_argument("--models", default="SC-INR-FixedOmega,SC-INR-NoPhi,SC-INR")
     parser.add_argument("--datasets", default="bsd100,urban100")
     parser.add_argument("--max_images", type=int, default=5)
     parser.add_argument("--lr_scale", type=int, default=4)
     parser.add_argument("--scales", default="4,8,16,30")
-    parser.add_argument("--cell_models", default="LTE,LTE-NoCell,LTE-FeaturePhase,SC-INR-Fixed,SC-INR")
+    parser.add_argument("--cell_models", default="LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR-FixedOmega,SC-INR-NoPhi,SC-INR")
     parser.add_argument("--cell_dataset", default="urban100")
     parser.add_argument("--cell_image", default="img_004.png")
     parser.add_argument("--cell_lr_scale", type=int, default=4)

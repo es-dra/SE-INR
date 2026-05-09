@@ -5,7 +5,7 @@
 ## 当前文件
 
 - `seed1/benchmark.json`：seed1 旧主 benchmark，8 模型。
-- `seed1/benchmark_signed_phiz.json`：seed1 含 `SC-INR-Signed` 与 `SC-INR+PhiZ` 的完整 benchmark。
+- `seed1/benchmark_signed_phiz.json`：seed1 含 `SC-INR-NoPhi-Signed` 与最终候选 `SC-INR` 的完整 benchmark；历史 raw key 分别为 `SC-INR-Signed` 与 `SC-INR+PhiZ`。
 - `seed2/benchmark.json`：核心三模型 seed2 benchmark。
 - `seed3/benchmark.json`：核心三模型 seed3 benchmark。
 - `continuous/seed1/*.json`：seed1 continuous-scale raw。

@@ -1,4 +1,4 @@
-# Review Advice Analysis for SC-INR / SE-INR
+# Review Advice Analysis for SC-INR-NoPhi / SE-INR
 
 This note evaluates the supplied reviewer-style advice against the current local
 code and seed-1 auxiliary results. It is intended as a working research memo, not
@@ -27,7 +27,7 @@ reconstruction gains over LTE are small but stable, while same-LR cross-scale
 observation consistency improves sharply for SC-INR.
 
 The most important caveat is that the current evidence still does not isolate
-the sinc response as the sole causal factor. SC-INR changes both the
+the sinc response as the sole causal factor. SC-INR-NoPhi changes both the
 cell injection mechanism and the local Fourier parameterization, so a w/o sinc
 control remains the highest-priority missing ablation.
 
@@ -64,15 +64,15 @@ sinc_y = analytic_sinc(omega_y * c_y / 2)
 W = sinc_x * sinc_y
 ```
 
-This directly supports the claim that SC-INR changes the role of cell from a
+This directly supports the claim that SC-INR-NoPhi changes the role of cell from a
 learned phase input to an observation response.
 
 ### More Metrics Beyond PSNR
 
 Supported. The paper-ready seed-1 tables now show:
 
-- BSD100 OOD PSNR: SC-INR is +0.056 dB over LTE.
-- Urban100 OOD PSNR: SC-INR is +0.052 dB over LTE.
+- BSD100 OOD PSNR: SC-INR-NoPhi is +0.056 dB over LTE.
+- Urban100 OOD PSNR: SC-INR-NoPhi is +0.052 dB over LTE.
 - BSD100 OOD SSIM-Y: +0.00191 over LTE.
 - Urban100 OOD SSIM-Y: +0.00101 over LTE.
 - BSD100 consistency PSNR: +8.61 dB over LTE.
@@ -83,9 +83,9 @@ Supported. The paper-ready seed-1 tables now show:
 These numbers support a mechanism-oriented story better than a pure benchmark
 story.
 
-### LTE-NoCell / LTE-FeaturePhase Caveat
+### LTE-NoCellPhase / LTE-PhaseZ Caveat
 
-Strongly supported. LTE-NoCell and LTE-FeaturePhase obtain very high consistency
+Strongly supported. LTE-NoCellPhase and LTE-PhaseZ obtain very high consistency
 PSNR, around +25 to +26 dB over LTE, but this mostly reflects weakened cell
 response. They should be presented as diagnostic controls, not as better
 super-resolution models. The useful comparison is the joint tradeoff between
@@ -137,7 +137,7 @@ the right next step.
 
 ## Highest-Priority Missing Experiments
 
-### 1. SC-INR w/o sinc
+### 1. SC-INR-NoPhi w/o sinc
 
 This is the most important ablation. It should keep the adaptive omega and MLP
 structure but set the response to one:
@@ -154,7 +154,7 @@ Expected paper use:
 
 - If w/o sinc loses consistency and/or OOD quality, it directly supports the
   sampling-consistency mechanism.
-- If w/o sinc matches SC-INR in PSNR but loses consistency, the paper
+- If w/o sinc matches SC-INR-NoPhi in PSNR but loses consistency, the paper
   should emphasize stability/consistency rather than reconstruction gain.
 - If w/o sinc matches both, the sinc mechanism is not yet experimentally
   established and the method story must be revised.
@@ -162,7 +162,7 @@ Expected paper use:
 ### 2. Cell Response Curve
 
 High priority. This would visually demonstrate the main mechanism: LTE can have
-learned cell extrapolation, LTE-NoCell is almost invariant to cell, and SC-INR
+learned cell extrapolation, LTE-NoCellPhase is almost invariant to cell, and SC-INR-NoPhi
 should show smooth analytic attenuation. It is more directly tied to the method
 than another benchmark table.
 
@@ -198,7 +198,7 @@ be regenerated/verified under the current protocol if used.
 
 This is scientifically interesting but should not preempt the w/o sinc and
 response-curve experiments. The low-risk version
-`edsr-eq-baseline + SC-INR decoder` is a good first step because it tests
+`edsr-eq-baseline + SC-INR-NoPhi decoder` is a good first step because it tests
 orthogonality with Rot-E without forcing a full orientation-aware sinc design.
 
 ### LIIF+
@@ -237,4 +237,3 @@ More defensible now:
 > The current evidence shows that replacing learned cell-conditioned phase with
 > a sampling-consistent response preserves or slightly improves OOD quality while
 > substantially reducing cross-scale inconsistency.
-

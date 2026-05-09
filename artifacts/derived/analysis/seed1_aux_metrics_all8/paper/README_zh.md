@@ -2,15 +2,15 @@
 
 全局结果阅读顺序建议先看 `results/analysis/README_zh.md`，再进入本文档。本文档只解释 `seed1_aux_metrics_all8` 这一组辅助质量和跨尺度一致性结果。
 
-这组结果用于支撑 SC-INR 的机制分析，不是最终多 seed 主 benchmark。使用这些结果时，结论强度应限定为“seed1 上的辅助证据”。
+这组结果用于支撑 `SC-INR-NoPhi` 的机制分析，不是最终多 seed 主 benchmark，也不是最终候选 `SC-INR` 的辅助指标。使用这些结果时，结论强度应限定为“seed1 上的辅助证据”。
 
 ## 这组结果回答什么
 
-核心问题是：在保持重建质量基本不下降的前提下，SC-INR 是否能减少 LTE 类 decoder 对 output cell 的任意外推，并提升同一 LR 输入下的跨尺度观测一致性。
+核心问题是：在保持重建质量基本不下降的前提下，`SC-INR-NoPhi` 是否能减少 LTE 类 decoder 对 output cell 的任意外推，并提升同一 LR 输入下的跨尺度观测一致性。
 
 推荐论文表述：
 
-> SC-INR 在 OOD scale 上相对 LTE 有小幅但稳定的质量提升，同时显著改善 same-LR cross-scale observation consistency。
+> SC-INR-NoPhi 在 OOD scale 上相对 LTE 有小幅但稳定的质量提升，同时显著改善 same-LR cross-scale observation consistency。
 
 不推荐表述：
 
@@ -35,12 +35,12 @@
 
 ## 关键结论
 
-- BSD100 OOD：SC-INR 相对 LTE 的 PSNR-Y 为 `+0.056 dB`，SSIM-Y 为 `+0.00191`。
-- Urban100 OOD：SC-INR 相对 LTE 的 PSNR-Y 为 `+0.052 dB`，SSIM-Y 为 `+0.00101`。
-- BSD100 consistency：SC-INR 相对 LTE 的 SC-PSNR 为 `+8.61 dB`，texture consistency RMSE 为 `-0.00590`。
-- Urban100 consistency：SC-INR 相对 LTE 的 SC-PSNR 为 `+7.77 dB`，texture consistency RMSE 为 `-0.01047`。
+- BSD100 OOD：SC-INR-NoPhi 相对 LTE 的 PSNR-Y 为 `+0.056 dB`，SSIM-Y 为 `+0.00191`。
+- Urban100 OOD：SC-INR-NoPhi 相对 LTE 的 PSNR-Y 为 `+0.052 dB`，SSIM-Y 为 `+0.00101`。
+- BSD100 consistency：SC-INR-NoPhi 相对 LTE 的 SC-PSNR 为 `+8.61 dB`，texture consistency RMSE 为 `-0.00590`。
+- Urban100 consistency：SC-INR-NoPhi 相对 LTE 的 SC-PSNR 为 `+7.77 dB`，texture consistency RMSE 为 `-0.01047`。
 
-重要 caveat：`LTE-NoCell` 和 `LTE-FeaturePhase` 的 consistency 很高，主要因为它们削弱了 cell response。它们是诊断性 baseline，不能仅凭 consistency 判定为更好的 ASISR 模型。
+重要 caveat：`LTE-NoCellPhase` 和 `LTE-PhaseZ` 的 consistency 很高，主要因为它们削弱了 cell response。它们是诊断性 baseline，不能仅凭 consistency 判定为更好的 ASISR 模型。
 
 ## 文件导航
 
@@ -59,7 +59,7 @@
 适合正文改造：
 
 - `fig_quality_consistency_tradeoff.pdf`：表达质量-一致性 tradeoff 的思路是对的，但需要重画。当前 NoCell/FeaturePhase 把 y 轴拉到 +25 dB，压缩了主模型差异；建议正文版本只保留主模型，诊断模型放 inset 或补充图。
-- `fig_scale_gain_vs_lte.pdf`：可改成少模型曲线，只画 LTE、LTE-EQ、SC-INR-Fixed、SC-INR。
+- `fig_scale_gain_vs_lte.pdf`：可改成少模型曲线，只画 LTE、LTE-EQ、SC-INR-FixedOmega、SC-INR-NoPhi。
 
 适合补充或调试，不建议直接进正文：
 
@@ -77,7 +77,7 @@
 当前 `visual_crops/` 更接近 debugging，不适合直接作为论文 Fig.10/Fig.11 风格图。后续应重做为配置化 qualitative figure：
 
 - 左侧放完整 HR 图并用红框标出 crop。
-- 右侧只放少量关键方法：`GT`、`Bicubic`、`LTE`、`LTE-EQ`、`SC-INR-Fixed`、`SC-INR`。
+- 右侧只放少量关键方法：`GT`、`Bicubic`、`LTE`、`LTE-EQ`、`SC-INR-FixedOmega`、`SC-INR-NoPhi`、最终候选 `SC-INR`。
 - 正文图优先 x8 或 x12/x16；x30 放补充。
 - 每个样例只放 1-2 个有结构差异的 crop，不自动选择最大 texture variance。
 - error map 必须共享色域和 colorbar，不给 GT 放黑色误差块。
@@ -101,4 +101,4 @@
 1. 重画质量-一致性 tradeoff 图，区分主模型和诊断 baseline。
 2. 写一个配置化 qualitative figure 脚本，人工指定 image/crop/methods。
 3. seed2/seed3 完成后，用同样表格口径更新 mean/std。
-4. 对 signed bounded omega 变体补充 benchmark、response distribution 和 cell response curve。
+4. 对最终候选 `SC-INR` 和 signed bounded omega/no-phase 变体补充 benchmark、response distribution 和 cell response curve。
