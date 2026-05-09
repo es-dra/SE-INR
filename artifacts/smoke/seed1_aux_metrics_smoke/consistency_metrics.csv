@@ -1,3 +1,0 @@
-model,dataset,image,source_scale,observation_scale,consistency_psnr_y,consistency_rmse_y,edge_consistency_rmse,texture_consistency_rmse,flat_consistency_rmse
-LTE,set5,baby.png,x8,x4,49.86768570331165,0.003210818191092481,0.005841372534632683,0.006164120510220528,0.0005245868815109134
-SC-INR-Adaptive,set5,baby.png,x8,x4,53.156272313674805,0.0021988033213949736,0.004515544045716524,0.004740445874631405,0.00026949209859594703
