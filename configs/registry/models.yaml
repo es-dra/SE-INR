@@ -1,0 +1,89 @@
+# Paper-facing model registry.
+# This is a lightweight alias map; it does not replace the training configs.
+
+models:
+  LIIF:
+    status: baseline
+    display_name: LIIF
+    registry_name: liif
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/liif
+    train_config: configs/train-div2k/train-liif.yaml
+    raw_keys: [LIIF]
+
+  LIIF-EQ:
+    status: orthogonal_baseline
+    display_name: LIIF-EQ
+    registry_name: liif_eq
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/liif-eq
+    train_config: configs/train-div2k/train-liif-eq.yaml
+    raw_keys: [LIIF-EQ]
+    note: Inherited Rot-E baseline; orthogonal to SC-INR decoder-side consistency.
+
+  LTE:
+    status: baseline
+    display_name: LTE
+    registry_name: lte
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte
+    train_config: configs/train-div2k/train-lte.yaml
+    raw_keys: [LTE]
+
+  LTE-EQ:
+    status: orthogonal_baseline
+    display_name: LTE-EQ
+    registry_name: lte_eq
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-eq
+    train_config: configs/train-div2k/train-lte-eq.yaml
+    raw_keys: [LTE-EQ]
+    note: Inherited Rot-E baseline; not a direct replacement for SC-INR.
+
+  LTE-NoCell:
+    status: diagnostic
+    display_name: LTE-NoCell
+    registry_name: lte-noc
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-no-cell
+    train_config: configs/train-div2k/train-lte-no-cell.yaml
+    raw_keys: [LTE-NoCell]
+
+  LTE-FeaturePhase:
+    status: diagnostic
+    display_name: LTE-FeaturePhase
+    registry_name: lte_phase_z
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-feature-phase
+    train_config: configs/train-div2k/train-lte-feature-phase.yaml
+    raw_keys: [LTE-FeaturePhase]
+
+  SC-INR-Fixed:
+    status: diagnostic
+    display_name: SC-INR-Fixed
+    registry_name: sc_inr_fixed
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-fixed
+    train_config: configs/train-div2k/train-sc-inr-fixed.yaml
+    raw_keys: [SC-INR-Fixed]
+
+  SC-INR:
+    status: active_main
+    display_name: SC-INR
+    registry_name: sc_inr_adaptive
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-adaptive
+    checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr-adaptive
+    checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr-adaptive
+    train_config: configs/train-div2k/train-sc-inr-adaptive.yaml
+    raw_keys: [SC-INR, SC-INR-Adaptive]
+    note: Paper display name for the previous SC-INR-Adaptive model.
+
+  SC-INR-Signed:
+    status: diagnostic
+    display_name: SC-INR-Signed
+    registry_name: sc_inr_adaptive_signed
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-adaptive-signed
+    train_config: configs/train-div2k/train-sc-inr-adaptive-signed.yaml
+    raw_keys: [SC-INR-Signed, SC-INR-Adaptive-Signed]
+
+  SC-INR+PhiZ:
+    status: active_candidate
+    display_name: SC-INR+PhiZ
+    registry_name: sc_inr_signed_phiz
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-phiz
+    train_config: configs/train-div2k/train-sc-inr-signed-phiz.yaml
+    raw_keys: [SC-INR+PhiZ]
+    note: Feature-conditioned phase candidate. Current evidence is seed1 PSNR plus qualitative candidates.

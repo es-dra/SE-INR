@@ -1,0 +1,85 @@
+# Project Manifest
+
+This file is the top-level map for the reorganized SC-INR / SE-INR research
+workspace. It records the stable project contracts: where source code lives,
+where artifacts live, which paths are compatibility aliases, and which evidence
+is suitable for paper use.
+
+## Directory Contract
+
+| Path | Role | Notes |
+| --- | --- | --- |
+| `src/` | Importable research code | `src/models`, `src/datasets`, and `src/utils.py` are the canonical source paths. Root `models/`, `datasets/`, and `utils.py` are compatibility symlinks. |
+| `entrypoints/` | CLI entry points | Canonical location for `train.py`, `test.py`, and evaluation scripts. Root files are compatibility symlinks. |
+| `configs/` | Versioned configs and registries | Training/test configs remain under existing subdirs; shared paper-facing registries live in `configs/registry/`. |
+| `scripts/analysis/` | Analysis and diagnostic scripts | Scripts that consume checkpoints/results and emit CSV/figures. |
+| `scripts/paper/` | Paper artifact generation | Scripts that turn verified analysis into table/figure candidates. |
+| `scripts/viz/` | Qualitative visualization scripts | Includes crop figure generation. |
+| `scripts/legacy/` | Historical launchers | Not recommended as current entry points. |
+| `artifacts/checkpoints/` | Checkpoints/config/log provenance | Large model artifacts. Ignored by git. Root `save/` and `save-seeds/` are compatibility symlinks. |
+| `artifacts/raw_results/` | Raw evaluation JSON | Formal raw metrics, grouped by seed/protocol. |
+| `artifacts/derived/` | Derived tables, figures, analysis | Recomputable from raw results and scripts. |
+| `artifacts/smoke/` | Smoke/debug outputs | Not paper evidence unless explicitly promoted. |
+| `artifacts/legacy/` | Historical outputs | Kept for traceability, not current evidence. |
+| `artifacts/results/` | Compatibility result tree | Symlink-based tree preserving old `results/...` paths. Root `results/` points here. |
+| `docs/` | Project documentation and historical reports | Current project docs plus archived historical reports. |
+| `experiments/` | Experiment cards and manifests | One directory per research question/experiment family. |
+| `paper/` | Paper-facing working area | Claims, figures, tables, and source maps. |
+| `memory/` | Daily project memory | Chronological research log. |
+
+## Compatibility Paths
+
+These paths are intentionally preserved as symlinks so old commands keep
+working during the transition:
+
+- `train.py` -> `entrypoints/train.py`
+- `test.py` -> `entrypoints/test.py`
+- `eval_full.py` -> `entrypoints/eval_full.py`
+- `eval_continuous.py` -> `entrypoints/eval_continuous.py`
+- `eval_fce.py` -> `entrypoints/eval_fce.py`
+- `eval_phase_intervention.py` -> `entrypoints/eval_phase_intervention.py`
+- `models` -> `src/models`
+- `datasets` -> `src/datasets`
+- `utils.py` -> `src/utils.py`
+- `save` -> `artifacts/checkpoints/seed1`
+- `save-seeds` -> `artifacts/checkpoints/seeds`
+- `results` -> `artifacts/results`
+- `logs` -> `artifacts/logs`
+
+Do not remove these compatibility paths until all scripts and documentation
+have been migrated to the canonical paths.
+
+## Evidence Status
+
+| Artifact | Status | Paper Use | Caveat |
+| --- | --- | --- | --- |
+| `artifacts/raw_results/seed1/benchmark.json` | `formal_raw` | seed1 baseline benchmark | Does not include Signed/PhiZ. |
+| `artifacts/raw_results/seed1/benchmark_signed_phiz.json` | `formal_raw` | seed1 Signed/PhiZ benchmark | Single seed for new variants. |
+| `artifacts/raw_results/seed2/benchmark.json` | `formal_raw` | core multi-seed | Core models only. |
+| `artifacts/raw_results/seed3/benchmark.json` | `formal_raw` | core multi-seed | Core models only. |
+| `artifacts/derived/analysis/benchmark_progress_2026-05-09/` | `derived` | current benchmark summary | Derived from raw JSON. |
+| `artifacts/derived/analysis/seed1_aux_metrics_all8/` | `derived` | mechanism/consistency evidence | Seed1 auxiliary protocol. |
+| `artifacts/derived/paper_candidates/qualitative_phiz_candidates/` | `candidate` | qualitative candidate pool | Auto-delta crop candidates; avoid overclaim. |
+| `artifacts/smoke/*` | `smoke` | do not cite | Debug/smoke only. |
+| `artifacts/legacy/*` | `legacy` | historical reference | Not current evidence unless revalidated. |
+
+For paper writing, the stricter citation whitelist is
+`paper/ARTIFACTS_ALLOWED.md`.
+
+## Naming Contract
+
+Paper-facing display names are centralized in
+`configs/registry/models.yaml`. Historical registry names, checkpoint
+directories, and raw-result keys are kept there to avoid future confusion.
+
+Important display names:
+
+- `SC-INR`: paper display name for the previous `SC-INR-Adaptive` checkpoint.
+- `SC-INR-Signed`: signed bounded omega diagnostic variant.
+- `SC-INR+PhiZ`: feature-conditioned phase candidate, currently seed1 only.
+
+## Current Claim Boundary
+
+The project currently supports claims about decoder-side sampling consistency
+and OOD scale robustness. It does not support claims of strict mathematical
+scale equivariance.

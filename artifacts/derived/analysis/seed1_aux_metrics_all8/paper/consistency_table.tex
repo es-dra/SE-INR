@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Seed-1 same-LR cross-scale observation consistency, averaged over x8/x16/x30 to x4. LTE-NoCell and LTE-FeaturePhase are diagnostic baselines with weakened cell response, so their high consistency should be interpreted with reconstruction quality.}
+\label{tab:seed1_aux_consistency}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & BSD SC-PSNR & $\Delta$ & BSD tex RMSE & $\Delta$ & Urban SC-PSNR & $\Delta$ & Urban tex RMSE & $\Delta$ \\
+\midrule
+LIIF & 47.95 & +3.76 & 0.00701 & -0.00323 & 44.13 & +4.83 & 0.01144 & -0.00784 \\
+LIIF-EQ & 46.36 & +2.17 & 0.00860 & -0.00165 & 41.54 & +2.24 & 0.01555 & -0.00374 \\
+LTE & 44.19 & +0.00 & 0.01024 & +0.00000 & 39.30 & +0.00 & 0.01928 & +0.00000 \\
+LTE-EQ & 45.57 & +1.38 & 0.00913 & -0.00111 & 41.37 & +2.07 & 0.01623 & -0.00306 \\
+LTE-NoCell & 69.23 & +25.04 & 0.00069 & -0.00955 & 65.28 & +25.98 & 0.00126 & -0.01802 \\
+LTE-FeaturePhase & 69.46 & +25.27 & 0.00069 & -0.00956 & 65.47 & +26.17 & 0.00123 & -0.01805 \\
+SC-INR-Fixed & 51.34 & +7.15 & 0.00458 & -0.00566 & 46.77 & +7.47 & 0.00870 & -0.01058 \\
+SC-INR & 52.81 & +8.61 & 0.00434 & -0.00590 & 47.07 & +7.77 & 0.00881 & -0.01047 \\
+\bottomrule
+\end{tabular}
+\end{table*}

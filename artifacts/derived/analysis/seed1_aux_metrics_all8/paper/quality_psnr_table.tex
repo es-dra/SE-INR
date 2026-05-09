@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Seed-1 auxiliary quality summary. OOD averages are equally averaged over x8, x16, and x30. Deltas are against LTE under the same HR-downsampled protocol.}
+\label{tab:seed1_aux_quality_psnr}
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & BSD100 x4 & BSD100 x8--x30 & $\Delta$ & Urban100 x4 & Urban100 x8--x30 & $\Delta$ \\
+\midrule
+LIIF & 27.661 & 22.814 & +0.008 & 26.459 & 20.532 & +0.021 \\
+LIIF-EQ & 27.696 & 22.849 & +0.043 & 26.629 & 20.574 & +0.062 \\
+LTE & 27.668 & 22.807 & +0.000 & 26.569 & 20.512 & +0.000 \\
+LTE-EQ & 27.670 & 22.801 & -0.005 & 26.547 & 20.547 & +0.035 \\
+LTE-NoCell & 27.599 & 22.815 & +0.008 & 26.390 & 20.545 & +0.033 \\
+LTE-FeaturePhase & 27.617 & 22.820 & +0.013 & 26.425 & 20.566 & +0.054 \\
+SC-INR-Fixed & 27.653 & 22.823 & +0.016 & 26.464 & 20.531 & +0.019 \\
+SC-INR & 27.672 & 22.862 & +0.056 & 26.600 & 20.564 & +0.052 \\
+\bottomrule
+\end{tabular}
+\end{table*}

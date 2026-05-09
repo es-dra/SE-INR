@@ -5,6 +5,10 @@ log/
 save/
 save_test/
 save-seeds/
+artifacts/checkpoints/
+artifacts/data_local/
+artifacts/logs/
+artifacts/scratch/
 
 # Python
 __pycache__/

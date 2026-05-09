@@ -1,0 +1,5 @@
+model,crop_psnr_y,crop_rmse_y
+Bicubic,16.2966,0.152540
+LTE,19.0235,0.111335
+SC-INR,20.8491,0.092948
+SC-INR+PhiZ,21.4873,0.087669

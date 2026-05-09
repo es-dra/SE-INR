@@ -1,0 +1,17 @@
+{
+  "dataset": "urban100",
+  "image": "img_004.png",
+  "scale": 8,
+  "models": [
+    "Bicubic",
+    "LTE",
+    "SC-INR",
+    "SC-INR+PhiZ"
+  ],
+  "crop_y": 336,
+  "crop_x": 672,
+  "crop_size": 96,
+  "device": "cuda:1",
+  "output_png": "/workspace/SE-INR/Equivariant-ASISR/results/analysis/qualitative_phiz_smoke/urban100_img004_x8_auto_texture.png",
+  "output_pdf": "/workspace/SE-INR/Equivariant-ASISR/results/analysis/qualitative_phiz_smoke/urban100_img004_x8_auto_texture.pdf"
+}
