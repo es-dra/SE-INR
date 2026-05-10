@@ -1,0 +1,28 @@
+{
+  "generated_on": "2026-05-10",
+  "inputs": [
+    "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+    "artifacts/raw_results/seed1/benchmark_sc_inr_nosinc.json"
+  ],
+  "benchmark_protocol": "entrypoints/eval_full.py with HR onsite bicubic downsampling image-folder + sr-implicit-downsampled",
+  "id_scales": [
+    "x2",
+    "x3",
+    "x4"
+  ],
+  "ood_scales": [
+    "x6",
+    "x8",
+    "x12",
+    "x16",
+    "x24",
+    "x30"
+  ],
+  "benchmarks": [
+    "Set5",
+    "Set14",
+    "BSD100",
+    "Urban100"
+  ],
+  "note": "Single-seed summary only. SC-INR key in benchmark_signed_phiz.json is legacy NoPhi when SC-INR+PhiZ is present."
+}

@@ -124,3 +124,16 @@ models:
     raw_keys: [SC-INR+PhiZ]
     ablation_axis: signed omega plus feature-conditioned phi(z)
     note: Final paper-name candidate; currently seed1 evidence only.
+
+  SC-INR-NoSinc:
+    status: ablation_seed1_benchmark_aux_complete
+    display_name: SC-INR-NoSinc
+    paper_name: SC-INR-NoSinc
+    registry_name: sc_inr_nosinc
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-nosinc
+    train_config: configs/train-div2k/train-sc-inr-nosinc.yaml
+    raw_keys: [SC-INR-NoSinc]
+    ablation_axis: signed omega plus feature-conditioned phi(z), without analytic sinc response
+    result_seed1: artifacts/raw_results/seed1/benchmark_sc_inr_nosinc.json
+    result_seed1_aux: artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1
+    note: Mechanism ablation for SC-INR; seed1 benchmark complete. Auxiliary metrics show very high same-LR self-consistency after removing sinc, so that metric alone should not be used as proof of the sinc response.

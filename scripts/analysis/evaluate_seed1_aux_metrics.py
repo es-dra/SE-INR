@@ -65,6 +65,7 @@ MODEL_PATHS = {
     "SC-INR-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
     "SC-INR": ROOT / "save" / "sc-inr" / "epoch-best.pth",
     "SC-INR+PhiZ": ROOT / "save" / "sc-inr" / "epoch-best.pth",
+    "SC-INR-NoSinc": ROOT / "save" / "sc-inr-nosinc" / "epoch-best.pth",
     "LIIF-EQ": ROOT / "save" / "liif-eq" / "epoch-best.pth",
     "LTE-EQ": ROOT / "save" / "lte-eq" / "epoch-best.pth",
 }
@@ -87,6 +88,7 @@ STYLE = {
     "SC-INR-Signed": "#AA3377",
     "SC-INR": "#B22222",
     "SC-INR+PhiZ": "#B22222",
+    "SC-INR-NoSinc": "#666666",
 }
 
 

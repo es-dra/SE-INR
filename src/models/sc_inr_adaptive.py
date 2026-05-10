@@ -19,6 +19,10 @@ Final-candidate variant: omega(z) + phi(z)
   - cell still enters only through analytic sinc response
   - the default remains phi=0 for checkpoint compatibility
 
+NoSinc ablation: omega(z) + phi(z), without analytic response
+  - keeps signed omega and feature-conditioned phase
+  - removes only W(omega, c) so the Fourier observation is unweighted by cell
+
 FCE = 0 preserved: omega_conv input is z (not c), so F does not depend on c.
 
 Compatibility note:
@@ -82,6 +86,7 @@ class SCINRAdaptive(nn.Module):
         phase_kernel_size: int = 1,
         phase_bias: bool = False,
         phase_zero_init: bool = True,
+        use_sinc_response: bool = True,
         local_ensemble: bool = True,
         upinput: bool = True,
         kernel_size: int = 3,
@@ -104,6 +109,7 @@ class SCINRAdaptive(nn.Module):
         self.phase_kernel_size = phase_kernel_size
         self.phase_bias = phase_bias
         self.phase_zero_init = phase_zero_init
+        self.use_sinc_response = use_sinc_response
         self.local_ensemble = local_ensemble
         self.upinput = upinput
 
@@ -269,15 +275,19 @@ class SCINRAdaptive(nn.Module):
                 fourier_cos = torch.cos(math.pi * q_phase)  # [B, Q, K]
                 fourier_sin = torch.sin(math.pi * q_phase)  # [B, Q, K]
 
-                # Step 3: analytic sinc weights W_k(c)
+                # Step 3: analytic sinc weights W_k(c), disabled only for
+                # the SC-INR-NoSinc mechanism ablation.
                 c_x = rel_cell[:, :, 0:1]  # [B, Q, 1]
                 c_y = rel_cell[:, :, 1:2]  # [B, Q, 1]
                 omega_x = q_omega[:, :, :, 0]  # [B, Q, K]
                 omega_y = q_omega[:, :, :, 1]  # [B, Q, K]
 
-                sinc_x = analytic_sinc(omega_x * c_x / 2)  # [B, Q, K]
-                sinc_y = analytic_sinc(omega_y * c_y / 2)  # [B, Q, K]
-                W = sinc_x * sinc_y
+                if self.use_sinc_response:
+                    sinc_x = analytic_sinc(omega_x * c_x / 2)  # [B, Q, K]
+                    sinc_y = analytic_sinc(omega_y * c_y / 2)  # [B, Q, K]
+                    W = sinc_x * sinc_y
+                else:
+                    W = torch.ones_like(q_phase)
 
                 # Step 4: sinc-weighted Fourier features
                 fourier_cos_w = fourier_cos * W
@@ -360,4 +370,13 @@ class SCINRSignedPhiZ(SCINRAdaptivePhiZ):
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("omega_param", "tanh_signed")
+        super().__init__(*args, **kwargs)
+
+
+@register('sc_inr_nosinc')
+class SCINRNoSinc(SCINRSignedPhiZ):
+    """SC-INR-NoSinc: signed omega plus phi(z), without sinc response."""
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("use_sinc_response", False)
         super().__init__(*args, **kwargs)

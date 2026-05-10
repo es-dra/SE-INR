@@ -45,11 +45,13 @@ MODEL_ALIASES = {
     "SC-INR+PhiZ": "SC-INR",
     "SC-INR-Signed": "SC-INR-NoPhi-Signed",
     "SC-INR-Adaptive-Signed": "SC-INR-NoPhi-Signed",
+    "SC-INR-w/o-sinc": "SC-INR-NoSinc",
 }
 CORE_MODELS = ["LIIF", "LTE", "SC-INR-NoPhi"]
 MODEL_ORDER = [
     "LIIF", "LIIF-EQ", "LTE", "LTE-EQ", "LTE-NoCellPhase", "LTE-PhaseZ",
     "SC-INR-FixedOmega", "SC-INR-NoPhi", "SC-INR-NoPhi-Signed", "SC-INR",
+    "SC-INR-NoSinc",
 ]
 STYLE = {
     "LIIF": {"color": "#4C72B0", "ls": "--", "lw": 1.8},
@@ -62,6 +64,7 @@ STYLE = {
     "SC-INR-NoPhi": {"color": "#C44E52", "ls": "-", "lw": 2.0},
     "SC-INR-NoPhi-Signed": {"color": "#8B0000", "ls": "-", "lw": 2.0},
     "SC-INR": {"color": "#222222", "ls": "-", "lw": 2.4},
+    "SC-INR-NoSinc": {"color": "#666666", "ls": "--", "lw": 2.0},
 }
 LEGACY_SCINR_NOPHI_FILES = {
     "benchmark.json",

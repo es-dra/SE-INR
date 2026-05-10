@@ -1,6 +1,7 @@
 # Project Story
 
-本文档是当前项目叙事入口。历史长版记录已归档到
+本文档是项目叙事入口。短恢复入口优先读 `docs/project/current_state.md`。
+历史长版记录已归档到
 `docs/archive/project_story_legacy_2026-05-09.md`，其中包含旧命名
 `SC-INR-Adaptive` 和早期结果解读；引用论文事实时应以本文档、
 `paper/claims_evidence_matrix.md` 和 `paper/ARTIFACTS_ALLOWED.md` 为准。
@@ -34,8 +35,8 @@ SC-INR 系列将内容 Fourier basis 与 observation footprint 分开：
 - 观测 footprint 由 cell 通过解析 sinc response 进入；
 - 禁止 learned `phase(cell)` shortcut。
 
-当前最终候选的论文展示名建议为 **SC-INR**，canonical checkpoint alias 为
-`save/sc-inr` / `artifacts/checkpoints/seed1/sc-inr`。历史 raw/checkpoint key
+当前最终候选的论文展示名为 **SC-INR**，canonical checkpoint alias 为
+`save/sc-inr` / `artifacts/checkpoints/seed*/sc-inr`。历史 raw/checkpoint key
 仍为 `SC-INR+PhiZ` / `sc-inr-phiz`。它使用 signed omega 和
 feature-conditioned phase：
 
@@ -73,6 +74,8 @@ raw JSON、训练日志和历史物理 checkpoint 目录不改写；新训练、
 - `SC-INR-NoPhi`：raw key `SC-INR` / `SC-INR-Adaptive`，自适应频率但无 phase。
 - `SC-INR-NoPhi-Signed`：raw key `SC-INR-Signed`，signed omega 但无 phase。
 - `SC-INR`：raw key `SC-INR+PhiZ`，signed omega 加 feature-conditioned phase。
+- `SC-INR-NoSinc`：signed omega 加 feature-conditioned phase，但关闭 analytic
+  sinc response，实际使用 `W=1`。
 
 不建议把 `LTE-NoCell` 简写为 `LTE-P`。`P` 容易被理解成 phase、parameter、
 prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。更清楚的展示名是
@@ -80,34 +83,42 @@ prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。�
 
 ## 当前证据边界
 
-截至 2026-05-09：
+截至 2026-05-10：
 
 - `SC-INR-NoPhi` 有 3 seed 核心 benchmark，OOD PSNR 相对 LTE 小幅稳定提升。
-- 最终候选 `SC-INR`（raw `SC-INR+PhiZ`）目前只有 seed1 benchmark 和两张用户
-  确认的 qualitative 候选图。
-- seed1 auxiliary metrics 支持 decoder-side same-LR cross-scale observation
-  consistency，但尚未覆盖最终候选 `SC-INR`。
-- 还缺少 `SC-INR` 的 auxiliary metrics、多 seed、w/o-sinc 消融和最终论文图。
+- 最终候选 `SC-INR`（raw `SC-INR+PhiZ`）已有 seed1 benchmark、seed1 auxiliary
+  metrics 和两张用户确认的 qualitative 候选图；seed2/seed3 已启动训练，尚未完成。
+- `SC-INR-NoSinc` benchmark 与 auxiliary metrics 已完成。Full benchmark 中 NoSinc
+  弱于完整 `SC-INR`，但 same-LR self-consistency 反而更高。
+- response/omega diagnostics 显示：NoSinc 的高 self-consistency 来自 zero active
+  cell response，不是更正确的 footprint observation。
 
 因此论文写作应区分：
 
 - 已较稳的 family-level 结论：scale-decoupled observation 改善 OOD scale
   robustness 和 same-LR consistency；
-- 仍需验证的 final-candidate 结论：feature-conditioned phase 是否在多 seed
-  与 consistency 指标上保持优势。
+- 仍需验证的 final-candidate 结论：feature-conditioned phase 是否在多 seed 上
+  保持优势；
+- 机制 caveat：same-LR consistency 不能单独证明 analytic sinc response。
 
 ## 证据入口
 
 - 模型命名：`paper/model_taxonomy.md`
 - claim 边界：`paper/claims_evidence_matrix.md`
 - 可引用产物白名单：`paper/ARTIFACTS_ALLOWED.md`
+- 短恢复入口：`docs/project/current_state.md`
+- 长任务账本：`memory/task_ledger.md`
 - 核心 benchmark：`artifacts/derived/analysis/benchmark_progress_2026-05-09/`
-- seed1 auxiliary metrics：`artifacts/derived/analysis/seed1_aux_metrics_all8/`
+- seed1 final SC-INR auxiliary：`artifacts/derived/analysis/sc_inr_final_aux_metrics_seed1/`
+- NoSinc auxiliary：`artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1/`
+- response/omega diagnostics：`artifacts/derived/analysis/response_omega_diagnostics_2026-05-10/`
 - qualitative 候选池：`artifacts/derived/paper_candidates/qualitative_phiz_candidates/`
 
 ## 下一步
 
-1. 跑最终候选 `SC-INR` 的 auxiliary metrics。
-2. 设计并训练 `SC-INR w/o sinc` 或等价 sinc 消融。
-3. 将用户确认的两张 qualitative 候选图升级为正式 figure draft。
-4. 若 auxiliary metrics 不显示 consistency 退化，再推进最终候选的多 seed。
+1. 监控并完成最终候选 `SC-INR` seed2/seed3 训练与 benchmark。
+2. 将用户确认的两张 qualitative 候选图升级为正式 figure draft。
+3. 收敛 paper tables：multi-seed core、seed1 final、NoSinc ablation、
+   auxiliary/diagnostic。
+4. 设计更直接的 footprint correctness 指标；不要继续堆叠 same-LR
+   self-consistency 作为 sinc 主证据。

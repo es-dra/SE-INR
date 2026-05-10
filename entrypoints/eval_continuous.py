@@ -169,6 +169,7 @@ def main():
         'SC-INR-NoPhi': 'save/sc-inr-nophi/epoch-best.pth',
         'SC-INR-NoPhi-Signed': 'save/sc-inr-nophi-signed/epoch-best.pth',
         'SC-INR': 'save/sc-inr/epoch-best.pth',
+        'SC-INR-NoSinc': 'save/sc-inr-nosinc/epoch-best.pth',
     }
     MODEL_ALIASES = {
         'LTE-NoCell': 'LTE-NoCellPhase',
@@ -179,6 +180,7 @@ def main():
         'SC-INR+PhiZ': 'SC-INR',
         'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
         'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
+        'SC-INR-w/o-sinc': 'SC-INR-NoSinc',
     }
 
     if args.models:
@@ -225,10 +227,11 @@ def main():
                   'LTE-NoCellPhase': '#2ca02c', 'LTE-EQ': '#bcbd22',
                   'LTE-PhaseZ': '#9467bd', 'SC-INR-FixedOmega': '#d62728',
                   'SC-INR-NoPhi': '#8c564b', 'SC-INR-NoPhi-Signed': '#aa3377',
-                  'SC-INR': '#b22222'}
+                  'SC-INR': '#b22222', 'SC-INR-NoSinc': '#666666'}
         markers = {'LIIF': 'o', 'LIIF-EQ': 'v', 'LTE': 's', 'LTE-NoCellPhase': '^',
                    'LTE-EQ': '<', 'LTE-PhaseZ': '>', 'SC-INR-FixedOmega': 'D',
-                   'SC-INR-NoPhi': 'p', 'SC-INR-NoPhi-Signed': 'X', 'SC-INR': '*'}
+                   'SC-INR-NoPhi': 'p', 'SC-INR-NoPhi-Signed': 'X',
+                   'SC-INR': '*', 'SC-INR-NoSinc': 'h'}
 
         ds_results = {k: v for k, v in all_results.items() if k.endswith(f'_{ds_name}')}
         for model_name in available:

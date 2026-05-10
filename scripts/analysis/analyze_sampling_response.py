@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import math
 import sys
 from pathlib import Path
@@ -60,6 +61,7 @@ MODEL_PATHS = {
     "SC-INR-Adaptive-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
     "SC-INR": ROOT / "save" / "sc-inr" / "epoch-best.pth",
     "SC-INR+PhiZ": ROOT / "save" / "sc-inr" / "epoch-best.pth",
+    "SC-INR-NoSinc": ROOT / "save" / "sc-inr-nosinc" / "epoch-best.pth",
 }
 
 STYLE = {
@@ -78,6 +80,7 @@ STYLE = {
     "SC-INR-Adaptive-Signed": "#222222",
     "SC-INR": "#B22222",
     "SC-INR+PhiZ": "#B22222",
+    "SC-INR-NoSinc": "#666666",
 }
 
 
@@ -132,21 +135,29 @@ def load_model(model_name: str, device: torch.device | str):
     return model
 
 
-def summarize_tensor(x: torch.Tensor, prefix: str) -> Dict[str, float]:
+def summarize_tensor(x: torch.Tensor, prefix: str, max_values: int = 20_000) -> Dict[str, float]:
     vals = x.detach().float().flatten().cpu()
     if vals.numel() == 0:
         return {f"{prefix}_{k}": float("nan") for k in ["mean", "std", "min", "q01", "q05", "q50", "q95", "q99", "max"]}
-    qs = torch.quantile(vals, torch.tensor([0.01, 0.05, 0.50, 0.95, 0.99]))
+    if vals.numel() > max_values:
+        step = max(1, math.ceil(vals.numel() / max_values))
+        vals = vals[::step][:max_values]
+    min_v = vals.min()
+    max_v = vals.max()
+    if float(min_v) == float(max_v):
+        qs = vals.new_tensor([float(min_v)] * 5)
+    else:
+        qs = torch.quantile(vals, torch.tensor([0.01, 0.05, 0.50, 0.95, 0.99]))
     return {
         f"{prefix}_mean": float(vals.mean()),
         f"{prefix}_std": float(vals.std(unbiased=False)),
-        f"{prefix}_min": float(vals.min()),
+        f"{prefix}_min": float(min_v),
         f"{prefix}_q01": float(qs[0]),
         f"{prefix}_q05": float(qs[1]),
         f"{prefix}_q50": float(qs[2]),
         f"{prefix}_q95": float(qs[3]),
         f"{prefix}_q99": float(qs[4]),
-        f"{prefix}_max": float(vals.max()),
+        f"{prefix}_max": float(max_v),
     }
 
 
@@ -159,6 +170,25 @@ def write_csv(path: Path, rows: List[Dict[str, object]]) -> None:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def summarize_rows(
+    rows: List[Dict[str, object]],
+    keys: Sequence[str],
+    metrics: Sequence[str],
+) -> List[Dict[str, object]]:
+    groups: Dict[tuple[object, ...], List[Dict[str, object]]] = {}
+    for row in rows:
+        groups.setdefault(tuple(row[k] for k in keys), []).append(row)
+    out: List[Dict[str, object]] = []
+    for group_key, items in sorted(groups.items()):
+        rec: Dict[str, object] = {k: v for k, v in zip(keys, group_key)}
+        rec["n"] = len(items)
+        for metric in metrics:
+            vals = [float(r[metric]) for r in items if r.get(metric) not in (None, "")]
+            rec[metric] = float(np.mean(vals)) if vals else float("nan")
+        out.append(rec)
+    return out
 
 
 def omega_components(model) -> torch.Tensor | None:
@@ -212,6 +242,10 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
                         sinc_x = torch.sinc(omega_x * rel_cell / 2)
                         sinc_y = torch.sinc(omega_y * rel_cell / 2)
                         response = sinc_x * sinc_y
+                        use_sinc_response = bool(getattr(model, "use_sinc_response", True))
+                        active_response = response if use_sinc_response else torch.ones_like(response)
+                        analytic_attenuation = 1.0 - response
+                        active_attenuation = 1.0 - active_response
                         row: Dict[str, object] = {
                             "model": model_name,
                             "dataset": dataset,
@@ -220,19 +254,47 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
                             "observation_scale": f"x{scale}",
                             "omega_param": getattr(model, "omega_param", "fixed"),
                             "omega_bound": float(bound) if bound is not None else "",
+                            "use_sinc_response": use_sinc_response,
                             "omega_neg_frac": neg_frac,
                             "omega_near_bound_frac": near_bound_frac,
                             "response_neg_frac": float((response < 0).float().mean()),
+                            "active_response_neg_frac": float((active_response < 0).float().mean()),
                         }
                         row.update(summarize_tensor(omega_x, "omega_x"))
                         row.update(summarize_tensor(omega_y, "omega_y"))
                         row.update(summarize_tensor(omega_mag, "omega_mag"))
                         row.update(summarize_tensor(response, "response"))
+                        row.update(summarize_tensor(active_response, "active_response"))
+                        row.update(summarize_tensor(analytic_attenuation, "analytic_attenuation"))
+                        row.update(summarize_tensor(active_attenuation, "active_attenuation"))
                         rows.append(row)
                 del lr
                 torch.cuda.empty_cache()
 
     write_csv(out_dir / "response_distribution.csv", rows)
+    write_csv(
+        out_dir / "response_distribution_summary.csv",
+        summarize_rows(
+            rows,
+            ["model", "observation_scale"],
+            [
+                "omega_mag_mean",
+                "omega_mag_q95",
+                "omega_neg_frac",
+                "omega_near_bound_frac",
+                "response_mean",
+                "response_q05",
+                "response_q50",
+                "response_q95",
+                "active_response_mean",
+                "active_response_q05",
+                "active_response_q50",
+                "active_response_q95",
+                "analytic_attenuation_mean",
+                "active_attenuation_mean",
+            ],
+        ),
+    )
     plot_response_distribution(out_dir / "response_distribution.csv", out_dir / "figures")
 
 
@@ -326,44 +388,78 @@ def run_cell_curve(args, device: torch.device, out_dir: Path) -> None:
     rows: List[Dict[str, object]] = []
     model_names = parse_csv_list(args.cell_models)
     scales = parse_scales(args.cell_scales)
+    datasets = parse_csv_list(args.cell_datasets) or [args.cell_dataset]
 
-    image_path = DATASETS[args.cell_dataset] / args.cell_image if args.cell_image else list_images(args.cell_dataset, 1)[0]
-    lr, hr = make_lr_hr(image_path, args.cell_lr_scale, device)
-    coord = make_query_coords(hr.shape[-2:], args.max_queries, device)
+    image_paths: List[tuple[str, Path]] = []
+    for dataset in datasets:
+        if args.cell_image:
+            img_path = DATASETS[dataset] / args.cell_image
+            if img_path.exists():
+                image_paths.append((dataset, img_path))
+        else:
+            image_paths.extend((dataset, p) for p in list_images(dataset, args.cell_max_images))
 
-    for model_name in model_names:
-        model = load_model(model_name, device)
-        preds: Dict[int, torch.Tensor] = {}
-        for scale in scales:
-            preds[scale] = query_model(model, lr, coord, scale, args.eval_bsize)
-        ref = preds[args.cell_ref_scale if args.cell_ref_scale in preds else scales[0]]
-        prev = None
-        for scale in scales:
-            pred = preds[scale]
-            pred_y = rgb_to_y(pred)
-            ref_y = rgb_to_y(ref)
-            delta_ref = torch.sqrt((pred_y - ref_y).square().mean())
-            if prev is None:
-                delta_adj = torch.tensor(float("nan"), device=device)
-            else:
-                delta_adj = torch.sqrt((pred_y - rgb_to_y(prev)).square().mean())
-            rows.append({
-                "model": model_name,
-                "dataset": args.cell_dataset,
-                "image": image_path.name,
-                "lr_scale": f"x{args.cell_lr_scale}",
-                "observation_scale": f"x{scale}",
-                "ref_scale": f"x{args.cell_ref_scale if args.cell_ref_scale in preds else scales[0]}",
-                "mean_y": float(pred_y.mean()),
-                "std_y": float(pred_y.std(unbiased=False)),
-                "rmse_y_vs_ref_cell": float(delta_ref),
-                "rmse_y_vs_previous_cell": float(delta_adj),
-            })
-            prev = pred
-        del model
-        torch.cuda.empty_cache()
+    if not image_paths:
+        raise FileNotFoundError("No cell-curve images found for the requested dataset/image settings")
+
+    loaded = {model_name: load_model(model_name, device) for model_name in model_names}
+    for dataset, image_path in image_paths:
+        lr, hr = make_lr_hr(image_path, args.cell_lr_scale, device)
+        coord = make_query_coords(hr.shape[-2:], args.max_queries, device)
+
+        for model_name, model in loaded.items():
+            preds: Dict[int, torch.Tensor] = {}
+            for scale in scales:
+                preds[scale] = query_model(model, lr, coord, scale, args.eval_bsize)
+            ref_scale = args.cell_ref_scale if args.cell_ref_scale in preds else scales[0]
+            ref = preds[ref_scale]
+            prev = None
+            for scale in scales:
+                pred = preds[scale]
+                pred_y = rgb_to_y(pred)
+                ref_y = rgb_to_y(ref)
+                delta_ref = torch.sqrt((pred_y - ref_y).square().mean())
+                if prev is None:
+                    delta_adj = torch.tensor(float("nan"), device=device)
+                else:
+                    delta_adj = torch.sqrt((pred_y - rgb_to_y(prev)).square().mean())
+                rows.append({
+                    "model": model_name,
+                    "dataset": dataset,
+                    "image": image_path.name,
+                    "lr_scale": f"x{args.cell_lr_scale}",
+                    "observation_scale": f"x{scale}",
+                    "ref_scale": f"x{ref_scale}",
+                    "mean_y": float(pred_y.mean()),
+                    "std_y": float(pred_y.std(unbiased=False)),
+                    "rmse_y_vs_ref_cell": float(delta_ref),
+                    "rmse_y_vs_previous_cell": float(delta_adj),
+                })
+                prev = pred
+            del preds
+            torch.cuda.empty_cache()
+        del lr, hr, coord
+
+    del loaded
+    torch.cuda.empty_cache()
 
     write_csv(out_dir / "cell_response_curve.csv", rows)
+    write_csv(
+        out_dir / "cell_response_curve_summary.csv",
+        summarize_rows(
+            rows,
+            ["model", "observation_scale"],
+            ["mean_y", "std_y", "rmse_y_vs_ref_cell", "rmse_y_vs_previous_cell"],
+        ),
+    )
+    write_csv(
+        out_dir / "cell_response_curve_by_dataset.csv",
+        summarize_rows(
+            rows,
+            ["model", "dataset", "observation_scale"],
+            ["mean_y", "std_y", "rmse_y_vs_ref_cell", "rmse_y_vs_previous_cell"],
+        ),
+    )
     plot_cell_curve(out_dir / "cell_response_curve.csv", out_dir / "figures")
 
 
@@ -376,11 +472,16 @@ def plot_cell_curve(csv_path: Path, fig_dir: Path) -> None:
     if df.empty:
         return
     ensure_dir(fig_dir)
-    df["scale_num"] = df["observation_scale"].str.replace("x", "", regex=False).astype(float)
-    df = df.sort_values(["model", "scale_num"])
+    grouped = (
+        df.groupby(["model", "observation_scale"], as_index=False)
+        [["rmse_y_vs_ref_cell", "rmse_y_vs_previous_cell"]]
+        .mean()
+    )
+    grouped["scale_num"] = grouped["observation_scale"].str.replace("x", "", regex=False).astype(float)
+    grouped = grouped.sort_values(["model", "scale_num"])
 
     fig, ax = plt.subplots(figsize=(6.4, 4.0))
-    for model_name, sub in df.groupby("model"):
+    for model_name, sub in grouped.groupby("model"):
         ax.plot(
             sub["scale_num"],
             sub["rmse_y_vs_ref_cell"],
@@ -410,7 +511,9 @@ def main() -> None:
     parser.add_argument("--scales", default="4,8,16,30")
     parser.add_argument("--cell_models", default="LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR-FixedOmega,SC-INR-NoPhi,SC-INR")
     parser.add_argument("--cell_dataset", default="urban100")
+    parser.add_argument("--cell_datasets", default="")
     parser.add_argument("--cell_image", default="img_004.png")
+    parser.add_argument("--cell_max_images", type=int, default=1)
     parser.add_argument("--cell_lr_scale", type=int, default=4)
     parser.add_argument("--cell_ref_scale", type=int, default=4)
     parser.add_argument("--cell_scales", default="4,6,8,12,16,24,30")
@@ -421,6 +524,7 @@ def main() -> None:
     out_dir = args.out if args.out.is_absolute() else ROOT / args.out
     ensure_dir(out_dir)
     ensure_dir(out_dir / "figures")
+    (out_dir / "run_config.json").write_text(json.dumps(vars(args), indent=2, default=str))
 
     if args.device.startswith("cuda") and not torch.cuda.is_available():
         device = torch.device("cpu")

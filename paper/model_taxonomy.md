@@ -25,6 +25,7 @@ alias 指向历史物理目录，避免新实验继续扩散旧命名。
 | `SC-INR-NoPhi` | `SC-INR`, `SC-INR-Adaptive` | `artifacts/checkpoints/seed1/sc-inr-nophi` | ablation / previous main | feature-conditioned omega，无 phase；旧论文名为 SC-INR-Adaptive。 |
 | `SC-INR-NoPhi-Signed` | `SC-INR-Signed`, `SC-INR-Adaptive-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` | ablation | signed omega，无 phase。 |
 | `SC-INR` | `SC-INR+PhiZ` | `artifacts/checkpoints/seed1/sc-inr` | final candidate | signed omega + feature-conditioned phase。 |
+| `SC-INR-NoSinc` | `SC-INR-NoSinc` | `artifacts/checkpoints/seed1/sc-inr-nosinc` | ablation | signed omega + feature-conditioned phase，但移除 analytic sinc response；seed1 benchmark 和 auxiliary metrics 已完成。 |
 
 ## 对用户命名方案的判断
 
@@ -53,3 +54,6 @@ cell-conditioned phase”。图表空间足够时用 `LTE-NoCellPhase`；空间�
 - `save/...` 是 compatibility symlink，等价于 `artifacts/checkpoints/seed1/...`。
   新实验优先写 canonical alias，如 `save/sc-inr`；历史物理目录只在 provenance
   或 raw-result 说明中出现。
+- `SC-INR-NoSinc` 的 same-LR self-consistency 很高，不能被解读为 NoSinc 更好；
+  它说明当前 consistency 指标会奖励 cell-independent decoder，需要结合 fidelity
+  和 full benchmark 解释。

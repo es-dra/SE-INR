@@ -1,0 +1,36 @@
+{
+  "models": [
+    "LTE",
+    "SC-INR-NoPhi",
+    "SC-INR-NoPhi-Signed",
+    "SC-INR",
+    "SC-INR-NoSinc"
+  ],
+  "datasets": [
+    "bsd100",
+    "urban100"
+  ],
+  "scales": [
+    4,
+    8,
+    16,
+    30
+  ],
+  "consistency_pairs": [
+    [
+      8,
+      4
+    ],
+    [
+      16,
+      4
+    ],
+    [
+      30,
+      4
+    ]
+  ],
+  "max_images": 10,
+  "device": "cuda:0",
+  "eval_bsize": 50000
+}

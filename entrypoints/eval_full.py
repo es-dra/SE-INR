@@ -176,6 +176,7 @@ def main():
         'sc-inr-nophi-signed': 'SC-INR-NoPhi-Signed',
         'sc-inr-phiz': 'SC-INR',
         'sc-inr': 'SC-INR',
+        'sc-inr-nosinc': 'SC-INR-NoSinc',
     }
     MODEL_ALIASES = {
         'LTE-NoCell': 'LTE-NoCellPhase',
@@ -186,6 +187,8 @@ def main():
         'SC-INR+PhiZ': 'SC-INR',
         'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
         'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
+        'SC-INR-w/o-sinc': 'SC-INR-NoSinc',
+        'SC-INR-NoSinc': 'SC-INR-NoSinc',
     }
     LEGACY_RESULT_ALIASES = {
         'LTE-NoCell': 'LTE-NoCellPhase',
@@ -196,6 +199,7 @@ def main():
         'SC-INR+PhiZ': 'SC-INR',
         'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
         'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
+        'SC-INR-w/o-sinc': 'SC-INR-NoSinc',
     }
 
     ALL_MODELS = {}
