@@ -30,7 +30,7 @@ sampling consistency。当前不宣称 whole-network strict scale equivariance�
 
 - registry name: `sc_inr_signed_phiz`
 - train config: `configs/train-div2k/train-sc-inr.yaml`
-- canonical checkpoint alias seed1: `artifacts/checkpoints/seed1/sc-inr`
+- canonical checkpoint aliases: `artifacts/checkpoints/seed{1,2,3}/sc-inr`
 - historical physical checkpoint: `artifacts/checkpoints/seed1/sc-inr-phiz`
 
 结构：
@@ -57,10 +57,19 @@ sampling consistency。当前不宣称 whole-network strict scale equivariance�
 - `SC-INR-NoPhi` 有 3-seed core benchmark，OOD 相对 LTE 小幅稳定提升。
 - `SC-INR-NoPhi` seed1 auxiliary 支持 strong same-LR consistency vs LTE。
 
-final `SC-INR` seed1 evidence：
+final `SC-INR` evidence：
 
-- benchmark: All `+0.0812 dB` vs LTE, `+0.0421 dB` vs `SC-INR-NoPhi`。
-- auxiliary: strong same-LR consistency vs LTE，但不是 consistency 最强变体。
+- 3-seed benchmark 已补齐：
+  `artifacts/derived/analysis/benchmark_progress_2026-05-11/`。
+- final `SC-INR`: ID `31.0738 ± 0.0582`, OOD `22.7578 ± 0.0316`,
+  ALL `25.5298 ± 0.0403`。
+- paired delta vs LIIF: ID `+0.0437 ± 0.0757`, OOD `+0.0328 ± 0.0373`,
+  ALL `+0.0364 ± 0.0499`。
+- paired delta vs LTE: ID `-0.0048 ± 0.0836`, OOD `+0.0504 ± 0.0417`,
+  ALL `+0.0320 ± 0.0555`。
+- `SC-INR` vs `SC-INR-NoPhi` 只展示 seed1 结构增量：OOD `+0.0295`,
+  ALL `+0.0421`；不在主表展示 seed2/seed3 两者差异。
+- auxiliary 仍是 seed1：strong same-LR consistency vs LTE，但不是 consistency 最强变体。
 - qualitative: 用户确认 Urban100 img012 x8 和 img004 x8 selected examples，已在
   `artifacts/derived/paper_figures/qualitative_selected_seed1/` 用当前命名重新导出。
 
@@ -75,13 +84,14 @@ NoSinc evidence：
 
 ## 当前最重要缺口
 
-1. final `SC-INR` seed2/seed3 训练和 benchmark。
-2. paper table 收敛：multi-seed core、seed1 final、NoSinc ablation、aux/diagnostic。
-3. footprint correctness 指标仍缺；不要继续把 same-LR consistency 当作 sinc 主证据。
+1. paper table 收敛：core 3-seed、final `SC-INR` 3-seed、NoSinc ablation、aux/diagnostic。
+2. footprint correctness 指标仍缺；不要继续把 same-LR consistency 当作 sinc 主证据。
+3. `SC-INR-EQ` 是 exploratory 分支：当前训练正常，但还缺少旋转通道顺序、cell-only response
+   和 analytic sinc 积分语义的属性测试。
 
 ## 当前行动原则
 
-- 先补 final `SC-INR` multi-seed，不再扩新消融。
+- final `SC-INR` multi-seed 已完成；论文 claim 按 3-seed 中性结论更新。
 - 所有新训练使用 canonical name `sc-inr`，按 seed 分目录保存。
 - 不覆盖已有 seed1、benchmark、checkpoint 或用户改动。
 - 长结果写入 artifact；对话只汇报关键数值、命令、风险。

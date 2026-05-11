@@ -24,7 +24,7 @@ alias 指向历史物理目录，避免新实验继续扩散旧命名。
 | `SC-INR-FixedOmega` | `SC-INR-Fixed` | `artifacts/checkpoints/seed1/sc-inr-fixed-omega` | ablation | 固定 frequency basis + analytic sinc。 |
 | `SC-INR-NoPhi` | `SC-INR`, `SC-INR-Adaptive` | `artifacts/checkpoints/seed1/sc-inr-nophi` | ablation / previous main | feature-conditioned omega，无 phase；旧论文名为 SC-INR-Adaptive。 |
 | `SC-INR-NoPhi-Signed` | `SC-INR-Signed`, `SC-INR-Adaptive-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` | ablation | signed omega，无 phase。 |
-| `SC-INR` | `SC-INR+PhiZ` | `artifacts/checkpoints/seed1/sc-inr` | final candidate | signed omega + feature-conditioned phase。 |
+| `SC-INR` | `SC-INR+PhiZ` seed1; clean `SC-INR` seed2/3 | `artifacts/checkpoints/seed1/sc-inr` | final candidate | signed omega + feature-conditioned phase。 |
 | `SC-INR-NoSinc` | `SC-INR-NoSinc` | `artifacts/checkpoints/seed1/sc-inr-nosinc` | ablation | signed omega + feature-conditioned phase，但移除 analytic sinc response；seed1 benchmark 和 auxiliary metrics 已完成。 |
 
 ## 对用户命名方案的判断
@@ -46,8 +46,10 @@ cell-conditioned phase”。图表空间足够时用 `LTE-NoCellPhase`；空间�
 
 ## 当前证据注意事项
 
-- 3 seed OOD 稳定性目前属于 `SC-INR-NoPhi`，不是最终候选 `SC-INR`。
-- 最终候选 `SC-INR` 目前对应 raw key `SC-INR+PhiZ`，证据仍是 seed1 preliminary。
+- 最终候选 `SC-INR` 的 3 seed benchmark 已完成；论文主表优先展示它相对
+  LIIF/LTE 的差距。`SC-INR` vs `SC-INR-NoPhi` 只作为 seed1 结构增量背景。
+- 最终候选 `SC-INR` 在 seed1 历史结果中对应 raw key `SC-INR+PhiZ`，
+  在 seed2/3 新评估文件中对应清理后的 raw key `SC-INR`。
 - 正文若提前采用最终命名 `SC-INR`，必须在实验表注或方法说明中写明：
   `SC-INR` corresponds to the feature-conditioned phase variant; `SC-INR-NoPhi`
   denotes the previous no-phase variant.

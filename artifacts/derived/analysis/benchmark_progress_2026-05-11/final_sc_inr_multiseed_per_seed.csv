@@ -1,0 +1,4 @@
+seed,source,raw_key,model,id_psnr,ood_psnr,all_psnr
+1,artifacts/raw_results/seed1/benchmark_signed_phiz.json,SC-INR+PhiZ,SC-INR,31.118717,22.776575,25.557289
+2,artifacts/raw_results/seed2/benchmark_sc_inr.json,SC-INR,SC-INR,31.008067,22.721292,25.483550
+3,artifacts/raw_results/seed3/benchmark_sc_inr.json,SC-INR,SC-INR,31.094692,22.775563,25.548606

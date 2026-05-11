@@ -1,0 +1,13 @@
+{
+  "generated_by": "python inline aggregation from existing summary CSVs",
+  "sources": [
+    "artifacts/derived/analysis/benchmark_progress_2026-05-09/multiseed_core_summary.csv",
+    "artifacts/derived/analysis/benchmark_progress_2026-05-09/seed1_signed_phiz_summary.csv",
+    "artifacts/derived/analysis/benchmark_progress_2026-05-10/seed1_signed_phiz_nosinc_summary.csv",
+    "artifacts/derived/analysis/response_omega_diagnostics_2026-05-10/cell_response_curve_summary.csv",
+    "artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1/consistency_summary.csv",
+    "artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img004_x8_selected_gt_bicubic_lte_nophi_scinr_metrics.csv",
+    "artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img012_x8_selected_gt_bicubic_lte_nophi_scinr_metrics.csv"
+  ],
+  "num_rows": 26
+}

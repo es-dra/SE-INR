@@ -118,12 +118,19 @@ models:
     legacy_display_name: SC-INR+PhiZ
     registry_name: sc_inr_signed_phiz
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr
+    checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr
+    checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr
     legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-phiz
     train_config: configs/train-div2k/train-sc-inr.yaml
     legacy_train_config: configs/train-div2k/train-sc-inr-signed-phiz.yaml
     raw_keys: [SC-INR+PhiZ]
+    clean_raw_keys_seed2_seed3: [SC-INR]
     ablation_axis: signed omega plus feature-conditioned phi(z)
-    note: Final paper-name candidate; currently seed1 evidence only.
+    result_seed1: artifacts/raw_results/seed1/benchmark_signed_phiz.json
+    result_seed2: artifacts/raw_results/seed2/benchmark_sc_inr.json
+    result_seed3: artifacts/raw_results/seed3/benchmark_sc_inr.json
+    result_multiseed: artifacts/derived/analysis/benchmark_progress_2026-05-11
+    note: Final paper-name candidate; 3-seed benchmark complete. Paper-facing comparison should foreground LIIF/LTE; SC-INR vs SC-INR-NoPhi is shown as seed1 context.
 
   SC-INR-NoSinc:
     status: ablation_seed1_benchmark_aux_complete

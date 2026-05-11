@@ -1,0 +1,4 @@
+model,split,mean_psnr,std_psnr,delta_vs_liif,delta_vs_lte,std_delta_vs_liif,std_delta_vs_lte,n_seed_pairs
+SC-INR,ID,31.073825,0.058202,0.043728,-0.004753,0.075700,0.083550,3
+SC-INR,OOD,22.757810,0.031630,0.032759,0.050421,0.037266,0.041733,3
+SC-INR,ALL,25.529815,0.040301,0.036416,0.032030,0.049857,0.055508,3

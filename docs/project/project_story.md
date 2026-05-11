@@ -37,8 +37,8 @@ SC-INR 系列将内容 Fourier basis 与 observation footprint 分开：
 
 当前最终候选的论文展示名为 **SC-INR**，canonical checkpoint alias 为
 `save/sc-inr` / `artifacts/checkpoints/seed*/sc-inr`。历史 raw/checkpoint key
-仍为 `SC-INR+PhiZ` / `sc-inr-phiz`。它使用 signed omega 和
-feature-conditioned phase：
+在 seed1 中仍为 `SC-INR+PhiZ` / `sc-inr-phiz`；seed2/3 新评估文件使用清理后的
+raw key `SC-INR`。它使用 signed omega 和 feature-conditioned phase：
 
 ```text
 coef(z), omega(z), phi(z)  -> content Fourier basis
@@ -73,7 +73,8 @@ raw JSON、训练日志和历史物理 checkpoint 目录不改写；新训练、
 - `SC-INR-FixedOmega`：raw key `SC-INR-Fixed`，固定频率加解析 sinc。
 - `SC-INR-NoPhi`：raw key `SC-INR` / `SC-INR-Adaptive`，自适应频率但无 phase。
 - `SC-INR-NoPhi-Signed`：raw key `SC-INR-Signed`，signed omega 但无 phase。
-- `SC-INR`：raw key `SC-INR+PhiZ`，signed omega 加 feature-conditioned phase。
+- `SC-INR`：seed1 raw key `SC-INR+PhiZ`，seed2/3 clean raw key `SC-INR`，
+  signed omega 加 feature-conditioned phase。
 - `SC-INR-NoSinc`：signed omega 加 feature-conditioned phase，但关闭 analytic
   sinc response，实际使用 `W=1`。
 
@@ -83,11 +84,12 @@ prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。�
 
 ## 当前证据边界
 
-截至 2026-05-10：
+截至 2026-05-11：
 
 - `SC-INR-NoPhi` 有 3 seed 核心 benchmark，OOD PSNR 相对 LTE 小幅稳定提升。
-- 最终候选 `SC-INR`（raw `SC-INR+PhiZ`）已有 seed1 benchmark、seed1 auxiliary
-  metrics 和两张用户确认的 qualitative 候选图；seed2/seed3 已启动训练，尚未完成。
+- 最终候选 `SC-INR` 已有 3 seed benchmark；主展示应比较它相对 LIIF/LTE 的差距。
+  `SC-INR` vs `SC-INR-NoPhi` 只展示 seed1 结构增量。seed1 auxiliary metrics 和
+  两张用户确认的 qualitative 候选图仍可作为辅助证据。
 - `SC-INR-NoSinc` benchmark 与 auxiliary metrics 已完成。Full benchmark 中 NoSinc
   弱于完整 `SC-INR`，但 same-LR self-consistency 反而更高。
 - response/omega diagnostics 显示：NoSinc 的高 self-consistency 来自 zero active
@@ -97,8 +99,8 @@ prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。�
 
 - 已较稳的 family-level 结论：scale-decoupled observation 改善 OOD scale
   robustness 和 same-LR consistency；
-- 仍需验证的 final-candidate 结论：feature-conditioned phase 是否在多 seed 上
-  保持优势；
+- 已更新的 final-candidate 结论：`SC-INR` 3-seed benchmark 已完成；论文主表
+  以 LIIF/LTE 为参照，NoPhi 差异只放 seed1 context；
 - 机制 caveat：same-LR consistency 不能单独证明 analytic sinc response。
 
 ## 证据入口
@@ -109,6 +111,8 @@ prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。�
 - 短恢复入口：`docs/project/current_state.md`
 - 长任务账本：`memory/task_ledger.md`
 - 核心 benchmark：`artifacts/derived/analysis/benchmark_progress_2026-05-09/`
+- final `SC-INR` 3-seed benchmark：
+  `artifacts/derived/analysis/benchmark_progress_2026-05-11/`
 - seed1 final SC-INR auxiliary：`artifacts/derived/analysis/sc_inr_final_aux_metrics_seed1/`
 - NoSinc auxiliary：`artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1/`
 - response/omega diagnostics：`artifacts/derived/analysis/response_omega_diagnostics_2026-05-10/`
@@ -116,9 +120,8 @@ prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。�
 
 ## 下一步
 
-1. 监控并完成最终候选 `SC-INR` seed2/seed3 训练与 benchmark。
-2. 将用户确认的两张 qualitative 候选图升级为正式 figure draft。
-3. 收敛 paper tables：multi-seed core、seed1 final、NoSinc ablation、
+1. 将用户确认的两张 qualitative 候选图升级为正式 figure draft。
+2. 收敛 paper tables：multi-seed core、final `SC-INR` 3-seed、NoSinc ablation、
    auxiliary/diagnostic。
-4. 设计更直接的 footprint correctness 指标；不要继续堆叠 same-LR
+3. 设计更直接的 footprint correctness 指标；不要继续堆叠 same-LR
    self-consistency 作为 sinc 主证据。

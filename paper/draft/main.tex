@@ -34,10 +34,10 @@ the average response is a product of normalized sinc terms; SC-INR uses this
 response to decouple feature-conditioned content from scale-conditioned
 observation. Our current no-phase variant gives a stable small OOD PSNR gain
 over LTE across three seeds, and substantially improves same-LR cross-scale
-observation consistency in seed1 diagnostics. A feature-conditioned phase
-variant is a promising final candidate, improving seed1 PSNR and selected
-qualitative examples, but still requires auxiliary metrics, a w/o-sinc ablation,
-and additional seeds before being claimed as the final model.
+observation consistency in seed1 diagnostics. The feature-conditioned phase
+final candidate shows positive OOD and All-scale mean gains over LIIF and LTE in
+a three-seed benchmark; its comparison to the no-phase variant is reported as
+seed1 context.
 \end{abstract}
 
 \section{Introduction}
@@ -123,7 +123,8 @@ The feature phase \(\phi(\feat)\) does not receive cell or scale. The previous
 no-phase variant, denoted SC-INR-NoPhi, sets \(\phi=0\). We keep checkpoint and
 raw-result compatibility names separate from paper display names; in older
 result files, the raw key ``SC-INR'' refers to SC-INR-NoPhi, while the current
-final-candidate SC-INR corresponds to raw key ``SC-INR+PhiZ''.
+final-candidate SC-INR corresponds to raw key ``SC-INR+PhiZ'' in the seed1
+historical file and to the cleaned raw key ``SC-INR'' in the seed2/seed3 files.
 
 \section{Experiments}
 
@@ -140,8 +141,9 @@ on BSD100 and Urban100 subsets for seed1.
 
 \begin{table}[H]
 \centering
-\caption{Seed1 benchmark summary. The final-candidate SC-INR is a promising
-single-seed result; multi-seed confirmation is not yet complete.}
+\caption{Seed1 benchmark context. The final-candidate SC-INR was strongest in
+seed1, but the current claim should use the three-seed summary in
+Table~\ref{tab:final-multiseed}.}
 \label{tab:seed1}
 \begin{tabular}{lrrr}
 \toprule
@@ -159,8 +161,7 @@ LIIF-EQ & 31.1205 & 22.7469 & 25.5381 \\
 
 Table~\ref{tab:seed1} shows that the final-candidate SC-INR improves seed1 OOD
 PSNR by \(+0.0849\) dB over LTE and by \(+0.0295\) dB over SC-INR-NoPhi. This
-supports the feature-conditioned phase as a useful candidate, but not yet as a
-final multi-seed conclusion.
+is the intended place to show the SC-INR vs SC-INR-NoPhi structural increment.
 
 \subsection{Core Multi-Seed Result}
 
@@ -188,6 +189,29 @@ PSNR gain over LTE, while its ID average is essentially tied with LTE. This is
 consistent with the intended role of decoder-side sampling consistency: improving
 scale extrapolation behavior rather than merely increasing training-scale
 fitting.
+
+\subsection{Final-Candidate Multi-Seed Result}
+
+\begin{table}[H]
+\centering
+\caption{Final-candidate SC-INR three-seed benchmark. Deltas are paired seed
+deltas against LIIF and LTE under the same benchmark protocol.}
+\label{tab:final-multiseed}
+\begin{tabular}{lrrrr}
+\toprule
+Split & Mean PSNR & Std. & Delta vs LIIF & Delta vs LTE \\
+\midrule
+ID & 31.0738 & 0.0582 & +0.0437 & -0.0048 \\
+OOD & 22.7578 & 0.0316 & +0.0328 & +0.0504 \\
+All & 25.5298 & 0.0403 & +0.0364 & +0.0320 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:final-multiseed} shows that the final-candidate SC-INR retains
+the OOD and All-scale PSNR advantage over LTE and is positive over LIIF across
+ID, OOD, and All splits. We keep SC-INR vs SC-INR-NoPhi as seed1 context rather
+than foregrounding seed2/seed3 differences between those two internal variants.
 
 \subsection{Cross-Scale Observation Consistency}
 
@@ -237,12 +261,14 @@ selected examples, not evidence of average visual quality.}
 \section{Limitations and Next Steps}
 
 The current evidence is not yet a complete paper claim. First, final-candidate
-SC-INR has only seed1 benchmark evidence. Second, auxiliary consistency and
-texture metrics currently cover SC-INR-NoPhi, not the final-candidate variant.
-Third, a w/o-sinc ablation is required before attributing the gain causally to
-the analytic response. Finally, PSNR does not fully measure perceptual texture
-quality; qualitative crops and texture-sensitive metrics must remain part of the
-evidence package.
+SC-INR now has three-seed benchmark evidence against LIIF and LTE, but auxiliary
+metrics for the final candidate remain seed1-only. Second, the w/o-sinc ablation
+is still single-seed and should not be used as a
+unique causal proof of the analytic response. Third, same-LR consistency can
+reward cell-insensitive behavior, so footprint-correctness diagnostics remain
+necessary. Finally, PSNR does not fully measure perceptual texture quality;
+qualitative crops and texture-sensitive metrics must remain part of the evidence
+package.
 
 \section{Conclusion}
 
@@ -250,9 +276,11 @@ SC-INR reframes output scale in Fourier implicit ASISR decoders as an
 observation footprint rather than a learned phase shortcut. The current results
 support decoder-side sampling consistency as a useful principle: SC-INR-NoPhi
 shows stable small OOD gains and substantially better cross-scale observation
-consistency, while feature-conditioned phase is a promising final-candidate
-extension. The next critical step is to close the evidence gap with auxiliary
-metrics, w/o-sinc ablation, and additional seeds for the final-candidate SC-INR.
+consistency, while the final-candidate feature-phase SC-INR preserves the OOD
+and All-scale PSNR gain over LTE and improves over LIIF on average.
+The next critical step is to close the remaining evidence gap with final-candidate
+auxiliary metrics, footprint-correctness diagnostics, and carefully audited
+qualitative evidence.
 
 \bibliographystyle{plainnat}
 \bibliography{references}

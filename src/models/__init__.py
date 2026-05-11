@@ -9,6 +9,7 @@ from . import lte_noc
 from . import lte_phase_z
 from . import sc_inr_fixed
 from . import sc_inr_adaptive
+from . import sc_inr_eq
 from . import e_linear
 from . import e_mlp_2
 from . import e_mlp_lte

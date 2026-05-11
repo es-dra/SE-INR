@@ -22,5 +22,6 @@ pdflatex -interaction=nonstopmode main.tex
 ## 证据边界
 
 - `SC-INR-NoPhi` 的 3-seed OOD 和 consistency 证据较稳。
-- 最终候选 `SC-INR` 目前仍是 seed1 preliminary。
+- 最终候选 `SC-INR` 已有 3-seed benchmark：主展示比较它相对 LIIF/LTE 的差距；
+  `SC-INR` vs `SC-INR-NoPhi` 只放 seed1 context。auxiliary/qualitative 仍主要是 seed1。
 - 草稿中不得改写为 strict scale equivariance、SOTA 或最终多 seed winner。

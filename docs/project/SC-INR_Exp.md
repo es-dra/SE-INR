@@ -127,8 +127,9 @@ $$
 ## 5. 当前 SC-INR 架构
 
 当前最终候选展示名为 `SC-INR`，canonical checkpoint alias 为
-`artifacts/checkpoints/seed1/sc-inr`（兼容路径 `save/sc-inr`）。历史 raw/checkpoint
-key 为 `SC-INR+PhiZ` / `sc-inr-phiz`。实现位于
+`artifacts/checkpoints/seed{1,2,3}/sc-inr`（seed1 兼容路径 `save/sc-inr`）。
+seed1 历史 raw/checkpoint key 为 `SC-INR+PhiZ` / `sc-inr-phiz`；seed2/3
+新评估文件使用清理后的 raw key `SC-INR`。实现位于
 `src/models/sc_inr_adaptive.py`，registry name 为 `sc_inr_signed_phiz`。
 
 ### 5.1 内容项
@@ -198,7 +199,7 @@ $\omega_x c_x$ 与 $\omega_y c_y$ 写反。
 
 | 展示名 | raw/result key | canonical checkpoint | 说明 |
 | --- | --- | --- | --- |
-| `SC-INR` | `SC-INR+PhiZ` | `artifacts/checkpoints/seed1/sc-inr` | 最终候选：signed omega + feature phase + sinc |
+| `SC-INR` | seed1 `SC-INR+PhiZ`; seed2/3 clean `SC-INR` | `artifacts/checkpoints/seed1/sc-inr` | 最终候选：signed omega + feature phase + sinc |
 | `SC-INR-NoPhi` | `SC-INR`, `SC-INR-Adaptive` | `artifacts/checkpoints/seed1/sc-inr-nophi` | 旧主线：adaptive omega + sinc，无 phase |
 | `SC-INR-NoPhi-Signed` | `SC-INR-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` | signed omega，无 phase |
 | `SC-INR-FixedOmega` | `SC-INR-Fixed` | `artifacts/checkpoints/seed1/sc-inr-fixed-omega` | fixed omega + sinc |
@@ -230,9 +231,9 @@ checkpoint 目录和旧 raw key 不物理重命名；展示层通过 registry �
 
 - `SC-INR` 是当前 seed1 PSNR 最强候选；
 - `SC-INR` 相比 `SC-INR-NoPhi` 的 OOD 增益为 `+0.0295 dB`；
-- 这支持继续投入 PhiZ，但还不能证明它是最终多 seed 主模型。
+- 这是 `SC-INR` vs `SC-INR-NoPhi` 的展示位置；seed2/seed3 不需要继续展示两者差异。
 
-### 7.2 核心 3-seed 结果
+### 7.2 核心 3-seed 与最终候选结果
 
 来源：`artifacts/derived/analysis/benchmark_progress_2026-05-09/multiseed_core_summary.csv`。
 
@@ -247,9 +248,11 @@ checkpoint 目录和旧 raw key 不物理重命名；展示层通过 registry �
 
 解释边界：
 
-- 当前 3-seed 稳定证据属于 `SC-INR-NoPhi`，不是最终候选 `SC-INR`；
-- `SC-INR-NoPhi` 的优势主要在 OOD scale，ID 并非优势；
-- 论文应把它作为 family-level decoder-side sampling consistency 证据。
+- 这张表用于 family-level decoder-side sampling consistency 证据。
+- 最终候选 `SC-INR` 的 3-seed 主展示应使用
+  `artifacts/derived/analysis/benchmark_progress_2026-05-11/final_sc_inr_vs_liif_lte_paper.csv`，
+  即比较 `SC-INR` 与 `LIIF`、`LTE`，不在主表展示 seed2/seed3 的
+  `SC-INR` vs `SC-INR-NoPhi` 差异。
 
 ### 7.3 auxiliary consistency evidence
 
@@ -376,11 +379,11 @@ Cell-only RMSE-Y vs x4 cell：
 
 在正式收敛论文主线前，至少还需要：
 
-1. `SC-INR` 至少关键 seed 复现：若资源允许，补 seed2/seed3。
-2. continuous-scale curve：展示 x4 以外尺度变化趋势，而不只给离散表。
-3. response/omega diagnostics：cell response curve、omega distribution、sinc attenuation；
-   尤其需要补充能区分 point self-consistency 与 footprint observation correctness
-   的诊断。
+1. continuous-scale curve：展示 x4 以外尺度变化趋势，而不只给离散表。
+2. footprint correctness/property tests：尤其需要能区分 point self-consistency 与
+   footprint observation correctness 的诊断。
+3. response/omega diagnostics：继续补充 cell response curve、omega distribution、
+   sinc attenuation 的覆盖面。
 4. 正式 qualitative figure：只晋级人工确认图，并记录筛选协议。
 
 后续 Rot-E 结合和 LIIF+ 原型属于正交扩展，不应在当前证据不足时混入主结论。
@@ -394,13 +397,14 @@ Cell-only RMSE-Y vs x4 cell：
 - Replacing LTE's learned cell-conditioned phase with a scale-decoupled analytic
   observation response improves same-LR cross-scale consistency in the
   no-phase variant.
-- A feature-conditioned phase variant is a promising final candidate, improving
-  seed1 PSNR and selected qualitative examples.
+- The final-candidate feature-phase SC-INR shows positive OOD/ALL PSNR gains
+  over LIIF and LTE in the 3-seed benchmark; its comparison to SC-INR-NoPhi is
+  reported as seed1 context.
 
 不能写：
 
 - SC-INR is strictly scale-equivariant.
-- SC-INR is already the final multi-seed winner.
+- Feature-conditioned phase is a stable multi-seed PSNR gain over SC-INR-NoPhi.
 - The gain is caused only by sinc, based only on the seed1 NoSinc benchmark.
 - The visual quality is generally better, based only on two selected crops.
 
@@ -410,8 +414,8 @@ Cell-only RMSE-Y vs x4 cell：
 
 1. 用 `SC-INR-NoPhi` 的 3-seed OOD 和 consistency 结果支撑 scale-decoupled
    observation 的基本有效性；
-2. 用最终候选 `SC-INR` 的 seed1 PSNR 和 selected qualitative examples 说明
-   feature-conditioned phase 是值得推进的主模型候选；
+2. 用最终候选 `SC-INR` 的 3-seed benchmark 说明它相对 LIIF/LTE 的 OOD/ALL
+   增益；`SC-INR` vs `SC-INR-NoPhi` 只作为 seed1 结构增量背景；
 3. 用 `SC-INR-NoSinc` benchmark/auxiliary 的分歧提醒读者：same-LR
-   self-consistency 不是 sinc 机制的单独证明；再用最终候选 multi-seed 和必要的
-   response/omega diagnostics 补齐论文闭环。
+   self-consistency 不是 sinc 机制的单独证明；再用必要的 footprint correctness、
+   response/omega diagnostics 和正式 qualitative figure 补齐论文闭环。

@@ -22,7 +22,8 @@ protocols:
     entrypoint: scripts/analysis/evaluate_seed1_aux_metrics.py
     compatibility_entrypoint: scripts/evaluate_seed1_aux_metrics.py
     current_artifact: artifacts/derived/analysis/seed1_aux_metrics_all8
-    caveat: Current complete auxiliary evidence is seed1 and does not yet include final-candidate SC-INR (raw key SC-INR+PhiZ).
+    final_candidate_artifact: artifacts/derived/analysis/sc_inr_final_aux_metrics_seed1
+    caveat: Complete auxiliary evidence is still seed1-only; final-candidate SC-INR is included in the seed1 auxiliary artifact but not as multi-seed auxiliary evidence.
 
   qualitative_candidates:
     status: candidate
