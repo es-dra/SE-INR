@@ -20,7 +20,7 @@
 | `artifacts/derived/evidence/` | 证据索引 | 辅助证据总入口 |
 | `artifacts/derived/paper_figures/` | 论文候选图 | 只保留用户确认的图 |
 | `artifacts/legacy/` | 历史留档 | 只作 provenance/audit |
-| `artifacts/results/` | 旧 results 兼容层 | 不作为新证据入口 |
+| `artifacts/results/` | results 便捷层 | 只链接 canonical benchmark JSON，不链接旧 raw JSON |
 | `experiments/` | 实验卡 | 冻结协议和实验结论 |
 | `paper/` | 论文工作区 | claim ledger、artifact 白名单、草稿 |
 | `docs/` | 项目文档 | 当前状态和历史 archive |
@@ -39,12 +39,12 @@
 - `logs` -> `artifacts/logs`
 - `Data` -> `artifacts/data_local`
 
-这些路径用于旧命令恢复。新脚本、新文档和论文正文应使用 canonical 路径。
+`results` 只保留清晰命名的 canonical benchmark JSON 链接。新脚本、新文档和论文正文应使用 canonical 路径。
 
 ## checkpoint 命名契约
 
-checkpoint 目录以论文展示名为 canonical 名称。旧训练名只保留为 symlink 或
-registry provenance。
+checkpoint 目录以论文展示名为 canonical 名称。旧训练名不再作为 checkpoint symlink
+保留，只能在 raw-result provenance 或历史配置说明中出现。
 
 | 展示名 | canonical checkpoint |
 | --- | --- |
@@ -70,9 +70,15 @@ raw JSON 中的历史 key 不改写，只通过注册表解释。
 | --- | --- | --- | --- |
 | `artifacts/raw_results/seed1/benchmark.json` | formal raw | seed1 baseline | 不含 Signed/PhiZ |
 | `artifacts/raw_results/seed1/benchmark_signed_phiz.json` | formal raw | seed1 Signed/PhiZ | 单 seed 新变体 |
+| `artifacts/raw_results/seed1/benchmark_sc_inr_nosinc.json` | formal raw | seed1 NoSinc | 单 seed 消融 |
+| `artifacts/raw_results/seed1/benchmark_sc_inr_eq.json` | formal raw | seed1 SC-INR-EQ | exploratory extension |
 | `artifacts/raw_results/seed2/benchmark.json` | formal raw | core multi-seed | core models |
+| `artifacts/raw_results/seed2/benchmark_sc_inr.json` | formal raw | final SC-INR seed2 | clean raw key |
 | `artifacts/raw_results/seed3/benchmark.json` | formal raw | core multi-seed | core models |
+| `artifacts/raw_results/seed3/benchmark_sc_inr.json` | formal raw | final SC-INR seed3 | clean raw key |
 | `artifacts/derived/benchmarks/` | derived | 主 benchmark 表 | paper benchmark canonical 来源 |
+| `artifacts/derived/benchmarks/benchmark_all_models_canonical.json` | derived | 全模型 benchmark JSON | 顶层模型名均为 canonical，含 `SC-INR-EQ` |
+| `artifacts/derived/benchmarks/benchmark_paper_main_3seed.json` | derived | 主模型三 seed JSON | 只含 LIIF/LTE/SC-INR |
 | `artifacts/derived/evidence/README_zh.md` | derived | 辅助证据索引 | 指向 diagnostics 与 selected figures |
 | `artifacts/derived/diagnostics/` | diagnostic | 机制和 consistency 支撑 | 不替代主 benchmark |
 | `artifacts/derived/paper_figures/qualitative_selected_seed1/` | candidate | 定性图 | 只支持 selected examples |

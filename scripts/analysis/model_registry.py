@@ -96,9 +96,6 @@ LEGACY_SCINR_NOPHI_SOURCES = {
     "artifacts/raw_results/seed1/benchmark.json",
     "artifacts/raw_results/seed2/benchmark.json",
     "artifacts/raw_results/seed3/benchmark.json",
-    "results/benchmark.json",
-    "results/seeds/benchmark_seed2.json",
-    "results/seeds/benchmark_seed3.json",
 }
 
 

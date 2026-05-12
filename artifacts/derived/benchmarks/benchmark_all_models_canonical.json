@@ -1,0 +1,3485 @@
+{
+  "metadata": {
+    "schema": "sc_asisr_canonical_benchmark_v1",
+    "generated_by": "scripts/analysis/build_canonical_benchmarks.py",
+    "protocol_id": "benchmark_hr_downsample_4datasets_9scales_eval_full",
+    "datasets": [
+      "Set5",
+      "Set14",
+      "BSD100",
+      "Urban100"
+    ],
+    "id_scales": [
+      "x2",
+      "x3",
+      "x4"
+    ],
+    "ood_scales": [
+      "x6",
+      "x8",
+      "x12",
+      "x16",
+      "x24",
+      "x30"
+    ],
+    "notes": [
+      "Top-level model keys are canonical paper-facing names.",
+      "Raw JSON keys are preserved only under provenance fields.",
+      "SC-INR-EQ is exploratory/context evidence, not a paper main 3-seed model."
+    ]
+  },
+  "models": {
+    "LIIF": {
+      "model_status": "baseline",
+      "model_role": "",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 30.99915,
+            "ood_psnr": 22.711137,
+            "all_psnr": 25.473808,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "LIIF",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/liif/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9285,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.3636,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.1657,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.8836,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9423,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5486,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0134,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.344,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4814,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.5687,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3303,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6105,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.445,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9438,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.14,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0598,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6364,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.7888,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1504,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.0913,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.5826,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8366,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7901,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4769,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6038,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3791,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6704,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.0054,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.1244,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.0684,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7363,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4253,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8701,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9446,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8266,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.2804,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "2": {
+          "summary": {
+            "id_psnr": 31.0399,
+            "ood_psnr": 22.729117,
+            "all_psnr": 25.499378,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed2_core",
+            "source_file": "artifacts/raw_results/seed2/benchmark.json",
+            "raw_key": "LIIF",
+            "raw_key_semantics": "Core seed2 benchmark. No final SC-INR in this file.",
+            "checkpoint": "artifacts/checkpoints/seed1/liif/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9558,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.3946,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.1815,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.8508,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9419,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5446,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0074,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4569,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5747,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6154,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3782,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6186,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4607,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9402,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.14,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0889,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.677,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8181,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1638,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1142,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8439,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7906,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4813,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6116,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3934,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6679,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.1162,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2055,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.135,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7765,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4431,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8986,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9678,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8448,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.2781,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "3": {
+          "summary": {
+            "id_psnr": 31.051242,
+            "ood_psnr": 22.734896,
+            "all_psnr": 25.507011,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed3_core",
+            "source_file": "artifacts/raw_results/seed3/benchmark.json",
+            "raw_key": "LIIF",
+            "raw_key_semantics": "Legacy seed3 core benchmark. Raw key SC-INR is no-phase here.",
+            "checkpoint": "artifacts/checkpoints/seed1/liif/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0197,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.3936,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.186,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.912,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.996,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5976,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.041,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3859,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5133,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6224,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3585,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6264,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4627,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9436,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1522,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0858,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6712,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8125,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1792,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1251,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.611,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8506,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8009,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4881,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6088,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3851,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6806,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.141,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2019,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1501,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7901,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4626,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.891,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9571,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8478,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.301,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LIIF-EQ": {
+      "model_status": "orthogonal_baseline",
+      "model_role": "Rot-E baseline; orthogonal to SC-INR decoder-side sampling consistency.",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.120467,
+            "ood_psnr": 22.746883,
+            "all_psnr": 25.538078,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "LIIF-EQ",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/liif-eq/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.021,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4661,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2751,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9253,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 27.0075,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.4878,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.9463,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4253,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5172,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6755,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3813,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6548,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4739,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.966,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1728,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0924,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6652,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.819,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2306,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1482,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6282,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8744,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8146,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4995,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6268,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3899,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6818,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.3497,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.3557,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.2594,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8752,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.5322,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9495,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.013,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.862,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3076,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LTE": {
+      "model_status": "baseline",
+      "model_role": "",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.04495,
+            "ood_psnr": 22.691688,
+            "all_psnr": 25.476108,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "LTE",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/lte/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9548,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.3577,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.1851,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.8985,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9046,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5215,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.94,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3087,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4745,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6502,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3437,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6197,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4486,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9139,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1108,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0283,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.5517,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.7481,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1918,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1187,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6099,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8422,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7913,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4639,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.5978,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3565,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6313,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.1563,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.201,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1505,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7917,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.451,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8625,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9237,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.7954,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.244,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "2": {
+          "summary": {
+            "id_psnr": 31.100625,
+            "ood_psnr": 22.717271,
+            "all_psnr": 25.511722,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed2_core",
+            "source_file": "artifacts/raw_results/seed2/benchmark.json",
+            "raw_key": "LTE",
+            "raw_key_semantics": "Core seed2 benchmark. No final SC-INR in this file.",
+            "checkpoint": "artifacts/checkpoints/seed1/lte/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0383,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4684,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2398,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9341,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9847,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5744,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0038,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3088,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4908,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.675,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3618,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6768,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4867,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9765,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1469,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0834,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.5781,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.7592,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2041,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1352,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.622,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.854,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7979,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4725,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.5928,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3518,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6299,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.2588,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.3003,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.227,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8378,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.486,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8792,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9282,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.799,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.258,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "3": {
+          "summary": {
+            "id_psnr": 31.090158,
+            "ood_psnr": 22.713208,
+            "all_psnr": 25.505525,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed3_core",
+            "source_file": "artifacts/raw_results/seed3/benchmark.json",
+            "raw_key": "LTE",
+            "raw_key_semantics": "Legacy seed3 core benchmark. Raw key SC-INR is no-phase here.",
+            "checkpoint": "artifacts/checkpoints/seed1/lte/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0243,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4232,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2219,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9922,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9689,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5597,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.8895,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3304,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4275,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.664,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3775,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.637,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4703,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9352,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1438,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0567,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.5983,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.7715,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2032,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1311,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6162,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8583,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7985,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4718,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.5857,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3493,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6465,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.2488,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.3068,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.2279,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8451,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4925,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8884,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9487,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.817,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.2712,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LTE-EQ": {
+      "model_status": "orthogonal_baseline",
+      "model_role": "Rot-E baseline; not a direct replacement for SC-INR.",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.067233,
+            "ood_psnr": 22.702987,
+            "all_psnr": 25.491069,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "LTE-EQ",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/lte-eq/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9745,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.3985,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.1942,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9134,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9705,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5327,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.8887,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.2974,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4875,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6988,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3584,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6437,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4591,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9289,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1605,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0657,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.556,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.7526,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2099,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1292,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6135,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8494,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7873,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4647,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.5917,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3547,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6552,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.2063,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2187,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1611,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7839,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4373,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8907,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9454,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.824,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.2744,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LTE-NoCellPhase": {
+      "model_status": "diagnostic",
+      "model_role": "remove LTE learned phase(cell)",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 30.841633,
+            "ood_psnr": 22.662042,
+            "all_psnr": 25.388572,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "LTE-NoCell",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/lte-nocellphase/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.8195,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.0613,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 31.9563,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.5763,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.756,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5188,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.9272,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3594,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5032,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.4997,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.2179,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.5346,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.2879,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.847,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1293,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0842,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.602,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8122,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.0277,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.9143,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.5131,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.7844,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7463,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4584,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.598,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3711,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6766,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 31.7125,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 27.9331,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 25.9096,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.6266,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.342,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8365,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.932,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8306,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.283,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LTE-PhaseZ": {
+      "model_status": "diagnostic",
+      "model_role": "replace LTE phase(cell) with feature-conditioned phi(z)",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 30.896017,
+            "ood_psnr": 22.690975,
+            "all_psnr": 25.425989,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "LTE-FeaturePhase",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/lte-phasez/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.8563,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.1875,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.0399,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.7199,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.8483,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5591,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0441,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3566,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5014,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.4771,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.2851,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.5952,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.3758,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.881,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1357,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.077,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6251,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.803,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.0811,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.0094,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.5454,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8066,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7619,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4714,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6026,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3884,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6755,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 31.6899,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.0241,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 25.9612,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.6565,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.3783,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.8404,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.936,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8416,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.2972,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SC-INR-FixedOmega": {
+      "model_status": "ablation",
+      "model_role": "fixed omega basis plus analytic sinc",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 30.994167,
+            "ood_psnr": 22.709583,
+            "all_psnr": 25.471111,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "SC-INR-Fixed",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/sc-inr-fixed-omega/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.91,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.38,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.19,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.85,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.92,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.58,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.99,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.33,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.49,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.28,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.58,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.42,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.92,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.13,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.04,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.62,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.83,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.16,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.08,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.58,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.83,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.78,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.48,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.39,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.68,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.01,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.1,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.06,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.73,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.43,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.88,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.97,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.85,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.29,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SC-INR-NoPhi": {
+      "model_status": "ablation_previous_main",
+      "model_role": "feature-conditioned omega, no feature phase",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.051467,
+            "ood_psnr": 22.747071,
+            "all_psnr": 25.515203,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "SC-INR",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/sc-inr-nophi/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9996,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4299,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.1833,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.924,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.996,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5935,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0735,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4488,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5664,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6255,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3624,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6242,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4665,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9388,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1416,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.0827,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.676,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8121,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1866,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1193,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6074,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8538,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8021,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4935,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6238,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4037,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6854,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.1266,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2093,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1435,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7934,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4654,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.921,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.993,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8658,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3089,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "2": {
+          "summary": {
+            "id_psnr": 31.089567,
+            "ood_psnr": 22.767996,
+            "all_psnr": 25.541853,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed2_core",
+            "source_file": "artifacts/raw_results/seed2/benchmark.json",
+            "raw_key": "SC-INR-Adaptive",
+            "raw_key_semantics": "Core seed2 benchmark. No final SC-INR in this file.",
+            "checkpoint": "artifacts/checkpoints/seed2/sc-inr-nophi/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0269,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4317,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2477,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9638,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 27.0092,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.6546,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0749,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4113,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6085,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6741,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3818,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6486,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4782,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9723,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.2233,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.1407,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6443,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8213,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1991,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1409,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6314,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8668,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8238,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.5092,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6408,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4026,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6949,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.2233,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2696,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1997,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8309,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.5073,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9377,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.0078,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8737,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.334,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "3": {
+          "summary": {
+            "id_psnr": 31.082625,
+            "ood_psnr": 22.759225,
+            "all_psnr": 25.533692,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed3_core",
+            "source_file": "artifacts/raw_results/seed3/benchmark.json",
+            "raw_key": "SC-INR",
+            "raw_key_semantics": "Legacy seed3 core benchmark. Raw key SC-INR is no-phase here.",
+            "checkpoint": "artifacts/checkpoints/seed3/sc-inr-nophi/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.009,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4135,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2147,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9006,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 27.0258,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.6282,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0428,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4253,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5373,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6726,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3773,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.659,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4975,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9714,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1642,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.1155,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6397,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8215,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1308,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6215,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8675,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8194,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.5042,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6421,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4161,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6957,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.2173,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2727,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.2031,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8324,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.5119,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9514,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.0057,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8836,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3216,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SC-INR-NoPhi-Signed": {
+      "model_status": "ablation",
+      "model_role": "signed omega, no feature phase",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.056725,
+            "ood_psnr": 22.741779,
+            "all_psnr": 25.513428,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "SC-INR-Signed",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/sc-inr-nophi-signed/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9719,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4042,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2312,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9154,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9627,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5974,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.9909,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3929,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5544,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6583,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3551,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6593,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4443,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.939,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1593,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.112,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6603,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.817,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.184,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1205,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.608,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8543,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8134,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.5005,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.631,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3938,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6993,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.1437,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2057,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1388,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7973,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4817,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9197,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9884,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8633,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3144,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SC-INR": {
+      "model_status": "active_final_candidate",
+      "model_role": "signed omega plus feature-conditioned phi(z)",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.118717,
+            "ood_psnr": 22.776575,
+            "all_psnr": 25.557289,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_signed_phiz",
+            "source_file": "artifacts/raw_results/seed1/benchmark_signed_phiz.json",
+            "raw_key": "SC-INR+PhiZ",
+            "raw_key_semantics": "Seed1 raw key SC-INR is legacy no-phase; SC-INR+PhiZ is final SC-INR.",
+            "checkpoint": "artifacts/checkpoints/seed1/sc-inr/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0453,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4981,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2609,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9754,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 27.0389,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.6549,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0822,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4149,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6138,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6859,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.4114,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6955,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4984,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9513,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1997,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.1232,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6691,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8101,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2128,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1469,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6316,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8777,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8332,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.5169,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6441,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4101,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6999,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.2784,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.3154,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.2424,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8709,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.5368,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9554,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.0238,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8903,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3468,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "2": {
+          "summary": {
+            "id_psnr": 31.008067,
+            "ood_psnr": 22.721292,
+            "all_psnr": 25.48355,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed2_final_sc_inr",
+            "source_file": "artifacts/raw_results/seed2/benchmark_sc_inr.json",
+            "raw_key": "SC-INR",
+            "raw_key_semantics": "Clean raw key SC-INR means final candidate for seed2.",
+            "checkpoint": "artifacts/checkpoints/seed2/sc-inr/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9565,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.3834,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2007,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.8194,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.9764,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.601,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0775,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3267,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4902,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6275,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.3315,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6139,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4079,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9278,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1406,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.1016,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6294,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8029,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1568,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1001,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.5943,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8423,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.7952,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4896,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6225,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3959,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6834,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 31.9771,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.1039,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.0511,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7336,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4298,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9058,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 19.9747,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8397,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.2971,
+                "split": "OOD"
+              }
+            }
+          }
+        },
+        "3": {
+          "summary": {
+            "id_psnr": 31.094692,
+            "ood_psnr": 22.775562,
+            "all_psnr": 25.548606,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed3_final_sc_inr",
+            "source_file": "artifacts/raw_results/seed3/benchmark_sc_inr.json",
+            "raw_key": "SC-INR",
+            "raw_key_semantics": "Clean raw key SC-INR means final candidate for seed3.",
+            "checkpoint": "artifacts/checkpoints/seed3/sc-inr/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0226,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.4979,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.2641,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9597,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 27.0535,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.6512,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0569,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4258,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6148,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.6982,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.391,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6604,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4893,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.9773,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1888,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.152,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6814,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8375,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.195,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1353,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6229,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.866,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8213,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.5124,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6429,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4205,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.7083,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.1968,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.2556,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1965,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.8344,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.5166,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.958,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.0228,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.885,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3371,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SC-INR-NoSinc": {
+      "model_status": "ablation_seed1_benchmark_aux_complete",
+      "model_role": "signed omega plus feature-conditioned phi(z), without analytic sinc response",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 30.979042,
+            "ood_psnr": 22.729854,
+            "all_psnr": 25.479583,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_nosinc",
+            "source_file": "artifacts/raw_results/seed1/benchmark_sc_inr_nosinc.json",
+            "raw_key": "SC-INR-NoSinc",
+            "raw_key_semantics": "Seed1 final-candidate ablation without analytic sinc response.",
+            "checkpoint": "artifacts/checkpoints/seed1/sc-inr-nosinc/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 37.9269,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.2251,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.0959,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.8208,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 26.8692,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.586,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0465,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.3578,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.4778,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.5458,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.2837,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.6401,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4175,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.875,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1862,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.1239,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.6641,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8283,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.1363,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.0097,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.5829,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8403,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.798,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.4926,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.623,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4129,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.6999,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 31.9965,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.1944,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.1112,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.7722,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.4731,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.9256,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.0017,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.8881,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.336,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SC-INR-EQ": {
+      "model_status": "exploratory_extension",
+      "model_role": "Rot-E encoder/imnet plumbing plus SC-INR decoder contract",
+      "seeds": {
+        "1": {
+          "summary": {
+            "id_psnr": 31.151333,
+            "ood_psnr": 22.777929,
+            "all_psnr": 25.569064,
+            "n_items": 36
+          },
+          "provenance": {
+            "result_set": "seed1_sc_inr_eq",
+            "source_file": "artifacts/raw_results/seed1/benchmark_sc_inr_eq.json",
+            "raw_key": "SC-INR-EQ",
+            "raw_key_semantics": "Exploratory Rot-E integration; not a main-method result.",
+            "checkpoint": "artifacts/checkpoints/seed1/sc-inr-eq/epoch-best.pth"
+          },
+          "datasets": {
+            "Set5": {
+              "x2": {
+                "psnr": 38.0478,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 34.494,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 32.3041,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 28.9727,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 27.073,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 24.5946,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 23.0179,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4419,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.5501,
+                "split": "OOD"
+              }
+            },
+            "Set14": {
+              "x2": {
+                "psnr": 33.7124,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 30.4137,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 28.714,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 26.4993,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.98,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.1836,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.123,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 20.665,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 19.8306,
+                "split": "OOD"
+              }
+            },
+            "BSD100": {
+              "x2": {
+                "psnr": 32.2292,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 29.1712,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 27.6548,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 25.8843,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 24.8298,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 23.517,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 22.6553,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 21.4001,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 20.7034,
+                "split": "OOD"
+              }
+            },
+            "Urban100": {
+              "x2": {
+                "psnr": 32.3813,
+                "split": "ID"
+              },
+              "x3": {
+                "psnr": 28.3867,
+                "split": "ID"
+              },
+              "x4": {
+                "psnr": 26.3068,
+                "split": "ID"
+              },
+              "x6": {
+                "psnr": 23.9081,
+                "split": "OOD"
+              },
+              "x8": {
+                "psnr": 22.57,
+                "split": "OOD"
+              },
+              "x12": {
+                "psnr": 20.977,
+                "split": "OOD"
+              },
+              "x16": {
+                "psnr": 20.0309,
+                "split": "OOD"
+              },
+              "x24": {
+                "psnr": 18.9048,
+                "split": "OOD"
+              },
+              "x30": {
+                "psnr": 18.3579,
+                "split": "OOD"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

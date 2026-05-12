@@ -1,19 +1,26 @@
-# results 兼容路径说明
+# results 便捷入口说明
 
-`results/` 是旧路径兼容层，真实目标是 `artifacts/results/`。这里仅保留少量指向
-`artifacts/raw_results/` 的 symlink，方便旧命令读取历史 raw JSON。
+`results/` 是根目录便捷入口，真实目标是 `artifacts/results/`。这里不再链接旧
+raw JSON，只保留指向 canonical benchmark JSON 的 symlink，避免后续从历史 raw key
+误读模型语义。
 
-论文、报告和新脚本应优先使用 canonical 路径：
+当前文件：
+
+- `benchmark_all_models_canonical.json`：所有模型的 canonical benchmark；顶层模型名均为
+  当前论文展示名，包含 `SC-INR-EQ` seed1 exploratory/context 结果。
+- `benchmark_paper_main_3seed.json`：论文主模型 `LIIF`、`LTE`、`SC-INR` 的三 seed
+  benchmark JSON。
+
+canonical 源路径：
 
 - 正式 raw JSON：`artifacts/raw_results/`
-- 可信派生表图：`artifacts/derived/`
+- 可信派生 benchmark：`artifacts/derived/benchmarks/`
 - 当前允许引用清单：`paper/ARTIFACTS_ALLOWED.md`
 - claim 与证据边界：`paper/claims_evidence_matrix.md`
 
-不要因为某个文件能从 `results/...` 打开就默认可引用。特别注意：
+使用边界：
 
-- 旧多 seed 表 symlink 已从兼容层删除；当前多 seed 表在
-  `artifacts/derived/benchmarks/`。
-- 旧 debug、analysis 和候选图池 symlink 已删除；当前定性图入口以
-  `artifacts/derived/paper_figures/qualitative_selected_seed1/` 和
-  `paper/ARTIFACTS_ALLOWED.md` 为准。
+- `results/benchmark.json`、`results/benchmark_seed1_with_signed_phiz.json`、
+  `results/seeds/benchmark_seed*.json` 已删除；这些旧入口会暴露历史 raw key。
+- 论文表格和 claim 仍应优先引用 `artifacts/derived/benchmarks/`，`results/` 只作短路径。
+- raw JSON 保留在 `artifacts/raw_results/` 作为 provenance，不直接作为论文表格入口。

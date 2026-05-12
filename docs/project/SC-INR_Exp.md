@@ -126,10 +126,10 @@ $$
 
 ## 5. 当前 SC-INR 架构
 
-当前最终候选展示名为 `SC-INR`，canonical checkpoint alias 为
+当前最终候选展示名为 `SC-INR`，canonical checkpoint 为
 `artifacts/checkpoints/seed{1,2,3}/sc-inr`（seed1 兼容路径 `save/sc-inr`）。
-seed1 历史 raw/checkpoint key 为 `SC-INR+PhiZ` / `sc-inr-phiz`；seed2/3
-新评估文件使用清理后的 raw key `SC-INR`。实现位于
+seed1 历史 raw key 为 `SC-INR+PhiZ`；旧 checkpoint 目录名 `sc-inr-phiz`
+不再保留。seed2/3 新评估文件使用清理后的 raw key `SC-INR`。实现位于
 `src/models/sc_inr_adaptive.py`，registry name 为 `sc_inr_signed_phiz`。
 
 ### 5.1 内容项

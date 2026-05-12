@@ -34,10 +34,11 @@ SC-INR 系列将内容 Fourier basis 与 observation footprint 分开：
 - 观测 footprint 由 cell 通过解析 sinc response 进入；
 - 禁止 learned `phase(cell)` shortcut。
 
-当前最终候选的论文展示名为 **SC-INR**，canonical checkpoint alias 为
-`save/sc-inr` / `artifacts/checkpoints/seed*/sc-inr`。历史 raw/checkpoint key
-在 seed1 中仍为 `SC-INR+PhiZ` / `sc-inr-phiz`；seed2/3 新评估文件使用清理后的
-raw key `SC-INR`。它使用 signed omega 和 feature-conditioned phase：
+当前最终候选的论文展示名为 **SC-INR**，canonical checkpoint 为
+`save/sc-inr` / `artifacts/checkpoints/seed*/sc-inr`。seed1 历史 raw key
+仍为 `SC-INR+PhiZ`；旧 checkpoint 目录名 `sc-inr-phiz` 不再保留。seed2/3
+新评估文件使用清理后的 raw key `SC-INR`。它使用 signed omega 和
+feature-conditioned phase：
 
 ```text
 coef(z), omega(z), phi(z)  -> content Fourier basis

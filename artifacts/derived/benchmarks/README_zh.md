@@ -8,8 +8,10 @@ paper-facing 结果显式展开为 `source_file`、`raw_key`、`canonical_model`
 ## 文件
 
 - `benchmark_all_models_long.csv`：所有 benchmark 记录的 canonical long table。
+- `benchmark_all_models_canonical.json`：所有模型的 canonical JSON，顶层模型名均为新命名。
 - `benchmark_by_seed_model.csv`：每个 seed/model 的 ID/OOD/ALL 汇总。
 - `paper_main_3seed.csv`：论文主表使用的 LIIF/LTE/SC-INR per-seed benchmark。
+- `benchmark_paper_main_3seed.json`：论文主模型三 seed canonical JSON。
 - `paper_main_3seed_summary.csv`：论文主表 mean/std 汇总。
 - `paper_main_3seed_paired_delta.csv`：`SC-INR` 相对 LIIF/LTE 的 paired delta。
 - `paper_context_seed1.csv`：seed1 context/diagnostic 模型，包括 NoPhi、NoSinc、

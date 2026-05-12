@@ -7,7 +7,7 @@ cell-conditioned phase extrapolation？
 
 - 论文展示名：`SC-INR`
 - canonical checkpoint：`artifacts/checkpoints/seed*/sc-inr`
-- 历史 raw/checkpoint key：`SC-INR+PhiZ` / `sc-inr-phiz`
+- seed1 历史 raw key：`SC-INR+PhiZ`；旧 checkpoint 目录名不再保留。
 
 ## 当前证据
 

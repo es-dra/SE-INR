@@ -50,7 +50,6 @@ models:
     registry_name: lte-noc
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-nocellphase
     train_config: configs/train-div2k/train-lte-nocellphase.yaml
-    legacy_train_config: configs/train-div2k/train-lte-no-cell.yaml
     raw_keys: [LTE-NoCell, LTE-NoC]
     ablation_axis: remove LTE learned phase(cell)
 
@@ -61,7 +60,6 @@ models:
     registry_name: lte_phase_z
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-phasez
     train_config: configs/train-div2k/train-lte-phasez.yaml
-    legacy_train_config: configs/train-div2k/train-lte-feature-phase.yaml
     raw_keys: [LTE-FeaturePhase, LTE-PhaseZ]
     ablation_axis: replace LTE phase(cell) with feature-conditioned phi(z)
 
@@ -73,7 +71,6 @@ models:
     registry_name: sc_inr_fixed
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-fixed-omega
     train_config: configs/train-div2k/train-sc-inr-fixed-omega.yaml
-    legacy_train_config: configs/train-div2k/train-sc-inr-fixed.yaml
     raw_keys: [SC-INR-Fixed]
     ablation_axis: fixed omega basis plus analytic sinc
 
@@ -87,7 +84,6 @@ models:
     checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr-nophi
     checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr-nophi
     train_config: configs/train-div2k/train-sc-inr-nophi.yaml
-    legacy_train_config: configs/train-div2k/train-sc-inr-adaptive.yaml
     raw_keys: [SC-INR, SC-INR-Adaptive]
     ablation_axis: feature-conditioned omega, no feature phase
     note: Raw key SC-INR currently refers to this no-phase variant in older result files.
@@ -100,7 +96,6 @@ models:
     registry_name: sc_inr_adaptive_signed
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-nophi-signed
     train_config: configs/train-div2k/train-sc-inr-nophi-signed.yaml
-    legacy_train_config: configs/train-div2k/train-sc-inr-adaptive-signed.yaml
     raw_keys: [SC-INR-Signed, SC-INR-Adaptive-Signed]
     ablation_axis: signed omega, no feature phase
 
@@ -114,7 +109,6 @@ models:
     checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr
     checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr
     train_config: configs/train-div2k/train-sc-inr.yaml
-    legacy_train_config: configs/train-div2k/train-sc-inr-signed-phiz.yaml
     raw_keys: [SC-INR+PhiZ]
     clean_raw_keys_seed2_seed3: [SC-INR]
     ablation_axis: signed omega plus feature-conditioned phi(z)

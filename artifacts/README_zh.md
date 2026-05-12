@@ -8,19 +8,23 @@
 - `raw_results/`：正式 raw JSON 结果，按 seed/protocol 存放。
 - `derived/`：从 raw 结果派生出的 CSV、TEX、图和候选论文产物。
 - `legacy/`：历史产物，保留用于追溯，不代表当前结论。
-- `results/`：兼容旧 `results/...` 路径的 symlink tree。
+- `results/`：便捷入口，只链接 canonical benchmark JSON。
 - `logs/`：训练和后台任务日志，兼容旧 `logs/...` 路径。
 
 ## 正式 Raw 结果
 
 - `raw_results/seed1/benchmark.json`
 - `raw_results/seed1/benchmark_signed_phiz.json`
+- `raw_results/seed1/benchmark_sc_inr_nosinc.json`
+- `raw_results/seed1/benchmark_sc_inr_eq.json`
 - `raw_results/seed2/benchmark.json`
+- `raw_results/seed2/benchmark_sc_inr.json`
 - `raw_results/seed3/benchmark.json`
+- `raw_results/seed3/benchmark_sc_inr.json`
 
 ## 当前论文相关派生结果
 
-- `derived/benchmarks/`：当前 canonical benchmark 总表、论文主表和 seed/context 表。
+- `derived/benchmarks/`：当前 canonical benchmark 总表、canonical JSON、论文主表和 seed/context 表。
 - `derived/evidence/README_zh.md`：辅助证据与机制分析入口索引。
 - `derived/diagnostics/`：appendix / diagnostic 层级的辅助证据。
 - `derived/paper_figures/qualitative_selected_seed1/`：当前保留的定性图入口。
@@ -32,5 +36,6 @@
 
 ## 引用规则
 
-论文中优先引用 `raw_results/` 和 `derived/` 中有 experiment card 支撑的产物。
+论文中优先引用 `derived/benchmarks/` 和 `derived/` 中有 experiment card 支撑的产物；
+`raw_results/` 作为 provenance 保留，不直接作为论文表格入口。
 `legacy/` 默认不得引用，除非正文明确说明其诊断性质。

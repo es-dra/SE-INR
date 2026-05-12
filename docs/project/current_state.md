@@ -30,8 +30,8 @@ sampling consistency。当前不宣称 whole-network strict scale equivariance�
 
 - registry name: `sc_inr_signed_phiz`
 - train config: `configs/train-div2k/train-sc-inr.yaml`
-- canonical checkpoint aliases: `artifacts/checkpoints/seed{1,2,3}/sc-inr`
-- historical physical checkpoint: `artifacts/checkpoints/seed1/sc-inr-phiz`
+- canonical checkpoint: `artifacts/checkpoints/seed{1,2,3}/sc-inr`
+- seed1 历史 raw key：`SC-INR+PhiZ`；旧 checkpoint 目录名不再保留。
 
 结构：
 

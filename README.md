@@ -70,8 +70,8 @@ python scripts/analysis/build_canonical_benchmarks.py
 - `SC-INR-EQ`：探索性 Rot-E 结合，不是主方法。
 
 旧 raw key 或历史名如 `SC-INR+PhiZ`、`SC-INR-Adaptive`、`sc-inr-phiz` 只作为
-provenance 出现；新命令、新文档和论文正文应使用 `configs/registry/models.yaml`
-里的 canonical 名称。
+raw-result provenance 出现；`save`/`artifacts/checkpoints` 下不再保留旧命名模型目录。
+新命令、新文档和论文正文应使用 `configs/registry/models.yaml` 里的 canonical 名称。
 
 ## 兼容路径
 
@@ -86,6 +86,8 @@ provenance 出现；新命令、新文档和论文正文应使用 `configs/regis
 - `logs` -> `artifacts/logs`
 - `Data` -> `artifacts/data_local`
 
+`results` 只放指向 canonical benchmark JSON 的便捷链接；raw JSON 在
+`artifacts/raw_results/`，主表和全模型指标在 `artifacts/derived/benchmarks/`。
 新脚本和新文档应优先使用 canonical 路径；兼容路径只用于旧命令恢复。
 
 ## 不能过度宣称

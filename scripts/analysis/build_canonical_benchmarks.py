@@ -184,6 +184,13 @@ def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> 
         writer.writerows(rows)
 
 
+def write_json(path: Path, data: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+
 def average(rows: list[dict[str, Any]], split: str) -> float:
     vals = [float(r["psnr"]) for r in rows if split == "ALL" or r["split"] == split]
     if not vals:
@@ -227,6 +234,117 @@ def rows_for_model_seed(rows: list[dict[str, Any]], model: str, seed: int) -> li
 
 def split_average_for_model_seed(rows: list[dict[str, Any]], model: str, seed: int, split: str) -> float:
     return average(rows_for_model_seed(rows, model, seed), split)
+
+
+def benchmark_metadata() -> dict[str, Any]:
+    return {
+        "schema": "sc_asisr_canonical_benchmark_v1",
+        "generated_by": "scripts/analysis/build_canonical_benchmarks.py",
+        "protocol_id": "benchmark_hr_downsample_4datasets_9scales_eval_full",
+        "datasets": BENCHMARKS,
+        "id_scales": ID_SCALES,
+        "ood_scales": OOD_SCALES,
+        "notes": [
+            "Top-level model keys are canonical paper-facing names.",
+            "Raw JSON keys are preserved only under provenance fields.",
+            "SC-INR-EQ is exploratory/context evidence, not a paper main 3-seed model.",
+        ],
+    }
+
+
+def seed_summary_map(rows: list[dict[str, Any]]) -> dict[tuple[int, str], dict[str, str]]:
+    return {
+        (int(row["seed"]), row["canonical_model"]): row
+        for row in summarize_seed_model(rows)
+    }
+
+
+def rows_to_model_json(rows: list[dict[str, Any]], model_filter: set[str] | None = None) -> dict[str, Any]:
+    summaries = seed_summary_map(rows)
+    out: dict[str, Any] = {"metadata": benchmark_metadata(), "models": {}}
+    for row in rows:
+        model = row["canonical_model"]
+        if model_filter is not None and model not in model_filter:
+            continue
+        seed = str(row["seed"])
+        model_rec = out["models"].setdefault(
+            model,
+            {
+                "model_status": row["model_status"],
+                "model_role": row["model_role"],
+                "seeds": {},
+            },
+        )
+        summary = summaries[(int(row["seed"]), model)]
+        seed_rec = model_rec["seeds"].setdefault(
+            seed,
+            {
+                "summary": {
+                    "id_psnr": float(summary["id_psnr"]),
+                    "ood_psnr": float(summary["ood_psnr"]),
+                    "all_psnr": float(summary["all_psnr"]),
+                    "n_items": int(summary["n_items"]),
+                },
+                "provenance": {
+                    "result_set": row["result_set"],
+                    "source_file": row["source_file"],
+                    "raw_key": row["raw_key"],
+                    "raw_key_semantics": row["raw_key_semantics"],
+                    "checkpoint": row["checkpoint"],
+                },
+                "datasets": {},
+            },
+        )
+        ds = seed_rec["datasets"].setdefault(row["dataset"], {})
+        ds[row["scale"]] = {"psnr": float(row["psnr"]), "split": row["split"]}
+    return out
+
+
+def main_summary_json(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    main_rows = [r for r in rows if r["canonical_model"] in PAPER_MAIN_MODELS]
+    data = rows_to_model_json(main_rows, set(PAPER_MAIN_MODELS))
+    data["metadata"]["paper_main_models"] = PAPER_MAIN_MODELS
+    data["summary"] = {}
+    seed_summary = [
+        r for r in summarize_seed_model(main_rows)
+        if r["canonical_model"] in PAPER_MAIN_MODELS
+    ]
+    for model in PAPER_MAIN_MODELS:
+        model_rows = [r for r in seed_summary if r["canonical_model"] == model]
+        data["summary"][model] = {}
+        for split_name, field in [("ID", "id_psnr"), ("OOD", "ood_psnr"), ("ALL", "all_psnr")]:
+            vals = [float(r[field]) for r in model_rows]
+            data["summary"][model][split_name] = {
+                "mean_psnr": mean(vals),
+                "std_psnr": stdev(vals) if len(vals) > 1 else None,
+                "n_seeds": len(vals),
+                "min_psnr": min(vals),
+                "max_psnr": max(vals),
+            }
+    data["paired_delta_vs_baselines"] = {}
+    for baseline in ["LIIF", "LTE"]:
+        key = f"SC-INR_vs_{baseline}"
+        data["paired_delta_vs_baselines"][key] = {}
+        for split_name in ["ID", "OOD", "ALL"]:
+            sc = {
+                int(r["seed"]): split_average_for_model_seed(main_rows, "SC-INR", int(r["seed"]), split_name)
+                for r in seed_summary
+                if r["canonical_model"] == "SC-INR"
+            }
+            base = {
+                int(r["seed"]): split_average_for_model_seed(main_rows, baseline, int(r["seed"]), split_name)
+                for r in seed_summary
+                if r["canonical_model"] == baseline
+            }
+            shared = sorted(set(sc) & set(base))
+            deltas = [sc[s] - base[s] for s in shared]
+            data["paired_delta_vs_baselines"][key][split_name] = {
+                "mean_delta": mean(deltas),
+                "std_delta": stdev(deltas) if len(deltas) > 1 else None,
+                "n_seed_pairs": len(deltas),
+                "seeds": shared,
+            }
+    return data
 
 
 def write_paper_main(rows: list[dict[str, Any]], out_dir: Path) -> None:
@@ -350,8 +468,10 @@ paper-facing 结果显式展开为 `source_file`、`raw_key`、`canonical_model`
 ## 文件
 
 - `benchmark_all_models_long.csv`：所有 benchmark 记录的 canonical long table。
+- `benchmark_all_models_canonical.json`：所有模型的 canonical JSON，顶层模型名均为新命名。
 - `benchmark_by_seed_model.csv`：每个 seed/model 的 ID/OOD/ALL 汇总。
 - `paper_main_3seed.csv`：论文主表使用的 LIIF/LTE/SC-INR per-seed benchmark。
+- `benchmark_paper_main_3seed.json`：论文主模型三 seed canonical JSON。
 - `paper_main_3seed_summary.csv`：论文主表 mean/std 汇总。
 - `paper_main_3seed_paired_delta.csv`：`SC-INR` 相对 LIIF/LTE 的 paired delta。
 - `paper_context_seed1.csv`：seed1 context/diagnostic 模型，包括 NoPhi、NoSinc、
@@ -416,6 +536,8 @@ def main() -> None:
             "n_items",
         ],
     )
+    write_json(out_dir / "benchmark_all_models_canonical.json", rows_to_model_json(rows))
+    write_json(out_dir / "benchmark_paper_main_3seed.json", main_summary_json(rows))
     write_paper_main(rows, out_dir)
     write_context_seed1(rows, out_dir)
     write_readme(out_dir)

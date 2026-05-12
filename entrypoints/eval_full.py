@@ -164,11 +164,7 @@ def checkpoint_dir_aliases_from_registry():
     registry = load_registry()
     aliases = {}
     for canonical_name, info in registry.items():
-        keys = sorted(
-            [key for key in info if key.startswith("checkpoint_dir")],
-            key=lambda key: (key.startswith("legacy_"), key),
-        )
-        keys += sorted([key for key in info if key.startswith("legacy_checkpoint_dir")])
+        keys = sorted([key for key in info if key.startswith("checkpoint_dir")])
         for key in keys:
             value = info.get(key)
             if not value:
@@ -178,7 +174,7 @@ def checkpoint_dir_aliases_from_registry():
 
 
 def discover_models(save_root):
-    """Discover available checkpoints while preferring canonical dirs over legacy symlinks."""
+    """Discover available checkpoints from canonical registry directories."""
 
     model_dirs = checkpoint_dir_aliases_from_registry()
     discovered = {}
