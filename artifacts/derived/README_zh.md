@@ -4,12 +4,13 @@
 
 ## 主要目录
 
-- `analysis/benchmark_progress_2026-05-09/`：当前核心 benchmark 和 PhiZ 阶段性汇总。
-- `analysis/seed1_aux_metrics_all8/`：seed1 辅助质量、一致性、机制分析。
-- `paper_candidates/qualitative_phiz_candidates/`：最终候选 `SC-INR`（raw key `SC-INR+PhiZ`）定性图候选池。
+- `benchmarks/`：当前 benchmark 活跃入口，包含 all-model long table、论文主表和 seed1 context。
+- `evidence/README_zh.md`：辅助证据索引，指向 diagnostics、qualitative 和 exploratory 摘要。
+- `diagnostics/`：appendix / diagnostic 层级的派生证据，不是主 benchmark。
+- `paper_figures/qualitative_selected_seed1/`：用户确认的 selected qualitative examples。
 
 ## 使用规则
 
 派生产物必须能追溯到 `artifacts/raw_results/`、checkpoint 或生成脚本。
-候选图不等于正式论文图；正式论文图应复制或导出到 `paper/figures/` 并在
-`paper/claims_evidence_matrix.md` 中登记。
+论文 benchmark 表只从 `benchmarks/` 进入；辅助证据先查 `evidence/README_zh.md`。
+未确认自动候选、debug/smoke 输出和旧 planning table 不属于 active evidence。

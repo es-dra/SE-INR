@@ -10,7 +10,7 @@ useful for the current SC-INR paper narrative:
 4. same-LR cross-scale observation consistency;
 5. high-texture crop visualizations.
 
-Outputs are written under results/analysis/seed1_aux_metrics/ by default.
+Outputs are written under artifacts/derived/diagnostics/seed1_aux_metrics/ by default.
 """
 
 from __future__ import annotations
@@ -41,6 +41,7 @@ sys.path.insert(0, str(ROOT))
 
 import models
 import utils
+from scripts.analysis.model_registry import MODEL_PATHS, STYLE
 
 DATASETS = {
     "set5": DATA_ROOT / "Set5" / "HR",
@@ -48,49 +49,6 @@ DATASETS = {
     "bsd100": DATA_ROOT / "BSD100" / "HR",
     "urban100": DATA_ROOT / "Urban100" / "HR",
 }
-
-MODEL_PATHS = {
-    "LIIF": ROOT / "save" / "liif" / "epoch-best.pth",
-    "LTE": ROOT / "save" / "lte" / "epoch-best.pth",
-    "LTE-NoCellPhase": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
-    "LTE-NoCell": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
-    "LTE-NoC": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
-    "LTE-PhaseZ": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
-    "LTE-FeaturePhase": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
-    "SC-INR-FixedOmega": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
-    "SC-INR-Fixed": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
-    "SC-INR-NoPhi": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
-    "SC-INR-Adaptive": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
-    "SC-INR-NoPhi-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
-    "SC-INR-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
-    "SC-INR": ROOT / "save" / "sc-inr" / "epoch-best.pth",
-    "SC-INR+PhiZ": ROOT / "save" / "sc-inr" / "epoch-best.pth",
-    "SC-INR-NoSinc": ROOT / "save" / "sc-inr-nosinc" / "epoch-best.pth",
-    "LIIF-EQ": ROOT / "save" / "liif-eq" / "epoch-best.pth",
-    "LTE-EQ": ROOT / "save" / "lte-eq" / "epoch-best.pth",
-}
-
-STYLE = {
-    "Bicubic": "#8c8c8c",
-    "LIIF": "#4C72B0",
-    "LIIF-EQ": "#64B5CD",
-    "LTE": "#DD8452",
-    "LTE-NoCellPhase": "#55A868",
-    "LTE-EQ": "#DDAA33",
-    "LTE-NoCell": "#55A868",
-    "LTE-PhaseZ": "#8172B2",
-    "LTE-FeaturePhase": "#8172B2",
-    "SC-INR-FixedOmega": "#C44E52",
-    "SC-INR-Fixed": "#C44E52",
-    "SC-INR-NoPhi": "#8B0000",
-    "SC-INR-Adaptive": "#8B0000",
-    "SC-INR-NoPhi-Signed": "#AA3377",
-    "SC-INR-Signed": "#AA3377",
-    "SC-INR": "#B22222",
-    "SC-INR+PhiZ": "#B22222",
-    "SC-INR-NoSinc": "#666666",
-}
-
 
 def parse_csv_list(text: str) -> List[str]:
     return [x.strip() for x in text.split(",") if x.strip()]
@@ -575,7 +533,7 @@ def main() -> None:
     parser.add_argument("--max_images", type=int, default=10)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--eval_bsize", type=int, default=50000)
-    parser.add_argument("--out", type=Path, default=ROOT / "results" / "analysis" / "seed1_aux_metrics")
+    parser.add_argument("--out", type=Path, default=ROOT / "artifacts" / "derived" / "diagnostics" / "seed1_aux_metrics")
     parser.add_argument("--include_bicubic", action="store_true", default=True)
     parser.add_argument("--skip_quality", action="store_true")
     parser.add_argument("--skip_consistency", action="store_true")

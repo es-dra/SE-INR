@@ -18,6 +18,7 @@ from tqdm import tqdm
 import datasets
 import models
 import utils
+from scripts.analysis.model_registry import MODEL_ALIASES, canonicalize_result_key, load_registry
 
 
 def batched_predict(model, inp, coord, cell, bsize):
@@ -142,71 +143,78 @@ def run_eval(model_path, benchmark, scale, device, data_root=None):
     return psnr
 
 
+def normalize_existing_results(results, output_path, force_legacy_sc_inr_no_phi=False):
+    """Normalize legacy result keys when resuming an existing JSON file."""
+    raw_keys = set(results.keys())
+    normalized_results = {}
+    for raw_name, model_results in results.items():
+        if raw_name == 'SC-INR' and force_legacy_sc_inr_no_phi:
+            canonical_name = 'SC-INR-NoPhi'
+        else:
+            canonical_name = canonicalize_result_key(raw_name, output_path, raw_keys)
+        if canonical_name in normalized_results and raw_name != canonical_name:
+            continue
+        normalized_results[canonical_name] = model_results
+    return normalized_results
+
+
+def checkpoint_dir_aliases_from_registry():
+    """Map checkpoint directory names under --save_root to canonical display names."""
+
+    registry = load_registry()
+    aliases = {}
+    for canonical_name, info in registry.items():
+        keys = sorted(
+            [key for key in info if key.startswith("checkpoint_dir")],
+            key=lambda key: (key.startswith("legacy_"), key),
+        )
+        keys += sorted([key for key in info if key.startswith("legacy_checkpoint_dir")])
+        for key in keys:
+            value = info.get(key)
+            if not value:
+                continue
+            aliases.setdefault(Path(value).name, canonical_name)
+    return aliases
+
+
+def discover_models(save_root):
+    """Discover available checkpoints while preferring canonical dirs over legacy symlinks."""
+
+    model_dirs = checkpoint_dir_aliases_from_registry()
+    discovered = {}
+    for dir_name, model_name in model_dirs.items():
+        pth = Path(save_root) / dir_name / "epoch-best.pth"
+        if pth.exists() and model_name not in discovered:
+            discovered[model_name] = str(pth)
+    return discovered
+
+
 def main():
     parser = argparse.ArgumentParser(description='Evaluate models on benchmark datasets')
     parser.add_argument('--device', type=str, default='0', help='GPU device id')
-    parser.add_argument('--output', type=str, default='results/benchmark.json', help='Output JSON file')
+    parser.add_argument(
+        '--output',
+        type=str,
+        default='artifacts/raw_results/manual/benchmark_eval_full.json',
+        help='Output JSON file. Prefer artifacts/raw_results/seedN/benchmark_<suite>.json for formal runs.',
+    )
     parser.add_argument('--save_root', type=str, default='save', help='Root directory containing model subdirectories')
     parser.add_argument('--skip_existing', action='store_true', help='Skip already evaluated combinations')
     parser.add_argument('--models', type=str, default=None,
                         help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,SC-INR". If not set, evaluate all.')
     parser.add_argument('--scales', type=str, default=None,
                         help='Comma-separated list of scales to evaluate, e.g., "2,3,4,6". If not set, evaluate all.')
+    parser.add_argument(
+        '--legacy_sc_inr_no_phi_input',
+        action='store_true',
+        help='Treat an existing raw key named SC-INR in the output file as legacy SC-INR-NoPhi when resuming old results.',
+    )
     args = parser.parse_args()
 
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
 
-    # Auto-discover models from save/ directory
-    # Each subdirectory in save/ with an epoch-best.pth is a model
     SAVE_ROOT = args.save_root
-    MODEL_NAMES = {
-        'liif': 'LIIF',
-        'liif-eq': 'LIIF-EQ',
-        'lte': 'LTE',
-        'lte-no-cell': 'LTE-NoCellPhase',
-        'lte-nocellphase': 'LTE-NoCellPhase',
-        'lte-eq': 'LTE-EQ',
-        'lte-feature-phase': 'LTE-PhaseZ',
-        'lte-phasez': 'LTE-PhaseZ',
-        'sc-inr-fixed': 'SC-INR-FixedOmega',
-        'sc-inr-fixed-omega': 'SC-INR-FixedOmega',
-        'sc-inr-adaptive': 'SC-INR-NoPhi',
-        'sc-inr-nophi': 'SC-INR-NoPhi',
-        'sc-inr-adaptive-signed': 'SC-INR-NoPhi-Signed',
-        'sc-inr-nophi-signed': 'SC-INR-NoPhi-Signed',
-        'sc-inr-phiz': 'SC-INR',
-        'sc-inr': 'SC-INR',
-        'sc-inr-nosinc': 'SC-INR-NoSinc',
-    }
-    MODEL_ALIASES = {
-        'LTE-NoCell': 'LTE-NoCellPhase',
-        'LTE-NoC': 'LTE-NoCellPhase',
-        'LTE-FeaturePhase': 'LTE-PhaseZ',
-        'SC-INR-Fixed': 'SC-INR-FixedOmega',
-        'SC-INR-Adaptive': 'SC-INR-NoPhi',
-        'SC-INR+PhiZ': 'SC-INR',
-        'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
-        'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
-        'SC-INR-w/o-sinc': 'SC-INR-NoSinc',
-        'SC-INR-NoSinc': 'SC-INR-NoSinc',
-    }
-    LEGACY_RESULT_ALIASES = {
-        'LTE-NoCell': 'LTE-NoCellPhase',
-        'LTE-NoC': 'LTE-NoCellPhase',
-        'LTE-FeaturePhase': 'LTE-PhaseZ',
-        'SC-INR-Fixed': 'SC-INR-FixedOmega',
-        'SC-INR-Adaptive': 'SC-INR-NoPhi',
-        'SC-INR+PhiZ': 'SC-INR',
-        'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
-        'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
-        'SC-INR-w/o-sinc': 'SC-INR-NoSinc',
-    }
-
-    ALL_MODELS = {}
-    for dir_name, model_name in MODEL_NAMES.items():
-        pth = os.path.join(SAVE_ROOT, dir_name, 'epoch-best.pth')
-        if os.path.exists(pth):
-            ALL_MODELS[model_name] = pth
+    ALL_MODELS = discover_models(SAVE_ROOT)
 
     if not ALL_MODELS:
         print("Warning: no models with epoch-best.pth found in save/")
@@ -235,15 +243,10 @@ def main():
     if os.path.exists(args.output):
         with open(args.output, 'r') as f:
             results = json.load(f)
-        legacy_sc_inr_no_phi = (
-            'SC-INR+PhiZ' in results
-            or Path(args.output).name in {'benchmark.json', 'benchmark_seed2.json', 'benchmark_seed3.json'}
-        )
-        if legacy_sc_inr_no_phi and 'SC-INR' in results and 'SC-INR-NoPhi' not in results:
-            results['SC-INR-NoPhi'] = results.pop('SC-INR')
-        for old_name, new_name in LEGACY_RESULT_ALIASES.items():
-            if old_name in results and new_name not in results:
-                results[new_name] = results.pop(old_name)
+        output_path = Path(args.output)
+        if not output_path.is_absolute():
+            output_path = ROOT / output_path
+        results = normalize_existing_results(results, output_path, args.legacy_sc_inr_no_phi_input)
         print(f"Loaded existing results from {args.output}")
     if args.skip_existing:
         print("--skip_existing: will skip already-evaluated combinations")

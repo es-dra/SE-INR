@@ -4,15 +4,19 @@
 
 ## 当前文件
 
-- `seed1/benchmark.json`：seed1 旧主 benchmark，8 模型。
-- `seed1/benchmark_signed_phiz.json`：seed1 含 `SC-INR-NoPhi-Signed` 与最终候选 `SC-INR` 的完整 benchmark；历史 raw key 分别为 `SC-INR-Signed` 与 `SC-INR+PhiZ`。
+- `seed1/benchmark.json`：seed1 旧主 benchmark，不含最终候选 `SC-INR` 的 clean key。
+- `seed1/benchmark_signed_phiz.json`：seed1 含 `SC-INR-NoPhi-Signed` 与最终候选
+  `SC-INR` 的完整 benchmark；历史 raw key 分别为 `SC-INR-Signed` 与 `SC-INR+PhiZ`。
+- `seed1/benchmark_sc_inr_nosinc.json`：seed1 NoSinc 消融 benchmark。
+- `seed1/benchmark_sc_inr_eq.json`：seed1 exploratory `SC-INR-EQ` benchmark。
 - `seed2/benchmark.json`：核心三模型 seed2 benchmark。
+- `seed2/benchmark_sc_inr.json`：最终候选 `SC-INR` seed2 benchmark。
 - `seed3/benchmark.json`：核心三模型 seed3 benchmark。
-- `continuous/seed1/*.json`：seed1 continuous-scale raw。
-- `diagnostics/seed1/fce.json`：FCE 诊断 raw。
-- `diagnostics/seed1/phase_intervention.json`：phase intervention raw。
+- `seed3/benchmark_sc_inr.json`：最终候选 `SC-INR` seed3 benchmark。
 
-## 注意
+## 使用规则
 
-- `continuous/seed1/urban100.json` 中 EQ 模型覆盖不完整，不能作为完整 8 模型 Urban100 continuous 证据。
-- `diagnostics/seed1/fce.json` 当前不是完整 FCE 全模型矩阵，引用时需说明覆盖。
+- 论文主 benchmark 不直接读 raw key，应使用 `artifacts/derived/benchmarks/`。
+- raw key 的历史歧义由 `configs/registry/models.yaml` 和
+  `scripts/analysis/model_registry.py` 解释。
+- 已删除旧 continuous/FCE/phase-intervention raw；它们不再是当前证据入口。

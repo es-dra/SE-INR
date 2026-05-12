@@ -1,1 +1,0 @@
-analysis/smoke_check_signed_omega.py

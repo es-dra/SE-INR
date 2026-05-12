@@ -216,7 +216,7 @@ checkpoint 目录和旧 raw key 不物理重命名；展示层通过 registry �
 
 ### 7.1 seed1 最终候选 benchmark
 
-来源：`artifacts/derived/analysis/benchmark_progress_2026-05-09/seed1_signed_phiz_summary.csv`。
+来源：`artifacts/legacy/derived_analysis/benchmark_provenance/benchmark_progress_2026-05-09/seed1_signed_phiz_summary.csv`。
 
 | Model | ID PSNR | OOD PSNR | All PSNR | Delta OOD vs LTE | Delta OOD vs SC-INR-NoPhi |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -235,7 +235,7 @@ checkpoint 目录和旧 raw key 不物理重命名；展示层通过 registry �
 
 ### 7.2 核心 3-seed 与最终候选结果
 
-来源：`artifacts/derived/analysis/benchmark_progress_2026-05-09/multiseed_core_summary.csv`。
+来源：`artifacts/legacy/derived_analysis/benchmark_provenance/benchmark_progress_2026-05-09/multiseed_core_summary.csv`。
 
 | Model | Split | Mean PSNR | Std | Delta Mean vs LTE |
 | --- | --- | ---: | ---: | ---: |
@@ -250,14 +250,14 @@ checkpoint 目录和旧 raw key 不物理重命名；展示层通过 registry �
 
 - 这张表用于 family-level decoder-side sampling consistency 证据。
 - 最终候选 `SC-INR` 的 3-seed 主展示应使用
-  `artifacts/derived/analysis/benchmark_progress_2026-05-11/final_sc_inr_vs_liif_lte_paper.csv`，
+  `artifacts/legacy/derived_analysis/benchmark_provenance/benchmark_progress_2026-05-11/final_sc_inr_vs_liif_lte_paper.csv`，
   即比较 `SC-INR` 与 `LIIF`、`LTE`，不在主表展示 seed2/seed3 的
   `SC-INR` vs `SC-INR-NoPhi` 差异。
 
 ### 7.3 auxiliary consistency evidence
 
 旧的 all-model auxiliary evidence 来源于
-`artifacts/derived/analysis/seed1_aux_metrics_all8/`，主要用于支撑
+`artifacts/derived/diagnostics/seed1_aux_metrics_all8/`，主要用于支撑
 `SC-INR-NoPhi` 的机制判断。
 
 Same-LR cross-scale observation consistency 相对 `LTE`：
@@ -274,7 +274,7 @@ Same-LR cross-scale observation consistency 相对 `LTE`：
 响应，不能单独据此宣称它们更好，必须结合重建 PSNR、SSIM 和纹理误差。
 
 最终候选 `SC-INR` 的 seed1 auxiliary metrics 位于
-`artifacts/derived/analysis/sc_inr_final_aux_metrics_seed1/`。协议覆盖
+`artifacts/derived/diagnostics/sc_inr_final_aux_metrics_seed1/`。协议覆盖
 `LTE`、`SC-INR-NoPhi`、`SC-INR-NoPhi-Signed`、`SC-INR`，BSD100 / Urban100
 sorted 前 10 张，x4/x8/x16/x30 quality 和 x8/x16/x30 -> x4 consistency。
 
@@ -294,14 +294,14 @@ consistency 本身不能单独决定最终主模型。
 
 用户已确认两张 selected examples 有可见改善：
 
-- `artifacts/derived/paper_candidates/qualitative_phiz_candidates/urban100_img012_x8_delta_phiz_vs_lte.png`
-- `artifacts/derived/paper_candidates/qualitative_phiz_candidates/urban100_img004_x8_delta_phiz_vs_lte.png`
+- `artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img012_x8_selected_gt_bicubic_lte_nophi_scinr.png`
+- `artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img004_x8_selected_gt_bicubic_lte_nophi_scinr.png`
 
 它们可以支持 selected qualitative improvement，不支持 average visual quality claim。
 
 ### 7.5 SC-INR-NoSinc auxiliary metrics
 
-来源：`artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1/`。
+来源：`artifacts/derived/diagnostics/sc_inr_nosinc_aux_metrics_seed1/`。
 
 协议覆盖 `LTE`、`SC-INR-NoPhi`、`SC-INR-NoPhi-Signed`、完整 `SC-INR` 和
 `SC-INR-NoSinc`；数据为 BSD100 / Urban100 sorted 前 10 张；quality scales 为
@@ -337,7 +337,7 @@ Same-LR consistency PSNR-Y（x8/x16/x30 -> x4 平均）：
 
 ### 7.6 response/omega diagnostics
 
-来源：`artifacts/derived/analysis/response_omega_diagnostics_2026-05-10/`。
+来源：`artifacts/derived/diagnostics/response_omega_diagnostics_2026-05-10/`。
 
 该诊断用于解释 7.5 中的反直觉结果。协议分两部分：
 

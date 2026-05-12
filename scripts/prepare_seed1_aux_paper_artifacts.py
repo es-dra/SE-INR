@@ -1,1 +1,0 @@
-paper/prepare_seed1_aux_paper_artifacts.py

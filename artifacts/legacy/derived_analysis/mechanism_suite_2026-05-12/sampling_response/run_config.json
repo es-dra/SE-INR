@@ -1,0 +1,20 @@
+{
+  "mode": "both",
+  "out": "artifacts/legacy/derived_analysis/mechanism_suite_2026-05-12/sampling_response",
+  "device": "cuda:0",
+  "models": "SC-INR,SC-INR-NoSinc,SC-INR-EQ",
+  "datasets": "bsd100,urban100",
+  "max_images": 3,
+  "lr_scale": 4,
+  "scales": "2,3,4,6,8,12,16,24,30",
+  "cell_models": "LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR,SC-INR-NoSinc,SC-INR-EQ",
+  "cell_dataset": "urban100",
+  "cell_datasets": "",
+  "cell_image": "img_004.png",
+  "cell_max_images": 1,
+  "cell_lr_scale": 4,
+  "cell_ref_scale": 4,
+  "cell_scales": "1,1.5,2,3,4,6,8,12,16,24,30",
+  "max_queries": 2048,
+  "eval_bsize": 50000
+}

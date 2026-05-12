@@ -1,39 +1,45 @@
-# Experiment: Final-Candidate SC-INR
+# 实验：最终候选 SC-INR
 
-## Question
+## 科学问题
 
-Does feature-conditioned phase improve SC-INR reconstruction quality without
-reintroducing LTE-style cell-conditioned phase extrapolation?
+feature-conditioned phase 是否能改善 `SC-INR` 的重建质量，同时不重新引入 LTE 式
+cell-conditioned phase extrapolation？
 
-Paper display name: `SC-INR`. Canonical checkpoint alias: `save/sc-inr`.
-Historical raw/checkpoint key: `SC-INR+PhiZ` / `sc-inr-phiz`.
+- 论文展示名：`SC-INR`
+- canonical checkpoint：`artifacts/checkpoints/seed*/sc-inr`
+- 历史 raw/checkpoint key：`SC-INR+PhiZ` / `sc-inr-phiz`
 
-## Current Evidence
+## 当前证据
 
-- Raw seed1 benchmark: `artifacts/raw_results/seed1/benchmark_signed_phiz.json`
-- Derived seed1 summary: `artifacts/derived/analysis/benchmark_progress_2026-05-09/seed1_signed_phiz_summary.csv`
-- Qualitative candidates: `artifacts/derived/paper_candidates/qualitative_phiz_candidates/`
+- seed1 raw benchmark：`artifacts/raw_results/seed1/benchmark_signed_phiz.json`
+- canonical seed1 context：`artifacts/derived/benchmarks/paper_context_seed1.csv`
+- final 3-seed benchmark：`artifacts/derived/benchmarks/paper_main_3seed_summary.csv`
+- 用户确认定性图：`artifacts/derived/paper_figures/qualitative_selected_seed1/`
 
-## Current Result
+## 当前结果
 
-Seed1 PSNR benchmark:
+final 3-seed PSNR benchmark：
 
-- `SC-INR - LTE`: ID `+0.0738 dB`, OOD `+0.0849 dB`, All `+0.0812 dB`
-- `SC-INR - SC-INR-NoPhi`: ID `+0.0673 dB`, OOD `+0.0295 dB`, All `+0.0421 dB`
+- `SC-INR - LIIF`：ID `+0.0437 dB`，OOD `+0.0328 dB`，ALL `+0.0364 dB`
+- `SC-INR - LTE`：ID `-0.0048 dB`，OOD `+0.0504 dB`，ALL `+0.0320 dB`
 
-User-confirmed qualitative candidates:
+seed1 结构增量背景：
+
+- `SC-INR - LTE`：ID `+0.0738 dB`，OOD `+0.0849 dB`，ALL `+0.0812 dB`
+- `SC-INR - SC-INR-NoPhi`：ID `+0.0673 dB`，OOD `+0.0295 dB`，ALL `+0.0421 dB`
+
+用户确认 qualitative candidates：
 
 - `urban100_img012_x8_delta_phiz_vs_lte.png`
 - `urban100_img004_x8_delta_phiz_vs_lte.png`
 
-## Caveats
+## caveat
 
-- Single seed only.
-- Auxiliary consistency/texture metrics are not yet complete for PhiZ.
-- Auto-delta qualitative crops are candidate evidence, not average visual quality proof.
+- `SC-INR` vs `SC-INR-NoPhi` 只有 seed1 context，不能写成 3 seed 主 claim。
+- 最终 `SC-INR` 的 auxiliary consistency/texture metrics 仍主要是 seed1。
+- selected qualitative figures 不能证明平均视觉质量更好。
 
-## Next Gates
+## 下一步 gate
 
-- Run auxiliary metrics for final-candidate `SC-INR`.
-- Add `SC-INR w/o sinc` or equivalent sinc ablation.
-- Run multi-seed if auxiliary metrics do not reveal consistency regression.
+- 论文主表必须绑定 `artifacts/derived/benchmarks/`。
+- 若要强化 sinc-response claim，需要先补 footprint correctness / mechanism diagnostics。

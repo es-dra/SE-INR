@@ -2,10 +2,10 @@
 """Prepare paper-facing tables and figures from seed1 auxiliary metrics.
 
 This script is read-only with respect to checkpoints and raw experiment CSVs.
-It consumes the outputs of scripts/evaluate_seed1_aux_metrics.py and writes a
-paper-oriented summary under:
+It consumes the outputs of scripts/analysis/evaluate_seed1_aux_metrics.py and
+writes a paper-oriented summary under:
 
-  results/analysis/seed1_aux_metrics_all8/paper/
+  artifacts/derived/diagnostics/seed1_aux_metrics_all8/paper/
 
 The intended use is to keep the original metric files intact while generating
 compact tables/plots for the SC-INR paper narrative.
@@ -25,7 +25,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_IN = ROOT / "results" / "analysis" / "seed1_aux_metrics_all8"
+DEFAULT_IN = ROOT / "artifacts" / "derived" / "diagnostics" / "seed1_aux_metrics_all8"
 DEFAULT_OUT = DEFAULT_IN / "paper"
 
 MODEL_ORDER = [

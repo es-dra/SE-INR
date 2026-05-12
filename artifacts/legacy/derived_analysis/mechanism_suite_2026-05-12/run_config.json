@@ -1,0 +1,20 @@
+{
+  "out": "artifacts/legacy/derived_analysis/mechanism_suite_2026-05-12",
+  "device": "cuda:0",
+  "benchmark_jsons": "artifacts/raw_results/seed1/benchmark_signed_phiz.json,artifacts/raw_results/seed1/benchmark_sc_inr_eq.json",
+  "scale_gain_pairs": "SC-INR,LTE;SC-INR-EQ,LTE-EQ",
+  "cell_signal_models": "LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR,SC-INR-EQ",
+  "cell_signal_dataset": "urban100",
+  "cell_signal_max_images": 1,
+  "cell_signal_lr_scale": 4,
+  "cell_signal_scales": "1,2,3,4,6,8,12,16,24,30",
+  "intervention_models": "LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR,SC-INR-EQ",
+  "intervention_dataset": "urban100",
+  "intervention_image": "img_004.png",
+  "intervention_lr_scale": 4,
+  "intervention_scale": 16,
+  "cell_multipliers": "0.5,1,2,4",
+  "crop_size": 96,
+  "max_queries": 1024,
+  "eval_bsize": 50000
+}

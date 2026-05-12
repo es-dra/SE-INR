@@ -1,1 +1,0 @@
-docs/project/project_story.md

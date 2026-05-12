@@ -1,7 +1,7 @@
-# Paper-facing model registry.
-# This lightweight alias map defines paper-facing names and canonical aliases.
-# Historical checkpoint directories and raw JSON keys remain as provenance.
-# See paper/model_taxonomy.md for the narrative rationale.
+# 论文展示名注册表。
+# 这里统一 paper-facing 模型名、checkpoint 目录、raw JSON key 和历史别名。
+# checkpoint 目录以 canonical 名称为真实目录；历史训练名只作为 raw key、旧配置名或 provenance。
+# 命名叙事见 paper/model_taxonomy.md。
 
 models:
   LIIF:
@@ -49,7 +49,6 @@ models:
     paper_name: LTE-NoCellPhase
     registry_name: lte-noc
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-nocellphase
-    legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-no-cell
     train_config: configs/train-div2k/train-lte-nocellphase.yaml
     legacy_train_config: configs/train-div2k/train-lte-no-cell.yaml
     raw_keys: [LTE-NoCell, LTE-NoC]
@@ -61,7 +60,6 @@ models:
     paper_name: LTE-PhaseZ
     registry_name: lte_phase_z
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-phasez
-    legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/lte-feature-phase
     train_config: configs/train-div2k/train-lte-phasez.yaml
     legacy_train_config: configs/train-div2k/train-lte-feature-phase.yaml
     raw_keys: [LTE-FeaturePhase, LTE-PhaseZ]
@@ -74,7 +72,6 @@ models:
     paper_name: SC-INR-FixedOmega
     registry_name: sc_inr_fixed
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-fixed-omega
-    legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-fixed
     train_config: configs/train-div2k/train-sc-inr-fixed-omega.yaml
     legacy_train_config: configs/train-div2k/train-sc-inr-fixed.yaml
     raw_keys: [SC-INR-Fixed]
@@ -89,9 +86,6 @@ models:
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-nophi
     checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr-nophi
     checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr-nophi
-    legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-adaptive
-    legacy_checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr-adaptive
-    legacy_checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr-adaptive
     train_config: configs/train-div2k/train-sc-inr-nophi.yaml
     legacy_train_config: configs/train-div2k/train-sc-inr-adaptive.yaml
     raw_keys: [SC-INR, SC-INR-Adaptive]
@@ -105,7 +99,6 @@ models:
     legacy_display_name: SC-INR-Signed
     registry_name: sc_inr_adaptive_signed
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-nophi-signed
-    legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-adaptive-signed
     train_config: configs/train-div2k/train-sc-inr-nophi-signed.yaml
     legacy_train_config: configs/train-div2k/train-sc-inr-adaptive-signed.yaml
     raw_keys: [SC-INR-Signed, SC-INR-Adaptive-Signed]
@@ -120,7 +113,6 @@ models:
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr
     checkpoint_dir_seed2: artifacts/checkpoints/seed2/sc-inr
     checkpoint_dir_seed3: artifacts/checkpoints/seed3/sc-inr
-    legacy_checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-phiz
     train_config: configs/train-div2k/train-sc-inr.yaml
     legacy_train_config: configs/train-div2k/train-sc-inr-signed-phiz.yaml
     raw_keys: [SC-INR+PhiZ]
@@ -129,8 +121,22 @@ models:
     result_seed1: artifacts/raw_results/seed1/benchmark_signed_phiz.json
     result_seed2: artifacts/raw_results/seed2/benchmark_sc_inr.json
     result_seed3: artifacts/raw_results/seed3/benchmark_sc_inr.json
-    result_multiseed: artifacts/derived/analysis/benchmark_progress_2026-05-11
+    result_multiseed: artifacts/derived/benchmarks/paper_main_3seed_summary.csv
+    result_multiseed_paired_delta: artifacts/derived/benchmarks/paper_main_3seed_paired_delta.csv
+    provenance_multiseed: artifacts/legacy/derived_analysis/benchmark_provenance/benchmark_progress_2026-05-11
     note: Final paper-name candidate; 3-seed benchmark complete. Paper-facing comparison should foreground LIIF/LTE; SC-INR vs SC-INR-NoPhi is shown as seed1 context.
+
+  SC-INR-EQ:
+    status: exploratory_extension
+    display_name: SC-INR-EQ
+    paper_name: SC-INR-EQ
+    registry_name: sc_inr_eq
+    checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-eq
+    train_config: configs/train-div2k/train-sc-inr-eq.yaml
+    raw_keys: [SC-INR-EQ]
+    ablation_axis: Rot-E encoder/imnet plumbing plus SC-INR decoder contract
+    result_seed1: artifacts/raw_results/seed1/benchmark_sc_inr_eq.json
+    note: Exploratory single-seed extension. Do not use as a main SC-INR claim until benchmark, property checks, mechanism diagnostics, and claim ledger are closed.
 
   SC-INR-NoSinc:
     status: ablation_seed1_benchmark_aux_complete
@@ -139,8 +145,8 @@ models:
     registry_name: sc_inr_nosinc
     checkpoint_dir_seed1: artifacts/checkpoints/seed1/sc-inr-nosinc
     train_config: configs/train-div2k/train-sc-inr-nosinc.yaml
-    raw_keys: [SC-INR-NoSinc]
+    raw_keys: [SC-INR-NoSinc, SC-INR-w/o-sinc]
     ablation_axis: signed omega plus feature-conditioned phi(z), without analytic sinc response
     result_seed1: artifacts/raw_results/seed1/benchmark_sc_inr_nosinc.json
-    result_seed1_aux: artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1
+    result_seed1_aux: artifacts/derived/diagnostics/sc_inr_nosinc_aux_metrics_seed1
     note: Mechanism ablation for SC-INR; seed1 benchmark complete. Auxiliary metrics show very high same-LR self-consistency after removing sinc, so that metric alone should not be used as proof of the sinc response.

@@ -8,10 +8,10 @@ local crop metrics. Use manual crop coordinates for final figures; automatic
 texture crop is only a starting point for finding candidates.
 
 Example:
-    python scripts/prepare_qualitative_figure.py \
+    python scripts/viz/prepare_qualitative_figure.py \
         --dataset urban100 --image img_004.png --scale 8 \
         --models Bicubic,LTE,SC-INR-NoPhi,SC-INR \
-        --auto_texture_crop --out results/analysis/qualitative_phiz
+        --auto_texture_crop --out artifacts/derived/paper_figures/qualitative_selected_seed1
 """
 
 from __future__ import annotations
@@ -288,7 +288,7 @@ def main() -> None:
     parser.add_argument("--crop_size", type=int, default=96)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--eval_bsize", type=int, default=50000)
-    parser.add_argument("--out", type=Path, default=ROOT / "results" / "analysis" / "qualitative_phiz")
+    parser.add_argument("--out", type=Path, default=ROOT / "artifacts" / "derived" / "paper_figures" / "qualitative_selected_seed1")
     parser.add_argument("--name", default=None, help="Output basename. Defaults to dataset_image_xscale_crop.")
     parser.add_argument("--with_error_maps", action="store_true")
     parser.add_argument("--show_crop_psnr", action="store_true")

@@ -1,0 +1,37 @@
+{
+  "models": [
+    "LTE",
+    "LTE-NoCellPhase",
+    "LTE-PhaseZ",
+    "SC-INR",
+    "SC-INR-NoSinc",
+    "SC-INR-EQ"
+  ],
+  "datasets": [
+    "bsd100",
+    "urban100"
+  ],
+  "scales": [
+    4,
+    8,
+    16,
+    30
+  ],
+  "consistency_pairs": [
+    [
+      8,
+      4
+    ],
+    [
+      16,
+      4
+    ],
+    [
+      30,
+      4
+    ]
+  ],
+  "max_images": 5,
+  "device": "cuda:0",
+  "eval_bsize": 50000
+}

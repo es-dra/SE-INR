@@ -1,0 +1,20 @@
+{
+  "mode": "both",
+  "out": "artifacts/derived/diagnostics/response_omega_diagnostics_2026-05-10",
+  "device": "cuda:0",
+  "models": "SC-INR-NoPhi,SC-INR-NoPhi-Signed,SC-INR,SC-INR-NoSinc",
+  "datasets": "bsd100,urban100",
+  "max_images": 5,
+  "lr_scale": 4,
+  "scales": "4,8,16,30",
+  "cell_models": "LTE,SC-INR-NoPhi,SC-INR-NoPhi-Signed,SC-INR,SC-INR-NoSinc",
+  "cell_dataset": "urban100",
+  "cell_datasets": "bsd100,urban100",
+  "cell_image": "",
+  "cell_max_images": 5,
+  "cell_lr_scale": 4,
+  "cell_ref_scale": 4,
+  "cell_scales": "4,6,8,12,16,24,30",
+  "max_queries": 4096,
+  "eval_bsize": 50000
+}

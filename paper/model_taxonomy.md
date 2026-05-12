@@ -1,61 +1,51 @@
-# Model Taxonomy And Display Names
+# 模型命名与展示名
 
-本文档约束论文表格、图例和正文中的模型展示名。工程目录、checkpoint 目录、
-raw JSON key 不做物理重命名；展示层通过本表映射。checkpoint 使用 canonical
-alias 指向历史物理目录，避免新实验继续扩散旧命名。
+本文档约束论文表格、图例和正文中的模型展示名。`configs/registry/models.yaml`
+是机器可读注册表；本文档负责解释命名理由和使用边界。
 
 ## 命名原则
 
-1. 最终候选使用简洁主名 `SC-INR`。
-2. 旧主模型和诊断模型应变成围绕最终模型的消融或机制对照。
-3. raw key 与历史物理 checkpoint 目录保留可追溯；新入口使用 canonical alias。
-4. 图表中优先使用短但明确的名字，避免只用单字母缩写。
+1. 最终候选主方法使用 `SC-INR`。
+2. 旧主线和结构变化写成消融或机制对照，不继续扩散旧工程名。
+3. raw JSON key 和历史训练名只作为 provenance 保留。
+4. checkpoint 真实目录使用 canonical 名称；历史训练名保留为 symlink。
+5. 图表中优先使用清晰展示名，避免只用含义不明的短缩写。
 
 ## 推荐展示表
 
 | 展示名 | raw/result key | canonical checkpoint | 角色 | 说明 |
 | --- | --- | --- | --- | --- |
-| `LIIF` | `LIIF` | `artifacts/checkpoints/seed1/liif` | baseline | 标准 LIIF。 |
-| `LTE` | `LTE` | `artifacts/checkpoints/seed1/lte` | baseline | 标准 LTE，含 cell-conditioned phase。 |
-| `LIIF-EQ` | `LIIF-EQ` | `artifacts/checkpoints/seed1/liif-eq` | orthogonal baseline | Rot-E 旋转等变版本。 |
-| `LTE-EQ` | `LTE-EQ` | `artifacts/checkpoints/seed1/lte-eq` | orthogonal baseline | Rot-E 旋转等变版本。 |
-| `LTE-NoCellPhase` | `LTE-NoCell` | `artifacts/checkpoints/seed1/lte-nocellphase` | diagnostic | 移除 LTE 的 learned `phase(cell)`。 |
-| `LTE-PhaseZ` | `LTE-FeaturePhase` | `artifacts/checkpoints/seed1/lte-phasez` | diagnostic | LTE phase 改为 feature-conditioned `phi(z)`。 |
-| `SC-INR-FixedOmega` | `SC-INR-Fixed` | `artifacts/checkpoints/seed1/sc-inr-fixed-omega` | ablation | 固定 frequency basis + analytic sinc。 |
-| `SC-INR-NoPhi` | `SC-INR`, `SC-INR-Adaptive` | `artifacts/checkpoints/seed1/sc-inr-nophi` | ablation / previous main | feature-conditioned omega，无 phase；旧论文名为 SC-INR-Adaptive。 |
-| `SC-INR-NoPhi-Signed` | `SC-INR-Signed`, `SC-INR-Adaptive-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` | ablation | signed omega，无 phase。 |
-| `SC-INR` | `SC-INR+PhiZ` seed1; clean `SC-INR` seed2/3 | `artifacts/checkpoints/seed1/sc-inr` | final candidate | signed omega + feature-conditioned phase。 |
-| `SC-INR-NoSinc` | `SC-INR-NoSinc` | `artifacts/checkpoints/seed1/sc-inr-nosinc` | ablation | signed omega + feature-conditioned phase，但移除 analytic sinc response；seed1 benchmark 和 auxiliary metrics 已完成。 |
+| `LIIF` | `LIIF` | `artifacts/checkpoints/seed1/liif` | baseline | 标准 LIIF |
+| `LTE` | `LTE` | `artifacts/checkpoints/seed1/lte` | baseline | 标准 LTE，含 cell-conditioned phase |
+| `LIIF-EQ` | `LIIF-EQ` | `artifacts/checkpoints/seed1/liif-eq` | 正交 baseline | Rot-E 旋转等变版本 |
+| `LTE-EQ` | `LTE-EQ` | `artifacts/checkpoints/seed1/lte-eq` | 正交 baseline | Rot-E 旋转等变版本 |
+| `LTE-NoCellPhase` | `LTE-NoCell` | `artifacts/checkpoints/seed1/lte-nocellphase` | diagnostic | 移除 LTE 的 learned `phase(cell)` |
+| `LTE-PhaseZ` | `LTE-FeaturePhase` | `artifacts/checkpoints/seed1/lte-phasez` | diagnostic | LTE phase 改为 feature-conditioned `phi(z)` |
+| `SC-INR-FixedOmega` | `SC-INR-Fixed` | `artifacts/checkpoints/seed1/sc-inr-fixed-omega` | ablation | 固定 frequency basis + analytic sinc |
+| `SC-INR-NoPhi` | legacy `SC-INR` / `SC-INR-Adaptive` | `artifacts/checkpoints/seed*/sc-inr-nophi` | 旧主线/消融 | feature-conditioned omega，无 phase |
+| `SC-INR-NoPhi-Signed` | `SC-INR-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` | ablation | signed omega，无 phase |
+| `SC-INR` | seed1 `SC-INR+PhiZ`; seed2/3 clean `SC-INR` | `artifacts/checkpoints/seed*/sc-inr` | 最终候选 | signed omega + feature-conditioned phase |
+| `SC-INR-EQ` | `SC-INR-EQ` | `artifacts/checkpoints/seed1/sc-inr-eq` | exploratory | Rot-E plumbing + SC-INR decoder contract，不是主方法 |
+| `SC-INR-NoSinc` | `SC-INR-NoSinc` | `artifacts/checkpoints/seed1/sc-inr-nosinc` | ablation | 移除 analytic sinc response |
 
-## 对用户命名方案的判断
+## 关键边界
 
-将最终 `SC-INR-PhaseZ` 简化为 `SC-INR` 是合理的，因为论文主方法应该有一个
-干净的名字；`PhaseZ` 更适合放在消融说明里，而不是长期挂在主方法名上。
+- `SC-INR` 是最终候选，不再写作 `SC-INR+PhiZ`。
+- `SC-INR-NoPhi` 才是旧 raw key `SC-INR` 在部分 seed1/core 结果中的含义。
+- `SC-INR-EQ` 只能写成可结合 Rot-E 的探索性扩展，不能作为新主方法。
+- `SC-INR-NoSinc` 的 same-LR consistency 很高，说明该指标会奖励 cell-insensitive
+  decoder；不能据此说 NoSinc 更符合 observation modeling。
 
-但不建议把所有对照都强行改成 `SC-INR-*`：
+## 论文写法建议
 
-- `LIIF`、`LTE` 是外部 baseline，不应变成 SC-INR 消融；
-- `LIIF-EQ`、`LTE-EQ` 是正交的 Rot-E baseline，也不应伪装成 SC-INR 消融；
-- `LTE-NoCellPhase` 和 `LTE-PhaseZ` 是 LTE-side 机制诊断，保留 LTE 前缀更诚实；
-- 真正的 SC-INR 消融应集中在 `FixedOmega`、`NoPhi`、`NoPhi-Signed`、`w/o sinc`
-  等结构轴上。
+正文可以写：
 
-不推荐 `LTE-P` 这个名字。它太短且语义不唯一，不能直接表达“移除
-cell-conditioned phase”。图表空间足够时用 `LTE-NoCellPhase`；空间不足时可用
-`LTE-NoCell`。
+> We denote the final feature-phase variant as SC-INR. The previous no-phase
+> variant is reported as SC-INR-NoPhi.
 
-## 当前证据注意事项
+不要写：
 
-- 最终候选 `SC-INR` 的 3 seed benchmark 已完成；论文主表优先展示它相对
-  LIIF/LTE 的差距。`SC-INR` vs `SC-INR-NoPhi` 只作为 seed1 结构增量背景。
-- 最终候选 `SC-INR` 在 seed1 历史结果中对应 raw key `SC-INR+PhiZ`，
-  在 seed2/3 新评估文件中对应清理后的 raw key `SC-INR`。
-- 正文若提前采用最终命名 `SC-INR`，必须在实验表注或方法说明中写明：
-  `SC-INR` corresponds to the feature-conditioned phase variant; `SC-INR-NoPhi`
-  denotes the previous no-phase variant.
-- `save/...` 是 compatibility symlink，等价于 `artifacts/checkpoints/seed1/...`。
-  新实验优先写 canonical alias，如 `save/sc-inr`；历史物理目录只在 provenance
-  或 raw-result 说明中出现。
-- `SC-INR-NoSinc` 的 same-LR self-consistency 很高，不能被解读为 NoSinc 更好；
-  它说明当前 consistency 指标会奖励 cell-independent decoder，需要结合 fidelity
-  和 full benchmark 解释。
+> SC-INR is strictly scale-equivariant.
+
+也不要把历史 raw key、训练目录名或旧日志名放进正文主表。它们只应出现在
+provenance、artifact 白名单或复现说明里。

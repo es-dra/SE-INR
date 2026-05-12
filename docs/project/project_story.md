@@ -1,10 +1,9 @@
 # Project Story
 
 本文档是项目叙事入口。短恢复入口优先读 `docs/project/current_state.md`。
-历史长版记录已归档到
-`docs/archive/project_story_legacy_2026-05-09.md`，其中包含旧命名
-`SC-INR-Adaptive` 和早期结果解读；引用论文事实时应以本文档、
-`paper/claims_evidence_matrix.md` 和 `paper/ARTIFACTS_ALLOWED.md` 为准。
+旧长版叙事已经删除，避免 `SC-INR-Adaptive` 等历史命名继续污染当前主线。
+引用论文事实时应以本文档、`paper/claims_evidence_matrix.md` 和
+`paper/ARTIFACTS_ALLOWED.md` 为准。
 
 ## 研究问题
 
@@ -110,18 +109,19 @@ prior 或 positive，审稿人不容易一眼看出它到底去掉了什么。�
 - 可引用产物白名单：`paper/ARTIFACTS_ALLOWED.md`
 - 短恢复入口：`docs/project/current_state.md`
 - 长任务账本：`memory/task_ledger.md`
-- 核心 benchmark：`artifacts/derived/analysis/benchmark_progress_2026-05-09/`
-- final `SC-INR` 3-seed benchmark：
-  `artifacts/derived/analysis/benchmark_progress_2026-05-11/`
-- seed1 final SC-INR auxiliary：`artifacts/derived/analysis/sc_inr_final_aux_metrics_seed1/`
-- NoSinc auxiliary：`artifacts/derived/analysis/sc_inr_nosinc_aux_metrics_seed1/`
-- response/omega diagnostics：`artifacts/derived/analysis/response_omega_diagnostics_2026-05-10/`
-- qualitative 候选池：`artifacts/derived/paper_candidates/qualitative_phiz_candidates/`
+- canonical benchmark：`artifacts/derived/benchmarks/`
+- 辅助证据索引：`artifacts/derived/evidence/README_zh.md`
+- 核心 benchmark provenance：`artifacts/legacy/derived_analysis/benchmark_provenance/benchmark_progress_2026-05-09/`
+- final `SC-INR` 3-seed benchmark provenance：
+  `artifacts/legacy/derived_analysis/benchmark_provenance/benchmark_progress_2026-05-11/`
+- seed1 final SC-INR auxiliary：`artifacts/derived/diagnostics/sc_inr_final_aux_metrics_seed1/`
+- NoSinc auxiliary：`artifacts/derived/diagnostics/sc_inr_nosinc_aux_metrics_seed1/`
+- response/omega diagnostics：`artifacts/derived/diagnostics/response_omega_diagnostics_2026-05-10/`
+- selected qualitative examples：`artifacts/derived/paper_figures/qualitative_selected_seed1/`
 
 ## 下一步
 
-1. 将用户确认的两张 qualitative 候选图升级为正式 figure draft。
-2. 收敛 paper tables：multi-seed core、final `SC-INR` 3-seed、NoSinc ablation、
-   auxiliary/diagnostic。
+1. 论文表格只从 `artifacts/derived/benchmarks/` 进入。
+2. 对辅助证据做 figure/table selection gate，区分正文、appendix 和 diagnostic-only。
 3. 设计更直接的 footprint correctness 指标；不要继续堆叠 same-LR
    self-consistency 作为 sinc 主证据。

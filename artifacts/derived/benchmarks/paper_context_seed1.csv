@@ -1,0 +1,13 @@
+seed,canonical_model,model_status,result_set,source_file,raw_key,id_psnr,ood_psnr,all_psnr,n_items,delta_id_vs_lte,delta_ood_vs_lte,delta_all_vs_lte
+1,LIIF,baseline,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,LIIF,30.999150,22.711137,25.473808,36,-0.045800,0.019449,-0.002300
+1,LIIF-EQ,orthogonal_baseline,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,LIIF-EQ,31.120467,22.746883,25.538078,36,0.075517,0.055195,0.061970
+1,LTE,baseline,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,LTE,31.044950,22.691688,25.476108,36,0.000000,0.000000,0.000000
+1,LTE-EQ,orthogonal_baseline,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,LTE-EQ,31.067233,22.702987,25.491069,36,0.022283,0.011299,0.014961
+1,LTE-NoCellPhase,diagnostic,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,LTE-NoCell,30.841633,22.662042,25.388572,36,-0.203317,-0.029646,-0.087536
+1,LTE-PhaseZ,diagnostic,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,LTE-FeaturePhase,30.896017,22.690975,25.425989,36,-0.148933,-0.000713,-0.050119
+1,SC-INR-FixedOmega,ablation,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,SC-INR-Fixed,30.994167,22.709583,25.471111,36,-0.050783,0.017895,-0.004997
+1,SC-INR-NoPhi,ablation_previous_main,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,SC-INR,31.051467,22.747071,25.515203,36,0.006517,0.055383,0.039095
+1,SC-INR-NoPhi-Signed,ablation,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,SC-INR-Signed,31.056725,22.741779,25.513428,36,0.011775,0.050091,0.037320
+1,SC-INR,active_final_candidate,seed1_signed_phiz,artifacts/raw_results/seed1/benchmark_signed_phiz.json,SC-INR+PhiZ,31.118717,22.776575,25.557289,36,0.073767,0.084887,0.081181
+1,SC-INR-NoSinc,ablation_seed1_benchmark_aux_complete,seed1_nosinc,artifacts/raw_results/seed1/benchmark_sc_inr_nosinc.json,SC-INR-NoSinc,30.979042,22.729854,25.479583,36,-0.065908,0.038166,0.003475
+1,SC-INR-EQ,exploratory_extension,seed1_sc_inr_eq,artifacts/raw_results/seed1/benchmark_sc_inr_eq.json,SC-INR-EQ,31.151333,22.777929,25.569064,36,0.106383,0.086241,0.092956

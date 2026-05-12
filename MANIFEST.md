@@ -1,43 +1,35 @@
-# Project Manifest
+# 项目清单
 
-This file is the top-level map for the reorganized SC-INR / SE-INR research
-workspace. It records the stable project contracts: where source code lives,
-where artifacts live, which paths are compatibility aliases, and which evidence
-is suitable for paper use.
+本文档记录 `SC-ASISR` 的稳定结构约定。更详细的科学状态看
+`docs/project/current_state.md`，论文证据边界看 `paper/claims_evidence_matrix.md`。
 
-## Directory Contract
+## 目录契约
 
-| Path | Role | Notes |
+| 路径 | 角色 | 说明 |
 | --- | --- | --- |
-| `src/` | Importable research code | `src/models`, `src/datasets`, and `src/utils.py` are the canonical source paths. Root `models/`, `datasets/`, and `utils.py` are compatibility symlinks. |
-| `entrypoints/` | CLI entry points | Canonical location for `train.py`, `test.py`, and evaluation scripts. Root files are compatibility symlinks. |
-| `configs/` | Versioned configs and registries | Training/test configs remain under existing subdirs; shared paper-facing registries live in `configs/registry/`. |
-| `scripts/analysis/` | Analysis and diagnostic scripts | Scripts that consume checkpoints/results and emit CSV/figures. |
-| `scripts/paper/` | Paper artifact generation | Scripts that turn verified analysis into table/figure candidates. |
-| `scripts/viz/` | Qualitative visualization scripts | Includes crop figure generation. |
-| `scripts/legacy/` | Historical launchers | Not recommended as current entry points. |
-| `artifacts/checkpoints/` | Checkpoints/config/log provenance | Large model artifacts. Ignored by git. Root `save/` and `save-seeds/` are compatibility symlinks. Canonical aliases such as `save/sc-inr` point to historical physical checkpoint directories. |
-| `artifacts/raw_results/` | Raw evaluation JSON | Formal raw metrics, grouped by seed/protocol. |
-| `artifacts/derived/` | Derived tables, figures, analysis | Recomputable from raw results and scripts. |
-| `artifacts/smoke/` | Smoke/debug outputs | Not paper evidence unless explicitly promoted. |
-| `artifacts/legacy/` | Historical outputs | Kept for traceability, not current evidence. |
-| `artifacts/results/` | Compatibility result tree | Symlink-based tree preserving old `results/...` paths. Root `results/` points here. |
-| `docs/` | Project documentation and historical reports | Current project docs plus archived historical reports. |
-| `experiments/` | Experiment cards and manifests | One directory per research question/experiment family. |
-| `paper/` | Paper-facing working area | Claims, figures, tables, and source maps. |
-| `memory/` | Daily project memory | Chronological research log. |
+| `src/` | 源码 | `src/models`、`src/datasets`、`src/utils.py` 是 canonical 源码位置 |
+| `entrypoints/` | 正式 CLI | 训练、评估和少量历史诊断入口 |
+| `configs/` | 配置与注册表 | 训练配置和 `configs/registry/` |
+| `scripts/analysis/` | 分析脚本 | benchmark 聚合、诊断和机制分析 |
+| `scripts/paper/` | 论文产物脚本 | 从已验证结果生成表图候选 |
+| `scripts/viz/` | 可视化脚本 | 定性 crop 图导出 |
+| `artifacts/checkpoints/` | checkpoint | 权重、训练配置、训练日志 |
+| `artifacts/raw_results/` | 原始评估结果 | 正式 benchmark JSON |
+| `artifacts/derived/benchmarks/` | 主 benchmark 表 | 论文主表 canonical 来源 |
+| `artifacts/derived/diagnostics/` | 辅助诊断 | consistency、response、mechanism suite 摘要 |
+| `artifacts/derived/evidence/` | 证据索引 | 辅助证据总入口 |
+| `artifacts/derived/paper_figures/` | 论文候选图 | 只保留用户确认的图 |
+| `artifacts/legacy/` | 历史留档 | 只作 provenance/audit |
+| `artifacts/results/` | 旧 results 兼容层 | 不作为新证据入口 |
+| `experiments/` | 实验卡 | 冻结协议和实验结论 |
+| `paper/` | 论文工作区 | claim ledger、artifact 白名单、草稿 |
+| `docs/` | 项目文档 | 当前状态和历史 archive |
+| `memory/` | 每日记忆 | 中文科研记录 |
 
-## Compatibility Paths
+## 兼容路径
 
-These paths are intentionally preserved as symlinks so old commands keep
-working during the transition:
+根目录只保留以下 symlink：
 
-- `train.py` -> `entrypoints/train.py`
-- `test.py` -> `entrypoints/test.py`
-- `eval_full.py` -> `entrypoints/eval_full.py`
-- `eval_continuous.py` -> `entrypoints/eval_continuous.py`
-- `eval_fce.py` -> `entrypoints/eval_fce.py`
-- `eval_phase_intervention.py` -> `entrypoints/eval_phase_intervention.py`
 - `models` -> `src/models`
 - `datasets` -> `src/datasets`
 - `utils.py` -> `src/utils.py`
@@ -45,46 +37,59 @@ working during the transition:
 - `save-seeds` -> `artifacts/checkpoints/seeds`
 - `results` -> `artifacts/results`
 - `logs` -> `artifacts/logs`
+- `Data` -> `artifacts/data_local`
 
-Do not remove these compatibility paths until all scripts and documentation
-have been migrated to the canonical paths.
+这些路径用于旧命令恢复。新脚本、新文档和论文正文应使用 canonical 路径。
 
-## Evidence Status
+## checkpoint 命名契约
 
-| Artifact | Status | Paper Use | Caveat |
+checkpoint 目录以论文展示名为 canonical 名称。旧训练名只保留为 symlink 或
+registry provenance。
+
+| 展示名 | canonical checkpoint |
+| --- | --- |
+| `LIIF` | `artifacts/checkpoints/seed1/liif` |
+| `LTE` | `artifacts/checkpoints/seed1/lte` |
+| `LIIF-EQ` | `artifacts/checkpoints/seed1/liif-eq` |
+| `LTE-EQ` | `artifacts/checkpoints/seed1/lte-eq` |
+| `LTE-NoCellPhase` | `artifacts/checkpoints/seed1/lte-nocellphase` |
+| `LTE-PhaseZ` | `artifacts/checkpoints/seed1/lte-phasez` |
+| `SC-INR-FixedOmega` | `artifacts/checkpoints/seed1/sc-inr-fixed-omega` |
+| `SC-INR-NoPhi` | `artifacts/checkpoints/seed*/sc-inr-nophi` |
+| `SC-INR-NoPhi-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` |
+| `SC-INR` | `artifacts/checkpoints/seed*/sc-inr` |
+| `SC-INR-EQ` | `artifacts/checkpoints/seed1/sc-inr-eq` |
+| `SC-INR-NoSinc` | `artifacts/checkpoints/seed1/sc-inr-nosinc` |
+
+命名映射以 `configs/registry/models.yaml` 和 `paper/model_taxonomy.md` 为准。
+raw JSON 中的历史 key 不改写，只通过注册表解释。
+
+## 证据状态
+
+| Artifact | 状态 | 论文用途 | caveat |
 | --- | --- | --- | --- |
-| `artifacts/raw_results/seed1/benchmark.json` | `formal_raw` | seed1 baseline benchmark | Does not include Signed/PhiZ. |
-| `artifacts/raw_results/seed1/benchmark_signed_phiz.json` | `formal_raw` | seed1 Signed/PhiZ benchmark | Single seed for new variants. |
-| `artifacts/raw_results/seed2/benchmark.json` | `formal_raw` | core multi-seed | Core models only. |
-| `artifacts/raw_results/seed3/benchmark.json` | `formal_raw` | core multi-seed | Core models only. |
-| `artifacts/derived/analysis/overview/` | `derived` | current benchmark/diagnostic summary | Regenerated by `scripts/analyze_results.py`; final-candidate `SC-INR` is seed1 only. |
-| `artifacts/derived/analysis/benchmark_progress_2026-05-09/` | `derived` | 2026-05-09 stage-specific benchmark notes | Derived from raw JSON. |
-| `artifacts/derived/analysis/seed1_aux_metrics_all8/` | `derived` | mechanism/consistency evidence | Seed1 auxiliary protocol. |
-| `artifacts/derived/paper_candidates/qualitative_phiz_candidates/` | `candidate` | qualitative candidate pool | Auto-delta crop candidates; avoid overclaim. |
-| `artifacts/smoke/*` | `smoke` | do not cite | Debug/smoke only. |
-| `artifacts/legacy/*` | `legacy` | historical reference | Not current evidence unless revalidated. |
+| `artifacts/raw_results/seed1/benchmark.json` | formal raw | seed1 baseline | 不含 Signed/PhiZ |
+| `artifacts/raw_results/seed1/benchmark_signed_phiz.json` | formal raw | seed1 Signed/PhiZ | 单 seed 新变体 |
+| `artifacts/raw_results/seed2/benchmark.json` | formal raw | core multi-seed | core models |
+| `artifacts/raw_results/seed3/benchmark.json` | formal raw | core multi-seed | core models |
+| `artifacts/derived/benchmarks/` | derived | 主 benchmark 表 | paper benchmark canonical 来源 |
+| `artifacts/derived/evidence/README_zh.md` | derived | 辅助证据索引 | 指向 diagnostics 与 selected figures |
+| `artifacts/derived/diagnostics/` | diagnostic | 机制和 consistency 支撑 | 不替代主 benchmark |
+| `artifacts/derived/paper_figures/qualitative_selected_seed1/` | candidate | 定性图 | 只支持 selected examples |
+| `artifacts/legacy/` | legacy | audit/provenance | 不能直接作为当前证据 |
 
-For paper writing, the stricter citation whitelist is
-`paper/ARTIFACTS_ALLOWED.md`.
+严格可引用范围以 `paper/ARTIFACTS_ALLOWED.md` 为准。
 
-## Naming Contract
+## 当前 claim 边界
 
-Paper-facing display names are centralized in
-`configs/registry/models.yaml`, with the rationale in `paper/model_taxonomy.md`.
-Historical registry names, checkpoint directories, and raw-result keys are kept
-there to avoid future confusion.
+支持：
 
-Important display names:
+- `SC-INR` 相对 LIIF/LTE 的小幅 OOD/ALL PSNR 正增益；
+- decoder-side sampling consistency / scale-decoupled observation；
+- 机制诊断可作为解释辅助。
 
-- `SC-INR`: final-candidate method; canonical checkpoint alias `save/sc-inr`;
-  historical raw/checkpoint key `SC-INR+PhiZ` / `sc-inr-phiz`.
-- `SC-INR-NoPhi`: previous no-phase main variant; raw key `SC-INR` /
-  `SC-INR-Adaptive`.
-- `SC-INR-NoPhi-Signed`: signed bounded omega diagnostic without phase.
-- `LTE-NoCellPhase` and `LTE-PhaseZ`: LTE-side mechanism diagnostics.
+不支持：
 
-## Current Claim Boundary
-
-The project currently supports claims about decoder-side sampling consistency
-and OOD scale robustness. It does not support claims of strict mathematical
-scale equivariance.
+- strict scale equivariance；
+- `SC-INR-EQ` 作为主方法；
+- 单一 consistency 分数或单 seed 诊断证明机制因果。

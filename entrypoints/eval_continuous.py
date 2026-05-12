@@ -5,9 +5,9 @@ Evaluates ASISR models on benchmark datasets at scales r in [1, 30], step 0.5.
 Output: comparison plot and JSON of results.
 
 Usage:
-    python eval_continuous.py --dataset set5     # Set5 only (default)
-    python eval_continuous.py --dataset bsd100   # BSD100 only
-    python eval_continuous.py --dataset all      # Both datasets
+    python entrypoints/eval_continuous.py --dataset set5     # Set5 only (default)
+    python entrypoints/eval_continuous.py --dataset bsd100   # BSD100 only
+    python entrypoints/eval_continuous.py --dataset all      # Both datasets
 """
 import os
 import sys
@@ -31,6 +31,7 @@ from tqdm import tqdm
 
 import models
 import utils
+from scripts.analysis.model_registry import MODEL_ALIASES
 
 
 DATA_ROOT = Path(os.environ.get('SEINR_DATA_ROOT', ROOT.parent / 'Data'))
@@ -171,18 +172,6 @@ def main():
         'SC-INR': 'save/sc-inr/epoch-best.pth',
         'SC-INR-NoSinc': 'save/sc-inr-nosinc/epoch-best.pth',
     }
-    MODEL_ALIASES = {
-        'LTE-NoCell': 'LTE-NoCellPhase',
-        'LTE-NoC': 'LTE-NoCellPhase',
-        'LTE-FeaturePhase': 'LTE-PhaseZ',
-        'SC-INR-Fixed': 'SC-INR-FixedOmega',
-        'SC-INR-Adaptive': 'SC-INR-NoPhi',
-        'SC-INR+PhiZ': 'SC-INR',
-        'SC-INR-Signed': 'SC-INR-NoPhi-Signed',
-        'SC-INR-Adaptive-Signed': 'SC-INR-NoPhi-Signed',
-        'SC-INR-w/o-sinc': 'SC-INR-NoSinc',
-    }
-
     if args.models:
         model_names = [MODEL_ALIASES.get(m.strip(), m.strip()) for m in args.models.split(',')]
         MODELS = {k: v for k, v in MODELS.items() if k in model_names}

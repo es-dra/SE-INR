@@ -1,1 +1,0 @@
-entrypoints/plot_continuous_scale.py

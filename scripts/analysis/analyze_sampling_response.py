@@ -9,7 +9,7 @@ produces compact CSV/figures for two questions:
 2. How much does a model's RGB output change when only the output cell changes
    for the same LR input and fixed query coordinates?
 
-Outputs are written under results/analysis/sampling_response/ by default.
+Outputs are written under artifacts/derived/diagnostics/sampling_response/ by default.
 """
 
 from __future__ import annotations
@@ -37,6 +37,7 @@ sys.path.insert(0, str(ROOT))
 
 import models
 import utils
+from scripts.analysis.model_registry import MODEL_PATHS, STYLE
 
 DATASETS = {
     "set5": DATA_ROOT / "Set5" / "HR",
@@ -45,51 +46,18 @@ DATASETS = {
     "urban100": DATA_ROOT / "Urban100" / "HR",
 }
 
-MODEL_PATHS = {
-    "LIIF": ROOT / "save" / "liif" / "epoch-best.pth",
-    "LTE": ROOT / "save" / "lte" / "epoch-best.pth",
-    "LTE-NoCellPhase": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
-    "LTE-NoCell": ROOT / "save" / "lte-nocellphase" / "epoch-best.pth",
-    "LTE-PhaseZ": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
-    "LTE-FeaturePhase": ROOT / "save" / "lte-phasez" / "epoch-best.pth",
-    "SC-INR-FixedOmega": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
-    "SC-INR-Fixed": ROOT / "save" / "sc-inr-fixed-omega" / "epoch-best.pth",
-    "SC-INR-NoPhi": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
-    "SC-INR-Adaptive": ROOT / "save" / "sc-inr-nophi" / "epoch-best.pth",
-    "SC-INR-NoPhi-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
-    "SC-INR-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
-    "SC-INR-Adaptive-Signed": ROOT / "save" / "sc-inr-nophi-signed" / "epoch-best.pth",
-    "SC-INR": ROOT / "save" / "sc-inr" / "epoch-best.pth",
-    "SC-INR+PhiZ": ROOT / "save" / "sc-inr" / "epoch-best.pth",
-    "SC-INR-NoSinc": ROOT / "save" / "sc-inr-nosinc" / "epoch-best.pth",
-}
-
-STYLE = {
-    "LIIF": "#4C72B0",
-    "LTE": "#DD8452",
-    "LTE-NoCellPhase": "#55A868",
-    "LTE-NoCell": "#55A868",
-    "LTE-PhaseZ": "#8172B2",
-    "LTE-FeaturePhase": "#8172B2",
-    "SC-INR-FixedOmega": "#C44E52",
-    "SC-INR-Fixed": "#C44E52",
-    "SC-INR-NoPhi": "#8B0000",
-    "SC-INR-Adaptive": "#8B0000",
-    "SC-INR-NoPhi-Signed": "#222222",
-    "SC-INR-Signed": "#222222",
-    "SC-INR-Adaptive-Signed": "#222222",
-    "SC-INR": "#B22222",
-    "SC-INR+PhiZ": "#B22222",
-    "SC-INR-NoSinc": "#666666",
-}
-
-
 def parse_csv_list(text: str) -> List[str]:
     return [x.strip() for x in text.split(",") if x.strip()]
 
 
-def parse_scales(text: str) -> List[int]:
-    return [int(float(x.strip())) for x in text.split(",") if x.strip()]
+def parse_scales(text: str) -> List[float]:
+    return [float(x.strip()) for x in text.split(",") if x.strip()]
+
+
+def scale_label(scale: float) -> str:
+    if float(scale).is_integer():
+        return f"x{int(scale)}"
+    return f"x{scale:g}"
 
 
 def ensure_dir(path: Path) -> None:
@@ -197,11 +165,44 @@ def omega_components(model) -> torch.Tensor | None:
         bs, ch, h, w = raw.shape
         if not hasattr(model, "num_freqs"):
             return None
+        if hasattr(model, "tranNum") and hasattr(model, "num_freqs_per_tran"):
+            t = int(model.tranNum)
+            k = int(model.num_freqs_per_tran)
+            if ch != 2 * k * t:
+                return None
+            return (
+                raw.view(bs, 2, k, t, h, w)
+                .permute(0, 4, 5, 2, 3, 1)
+                .reshape(bs, h, w, k * t, 2)
+                .contiguous()
+            )
         return raw.view(bs, model.num_freqs, 2, h, w).permute(0, 3, 4, 1, 2).contiguous()
     if hasattr(model, "freqs"):
         freqs = model.freqs.detach().view(1, 1, 1, model.num_freqs, 2)
         return freqs
     return None
+
+
+def effective_omega_components(model) -> torch.Tensor | None:
+    if not (hasattr(model, "omega_map") and hasattr(model, "tranNum") and hasattr(model, "num_freqs_per_tran")):
+        return omega_components(model)
+    raw = model.omega_map.detach()
+    bs, ch, h, w = raw.shape
+    t = int(model.tranNum)
+    k = int(model.num_freqs_per_tran)
+    if ch != 2 * k * t:
+        return None
+    omega = raw.view(bs, 2, k, t, h, w).permute(0, 4, 5, 2, 3, 1).contiguous()
+    omega_x = omega[..., 0]
+    omega_y = omega[..., 1]
+    cos_theta = model.cosTheta.detach().view(1, 1, 1, 1, t)
+    sin_theta = model.sinTheta.detach().view(1, 1, 1, 1, t)
+    eff_x = cos_theta * omega_x + sin_theta * omega_y
+    eff_y = -sin_theta * omega_x + cos_theta * omega_y
+    if getattr(model, "corrd_scale", 1.0) != 1.0:
+        eff_x = eff_x * float(model.corrd_scale)
+        eff_y = eff_y * float(model.corrd_scale)
+    return torch.stack([eff_x, eff_y], dim=-1).reshape(bs, h, w, k * t, 2).contiguous()
 
 
 def has_sc_inr_omega(model) -> bool:
@@ -224,11 +225,17 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
                 with torch.no_grad():
                     model.gen_feat((lr - 0.5) / 0.5)
                     omega = omega_components(model)
+                    effective_omega = effective_omega_components(model)
                     if omega is None:
                         continue
+                    if effective_omega is None:
+                        effective_omega = omega
                     omega_x = omega[..., 0]
                     omega_y = omega[..., 1]
+                    effective_omega_x = effective_omega[..., 0]
+                    effective_omega_y = effective_omega[..., 1]
                     omega_mag = torch.sqrt(omega_x.square() + omega_y.square())
+                    effective_omega_mag = torch.sqrt(effective_omega_x.square() + effective_omega_y.square())
                     omega_abs = torch.cat([omega_x.abs().flatten(), omega_y.abs().flatten()])
                     neg_frac = float(((omega_x < 0).float().mean() + (omega_y < 0).float().mean()) / 2)
                     bound = getattr(model, "omega_bound", None)
@@ -239,8 +246,8 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
 
                     for scale in scales:
                         rel_cell = 2.0 / float(scale)
-                        sinc_x = torch.sinc(omega_x * rel_cell / 2)
-                        sinc_y = torch.sinc(omega_y * rel_cell / 2)
+                        sinc_x = torch.sinc(effective_omega_x * rel_cell / 2)
+                        sinc_y = torch.sinc(effective_omega_y * rel_cell / 2)
                         response = sinc_x * sinc_y
                         use_sinc_response = bool(getattr(model, "use_sinc_response", True))
                         active_response = response if use_sinc_response else torch.ones_like(response)
@@ -251,7 +258,7 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
                             "dataset": dataset,
                             "image": img_path.name,
                             "lr_scale": f"x{args.lr_scale}",
-                            "observation_scale": f"x{scale}",
+                            "observation_scale": scale_label(scale),
                             "omega_param": getattr(model, "omega_param", "fixed"),
                             "omega_bound": float(bound) if bound is not None else "",
                             "use_sinc_response": use_sinc_response,
@@ -263,6 +270,9 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
                         row.update(summarize_tensor(omega_x, "omega_x"))
                         row.update(summarize_tensor(omega_y, "omega_y"))
                         row.update(summarize_tensor(omega_mag, "omega_mag"))
+                        row.update(summarize_tensor(effective_omega_x, "effective_omega_x"))
+                        row.update(summarize_tensor(effective_omega_y, "effective_omega_y"))
+                        row.update(summarize_tensor(effective_omega_mag, "effective_omega_mag"))
                         row.update(summarize_tensor(response, "response"))
                         row.update(summarize_tensor(active_response, "active_response"))
                         row.update(summarize_tensor(analytic_attenuation, "analytic_attenuation"))
@@ -280,6 +290,8 @@ def run_response_distribution(args, device: torch.device, out_dir: Path) -> None
             [
                 "omega_mag_mean",
                 "omega_mag_q95",
+                "effective_omega_mag_mean",
+                "effective_omega_mag_q95",
                 "omega_neg_frac",
                 "omega_near_bound_frac",
                 "response_mean",
@@ -368,11 +380,11 @@ def make_query_coords(size: Sequence[int], max_queries: int, device: torch.devic
     return coord.contiguous()
 
 
-def query_model(model, lr: torch.Tensor, coord: torch.Tensor, scale: int, bsize: int) -> torch.Tensor:
+def query_model(model, lr: torch.Tensor, coord: torch.Tensor, scale: float, bsize: int) -> torch.Tensor:
     h_lr, w_lr = lr.shape[-2:]
     cell = torch.ones_like(coord)
-    cell[:, :, 0] *= 2 / int(round(h_lr * scale))
-    cell[:, :, 1] *= 2 / int(round(w_lr * scale))
+    cell[:, :, 0] *= 2 / (h_lr * float(scale))
+    cell[:, :, 1] *= 2 / (w_lr * float(scale))
     with torch.no_grad():
         model.gen_feat((lr - 0.5) / 0.5)
         preds = []
@@ -411,7 +423,7 @@ def run_cell_curve(args, device: torch.device, out_dir: Path) -> None:
             preds: Dict[int, torch.Tensor] = {}
             for scale in scales:
                 preds[scale] = query_model(model, lr, coord, scale, args.eval_bsize)
-            ref_scale = args.cell_ref_scale if args.cell_ref_scale in preds else scales[0]
+            ref_scale = float(args.cell_ref_scale) if float(args.cell_ref_scale) in preds else scales[0]
             ref = preds[ref_scale]
             prev = None
             for scale in scales:
@@ -428,8 +440,8 @@ def run_cell_curve(args, device: torch.device, out_dir: Path) -> None:
                     "dataset": dataset,
                     "image": image_path.name,
                     "lr_scale": f"x{args.cell_lr_scale}",
-                    "observation_scale": f"x{scale}",
-                    "ref_scale": f"x{ref_scale}",
+                    "observation_scale": scale_label(scale),
+                    "ref_scale": scale_label(ref_scale),
                     "mean_y": float(pred_y.mean()),
                     "std_y": float(pred_y.std(unbiased=False)),
                     "rmse_y_vs_ref_cell": float(delta_ref),
@@ -502,7 +514,7 @@ def plot_cell_curve(csv_path: Path, fig_dir: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["response", "cell", "both"], default="both")
-    parser.add_argument("--out", type=Path, default=ROOT / "results" / "analysis" / "sampling_response")
+    parser.add_argument("--out", type=Path, default=ROOT / "artifacts" / "derived" / "diagnostics" / "sampling_response")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--models", default="SC-INR-FixedOmega,SC-INR-NoPhi,SC-INR")
     parser.add_argument("--datasets", default="bsd100,urban100")
