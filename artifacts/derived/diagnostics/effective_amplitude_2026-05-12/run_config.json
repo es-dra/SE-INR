@@ -1,0 +1,11 @@
+{
+  "self_test": false,
+  "out": "artifacts/derived/diagnostics/effective_amplitude_2026-05-12",
+  "device": "cuda:0",
+  "models": "SC-INR-NoPhi,SC-INR,SC-INR-NoSinc",
+  "datasets": "bsd100",
+  "max_images": 1,
+  "lr_scale": 4,
+  "scales": "4,8,16,30",
+  "max_queries": 128
+}

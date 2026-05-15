@@ -9,6 +9,8 @@
 - `sc_inr_final_aux_metrics_seed1/`：最终候选 `SC-INR` 的 seed1 辅助指标。
 - `sc_inr_nosinc_aux_metrics_seed1/`：NoSinc 负控和 consistency caveat。
 - `response_omega_diagnostics_2026-05-10/`：response/omega 机制诊断。
+- `effective_amplitude_2026-05-12/`：`q_coef(z) * W(omega(z), c)` 的 feature-level
+  effective amplitude 诊断。
 - `mechanism_suite_2026-05-12/`：6.1-6.6 与 SC-INR-EQ 的 active 摘要；完整探索产物在 legacy。
 
 ## 使用边界

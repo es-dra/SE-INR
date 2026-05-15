@@ -86,6 +86,11 @@ NoSinc evidence：
   zero active cell response 的 caveat，不是更正确 observation 的证据。
 - response/omega diagnostics: NoSinc active attenuation 和 cell-only RMSE 均为 0；
   full `SC-INR` 保留有限 analytic response。
+- effective amplitude diagnostics:
+  `artifacts/derived/diagnostics/effective_amplitude_2026-05-12/` 只作为
+  feature-level mechanism sanity check。它统计 MLP 前 coefficient-pair magnitude
+  proxy 与 `W(omega,c)` 的关系，不能解释为最终 RGB 频谱振幅、数据集级趋势或
+  多 seed 证据。
 
 SC-INR-EQ exploratory evidence：
 

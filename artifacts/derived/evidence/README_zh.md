@@ -11,6 +11,7 @@
 | final SC-INR seed1 auxiliary | `../diagnostics/sc_inr_final_aux_metrics_seed1/` | preliminary | 说明 final candidate 保留对 LTE 的 strong consistency，但不是 consistency 最强变体。 |
 | NoSinc caveat | `../diagnostics/sc_inr_nosinc_aux_metrics_seed1/` | diagnostic | 说明 same-LR consistency 会奖励 cell-insensitive decoder，不能单独证明 sinc。 |
 | response/omega diagnostics | `../diagnostics/response_omega_diagnostics_2026-05-10/` | diagnostic | 解释 full SC-INR 有有限 analytic cell response，NoSinc 为 zero active response。 |
+| effective amplitude diagnostics | `../diagnostics/effective_amplitude_2026-05-12/` | diagnostic | 直接统计 feature-level `q_coef(z) * W(omega(z), c)`，说明 cell 作用在有效输入强度而非 phase。 |
 | 6.1-6.6 mechanism suite / SC-INR-EQ | `../diagnostics/mechanism_suite_2026-05-12/` | diagnostic/exploratory | 机制摘要；完整探索产物在 legacy archive。 |
 | 用户确认 qualitative | `../paper_figures/qualitative_selected_seed1/` | candidate | 只作为 selected examples，不证明平均视觉质量。 |
 

@@ -99,6 +99,9 @@ footprint, the separable response is
   \sinc\left(\frac{\omega_h c_h}{2}\right)
   \sinc\left(\frac{\omega_w c_w}{2}\right).
 \end{equation}
+This is a signed sinc response. It can become negative for some
+frequency-footprint pairs, which corresponds to the signed response of a box
+filter rather than a guaranteed positive attenuation envelope.
 
 \subsection{SC-INR Variants}
 
@@ -106,7 +109,9 @@ The final-candidate SC-INR predicts content terms from features:
 \begin{equation}
   A=A(\feat), \qquad \freq=\freq(\feat), \qquad \phi=\phi(\feat),
 \end{equation}
-and uses signed bounded frequencies
+where \(A\) denotes the pre-MLP coefficient vector used by the decoder, not a
+direct measurement of the final RGB image spectrum.
+It uses signed bounded frequencies
 \begin{equation}
   \freq(\feat)=\omega_{\max}\tanh(g_\omega(\feat)).
 \end{equation}
@@ -119,6 +124,16 @@ The decoder input is
   \right]
   \odot W(\freq(\feat),\cell).
 \end{equation}
+Equivalently, the coefficient part can be viewed as a feature-level effective
+amplitude
+\begin{equation}
+  A_{\mathrm{eff}}(\feat,\cell)=A(\feat)\odot W(\freq(\feat),\cell),
+\end{equation}
+which separates content-dependent coefficient strength from the
+observation-dependent response of the output footprint. This interpretation
+applies to the Fourier feature vector passed to the MLP decoder; because SC-INR
+still uses an MLP, local ensemble, and residual upsampling, the full RGB
+predictor should not be described as an exact analytic box integral.
 The feature phase \(\phi(\feat)\) does not receive cell or scale. The previous
 no-phase variant, denoted SC-INR-NoPhi, sets \(\phi=0\). We keep checkpoint and
 raw-result compatibility names separate from paper display names; in older
