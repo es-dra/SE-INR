@@ -96,6 +96,8 @@ raw-result provenance 出现；`save`/`artifacts/checkpoints` 下不再保留旧
 
 - `SC-INR` 在当前 3 seed protocol 下相对 LIIF/LTE 有小幅 OOD/ALL PSNR 正增益；
 - decoder-side sampling consistency / scale-decoupled observation 是合理表述；
+- seed1 小样本 footprint oracle 诊断显示 `SC-INR` 比 `SC-INR-NoSinc` 更跟随
+  HR box-average proxy，但这仍是 diagnostic；
 - consistency 指标只能作为诊断，不能单独证明 observation modeling 正确。
 
 当前证据不支持：

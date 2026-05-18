@@ -50,11 +50,12 @@ coefficients and frequencies from image features, enabling stronger texture
 modeling than a plain MLP \citep{lee2022lte}.
 
 The current work revisits how the output cell enters such Fourier decoders. In
-LTE, the cell is fed to a learned phase map and directly shifts the Fourier
-argument. This can improve fitting near training scales, but it also gives the
-network freedom to extrapolate cell-to-phase behavior outside the training scale
-range. From a sampling perspective, the cell has a more specific meaning: it is
-the footprint of the output pixel in the continuous domain.
+the ASISR query protocol, the cell is not an arbitrary scale token: it specifies
+the output pixel footprint in the continuous image domain. In LTE, however, this
+cell is fed to a learned phase map and directly shifts the Fourier argument.
+This can improve fitting near training scales, but it also gives the network a
+shortcut for moving local texture phase as a function of the requested output
+footprint.
 
 We therefore study \emph{decoder-side sampling consistency}. The central idea is
 to separate the feature-conditioned continuous content from the scale-conditioned
@@ -64,7 +65,8 @@ decoded observation through an analytic sinc response derived from box averaging
 a Fourier component. This is not a claim of whole-network scale equivariance:
 the encoder, degradation model, and sampling protocol are not proven to commute
 with scale transformations. The contribution is instead a constrained implicit
-decoder that reduces arbitrary learned cell-conditioned extrapolation.
+decoder contract that reduces arbitrary learned cell-conditioned phase
+extrapolation.
 
 \section{Method}
 
@@ -78,7 +80,9 @@ frequencies from \(\feat\), but also adds a learned phase term \(h_p(\cell)\):
   \cos\left(\pi(\freq(\feat)^\top \delta + h_p(\cell))\right).
 \end{equation}
 This creates a cell-specific local function \(f_{\feat,\cell}\), rather than a
-single content function observed under different output footprints.
+single content function observed under different output footprints. Under scale
+extrapolation, this branch is unconstrained: a larger footprint can alter where
+the Fourier component appears, not merely how strongly it is observed.
 
 \subsection{Analytic Observation Response}
 
@@ -251,10 +255,89 @@ SC-INR-NoPhi & Urban100 & 47.0694 & +7.7712 \\
 \end{table}
 
 The large consistency gains in Table~\ref{tab:consistency} support the mechanism
-that removing learned cell-conditioned phase and using an analytic observation
-response improves same-LR cross-scale agreement. However, diagnostic LTE
-variants with weakened cell response can also score highly on consistency; these
-numbers must be interpreted jointly with reconstruction quality.
+that removing learned cell-conditioned phase is consistent with improved
+same-LR cross-scale agreement. However, diagnostic LTE variants with weakened
+cell response and SC-INR-NoSinc can also score highly on consistency; these
+numbers must be interpreted jointly with reconstruction quality and
+footprint-oracle diagnostics.
+
+\subsection{Footprint Oracle Diagnostic}
+
+Same-LR consistency alone cannot distinguish a footprint-aware decoder from a
+cell-insensitive decoder. We therefore add a small seed1 diagnostic that keeps
+the \(4\times\) LR input and query grid fixed, changes only the decoder cell,
+and compares the output to a discrete HR box-average oracle at the same query
+locations. The oracle is a piecewise-constant proxy from the available HR image,
+so it is a diagnostic target rather than a true continuous-scene integral.
+
+\begin{table}[H]
+\centering
+\caption{Seed1 footprint-oracle diagnostic on BSD100 and Urban100 first 10
+images. Cell multiplier \(m\) is relative to the native \(4\times\) query grid.
+Lower RMSE is better.}
+\label{tab:footprint-oracle}
+\begin{tabular}{lrrrr}
+\toprule
+Model & Oracle RMSE \(m=2\) & Oracle RMSE \(m=4\) &
+Tracking RMSE \(m=2\) & Tracking RMSE \(m=4\) \\
+\midrule
+LTE & 0.02504 & 0.02309 & 0.03077 & 0.04834 \\
+LTE-NoCellPhase & 0.02611 & 0.02653 & 0.03237 & 0.05134 \\
+SC-INR-NoPhi & 0.02476 & 0.02057 & 0.03069 & 0.04708 \\
+SC-INR & 0.02464 & 0.02148 & 0.03062 & 0.04745 \\
+SC-INR-NoSinc & 0.02612 & 0.02750 & 0.03237 & 0.05134 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:footprint-oracle} shows that SC-INR tracks the footprint oracle
+better than the cell-insensitive NoSinc control under this small diagnostic,
+while LTE-NoCellPhase and SC-INR-NoSinc have zero cell sensitivity and therefore
+inherit the oracle-change error. SC-INR-NoPhi is slightly stronger than the
+final feature-phase SC-INR on this diagnostic, so this result should be read as
+support for the analytic footprint-response mechanism, not as a claim that the
+final variant is best on every auxiliary metric.
+
+\subsection{LTE-to-SC-INR Mechanism Gate}
+
+The footprint-oracle diagnostic compares output behavior, but the central
+mechanism claim is more specific: LTE lets the cell directly change a learned
+phase signal, whereas SC-INR lets cell change a pre-MLP analytic response. We
+therefore add a crop-based seed1 gate that uses the same images, query points,
+and cell multipliers to record LTE's isolated \(h_p(c)\), SC-INR's active
+response, and the footprint-oracle errors. This diagnostic uses BSD100 and
+Urban100 first 5 images, center \(64\times64\) HR crops, and 256 query points
+per image; it is intentionally a mechanism gate, not a replacement for the
+full-image footprint oracle or the multi-seed benchmark.
+
+\begin{table}[H]
+\centering
+\caption{Unified LTE-to-SC-INR mechanism diagnostic, averaged over cell
+multipliers \(m=2,4\). Lower RMSE is better. Signal deltas are measured against
+the native \(m=1\) cell.}
+\label{tab:lte-scinr-mechanism}
+\begin{tabular}{lrrrr}
+\toprule
+Model & Oracle RMSE & Tracking RMSE & \(h_p(c)\) delta & Active response delta \\
+\midrule
+LTE & 0.02623 & 0.04198 & 0.51528 & -- \\
+LTE-NoCellPhase & 0.02714 & 0.04353 & -- & -- \\
+LTE-PhaseZ & 0.02695 & 0.04353 & -- & -- \\
+SC-INR & 0.02512 & 0.04113 & -- & 0.30812 \\
+SC-INR-NoPhi & 0.02476 & 0.04101 & -- & 0.29938 \\
+SC-INR-NoSinc & 0.02729 & 0.04353 & -- & 0.00000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:lte-scinr-mechanism} directly supports the intended mechanism
+distinction. LTE has a non-zero learned cell-phase signal; NoCellPhase and
+NoSinc remove the active cell response and therefore inherit the oracle-change
+error; SC-INR keeps a non-zero analytic response and tracks the crop oracle
+slightly better than LTE and NoSinc. The table should still be interpreted
+narrowly: the phase norm and response norm are not the same physical quantity,
+and this crop-based diagnostic does not prove that sinc is the unique cause of
+the benchmark gain.
 
 \subsection{Selected Qualitative Examples}
 
@@ -282,10 +365,11 @@ SC-INR now has three-seed benchmark evidence against LIIF and LTE, but auxiliary
 metrics for the final candidate remain seed1-only. Second, the w/o-sinc ablation
 is still single-seed and should not be used as a
 unique causal proof of the analytic response. Third, same-LR consistency can
-reward cell-insensitive behavior, so footprint-correctness diagnostics remain
-necessary. Finally, PSNR does not fully measure perceptual texture quality;
-qualitative crops and texture-sensitive metrics must remain part of the evidence
-package.
+reward cell-insensitive behavior; the footprint-oracle diagnostic partly closes
+this gap but remains a seed1 small-sample HR proxy, not a proof that the final
+RGB output is an exact box-footprint observation. Finally, PSNR does not fully
+measure perceptual texture quality; qualitative crops and texture-sensitive
+metrics must remain part of the evidence package.
 
 \section{Conclusion}
 
@@ -296,7 +380,7 @@ shows stable small OOD gains and substantially better cross-scale observation
 consistency, while the final-candidate feature-phase SC-INR preserves the OOD
 and All-scale PSNR gain over LTE and improves over LIIF on average.
 The next critical step is to close the remaining evidence gap with final-candidate
-auxiliary metrics, footprint-correctness diagnostics, and carefully audited
+auxiliary metrics, broader footprint-correctness checks, and carefully audited
 qualitative evidence.
 
 \bibliographystyle{plainnat}

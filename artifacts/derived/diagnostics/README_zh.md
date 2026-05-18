@@ -11,6 +11,11 @@
 - `response_omega_diagnostics_2026-05-10/`：response/omega 机制诊断。
 - `effective_amplitude_2026-05-12/`：`q_coef(z) * W(omega(z), c)` 的 feature-level
   effective amplitude 诊断。
+- `footprint_oracle_2026-05-15/`：固定 x4 LR/query、只改变 cell multiplier，
+  用 HR box-average proxy 检查模型是否跟随 footprint target。
+- `lte_scinr_mechanism_2026-05-16/`：统一比较 `LTE -> SC-INR` 主脉络，
+  同一 crop/query/cell 下记录 LTE `h_p(c)`、SC-INR `W(omega,c)`、
+  effective amplitude proxy 和 footprint oracle。
 - `mechanism_suite_2026-05-12/`：6.1-6.6 与 SC-INR-EQ 的 active 摘要；完整探索产物在 legacy。
 
 ## 使用边界

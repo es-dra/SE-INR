@@ -91,6 +91,23 @@ NoSinc evidence：
   feature-level mechanism sanity check。它统计 MLP 前 coefficient-pair magnitude
   proxy 与 `W(omega,c)` 的关系，不能解释为最终 RGB 频谱振幅、数据集级趋势或
   多 seed 证据。
+- footprint oracle diagnostics:
+  `artifacts/derived/diagnostics/footprint_oracle_2026-05-15/` 固定 x4 LR/query，
+  只改变 cell multiplier，并用 HR piecewise-constant box average 作为 oracle proxy。
+  `SC-INR` 在 multiplier 2/4 下的 oracle RMSE 为 `0.02464/0.02148`，低于
+  `SC-INR-NoSinc` 的 `0.02612/0.02750`；delta-tracking RMSE 为
+  `0.03062/0.04745`，低于 NoSinc 的 `0.03237/0.05134`。该诊断支持 analytic
+  footprint response 区分于 cell-insensitive 负控，但不是真实连续图像 exact integral
+  或 sinc 唯一因果证明。
+- LTE vs SC-INR unified mechanism diagnostics:
+  `artifacts/derived/diagnostics/lte_scinr_mechanism_2026-05-16/` 使用 BSD100/Urban100
+  前 5 张、中心 crop 64、每图 256 query、cell multiplier 1/2/4。m>1 平均下，
+  `SC-INR` delta-tracking RMSE `0.04113`，低于 `LTE` 的 `0.04198` 和
+  `SC-INR-NoSinc` 的 `0.04353`；oracle RMSE `0.02512`，低于 `LTE` 的
+  `0.02623` 和 NoSinc 的 `0.02729`。`LTE` 的 learned `h_p(c)` delta RMS 为
+  `0.51528`，`SC-INR` active response delta RMS 为 `0.30812`，NoSinc 为 `0`。
+  该结果直接补强 `LTE phase(cell) -> SC-INR W(omega,c)` 主脉络，但仍是
+  crop-based seed1 diagnostic。
 
 SC-INR-EQ exploratory evidence：
 
@@ -115,7 +132,8 @@ SC-INR-EQ exploratory evidence：
 
 1. paper table 收敛：benchmark 已有 canonical 入口
    `artifacts/derived/benchmarks/`；下一步只从该入口进入论文表格。
-2. footprint correctness 指标仍缺；不要继续把 same-LR consistency 当作 sinc 主证据。
+2. footprint correctness 已有 seed1 小样本 diagnostic gate；下一步若进入论文强证据，
+   需要扩大覆盖或继续作为 appendix diagnostic。不要继续把 same-LR consistency 当作 sinc 主证据。
 3. `SC-INR-EQ` 是 exploratory 分支：benchmark 和机制 suite 已补，但仍缺少更严格的
    旋转通道顺序、group action、cell-only response 和 analytic sinc 积分语义属性测试。
 4. 项目健康：旧 overview、旧 planning table 和未确认自动 qualitative candidates 已不应作为活跃入口。

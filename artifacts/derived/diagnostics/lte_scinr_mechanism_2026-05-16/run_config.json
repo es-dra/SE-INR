@@ -1,0 +1,14 @@
+{
+  "self_test": false,
+  "models": "LTE,LTE-NoCellPhase,LTE-PhaseZ,SC-INR-NoPhi,SC-INR,SC-INR-NoSinc",
+  "datasets": "bsd100,urban100",
+  "max_images": 5,
+  "base_scale": 4,
+  "cell_multipliers": "1,2,4",
+  "weak_oracle_threshold": 0.002,
+  "max_signal_queries": 256,
+  "crop_size": 64,
+  "device": "cuda:0",
+  "eval_bsize": 10000,
+  "out": "artifacts/derived/diagnostics/lte_scinr_mechanism_2026-05-16"
+}
