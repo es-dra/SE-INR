@@ -15,6 +15,6 @@
   "target_model": "SC-INR",
   "baseline_model": "LTE",
   "device": "cuda:0",
-  "output_png": "/workspace/SE-INR/Equivariant-ASISR/artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img004_x8_selected_gt_bicubic_lte_nophi_scinr.png",
-  "output_pdf": "/workspace/SE-INR/Equivariant-ASISR/artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img004_x8_selected_gt_bicubic_lte_nophi_scinr.pdf"
+  "output_png": "/workspace/SE-INR/SC-ASISR/artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img004_x8_selected_gt_bicubic_lte_nophi_scinr.png",
+  "output_pdf": "/workspace/SE-INR/SC-ASISR/artifacts/derived/paper_figures/qualitative_selected_seed1/urban100_img004_x8_selected_gt_bicubic_lte_nophi_scinr.pdf"
 }

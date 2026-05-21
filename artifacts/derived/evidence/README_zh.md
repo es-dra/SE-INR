@@ -12,8 +12,9 @@
 | NoSinc caveat | `../diagnostics/sc_inr_nosinc_aux_metrics_seed1/` | diagnostic | 说明 same-LR consistency 会奖励 cell-insensitive decoder，不能单独证明 sinc。 |
 | response/omega diagnostics | `../diagnostics/response_omega_diagnostics_2026-05-10/` | diagnostic | 解释 full SC-INR 有有限 analytic cell response，NoSinc 为 zero active response。 |
 | effective amplitude diagnostics | `../diagnostics/effective_amplitude_2026-05-12/` | diagnostic | 直接统计 feature-level `q_coef(z) * W(omega(z), c)`，说明 cell 作用在有效输入强度而非 phase。 |
-| footprint oracle diagnostics | `../diagnostics/footprint_oracle_2026-05-15/` | diagnostic | 固定 x4 LR/query，只改变 cell multiplier，并与 HR box-average proxy 比较；支持区分 analytic response 与 cell-insensitive 负控。 |
-| LTE vs SC-INR 统一机制诊断 | `../diagnostics/lte_scinr_mechanism_2026-05-16/` | diagnostic | 在同一 crop/query/cell 协议下并列检查 LTE `h_p(c)`、SC-INR active response/effective amplitude proxy 和 footprint oracle；支持主脉络机制解释。 |
+| footprint oracle diagnostics | `../diagnostics/footprint_oracle_2026-05-15/` | diagnostic | seed1 小样本 proxy；固定 x4 LR/query，只改变 cell multiplier，并与 HR box-average proxy 比较；支持区分 analytic response 与 cell-insensitive 负控，但不是 exact integral 证明。 |
+| LTE vs SC-INR 统一机制诊断 | `../diagnostics/lte_scinr_mechanism_2026-05-16/` | diagnostic | seed1 crop-based proxy；在同一 crop/query/cell 协议下并列检查 LTE `h_p(c)`、SC-INR active response/effective amplitude proxy 和 footprint oracle；支持主脉络机制解释，但不替代 benchmark。 |
+| LTE vs SC-INR 机制对比图 | `../paper_figures/lte_scinr_mechanism_2026-05-18/` | candidate | 论文/周报用结构示意图；用于解释形式差异，不能替代机制诊断或 benchmark。 |
 | 6.1-6.6 mechanism suite / SC-INR-EQ | `../diagnostics/mechanism_suite_2026-05-12/` | diagnostic/exploratory | 机制摘要；完整探索产物在 legacy archive。 |
 | 用户确认 qualitative | `../paper_figures/qualitative_selected_seed1/` | candidate | 只作为 selected examples，不证明平均视觉质量。 |
 

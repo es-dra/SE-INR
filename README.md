@@ -89,6 +89,8 @@ raw-result provenance 出现；`save`/`artifacts/checkpoints` 下不再保留旧
 `results` 只放指向 canonical benchmark JSON 的便捷链接；raw JSON 在
 `artifacts/raw_results/`，主表和全模型指标在 `artifacts/derived/benchmarks/`。
 新脚本和新文档应优先使用 canonical 路径；兼容路径只用于旧命令恢复。
+除非是在解释历史命令或兼容恢复，新命令、论文正文和持久脚本不要再写入
+`save/` 或 `save-seeds/` 路径。
 
 ## 不能过度宣称
 

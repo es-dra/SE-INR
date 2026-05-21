@@ -143,12 +143,20 @@ class ContinuousBenchmark:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Continuous PSNR evaluation')
+    parser = argparse.ArgumentParser(
+        description='Continuous PSNR evaluation. 默认读取 canonical checkpoint root。'
+    )
     parser.add_argument('--dataset', type=str, default='set5',
                         choices=['set5', 'bsd100', 'set14', 'urban100', 'all'],
                         help='Dataset to evaluate on (default: set5)')
     parser.add_argument('--models', type=str, default=None,
                         help='Comma-separated models to evaluate. Default: all available')
+    parser.add_argument(
+        '--save_root',
+        type=str,
+        default='artifacts/checkpoints/seed1',
+        help='Checkpoint root. Formal runs should prefer artifacts/checkpoints/seedN, not legacy save/.'
+    )
     args = parser.parse_args()
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -159,18 +167,19 @@ def main():
     else:
         target_datasets = [args.dataset]
 
+    save_root = args.save_root.rstrip('/')
     MODELS = {
-        'LIIF': 'save/liif/epoch-best.pth',
-        'LIIF-EQ': 'save/liif-eq/epoch-best.pth',
-        'LTE': 'save/lte/epoch-best.pth',
-        'LTE-NoCellPhase': 'save/lte-nocellphase/epoch-best.pth',
-        'LTE-EQ': 'save/lte-eq/epoch-best.pth',
-        'LTE-PhaseZ': 'save/lte-phasez/epoch-best.pth',
-        'SC-INR-FixedOmega': 'save/sc-inr-fixed-omega/epoch-best.pth',
-        'SC-INR-NoPhi': 'save/sc-inr-nophi/epoch-best.pth',
-        'SC-INR-NoPhi-Signed': 'save/sc-inr-nophi-signed/epoch-best.pth',
-        'SC-INR': 'save/sc-inr/epoch-best.pth',
-        'SC-INR-NoSinc': 'save/sc-inr-nosinc/epoch-best.pth',
+        'LIIF': f'{save_root}/liif/epoch-best.pth',
+        'LIIF-EQ': f'{save_root}/liif-eq/epoch-best.pth',
+        'LTE': f'{save_root}/lte/epoch-best.pth',
+        'LTE-NoCellPhase': f'{save_root}/lte-nocellphase/epoch-best.pth',
+        'LTE-EQ': f'{save_root}/lte-eq/epoch-best.pth',
+        'LTE-PhaseZ': f'{save_root}/lte-phasez/epoch-best.pth',
+        'SC-INR-FixedOmega': f'{save_root}/sc-inr-fixed-omega/epoch-best.pth',
+        'SC-INR-NoPhi': f'{save_root}/sc-inr-nophi/epoch-best.pth',
+        'SC-INR-NoPhi-Signed': f'{save_root}/sc-inr-nophi-signed/epoch-best.pth',
+        'SC-INR': f'{save_root}/sc-inr/epoch-best.pth',
+        'SC-INR-NoSinc': f'{save_root}/sc-inr-nosinc/epoch-best.pth',
     }
     if args.models:
         model_names = [MODEL_ALIASES.get(m.strip(), m.strip()) for m in args.models.split(',')]

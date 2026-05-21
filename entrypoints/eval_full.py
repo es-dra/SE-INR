@@ -194,7 +194,12 @@ def main():
         default='artifacts/raw_results/manual/benchmark_eval_full.json',
         help='Output JSON file. Prefer artifacts/raw_results/seedN/benchmark_<suite>.json for formal runs.',
     )
-    parser.add_argument('--save_root', type=str, default='save', help='Root directory containing model subdirectories')
+    parser.add_argument(
+        '--save_root',
+        type=str,
+        default='artifacts/checkpoints/seed1',
+        help='Root directory containing model subdirectories. Use legacy save/ only for compatibility recovery.',
+    )
     parser.add_argument('--skip_existing', action='store_true', help='Skip already evaluated combinations')
     parser.add_argument('--models', type=str, default=None,
                         help='Comma-separated list of models to evaluate, e.g., "LIIF,LTE,SC-INR". If not set, evaluate all.')
@@ -213,7 +218,7 @@ def main():
     ALL_MODELS = discover_models(SAVE_ROOT)
 
     if not ALL_MODELS:
-        print("Warning: no models with epoch-best.pth found in save/")
+        print(f"Warning: no models with epoch-best.pth found in {SAVE_ROOT}/")
 
     # Filter by --models argument if provided, otherwise evaluate all discovered
     if args.models:

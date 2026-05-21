@@ -76,6 +76,10 @@ final `SC-INR` evidence：
 - auxiliary 仍是 seed1：strong same-LR consistency vs LTE，但不是 consistency 最强变体。
 - qualitative: 用户确认 Urban100 img012 x8 和 img004 x8 selected examples，已在
   `artifacts/derived/paper_figures/qualitative_selected_seed1/` 用当前命名重新导出。
+- mechanism figure: LTE vs SC-INR 结构对比图已生成在
+  `artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/`；它是论文/周报候选图，
+  只说明 cell 进入 decoder 的形式差异，不能替代 `lte_scinr_mechanism_2026-05-16`
+  的 seed1 机制诊断。
 
 NoSinc evidence：
 

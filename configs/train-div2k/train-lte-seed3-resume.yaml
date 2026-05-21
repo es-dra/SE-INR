@@ -60,5 +60,5 @@ multi_step_lr:
 epoch_val: 1
 epoch_save: 100
 resume:
-  path: ./save-seeds/seed3/lte/epoch-last.pth
+  path: ./artifacts/checkpoints/seeds/seed3/lte/epoch-last.pth
   map_location: cuda

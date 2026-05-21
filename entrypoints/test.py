@@ -141,7 +141,7 @@ def eval_psnr(loader, model, data_norm=None, eval_type=None, eval_bsize=None,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default='configs/test/test-urban100-4.yaml')
-    parser.add_argument('--model', default='save/liif/epoch-best.pth')
+    parser.add_argument('--model', default='artifacts/checkpoints/seed1/liif/epoch-best.pth')
     parser.add_argument('--device', default='0')
     # parser.add_argument('--window', default='0')
     args = parser.parse_args()
