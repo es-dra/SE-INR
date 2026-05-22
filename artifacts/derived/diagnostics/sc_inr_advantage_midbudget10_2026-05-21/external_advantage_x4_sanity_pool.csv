@@ -1,0 +1,5 @@
+dataset,image,scale,scale_num,split,crop_id,crop_y,crop_x,crop_size,texture_bin,edge_bin,highpass_bin,flat_control,structured_crop,sc_inr_psnr_y,liif_psnr_y,lte_psnr_y,delta_vs_liif,delta_vs_lte,min_external_delta,mean_external_delta,wins_external,texture_var,edge_mag,highpass_energy,representative_type
+Urban100,img_018.png,x4,4,ID,6,96,576,96,high,mid,high,0,1,24.57137050,24.57151797,24.53904892,-0.00014747,0.03232158,-0.00014747,0.01608706,0,0.01015607,0.04745447,0.23560353,x4_sanity_neutral
+BSD100,145086.png,x4,4,ID,10,192,0,96,low,mid,mid,0,1,24.36182963,24.36198671,24.35254757,-0.00015708,0.00928206,-0.00015708,0.00456249,0,0.00707121,0.04547511,0.24159008,x4_sanity_neutral
+BSD100,159008.png,x4,4,ID,14,192,384,96,high,high,high,0,1,24.61515747,24.61480572,24.59470742,0.00035175,0.02045005,0.00035175,0.01040090,1,0.01453020,0.05649704,0.19707347,x4_sanity_neutral
+Urban100,img_006.png,x4,4,ID,1,0,384,96,high,high,high,0,1,21.00262288,21.00215671,20.87626762,0.00046617,0.12635526,0.00046617,0.06341071,1,0.02164957,0.08597296,0.28709313,x4_sanity_neutral

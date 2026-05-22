@@ -1,8 +1,9 @@
 # Current State Capsule
 
-本文档是短恢复入口。长技术细节见 `docs/project/SC-INR_Exp.md`，论文 claim
-边界见 `paper/claims_evidence_matrix.md`，可引用产物见
-`paper/ARTIFACTS_ALLOWED.md`。
+本文档是短恢复入口。LIIF/LTE 文献笔记与 SC-INR 对照底稿见
+`docs/project/model_details_liif_lte_scinr.md`；论文 claim 边界见
+`paper/claims_evidence_matrix.md`；可引用产物见 `paper/ARTIFACTS_ALLOWED.md`。
+旧长技术记录 `docs/project/SC-INR_Exp.md` 只作历史参考，不再作为恢复主入口。
 
 ## 当前研究对象
 
@@ -112,6 +113,21 @@ NoSinc evidence：
   `0.51528`，`SC-INR` active response delta RMS 为 `0.30812`，NoSinc 为 `0`。
   该结果直接补强 `LTE phase(cell) -> SC-INR W(omega,c)` 主脉络，但仍是
   crop-based seed1 diagnostic。
+- advantage-region diagnostics:
+  `artifacts/derived/diagnostics/sc_inr_advantage_midbudget10_2026-05-21/` 已补充
+  first-10 逐图 paired statistics 和 seed1 预注册局部 crop 候选池。first-10 OOD
+  相对 LTE mean/median/win-rate 为 `+0.0434` / `+0.0320` / `0.746`，相对 LIIF 为
+  `+0.0291` / `+0.0216` / `0.689`。局部 OOD crop 相对 LTE median ΔPSNR
+  `+0.0353`、win-rate `0.628`；相对 LIIF median ΔPSNR `+0.0231`、win-rate
+  `0.596`。当前主展示已收缩为外部基线优势区间：`external_advantage_region_pool.csv`
+  是候选池入口；`figures/external_advantage_crops/` 和 `figures/external_advantage_context_zoom/`
+  是本地渲染候选图目录，只展示 `GT/Bicubic/LIIF/LTE/SC-INR`，NoPhi/NoSinc 留作后续单独消融。
+  候选图只从 OOD 非平坦结构 crop 中选，排序指标为 `min(SC-INR-LIIF, SC-INR-LTE)`；
+  正文优先使用 context+zoom 版本，但采用前需迁移到 `artifacts/derived/paper_figures/` 并登记。
+  x4 sanity pool 的 min external Δ 约为 0，
+  只能作为低倍率边界对照，不能写成 x4 明显优势。该结果支持
+  “selected external-baseline advantage regions”，不能替代全量 3-seed benchmark、
+  证明平均视觉质量更好，或宣称 SC-INR 在所有局部区域普遍优于 LIIF/LTE。
 
 SC-INR-EQ exploratory evidence：
 
@@ -141,6 +157,11 @@ SC-INR-EQ exploratory evidence：
 3. `SC-INR-EQ` 是 exploratory 分支：benchmark 和机制 suite 已补，但仍缺少更严格的
    旋转通道顺序、group action、cell-only response 和 analytic sinc 积分语义属性测试。
 4. 项目健康：旧 overview、旧 planning table 和未确认自动 qualitative candidates 已不应作为活跃入口。
+5. LIIF/LTE 文献笔记与 SC-INR 对照底稿已建立：
+   `docs/project/model_details_liif_lte_scinr.md`。后续关于原文理解、方法细节和
+   SC-INR 动机边界，优先在该文档上增量修订。
+6. 工作区清理原则不再单独维护规划文件：对话中先给出清理建议，实际执行时只更新
+   current_state、claim/evidence 入口和 daily memory，避免文档膨胀。
 
 ## 当前行动原则
 

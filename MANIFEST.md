@@ -24,7 +24,7 @@
 | `experiments/` | 实验卡 | 冻结协议和实验结论 |
 | `paper/` | 论文工作区 | claim ledger、artifact 白名单、草稿 |
 | `docs/` | 项目文档 | 当前状态和历史 archive |
-| `memory/` | 每日记忆 | 中文科研记录 |
+| `memory/` | 每日记忆 | 中文科研记录；本地保留，不进入源码管理 |
 
 ## 兼容路径
 

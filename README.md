@@ -61,6 +61,12 @@ python scripts/analysis/build_canonical_benchmarks.py
 | 定性图 | `artifacts/derived/paper_figures/qualitative_selected_seed1/` | 用户确认的候选图 |
 | 历史留档 | `artifacts/legacy/` | 仅作 provenance/audit，不是当前证据入口 |
 
+## 源码管理边界
+
+本仓库只把源码、配置、canonical 小型结果表、证据索引和少量人工确认论文图作为源码管理对象。
+checkpoint、本地数据、训练日志、memory、scratch/smoke、diagnostic 大图和可再生成中间产物默认只在本地保留。
+新的结果如果要进入源码管理，先更新 `paper/ARTIFACTS_ALLOWED.md` 或相应 README，说明来源、协议、用途和 caveat。
+
 ## 命名边界
 
 - `SC-INR`：最终候选，checkpoint 使用 `artifacts/checkpoints/seed*/sc-inr`。

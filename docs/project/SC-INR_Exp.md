@@ -1,4 +1,12 @@
-# SC-INR 技术与实验记录
+# SC-INR 历史技术记录
+
+> 本文档是历史技术记录，只用于追溯早期 SC-INR 系列实验和命名迁移。
+> 当前恢复入口请优先读 `docs/project/current_state.md`，模型/文献底稿请读
+> `docs/project/model_details_liif_lte_scinr.md`，论文 claim 边界请读
+> `paper/claims_evidence_matrix.md`，可引用 artifact 请读
+> `paper/ARTIFACTS_ALLOWED.md`。
+>
+> 本文中的旧命名、旧 seed1 叙事和阶段性判断不得绕过上述 canonical 入口直接用于论文。
 
 本文档记录当前 SC-INR 系列的模型动机、实现细节、命名体系和已有实验事实。
 它是项目内部技术记录，不是最终论文正文。论文可引用材料以

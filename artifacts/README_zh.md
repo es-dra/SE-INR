@@ -39,3 +39,17 @@
 论文中优先引用 `derived/benchmarks/` 和 `derived/` 中有 experiment card 支撑的产物；
 `raw_results/` 作为 provenance 保留，不直接作为论文表格入口。
 `legacy/` 默认不得引用，除非正文明确说明其诊断性质。
+
+## 源码管理边界
+
+`artifacts/` 中只有少量 canonical 入口适合进入源码管理：
+
+- `README_zh.md` 和各子目录索引；
+- `raw_results/` 下正式 benchmark JSON；
+- `derived/benchmarks/` 下论文主表和 canonical CSV/JSON；
+- `derived/evidence/README_zh.md`；
+- 经人工确认的少量 `derived/paper_figures/` 候选图。
+
+大体量 checkpoint、训练日志、本地数据、scratch/smoke 输出、diagnostic 中间图和 legacy 大图默认只保留在本地，
+不作为源码管理内容。需要把新的 artifact 晋级为论文证据时，先更新
+`paper/ARTIFACTS_ALLOWED.md`，再考虑是否放行 `.gitignore`。

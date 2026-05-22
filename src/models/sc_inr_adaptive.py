@@ -30,6 +30,9 @@ Compatibility note:
     variant SC-INR-NoPhi.
   - sc_inr_adaptive_signed is the legacy registry name for SC-INR-NoPhi-Signed.
   - sc_inr_signed_phiz is the current final-candidate SC-INR.
+  - sc_inr_phase2, sc_inr_adaptive_phiz, sc_inr_phase2_phiz, and sc_inr_phiz
+    are compatibility aliases for old configs/checkpoints only. New configs
+    should use the canonical registry names listed in configs/registry/models.yaml.
 """
 
 import math
@@ -63,7 +66,7 @@ def init_log_polar_freqs(num_freqs, num_angles, freq_min, freq_max):
 
 
 @register('sc_inr_adaptive')
-@register('sc_inr_phase2')  # Backward compatibility for existing checkpoints.
+@register('sc_inr_phase2')  # 仅用于旧配置/checkpoint 兼容；新配置使用 sc_inr_adaptive。
 class SCINRAdaptive(nn.Module):
     """
     SC-INR-NoPhi: data-driven omega_k(z) with phi=0.
@@ -353,10 +356,13 @@ class SCINRAdaptiveSigned(SCINRAdaptive):
 @register('sc_inr_phase2_phiz')
 @register('sc_inr_phiz')
 class SCINRAdaptivePhiZ(SCINRAdaptive):
-    """Feature-conditioned phase variant.
+    """Feature-conditioned phase compatibility variant.
 
     The phase branch predicts phi(z) only. It does not receive cell/scale, so
     the decoder-side sampling response remains the analytic sinc term.
+
+    The registry aliases on this class are retained for old checkpoints and
+    configs. New final-candidate SC-INR configs should use sc_inr_signed_phiz.
     """
 
     def __init__(self, *args, **kwargs):
