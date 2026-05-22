@@ -93,10 +93,9 @@ python scripts/analysis/evaluate_seed1_aux_metrics.py \
   --skip_quality \
   --skip_visuals
 
-CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
-python scripts/analysis/run_mechanism_suite.py \
-  --device cuda:0 \
-  --out artifacts/legacy/derived_analysis/mechanism_suite_2026-05-12
+# 旧的总编排脚本 scripts/analysis/run_mechanism_suite.py 已从活跃代码面退役。
+# 本目录只保留当时已经生成的 CSV/图和 run_config 供审计；如需复跑，
+# 应优先使用当前仍保留的细分脚本重新生成相应诊断。
 ```
 
 `SC-INR-EQ` benchmark 命令：

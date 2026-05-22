@@ -3,7 +3,8 @@
 本文档是短恢复入口。LIIF/LTE 文献笔记与 SC-INR 对照底稿见
 `docs/project/model_details_liif_lte_scinr.md`；论文 claim 边界见
 `paper/claims_evidence_matrix.md`；可引用产物见 `paper/ARTIFACTS_ALLOWED.md`。
-旧长技术记录 `docs/project/SC-INR_Exp.md` 只作历史参考，不再作为恢复主入口。
+旧长技术记录已退役，历史结论不得绕过本文件、claim matrix 和 artifact whitelist
+直接进入论文。
 
 ## 当前研究对象
 
