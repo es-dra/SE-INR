@@ -1,0 +1,15 @@
+{
+  "device": "cpu",
+  "datasets": "urban100",
+  "models": "LTE,LTE-PhaseZ,SC-INR,SC-INR-NoSinc",
+  "max_images": 1,
+  "base_scale": 4,
+  "large_multiplier": 4.0,
+  "crop_size": 64,
+  "stride": 64,
+  "max_crops_per_image": 1,
+  "max_candidates": 1,
+  "num_select": 1,
+  "eval_bsize": 4096,
+  "out": "artifacts/derived/diagnostics/incode_method_support_2026-06-20/smoke_cell_intervention"
+}

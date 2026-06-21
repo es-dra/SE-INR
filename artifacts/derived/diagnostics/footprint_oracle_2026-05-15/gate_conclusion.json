@@ -1,5 +1,0 @@
-{
-  "gate_status": "supports_sc_inr_over_nosinc_on_at_least_one_primary_metric",
-  "best_vs_nosinc_delta_tracking": -0.0028196469414979303,
-  "best_vs_nosinc_oracle_rmse": -0.003749020172016424
-}

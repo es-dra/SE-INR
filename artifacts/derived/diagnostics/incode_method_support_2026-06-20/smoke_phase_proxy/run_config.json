@@ -1,0 +1,9 @@
+{
+  "out": "artifacts/derived/diagnostics/incode_method_support_2026-06-20/smoke_phase_proxy",
+  "device": "cpu",
+  "models": "LTE,LTE-PhaseZ,SC-INR,SC-INR-NoSinc",
+  "scales": "4,30",
+  "ref_scale": 4.0,
+  "base_scale": 4.0,
+  "multipliers": "1,4"
+}

@@ -1,0 +1,1672 @@
+
+
+===== PAGE 1 =====
+3550
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+From Coarse to Continuous: Progressive Reﬁnement
+Implicit Neural Representation for Motion-Robust
+Anisotropic MRI Reconstruction
+Zhenxuan Zhang , Lipei Zhang, Yanqi Cheng, Zi Wang , Fanwen Wang , Haosen Zhang, Yue Yang ,
+Yinzhe Wu , Student Member, IEEE, Jiahao Huang , Angelica I. Aviles-Rivero , Member, IEEE,
+Zhifan Gao , Member, IEEE, Guang Yang , Senior Member, IEEE, and Peter J. Lally
+Abstract—In
+motion-robust
+magnetic
+resonance
+imaging
+(MRI), slice-to-volume reconstruction is critical for recover-
+ing anatomically consistent 3D brain volumes from 2D slices,
+especially under accelerated acquisitions or patient motion.
+However, this task remains challenging due to hierarchical
+structural disruptions. It includes local detail loss from k-space
+undersampling, global structural aliasing caused by motion,
+and volumetric anisotropy. Therefore, we propose a progressive
+reﬁnement implicit neural representation (PR-INR) framework.
+Our PR-INR uniﬁes motion correction, structural reﬁnement,
+and volumetric synthesis within a geometry-aware coordinate
+space. Speciﬁcally, a motion-aware diﬀusion module is ﬁrst
+employed to generate coarse volumetric reconstructions that
+Received 18 June 2025; revised 13 November 2025 and 7 February 2026;
+accepted 21 March 2026. Date of publication 1 April 2026; date of current
+version 6 April 2026. The work of Guang Yang was supported in part by
+the ERC IMI under Grant 101005122, in part by H2020 under Grant 952172,
+in part by MRC under Grant MC/PC/21013, in part by the Royal Society under
+Grant IEC/NSFC/211235, in part by the NVIDIA Academic Hardware Grant
+Program, in part by the SABER Project supported by Boehringer Ingelheim
+Ltd., in part by NIHR Imperial Biomedical Research Centre under Grant
+RDA01, in part by the Wellcome Leap Dynamic Resilience Program (co-
+funded by Temasek Trust), in part by UKRI through the Horizon Europe
+MSCA Postdoctoral Fellowships under Grant EP/Z002206/1, in part by the
+UKRI MRC Research Grant, in part by TFS Research Grants under Grant
+MR/U506710/1, in part by the Swiss National Science Foundation under
+Grant 220785, in part by the UKRI Future Leaders Fellowship under Grant
+MR/V023799/1 and Grant UKRI2738, and in part by the Imperial College
+London Seeds for Success Fund. The work of Zhenxuan Zhang was supported
+by the CSC Scholarship. The associate editor coordinating the review of this
+article and approving it for publication was Prof. Wenqi Ren. (Guang Yang
+and Peter J. Lally are co-last authors.) (Corresponding author: Guang Yang.)
+Zhenxuan Zhang, Zi Wang, Fanwen Wang, Haosen Zhang, Yue Yang,
+Yinzhe Wu, and Jiahao Huang are with the Department of Bioengineering
+and Imperial-X, Imperial College London, SW7 2AZ London, U.K.
+Lipei Zhang and Yanqi Cheng are with the Department of Applied
+Mathematics and Theoretical Physics, University of Cambridge, CB3 0WA
+Cambridge, U.K.
+Angelica I. Aviles-Rivero is with the Yau Mathematical Sciences Center,
+Tsinghua University, Beijing 100084, China.
+Zhifan Gao is with the School of Biomedical Engineering, Sun Yat-sen
+University, Shenzhen 518107, China.
+Guang Yang is with the Bioengineering Department and Imperial-X, Impe-
+rial College London, W12 7SL Cambridge, U.K., also with the National Heart
+and Lung Institute, Imperial College London, SW7 2AZ Cambridge, U.K.,
+also with the Cardiovascular Research Centre, Royal Brompton Hospital, SW3
+6NP Cambridge, U.K., and also with the School of Biomedical Engineering
+and Imaging Sciences, King’s College London, WC2R 2LS Cambridge, U.K.
+(e-mail: g.yang@imperial.ac.uk).
+Peter J. Lally is with the Department of Bioengineering, Imperial College
+London, SW7 2AZ London, U.K., and also with the U.K. Dementia Research
+Institute Centre for Care Research and Technology, W12 0BZ London, U.K.
+(e-mail: p.lally@imperial.ac.uk).
+Digital Object Identiﬁer 10.1109/TIP.2026.3678052
+suppress motion artifacts and preserve global anatomical struc-
+tures. Then, we introduce an implicit detail restoration module
+that performs residual reﬁnement by aligning spatial coordinates
+with visual features. It corrects local structures and enhances
+boundary precision. Further, a voxel continuous-aware repre-
+sentation module represents the image as a continuous function
+over 3D coordinates. It enables accurate inter-slice completion
+and high-frequency detail recovery. We evaluate PR-INR on ﬁve
+public MRI datasets under various motion conditions (3% and
+5% displacement), undersampling rates (4x and 8x) and slice
+resolutions (scale = 5). Experimental results demonstrate that
+PR-INR outperforms state-of-the-art methods in both quantita-
+tive reconstruction metrics and visual quality. It further shows
+generalization and robustness across diverse unseen domains.
+Index Terms—MRI reconstruction, implicit neural network,
+diﬀusion models.
+I. INTRODUCTION
+M
+OTION robust anisotropic Magnetic Resonance Imag-
+ing (MRI) reconstruction is essential for accurate
+diagnosis and quantitative analysis across a wide range of
+clinical applications (Fig. 1 (a)). On the one hand, many
+anatomically critical regions (e.g., the brain and heart) contain
+both ﬁne-grained structural details and complex global orga-
+nization. These require high-resolution imaging to visualize
+subtle pathological changes (e.g., microstructural damage in
+neurodegenerative diseases or small lesions in stroke) [1].
+On the other hand, it is also signiﬁcant in reducing motion
+artifacts and aliasing [2], [3]. Motion artifacts can obscure
+ﬁne neural details and compromise the reliability of volumetric
+assessments, particularly in subjects like children and elderly
+patients [3], [4]. Further, robust slice-to-volume reconstruction
+is essential for synthesizing consistent 3D representations
+from 2D slices [5], [6], [7], [8]. It needs robust slice-to-
+volume reconstruction to ensure spatial consistency and enable
+downstream tasks [5], [9]. It allows precise volumetric analysis
+critical to understanding morphology and tracking disease
+progression [9]. Therefore, it not only enhances image quality
+but also facilitates accurate image biomarker extraction and
+quantiﬁcation, which are important for downstream clinical
+tasks.
+However, reconstructing volumetric MRI images from
+sparse motion-corrupted slices still has the challenge of multi-
+type structural disruptions (Fig. 1(b)). It can be divided into
+1941-0042 © 2026 IEEE. All rights reserved, including rights for text and data mining, and training of artiﬁcial intelligence and
+similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission.
+See https://www.ieee.org/publications/rights/index.html for more information.
+
+
+===== PAGE 2 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3551
+Fig. 1.
+Overview of motion-robust slice-to-volume MRI reconstruction.
+(a) Illustrates the workﬂow from clinical MRI acquisition to inter-slice
+reconstruction and downstream volumetric diagnostics. (b) Highlights key
+challenge of multi-type structural disruptions, including global aliasing, local
+detail loss, and volumetric anisotropy.
+three aspects. First, it still has the challenge of global structure
+aliasing. Motion during MRI acquisition introduces global
+artifacts (e.g., aliasing due to patient movement or respiration).
+These artifacts manifest as spurious signals that misrepresent
+anatomical boundaries or overlap regions [7], [10], [11]. This
+leads to mis-registration between structures when assessing
+large-scale connectivity or structural integrity [12], [13]. Sec-
+ond, it still has the challenge of local detail reduction. This is
+because of the loss of high spatial frequency information in
+accelerating MRI acquisition with incoherent undersampling
+schemes. It results in incomplete data and further leads to the
+loss of ﬁne-grained local image details [14], [15], [16], [17].
+This is particularly detrimental in capturing subtle anatomical
+structures (e.g., cortical folds or small subcortical regions).
+These structures are critical for accurate diagnosis and analysis
+[18], [19], [20]. Third, it has the limitation of volumetric
+anisotropy. Clinical MRI acquisitions often have a high in-
+plane resolution but relatively low resolution along the slice
+dimension [21]. This disparity creates discontinuities and a
+lack of smoothness across slices, making the reconstruction
+of seamless 3D brain structures diﬃcult (e.g., the gyri and
+sulci of the brain may appear disconnected or distorted). It
+limits the accuracy of neuroanatomical analyses or volumetric
+measurements. These issues not only undermine the diagnostic
+quality but also hinder downstream applications. Therefore, it
+still requires a uniﬁed solution to address these challenges.
+Existing MRI reconstruction methods struggle to fully
+address these issues due to inherent limitations. Early
+approaches based on compressed sensing and conventional
+deep learning typically focus on sparsity priors [1], [16],
+Fig. 2.
+Overview of strategies integrating INR variants: (a) Original INR
+learns a continuous image solely from sinusoidally encoded spatial coor-
+dinates. (b) Conditioned INR injects a pixel prior to guide the coordinate
+stream. (c) Feature-based INR integrates a feature encoder. It iteratively
+reﬁnes the implicit representation together with extracted image features.
+(d) Proposed PR-INR generalizes to 3D coordinates and performs coarse-
+to-continuous reconstruction via a progressive architecture. It ﬁrst removes
+motion artifacts and global aliasing with diﬀusion prior, then selectively
+restores high-frequency details through a residual INR, and ﬁnally enforces
+volumetric smoothness using a continuous 3D representation. This design
+yields motion-robust and anatomically consistent volumetric images.
+[22]. However, they often struggle under high acceleration
+factors due to the limited ability of sparsity priors to accurately
+complete missing information. CNN-based and generative net-
+works can enhance perceptual quality under high acceleration
+factors but may introduce hallucinated details. It leads to
+anatomically implausible structures and compromised ﬁdelity
+[23]. Especially, these are often aggravated by motion in
+dynamic or long acquisition scenarios. Some recent methods
+integrate motion correction modules. But their performance
+heavily depends on the pre-deﬁned motion priors [24], [25].
+Implicit neural representations (INR) have the potential to
+address these challenges for their continuous spatial structures
+and high-frequency sensitivity [26], [27]. Early INR-based
+methods (Fig. 2(a)) represent images as continuous functions
+over coordinates xcoord, enabling the learning of implicit spatial
+priors. This allows for resolution-independent reconstruction
+and recovery of high-frequency details [26], [27]. However,
+they must be optimized per case and lack prior knowledge
+of measurements. Conditional INR (Fig. 2(b)) builds the
+network with pixel priors xpixel. It allows fast inference but
+still suﬀers from inherited motion artifacts. Feature-based INR
+(Fig. 2(c)) further enhances robustness by extracting latent
+features f(xpixel) from the input. But the ﬁxed-single-stream
+INR still struggles with motion artifacts and anisotropic data.
+Therefore, it is still needed to combine the continuous mod-
+eling with the artifact suppression to enable robust recovery
+under motion and under-sampling.
+In this work, we propose a uniﬁed progressive reﬁne-
+ment implicit neural representation (PR-INR) framework
+for motion-robust slice-to-volume MRI reconstruction. The
+core idea of PR-INR is to treat MRI reconstruction as
+a task-disentangled process. It explicitly disentangles the
+reconstruction into progressive sub-tasks, including motion
+correction, detail recovery, and inter-slice continuity mod-
+eling. The key motivation is that structural misalignments
+caused by motion must be ﬁrstly addressed, as they interfere
+with subsequent detail restoration and volumetric consistency.
+Without a stabilized anatomical layout, local reﬁnement may
+
+
+===== PAGE 3 =====
+3552
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+amplify noise or hallucinate misleading features. Therefore,
+PR-INR ﬁrst performs motion-aware correction to produce a
+globally aligned coarse volume. This is followed by a residual
+implicit reﬁnement stage that enhances high-frequency details,
+and a ﬁnal stage that enforces slice-to-volume consistency
+in a continuous 3D coordinate space. Speciﬁcally, PR-INR
+ﬁrst generates a coarse reconstruction result via a motion-
+aware diﬀusion (MAD) prior. It stabilizes motion artifacts
+and enforces global structure. This intermediate result is then
+passed through an implicit detail restoration (IDR) module
+that performs residual reﬁnement. For each spatial query (x, y)
+IDR concatenates a learned local feature vector, allowing the
+implicit ﬁeld to be content–adaptive rather than purely posi-
+tional. The network predicts only a high-frequency residual
+that is weighted by a mask (i.e., enforcing data consistency).
+This utilizes the continuous function characteristics of INR to
+represent the multi-dimensional features of the image. Further,
+the voxel continuous-aware representation (VCR) module rep-
+resents the reconstructed image as a continuous function over
+3D coordinates and is conditioned on both spatial locations and
+local visual features. It enables accurate recovery of missing
+structures and high-frequency texture. In these processes, PR-
+INR achieves robust and high-ﬁdelity reconstructions under
+varying slice thicknesses, motion artifacts and acceleration
+factors. In summary:
+1) We propose a uniﬁed reconstruction workﬂow that
+simultaneously addresses local detail loss, motion arti-
+facts, and volumetric anisotropy.
+2) We design a novel reconstruction architecture that inte-
+grates motion-aware initialization, feature-conditioned
+implicit reﬁnement, and continuous volumetric represen-
+tation for uniﬁed MRI reconstruction.
+3) We conduct extensive experiments on ﬁve public MRI
+datasets, demonstrating superior performance across var-
+ious sampling patterns and motion conditions.
+II. RELATED WORK
+A. MRI Reconstruction
+MRI reconstruction has traditionally relied on model-based
+techniques such as compressed sensing and parallel imag-
+ing [16], [22]. These methods impose handcrafted priors
+like sparsity or coil sensitivity, but often degrade at high
+acceleration rates. Recently, unsupervised and self-supervised
+reconstruction paradigms have gained increasing attention.
+These methods formulate reconstruction through measure-
+ment consistency or cooperative constraints, enabling eﬀective
+recovery from incomplete data without paired supervision
+[28], [29]. However, these methods rely on speciﬁc redundancy
+assumptions and do not explicitly address motion-induced
+artifacts. Motion artifacts further compromise image quality
+[2], [7]. While prospective gating or navigator-based regres-
+sion can reduce motion during acquisition, they are not
+always feasible (e.g., increasing acquisition time or requiring
+additional hardware) [30]. Retrospective correction strategies
+(e.g., learning-based or motion-compensated reconstruction)
+have been explored to restore spatial ﬁdelity after motion has
+occurred [4], [31]. These methods enhance structural clarity by
+TABLE I
+GLOSSARY OF SYMBOLS
+recovering sharp features obscured by motion. More recently,
+INR models have been applied to volumetric reconstruction
+from 2D slices [32], [33], [34]. These approaches can improve
+inter-slice consistency by modeling continuous spatial ﬁelds.
+B. Diﬀusion-Based Methods
+Diﬀusion-based methods model the MRI reconstruction task
+as a stochastic denoising process. It progressively transforms
+noisy observations toward fully sampled images. In MRI
+reconstruction, diﬀusion priors can be imposed either in the
+image domain or directly in the frequency domain, guiding
+reconstructions through learned score functions that capture
+the underlying data distribution [35]. Recent approaches uti-
+lize conditional diﬀusion models to incorporate measurement
+consistency at each diﬀusion step, blending the forward acqui-
+sition operator with denoising updates to ensure ﬁdelity to the
+raw k-space data [36], [37]. Latent diﬀusion frameworks fur-
+ther improve eﬃciency by mapping high-dimensional image
+volumes into a lower-dimensional latent space. This diﬀusion
+process operates more tractably before decoding back to the
+full-resolution image [35], [38]. These strategies have been
+shown to enhance robustness to noise and motion, yielding
+higher PSNR and sharper anatomical details [35]. However,
+diﬀusion models carry the risk of generating hallucinations
+(e.g., synthesizing anatomically plausible but incorrect struc-
+tures). It can compromise clinical reliability [35], [39].
+C. Implicit Neural Representation
+In contrast to discretized grid-based methods, implicit neural
+representations (INRs) treat an image or volume as a con-
+tinuous function mapping spatial coordinates to intensities.
+Early INR methods struggled with high-frequency details,
+leading to advanced designs incorporating sinusoidal acti-
+vations (e.g., SIREN [40]) or Fourier feature embeddings
+[32]. In MRI, INRs have been utilized for super-resolution
+and slice-to-volume reconstruction [41], [42], [43], promising
+superior resolution and inter-slice continuity without large
+memory overhead. More recent eﬀorts embed spatial atten-
+tion or motion modeling into INR frameworks [33], making
+them robust to undersampled and corrupted k-space data.
+Although INR-driven reconstructions can excel at preserving
+details, they risk hallucinating structures if not tightly coupled
+with measurement ﬁdelity, especially under motion-induced
+misalignment.
+
+
+===== PAGE 4 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3553
+III. METHODOLOGY
+A. Problem Formulation
+Let b ∈CM denote the observed undersampled k-space
+measurements, and k
+∈
+CN represent the fully-sampled
+k-space, where M ≪N. The corresponding fully-sampled
+image is given by x = F−1k, where F−1 denotes the inverse
+Fourier transform. The acquisition model is expressed as:
+b = Pk + η,
+(1)
+where P is the undersampling mask and η ∈CM models
+measurement noise. The goal is to recover the fully-sampled
+k-space ˆk, and reconstruct the corresponding image ˆx = F−1 ˆk.
+This problem is typically formulated as a regularized inverse
+problem:
+min
+ˆk
+1
+2∥Pˆk −b∥2
+2 + λR(ˆk),
+(2)
+where the ﬁrst term ensures data consistency, and R(ˆk) serves
+as a prior to compensate for missing information due to
+undersampling.
+1) Global Structure Aliasing Due to Motion: In acquisi-
+tion, motion-induced aliasing arises when diﬀerent regions of
+k-space (e.g. phase encoding lines) are sampled under varying
+spatial transformations. In this work, we focus on slice-
+based 2D Cartesian acquisitions with thick slices. Under this
+anisotropic acquisition regime, spatial encoding is dominated
+by in-plane resolution, while the through-plane resolution is
+substantially coarser due to the large slice thickness. Under
+this setting, the eﬀect of motion-corrupted sampling can be
+approximated as:
+ex = F−1 hP
+j[Fj
+ x ◦τj
+
+]
+i
++ η
+(3)
+where Fj denotes the j-th phase-encoding line of the 2D
+Fourier transform, τ j represents the in-plane rigid transfor-
+mation associated with subject motion during the acquisition
+of the j-th line, and η denotes measurement noise. This
+formulation captures the dominant impact of in-plane motion
+on slice-based 2D acquisitions.
+It note that Eq. (3) does not aim to explicitly model
+kz-dependent through-plane encoding, slice proﬁle eﬀects, or
+fully acquisition-consistent 3D motion processes. Instead, it
+serves as a practically relevant abstraction that isolates the
+dominant motion-induced aliasing eﬀects under thick-slice
+acquisition, while maintaining computational tractability. The
+limitations of this abstraction are discussed in Discussion
+Section.
+To compensate for such corruption, motion artifact correc-
+tion can be formulated as a motion-aware image regression
+problem. Speciﬁcally, one seeks to predict the motion-
+corrected image intensity at aligned spatial coordinates by
+minimizing:
+θ∗
+1 = arg min
+θ1
+1
+N
+N
+X
+i=1
+ˇˇ fθ1(ex) −eyi
+ˇˇ2 ,
+(4)
+where eyi denotes the motion-free reference image intensity
+under the same slice-based acquisition setting. This formula-
+tion characterizes motion artifact correction as the recovery
+of spatially consistent image content from motion-corrupted
+slice-based observations.
+2) High-Frequency Detail Loss Due to Undersampling:
+Even after motion correction, incoherent undersampling in
+the frequency domain introduces additional artifacts, primarily
+manifesting as incoherent aliasing and high-frequency detail
+loss. The degraded observation can be expressed as:
+ˆx = F−1 h
+P · P
+j[Fj
+ x ◦τj
+
+]
+i
++ η,
+(5)
+where P denotes the undersampling mask. The task of restor-
+ing high-frequency anatomical structures can be formulated as
+a detail enhancement problem:
+θ∗
+2 = arg min
+θ2
+1
+N
+N
+X
+i=1
+ˇˇfθ2 (ˆx) −ˆyi
+ˇˇ2 ,
+(6)
+where ˆyi represents the fully-sampled motion-free image inten-
+sity at location xi. This step aims to recover the ﬁne-grained
+structures that are degraded due to frequency domain under-
+sampling.
+3) Volumetric Anisotropy:
+Clinical MRI data typically
+suﬀer from resolution anisotropy, where the through-plane res-
+olution (∆z) is signiﬁcantly lower than the in-plane resolutions
+(∆x, ∆y). This results in inconsistent inter-slice continuity
+and volumetric degradation. The anisotropic acquisition can
+be characterized by the imaging domain: (x, y, z) ∈Ω,
+Ω=
+[0, Nx∆x] ×
+
+0, Ny∆y
+
+×
+
+0, Nz∆z
+
+. To address this, volumetric
+consistency is commonly formulated as a 3D interpolation
+task using a continuous function deﬁned over the anisotropic
+coordinate system:
+θ∗
+3 =arg min
+θ3
+1
+M
+M
+X
+i=1
+Z
+Ωxy
+ˇˇfθ3(x, y, zi) −fθ2(x, y, zi)
+ˇˇ2 dx dy,
+(7)
+where Ωxy denotes the in-plane pixel intensities, zi indexes
+the available slices and M is the total number of observed
+slices. This formulation reﬂects the need to interpolate across
+sparsely sampled slices while preserving in-plane details.
+B. Network Implementation
+1) Motion-Aware Diﬀusion Module for Denoising Motion
+Corruption: Although the estimated motion ﬁeld δ∗enables
+partial correction of motion-induced aliasing as formulated in
+Equation. (3), residual errors often persist due to limited sam-
+pling density and imperfect motion alignment. These residuals
+degrade high-frequency details of the motion-compensated
+image.
+To address this, a Motion-Aware Diﬀusion Module (MAD)
+is considered, where the partially corrected image is treated
+as a noisy observation (Fig. 3(a)). The MAD module follows
+a diﬀusion-based U-Net backbone with a depth of 4, using
+[64, 128, 256, 512] ﬁlters per stage and SiLU activations. It
+takes 4-channel inputs with 32 base channels and employs
+channel multipliers of [1, 2, 4, 8] to capture multi-scale motion
+features. The conditional embedding dimension is set to 128.
+It progressively reﬁning the diﬀusion prior under motion-
+aware conditioning. The forward process progressively adds
+Gaussian noise to the motion-corrected image x0:
+q(xt|x0) = N
+ xt; √¯αtx0, (1 −¯αt)I
+
+,
+(8)
+
+
+===== PAGE 5 =====
+3554
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+Fig. 3. Overview of the proposed PR-INR framework for motion-robust slice-to-volume MRI reconstruction. (a) Motion artifact correction. A motion-aware
+diﬀusion-based model is used to suppress intra-slice artifacts by iteratively reﬁning image quality through forward and reverse denoising processes. (b) Local
+detail reconstruction. A data-consistency-aware visual encoder extracts anatomical details from under-sampled slices, guided by k-space priors and acquisition-
+aware feature selection. The residual INR then selectively reﬁnes high-frequency details to correct hallucinations introduced during the diﬀusion phase. It
+ensures spatial ﬁdelity and structural consistency. (c) Inter-slice space ﬁlling. A volumetric INR takes continuous spatial coordinates and encoded features to
+generate dense volumetric outputs with coherent inter-slice structure.
+where x0 is reconstructed from the motion-aligned k-space
+obtained via Equation. (3), {βs}T
+s=1 is a pre-deﬁned variance
+schedule, αs = 1 −βs, and ¯αt = Qt
+s=1 αs.
+The diﬀusion model is tasked to restore motion-free struc-
+tures by minimizing the following denoising objective:
+LMAD = Ex0,t,ϵ
+h
+∥ϵ −ϵθ (xt, t, δ∗)∥2i
+,
+(9)
+where ϵθ predicts the noise residual conditioned on the cor-
+rupted image xt, the timestep t, and the estimated motion ﬁeld
+δ∗. At inference, the clean motion-free image is iteratively
+reconstructed via the reverse diﬀusion process:
+xt−1 = √¯αt−1 xMAD +
+q
+1 −¯αt−1 −σ2
+t ˆϵθ + σtz,
+(10)
+with z ∼N(0, I), and
+xMAD = (xt −
+p
+1 −¯αtˆϵθ)/( √¯αt).
+(11)
+This formulation characterizes the residual motion corrup-
+tion removal problem as a conditional generative denoising
+task, where δ∗serves as the guidance derived from the esti-
+mated motion ﬁeld.
+2) Implicit Detail Restoration Module for High-Frequency
+Enhancement: Although diﬀusion models provide plausible
+completions in under-sampled regions, they are prone to
+hallucinations, especially for high-frequency details that are
+weakly constrained by the observed frequency domain. To
+address this, we incorporate an Implicit Detail Restoration
+Module (IDR) conditioned on diﬀusion outputs and measured
+data (Fig. 3(b)). The IDR module is implemented as a con-
+ditional implicit neural representation that models slice-wise
+ﬁne details from spatial coordinates and diﬀusion features.
+It contains four hidden layers with 256 neurons each, using
+sine activations and frequency scaling parameters ω(1)
+0
+= 30
+and ω(h)
+0 = 30 to encode high-frequency structures eﬀectively.
+The module takes as input the 2D spatial coordinates along
+with contextual embeddings derived from diﬀusion priors, and
+predicts residual corrections in both the image and frequency
+domains.
+We ﬁrst apply a data-consistency projection to correct
+diﬀusion’s low-frequency bias:
+˜x0 = F−1 
+P ⊙y + (1 −P) ⊙F(xMAD)
+
+.
+(12)
+This projection enforces:
+F(˜x0)
+ˇˇ
+P=1 = y
+ˇˇ
+P=1,
+(13)
+thus guaranteeing that the low-frequency spectrum strictly
+conforms to measurements. However,
+˜x0 still lacks reli-
+able high-frequency content due to undersampling. Here, the
+data-consistency projection replaces the acquired k-space coef-
+ﬁcients with ground-truth measurements while preserving the
+diﬀusion-estimated values in unmeasured regions, ensuring
+
+
+===== PAGE 6 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3555
+Algorithm 1 Progressive Reﬁnement Training of PR-INR
+physical ﬁdelity to the acquisition process. Although this
+correction primarily targets the low-frequency bias introduced
+by the diﬀusion prior, the inverse Fourier transform inherently
+couples frequency components in the spatial domain. As a
+result, restoring accurate low-frequency coeﬃcients improves
+global contrast consistency, which stabilizes the reconstruction
+of adjacent high-frequency regions and reduces spurious edge
+artifacts. This coupled correction eﬀect provides a smooth
+spectral transition that beneﬁts the subsequent high-frequency
+reﬁnement in the IDR module.
+To selectively reﬁne only the high-frequency residual, we
+adopt a residual INR model:
+xIDR(x, y) = ˜x0(x, y) + fθ2 (x, y; c1(x, y)) ,
+(14)
+where fθ2 is a conditioned INR responsible for learning, the
+conditioning vector c1(x, y) is extracted via a 2D convolutional
+encoder applied to ˜x0:
+r(x, y) = xIDR(x, y) −˜x0(x, y).
+(15)
+This residual formulation r(x, y) eﬀectively restricts fθ2 to
+focus on hallucination-prone, high-frequency components.
+Unlike convolutional layers that favor low-frequency sig-
+nals, SIREN-based INRs use periodic activations:
+fθ2(x) = sin(ω0 · W · γ(x) + b),
+(16)
+where W and b are the learnable weight and bias parameters
+of the INR layer, and ω0 is a hyperparameter that controls the
+frequency scale of the sinusoidal activation. γ(x) = [sin(Bx),
+cos(Bx)] as the frequency encoding, where B is a frequency
+mapping matrix that controls the spectral bandwidth of the
+encoding. This formulation allows the INR to represent ﬁne-
+grained, high-frequency anatomical structures.
+To train the conditioned INR with robust supervision, we
+adopt a dual-domain residual loss that constrains the predicted
+reﬁnement r(x, y) in both image and frequency domains. The
+loss is deﬁned as:
+LIDR = ∥xIDR −˜x0∥2 + ∥w ⊙(F(xIDR) −F(˜x0))∥2 ,
+(17)
+where ˜x0 is the data-consistent image reconstructed from
+diﬀusion outputs, F(·) is the Fourier transform, and w is
+a frequency weighting mask that emphasizes high-frequency
+components. This residual supervision encourages the INR
+to selectively reﬁne under-constrained spectral regions while
+preserving the reliable low-frequency components already
+restored by the diﬀusion and data consistency modules.
+Speciﬁcally, the weighting mask w is implemented as a
+ﬁxed two-dimensional radial map in k-space, where the
+central low-frequency region is softly down-weighted and
+the outer high-frequency region is progressively emphasized.
+The weight at each frequency location is determined by
+its normalized distance from the k-space center. This mask
+provides stronger supervision for high-frequency residuals to
+guide the INR reﬁnement in under-constrained regions. All
+image-domain signals are normalized to the range [0,1] before
+loss computation and the residual energy is preserved across
+domains, ensuring that both loss terms contribute in a bal-
+anced manner. This residual supervision encourages the INR
+to selectively reﬁne under-constrained spectral regions while
+preserving the reliable low-frequency components already
+restored by the diﬀusion and data consistency modules.
+To further enhance generalization under diverse undersam-
+pling patterns, we employ a mask-randomized pretraining
+strategy, followed by ﬁne-tuning under the target sampling
+pattern. Speciﬁcally, during pretraining, four types of under-
+sampling masks are randomly applied, including 1D Gaussian,
+2D Gaussian, radial, and spiral patterns, with acceleration
+factors of 4× and 8×. This setting exposes the network to
+various aliasing artifacts and sampling geometries, encourag-
+ing the diﬀusion and INR modules to learn structure-aware
+priors rather than pattern-speciﬁc mappings.
+The combination of data-consistency correction for low-
+frequency spectrum, residual INR for selective high-frequency
+reﬁnement, and the Fourier-inspired representation capacity of
+SIREN allows us to signiﬁcantly reduce diﬀusion’s hallucina-
+tion space:
+Var(xIDR | y) ≪Var(xMAD | y),
+(18)
+leading to reconstructions that are both faithful and rich in
+details. The proof details are in the Section VII Appendix.
+3) Voxel Continuous-Aware Representation Module for
+Volumetric Anisotropy: While the conditioned INR reﬁnes
+slice-wise details, achieving true slice-to-volume consistency
+requires a volumetric neural representation. To this end, we
+introduce a Voxel Continuous-aware Representation (VCR)
+Module fθ3(x, y, z) that directly maps spatial coordinates to
+intensity values (Fig. 3(c)). The VCR module is constructed as
+
+
+===== PAGE 7 =====
+3556
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+a 3D conditional SIREN-based implicit neural representation
+with ﬁve hidden layers and 256 hidden units per layer, using
+sine activations and frequency scaling parameters ω(1)
+0
+= 30
+and ω(h)
+0
+= 30. To explicitly capture inter-slice dependencies,
+a ConvLSTM block with depth 4, hidden size 128, and kernel
+size 3 × 3 is integrated into the network, propagating spatial-
+temporal context across adjacent slices.
+Given the reﬁned slices {fi(x, y)}M
+i=1 from previous stages
+located at z = zi, we aim to ﬁt fθ3 such that it reproduces
+these slices when queried at the corresponding planes, while
+maintaining spatial smoothness across z.
+To facilitate this, multi-scale features are ﬁrst extracted from
+each slice using a 2D encoder. These features are then fed into
+a bidirectional ConvLSTM to capture inter-slice correlations in
+both forward and backward directions. The resulting hidden
+states are aggregated into a volumetric latent representation
+c2(x, y, z), which encodes both local texture and contextual
+information across adjacent slices. The volumetric INR fθ3
+then takes (x, y, z) and the aggregated feature c2(x, y, z) as
+input.
+The learning objective is deﬁned as:
+LVCR
+=
+1
+M
+M
+X
+i=1
+Z ˇˇˇfθ3
+ x, y, zi; c2(x, y, z)
+
+−fi(x, y)
+ˇˇˇ
+2
+dx dy,
+(19)
+where fi(x, y) denotes the observed slice at location z = zi.
+Under thick-slice acquisition, fi(x, y) represents an anisotropi-
+cally blurred observation over a ﬁnite through-plane extent,
+rather than a voxel-resolved ground-truth slice at an exact
+z location. Accordingly, Eq. (19) is formulated as a soft
+consistency constraint that regularizes the shared continuous
+volumetric representation using the available slice observa-
+tions, rather than enforcing exact voxel-wise equality.
+By ﬁtting fθ3 to each available slice in this weakly super-
+vised manner, we encourage the network to build a spatially
+smooth and coherent representation along the slice direction.
+The continuity of fθ3(x, y, z) naturally enforces smooth varia-
+tion along the z-axis, implying:
+ˇˇ fθ3(x, y, z + ∆z) −fθ3(x, y, z)
+ˇˇ ≤C |∆z|,
+(20)
+where C denotes a Lipschitz constant that characterizes
+the spatial smoothness of the volumetric representation
+along the slice axis. Importantly, this smoothness constraint
+complements the VCR objective without assuming exact
+slice-to-volume correspondence under thick-slice sampling. In
+practice, sinusoidal activations and Fourier feature encodings
+can further enhance the capacity to capture high-frequency
+anatomical structures.
+By merging slice-wise features into a continuous volumet-
+ric function, we not only retain the high-frequency details
+recovered in earlier stages but also ﬁll inter-slice gaps for
+volumetric reconstruction. This design accommodates uneven
+slice spacing or anisotropic scans, as fθ3 can be queried
+at arbitrary z coordinates to generate intermediate slices or
+re-slice the volume in diﬀerent orientations.
+C. Overall Loss Function
+The overall loss of the proposed PR-INR framework inte-
+grates the objectives of diﬀusion denoising, dual-domain
+residual supervision, and volumetric smoothing into a uniﬁed
+formulation:
+Ltotal = λ1LMAD + λ2LIDR + λ3LVCR
+(21)
+where LMAD is the diﬀusion-based denoising loss, LIDR rep-
+resents the image-domain and k-space-domain residual losses
+computed slice-wise for the IDR module, and LVCR enforces
+inter-slice continuity and volumetric smoothness. The weights
+are set to λ1 = 0.5, λ2 = 1.0, and λ3 = 0.3, which balance
+the contributions of global structural regularization, slice-level
+detail reﬁnement, and volumetric consistency. These coeﬃ-
+cients were determined through a grid search on the validation
+set, where diﬀerent combinations were evaluated to identify
+the conﬁguration that achieved the best trade-oﬀbetween
+edge sharpness and volumetric smoothness. We used the same
+weighting conﬁguration for all datasets, which consistently
+yielded stable performance and demonstrated strong cross-
+dataset generalizability. This balanced weighting enables the
+PR-INR framework to achieve stable and high-ﬁdelity slice-
+to-volume reconstruction across diﬀerent anatomical regions.
+IV. EXPERIMENT
+A. Dataset and Preprocessing
+In this study, we use the FastMRI brain dataset [53] and
+HCP1200 [54] to evaluate the reconstruction performance,
+the BRATS 2021 dataset [55] to assess its capability in
+3D continuous reconstruction, and the CMRxRecon 2024
+[56] as well as the FastMRI knee dataset [53] to vali-
+date its generalization ability across anatomies. The FastMRI
+brain dataset comprises 7,002 fully sampled brain MR scans
+acquired using 1.5T and 3T scanners. The HCP1200 dataset
+provides ultra-high-resolution 7T brain MRIs from 184 healthy
+participants. The BRATS 2021 dataset includes MRI scans
+of 2,040 patients with brain tumors. Pixel-wise annotations
+cover enhancing tumor (ET), peritumoral edema (ED), and
+necrotic core (NCR). The tumor core (TC) comprises ET and
+NCR, while the whole tumor (WT) includes TC and ED. The
+CMRxRecon 2024 dataset contains multi-view, multi-slice,
+and multi-coil cardiac MRI k-space data from 300 healthy sub-
+jects. It includes cine acquisitions in short-axis and long-axis
+views for dynamic cardiac imaging and reconstruction tasks.
+The FastMRI knee dataset includes more than 1,500 fully
+sampled knee MRIs obtained on 3 and 1.5T scanners.
+Preprocessing of multi-coil and complex data: For multi-
+coil k-space acquisitions, we ﬁrst apply an inverse Fourier
+transform to each coil channel and then perform root-sum-
+of-squares (RSS) reconstruction [57] in the image domain
+to obtain single-coil magnitude images. For complex-valued
+k-space inputs, we separate the real and imaginary components
+into two channels. This allows the network to operate in the
+real domain without losing phase information.
+Motion simulation and undersampling strategy: To evaluate
+the robustness of our framework against motion artifacts and
+undersampled acquisition, we simulate k-space acquisition
+
+
+===== PAGE 8 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3557
+line by line. For motion corruption, rigid motion is applied
+independently at each phase-encoding line, including random
+in-plane displacement (3–5%) of the ﬁeld of view (FOV) and
+rotations (up to 30◦). After applying the transformation, a 2D
+Fourier transform is performed to obtain the corresponding
+k-space line. All lines are sequentially stored and combined
+to reconstruct a motion-corrupted image via inverse FFT.
+For undersampling, we adopt 1D variable-density Gaussian
+masks along the phase-encoding direction to mimic clinical
+acceleration settings. Two acceleration factors are evaluated:
+R = 4× and R = 8×. The Gaussian masks are centered and
+smoothly decay toward high-frequency regions to preserve
+low-frequency information. The same sampling pattern is
+applied consistently across all slices.
+B. Metric and Network Conﬁguration
+First, we evaluate PR-INR using several key metrics. For
+image reconstruction, it employs: 1) PSNR to measure the
+ﬁdelity of reconstructed images, with higher values indicating
+less corruption; 2) SSIM to quantify perceptual similarity
+by analyzing structural, luminance, and contrast features;
+3) LPIPS is a learned perceptual metric [58] to assess sim-
+ilarity in feature space, capturing ﬁne-grained visual details;
+4) NCC to evaluate the correlation between the reconstructed
+image and the ground truth (GT), with higher values indicating
+stronger agreement. For the downstream image segmentation,
+we used the pre-trained UNet network as the baseline [48]. It
+employs the Dice score coeﬃcient (DSC) to evaluate overlap
+between predicted and reference masks.
+Second, the comparison of our PR-INR with eight state-of-
+the-art MRI reconstruction methods includes visual analysis
+of multi-datasets, multi-slice analysis, and quantitative anal-
+ysis. Among them, seven are the fast MRI reconstruction
+methods [44], [45], [46], [47], [48], [49], [50] and three
+are the INR-based multi-slice reconstruction methods [32],
+[33], [34]. In addition, we also included comparisons of some
+traditional methods, such as zero-ﬁlling (for under-sampling),
+cubic interpolation, and trilinear interpolation (for slice
+interpolation).
+The conﬁguration of our experiment is as follows: The
+adaptive moment (Adam) method is applied to minimize the
+combined error of our PR-INR. The initial learning rate is
+0.002, decreasing by a factor of 0.5 every 10 epochs. Training
+is performed for a maximum of 100 epochs, with early-
+stopping (patience = 5) monitoring the validation PSNR and
+dropout (dropout rate = 0.2) to reduce model overﬁtting. The
+batch size is set to 2 due to the high memory requirements of
+3D MRI data and the coordinate-based INR representation,
+which involves full-volume evaluations during training. A
+weight decay of 1 × 10−3 is applied for regularization, and
+gradient clipping with a maximum norm of 1.0 is used to
+stabilize optimization. All experiments are implemented in
+PyTorch 2.1 with mixed-precision training (AMP) to improve
+computational eﬃciency. The total parameter count of PR-INR
+is 28.5M. All calculations were performed on a worksta-
+tion with a Xeon 2.90 GHz CPU and an NVIDIA RTX
+A6000 GPU.
+C. Comparison Experiment
+1) Comparison Experiment in Motion Correlation: Table II
+demonstrates that our PR-INR eﬀectively compensates for
+patient motion during k-space acquisition. Compared with
+existing approaches, our method consistently achieves superior
+reconstruction quality under diﬀerent motion corruption setting
+(3% and 5%). It delivers the best quantitative performance,
+attaining a PSNR of 33.3 dB and an SSIM of 0.919 when
+the displacement magnitude is 3 % of the FOV and still
+preserving a 31.0 dB / 0.887 at the more challenging 5 %
+of the FOV. These results indicate pronounced suppression
+of aliasing artifacts and a notable enhancement in volu-
+metric spatial coherence. Visualization results (Fig. 4 (a)
+and (b)) demonstrate that PR-INR restores subtle cortical
+folds and yields sharper tissue interfaces. The zoomed-in
+regions further highlight its superiority in reconstructing ﬁne
+anatomical details and preserving global consistency. Besides,
+a slight upward shift in global intensity can be seen relative
+to the ground truth. This eﬀect may arises from the residual
+reﬁnement behavior of the INR module, which predicts high-
+frequency corrections on top of diﬀusion- and data-consistent
+reconstructions. In regions with weak or uncertain structural
+evidence, the residual estimation may slightly overcompensate
+the signal magnitude, resulting in a mild global brightness
+increase after normalization. Moreover, the diﬀusion prior
+inherently enhances mid- and high-frequency contrast, which
+further contributes to this eﬀect. This reﬂects the model’s
+intrinsic tendency to emphasize ﬁne-detail recovery and con-
+trast enhancement without compromising anatomical ﬁdelity.
+Table III shows that our PR-INR consistently outperforms
+state-of-the-art MRI reconstruction methods under both 3%
+and 5% motion corruption on the BraTS dataset. It attains the
+best overall performance with PSNR = 32.1 dB / 30.0 dB,
+SSIM = 0.962 / 0.942, and NCC = 0.991 / 0.985 for 3%
+and 5% corruption levels, respectively. These results indicate
+that PR-INR eﬀectively preserves ﬁne structural boundaries
+and minimizing perceptual distortion (lowest LPIPS = 0.046 /
+0.067) from motion-corrupted, lesion-containing MR images.
+2) Comparison Experiment in Under-Sampled MRI Recon-
+struction: Table II shows that our PR-INR outperforms state-
+of-the-art MRI reconstruction methods under both 4× and 8×
+acceleration on the fastMRI and HCP1200 datasets. The model
+maintains superior image quality and structural consistency
+despite reduced sampling, indicating its capacity to restore
+high-frequency details and suppress undersampling artifacts.
+It achieves the highest PSNR (28.9/26.4 dB on fastMRI,
+26.4/24.0 dB on HCP1200) and SSIM (0.887/0.721 on
+fastMRI, 0.895/0.849 on HCP1200), indicating superior recon-
+struction quality and perceptual ﬁdelity. Fig. 4 (c) and (d)
+further demonstrate the advantages of PR-INR in visual qual-
+ity. Compared to baseline models, our method reconstructs
+sharper anatomical boundaries and suppresses noise and arti-
+facts. The zoomed-in regions especially highlight its ability
+to retain ﬁne-grained features and maintain consistency with
+ground truth images. Table III contains the comparison under
+4x and 8x undersampling conditions on the BraTS dataset. Our
+PR-INR demonstrates consistent superiority across all metrics.
+
+
+===== PAGE 9 =====
+3558
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+Fig. 4.
+Visual comparisons of MRI reconstruction methods under diﬀerent acceleration factors (AF) and motion displacements. Each subﬁgure shows
+reconstructed results from diﬀerent methods. (a) Reconstruction under Max Displacement = 3 %. (b) Reconstruction under Max Displacement = 5 %.
+(c) Reconstruction with AF = 4x. (d) Reconstruction with AF = 8x. (e) Reconstruction under Max Displacement = 5 %, T2-weighted, BraTS dataset. Each
+row includes reconstructed images (top) and error maps (bottom).
+Speciﬁcally, PR-INR achieves PSNR = 34.1 / 29.5 dB, SSIM =
+0.984 / 0.935, and LPIPS = 0.020 / 0.045 for 4x and 8x
+accelerations, respectively. These improvements conﬁrm that
+PR-INR can maintain structural coherence and tumor visibility
+even under aggressive undersampling. The high NCC values
+(0.996 / 0.984) further demonstrate the model’s ability to
+preserve intensity correlation and ﬁne structural details.
+3) Comparison Experiment in Slice Interpolation: Table IV
+reports the performance of diﬀerent inter-slice reconstruc-
+tion methods and downstream brain tumor segmentation
+(scale = 5). Our PR-INR achieves the highest PSNR (34.4)
+and SSIM (0.941), indicating superior image ﬁdelity compared
+to interpolation baselines. In downstream segmentation, PR-
+INR also surpasses other methods in capturing anatomical
+boundaries (69.4 for ET, 87.0 for TC, and 82.6 for WT).
+Fig. 8 further illustrates the diﬀerences among reconstruction
+methods. Notably, the blue dashed regions reveal that PR-INR
+maintains structural coherence in low-resolution slices. The
+green dashed regions show error maps, where PR-INR exhibits
+lower reconstruction errors and better preservation of cortical
+folding patterns, especially along sulcal and gyral boundaries.
+The red dashed segmented regions show that PR-INR is
+spatially consistent and aligned with the ground truth in tumor
+boundaries (red circles area). These results demonstrate that
+PR-INR not only improves visual quality but also preserves
+detailed structure.
+D. Eﬀectiveness Evaluation
+1) Visualization Analysis of Diﬀerent Modules:
+Fig. 5
+illustrates the working mechanism of the proposed PR-INR
+framework across its three stages. In Fig. 5(a), the motion-
+aware diﬀusion module progressively removes motion artifacts
+through iterative denoising, transforming distorted inputs into
+anatomically consistent images. Fig. 5(b) shows the implicit
+detail restoration (IDR) process, where the conditioned INR
+enhances local contrast and recovers ﬁne structural details
+missing in the zero-ﬁlled reconstruction. Fig. 5(c) illus-
+trates the voxel continuous-aware representation (VCR), which
+reﬁnes inter-slice transitions and enforces volumetric continu-
+ity, mitigating anisotropy and preserving coherent 3D anatomy.
+Fig. 6 illustrates the hybrid reconstruction strategy in the
+frequency domain, where optimal performance is achieved
+by allocating the high-frequency region to INR and the low-
+frequency region to diﬀusion. As shown in the left panel,
+varying the ratio parameter ρ adjusts the relative contribution
+of each model, resulting in a smooth trade-oﬀbetween global
+structure restoration and ﬁne-detail recovery. The right panel
+visualizes the corresponding error maps, revealing a clear
+
+
+===== PAGE 10 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3559
+TABLE II
+COMPARISON WITH THE STATE-OF-THE-ART MRI RECONSTRUCTION METHODS ON FASTMRI AND HCP1200 DATASETS UNDER MOTION CORRUPTION.
+‘DM’ DENOTES THE DISPLACEMENT MAGNITUDE IN PIXELS. THE ‘AF’ DENOTES THE ACCELERATING FACTOR. THE VALUES IN BRACKETS ’(*)’
+REPRESENT THE STANDARD DEVIATION. BEST RESULTS ARE IN BOLD
+transition from smoother but oversmoothed reconstructions at
+low ρ to sharper but noisier outputs at high ρ. This observation
+conﬁrms that diﬀusion and INR play complementary roles:
+diﬀusion excels in denoising and large-scale consistency, while
+INR contributes to high-frequency reﬁnement and textural
+ﬁdelity. A balanced frequency allocation between the two
+yields the most faithful and perceptually coherent reconstruc-
+tion. Fig. 7 shows that our PR-INR achieves the closest
+alignment with ground-truth intensity proﬁles, preserving
+sharper boundaries and more consistent intensity transitions.
+The ablation results in Fig. 7(a) demonstrate that removing
+either MAD or IDR degrades boundary sharpness, while the
+full model maintains stable intensity gradients. In Fig. 7(b),
+PR-INR outperforms recent diﬀusion- and transformer-based
+methods by achieving both edge ﬁdelity and smooth intensity
+continuity.
+2) Numerical Evaluation of Diﬀerent Modules: Table V
+shows that the full conﬁguration of our PR-INR framework
+consistently achieves the best performance across all under-
+sampling settings on both the FastMRI and HCP 1200 datasets.
+At 3% and 5% displacement during acquisition, the complete
+model achieves strong gains over the baseline. For instance,
+
+
+===== PAGE 11 =====
+3560
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+TABLE III
+QUANTITATIVE COMPARISON WITH STATE-OF-THE-ART MRI RECON-
+STRUCTION METHODS ON THE BRATS DATASET UNDER MOTION
+CORRUPTION AND ACCELERATION
+TABLE IV
+PERFORMANCE COMPARISON OF DIFFERENT METHODS UNDER SCALES
+PSNR/SSIM improves from 30.0/0.853 to 33.3/0.919 on
+FastMRI, and from 24.3/0.820 to 27.0/0.904 on HCP 1200 at
+3%, with similar trends at 5%. Under 4x and 8x under-
+sampling, PR-INR remains robust, consistently outperforming
+variants. At 8x, it improves PSNR from 23.9 to 26.4 and
+SSIM from 0.645 to 0.721 on FastMRI, and shows comparable
+improvements on HCP. The IDR module plays a key role
+in enhancing perceptual and structural quality (e.g., LPIPS
+drops and SSIM improves), while the VCR module further
+enforces volumetric smoothness, reﬂected in higher NCC
+values. These results validate the complementary contributions
+Fig. 5. Overview of the proposed multi-stage MRI reconstruction framework.
+(a) The motion aware diﬀusion process progressively removes motion artifacts
+and restores clean anatomical structures. (b) The implicit detail restoration
+process enhances local structural details and contrast in both image and
+k-space domains. (c) The voxel continuous-aware representation captures
+slice-wise continuity and reconstructs anisotropic volumes.
+Fig. 6. Visualization of the hybrid reconstruction strategy in the frequency
+domain. The left panel shows the balance of the INR model (high frequency)
+and the diﬀusion model (low frequency) determined by the ρ in the frequency
+domain. This shows how the PSNR and SSIM change with diﬀerent ρ. The
+right panel displays error maps for varying ρ, transitioning from full diﬀusion
+(ρ = 0.0) to full INR (ρ = 1.0).
+Fig. 7.
+Vertical intensity proﬁle comparison across diﬀerent reconstruction
+methods. The plot compares the normalized intensity values of the ground
+truth (GT), zero-ﬁlled (ZF), and various reconstruction approaches. The
+magniﬁed regions highlight diﬀerences in edge ﬁdelity and ﬁne-structure.
+of each module and the generalizability of PR-INR across
+diﬀerent datasets and acceleration regimes.
+3) Eﬀectiveness Evaluation of Network Conﬁguration:
+As shown in Table VI, the three loss terms contribute in
+complementary ways. Under 5% sampling, reducing the MAD
+weight λ1 from 0.5 to 0.3 leads to a drop in PSNR from
+
+
+===== PAGE 12 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3561
+Fig. 8.
+Visualization of diﬀerent 3D reconstruction methods. The ﬁrst row
+shows the coronal view with selected regions. The second row highlights
+image reconstruction quality of a coronal view from a stack of thick axial
+slices. The third row shows the error maps of each methods compared to
+GroundTruth. The fourth row presents corresponding BraTS tumor segmen-
+tation results.
+TABLE V
+JOINT ABLATION STUDY ON FASTMRI DATASET AND HCP
+1200 DATASET. ✓INDICATES THE MODULE IS ENABLED.
+BEST RESULTS ARE IN BOLD
+31.3,dB to 30.7,dB and a decrease in SSIM from 0.868 to
+0.855, indicating insuﬃcient motion suppression. Increasing
+the IDR weight λ2 to 2.0 slightly improves perceptual quality
+(LPIPS 0.133 vs. 0.136) but also results in lower PSNR and
+SSIM, reﬂecting a trade-oﬀbetween detail enhancement and
+global ﬁdelity. Similarly, reducing the VCR weight λ3 from
+0.3 to 0.1 causes noticeable degradation in volumetric consis-
+tency (NCC decrease from 0.984 to 0.975). Joint perturbations
+of multiple loss weights further amplify these eﬀects. The
+ﬁnal default conﬁguration of our PR-INR achieves superior
+performance across tasks and evaluation metrics (Fig. 9).
+For instance, in the 4x setting, it reaches a PSNR of 27.0,
+Fig. 9. This ﬁgure presents the results of an ablation study evaluating diﬀerent
+network settings. Radar and bar plots show performance across diﬀerent
+settings for INR layers, hidden dimensions, Ωvalues in INR network, and
+DDIM steps.
+TABLE VI
+QUANTITATIVE COMPARISON UNDER DIFFERENT LOSS WEIGHT CONFIG-
+URATIONS FOR DIFFERENT SAMPLING RATIOS
+representing a gain of 2.5 dB over the 24.5 (layer: wire). In the
+more challenging 8× setting, the ﬁnal default reaches a PSNR
+of 24.00, which is 2.69 dB higher than the next best. It also
+achieves the best LPIPS (0.115) and SSIM (0.829) among all
+conﬁgurations. Under the motion corruption setting (3% and
+5%), the ﬁnal default setup shows clear robustness, reaching
+up to 26.48 PSNR and 0.847 SSIM at 3% displacement.
+These results validate that the default architecture improves
+perceptual ﬁdelity and structural consistency.
+4) Computational Eﬃciency: Table VII presents the com-
+putational complexity and inference eﬃciency of diﬀerent
+reconstruction models. The proposed PR-INR requires 7.47M
+parameters and 226.6G FLOPs in its full version, which is
+lighter than SwinMR (11.4M, 800.7G) and comparable to
+MMR-Mamba (6.8M, 75.1G). The inference time is 0.459 s
+per slice, slightly slower than transformer-based models such
+as SwinMR (0.188 s/slice) and ReconFormer (0.047 s/slice).
+This moderate increase in runtime is acceptable given the
+substantial improvement in reconstruction ﬁdelity and the
+inherently slow MRI acquisition process [59].
+
+
+===== PAGE 13 =====
+3562
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+Fig. 10.
+Visual results on unseen domains. (a) cardiac cine MRI across the temporal dimension. ‘ZF’ represents zero-ﬁlled image. (b) knee MRI across
+the slice dimension. ‘MC’ represents motion-corrupted image. PR-INR demonstrates improved recovery of anatomical structures and better suppression of
+undersampling and motion artifacts.
+TABLE VII
+QUANTITATIVE COMPARISON
+OF COMPUTATIONAL COMPLEXITY AND
+INFERENCE EFFICIENCY. THE PROPOSED PR-INR IS DECOMPOSED
+INTO ITS THREE STAGES (MAD, IDR, VCR) FOR
+DETAILED ANALYSIS
+TABLE VIII
+GENERALIZATION PERFORMANCE ON UNSEEN DOMAINS
+E. Generalization Evaluation
+Fig. 10 and Table VIII show that the PR-INR framework
+can be applied to two unseen domains. It includes cardiac-cine
+(balanced Steady State Free Precession, bSSFP) with multi-
+frame sequences and knee proton density (PD). Fig. 10(a)
+shows that PR-INR can preserve ventricular and papillary
+structures with sharp, temporally consistent boundaries. The
+error maps highlight the eﬀectiveness in suppressing aliasing,
+particularly around the basal septum (red arrows). Fig. 10(b)
+shows that PR-INR restores cartilage interfaces and meniscal
+detail lost in motion-corrupted images. Table VIII reports
+quantitative gains: PR-INR improves PSNR by +3.1/6.9 dB,
+SSIM by +0.145/0.186, and NCC by +0.059/0.029, while
+reducing LPIPS by 0.123/0.329 on the cardiac/knee datasets.
+It demonstrates robust generalization across anatomies and
+contrasts.
+Fig. 11.
+Predicted cardiac MR images at end-diastolic (ED) and end-
+systolic (ES) frames. Each column shows the ground truth, images with
+respiration-induced motion artifacts, and the predictions from the proposed
+PR-INR model, respectively, illustrating the structural diﬀerences and motion
+correction across cardiac phases.
+TABLE IX
+RECONSTRUCTION PERFORMANCE ON MOTION-CORRUPTED CARDIAC
+MR IMAGES AT END-DIASTOLIC (ED) AND
+END-SYSTOLIC (ES) FRAMES
+For real motion corruption, we further validated PR-INR on
+the CMRxMotion dataset containing real respiration-induced
+motion artifacts [60]. Fig. 11 shows motion-corrupted inputs
+at end-diastolic (ED) and end-systolic (ES) frames contain real
+respiration-induced motion artifacts, leading to visible blurring
+and ghosting around the ventricular walls. The proposed
+PR-INR model eﬀectively restores structural integrity and
+sharpness, yielding clearer myocardial boundaries and consis-
+tent ventricular morphology across cardiac phases. Table IX
+further reports consistent improvements in PSNR (+4.1 and
++3.8 dB), SSIM (+0.186 and +0.179) over motion-corrupted
+inputs for ED and ES frames, conﬁrming the model’s robust-
+ness in correcting real respiration-induced motion artifacts.
+
+
+===== PAGE 14 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3563
+V. DISCUSSION
+The design of PR-INR is explicitly guided by three
+core hypotheses. It includes motion corruption, hallucination
+correction, inter-slice continuity and domain generaliza-
+tion. Experiment results provide empirical support for these
+hypotheses and demonstrate their complementary roles in
+producing reliable reconstructions.
+The ﬁrst hypothesis posits that a diﬀusion-based prior
+can eﬀectively suppress global aliasing and motion-induced
+artifacts by leveraging its generative capacity. This is sup-
+ported by our quantitative results under synthetic motion
+settings (Table II), where PR-INR achieves 33.3 dB PSNR
+and 0.919 SSIM at 3% displacement, and maintains 31.0 dB /
+0.887 even under 5% displacement. Qualitative visualizations
+(Fig. 4(a) and (b)) further show that our MAD module
+restores global cortical folds and large-scale tissue integrity.
+Fig. 5(a) illustrates this denoising process over diﬀusion steps,
+clearly showing the recovery of anatomical structure. These
+results validate that the MAD module captures low-frequency
+structure and motion patterns. However, residual blur and
+hallucinated textures are still observed around high-frequency
+regions.
+To address this, our second hypothesis posits that hal-
+lucinations are spatially and frequency localized and can
+therefore be selectively reﬁned. This is supported by the error
+map analysis in Fig. 6, which shows substantially reduced
+errors after reﬁnement. Further evidence is provided by the
+intensity proﬁles in Fig. 7, where our method closely aligns
+with ground truth at structural boundaries, while competing
+methods exhibit oversmoothing or spurious oscillations. These
+results indicate that the IDR module eﬀectively suppresses
+high-frequency hallucination-prone regions by conditioning on
+coarse outputs and acquisition-aware features. While this dual-
+domain reﬁnement mitigates localized hallucination artifacts,
+residual uncertainty may still arise under severely degraded
+inputs, such as low-SNR or motion-corrupted slices. To con-
+strain generative behavior and preserve anatomical ﬁdelity,
+PR-INR integrates dual-domain supervision, volumetric regu-
+larization, and strict data-consistency projection. Future work
+will explore uncertainty quantiﬁcation and radiologist reader
+studies to further assess hallucination risk and clinical relia-
+bility.
+The third hypothesis focuses on the need to enforce
+volumetric continuity in the presence of anisotropic slice
+resolution. Our volumetric continuous representation (VCR)
+module addresses this by modeling a continuous function over
+3D coordinates. Experimental results in Table IV and Fig. 8
+show that PR-INR achieves the best slice interpolation (PSNR
+= 34.4, SSIM = 0.941) and yields superior segmentation
+accuracy (ET: 69.4, TC: 87.0, WT: 82.6). Fig. 5(c) further
+illustrates the volumetric modeling process, where spatial
+continuity is preserved across slices.
+Together, these three hypotheses form the foundation of a
+robust framework. This design not only promotes task-speciﬁc
+optimization but also facilitates generalization across domains.
+Fig. 10 and Table VIII show that PR-INR achieves up to
++6.9 dB PSNR and–0.329 LPIPS improvement on unseen
+cardiac and knee datasets.
+However, the proposed formulation targets anisotropic
+multi-slice 2D MRI acquisitions with thick slices. In this set-
+ting, motion corruption is dominated by in-plane components.
+Motion correction in the MAD stage is therefore performed
+in a slice-wise manner, and acquisition-level slice coupling
+induced by through-plane encoding and slice proﬁle eﬀects
+is not explicitly modeled. This provides a practical approxi-
+mation under thick-slice sampling but does not fully capture
+inter-slice coupling in more isotropic or fully encoded 3D
+acquisitions. Future work may incorporate more acquisition-
+consistent volumetric motion models (e.g., joint optimization
+across slices) to better model inter-slice coupling within a
+continuous implicit representation framework.
+VI. CONCLUSION
+In conclusion, we propose a progressive reﬁnement implicit
+neural representation (PR-INR) framework for MRI slice-
+to-volume reconstruction. The framework combines motion-
+aware diﬀusion, INR-based detail restoration, and continuous
+volumetric modeling to address motion artifacts, recover high-
+frequency details, and enforce slice-to-slice consistency under
+anisotropic sampling. Extensive experiments on four public
+datasets demonstrate consistent improvements in both quan-
+titative metrics and visual quality. We further validate the
+versatility of PR-INR on cardiac and knee imaging data,
+highlighting its robustness and potential for broader adoption
+in medical imaging workﬂows.
+VII. APPENDIX
+A. Proof and Analysis for Equation 14
+The MRI reconstruction pipeline consists of two stages:
+1) Diﬀusion-based Motion Correction: Generates initial
+estimate ˆx0 with motion artifacts mitigated
+2) Data-Consistent INR Reﬁnement: Produces xIDR via the
+sum up residual predicted by INR:
+xIDR = ˜x0 + fφ(˜x0, y, z).
+(22)
+Variance Analysis of Stage 2:
+Deﬁnition 1
+(k-Space Decomposition): Given sampling
+mask M ∈{0, 1}n×n, we decompose the reconstruction:
+xlow = F−1(M ⊙y),
+(23)
+xhigh = F−1((1 −M) ⊙F(ˆx0)),
+(24)
+where ⊙denotes the Hadamard product.
+After data consistency projection, we have two properties:
+Low-frequency determinism:Var(xlow|y) = 0
+High-frequency inheritance:Var(xhigh|y) = Var(ˆxhigh
+0
+|y)
+B. Residual Learning Formalism
+Deﬁnition 2 (PR-INR Operator): The reﬁnement operator
+of IDR process acts as:
+xIDR = ˜x0 + r,
+r = fφ(˜x0, y, z).
+(25)
+with r constrained to the high-frequency subspace:
+(F(r)) ⊆{(kx, kz)|M(kx, kz) = 0}
+(26)
+
+
+===== PAGE 15 =====
+3564
+IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 35, 2026
+Theorem 1
+(Variance Decomposition): The conditional
+variance decomposes as:
+Var(xIDR|y) = Var(xhigh|y)
+„
+ƒ‚
+…
+T1
++ Var(r|y)
+„ ƒ‚ …
+T2
++ 2Cov(xhigh, r|y)
+„
+ƒ‚
+…
+T3
+. (27)
+(since Var(xlow|y) = 0)
+C. Variance Reduction Mechanism in IDR
+Lemma 1 (Dual-Domain Constraint): The composite loss:
+LIDR = λ1∥xIDR −xgt∥2 + λ2∥P ⊙F(xIDR) −y∥2.
+(28)
+induces the variance bound:
+Var(r|y) ≤
+1
+λ1 + λ2
+E
+
+(Lr)2
+(29)
+Via Fisher information inequality:
+Var(r) ≤E[(∂rL)2]
+(∂2rL)2
+≤E[(∂rL)2]
+(λ1 + λ2)2 .
+(30)
+where second derivative ∂2
+rL ≥λ1 + λ2.
+Theorem 2 (Dominance of Covariance Term): Under opti-
+mal training:
+Cov(xhigh, r|y) ≤
+p
+Var(xhigh|y)Var(r|y).
+(31)
+Using Cauchy-Schwarz inequality:
+Cov(xhigh, r) = E[(xhigh −Exhigh)(r −Er)]
+≤−
+p
+Var(xhigh)Var(r).
+(32)
+(by error correction property). The negative sign arises because
+r actively corrects errors in xhigh.
+D. Main Variance Reduction Theorem
+Theorem 3 (Strict Variance Reduction): Under the pipeline
+constraints:
+Var(xIDR|y) ≪Var(ˆx0|y).
+(33)
+Combine results from deﬁnitions VII.3 to VII.5:
+Var(xIDR|y) = T1 + T2 + T3
+= Var(xhigh|y) + Var(r|y) + 2Cov(xhigh, r|y)
+≤Var(xhigh|y) −2
+p
+Var(xhigh|y)ϵ + ϵ
+=
+ p
+Var(xhigh|y) −√ϵ
+2
+≪Var(ˆx0|y).
+(34)
+where ϵ = Var(r|y) is constrained by the dual-domain loss.
+E. Proposition (Discrete Smoothness of INR in the Axial
+Direction)
+Let fθ : R3 →R be a coordinate-based implicit neural
+representation (INR), parameterized by θ, which maps con-
+tinuous spatial coordinates (x, y, z) ∈R3 to scalar intensity
+values. Assume that:
+• fθ is implemented as a multilayer perceptron (MLP) with
+continuous activation functions (e.g., ReLU, tanh, sin),
+• The network is trained on volumetric data sampled at
+discrete slice indices zi ∈Z,
+• The domain Ω⊂R2 × Z is compact (i.e., the spatial and
+axial coordinates are bounded).
+Then, there exists a constant C > 0 such that for all (x, y) ∈
+R2 and all z ∈Z, the ﬁnite forward diﬀerence of fθ along the
+z-axis is uniformly bounded:
+|fθ(x, y, z + 1) −fθ(x, y, z)| ≤C.
+(35)
+This
+inequality
+expresses
+a
+form
+of
+discrete
+Lips-
+chitz
+continuity
+over
+the
+z-axis
+and
+implies
+that
+the
+learned INR is smooth across adjacent slices in the axial
+direction.
+REFERENCES
+[1]
+K. Hammernik et al., “Physics-driven deep learning for computational
+magnetic resonance imaging: Combining physics and machine learning
+for improved medical imaging,” IEEE Signal Process. Mag., vol. 40,
+no. 1, pp. 98–114, Jan. 2023.
+[2]
+V. Spieker et al., “Deep learning for retrospective motion correction in
+MRI: A comprehensive review,” IEEE Trans. Med. Imag., vol. 43, no. 2,
+pp. 846–859, Feb. 2024.
+[3]
+D. Sobotka et al., “Motion correction and volumetric reconstruction
+for fetal functional magnetic resonance imaging data,” NeuroImage,
+vol. 255, Jul. 2022, Art. no. 119213.
+[4]
+D. Qiu, Y. Cheng, and X. Wang, “Medical image super-resolution
+reconstruction
+algorithms
+based
+on
+deep
+learning:
+A
+survey,”
+Comput.
+Methods
+Programs
+Biomed.,
+vol. 238,
+Aug.
+2023,
+Art. no. 107590.
+[5]
+A. Gholipour, J. A. Estroﬀ, and S. K. Warﬁeld, “Robust super-resolution
+volume reconstruction from slice acquisitions: Application to fetal brain
+MRI,” IEEE Trans. Med. Imag., vol. 29, no. 10, pp. 1739–1758, Oct.
+2010.
+[6]
+F. Rousseau et al., “Registration-based approach for reconstruction of
+high-resolution in utero fetal MR brain images,” Academic Radiol.,
+vol. 13, no. 9, pp. 1072–1081, Sep. 2006.
+[7]
+K. Kim, P. A. Habas, F. Rousseau, O. A. Glenn, A. J. Barkovich, and
+C. Studholme, “Intersection based motion correction of multislice mri
+for 3-d in utero fetal brain image formation,” IEEE Trans. Med. Imag.,
+vol. 29, no. 1, pp. 146–158, Jan. 2009.
+[8]
+A. Uus et al., “Deformable slice-to-volume registration for motion
+correction of fetal body and placenta MRI,” IEEE Trans. Med. Imag.,
+vol. 39, no. 9, pp. 2750–2759, Sep. 2020.
+[9]
+L. Wang, W. Zhang, W. Chen, Z. He, Y. Jia, and J. Du, “Cross-modality
+reference and feature mutual-projection for 3D brain MRI image
+super-resolution,” J. Imag. Informat. Med., vol. 37, no. 6, pp. 1–14,
+Jun. 2024.
+[10] Y.
+Pei
+et
+al.,
+“Anatomy-guided
+convolutional
+neural
+network
+for
+motion
+correction
+in
+fetal
+brain
+MRI,”
+in
+Proc.
+Mach.
+Learn.
+Med.
+Imaging:
+11th
+Int.
+Workshop,
+vol. 12436,
+2020,
+pp. 384–393.
+[11] B. A. Duﬀy et al., “Retrospective motion artifact correction of structural
+MRI images using deep learning improves the quality of cortical surface
+reconstructions,” NeuroImage, vol. 230, Apr. 2021, Art. no. 117756.
+[12] A. Alansary et al., “PVR: Patch-to-volume reconstruction for large area
+motion correction of fetal MRI,” IEEE Trans. Med. Imag., vol. 36,
+no. 10, pp. 2031–2044, Oct. 2017.
+[13] B. Kainz et al., “Fast volume reconstruction from motion cor-
+rupted stacks of 2D slices,” IEEE Trans. Med. Imag., vol. 34, no. 9,
+pp. 1901–1913, Sep. 2015.
+[14] J. E. Iglesias et al., “Joint super-resolution and synthesis of 1 mm
+isotropic MP-RAGE volumes from clinical MRI exams with scans of
+diﬀerent orientation, resolution and contrast,” NeuroImage, vol. 237,
+Aug. 2021, Art. no. 118206.
+[15] Y.
+Liu
+et
+al.,
+“3D
+isotropic
+super-resolution
+prostate
+MRI
+using
+generative
+adversarial
+networks
+and
+unpaired
+multiplane
+slices,”
+J.
+Digit.
+Imag.,
+vol. 34,
+no. 5,
+pp. 1199–1208,
+Oct. 2021.
+[16] M. Lustig, D. Donoho, and J. M. Pauly, “Sparse MRI: The application
+of compressed sensing for rapid MR imaging,” Magn. Reson. Med.,
+vol. 58, no. 6, pp. 1182–1195, Dec. 2007.
+[17] K. Zhang et al., “SOUP-GAN: Super-resolution MRI using generative
+adversarial networks,” Tomography, vol. 8, no. 2, pp. 905–919, Mar.
+2022.
+
+
+===== PAGE 16 =====
+ZHANG et al.: PR-INR FOR MOTION-ROBUST ANISOTROPIC MRI RECONSTRUCTION
+3565
+[18] L. Wang, H. Zhu, Z. He, Y. Jia, and J. Du, “Adjacent slices feature
+transformer network for single anisotropic 3D brain MRI image super-
+resolution,” Biomed. Signal Process. Control, vol. 72, Feb. 2022, Art.
+no. 103339.
+[19] B. Hou et al., “3-D reconstruction in canonical co-ordinate space from
+arbitrarily oriented 2-D images,” IEEE Trans. Med. Imag., vol. 37, no. 8,
+pp. 1737–1750, Aug. 2018.
+[20] S. S. M. Salehi, S. Khan, D. Erdogmus, and A. Gholipour, “Real-time
+deep pose estimation with geodesic loss for image-to-template rigid
+registration,” IEEE Trans. Med. Imag., vol. 38, no. 2, pp. 470–481, Feb.
+2019.
+[21] M. Kuklisova-Murgasova, G. Quaghebeur, M. A. Rutherford, J. V. Haj-
+nal, and J. A. Schnabel, “Reconstruction of fetal brain MRI with
+intensity matching and complete outlier removal,” Med. Image Anal.,
+vol. 16, no. 8, pp. 1550–1564, Dec. 2012.
+[22] J. P. Haldar and J. Zhuo, “P-LORAKS: Low-rank modeling of local k-
+space neighborhoods with parallel imaging data,” Magn. Reson. Med.,
+vol. 75, no. 4, pp. 1499–1514, Apr. 2016.
+[23] R. Heckel, M. Jacob, A. Chaudhari, O. Perlman, and E. Shimron, “Deep
+learning for accelerated and robust MRI reconstruction,” Magn. Reson.
+Mater. Phys., vol. 37, no. 3, pp. 335–368, 2024.
+[24] S. Tulyakov, M.-Y. Liu, X. Yang, and J. Kautz, “MoCoGAN: Decom-
+posing motion and content for video generation,” in Proc. IEEE/CVF
+Conf. Comput. Vis. Pattern Recognit., Jun. 2018, pp. 1526–1535.
+[25] Z. Wu, S. W. Remedios, B. E. Dewey, A. Carass, and J. L. Prince,
+“AniRes2D: Anisotropic residual-enhanced diﬀusion for 2D MR super-
+resolution,” Proc. SPIE, vol. 12930, pp. 567–574, Apr. 2024.
+[26] J. Xu, D. Moyer, P. E. Grant, P. Golland, J. E. Iglesias, and E. Adal-
+steinsson, “SVoRT: Iterative transformer for slice-to-volume registration
+in fetal brain MRI,” in Proc. Int. Conf. Med. Image Comput. Comput.-
+Assist. Intervent. Cham, Switzerland: Springer, 2022, pp. 3–13.
+[27] S. I. Young, Y. Balbastre, B. Fischl, P. Golland, and J. E. Iglesias, “Fully
+convolutional slice-to-volume reconstruction for single-stack MRI,” in
+Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun.
+2024, pp. 11535–11545.
+[28] J. Feng et al., “Spatiotemporal implicit neural representation for unsuper-
+vised dynamic MRI reconstruction,” IEEE Trans. Med. Imag., vol. 44,
+no. 5, pp. 2143–2156, May 2025.
+[29] Y. Quan, X. Qin, T. Pang, and H. Ji, “Siamese cooperative learning
+for unsupervised image reconstruction from incomplete measurements,”
+IEEE Trans. Pattern Anal. Mach. Intell., vol. 46, no. 7, pp. 4866–4879,
+Jul. 2024.
+[30] S. Anand and M. Lustig, “Beat pilot tone (BPT): Simultaneous MRI
+and RF motion sensing at arbitrary frequencies,” Magn. Reson. Med.,
+vol. 92, no. 4, pp. 1768–1787, Oct. 2024.
+[31] P. Lei, L. Hu, F. Fang, and G. Zhang, “Joint under-sampling pattern and
+dual-domain reconstruction for accelerating multi-contrast MRI,” IEEE
+Trans. Image Process., vol. 33, pp. 4686–4701, 2024.
+[32] Z. Chen et al., “VideoINR: Learning video implicit neural representation
+for continuous space-time super-resolution,” in Proc. IEEE/CVF Conf.
+Comput. Vis. Pattern Recognit. (CVPR), Jun. 2022, pp. 2047–2057.
+[33] X. Wang et al., “Spatial attention-based implicit neural representation
+for arbitrary reduction of MRI slice spacing,” Med. Image Anal., vol. 94,
+May 2024, Art. no. 103158.
+[34] W. Fang et al., “CycleINR: Cycle implicit neural representation
+for arbitrary-scale volumetric super-resolution of medical data,” in
+Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2024,
+pp. 11631–11641.
+[35] G. Li, C. Rao, J. Mo, Z. Zhang, W. Xing, and L. Zhao, “Rethinking
+diﬀusion model for multi-contrast MRI super-resolution,” in Proc.
+IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2024,
+pp. 11365–11374.
+[36] A. G¨ung¨or et al., “Adaptive diﬀusion priors for accelerated MRI
+reconstruction,” Med. Image Anal., vol. 88, Aug. 2023, Art. no. 102872.
+[37] H. Chung and J. C. Ye, “Score-based diﬀusion models for accelerated
+MRI,” Med. Image Anal., vol. 80, Aug. 2022, Art. no. 102479.
+[38] B. Ozturkler, C. Liu, B. Eckart, M. Mardani, J. Song, and J. Kautz,
+“SMRD:
+SURE-based
+robust
+MRI
+reconstruction
+with
+diﬀusion
+models,” in Proc. Int. Conf. Med. Image Comput. Comput.-Assist.
+Intervent., 2023, pp. 199–209.
+[39] Z. Zhao, J. C. Ye, and Y. Bresler, “Generative models for inverse
+imaging problems: From mathematical foundations to physics-driven
+applications,” IEEE Signal Process. Mag., vol. 40, no. 1, pp. 148–163,
+Jan. 2023.
+[40] V. Sitzmann, J. Martel, A. W. Bergman, D. B. Lindell, and G. Wetzstein,
+“Implicit neural representations with periodic activation functions,” in
+Proc. Adv. Neural Inf. Process. Syst., vol. 33, 2020, pp. 7462–7473.
+[41] R. Feng et al., “IMJENSE: Scan-speciﬁc implicit representation for joint
+coil sensitivity and image estimation in parallel MRI,” IEEE Trans. Med.
+Imag., vol. 43, no. 4, pp. 1539–1553, Apr. 2024.
+[42] J. Xu et al., “NeSVoR: Implicit neural representation for slice-to-
+volume reconstruction in MRI,” IEEE Trans. Med. Imag., vol. 42, no. 6,
+pp. 1707–1719, Jun. 2023.
+[43] J. McGinnis et al., “Single-subject multi-contrast MRI super-resolution
+via implicit neural representations,” in Proc. Int. Conf. Med. Image
+Comput. Comput.-Assist. Intervent., 2023, pp. 173–183.
+[44] J. Schlemper, J. Caballero, J. V. Hajnal, A. N. Price, and D. Rueckert, “A
+deep cascade of convolutional neural networks for dynamic MR image
+reconstruction,” IEEE Trans. Med. Imag., vol. 37, no. 2, pp. 491–503,
+Feb. 2018.
+[45] H. K. Aggarwal, M. P. Mani, and M. Jacob, “MoDL: Model-based deep
+learning architecture for inverse problems,” IEEE Trans. Med. Imag.,
+vol. 38, no. 2, pp. 394–405, Feb. 2019.
+[46] J.-Y. Zhu, T. Park, P. Isola, and A. A. Efros, “Unpaired image-to-image
+translation using cycle-consistent adversarial networks,” in Proc. IEEE
+Int. Conf. Comput. Vis., Oct. 2017, pp. 2223–2232.
+[47] J. Liang, J. Cao, G. Sun, K. Zhang, L. Van Gool, and R. Tim-
+ofte, “SwinIR: Image restoration using Swin transformer,” in Proc.
+IEEE/CVF Int. Conf. Comput. Vis. Workshops (ICCVW), Oct. 2021,
+pp. 1833–1844.
+[48] O. Ronneberger, P. Fischer, and T. Brox, “U-Net: Convolutional net-
+works for biomedical image segmentation,” in Proc. 18th Int. Conf. Med.
+Image Comput. Comput.-Assist. Intervent., vol. 9351. Cham, Switzer-
+land: Springer, 2015, pp. 234–241.
+[49] J. Huang et al., “Swin transformer for fast MRI,” Neurocomputing,
+vol. 493, pp. 281–304, Jul. 2022.
+[50] P. Guo, Y. Mei, J. Zhou, S. Jiang, and V. M. Patel, “ReconFormer:
+Accelerated MRI reconstruction using recurrent transformer,” IEEE
+Trans. Med. Imag., vol. 43, no. 1, pp. 582–593, Jan. 2024.
+[51] H. Sun et al., “Fourier convolution block with global receptive ﬁeld for
+MRI reconstruction,” Med. Image Anal., vol. 99, Jan. 2025, Art. no.
+103349.
+[52] J. Zou et al., “MMR-Mamba: Multi-modal MRI reconstruction with
+mamba and spatial-frequency information fusion,” Med. Image Anal.,
+vol. 102, May 2025, Art. no. 103549.
+[53] J. Zbontar et al., “FastMRI: An open dataset and benchmarks for
+accelerated MRI,” 2018, arXiv:1811.08839.
+[54] M. F. Glasser et al., “The human connectome project’s neuroimag-
+ing
+approach,”
+Nature
+Neurosci.,
+vol. 19,
+no. 9,
+pp. 1175–1187,
+2016.
+[55] U. Baid et al., “The RSNA-ASNR-MICCAI BraTS 2021 benchmark
+on brain tumor segmentation and radiogenomic classiﬁcation,” 2021,
+arXiv:2107.02314.
+[56] C. Wang et al., “CMRxRecon: A publicly available k-space dataset and
+benchmark to advance deep learning for cardiac MRI,” Scientiﬁc Data,
+vol. 11, no. 1, p. 687, Jun. 2024.
+[57] D. O. Walsh, A. F. Gmitro, and M. W. Marcellin, “Adaptive reconstruc-
+tion of phased array MR imagery,” Magn. Reson. Med., vol. 43, no. 5,
+pp. 682–690, May 2000.
+[58] R. Zhang, P. Isola, A. A. Efros, E. Shechtman, and O. Wang, “The
+unreasonable eﬀectiveness of deep features as a perceptual metric,”
+in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2018,
+pp. 586–595.
+[59] J. P. Guenette and L. Qin, “Time-saving 3D MR imaging proto-
+cols with millimeter and submillimeter isotropic spatial resolution
+for face and neck imaging as implemented at a single-site major
+referral center,” Amer. J. Neuroradiology, vol. 45, no. 6, pp. 737–742,
+Jun. 2024.
+[60] S. Wang et al., “The extreme cardiac MRI analysis challenge under
+respiratory motion (CMRxMotion),” 2022, arXiv:2210.06385.

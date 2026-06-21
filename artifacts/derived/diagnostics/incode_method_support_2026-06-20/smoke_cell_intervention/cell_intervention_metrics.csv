@@ -1,0 +1,5 @@
+dataset,image,x,y,crop_size,texture_score,model,cell_multiplier,oracle_rmse_y,delta_tracking_rmse_y,cell_sensitivity_rmse_y,oracle_change_rmse_y,delta_oracle_corr_y,delta_oracle_best_shift_x,delta_oracle_best_shift_y,delta_oracle_best_shift_corr_y,highpass_delta_rms_y
+urban100,img_001.png,192,0,64,0.39832707,LTE,4,0.03908366,0.09501752,0.04790290,0.10101154,0.35857538,0,0,0.35857538,0.10720216
+urban100,img_001.png,192,0,64,0.39832707,LTE-PhaseZ,4,0.03593896,0.10101154,0.00000000,0.10101154,nan,0,0,-inf,0.00000000
+urban100,img_001.png,192,0,64,0.39832707,SC-INR,4,0.03565615,0.09409513,0.04526176,0.10101154,0.37166063,0,0,0.37166063,0.10743263
+urban100,img_001.png,192,0,64,0.39832707,SC-INR-NoSinc,4,0.04217726,0.10101154,0.00000000,0.10101154,nan,0,0,-inf,0.00000000

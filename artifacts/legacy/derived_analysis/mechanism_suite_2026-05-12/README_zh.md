@@ -6,21 +6,20 @@
 ## 包含的检查
 
 - 6.1 Cell response curve：
-  `sampling_response/cell_response_curve.csv` 和
-  `sampling_response/figures/cell_response_delta_vs_ref.*`。
+  `sampling_response/cell_response_curve.csv`。
 - 6.2 Scale gain curve：
-  `scale_gain_curve.csv` 和 `figures/scale_gain_curve.*`。
+  `scale_gain_curve.csv`。
 - 6.3 Sampling consistency metric：
-  `sampling_consistency/consistency_summary.csv` 和
-  `sampling_consistency/figures/consistency_psnr_y.png`。
+  `sampling_consistency/consistency_summary.csv`。
 - 6.4 Frequency/response visualization：
-  `sampling_response/response_distribution_summary.csv` 和
-  `sampling_response/figures/response_mean_by_scale.*`。
+  `sampling_response/response_distribution_summary.csv`。
 - 6.5 OOD cell extrapolation diagnostic：
-  `cell_extrapolation_diagnostic.csv` 和
-  `figures/cell_extrapolation_signal_rms.*`。
+  `cell_extrapolation_diagnostic.csv`。
 - 6.6 Cell intervention experiment：
-  `cell_intervention_summary.csv` 和 `figures/cell_intervention/`。
+  `cell_intervention_summary.csv`。
+
+说明：旧自动图已从本地工作区清理；本 legacy 目录保留 CSV、README 和 run config
+用于审计。若需要图，应用当前细分脚本重新生成。
 
 ## 关键观察
 

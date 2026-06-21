@@ -1,0 +1,11 @@
+{
+  "self_test": false,
+  "out": "artifacts/derived/diagnostics/incode_method_support_2026-06-20/effective_amplitude",
+  "device": "cpu",
+  "models": "SC-INR,SC-INR-NoSinc",
+  "datasets": "bsd100,urban100",
+  "max_images": 3,
+  "lr_scale": 4,
+  "scales": "2,4,8,16,30",
+  "max_queries": 1024
+}

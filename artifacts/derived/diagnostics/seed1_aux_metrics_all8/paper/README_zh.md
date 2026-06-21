@@ -55,23 +55,14 @@
 - `consistency_per_pair_with_lte_deltas.csv`：逐 source scale 的 consistency 指标和 LTE delta。
 - `key_findings.md`：中文简要结论，便于快速恢复关键数字。
 
-## 图表使用建议
+## 图表状态
 
-适合正文改造：
+早期自动生成的监控图和草稿图已经从本地工作区清理，当前保留表格、CSV 和
+`key_findings.md` 作为该诊断的恢复入口。若后续确实需要图，应从这些表格重新绘制
+少模型、少指标、面向论文叙事的版本，而不是恢复旧的密集柱状图/折线图。
 
-- `fig_quality_consistency_tradeoff.pdf`：表达质量-一致性 tradeoff 的思路是对的，但需要重画。当前 NoCell/FeaturePhase 把 y 轴拉到 +25 dB，压缩了主模型差异；建议正文版本只保留主模型，诊断模型放 inset 或补充图。
-- `fig_scale_gain_vs_lte.pdf`：可改成少模型曲线，只画 LTE、LTE-EQ、SC-INR-FixedOmega、SC-INR-NoPhi。
-
-适合补充或调试，不建议直接进正文：
-
-- `fig_ood_psnr_gain_vs_lte.pdf`
-- `fig_ood_texture_rmse_delta_vs_lte.pdf`
-- `../figures/quality_psnr_y.png`
-- `../figures/texture_rmse_y.png`
-- `../figures/highpass_rmse_y.png`
-- `../figures/consistency_psnr_y.png`
-
-原因：这些图更像实验监控图。柱状图过密、方法太多，读者难以抓住论文主结论。
+原因：旧图更像实验监控图，方法太多且诊断 baseline 会压缩主模型差异，读者难以抓住
+论文主结论。
 
 ## Qualitative 可视化重做要求
 

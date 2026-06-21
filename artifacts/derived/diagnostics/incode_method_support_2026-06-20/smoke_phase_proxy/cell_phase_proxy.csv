@@ -1,0 +1,17 @@
+model,mode,scale_or_multiplier,ref,rel_cell_x,rel_cell_y,has_cell_phase,phase_l2,phase_abs_mean,phase_abs_max,delta_l2_vs_ref,delta_abs_mean_vs_ref,delta_abs_max_vs_ref
+LTE,observation_scale,x4,x4,0.5,0.5,1,2.9148619174957275,0.20162342488765717,0.6683276295661926,0.0,0.0,0.0
+LTE,observation_scale,x30,x4,0.06666667014360428,0.06666667014360428,1,0.38864827156066895,0.02688312530517578,0.0891103595495224,2.5262136459350586,0.17474029958248138,0.579217255115509
+LTE,cell_multiplier,1,1,0.5,0.5,1,2.9148619174957275,0.20162342488765717,0.6683276295661926,0.0,0.0,0.0
+LTE,cell_multiplier,4,1,2.0,2.0,1,11.65944766998291,0.8064936995506287,2.6733105182647705,8.744585037231445,0.6048702597618103,2.0049829483032227
+LTE-PhaseZ,observation_scale,x4,x4,0.5,0.5,0,0.0,0.0,0.0,0.0,0.0,0.0
+LTE-PhaseZ,observation_scale,x30,x4,0.06666667014360428,0.06666667014360428,0,0.0,0.0,0.0,0.0,0.0,0.0
+LTE-PhaseZ,cell_multiplier,1,1,0.5,0.5,0,0.0,0.0,0.0,0.0,0.0,0.0
+LTE-PhaseZ,cell_multiplier,4,1,2.0,2.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR,observation_scale,x4,x4,0.5,0.5,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR,observation_scale,x30,x4,0.06666667014360428,0.06666667014360428,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR,cell_multiplier,1,1,0.5,0.5,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR,cell_multiplier,4,1,2.0,2.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR-NoSinc,observation_scale,x4,x4,0.5,0.5,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR-NoSinc,observation_scale,x30,x4,0.06666667014360428,0.06666667014360428,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR-NoSinc,cell_multiplier,1,1,0.5,0.5,0,0.0,0.0,0.0,0.0,0.0,0.0
+SC-INR-NoSinc,cell_multiplier,4,1,2.0,2.0,0,0.0,0.0,0.0,0.0,0.0,0.0

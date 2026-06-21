@@ -1,0 +1,15 @@
+{
+  "device": "cpu",
+  "datasets": "urban100,bsd100",
+  "models": "LIIF,LTE,LTE-PhaseZ,SC-INR,SC-INR-NoSinc",
+  "max_images": 3,
+  "base_scale": 4,
+  "large_multiplier": 4.0,
+  "crop_size": 96,
+  "stride": 96,
+  "max_crops_per_image": 3,
+  "max_candidates": 18,
+  "num_select": 4,
+  "eval_bsize": 8192,
+  "out": "artifacts/derived/diagnostics/incode_method_support_2026-06-20/cell_intervention"
+}

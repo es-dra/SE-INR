@@ -1,0 +1,9 @@
+{
+  "out": "artifacts/derived/diagnostics/incode_method_support_2026-06-20/cell_phase_proxy",
+  "device": "cpu",
+  "models": "LTE,LTE-PhaseZ,SC-INR,SC-INR-NoSinc",
+  "scales": "2,3,4,6,8,12,16,24,30",
+  "ref_scale": 4.0,
+  "base_scale": 4.0,
+  "multipliers": "0.5,1,2,4"
+}

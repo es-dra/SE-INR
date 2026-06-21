@@ -1,0 +1,1327 @@
+
+
+===== PAGE 1 =====
+INCODE: Implicit Neural Conditioning with Prior Knowledge Embeddings
+Amirhossein Kazerouni 1
+Reza Azad 2
+Alireza Hosseini 3
+Dorit Merhof 4
+Ulas Bagci 5
+1 Iran University of Science and Technology 2 RWTH Aachen University
+3 University of Tehran 4 University of Regensburg 5 Northwestern University
+{amirhossein477, rezazad68}@gmail.com, {arhosseini77}@ut.ac.ir
+{dorit.merhof}@ur.de, {ulas.bagci}@northwestern.edu
+https://xmindflow.github.io/incode
+Abstract
+Implicit Neural Representations (INRs) have revolution-
+ized signal representation by leveraging neural networks to
+provide continuous and smooth representations of complex
+data. However, existing INRs face limitations in captur-
+ing fine-grained details, handling noise, and adapting to
+diverse signal types. To address these challenges, we intro-
+duce INCODE, a novel approach that enhances the control
+of the sinusoidal-based activation function in INRs using
+deep prior knowledge. INCODE comprises a harmonizer
+network and a composer network, where the harmonizer
+network dynamically adjusts key parameters of the activa-
+tion function. Through a task-specific pre-trained model,
+INCODE adapts the task-specific parameters to optimize
+the representation process. Our approach not only excels
+in representation, but also extends its prowess to tackle
+complex tasks such as audio, image, and 3D shape re-
+constructions, as well as intricate challenges such as neu-
+ral radiance fields (NeRFs), and inverse problems, includ-
+ing denoising, super-resolution, inpainting, and CT recon-
+struction. Through comprehensive experiments, INCODE
+demonstrates its superiority in terms of robustness, accu-
+racy, quality, and convergence rate, broadening the scope
+of signal representation. Please visit the project’s website
+for details on the proposed method and access to the code.
+1. Introduction
+The realm of signal representation has undergone a sig-
+nificant transformation with the emergence of Implicit Neu-
+ral Representations (INRs), also known as coordinate-based
+neural representations. Unlike traditional methods where
+signal values are discretely stored on coordinate grids, this
+new approach revolves around training neural networks,
+specifically Multilayer Perceptrons (MLPs), equipped with
+continuous nonlinear activation functions. The goal is to
+approximate the complex relationship between coordinates
+and their corresponding signal values, ultimately providing
+a continuous signal representation [41].
+INRs have received considerable attention for their abil-
+ity to learn tasks involving complex and high-dimensional
+data more compactly and flexibly.
+They have shown
+promise in applications spanning computer graphics [10,26,
+28], computer vision [21, 22, 27, 48], virtual reality [6, 17],
+and so on.
+The inherent attributes of seamlessness and
+continuity within INRs offer a wide range of advantages,
+most notably in applications involving super-resolution and
+inpainting tasks. Unlike Convolutional Neural Networks
+(CNNs), INRs bypass the limitations attributed to locality
+biases and leverage the power of neural networks to directly
+learn the relationship between inputs and desired outputs,
+thereby enhancing their effectiveness in modeling complex
+tasks. However, their potential is hampered by limitations.
+Previous approaches have not fully exploited the high rep-
+resentation capacity of INRs, failing to extract fine-grained
+details. Additionally, these methods often disregard data
+noise, rendering them ineffective for tasks such as super-
+resolution, denoising, and inpainting. Their applicability
+across signal types is limited, and scalability to handle large
+signal sets poses difficulties. Overcoming these challenges
+is crucial for unlocking INRs’ efficacy in diverse signal-
+processing contexts.
+Conditional neural networks constitute a significant ad-
+vancement in deep learning, endowing networks with adapt-
+ability based on auxiliary information, a departure from
+conventional context-agnostic counterparts. This adaptabil-
+ity introduces context awareness and targeted responsive-
+ness. The incorporation of supplementary conditions en-
+ables the accommodation of data distribution variations. In
+the domain of INRs, latent code concatenation with MLP
+spatial coordinates is prevalent [5, 24, 35]. An alternative,
+the dual-MLP approach by Mehta et al. [24], deploys a
+ReLU-based modulator network for amplitude modulation
+of sinusoidal activations across the hidden layers of the
+synthesis network. This modulation involves element-wise
+multiplication of modulator and synthesis activations. Shen
+et al. [40] augment CT and MRI reconstruction by embed-
+This WACV paper is the Open Access version, provided by the Computer Vision Foundation.
+Except for this watermark, it is identical to the accepted version;
+the final published version of the proceedings is available on IEEE Xplore.
+1298
+
+
+===== PAGE 2 =====
+ding prior image data into MLP weights, initializing a re-
+construction network, and facilitating its training. However,
+the concatenation strategy imposes limitations on recon-
+struction quality, the modulated synthesizer approach fails
+to fully exploit the potential of sinusoidal activation, the uti-
+lization of initialization techniques necessitates a two-step
+process, and using hyper-networks [15,47] is computation-
+ally expensive and requires significant memory costs.
+To mitigate these problems, we present a novel INR
+method to enhance the hierarchical representation capabil-
+ities of the INRS. The proposed method excels in achiev-
+ing high-quality reconstructions across various tasks, en-
+compassing audio, image, and 3D shape, as well as intri-
+cate challenges such as NeRF and inverse problems includ-
+ing denoising, super-resolution, inpainting, and CT (com-
+puted tomography) reconstruction. The architectural foun-
+dation of our proposed model is characterized by a dual-
+component MLP structure, comprising a harmonizer net-
+work and a composer network.
+The composer network
+is distinguished by a general form of sinusoidal activation
+function (asin(bω0x+c)+d), which effectively establishes
+a mapping between spatial coordinates and their respective
+values. Concurrently, the harmonizer network conditions
+the composer with a deep prior knowledge by dynamically
+adjusting the parameters a, b, c, and d during the learn-
+ing process. To this end, task-specific pre-trained models
+are used to generate object embeddings. At each learning
+step, the obtained embedding is fed into the harmonizer net-
+work, yielding the extraction of sinusoidal parameters. This
+symbiotic arrangement empowers the composer network to
+adeptly capture detailed information and refine intricacies
+crucial for accurate and comprehensive representation. Fur-
+thermore, we employ a regularization technique for the esti-
+mated parameters to expedite the convergence of the model.
+Our extensive experiments on various applications clearly
+demonstrate the superiority of our approach in terms of ro-
+bustness, accuracy, quality, and convergence rate.
+2. Related Works
+Implicit Neural Representation.
+Recent works have
+shown remarkable success in representing various signals
+using neural networks. INR applications span across sev-
+eral domains: 3D shape, image, video, and audio signals
+[7, 13, 19, 29, 37, 38, 41, 42]. Most INR works have been
+pursued to address the challenge of spectral bias encoun-
+tered in ReLU-based MLPs, which inherently inclines to-
+wards learning low-frequency components [33]. Sitzmann
+et al. in [41] utilize sinusoidal-based activation functions
+for INR. Tanckik et al. [43] introduce an FFN that applies
+a Fourier feature mapping before the actual network to pro-
+mote the learning of high-frequency data. Fathony et al. [9]
+introduce two variations of the Multiplicative Filter Net-
+works (MFN): one employing sinusoids and another one
+utilizing a Gabor wavelet as the filter applied after each
+layer. Some works take advantage of using an aggregate
+of smaller networks to represent the signal rather than us-
+ing one large MLP. In [12], the input signal is broken into
+regular grids of smaller sizes, and a separate network is re-
+sponsible for representing each cell inside the grid. [23,39]
+introduce an adaptive method for resource allocation based
+on the local complexity of the signal, enabling INR to work
+on larger signals, e.g., gigapixel images. Moreover, Milden-
+hall et al. [25] employ volume rendering to represent 3D
+scenes that take advantage of coordinate-based neural net-
+works. Since vanilla NeRF is difficult to train and entails
+lengthy training processes, other methods [3,4,10,18,32,46]
+utilized similar approaches to improve the fidelity and effi-
+ciency of NeRFs. KiloNeRF [36] shortens the rendering
+process by three orders of magnitude, where they utilize
+thousands of tiny MLPs to represent different segments of
+a scene and merge the outputs to obtain the entire scene.
+M¨uller et al. [28] have utilized hash encoding to expedite
+the training and inference process in NeRFs.
+Periodic Activation Functions. In recent studies, periodic
+activation functions have exhibited favorable results in INR
+tasks by instructing the network to learn high-frequency de-
+tails. Such activation functions have been widely investi-
+gated since 1987, when Lapedes and Farber [16] showed
+that networks with such activations are generally difficult
+to train.
+Further, Parascandolo et al. [30] shed light on
+why training networks with periodic activation functions
+is challenging. They show that training is only successful
+if the networks do not rely on the periodicity of the given
+functions and propose using a truncated sinusoidal function.
+Klocek et al. [15], motivated by discrete cosine transform,
+propose to exploit cosine activation functions for a target
+network whose weights are determined by a hyper-network.
+Recently, Sitzmann et al. [41] leverage sinusoidal activation
+functions initialized carefully to represent complex unstruc-
+tured data. Motivated by this, we propose INCODE, a gen-
+eral form of sinusoidal activation function, aiming to im-
+prove the representation accuracy and robustness of SIREN.
+Conditional Neural Network. In this domain, the focus on
+improving model adaptability through contextual informa-
+tion integration reflects a broader trend toward harnessing
+auxiliary data for enhanced model performance. In INRs, a
+common strategy involves the concatenation of latent codes
+obtained from an encoder with input coordinates [5,31,35].
+Diverse approaches have emerged for contextual integra-
+tion: Klocek et al. [15] leverage hyper-networks to com-
+pute weights for the primary network operating on coordi-
+nates, while Rebain et al. [35] propose an attention MLP
+conditioning mechanism using the latent code as keys and
+values and the coordinate as queries. Mehta et al. [24] mod-
+ulate the implicit function through a modulator MLP. Con-
+sequently, we present a novel conditioning process, wherein
+we estimate the parameters of the proposed activation func-
+1299
+
+
+===== PAGE 3 =====
+INCODE
+INCODE
+Harmonizer Network
+Task-specific Model
+Composer Network
+INCODE
+Harmonizer Network
+Input
+SiLU
+SiLU
+INCODE
+Figure 1. Illustration of the INCODE pipeline: adaptive implicit neural representation with prior knowledge embedding.
+tion using deep prior information and an auxiliary MLP
+network, thereby contributing to the growing landscape of
+adaptive conditional neural networks.
+3. Method
+The INR function operates by encoding a continuous
+target signal S(x) : RM→RN through a neural network
+f(x; θ) : RM→RN, i.e., an MLP, where the network’s ar-
+chitecture is parameterized by a set of weights θ. This net-
+work establishes a functional mapping between input coor-
+dinates x ∈RM and signal values S(x) ∈RN (e.g., occu-
+pancy, color, etc.). This is achieved by minimizing a loss
+function as:
+arg min
+θ
+E
+x∈X
+
+||f(x; θ) −S(x)||2
+2
+
+.
+(1)
+By implementing f(x; θ) with ReLU-based MLP archi-
+tectures, a notable trend emerges: the network displays
+a bias for capturing low-frequency signals. This trait, as
+shown by Rahaman et al. [33], frequently results in inferior-
+quality signal reconstructions. Sitzmann et al. [41] propose
+to use MLP with a sinusoidal activation function (SIREN
+method), where the post-activation layer is recursively de-
+fined as follows:
+yl = sin(wo
+ Wlyl−1 + bl
+
+), l = 1, 2, ..., L −1,
+(2)
+where Wl ∈RPl−1×Pl denotes the weights and bl ∈RPl
+indicates the bias at the lth layer of the network. While
+SIREN offers superior representation capacity compared to
+ReLU, there is still an opportunity to enhance control over
+the sine activation function. This control could adaptively
+amplify representation capacity and counter noise’s impact,
+diverging from the original SIREN’s noise-equivalent treat-
+ment in image representation. Therefore, our focus in IN-
+CODE is on introducing a sine-based activation function
+that provides enhanced control throughout the learning pro-
+cess by using deep prior knowledge.
+3.1. INCODE
+We now present INCODE: a conditional INR model
+with prior knowledge embeddings, illustrated in Figure 1.
+INCODE is composed of two fundamental components: a
+harmonizer network and a synthesizer network. The harmo-
+nizer network endeavors to adjust the activation function of
+the composer network, while the composer network’s duty
+is to craft a final piece. To initiate the process, we obtain
+a latent code z ∈Rr from a pre-trained model tailored to
+the task. This latent code then serves as input for the har-
+monizer network, which conditions the composer network’s
+mapping of spatial coordinates to signal values.
+3.1.1
+Composer Network
+We define the composer network as an MLP with L hidden
+layers, each containing P hidden features that map the in-
+put coordinates to its output domain, e.g., RGB values for
+an image. Each layer within the network utilizes a periodic-
+nonlinear activation function, which post-activation layer
+can be defined as follows:
+yl = a sin(b wo
+ Wlyl−1 + bl
+
++ c) + d,
+(3)
+where values of a, b, c, and d are adaptively determined
+at each iteration throughout the learning process, facilitated
+by the harmonizer network. In this function, each variable
+plays a distinct role in shaping the behavior of the activa-
+tion function. We now proceed to individually analyze the
+effects of each variable and see how they increase the rep-
+resentation accuracy and robustness:
+a (Amplitude): The amplitude a plays a pivotal role in ver-
+tically scaling or stretching the sinusoidal wave. Specifi-
+cally, our approach involves adjusting a during the learning
+process to influence the strength of the activation function’s
+response. In denoising, a higher a could potentially amplify
+noise, whereas, in representation, it could enhance the em-
+phasis on certain features. As a result, guiding the model to
+achieve an optimal balance for a leads to a feature enhance-
+ment in the representation tasks and noise suppression in the
+denoising-related tasks. Hence, the first objective of the har-
+monizer module is to optimally set the a value based on the
+given task. This adaptive learning is a departure from fixed
+activation functions and allows the model to self-regulate its
+response based on the specific characteristics of the data.
+1300
+
+
+===== PAGE 4 =====
+INCODE
+Layer 1
+Layer 2
+Layer 3
+Layer 4
+PSNR: 49.77 dB
+Output
+SIREN
+PSNR: 42.26 dB
+40
+20
+0
+20
+40
+0
+1
+2
+3
+Activation Spectrum
+1e5
+Layer 1
+INCODE
+SIREN
+40
+20
+0
+20
+40
+0
+1
+2
+3 1e5
+Layer 2
+INCODE
+SIREN
+40
+20
+0
+20
+40
+0
+1
+2
+3 1e5
+Layer 3
+INCODE
+SIREN
+40
+20
+0
+20
+40
+0
+1
+2
+3 1e5
+Layer 4
+INCODE
+SIREN
+Figure 2. Comparison of frequency response representations of the proposed method vs. SIREN across network layers.
+b (Frequency Scaling): The variable b governs the fre-
+quency scaling of the sinusoidal wave. The adjustment of b
+plays a significant role in accentuating either finer or coarser
+details within the representation. Thus, careful selection
+of b enables attenuating high-frequency noise in denoising
+tasks and regulates the granularity of captured features in
+representation tasks. Hence, adaptive calibration of b dur-
+ing the learning process effectively enhances the represen-
+tation capacity of representation models while reducing the
+high-frequency noise in the denoising tasks.
+c (Phase Shift): The phase shift parameter c horizontally
+displaces the sinusoidal wave along the x-axis. This adjust-
+ment impacts the alignment of features represented by the
+activation function, influencing their spatial arrangement
+within the model’s generated representation. Consequently,
+modifying c holds the potential to affect the quality and fi-
+delity of the resulting representation. In denoising, altering
+c can shift noise patterns, altering their perceptibility in the
+output; therefore, the model can learn to balance the effect
+of noise by shifting the sinusoidal wave.
+d (Vertical Shift): The variable d in the activation function
+acts as a vertical shift. Increasing d adds a constant positive
+offset to the entire function, resulting in a raised baseline.
+This adjustment effectively enhances the overall brightness
+of the generated image, akin to intensifying light or color.
+By elevating d, the output values of the activation function
+shift upwards, creating a visually brighter appearance in the
+representation. Thus, manipulating d provides a mechanism
+for controlling baseline brightness within the INR frame-
+work. Therefore, devising a mechanism that dynamically
+adjusts these variables during the learning process at each
+iteration can guide us towards achieving our objectives of
+constructing a resilient model with substantial representa-
+tion capacity.
+3.1.2
+Harmonizer Network
+The harmonizer network employs an MLP architecture con-
+sisting of K hidden layers and p1, p2, ..., pK hidden fea-
+tures. Its primary function revolves around the direct reg-
+ulation of the amplitude, frequency, and displacement of
+the sinusoidal activation such that it is defined as g(z; θ) :
+Rr→R4. This network is structured to predict the a, b, c,
+and d values dynamically. It initiates its function by receiv-
+ing a latent code z from a task-specific pre-trained model.
+Subsequently, it endeavors to predict these variable values
+in an adaptive manner. In our architectural framework, we
+strategically integrate a task-specific pretrained model, har-
+nessing the invaluable insights gained from its extensive
+training on a large-scale dataset. This integration is piv-
+otal in dynamically transforming the data into a meaningful
+latent space, subsequently facilitating its utilization by the
+harmonizer network.
+3.2. Loss function
+In our approach, we employ the mean squared error
+(MSE) as a metric to minimize the differences between the
+predicted signal values and their corresponding true values.
+This optimization objective aims to make the predicted val-
+ues closely align with the actual data. Additionally, we in-
+troduce a regularization term to the loss function. This term
+is designed to enforce positive values for the parameters a,
+b, c, and d. We enforce the variables to be positive in or-
+der to guide the model towards more relevant solutions, en-
+courage the model to converge more rapidly, and reduce the
+likelihood of becoming trapped in a local optimum during
+the training process. This regularization mechanism con-
+tributes to a more efficient and effective optimization pro-
+1301
+
+
+===== PAGE 5 =====
+cess, enhancing the overall performance of the model. Our
+loss function is defined as follows:
+arg min
+θ,a,b,c,d
+E
+
+∥f(x; θ) −S(x)∥2
+2
+
+s.t.
+a ⩾1,
+b ⩾1,
+c ⩾0,
+d ⩾0.
+(4)
+We control the strength of the regularization applied to
+the parameters a, b, c, and d through corresponding coef-
+ficients λ1, λ2, λ3, and λ4 in the optimization process, en-
+abling us to manage the trade-off between fitting the data
+and imposing constraints on the parameter values.
+3.3. Expressiveness of INCODE
+This section explores INCODE’s expressive capabilities
+and compares them with the SIREN architecture. Y¨uce et
+al. [49] analyze the two-layer SIREN. In a SIREN with two
+layers and input x, the first layer produces Z(0) = sin(Ωx),
+and the second layer yields Z(1) = sin(ω(1) sin(Ωx)). The
+second-layer output in SIREN can be expressed as:
+P −1
+X
+m=0
++∞
+X
+s1,...,sN=−∞
+ N−1
+Y
+t=0
+JstW (1)
+m,t
+!
+sin
+ N−1
+X
+t=0
+stwtx
+!
+,
+(5)
+where Js defines the Bessel function of the first kind of or-
+der s. The decreasing nature of JstW (1)
+m,t results in higher-
+order harmonics carrying smaller weights, concentrating
+energy around a narrow band centered at input frequencies
+Ω. Scaling coefficients like ω(1) amplify higher-order har-
+monics, enabling a broader range of learnable frequencies.
+INCODE introduces a harmonizer network learning ac-
+tivation function parameters a, b, c, and d, leading to
+a sin(bΩ+ c) + d. The simplified second-layer output in
+INCODE, with only a and b, becomes:
+a
+P −1
+X
+m=0
++∞
+X
+s1,...,sN=−∞
+ N−1
+Y
+t=0
+JstW (1)
+m,tab
+!
+sin
+ N−1
+X
+t=0
+stwtbx
+!
+.
+(6)
+The term a enhances noise robustness and emphasizes
+signal details, while ab amplifies coefficients for higher-
+order terms, broadening the frequency spectrum beyond
+that of SIREN, given that ab ⩾1. To ensure this condition,
+we consider a and b as ea and eb, respectively, in our pro-
+posed activation function to fulfill this condition. Parameter
+c crucially produces ejc terms, effectively controlling b to
+prevent unbounded growth. This control enhances network
+stability and maintains meaningful frequency components.
+For experimental purposes, an image is generated within
+specific frequency ranges, transmitting information from
+low to high frequency.
+Empirical evidence in Figure 2
+demonstrates higher amplitudes at higher frequencies in
+INCODE’s first layer, confirming enhanced mapping ca-
+pabilities and expanded frequency bandwidth compared to
+SIREN. The parameterization of the harmonizer network
+achieves broader frequency coverage while retaining sen-
+sitivity to essential signal details.
+4. Experiments
+Implementation Details. We utilize a 5-layer composer
+network with 256 units for all experiments. Specifics re-
+garding the harmonizer network can be found in the relevant
+task description. Our experiments are performed using Py-
+Torch on an Nvidia RTX 3070 Ti GPU with 8GB memory.
+We use the Adam optimizer [14] with a learning rate sched-
+uler, aiding convergence by decreasing the learning rate by
+α at each epoch’s completion. Experiments are conducted
+for 500 epochs, except audio (1000 epochs), occupancy
+(200 epochs), and CT reconstruction (2000 epochs). λ1, λ2,
+λ3, and λ4 are set to 0.1993, 0.0196, 0.0588, and 0.0269,
+respectively, obtained by training the model for the image
+representation task on 10 samples and using Optuna [1] for
+hyperparameter optimization. We extensively compare our
+methods with WIRE [38], SIREN [38], MFN [9], Gaussian
+[34], ReLU with Positional-Encoding (ReLU+P.E.) [43],
+and FFN [43]. Further architectural details of these methods
+are available in the supplementary materials.
+4.1. Signal Representations
+4.1.1
+Image
+Data. We conducted our image representation experiments
+using the DIV2K dataset [44], which was downsampled by
+a factor of 1/4. For example, Figure 3 is downsampled from
+1644 × 2040 × 3 to 411 × 510 × 3.
+Architecture.
+The Composer network maps 2D coordi-
+nates to RGB values, and wo is set to 30 for this network.
+The Harmonizer network is a 3-layer MLP with 64, 32, and
+4 features, equipped with the SiLU [8] activation function.
+It maps the generated latent code with r = 64 to the four
+parameters of activation. Weights of this network are nor-
+mally initialized N(0, 0.001) with constant biases of 0.31.
+We use ResNet34 [11] truncated to its fifth layer, followed
+by an adaptive average pooling, to generate the latent code.
+The learning rate is set to 9 × 10−4 and α to 0.1.
+Analysis. The experimental results of image representa-
+tion are presented in Figure 3. The results clearly indicate
+that INCODE outperforms its counterparts in terms of rep-
+resentation quality. Notably, it achieves a substantial en-
+hancement of +3.89 dB in PSNR values compared to the
+nearest counterpart, FFN, and +4.44 dB and +4.48 dB im-
+provements compared to WIRE and SIREN, respectively.
+Additionally, INCODE has shown a sharper reconstruc-
+tion of the tiger eyebrow than the other methods, particu-
+larly ReLU+P.E. and MFN. This observation underscores
+the promising potential of INCODE for image representa-
+tion, capable of producing sharper images with finer details.
+More results are in the supplementary file.
+4.1.2
+Occupancy Volume
+Data. We use the Lucy dataset from the Stanford 3D Scan-
+ning Repository and follow the WIRE strategy [38]. We
+create an occupancy volume through point sampling on a
+1302
+
+
+===== PAGE 6 =====
+Ground truth
+PSNR=38.46 dB
+INCODE
+PSNR=33.59 dB
+SIREN
+PSNR=34.02 dB
+WIRE
+PSNR=31.88 dB
+MFN
+PSNR=26.83 dB
+ReLU + P.E.
+PSNR=31.18 dB
+Gauss
+PSNR=34.57 dB
+FFN
+Figure 3. Image representation: Comparison of INCODE with SOTA methods.
+Ground truth
+IoU=0.9950
+INCODE
+IoU=0.9885
+SIREN
+IoU=0.9718
+WIRE
+IoU=0.9927
+ReLU + P.E.
+Figure 4. Occupancy volume representation: Comparison of INCODE with SOTA methods.
+Ground truth
+PSNR=21.30 dB, SSIM=0.33
+Noisy Image
+PSNR=32.13 dB, SSIM=0.81
+INCODE
+PSNR=31.50 dB, SSIM=0.78
+SIREN
+PSNR=30.86 dB, SSIM=0.75
+WIRE
+PSNR=28.93 dB, SSIM=0.62
+MFN
+PSNR=31.74 dB, SSIM=0.79
+ReLU + P.E.
+PSNR=30.20 dB, SSIM=0.72
+Gauss
+= 10
+= 20
+= 30
+= 40
+= 50
+= 60
+= 70
+= 80
+N /A
+Noisy Img
+INCODE
+WIRE
+SIREN
+MFN
+ReLU+P.E.
+Gauss
+12.2
+28.6
+27.5
+27.8
+24.1
+28.5
+25.6
+17.0
+30.5
+29.2
+29.4
+27.3
+30.3
+28.2
+19.6
+31.5
+30.8
+30.9
+28.6
+31.4
+29.1
+21.3
+32.1
+30.9
+31.5
+29.9
+31.7
+30.2
+22.6
+32.7
+31.1
+32.2
+30.6
+32.1
+31.6
+23.6
+33.0
+31.4
+32.6
+30.8
+33.3
+31.3
+24.4
+33.3
+31.9
+33.0
+31.4
+33.7
+31.7
+25.1
+33.6
+32.3
+33.2
+31.5
+33.9
+32.3
+inf
+48.2
+40.4
+40.3
+37.4
+35.1
+38.3
+Methods vs. Noise
+15
+20
+25
+30
+35
+40
+45
+PSNR (dB)
+Figure 5. Image denoising: Qualitative and quantitative comparison of INCODE with SOTA methods.
+Ground truth
+PSNR=31.11 dB
+INCODE
+PSNR=27.39 dB
+SIREN
+PSNR=27.99 dB
+WIRE
+PSNR=28.79 dB
+MFN
+PSNR=23.86 dB
+ReLU+P.E
+PSNR=26.75 dB
+Gauss
+Figure 6. CT Reconstruction: Comparison of CT-based reconstruction with 150 angles with SOTA methods.
+512×512×512 grid, assigning values of 1 to voxels within
+the object and 0 to voxels outside.
+Architecture. Our network and training configurations re-
+semble the image representation task, with the distinction
+that the composer network now maps 3D (M = 3) coor-
+dinates to signed distance function (SDF) values (N = 1).
+Utilizing ResNet3D-18 [45] truncated to the third layer for
+feature extraction to generate a latent code of size 128, our
+approach effectively incorporates volumetric data into the
+composer network.
+Analysis. The results showcased in Figure 4 underscore IN-
+CODE’s effectiveness as a robust replacement for its coun-
+1303
+
+
+===== PAGE 7 =====
+terparts in occupancy representation tasks.
+Remarkably,
+INCODE adeptly harnesses the informative latent code to
+condition the composer network, yielding an amplified rep-
+resentation capacity. This augmentation is particularly ev-
+ident in the intensification of high-frequency information
+while also adeptly capturing low-frequency details.
+Our
+method yields higher Intersection over Union (IOU) values,
+particularly excelling in replicating intricate details such as
+Lucy’s hand and foot. INCODE remarkably enhances ob-
+ject details and scene complexity, enabling more accurate
+representation compared to existing methods.
+4.1.3
+Audio Representations
+Data. We use the first 7 seconds of Bach’s Cello Suite No.
+1: Prelude [41], with a sampling rate of 44100 Hz as our
+example for the audio representation task.
+Architecture. The composer network transforms 1D (M =
+1) input to its corresponding 1D output (N = 1). It em-
+ploys strategic frequency initialization for effective learning
+due to the nature of audio: w0 is set to 3000 for the first layer
+to capture high spatial frequency information, and hidden
+w0 is set to 30 for subsequent layers. To capture audio fea-
+tures, Mel Frequency Cepstral Coefficients (MFCCs) [20]
+serve as the feature extractor.
+MFCCs encode both fre-
+quency and temporal information, suited for audio represen-
+tation. The harmonizer network utilizes extracted features
+and generates the activation parameters. Also, the learning
+rate is 9 × 10−5, and α is 0.2.
+Analysis. We evaluate INCODE’s performance against es-
+tablished methods to gauge its effectiveness in audio sig-
+nal representation. Results highlight INCODE’s substantial
+reduction in error rates and increase of +10.60 dB PSNR
+value compared to the second best, Gauss (See Supplemen-
+tary, Fig 2).
+The periodicity of audio signals at various
+time scales leads to an accurate and efficient representation
+in INCODE, akin to SIREN. INCODE converges swiftly
+to a distortion-minimized representation, while Gauss and
+ReLU+P.E. methods manifest distortion during playback.
+Although SIREN strives to mitigate this, some dominant
+noise is witnessed in the background. INCODE notably ex-
+cels in this aspect, as evidenced in its error figure.
+4.2. Inverse Problems
+4.2.1
+Image denoising
+Data.
+We employ an image from DIV2K dataset [44],
+downsampled by a factor of 1/4 from 1152 × 2040 × 3 to
+288 × 510 × 3. We create the noisy image using realistic
+sensor measurement with readout and photon noise, where
+independent Poisson random variables are applied to each
+pixel. The mean photon count (τ) varied between 10 and
+80, while the readout count (ro) set fixed at 2.
+Architecture. The composer network is similar to previ-
+ous tasks, however, we set w0 to 10 for the first layer, while
+the other layers remain at 30. The choice of w0 in the ini-
+tial layer plays a crucial role in achieving a denoised image
+with higher fidelity and fewer artifacts. By setting w0 to a
+lower value, the network becomes more adept at capturing
+low-frequency information and smoothing out noise-related
+variations. The first layer w0 can also be calibrated in align-
+ment with the noise characteristics to attain optimal signal
+quality. The harmonizer network is a 4-layer MLP, con-
+taining 32, 16, 8, and 4 nodes. Each layer is followed by
+a LayerNorm and SiLU activation function. This network
+is responsible for mapping the latent code (r = 64) gener-
+ated by ResNet34 to the activation parameters. Weights are
+initialized using the normal distribution of N(0, 0.001) and
+constant biases of 0.0005. This initialization emphasizes the
+relevant signal components and suppresses noise-related ar-
+tifacts. We train the model with a learning rate of 1.5×10−4
+and α = 0.1.
+Analysis. We demonstrate the effectiveness of INCODE in
+solving inverse problems using the example of image de-
+noising, capitalizing on its inductive bias and robustness.
+The visual comparison of our approach is presented in Fig-
+ure 5 for τ = 40 and ro = 2, where INCODE significantly
+enhances the fidelity of the noisy image with a +10.83 dB
+PSNR improvement and a 0.48 increment in the Structural
+Similarity Index (SSIM) metric.
+INCODE adeptly pre-
+serves image details while mitigating noise artifacts, par-
+ticularly when compared to the MFN and Gauss methods,
+where noise effects still persist in the output. Furthermore,
+our approach outperforms the ReLU+P.E. method by 0.39
+dB and 0.02 in terms of SSIM. Furthermore, we present a
+histogram visualization in Figure 5, wherein the image is
+subjected to varying degrees of noise to illustrate the com-
+parative performance of each approach and the incremental
+trend as noise influence diminishes. Additionally, we con-
+duct the methods without noise to exhibit the capacity of
+each approach in both denoising and representation tasks.
+Evidently, INCODE has shown a comparable performance
+with the ReLU+P.E. method, while the ReLU-based net-
+works are particularly good for prioritizing learning low-
+frequency information, demonstrating the robustness and
+power of the INCODE in denoising tasks.
+4.2.2
+Image super resolution
+Data. We adopt an image from the DIV2K dataset [44] and
+downsampled the image with the size of 1356 × 2040 × 3
+by factors of 1/2, 1/4, and 1/6.
+Architecture.
+We maintain the same architectural and
+training settings as the image representation task. By em-
+ploying a downsampled image during training, we exploit
+the interpolation capabilities of INRs to reconstruct an im-
+age of its original size in the test.
+Analysis. In super-resolution, the application of INRs as
+interpolants presents a promising avenue. This notion in-
+dicates that INRs possess inherent advantageous biases that
+can be harnessed to enhance super-resolution tasks. To val-
+1304
+
+
+===== PAGE 8 =====
+idate this proposition, we conducted 1×, 2×, 4×, and 6×
+super-resolution experiments on an image. As presented
+in Table 1, the results demonstrate that INCODE consis-
+tently achieves superior PSNR and SSIM values across all
+super-resolution levels, outperforming alternative methods.
+Furthermore, the visual demonstration of INCODE’s supe-
+riority is presented in (Supplementary, Fig. 6), revealing its
+ability to retain sharper details compared to others that often
+result in blurrier outcomes.
+Table 1. INCODE vs. SOTAs in super-resolution.
+Methods
+1×
+2×
+4×
+6×
+PSNR
+SSIM
+PSNR
+SSIM
+PSNR
+SSIM
+PSNR
+SSIM
+Gauss
+30.25
+0.79
+29.05
+0.86
+27.07
+0.83
+25.04
+0.79
+FFN
+32.96
+0.90
+29.33
+0.85
+29.41
+0.86
+27.01
+0.84
+MFN
+31.20
+0.84
+30.78
+0.87
+29.35
+0.86
+27.23
+0.83
+ReLU P.E.
+32.41
+0.87
+30.29
+0.88
+25.52
+0.82
+24.26
+0.81
+WIRE
+31.57
+0.84
+31.37
+0.86
+28.55
+0.83
+24.77
+0.72
+SIREN
+32.10
+0.87
+31.51
+0.89
+28.81
+0.85
+26.46
+0.84
+INCODE
+33.44
+0.91
+33.02
+0.92
+29.88
+0.87
+27.57
+0.85
+4.2.3
+CT reconstruction
+Data. We use a publicly available CT lung image (256 ×
+256) from the Kaggle Lung Nodule Analysis dataset [2] to
+assess our model’s performance in CT reconstruction.
+Architecture. The architecture remains consistent with that
+of the image representation task.
+INCODE involves us-
+ing the ResNet34 architecture to process the undersampled
+sinogram and generate a latent code. We conduct training
+over 2000 epochs, using the learning rate of 2 × 10−4, cou-
+pled with α = 0.4. We generate a sinogram according to
+the projection level using the radon transform. The model
+predicts a reconstructed CT image. Subsequently, we calcu-
+late the radon transform for the generated output and com-
+pute the loss function between these sinograms, to guide the
+model toward generating CT images with reduced artifacts.
+Analysis. CT reconstruction is the process of generating
+a computed image from sensor measurements. Sparse CT
+reconstruction deals with the added complexity of generat-
+ing accurate images when only a subset of measurements
+is available, posing challenges due to limited data con-
+straints. INCODE addresses this challenge by employing
+a conditional harmonizer network to seamlessly integrate
+deep prior information into the model. As shown in Fig-
+ure 6, INCODE stands out by producing sharp reconstruc-
+tions with clear details using 150 measurements (+2.32 dB
+improvement compared to the second best, MFN). Con-
+versely, MFN shows artifacts similar to WIRE and Gauss,
+yet achieving higher PSNR values.
+On the other hand,
+SIREN and ReLU+P.E. yield overly blurred results with re-
+duced details. This underscores INCODE’s robustness in
+addressing challenges posed by noisy and undersampled in-
+verse problems. Its ability to balance image fidelity and
+noise reduction establishes INCODE as a promising so-
+lution in the underconstrained image reconstruction land-
+scape. We also explore the relationship between the number
+of projections and the reconstructed CT quality (see Sup-
+plementary, Fig. 3). Our method maintained its superiority
+compared to SOTA methods, underscoring its resilience in
+the face of measurement noise.
+4.2.4
+Inpainting
+Data. W utilize Celtic spiral knots image with a resolution
+of 572×582×3. The sampling mask is generated randomly,
+with an average of 20% of pixels being sampled.
+Architecture. We adopt a configuration similar to that of
+image representation architecture, albeit with adjustments
+tailored to the task-specific model. Due to the random pixel
+sampling, a pre-trained model like ResNet cannot be em-
+ployed. Hence, a custom model is crafted for latent code
+generation, consisting of two layers [Conv1D, ReLU, Max-
+Pooling], followed by another Conv1D layer. The resulting
+latent code is of size 64. For training, the model employs a
+learning rate of 1.5 × 10−4 and α = 0.25.
+Analysis. Despite only sampling 20% of pixels, INCODE
+effectively addresses inverse problems as demonstrated by
+single-image inpainting.
+The output in (Supplementary,
+Fig. 4) illustrates that INCODE can achieve performance on
+par but better with other baseline methods. Specifically, IN-
+CODE exhibits the ability to generate sharper results with
+more details.
+4.3. Neural radiance fields
+Neural Radiance Fields (NeRFs) [25] combine INRs
+and volume rendering by using MLPs equipped with
+ReLU+P.E, aiming to implicitly represent scenes for syn-
+thesizing novel views. By training a 3D implicit function
+using spatial coordinates (x, y, z) and viewing directions
+(θ, ϕ), NeRFs can predict the color and density of that spe-
+cific location. This allows for generating new views of ob-
+jects from different angles by tracing camera rays through
+pixels using neural rendering. We, therefore, investigate the
+effectiveness of using INCODE without positional encod-
+ing in the NeRF. We found that our approach yields supe-
+rior results in fewer epochs. We substantiate the excellence
+of our approach through comparative analyses and results
+showcased in the supplementary material.
+5. Conclusion
+In this paper, we introduced INCODE, an innovative ap-
+proach to INRs that enhances their representation capac-
+ity.
+INCODE employs dynamic sinusoidal-based activa-
+tion functions with adaptive control, overcoming existing
+limitations. Guided by deep prior knowledge, the harmo-
+nizer network dynamically adjusts activation function pa-
+rameters, leading to superior performance in various tasks.
+Acknowledgement:
+The project is supported by the
+NIH funding:
+R01-CA246704,
+R01-CA240639,
+U01
+DK127384-02S1, and U01-CA268808.
+1305
+
+
+===== PAGE 9 =====
+References
+[1] Takuya Akiba, Shotaro Sano, Toshihiko Yanase, Takeru
+Ohta, and Masanori Koyama. Optuna: A next-generation
+hyperparameter optimization framework. In Proceedings of
+the 25th ACM SIGKDD International Conference on Knowl-
+edge Discovery and Data Mining, 2019. 5
+[2] Reza Azad, Maryam Asadi-Aghbolaghi, Mahmood Fathy,
+and Sergio Escalera.
+Bi-directional convlstm u-net with
+densley connected convolutions.
+In Proceedings of the
+IEEE/CVF international conference on computer vision
+workshops, pages 0–0, 2019. 8
+[3] Jonathan T Barron, Ben Mildenhall, Dor Verbin, Pratul P
+Srinivasan, and Peter Hedman. Mip-nerf 360: Unbounded
+anti-aliased neural radiance fields.
+In Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 5470–5479, 2022. 2
+[4] Zhiqin Chen, Thomas Funkhouser, Peter Hedman, and An-
+drea Tagliasacchi. Mobilenerf: Exploiting the polygon ras-
+terization pipeline for efficient neural field rendering on mo-
+bile architectures.
+In Proceedings of the IEEE/CVF Con-
+ference on Computer Vision and Pattern Recognition, pages
+16569–16578, 2023. 2
+[5] Zhiqin Chen and Hao Zhang. Learning implicit fields for
+generative shape modeling. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition,
+pages 5939–5948, 2019. 1, 2
+[6] Nianchen Deng,
+Zhenyi He,
+Jiannan Ye,
+Budmonde
+Duinkharjav, Praneeth Chakravarthula, Xubo Yang, and Qi
+Sun. Fov-nerf: Foveated neural radiance fields for virtual
+reality. IEEE Transactions on Visualization and Computer
+Graphics, 28(11):3854–3864, 2022. 1
+[7] Shivam Duggal, Zihao Wang, Wei-Chiu Ma, Sivabalan
+Manivasagam, Justin Liang, Shenlong Wang, and Raquel
+Urtasun.
+Mending neural implicit modeling for 3d ve-
+hicle reconstruction in the wild.
+In Proceedings of the
+IEEE/CVF Winter Conference on Applications of Computer
+Vision, pages 1900–1909, 2022. 2
+[8] Stefan Elfwing, Eiji Uchibe, and Kenji Doya.
+Sigmoid-
+weighted linear units for neural network function approxima-
+tion in reinforcement learning. Neural Networks, 107:3–11,
+2018. 5
+[9] Rizal Fathony, Anit Kumar Sahu, Devin Willmott, and J Zico
+Kolter. Multiplicative filter networks. In International Con-
+ference on Learning Representations, 2021. 2, 5
+[10] Kyle Gao, Yina Gao, Hongjie He, Denning Lu, Linlin Xu,
+and Jonathan Li. Nerf: Neural radiance field in 3d vision,
+a comprehensive review. arXiv preprint arXiv:2210.00379,
+2022. 1, 2
+[11] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+Deep residual learning for image recognition. In Proceed-
+ings of the IEEE conference on computer vision and pattern
+recognition, pages 770–778, 2016. 5
+[12] Milad Soltany Kadarvish, Hesam Mojtahedi, Hossein En-
+tezari Zarch, Amirhossein Kazerouni, Alireza Morsali, Azra
+Abtahi, and Farokh Marvasti. Ensemble neural representa-
+tion networks. arXiv preprint arXiv:2110.04124, 2021. 2
+[13] Jaechang Kim, Yunjoo Lee, Seunghoon Hong, and Jungseul
+Ok. Learning continuous representation of audio for arbi-
+trary scale super resolution.
+In ICASSP 2022-2022 IEEE
+International Conference on Acoustics, Speech and Signal
+Processing (ICASSP), pages 3703–3707. IEEE, 2022. 2
+[14] Diederik P. Kingma and Jimmy Ba. Adam: A method for
+stochastic optimization. 2014. 5
+[15] Sylwester Klocek, Łukasz Maziarka, Maciej Wołczyk, Jacek
+Tabor, Jakub Nowak, and Marek ´Smieja.
+Hypernetwork
+functional image representation. In International Conference
+on Artificial Neural Networks, pages 496–510. Springer,
+2019. 2
+[16] Alan Lapedes and Robert Farber. Nonlinear signal process-
+ing using neural networks: Prediction and system modelling.
+Technical report, 1987. 2
+[17] Ke Li, Tim Rolff, Susanne Schmidt, Reinhard Bacher, Si-
+mone Frintrop, Wim Leemans, and Frank Steinicke. Bring-
+ing instant neural graphics primitives to immersive virtual
+reality. In 2023 IEEE Conference on Virtual Reality and 3D
+User Interfaces Abstracts and Workshops (VRW), pages 739–
+740. IEEE, 2023. 1
+[18] Sicheng Li, Hao Li, Yue Wang, Yiyi Liao, and Lu Yu. Steern-
+erf: Accelerating nerf rendering via smooth viewpoint trajec-
+tory. In Proceedings of the IEEE/CVF Conference on Com-
+puter Vision and Pattern Recognition, pages 20701–20711,
+2023. 2
+[19] Tianyang Li, Xin Wen, Yu-Shen Liu, Hua Su, and Zhizhong
+Han. Learning deep implicit functions for 3d shapes with
+dynamic code clouds. In Proceedings of the IEEE/CVF Con-
+ference on Computer Vision and Pattern Recognition, pages
+12840–12850, 2022. 2
+[20] Beth Logan et al.
+Mel frequency cepstral coefficients for
+music modeling. In Ismir, volume 270, page 11. Plymouth,
+MA, 2000. 7
+[21] Yunfan Lu, Zipeng Wang, Minjie Liu, Hongjian Wang, and
+Lin Wang. Learning spatial-temporal implicit neural repre-
+sentations for event-guided video super-resolution. In Pro-
+ceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition, pages 1557–1567, 2023. 1
+[22] Shishira R Maiya, Sharath Girish, Max Ehrlich, Hanyu
+Wang, Kwot Sin Lee, Patrick Poirson, Pengxiang Wu, Chen
+Wang, and Abhinav Shrivastava. Nirvana: Neural implicit
+representations of videos with adaptive networks and au-
+toregressive patch-wise modeling.
+In Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 14378–14387, 2023. 1
+[23] Julien NP Martel, David B Lindell, Connor Z Lin, Eric R
+Chan, Marco Monteiro, and Gordon Wetzstein.
+Acorn:
+adaptive coordinate networks for neural scene representa-
+tion.
+ACM Transactions on Graphics (TOG), 40(4):1–13,
+2021. 2
+[24] Ishit Mehta, Micha¨el Gharbi, Connelly Barnes, Eli Shecht-
+man, Ravi Ramamoorthi, and Manmohan Chandraker. Mod-
+ulated periodic activations for generalizable local functional
+representations. In Proceedings of the IEEE/CVF Interna-
+tional Conference on Computer Vision, pages 14214–14223,
+2021. 1, 2
+1306
+
+
+===== PAGE 10 =====
+[25] Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik,
+Jonathan T. Barron, Ravi Ramamoorthi, and Ren Ng. Nerf:
+Representing scenes as neural radiance fields for view syn-
+thesis. In ECCV, 2020. 2, 8
+[26] Ben Mildenhall, Pratul P Srinivasan, Matthew Tancik,
+Jonathan T Barron, Ravi Ramamoorthi, and Ren Ng. Nerf:
+Representing scenes as neural radiance fields for view syn-
+thesis. Communications of the ACM, 65(1):99–106, 2021.
+1
+[27] Amirali Molaei, Amirhossein Aminimehr, Armin Tavakoli,
+Amirhossein Kazerouni, Bobby Azad, Reza Azad, and Dorit
+Merhof. Implicit neural representation in medical imaging:
+A comparative survey.
+arXiv preprint arXiv:2307.16142,
+2023. 1
+[28] Thomas M¨uller, Alex Evans, Christoph Schied, and Alexan-
+der Keller. Instant neural graphics primitives with a multires-
+olution hash encoding.
+arXiv preprint arXiv:2201.05989,
+2022. 1, 2
+[29] Joseph Ortiz, Alexander Clegg, Jing Dong, Edgar Sucar,
+David Novotny, Michael Zollhoefer, and Mustafa Mukadam.
+isdf: Real-time neural signed distance fields for robot per-
+ception. arXiv preprint arXiv:2204.02296, 2022. 2
+[30] Giambattista Parascandolo, Heikki Huttunen, and Tuomas
+Virtanen. Taming the waves: sine as activation function in
+deep neural networks. 2016. 2
+[31] Jeong Joon Park, Peter Florence, Julian Straub, Richard
+Newcombe, and Steven Lovegrove. Deepsdf: Learning con-
+tinuous signed distance functions for shape representation.
+In Proceedings of the IEEE/CVF conference on computer vi-
+sion and pattern recognition, pages 165–174, 2019. 2
+[32] Albert Pumarola, Enric Corona, Gerard Pons-Moll, and
+Francesc Moreno-Noguer.
+D-nerf: Neural radiance fields
+for dynamic scenes. In Proceedings of the IEEE/CVF Con-
+ference on Computer Vision and Pattern Recognition, pages
+10318–10327, 2021. 2
+[33] Nasim Rahaman, Aristide Baratin, Devansh Arpit, Felix
+Draxler, Min Lin, Fred Hamprecht, Yoshua Bengio, and
+Aaron Courville. On the spectral bias of neural networks.
+In International Conference on Machine Learning, pages
+5301–5310. PMLR, 2019. 2, 3
+[34] Sameera Ramasinghe and Simon Lucey. Beyond periodicity:
+Towards a unifying framework for activations in coordinate-
+mlps. In European Conference on Computer Vision, pages
+142–158. Springer, 2022. 5
+[35] Daniel Rebain, Mark J Matthews, Kwang Moo Yi, Gopal
+Sharma, Dmitry Lagun, and Andrea Tagliasacchi.
+Atten-
+tion beats concatenation for conditioning neural fields. arXiv
+preprint arXiv:2209.10684, 2022. 1, 2
+[36] Christian Reiser, Songyou Peng, Yiyi Liao, and Andreas
+Geiger. Kilonerf: Speeding up neural radiance fields with
+thousands of tiny mlps. In Proceedings of the IEEE/CVF In-
+ternational Conference on Computer Vision, pages 14335–
+14345, 2021. 2
+[37] Daniel Rho, Junwoo Cho, Jong Hwan Ko, and Eunbyung
+Park. Neural residual flow fields for efficient video represen-
+tations. arXiv preprint arXiv:2201.04329, 2022. 2
+[38] Vishwanath Saragadam, Daniel LeJeune, Jasper Tan, Guha
+Balakrishnan, Ashok Veeraraghavan, and Richard G Bara-
+niuk. Wire: Wavelet implicit neural representations. In Pro-
+ceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition, pages 18507–18516, 2023. 2, 5
+[39] Vishwanath Saragadam, Jasper Tan, Guha Balakrishnan,
+Richard G Baraniuk, and Ashok Veeraraghavan.
+Miner:
+Multiscale implicit neural representation. In European Con-
+ference on Computer Vision, pages 318–333. Springer, 2022.
+2
+[40] Liyue Shen, John Pauly, and Lei Xing. Nerp: implicit neu-
+ral representation learning with prior embedding for sparsely
+sampled image reconstruction. IEEE Transactions on Neural
+Networks and Learning Systems, 2022. 1
+[41] Vincent Sitzmann, Julien Martel, Alexander Bergman, David
+Lindell, and Gordon Wetzstein. Implicit neural representa-
+tions with periodic activation functions. Advances in neural
+information processing systems, 33:7462–7473, 2020. 1, 2,
+3, 7
+[42] Yannick Str¨umpler, Janis Postels, Ren Yang, Luc Van Gool,
+and Federico Tombari. Implicit neural representations for
+image compression. In European Conference on Computer
+Vision, pages 74–91. Springer, 2022. 2
+[43] Matthew Tancik, Pratul Srinivasan, Ben Mildenhall, Sara
+Fridovich-Keil, Nithin Raghavan, Utkarsh Singhal, Ravi Ra-
+mamoorthi, Jonathan Barron, and Ren Ng. Fourier features
+let networks learn high frequency functions in low dimen-
+sional domains. Advances in Neural Information Processing
+Systems, 33:7537–7547, 2020. 2, 5
+[44] Radu Timofte, Shuhang Gu, Jiqing Wu, Luc Van Gool, Lei
+Zhang, Ming-Hsuan Yang, Muhammad Haris, et al. Ntire
+2018 challenge on single image super-resolution: Methods
+and results. In The IEEE Conference on Computer Vision
+and Pattern Recognition (CVPR) Workshops, June 2018. 5,
+7
+[45] Du Tran, Heng Wang, Lorenzo Torresani, Jamie Ray, Yann
+LeCun, and Manohar Paluri. A closer look at spatiotemporal
+convolutions for action recognition. In Proceedings of the
+IEEE conference on Computer Vision and Pattern Recogni-
+tion, pages 6450–6459, 2018. 6
+[46] Peng Wang, Yuan Liu, Zhaoxi Chen, Lingjie Liu, Ziwei Liu,
+Taku Komura, Christian Theobalt, and Wenping Wang. F2-
+nerf: Fast neural radiance field training with free camera
+trajectories.
+In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pages 4150–
+4159, 2023. 2
+[47] Qi Wu, David Bauer, Yuyang Chen, and Kwan-Liu Ma. Hy-
+perinr: A fast and predictive hypernetwork for implicit neu-
+ral representations via knowledge distillation. arXiv preprint
+arXiv:2304.04188, 2023. 2
+[48] Dejia Xu, Peihao Wang, Yifan Jiang, Zhiwen Fan, and
+Zhangyang Wang. Signal processing for implicit neural rep-
+resentations.
+Advances in Neural Information Processing
+Systems, 35:13404–13418, 2022. 1
+[49] Gizem Y¨uce et al.
+A structured dictionary perspective
+on implicit neural representations.
+In Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern
+Recognition. IEEE, 2022. 5
+1307

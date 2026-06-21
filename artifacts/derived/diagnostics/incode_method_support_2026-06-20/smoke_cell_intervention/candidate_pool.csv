@@ -1,0 +1,2 @@
+dataset,image,x,y,crop_size,texture_score
+urban100,img_001.png,192,0,64,0.39832707
