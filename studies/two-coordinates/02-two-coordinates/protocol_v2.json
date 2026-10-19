@@ -1,0 +1,17 @@
+{
+ "version": "claude-20261019-two-coordinates-v2",
+ "origin": "v1 (Set14/BSD100/Urban100, frozen) failed its H1 (75% < 90%) and H2 (asymmetry reversed: larger cell costs more, 33/144). Exploratory analysis of v1 suggested: recovery R_net is a function of LR-normalised u=2sr (collapse across scales, decoders equal); the cell acts at fixed HR frequency r~0.19-0.375 (output footprint), with cost tracking recovered energy there. v2 freezes these as new predictions and tests on never-used images and an unused seed.",
+ "cohort": "DIV2K valid 0869-0900 (32 images, never used in this project per cohort_history and file grep); center crop 240",
+ "models": "liif, lte, sc-inr; seeds 1,2,3 (seed3 never used in cell sweeps); epoch-last (1000)",
+ "scales": [2, 3, 4, 6], "cell_multipliers": "same 11 as v1", "metric": "same as v1 (u-bins width .25, shave 4, non-DC)",
+ "predictions_frozen_before_run": {
+  "P1_u_collapse": "Per model and seed, for each u-bin in [0.5,2.0): max-min of R_net across scales {2,3,4} (scales where bin exists) <= 0.05. PASS if >=90% of (model,seed,bin).",
+  "P2_decoder_equal": "Per scale in {2,3,4} and u-bin in [0.5,2.0): max-min of seed-mean R_net across liif/lte/sc-inr <= 0.03. PASS if >=90% of (scale,bin).",
+  "P3_cell_locus_in_r": "For m=2 and each model,seed,scale in {2,3,4,6}: the HR-frequency r-bin (width 1/16) with the largest cost lies in [0.1875,0.375). PASS if >=90%.",
+  "P4_leverage_law": "Per model (pooled seeds), over all (scale,u-bin) with r>=0.1875: Spearman(cost(m=2), recovered energy tgt-err(1)) >= 0.7. PASS if all 3 models.",
+  "P5_native_calibrated": "Per model,seed and scale in {2,3,4}: argmin_m pooled MSE in [0.9091,1.1]. PASS if >=80%.",
+  "P6_leverage_decays": "Per model,seed: cost(m=2) in dB strictly decreases with scale 2>3>4>6. PASS if >=80%."
+ },
+ "failures": "Report all gates and failures; no post-hoc change of bins/cohort/gates; changes require new version.",
+ "compute": "GPU inference only; no training"
+}

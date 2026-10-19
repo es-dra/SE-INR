@@ -1,0 +1,14 @@
+{
+ "version": "claude-20261019-encoder-v3",
+ "question": "Is above-Nyquist recovery R_net(u) set by the encoder/training prior rather than the decoder, and does the cell act at fixed HR frequency for other decoder families?",
+ "cohort": "DIV2K valid 0869-0900 center 240 (same as v2, for direct comparison with v2 LIIF/LTE/SC seed means)",
+ "models": {"gaussiansr": "external EDSR-baseline encoder + Gaussian splatting decoder, epoch 2000, sha in manifest", "rdn-btc": "external RDN encoder + B-spline texture decoder (BTC), epoch 1000"},
+ "caveat": "No same-decoder RDN model available; RDN-BTC changes encoder and decoder together. External checkpoints' training recipes differ from the in-house models.",
+ "predictions_frozen_before_run": {
+  "Q1_decoder_family": "GaussianSR R_net(u) within 0.03 of the v2 EDSR-decoder mean (LIIF/LTE/SC, seeds 1-3) for >=90% of u-bins in [0.5,2) at x2,3,4.",
+  "Q2_encoder": "RDN-BTC R_net(u) exceeds the v2 EDSR-decoder mean in >=80% of u-bins in [1,2) at x2,3,4.",
+  "Q3_cell_locus": "For each of the two models and scales 2,3,4,6: m=2 cost peak r-bin in [0.1875,0.375).",
+  "reported": "native PSNR sanity, full u-profiles, argmin m; failures reported."
+ },
+ "compute": "GPU inference only"
+}

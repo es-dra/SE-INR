@@ -1,8 +1,0 @@
-{
-  "start_unix": 1792325720.9834745,
-  "deadline_unix": 1792325840.9834745,
-  "budget_seconds": 120,
-  "cpu_threads": 1,
-  "nice": 10,
-  "gpu": 0
-}

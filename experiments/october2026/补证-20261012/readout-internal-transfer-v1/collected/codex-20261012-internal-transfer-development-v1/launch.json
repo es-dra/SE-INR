@@ -1,9 +1,0 @@
-{
-  "start_epoch": 1791742498.737831,
-  "absolute_deadline_epoch": 1791744298.7378314,
-  "cumulative_phase_budget_seconds": 900,
-  "CPU_threads": 1,
-  "nice": 10,
-  "GPU": 0,
-  "smoke": false
-}

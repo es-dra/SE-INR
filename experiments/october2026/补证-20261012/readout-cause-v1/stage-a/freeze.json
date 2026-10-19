@@ -1,8 +1,0 @@
-{
-  "source_sha256": "db1fb78f2fdaa4c5fab280347eb6f793597a68dbd1f63a2c4f4177970bc2b410",
-  "protocol_sha256": "e9327b4b2376772a75d3dbb5de696477ce01cf20f522beef75293520f6de444c",
-  "frozen_utc": "2026-10-12T01:28:03.400326+00:00",
-  "launcher": "Python subprocess.run timeout180 wraps nice10 bundledPython; no resume or retry changes",
-  "CPU_threads": 1,
-  "GPU": 0
-}

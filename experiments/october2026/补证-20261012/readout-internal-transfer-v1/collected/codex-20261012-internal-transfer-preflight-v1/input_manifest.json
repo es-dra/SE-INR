@@ -1,9 +1,0 @@
-{
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/observations/calibration_0001_x2.npy": "4278fb54be97b303f9433ce2f1eea48f8b3b44380bee161554e4d9e314e296e6",
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/predictions/calibration_0001_x2__lte.npz": "0b0a84a3fb892e8f7b49f56437c91e12b9da82c7b3dceda407d637a122642f2a",
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/predictions/calibration_0001_x2__sc-inr.npz": "3b7e87682957645ce169733fe10c67d2dd1a814ba7f0575d828dea989c8f1c8f",
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/observations/calibration_0001_x4.npy": "d019a7e3ed4e114803b0cf4912b3b2680c8fbc1b025b70df3ee6e50298499ad9",
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/predictions/calibration_0001_x4__lte.npz": "95969c7482efe9285bcf674402d513a4db2e7d3bd5634c1370558ff53117b670",
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/predictions/calibration_0001_x4__sc-inr.npz": "988ad66a5f0af5b98932670d161b77375bc7a6e72d9c55b8be69c75b15ef2eb9",
-  "/workspace/SE-INR/codex-20261011-negative-formal-v3/calibration_rows.json": "bc6db4310552b2211aa2a2bafdba416a52099dfdac0c507886532fa208358d4a"
-}

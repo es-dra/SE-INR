@@ -1,6 +1,0 @@
-{
-  "time_epoch": 1791742526.6521866,
-  "rows_sha256": "29cc99915ea8e5853391adec12c32986d84349fa1885b6292f02755a4dbdd7f4",
-  "fits_sha256": "1cd697505b6405963c91e2fb94aa1f34867f24c1e263af69bcb399407ac9b286",
-  "scope": "development OOF using prior calibration labels; not new blinded test"
-}

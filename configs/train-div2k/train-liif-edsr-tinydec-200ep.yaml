@@ -1,0 +1,67 @@
+data_norm:
+  gt:
+    div:
+    - 0.5
+    sub:
+    - 0.5
+  inp:
+    div:
+    - 0.5
+    sub:
+    - 0.5
+epoch_max: 200
+epoch_save: 50
+epoch_val: 1
+model:
+  args:
+    encoder_spec:
+      args:
+        no_upsampling: true
+      name: edsr-baseline
+    imnet_spec:
+      args:
+        hidden_list:
+        - 64
+        - 64
+        out_dim: 3
+      name: mlp
+  name: liif
+multi_step_lr:
+  gamma: 0.5
+  milestones:
+  - 100
+  - 150
+optimizer:
+  args:
+    lr: 0.0001
+  name: adam
+train_dataset:
+  batch_size: 16
+  dataset:
+    args:
+      cache: in_memory
+      repeat: 20
+      root_path: /workspace/SE-INR/Data/DIV2K_train_HR
+    name: image-folder
+  wrapper:
+    args:
+      augment: true
+      inp_size: 48
+      sample_q: 2304
+      scale_max: 4
+    name: sr-implicit-downsampled
+val_dataset:
+  batch_size: 16
+  dataset:
+    args:
+      cache: in_memory
+      first_k: 10
+      repeat: 160
+      root_path: /workspace/SE-INR/Data/DIV2K_valid_HR
+    name: image-folder
+  wrapper:
+    args:
+      inp_size: 48
+      sample_q: 2304
+      scale_max: 4
+    name: sr-implicit-downsampled

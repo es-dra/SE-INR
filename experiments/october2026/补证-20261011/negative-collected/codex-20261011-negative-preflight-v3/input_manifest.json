@@ -1,8 +1,0 @@
-{
-  "observations/alias_n16_k3_a0_p0.npy": "e5ff3ab902a12ee7bb2e31f09530762e1648546bdaee5849727cc639e71f9ea6",
-  "observations/calibration_0001_x2.npy": "4278fb54be97b303f9433ce2f1eea48f8b3b44380bee161554e4d9e314e296e6",
-  "observations/calibration_0001_x4.npy": "d019a7e3ed4e114803b0cf4912b3b2680c8fbc1b025b70df3ee6e50298499ad9",
-  "truth/alias_specs.json": "8d679d5bcef3415a79c7f0b2496dc249abfed24c882a063a2ca759868895a86a",
-  "truth/calibration_0001_x2.npy": "41d52021d1b3159c3a5c854f15ae8efefd1e987f6c3738896d6b25fcd73a2535",
-  "truth/calibration_0001_x4.npy": "41d52021d1b3159c3a5c854f15ae8efefd1e987f6c3738896d6b25fcd73a2535"
-}

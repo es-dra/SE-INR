@@ -1,0 +1,17 @@
+{
+ "version": "claude-20261019-prior-v4",
+ "question": "Is above-Nyquist recovery R_net(u) a learned-prior quantity: does it grow with training and with a larger encoder, while sub-Nyquist recovery does not change?",
+ "background": "v3: decoder-invariance confirmed for GaussianSR (18/18) but the external RDN-BTC checkpoint scored below EDSR models under this protocol (Q2 0/12) and cannot serve as encoder evidence; cell-locus at r~0.25 failed for both non-LIIF-family decoders.",
+ "cohort": "DIV2K valid 0869-0900 center 240, same degradation as v2",
+ "arms": {
+  "early": "LIIF/LTE/SC-INR seed1 epoch-100.pth (same runs as v2 epoch-last); full cell sweep",
+  "edsr_full": "official EDSR x4 (32 blocks, 256 feats, fixed scale) edsr_x4-4f62e9ef.pt, rgb_range 255, x4 only, native output"
+ },
+ "predictions_frozen_before_run": {
+  "R1_training": "For each of 3 models and scales 2,3,4: R_net(u) at epoch 100 < epoch 1000 in >=80% of u-bins in [1,2); and |difference| <= 0.01 in >=80% of bins in [0,0.75).",
+  "R2_capacity": "EDSR-full R_net(u) at x4 exceeds v2 EDSR-baseline decoder mean in >=3 of 4 u-bins in [1,2).",
+  "R3_leverage_training": "Cost of m=2 (dB) at x2 is smaller at epoch 100 than at epoch 1000 for >=2 of 3 models (less recovered energy -> less cell leverage)."
+ },
+ "caveat": "EDSR-full is a different (fixed-scale, MATLAB-bicubic-trained) model; R2 is descriptive of capacity+recipe, not a matched encoder swap.",
+ "compute": "GPU inference only"
+}

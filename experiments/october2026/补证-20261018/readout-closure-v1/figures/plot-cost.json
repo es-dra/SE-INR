@@ -1,9 +1,0 @@
-{
-  "wall_seconds": 2.100927901978139,
-  "cpu_user_seconds": 1.9966640000000002,
-  "cpu_sys_seconds": 0.103941,
-  "peak_rss_platform_units": 134692,
-  "nice": 10,
-  "gpu": 0,
-  "inference": 0
-}

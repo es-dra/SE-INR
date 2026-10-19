@@ -1,0 +1,27 @@
+{
+ "version": "claude-20261019-cell-mismatch-v1",
+ "question": "Within a fixed scale, is the reconstruction cost of mis-set cell asymmetric (too-small cell = requesting more detail costs more than too-large), and does it lie above LR Nyquist (u>=1)?",
+ "origin": "Exploratory CPU re-analysis of seen DIV2K 0837-0868 (claude-20261019-u-profile-v1) suggested asymmetry but confounded scale with direction. This run is the first within-scale test on cohorts never used for cell sweeps.",
+ "models": {"liif": "seed1,seed2", "lte": "seed1,seed2", "sc-inr": "seed1,seed2"},
+ "checkpoint_root": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed{N}/{model}/epoch-last.pth (epoch 1000, read-only, sha recorded)",
+ "source": "/workspace/SE-INR/codex-20261018-cell-reference-v2/snapshot/src (frozen copy)",
+ "datasets": {"Set14": "all 14", "BSD100": "all 100", "Urban100": "all 100"},
+ "preprocessing": "RGB center crop 240 HR /255; torch bicubic antialias align_corners=False to 240/s; LR clamp[0,1]; output raw unclipped",
+ "scales": [2, 3, 4, 6],
+ "cell_multipliers": [0.5, 0.625, 0.75, 0.8, 0.9091, 1.0, 1.1, 1.25, 1.3333, 1.6, 2.0],
+ "cell": "cell = m * 2/240 (m=1 native). Equivalent scale s_eq = s/m. In training support iff 1<=s_eq<=4.",
+ "metric": "MSE after shave 4 (232x232), split by non-DC Chebyshev FFT radius in u=2*s*r bins of width 0.25 up to u=s. Per bin store err(m), and a(m)=<T-P1, Pm-P1>, b(m)=|Pm-P1|^2.",
+ "definitions": {
+  "C(m)": "pooled-over-images MSE(m) - MSE(1) within a group (model,seed,dataset,scale)",
+  "pair": "(m, 1/m) with m in {1.1,1.25,1.3333,1.6,2.0}; usable only if both s/m and s*m in [1,4]"
+ },
+ "predictions_frozen_before_run": {
+  "H1_location": "For groups at scale 2,3,4 and every in-support m!=1 with |C(m)|>1e-7: share of sum_b |dMSE_b| lying in bins u>=1 is >=0.8. PASS if true for >=90% of (group,m).",
+  "H2_asymmetry": "For every usable pair in scales 2 and 3: C(1/m) > C(m) (smaller cell costs more). PASS if >=80% of (group,pair) and median C(1/m)/max(C(m),1e-9) >= 2. Reported per model.",
+  "H3_secondary_theory": "Descriptive: across u-bins, per-bin asymmetry log((dMSE_b(1/m)+eps)/(dMSE_b(m)+eps)) is larger where native per-bin recovery R_b=1-err_b(1)/|T|^2_b is lower (Spearman<0 in majority of groups). Not a gate.",
+  "reported_not_gated": "argmin_m of MSE per group; x4 small-cell side and all x6 are out of training support and reported separately; per-image fraction for H2."
+ },
+ "failures": "All outcomes reported including failed gates; no change of bins, metrics, cohorts, or multipliers after seeing results; any code change gets a new version root.",
+ "compute": "GPU inference only, single device with spare memory, no training; others' jobs not touched.",
+ "training_runs": 0
+}

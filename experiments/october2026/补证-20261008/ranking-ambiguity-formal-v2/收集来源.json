@@ -1,9 +1,0 @@
-{
-  "host": "research-175",
-  "remote_root": "/workspace/SE-INR/codex-20261008-paper-continuation/ranking-ambiguity-formal-v2",
-  "archive_sha256": "e2c8df01ddc0944dc53b607cdf0ddb5d24b99c050111be488e3b29325186d738",
-  "remote_archive_sha256": "e2c8df01ddc0944dc53b607cdf0ddb5d24b99c050111be488e3b29325186d738",
-  "initial_timeout_guard_pid": 17884,
-  "source_directory": "../ranking-ambiguity-v1/versions/formal-v2",
-  "phase": "CPU only, process completed; no GPU process started"
-}

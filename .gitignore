@@ -1,107 +1,31 @@
-# Experiment logs (personal learning)
-log/
-
-# Training outputs
+# Data, checkpoints, outputs
+Data/
+artifacts/
 save/
-save_test/
 save-seeds/
-artifacts/checkpoints/
-artifacts/data_local/
-artifacts/logs/
-artifacts/scratch/
-artifacts/smoke/
-
-# Generated diagnostics and large paper artifacts.
-# Keep canonical benchmark CSV/JSON, raw result JSON, README/index files, and
-# explicitly curated paper figures visible unless they are ignored below.
-artifacts/derived/diagnostics/*/figures/
-artifacts/derived/diagnostics/**/figures/
-artifacts/derived/diagnostics/*/*.png
-artifacts/derived/diagnostics/*/*.pdf
-artifacts/derived/diagnostics/*/*.svg
-artifacts/derived/diagnostics/*/*.npz
-artifacts/derived/diagnostics/*/*.npy
-artifacts/derived/diagnostics/**/*.png
-artifacts/derived/diagnostics/**/*.pdf
-artifacts/derived/diagnostics/**/*.svg
-artifacts/derived/diagnostics/**/*.npz
-artifacts/derived/diagnostics/**/*.npy
-artifacts/derived/diagnostics/**/local_crop_descriptors.csv
-artifacts/derived/diagnostics/**/local_crop_metrics.csv
-artifacts/derived/diagnostics/**/paired_delta_per_image_scale.csv
-artifacts/derived/diagnostics/**/per_image_per_scale_metrics.csv
-artifacts/legacy/derived_analysis/**/figures/
-artifacts/legacy/derived_analysis/**/*.png
-artifacts/legacy/derived_analysis/**/*.pdf
-artifacts/legacy/derived_analysis/**/*.svg
-artifacts/derived/paper_figures/**/*.png
-artifacts/derived/paper_figures/**/*.pdf
-artifacts/derived/paper_figures/**/*.svg
-artifacts/derived/paper_figures/**/crops/
-
-# Re-allow curated paper figure files and indexes that are intentionally tracked.
-!artifacts/derived/paper_figures/README_zh.md
-!artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/
-!artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/README_zh.md
-!artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/lte_scinr_mechanism_comparison.pdf
-!artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/lte_scinr_mechanism_comparison.png
-!artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/lte_scinr_mechanism_comparison.svg
-!artifacts/derived/paper_figures/qualitative_selected_seed1/
-!artifacts/derived/paper_figures/qualitative_selected_seed1/README_zh.md
-!artifacts/derived/paper_figures/qualitative_selected_seed1/*.png
-!artifacts/derived/paper_figures/qualitative_selected_seed1/*.pdf
-!artifacts/derived/paper_figures/qualitative_selected_seed1/*_config.json
-!artifacts/derived/paper_figures/qualitative_selected_seed1/*_metrics.csv
+*.pth
+*.pt
+*.npz
+*.npy
+*.log
 
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
 .pytest_cache/
-.ruff_cache/
-.mypy_cache/
 .ipynb_checkpoints/
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Data
-Data/
-
-# Checkpoints
-*.pth
-*.pt
-
-# Logs
-*.log
-training_log*.txt
-*.pid
-logs/**/*.pid
-
-# Local research memory is kept on disk but not managed as source.
-memory/
-
-# LaTeX build byproducts
+# LaTeX byproducts
 *.aux
 *.bbl
 *.blg
 *.fls
 *.fdb_latexmk
 *.out
-*.toc
 *.synctex.gz
-*.lof
-*.lot
-*.nav
-*.snm
-*.vrb
-*.bcf
-*.run.xml
-*.xdv
 
-# Mac
+# OS / IDE
 .DS_Store
+.vscode/
+.idea/
+memory/

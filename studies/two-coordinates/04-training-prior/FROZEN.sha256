@@ -1,0 +1,8 @@
+bd51c3e3022e072a257e8d7782f877cc2dc5d7cd8cfb2aa099cb6f4e3021709c  protocol_v4.json
+b6db56583430842dd30f1e593f9394ef5c45e410bd4cf85773d4a08b2402b3d7  run_edsr.py
+9e38af79f5cb649a71b8e6e2582a0400fe6dd8948cafeefb2610547209fd6b68  run_v3.py
+Mon Oct 19 11:47:49 UTC 2026
+e1df1e205727b0a30206eea35936c432c8b4e84479fb7d4f2b6fb3ed7857dac8  run_edsr.py
+run_edsr.py constructor fix (edsr->edsr-baseline args, same architecture) before any result
+Mon Oct 19 11:48:05 UTC 2026
+b047b8a645af69213ff65734a81e7f4693f64c9da6d6960c6975337e16221fbd  score_v4.py

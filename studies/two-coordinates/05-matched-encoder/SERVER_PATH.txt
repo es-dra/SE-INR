@@ -1,0 +1,1 @@
+server: research-175:/workspace/SE-INR/claude-20261019-encoder-train-v5

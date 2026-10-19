@@ -1,53 +1,32 @@
-# SE-INR：连续图像表示与尺度读出诊断
+# SE-INR：任意倍率超分的“两个坐标”
 
-当前研究 **目标像素大小（cell）如何影响任意倍率重建，以及何时尺度修正会损害结果**。沿用LTE和作者由LTE衍生的SC-INR已有模型，研究负收益的类型、受控原因和针对性干预；目前是ICASSP目标的分析稿，未投稿，不提出新网络或通用修复器。
+研究问题：任意倍率超分（ASISR）的重建收益从哪里来？为什么 ×4 以上改解码器、改尺度输入（cell）几乎不再带来提升？
 
-## 阅读入口
+当前主线（2026-10-20 起）：
+- **恢复度只由 u 决定。** 网络能恢复多少，只取决于按 LR Nyquist 归一化的频率 u = 2·s·r，与解码器设计无关；训练和编码器只提高 u≥1 的部分。
+- **cell 作用在 r 上。** cell 相当于在 HR 像素频率 r 上加的一个低通，它的杠杆受限于该频率上网络已恢复的能量，所以倍率越大，cell 越无关紧要。
 
-1. [研究现状](docs/project/current_state.md)：主要结果、反例、边界，以及早期路线到当前问题的脉络。
-2. [当前论文](paper/current/main.pdf)与[完整出处和阶段记录](paper/current/SOURCES.md)。
-3. [实验原件索引](experiments/october2026/manifest.json)：协议、代码、完整评分、失败版本与原件包SHA；大型原件仍在科研服务器原目录。
-
-最新受控干预：固定SC权重和×4，保持内部特征**总改变量**相同，只改变削弱分配，焦点16例中频负收益在正常/固定解码开关下均转正；完整32中频由31负/1正变为32正。焦点16例完整RGB误差下降中位**0.3996%**。但16例低频对照的**中心RGB**由正收益变负，说明这是特定失败的诊断证据，不能当通用方案。此前“输入使尺度权重漂移”的假设只救回1/16，未获得主要解释支持。
-
-SC-INR是LTE衍生实验变体。早期新方法路线的[收口记录](docs/project/sc_inr_route_closeout_2026-08-07.md)、[冻结草稿](paper/draft/README_zh.md)、[模型命名](paper/model_taxonomy.md)与历史结果保留；当前分析论文不恢复旧性能/新方法主张。源码仍保留历史实现，模型/数据/协议以每项冻结记录为准。
-
-服务器`research-175`：当前干净版本在`/workspace/SE-INR/SE-INR-current`；旧`SC-ASISR`工作树及全部未提交改动保留，`claude-*`/`codex-*`实验根、checkpoint与日志原位不动。读取进展从本页及研究现状开始，不把旧目录的训练计划当作新授权。
-
-<details>
-<summary>同步前服务器README（历史导航，原文保留）</summary>
-
-# SC-ASISR / SC-INR
-
-本项目研究任意倍率图像超分辨率。SC-ASISR 是项目目录名，SC-INR 是研究模型名；代码、训练配方和实验结果分开管理。
-
-## 从这里开始
-
-- [当前研究与运行入口](docs/project/current_state.md)：正在回答的问题、当前执行状态和主线材料。
-- [维护清单](MANIFEST.md)：目录职责、命名和历史材料的处理方式。
-- [模型实现](src/models/) · [训练与评价入口](entrypoints/) · [配置](configs/) · [测试](tests/)。
-
-当前主线是 P／S／R 在共同初始化和数据条件下的读取方式比较。准备工作、正式训练和科学结论分别记录；是否启动全量训练以负责人决定和当前运行状态为准。
+全部证据、预注册预测与未通过项见 [studies/two-coordinates](studies/two-coordinates/README.md)，论文大纲见 [paper/OUTLINE.md](paper/OUTLINE.md)，研究历程见 [docs/HISTORY.md](docs/HISTORY.md)。
 
 ## 目录
 
 | 目录 | 内容 |
 | --- | --- |
-| src/ | 可复用模型、数据加载与工具代码 |
-| entrypoints/ | 训练、评价等运行入口 |
-| configs/ | 配方、协议和模型注册 |
-| scripts/ | 分析、评价与产物生成脚本 |
-| tests/ | 数学性质、接口和恢复检查 |
-| outputs/research-week-20260906/ | 主任务的执行状态入口 |
-| artifacts/ | 数据、检查点、原始结果和必要复现快照 |
-| docs/project/ | 当前入口与尚待归并的历史研究文档 |
-| memory/ | 历史工作记录；不作为最新运行状态 |
-| paper/ | 论文材料及其证据范围；不等于当前已接受结论 |
+| `src/` | 模型（EDSR、RDN 编码器；LIIF、LTE、SC-INR 解码器）、数据加载、工具 |
+| `entrypoints/` | 训练与评测入口 |
+| `configs/` | 训练与测试配置；`*-200ep.yaml` 为匹配训练实验 |
+| `studies/` | 每个研究阶段的冻结协议、代码、评分脚本和结果摘要 |
+| `paper/` | 当前论文 |
+| `docs/` | 研究历程 |
 
-旧路线和旧结论按发生时间保留，不再占据首页的“当前状态”。大批历史合同、修订脚本和快照仍待在本轮活跃实验收口后按引用关系归并；不能仅凭文件旧、名称含 v2 或内容相同就删除。
+`Data`、`datasets`、`models`、`utils.py` 是兼容链接：`Data` 指向本地数据目录（不入库），其余三个指向 `src/` 下对应模块。
 
-本次入口整理前的原文保存在 [恢复包](artifacts/legacy/maintenance-20260911/navigation-before.zip)，包含原 README、维护清单和完整的历史状态页。
+## 运行
 
-外层 /workspace/SE-INR/Data 是共享数据；models、datasets、save 等兼容链接不是重复副本。此轮整理未改变这些路径。
+训练：`python entrypoints/train.py --config configs/train-div2k/train-liif-edsr-200ep.yaml --name <name> --device 0 --seed 1`
 
-</details>
+服务器 `research-175:/workspace/SE-INR` 的布局见该目录下的 `INDEX.md`。数据集和 checkpoint 不入库。
+
+## 历史
+
+2026-10-19 之前的全部内容（SC-INR 方法路线、Codex 的 cell 负收益诊断稿、各论文版本与原始记录）都完整保存在标签 [`archive-2026-10`](../../tree/archive-2026-10) 中，用 `git checkout archive-2026-10` 即可查看。

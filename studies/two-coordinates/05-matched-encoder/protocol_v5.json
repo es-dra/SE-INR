@@ -1,0 +1,9 @@
+{"version":"claude-20261019-encoder-train-v5",
+ "question":"With decoder (LIIF) and training recipe fixed, does a stronger encoder (RDN vs EDSR-baseline) raise above-Nyquist recovery R(u>=1) while leaving sub-Nyquist recovery unchanged?",
+ "training":"Both arms: SE-INR-current LIIF recipe (DIV2K train 800, inp48, scale U(1,4), sample_q 2304, batch16, Adam 1e-4) shortened to 200 epochs, milestones [100,150], seed 1; only encoder_spec differs (edsr-baseline vs rdn from BTC snapshot = LIIF rdn). Evaluate epoch-last with claude-20261019-encoder-v3/run_v3.py on DIV2K 0869-0900.",
+ "predictions_frozen_before_training":{
+  "T1":"RDN-LIIF R(u) > EDSR-LIIF R(u) in >=80% of u-bins in [1,2) at x2,3,4.",
+  "T2":"|R_RDN - R_EDSR| <= 0.01 in >=80% of u-bins in [0,0.75) at x2,3,4.",
+  "T3":"For both arms, m=2 cell cost decreases strictly x2>x3>x4>x6."},
+ "caveat":"Short schedule; single seed; RDN has ~22M vs ~1.2M encoder params, so this is capacity+architecture, not a pure inductive-bias test.",
+ "compute":"2 A800 GPUs shared with other users; training only for this matched comparison"}

@@ -1,8 +1,0 @@
-{
-  "audit_source_sha256": "681c0154a1df54fcfad0616fc06666cdbbc5040c29891a18b5255ad358f30fc7",
-  "frozen_utc": "2026-10-12T01:37:22.133316+00:00",
-  "runtime_budget_seconds": 180,
-  "CPU_threads": 1,
-  "no_model_inference": true,
-  "awaiting_full_artifacts": true
-}

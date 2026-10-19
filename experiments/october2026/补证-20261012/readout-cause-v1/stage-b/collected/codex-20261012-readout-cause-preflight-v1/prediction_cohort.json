@@ -1,8 +1,0 @@
-{
-  "predictions/o0000__lte.npz": "b31c62aecb32070688a39f06d9ab99457831eb635e09a11d45a44db5ba1dd447",
-  "predictions/o0000__sc-inr.npz": "447b9ee54e6d8fc2ac242a21541e413ba7caf15b3ff6fdee5379b4eaa01c5985",
-  "predictions/o0001__lte.npz": "3e6dc479a4b0aa5c1f661414f29f672b8a6ba811f59759800b6eb95ea23cb913",
-  "predictions/o0001__sc-inr.npz": "1f8408f9eda9ebd41c4195444512efe6e8911ae992ee758e6a0c8a7270332ec4",
-  "predictions/o0002__lte.npz": "4daf0f493113dc3b2b961c82708ed91243b728c2406c5885814c112edd60aeeb",
-  "predictions/o0002__sc-inr.npz": "a8549f68c205965c71afea8f774e5c1f0a4ebc65fa9549ec6bc0fd5809dec3b4"
-}

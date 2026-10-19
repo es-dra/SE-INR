@@ -1,0 +1,8 @@
+{"version":"claude-20261020-decoder-budget-v6",
+ "question":"Prescriptive test of the two-coordinate account: with the EDSR-baseline encoder and the same 200-epoch recipe, does shrinking the decoder (MLP 4x256 -> 2x64) or removing cell input cost little at large scales, while an RDN encoder gains?",
+ "arms":"liif-edsr-200ep (baseline, done), liif-edsr-tinydec-200ep, liif-edsr-nocell-200ep, liif-rdn-200ep (v5). Seed 1. Eval: claude-20261019-encoder-v3/run_v3.py on DIV2K 0869-0900, native cell only for no-cell arm (cell ignored).",
+ "predictions_frozen_before_training":{
+  "D1":"tinydec vs baseline: native PSNR loss <=0.05 dB at x4 and x6, and its R(u) differs by <=0.01 in >=80% of u-bins in [0,2) at x3,x4.",
+  "D2":"nocell vs baseline: PSNR loss shrinks with scale (x2 > x3 > x4 > x6) and is <=0.03 dB at x4 and x6.",
+  "D3":"rdn vs baseline gain at x4 exceeds |tinydec loss| at x4 (encoder capacity matters more than decoder capacity)."},
+ "compute":"GPU0 training, inference only for eval"}

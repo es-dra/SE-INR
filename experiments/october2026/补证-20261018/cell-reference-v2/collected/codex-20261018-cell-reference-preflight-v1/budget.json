@@ -1,7 +1,0 @@
-{
-  "start_unix": 1792307826.6885715,
-  "deadline_unix": 1792308126.6885715,
-  "wall_limit_seconds": 300,
-  "cumulative_limit_seconds": 300,
-  "resume_allowed": false
-}

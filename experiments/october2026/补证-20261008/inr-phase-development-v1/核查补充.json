@@ -1,9 +1,0 @@
-{
-  "frozen_protocol_unchanged": true,
-  "protocol_sha256": "fca50a58768c66a3ede9c1c7c81e0f7c40f49385c16ad45005a7ba6308635261",
-  "noise": "Within each geometry noise coordinates are iid. Each geometry resets CPU seed1001, so different geometries use the same random noise array (common random numbers). The two sigma models share exact Y. Do not call noise arrays independent across geometries.",
-  "metrics": "Reported geometry differences can be clamped or unclamped; preserve both. Independent audit uses clamped PSNR .443-.951dB phase02 minus phase01; unclamped .445-.951dB.",
-  "scientific_limits": "Two previously seen development images, one initialization seed, horizontal point sampling; no fresh test, causal mechanism, 2D covariance identification, selector, or A-level contribution established.",
-  "root_pixel_recalculation_pass": true,
-  "independent_audit_reviewed": true
-}
