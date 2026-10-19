@@ -19,7 +19,7 @@
 | `paper/` | 当前论文 |
 | `docs/` | 研究历程 |
 
-`Data`、`datasets`、`models`、`utils.py` 是兼容链接：`Data` 指向本地数据目录（不入库），其余三个指向 `src/` 下对应模块。
+`datasets`、`models`、`utils.py` 是兼容链接：指向 `src/` 下对应模块。
 
 ## 运行
 

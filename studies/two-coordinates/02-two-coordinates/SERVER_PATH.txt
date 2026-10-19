@@ -1,1 +1,1 @@
-server: research-175:/workspace/SE-INR/claude-20261019-two-coordinates-v2
+server: research-175:/workspace/SE-INR/runs/claude-20261019-two-coordinates-v2
