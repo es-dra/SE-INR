@@ -1,0 +1,18 @@
+{
+  "id": "identifiability-screen-v1-20261008",
+  "created_utc": "2026-10-08T03:52:19Z",
+  "authorization": "User requested further research toward A-conference competitiveness, retaining Claude's continuous-signal analysis topic.",
+  "stage": "bounded analytical screening, not a confirmatory image benchmark",
+  "question": "When can observation covariance distinguish spectral priors, and when do observationally equivalent priors still require different reconstructions?",
+  "novelty_status": "Unknown. Gaussian covariance identifiability, posterior-risk decomposition and two-point arguments are classical; this toy is not claimed as a new theorem or a new method.",
+  "models": "C1=diag(p,1), C2=diag(1,p); independent Gaussian noise covariance nu*I; A_single=[1,1], A_delta=[[1,1],[1,1-delta]]. Zero means, no estimated amplitudes, no image or network claims.",
+  "power_p": [1, 3, 9],
+  "noise_variance_nu": [0.01, 0.1, 1, 10],
+  "second_measurement_delta": [0, 0.05, 0.25, 1, 2],
+  "evaluation": "Exact dense-matrix covariance and risk identities; deterministic Gaussian quadrature for three observation-dependent arm-selection rules under equal model probabilities. Cross-check closed forms, matrix risks, midpoint risk and KL. No fitted parameters or outcome-dependent case exclusion.",
+  "comparison": "Single measurement versus two measurements is an acquisition intervention with different cost; not a compute-matched performance comparison. No claim that positive KL yields reliable finite-sample selection.",
+  "budget": {"cpu_wall_seconds": 120, "cpu_threads": 1, "gpu_jobs": 0, "paid_services": 0},
+  "failure": "Retain all rows; any failed algebraic identity blocks promotion to further research. Even a complete pass does not establish novelty or real-image utility.",
+  "next_gate": "Audit GSURE, empirical Bayes and inverse/sampling theory; only if a distinct question remains, freeze a new protocol with calibration-static prior, CV and applicable risk/marginal-likelihood baselines, fresh prospectively fixed data, multiple operators/noises and full costs. G2 target0813-0824 is evaluation history and cannot become an unseen test.",
+  "preservation": "Do not alter G2 v4 frozen roots, old dirty SC-ASISR or the compiled 13-page working paper. Schedule remains paused pending an operational next-stage protocol; user authorization for research/GPU persists."
+}

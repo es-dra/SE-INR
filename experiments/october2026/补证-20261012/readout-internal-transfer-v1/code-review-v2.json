@@ -1,0 +1,22 @@
+{
+  "reviewer": "independent /root/internal_transfer_review",
+  "timestamp_utc": "2026-10-11T18:13:22.209286+00:00",
+  "source_sha256": "33e4ee426f202e8358bc83c98ff57761b9b83bacbd223e84802dbf62910c06d1",
+  "protocol_sha256": "4e426659dd58683049319a1f3114555d46ffb8c818c0c2233a605eb310876f33",
+  "previous_review_sha256": "e3c54da9f2846a8123c664bb9d0a694f46d6783299deddd2df487c1422c4b8a1",
+  "status": "approved for bounded preflight",
+  "scope": "Delta-only static review of input snapshot correction; previous41 numerical tests not rerun and preserved.",
+  "resolved": [
+    {
+      "id": "snapshot-mismatch",
+      "finding": "All calibration observations and inherited prediction files copied with byte-hash verification and chmod0444; calibration_rows copied/hash-verified/0444; forecast hashes and parses out/calibration_rows rather than OLD."
+    }
+  ],
+  "launch_condition": "Parent reports planned external timeout120s preflight/1800s development plus time-v. Actual launch and complete costs require root verification. Internal cumulative900s guard unchanged.",
+  "findings": [],
+  "cost": {
+    "new_inference": 0,
+    "new_HR_reads": 0,
+    "numeric_test_reruns": 0
+  }
+}

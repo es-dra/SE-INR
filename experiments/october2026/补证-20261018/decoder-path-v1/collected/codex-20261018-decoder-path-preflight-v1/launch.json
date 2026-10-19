@@ -1,0 +1,9 @@
+{
+  "start_epoch": 1792336640.2651536,
+  "deadline_epoch": 1792336820.2651536,
+  "budget_seconds": 180,
+  "root": "/workspace/SE-INR/codex-20261018-decoder-path-preflight-v1",
+  "CPU": 1,
+  "GPU": 0,
+  "training": 0
+}

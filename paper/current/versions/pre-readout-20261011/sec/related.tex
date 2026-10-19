@@ -1,0 +1,45 @@
+\section{Related Work}\label{sec:related}
+
+\paragraph{Spectral control in implicit representations.}
+SIREN \citep{sitzmann2020siren} sets the frequency scale $\omega_0$ by hand;
+Fourier features \citep{tancik2020fourier} expose the bandwidth $\sigma$ and
+connect it to the neural tangent kernel \citep{jacot2018ntk}; FINER
+\citep{liu2024finer} widens the reachable frequency set. A recent group
+selects these parameters from the spectrum of the target signal: FreSh
+\citep{kania2025fresh} matches the spectrum of the untrained model to the
+target's; WINNER \citep{winner2025} sets Gaussian weight-perturbation scales
+from the target spectral centroid; SEC \citep{sec2026} retrieves
+grid-search-derived frequency parameters using centroid-based calibration.
+WIEN-INR \citep{wieninr} uses wavelet-band subnetworks and a finest-detail
+enhancement module. These studies include signal fitting, and FreSh and
+WINNER also evaluate inverse tasks. We focus on observation- and
+noise-conditioned linear references, mismatch costs, and the empirical
+reliability of guidance under degraded observations. Spectral bias
+\citep{rahaman2019spectral} explains what an untuned network prefers; our covariance-conditioned reference describes recovery under a specified signal law and observation model.
+
+\paragraph{Arbitrary-scale super-resolution.}
+LIIF \citep{chen2021liif} decodes a local latent at continuous coordinates
+with a cell (footprint) input; LTE \citep{lee2022lte} adds a local dominant
+frequency estimator; MetaSR \citep{hu2019metasr}, SRNO \citep{wei2023srno},
+CiaoSR \citep{cao2023ciaosr} and HIIF \citep{jiang2025hiif} refine the
+decoder; the SC-INR research implementation examined here replaces the cell input with an
+analytic footprint (sinc) readout and includes scale-consistency components; their benefits are evaluated separately from the footprint. Gaussian-splatting decoders
+\citep{chen2025gsasr} and heat-field decoders with analytic anti-aliasing
+\citep{becker2025thera} form a newer family. A controlled re-training study
+\citep{nasir2026empirical} examines the influence of decoder architectures and training recipes. Low-pass behaviour of SR networks has been measured with a global
+scalar \citep{fsds2024}; we measure recovery per band defined by the sampling
+theorem and set it against a covariance-conditioned linear reference. We examine these empirical similarities and their limitations.
+
+\paragraph{Multi-frame and sparse reconstruction.}
+SuperF \citep{superf2026} fits a Fourier-feature network to multiple shifted
+low-resolution frames and tunes $\sigma$; Deep Image Prior
+\citep{ulyanov2018dip} reconstructs without training data; kriging/GP
+regression \citep{rasmussen2006gp} inserts the spectrum directly as a prior.
+These tasks serve as linear and inverse-problem checks of the diagnostic, separate from the ASISR readout analysis.
+
+\paragraph{Classical theory and per-band diagnostics.}
+LMMSE/Wiener estimation and aliasing analysis of sampling are textbook
+\citep{kay1993estimation}. Per-frequency agreement measures such as
+Fourier ring correlation in microscopy \citep{vanheel2005frc} and
+scale-decomposed skill scores in forecast verification are close relatives of
+our per-band recovery score. We use the score to compare scale-dependent ASISR behaviour, rather than claiming a new information measure or a general spectral-selection theorem.

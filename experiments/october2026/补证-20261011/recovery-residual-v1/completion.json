@@ -1,0 +1,365 @@
+{
+  "completed_utc": "2026-10-11T16:06:31.638894+00:00",
+  "status": "complete retrospective residual decomposition",
+  "freeze_input_source_output_hashes": "all matched original manifest; failed audit-v1 retained",
+  "independent_audit": {
+    "passed": true,
+    "checks": 80243,
+    "max_dimensionless_abs_error": 1.0658141036401503e-14,
+    "raw_energy_max_relative_error": 4.741098171403819e-16,
+    "scope": "Independent from original three JSON ring arrays with scalar summation loops; no import analyze.py, no image/model preprocessing audit.",
+    "prior_failure": {
+      "passed": false,
+      "failure_count": 752,
+      "source_sha256": "f831ca3d6d5014c75997e828ad0b0f556ec73842950dc351747fddfbe1dec9db",
+      "results_sha256": "b90f7923e86da2471eb80eb0cfe705dd54391a503f364887315a88ad36e1dea0",
+      "reason": "Initial audit used absolute 1e-11 tolerance on unnormalised FFT energies around 1e7. All 752 differences are scalar-vs-vector summation rounding; initial failure preserved unchanged.",
+      "wall_seconds": 2.465080666996073,
+      "cpu_seconds": 2.445122
+    }
+  },
+  "counts": {
+    "groups": 27,
+    "image_model_seed_combinations": 666,
+    "pair_bin_rows": 567,
+    "normalization_improves_perimage": 658,
+    "bootstrap_pergroup": 2000
+  },
+  "summary": [
+    {
+      "dataset": "Set14",
+      "groups": 9,
+      "original_strict_pass": 1,
+      "equal_strict_pass": 9,
+      "fixed_strict_pass": 9,
+      "fixed_D_below_original": 9,
+      "median_image_D": {
+        "min": 0.04414393957715457,
+        "q25": 0.046466394669188116,
+        "median": 0.049369558115176126,
+        "q75": 0.04982553331871248,
+        "q90": 0.052699835841048724,
+        "max": 0.05771279376728872
+      },
+      "individual_strict_fraction": {
+        "min": 0.5,
+        "q25": 0.5,
+        "median": 0.5,
+        "q75": 0.5714285714285714,
+        "q90": 0.5857142857142857,
+        "max": 0.6428571428571429
+      },
+      "individual_normalization_improvement_fraction": {
+        "min": 0.9285714285714286,
+        "q25": 0.9285714285714286,
+        "median": 0.9285714285714286,
+        "q75": 0.9285714285714286,
+        "q90": 0.942857142857143,
+        "max": 1.0
+      }
+    },
+    {
+      "dataset": "BSD100",
+      "groups": 9,
+      "original_strict_pass": 9,
+      "equal_strict_pass": 9,
+      "fixed_strict_pass": 9,
+      "fixed_D_below_original": 9,
+      "median_image_D": {
+        "min": 0.03175213141971339,
+        "q25": 0.03250265609218578,
+        "median": 0.03375966992171292,
+        "q75": 0.03521918302369159,
+        "q90": 0.036811259988674475,
+        "max": 0.03803124970573535
+      },
+      "individual_strict_fraction": {
+        "min": 0.7666666666666667,
+        "q25": 0.8333333333333334,
+        "median": 0.8333333333333334,
+        "q75": 0.8333333333333334,
+        "q90": 0.8400000000000001,
+        "max": 0.8666666666666667
+      },
+      "individual_normalization_improvement_fraction": {
+        "min": 1.0,
+        "q25": 1.0,
+        "median": 1.0,
+        "q75": 1.0,
+        "q90": 1.0,
+        "max": 1.0
+      }
+    },
+    {
+      "dataset": "Urban100",
+      "groups": 9,
+      "original_strict_pass": 9,
+      "equal_strict_pass": 9,
+      "fixed_strict_pass": 7,
+      "fixed_D_below_original": 0,
+      "median_image_D": {
+        "min": 0.0448195245710058,
+        "q25": 0.045208287245941337,
+        "median": 0.04694879070441538,
+        "q75": 0.05214861798394543,
+        "q90": 0.05576745457493925,
+        "max": 0.066113406008453
+      },
+      "individual_strict_fraction": {
+        "min": 0.4666666666666667,
+        "q25": 0.5,
+        "median": 0.5333333333333333,
+        "q75": 0.5333333333333333,
+        "q90": 0.54,
+        "max": 0.5666666666666667
+      },
+      "individual_normalization_improvement_fraction": {
+        "min": 1.0,
+        "q25": 1.0,
+        "median": 1.0,
+        "q75": 1.0,
+        "q90": 1.0,
+        "max": 1.0
+      }
+    }
+  ],
+  "largest_gap_diagnostic": {
+    "Set14": {
+      "pooled_gap": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          3,
+          3,
+          4,
+          4,
+          4,
+          3,
+          3,
+          4,
+          4
+        ]
+      },
+      "mean_abs_individual_gap": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      "within_image_component": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          3,
+          3,
+          4,
+          4,
+          4,
+          3,
+          3,
+          4,
+          4
+        ]
+      },
+      "weight_migration_component": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          3,
+          3,
+          4,
+          3,
+          3,
+          3,
+          3,
+          5,
+          5
+        ]
+      }
+    },
+    "BSD100": {
+      "pooled_gap": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "mean_abs_individual_gap": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "within_image_component": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "weight_migration_component": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "Urban100": {
+      "pooled_gap": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          3,
+          3,
+          4,
+          5,
+          3,
+          5,
+          3,
+          3,
+          3
+        ]
+      },
+      "mean_abs_individual_gap": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      "within_image_component": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      "weight_migration_component": {
+        "largest_gap_above_or_at_u1": 9,
+        "groups": 9,
+        "bin_indices": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      }
+    }
+  },
+  "largest_gap_limit": "maximum among frozen bins/pairs, descriptive; not independent causal or threshold search. All maxima for four metrics at/aboveu1; does not say all errors are above Nyquist.",
+  "cost": {
+    "analysis": {
+      "start_utc": "2026-10-11T15:53:03.165138+00:00",
+      "end_utc": "2026-10-11T15:53:03.505970+00:00",
+      "wall_seconds": 0.3408422079810407,
+      "cpu_seconds": 0.238298,
+      "peak_rss_bytes": 94961664,
+      "CPU_threads": 1,
+      "nice": 10,
+      "GPU": 0,
+      "inference": 0,
+      "training": 0
+    },
+    "audit_v1_wall": 2.465080666996073,
+    "audit_v2_wall": 3.9567988750059158,
+    "cumulative_analysis_audit_wall_seconds": 6.762721749983029,
+    "CPU_threads": 1,
+    "GPU": 0,
+    "inference": 0,
+    "training": 0,
+    "compiler_plot_and_orchestration_not_in_CPU_analysis_timing": true
+  },
+  "budget": {
+    "absolute_deadline_utc": "2026-10-11T16:20:18+00:00",
+    "root_start_utc": "2026-10-11T15:50:18+00:00",
+    "root_elapsed_wall_seconds": 973.638995885849,
+    "root_active_wall_budget_seconds": 1800,
+    "cumulative_CPU_analysis_budget_seconds": 600,
+    "root_elapsed_wall_seconds_at_final_verification": 1131.8205029964447
+  },
+  "paper_pdf_sha256": "f818c4c963565a5c06616b32415e02921edd298d0302005ca765bb098243f34c",
+  "scientific_limits": [
+    "Same u maps to different HR frequency supports across scales; neither per-image gap nor decomposition is isolated architecture causality.",
+    "S enters both weights and denominator; components not independent physical causes.",
+    "Target-spectrum weights use HR truth; not deployable observation-only forecasts.",
+    "Repeated seeds/models share target images and weights, not independent texture replications.",
+    "Bootstrap intervals describe resampling of frozen finite benchmark images, not universal population guarantees.",
+    "No texture/JPEG/blockiness diagnosis from radial energies alone; no original RGB or checkpoint rerun."
+  ],
+  "next_question": "Can an LR-observable content/correction feature predict signed intervention gain beyond fixed band/scale and magnitude/spectrum controls? Existing proxies failed; current HR-weight decomposition is diagnostic only. Any changed predictor requires a new frozen calibration/development/evaluation protocol, not refitting old test. No matching training authorized at present.",
+  "automation": "old schedule remains PAUSED",
+  "existing_masters_updated": [
+    "README.md",
+    "../研究现状.md",
+    "../接续问题.md",
+    "论文修订/SOURCES.md"
+  ],
+  "current_source_archive": "论文修订/versions/recovery-residual-5page/source-and-evidence.zip",
+  "final_pdf_visual_review": "5/5 pages at140dpi and all plotted points reviewed",
+  "root_final_verified_utc": "2026-10-11T16:09:09.820210+00:00"
+}

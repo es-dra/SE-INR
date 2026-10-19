@@ -1,0 +1,11 @@
+{
+  "alias_n16_k3_a0_p0": {
+    "k_low": 3,
+    "k_high": 13,
+    "axis": 0,
+    "phase_low": 0.0,
+    "phase_high": 3.141592653589793,
+    "amplitude_low": 0.057692307692307696,
+    "amplitude_high": 0.25
+  }
+}

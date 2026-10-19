@@ -1,0 +1,2150 @@
+{
+  "scope": "Bounded development on previously used calibration images only. Test0825-0836 and all other HR images are not read. Frozen existing LTE/SC checkpoints; no SR training. New LR-only diagnostic inspired by classical cross-scale internal recurrence, not a new mechanism or theorem. Calibration images lie in original DIV2K training split; exact per-checkpoint inclusion is not re-audited. OOF independence is selector fitting only, not unseen-network image generalization.",
+  "models": {
+    "lte": {
+      "band_rows": 192,
+      "RGB_rows": 64,
+      "negative_images": 9,
+      "eligible_AUC_cells": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "cells": [
+        {
+          "scale": 2,
+          "band": 1,
+          "negative": 0,
+          "positive": 31,
+          "ties": 1,
+          "lower_positive_upper_negative": 0,
+          "lower_negative_upper_positive": 0,
+          "metrics": {
+            "always_enable": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "always_disable": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 31.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "band_median": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "energy_only": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 31.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "norm_ridge": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 8.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.25806451612903225,
+              "BA": null
+            },
+            "proxy": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "directional_ridge": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 9.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.2903225806451613,
+              "BA": null
+            },
+            "internal_transfer": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "internal_ridge": {
+              "negative": 0.0,
+              "positive": 31.0,
+              "TP": 0.0,
+              "FP": 8.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.25806451612903225,
+              "BA": null
+            }
+          }
+        },
+        {
+          "scale": 2,
+          "band": 2,
+          "negative": 0,
+          "positive": 32,
+          "ties": 0,
+          "lower_positive_upper_negative": 0,
+          "lower_negative_upper_positive": 1,
+          "metrics": {
+            "always_enable": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "always_disable": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 32.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "band_median": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "energy_only": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 32.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "norm_ridge": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 11.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.34375,
+              "BA": null
+            },
+            "proxy": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 32.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "directional_ridge": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 11.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.34375,
+              "BA": null
+            },
+            "internal_transfer": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 1.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.03125,
+              "BA": null
+            },
+            "internal_ridge": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 12.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.375,
+              "BA": null
+            }
+          }
+        },
+        {
+          "scale": 2,
+          "band": 3,
+          "negative": 1,
+          "positive": 29,
+          "ties": 2,
+          "lower_positive_upper_negative": 1,
+          "lower_negative_upper_positive": 4,
+          "metrics": {
+            "always_enable": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 29.0,
+              "recall": 1.0,
+              "precision": 0.03333333333333333,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 29.0,
+              "recall": 1.0,
+              "precision": 0.03333333333333333,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 8.0,
+              "recall": 0.0,
+              "precision": 0.0,
+              "FPR": 0.27586206896551724,
+              "BA": 0.3620689655172414
+            },
+            "proxy": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 28.0,
+              "recall": 1.0,
+              "precision": 0.034482758620689655,
+              "FPR": 0.9655172413793104,
+              "BA": 0.5172413793103448
+            },
+            "directional_ridge": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 7.0,
+              "recall": 0.0,
+              "precision": 0.0,
+              "FPR": 0.2413793103448276,
+              "BA": 0.3793103448275862
+            },
+            "internal_transfer": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 4.0,
+              "recall": 0.0,
+              "precision": 0.0,
+              "FPR": 0.13793103448275862,
+              "BA": 0.43103448275862066
+            },
+            "internal_ridge": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 8.0,
+              "recall": 0.0,
+              "precision": 0.0,
+              "FPR": 0.27586206896551724,
+              "BA": 0.3620689655172414
+            }
+          }
+        },
+        {
+          "scale": 4,
+          "band": 1,
+          "negative": 0,
+          "positive": 32,
+          "ties": 0,
+          "lower_positive_upper_negative": 0,
+          "lower_negative_upper_positive": 5,
+          "metrics": {
+            "always_enable": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "always_disable": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 32.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "band_median": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "energy_only": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 32.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "norm_ridge": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 2.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.0625,
+              "BA": null
+            },
+            "proxy": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 29.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.90625,
+              "BA": null
+            },
+            "directional_ridge": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 2.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.0625,
+              "BA": null
+            },
+            "internal_transfer": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 5.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.15625,
+              "BA": null
+            },
+            "internal_ridge": {
+              "negative": 0.0,
+              "positive": 32.0,
+              "TP": 0.0,
+              "FP": 2.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.0625,
+              "BA": null
+            }
+          }
+        },
+        {
+          "scale": 4,
+          "band": 2,
+          "negative": 3,
+          "positive": 29,
+          "ties": 0,
+          "lower_positive_upper_negative": 2,
+          "lower_negative_upper_positive": 8,
+          "metrics": {
+            "always_enable": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 3.0,
+              "FP": 29.0,
+              "recall": 1.0,
+              "precision": 0.09375,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 3.0,
+              "FP": 29.0,
+              "recall": 1.0,
+              "precision": 0.09375,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 7.0,
+              "recall": 0.3333333333333333,
+              "precision": 0.125,
+              "FPR": 0.2413793103448276,
+              "BA": 0.5459770114942528
+            },
+            "proxy": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 3.0,
+              "FP": 28.0,
+              "recall": 1.0,
+              "precision": 0.0967741935483871,
+              "FPR": 0.9655172413793104,
+              "BA": 0.5172413793103448
+            },
+            "directional_ridge": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 6.0,
+              "recall": 0.3333333333333333,
+              "precision": 0.14285714285714285,
+              "FPR": 0.20689655172413793,
+              "BA": 0.5632183908045977
+            },
+            "internal_transfer": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 8.0,
+              "recall": 0.3333333333333333,
+              "precision": 0.1111111111111111,
+              "FPR": 0.27586206896551724,
+              "BA": 0.5287356321839081
+            },
+            "internal_ridge": {
+              "negative": 3.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 5.0,
+              "recall": 0.3333333333333333,
+              "precision": 0.16666666666666666,
+              "FPR": 0.1724137931034483,
+              "BA": 0.5804597701149425
+            }
+          }
+        },
+        {
+          "scale": 4,
+          "band": 3,
+          "negative": 9,
+          "positive": 22,
+          "ties": 1,
+          "lower_positive_upper_negative": 5,
+          "lower_negative_upper_positive": 9,
+          "metrics": {
+            "always_enable": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 9.0,
+              "FP": 22.0,
+              "recall": 1.0,
+              "precision": 0.2903225806451613,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 9.0,
+              "FP": 22.0,
+              "recall": 1.0,
+              "precision": 0.2903225806451613,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 4.0,
+              "FP": 10.0,
+              "recall": 0.4444444444444444,
+              "precision": 0.2857142857142857,
+              "FPR": 0.45454545454545453,
+              "BA": 0.4949494949494949
+            },
+            "proxy": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 8.0,
+              "FP": 17.0,
+              "recall": 0.8888888888888888,
+              "precision": 0.32,
+              "FPR": 0.7727272727272727,
+              "BA": 0.5580808080808081
+            },
+            "directional_ridge": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 3.0,
+              "FP": 11.0,
+              "recall": 0.3333333333333333,
+              "precision": 0.21428571428571427,
+              "FPR": 0.5,
+              "BA": 0.41666666666666663
+            },
+            "internal_transfer": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 4.0,
+              "FP": 9.0,
+              "recall": 0.4444444444444444,
+              "precision": 0.3076923076923077,
+              "FPR": 0.4090909090909091,
+              "BA": 0.5176767676767676
+            },
+            "internal_ridge": {
+              "negative": 9.0,
+              "positive": 22.0,
+              "TP": 4.0,
+              "FP": 10.0,
+              "recall": 0.4444444444444444,
+              "precision": 0.2857142857142857,
+              "FPR": 0.45454545454545453,
+              "BA": 0.4949494949494949
+            }
+          }
+        }
+      ],
+      "band_metrics": {
+        "always_enable": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 0.0,
+          "FP": 0.0,
+          "recall": 0.0,
+          "precision": null,
+          "FPR": 0.0,
+          "BA": 0.5
+        },
+        "always_disable": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 13.0,
+          "FP": 175.0,
+          "recall": 1.0,
+          "precision": 0.06914893617021277,
+          "FPR": 1.0,
+          "BA": 0.5
+        },
+        "band_median": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 0.0,
+          "FP": 0.0,
+          "recall": 0.0,
+          "precision": null,
+          "FPR": 0.0,
+          "BA": 0.5
+        },
+        "energy_only": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 13.0,
+          "FP": 175.0,
+          "recall": 1.0,
+          "precision": 0.06914893617021277,
+          "FPR": 1.0,
+          "BA": 0.5
+        },
+        "norm_ridge": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 5.0,
+          "FP": 46.0,
+          "recall": 0.38461538461538464,
+          "precision": 0.09803921568627451,
+          "FPR": 0.26285714285714284,
+          "BA": 0.5608791208791208
+        },
+        "proxy": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 12.0,
+          "FP": 134.0,
+          "recall": 0.9230769230769231,
+          "precision": 0.0821917808219178,
+          "FPR": 0.7657142857142857,
+          "BA": 0.5786813186813187
+        },
+        "directional_ridge": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 4.0,
+          "FP": 46.0,
+          "recall": 0.3076923076923077,
+          "precision": 0.08,
+          "FPR": 0.26285714285714284,
+          "BA": 0.5224175824175824
+        },
+        "internal_transfer": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 5.0,
+          "FP": 27.0,
+          "recall": 0.38461538461538464,
+          "precision": 0.15625,
+          "FPR": 0.15428571428571428,
+          "BA": 0.6151648351648351
+        },
+        "internal_ridge": {
+          "negative": 13.0,
+          "positive": 175.0,
+          "TP": 5.0,
+          "FP": 45.0,
+          "recall": 0.38461538461538464,
+          "precision": 0.1,
+          "FPR": 0.2571428571428571,
+          "BA": 0.5637362637362637
+        }
+      },
+      "macro_within_cell_AUC": {
+        "always_enable": 0.5,
+        "always_disable": 0.5,
+        "band_median": 0.8203877859050274,
+        "energy_only": 0.20933472657610588,
+        "norm_ridge": 0.6010101010101011,
+        "proxy": 0.22756298618367585,
+        "directional_ridge": 0.5899802623940554,
+        "internal_transfer": 0.7468361778706605,
+        "internal_ridge": 0.5988621850690816
+      },
+      "RGB_policies": {
+        "always_enable": {
+          "mse": 0.002486768219278934,
+          "mean_PSNR": 31.079605315543827,
+          "oracle_regret": 1.2060545660370203e-07,
+          "disable_cases": 0,
+          "harmful_native_kept": 1,
+          "beneficial_native_disabled": 0
+        },
+        "always_disable": {
+          "mse": 0.00272348912268672,
+          "mean_PSNR": 30.469113050245046,
+          "oracle_regret": 0.0002368415088643895,
+          "disable_cases": 64,
+          "harmful_native_kept": 0,
+          "beneficial_native_disabled": 63
+        },
+        "band_median": {
+          "mse": 0.002486768219278934,
+          "mean_PSNR": 31.079605315543827,
+          "oracle_regret": 1.2060545660370203e-07,
+          "disable_cases": 0,
+          "harmful_native_kept": 1,
+          "beneficial_native_disabled": 0
+        },
+        "energy_only": {
+          "mse": 0.00272348912268672,
+          "mean_PSNR": 30.469113050245046,
+          "oracle_regret": 0.0002368415088643895,
+          "disable_cases": 64,
+          "harmful_native_kept": 0,
+          "beneficial_native_disabled": 63
+        },
+        "norm_ridge": {
+          "mse": 0.0024895544474382095,
+          "mean_PSNR": 31.04579055741481,
+          "oracle_regret": 2.9068336158790782e-06,
+          "disable_cases": 9,
+          "harmful_native_kept": 1,
+          "beneficial_native_disabled": 9
+        },
+        "proxy": {
+          "mse": 0.002723486999826793,
+          "mean_PSNR": 30.470334052634698,
+          "oracle_regret": 0.00023683938600446296,
+          "disable_cases": 62,
+          "harmful_native_kept": 0,
+          "beneficial_native_disabled": 61
+        },
+        "directional_ridge": {
+          "mse": 0.0024898448143175667,
+          "mean_PSNR": 31.042009343108084,
+          "oracle_regret": 3.197200495236458e-06,
+          "disable_cases": 10,
+          "harmful_native_kept": 1,
+          "beneficial_native_disabled": 10
+        },
+        "internal_transfer": {
+          "mse": 0.0024927220829657594,
+          "mean_PSNR": 31.063646092271796,
+          "oracle_regret": 6.074469143429324e-06,
+          "disable_cases": 6,
+          "harmful_native_kept": 0,
+          "beneficial_native_disabled": 5
+        },
+        "internal_ridge": {
+          "mse": 0.0024890195625117896,
+          "mean_PSNR": 31.049845959325523,
+          "oracle_regret": 2.371948689459323e-06,
+          "disable_cases": 8,
+          "harmful_native_kept": 1,
+          "beneficial_native_disabled": 8
+        }
+      },
+      "gates": {
+        "internal_transfer": {
+          "classification_pass": false,
+          "within_cell_AUC_pass": false,
+          "RGB_policy_pass": false,
+          "combined_pass": false,
+          "BA_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -0.005725922953451055,
+                0.25917574656981424
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                -0.005725922953451055,
+                0.25917574656981424
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -0.005725922953451055,
+                0.25917574656981424
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                -0.005725922953451055,
+                0.25917574656981424
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                -0.1017286933850615,
+                0.23238979873717436
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                -0.10101813821813463,
+                0.204443233969096
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                -0.06847392170034163,
+                0.2921629213483145
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          },
+          "within_cell_AUC_improvement_vs_norm": {
+            "ci95": [
+              -0.06153384200427218,
+              0.36493988323298676
+            ],
+            "valid": 1253,
+            "missing": 747
+          },
+          "policy_MSE_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -1.607734135698182e-05,
+                -2.1609824685090757e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                0.00014149404589860036,
+                0.00034419885909722087
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -1.607734135698182e-05,
+                -2.1609824685090757e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                0.00014149404589860036,
+                0.00034419885909722087
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                -1.433947900376853e-05,
+                4.4887962133042354e-06
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                0.00014149197611017163,
+                0.0003441988060257227
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                -1.4123672923195319e-05,
+                4.759265432955741e-06
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          }
+        },
+        "internal_ridge": {
+          "classification_pass": false,
+          "within_cell_AUC_pass": false,
+          "RGB_policy_pass": false,
+          "combined_pass": false,
+          "BA_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -0.072421849046575,
+                0.2198910881834166
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                -0.072421849046575,
+                0.2198910881834166
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -0.072421849046575,
+                0.2198910881834166
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                -0.072421849046575,
+                0.2198910881834166
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                -0.00588235294117645,
+                0.013663078724554138
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                -0.185311115355233,
+                0.20458718541345636
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                -0.011430213464696248,
+                0.13743006765547733
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          },
+          "within_cell_AUC_improvement_vs_norm": {
+            "ci95": [
+              -0.028258960573476672,
+              0.026360819590205063
+            ],
+            "valid": 1253,
+            "missing": 747
+          },
+          "policy_MSE_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -5.752399739502277e-06,
+                -7.648424249539001e-08
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                0.00014517693302279575,
+                0.0003471711197811814
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -5.752399739502277e-06,
+                -7.648424249539001e-08
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                0.00014517693302279575,
+                0.0003471711197811814
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                0.0,
+                1.6046547792595602e-06
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                0.00014517274037444074,
+                0.00034716698020432395
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                0.0,
+                2.185388537973964e-06
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          }
+        }
+      }
+    },
+    "sc-inr": {
+      "band_rows": 192,
+      "RGB_rows": 64,
+      "negative_images": 18,
+      "eligible_AUC_cells": [
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "cells": [
+        {
+          "scale": 2,
+          "band": 1,
+          "negative": 0,
+          "positive": 29,
+          "ties": 3,
+          "lower_positive_upper_negative": 0,
+          "lower_negative_upper_positive": 0,
+          "metrics": {
+            "always_enable": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "always_disable": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 29.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "band_median": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "energy_only": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 29.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 1.0,
+              "BA": null
+            },
+            "norm_ridge": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 15.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.5172413793103449,
+              "BA": null
+            },
+            "proxy": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 2.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.06896551724137931,
+              "BA": null
+            },
+            "directional_ridge": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 10.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.3448275862068966,
+              "BA": null
+            },
+            "internal_transfer": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": null,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": null
+            },
+            "internal_ridge": {
+              "negative": 0.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 15.0,
+              "recall": null,
+              "precision": 0.0,
+              "FPR": 0.5172413793103449,
+              "BA": null
+            }
+          }
+        },
+        {
+          "scale": 2,
+          "band": 2,
+          "negative": 5,
+          "positive": 25,
+          "ties": 2,
+          "lower_positive_upper_negative": 2,
+          "lower_negative_upper_positive": 0,
+          "metrics": {
+            "always_enable": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 5.0,
+              "FP": 25.0,
+              "recall": 1.0,
+              "precision": 0.16666666666666666,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 5.0,
+              "FP": 25.0,
+              "recall": 1.0,
+              "precision": 0.16666666666666666,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 2.0,
+              "FP": 12.0,
+              "recall": 0.4,
+              "precision": 0.14285714285714285,
+              "FPR": 0.48,
+              "BA": 0.45999999999999996
+            },
+            "proxy": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 2.0,
+              "FP": 13.0,
+              "recall": 0.4,
+              "precision": 0.13333333333333333,
+              "FPR": 0.52,
+              "BA": 0.43999999999999995
+            },
+            "directional_ridge": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 2.0,
+              "FP": 5.0,
+              "recall": 0.4,
+              "precision": 0.2857142857142857,
+              "FPR": 0.2,
+              "BA": 0.6
+            },
+            "internal_transfer": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 3.0,
+              "FP": 0.0,
+              "recall": 0.6,
+              "precision": 1.0,
+              "FPR": 0.0,
+              "BA": 0.8
+            },
+            "internal_ridge": {
+              "negative": 5.0,
+              "positive": 25.0,
+              "TP": 2.0,
+              "FP": 13.0,
+              "recall": 0.4,
+              "precision": 0.13333333333333333,
+              "FPR": 0.52,
+              "BA": 0.43999999999999995
+            }
+          }
+        },
+        {
+          "scale": 2,
+          "band": 3,
+          "negative": 5,
+          "positive": 27,
+          "ties": 0,
+          "lower_positive_upper_negative": 2,
+          "lower_negative_upper_positive": 3,
+          "metrics": {
+            "always_enable": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 5.0,
+              "FP": 27.0,
+              "recall": 1.0,
+              "precision": 0.15625,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 5.0,
+              "FP": 27.0,
+              "recall": 1.0,
+              "precision": 0.15625,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 3.0,
+              "FP": 4.0,
+              "recall": 0.6,
+              "precision": 0.42857142857142855,
+              "FPR": 0.14814814814814814,
+              "BA": 0.725925925925926
+            },
+            "proxy": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 2.0,
+              "FP": 0.0,
+              "recall": 0.4,
+              "precision": 1.0,
+              "FPR": 0.0,
+              "BA": 0.7
+            },
+            "directional_ridge": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 3.0,
+              "FP": 4.0,
+              "recall": 0.6,
+              "precision": 0.42857142857142855,
+              "FPR": 0.14814814814814814,
+              "BA": 0.725925925925926
+            },
+            "internal_transfer": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 3.0,
+              "FP": 3.0,
+              "recall": 0.6,
+              "precision": 0.5,
+              "FPR": 0.1111111111111111,
+              "BA": 0.7444444444444445
+            },
+            "internal_ridge": {
+              "negative": 5.0,
+              "positive": 27.0,
+              "TP": 3.0,
+              "FP": 3.0,
+              "recall": 0.6,
+              "precision": 0.5,
+              "FPR": 0.1111111111111111,
+              "BA": 0.7444444444444445
+            }
+          }
+        },
+        {
+          "scale": 4,
+          "band": 1,
+          "negative": 1,
+          "positive": 29,
+          "ties": 2,
+          "lower_positive_upper_negative": 0,
+          "lower_negative_upper_positive": 6,
+          "metrics": {
+            "always_enable": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 29.0,
+              "recall": 1.0,
+              "precision": 0.03333333333333333,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 29.0,
+              "recall": 1.0,
+              "precision": 0.03333333333333333,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 2.0,
+              "recall": 0.0,
+              "precision": 0.0,
+              "FPR": 0.06896551724137931,
+              "BA": 0.46551724137931033
+            },
+            "proxy": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 7.0,
+              "recall": 0.0,
+              "precision": 0.0,
+              "FPR": 0.2413793103448276,
+              "BA": 0.3793103448275862
+            },
+            "directional_ridge": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "internal_transfer": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 1.0,
+              "FP": 6.0,
+              "recall": 1.0,
+              "precision": 0.14285714285714285,
+              "FPR": 0.20689655172413793,
+              "BA": 0.896551724137931
+            },
+            "internal_ridge": {
+              "negative": 1.0,
+              "positive": 29.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            }
+          }
+        },
+        {
+          "scale": 4,
+          "band": 2,
+          "negative": 8,
+          "positive": 21,
+          "ties": 3,
+          "lower_positive_upper_negative": 4,
+          "lower_negative_upper_positive": 13,
+          "metrics": {
+            "always_enable": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 8.0,
+              "FP": 21.0,
+              "recall": 1.0,
+              "precision": 0.27586206896551724,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 8.0,
+              "FP": 21.0,
+              "recall": 1.0,
+              "precision": 0.27586206896551724,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 3.0,
+              "FP": 7.0,
+              "recall": 0.375,
+              "precision": 0.3,
+              "FPR": 0.3333333333333333,
+              "BA": 0.5208333333333334
+            },
+            "proxy": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 6.0,
+              "FP": 16.0,
+              "recall": 0.75,
+              "precision": 0.2727272727272727,
+              "FPR": 0.7619047619047619,
+              "BA": 0.49404761904761907
+            },
+            "directional_ridge": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 3.0,
+              "FP": 12.0,
+              "recall": 0.375,
+              "precision": 0.2,
+              "FPR": 0.5714285714285714,
+              "BA": 0.4017857142857143
+            },
+            "internal_transfer": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 4.0,
+              "FP": 13.0,
+              "recall": 0.5,
+              "precision": 0.23529411764705882,
+              "FPR": 0.6190476190476191,
+              "BA": 0.44047619047619047
+            },
+            "internal_ridge": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 3.0,
+              "FP": 8.0,
+              "recall": 0.375,
+              "precision": 0.2727272727272727,
+              "FPR": 0.38095238095238093,
+              "BA": 0.49702380952380953
+            }
+          }
+        },
+        {
+          "scale": 4,
+          "band": 3,
+          "negative": 8,
+          "positive": 21,
+          "ties": 3,
+          "lower_positive_upper_negative": 7,
+          "lower_negative_upper_positive": 7,
+          "metrics": {
+            "always_enable": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "always_disable": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 8.0,
+              "FP": 21.0,
+              "recall": 1.0,
+              "precision": 0.27586206896551724,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "band_median": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "energy_only": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 8.0,
+              "FP": 21.0,
+              "recall": 1.0,
+              "precision": 0.27586206896551724,
+              "FPR": 1.0,
+              "BA": 0.5
+            },
+            "norm_ridge": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 1.0,
+              "FP": 4.0,
+              "recall": 0.125,
+              "precision": 0.2,
+              "FPR": 0.19047619047619047,
+              "BA": 0.46726190476190477
+            },
+            "proxy": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 0.0,
+              "FP": 0.0,
+              "recall": 0.0,
+              "precision": null,
+              "FPR": 0.0,
+              "BA": 0.5
+            },
+            "directional_ridge": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 3.0,
+              "FP": 10.0,
+              "recall": 0.375,
+              "precision": 0.23076923076923078,
+              "FPR": 0.47619047619047616,
+              "BA": 0.4494047619047619
+            },
+            "internal_transfer": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 1.0,
+              "FP": 7.0,
+              "recall": 0.125,
+              "precision": 0.125,
+              "FPR": 0.3333333333333333,
+              "BA": 0.39583333333333337
+            },
+            "internal_ridge": {
+              "negative": 8.0,
+              "positive": 21.0,
+              "TP": 2.0,
+              "FP": 5.0,
+              "recall": 0.25,
+              "precision": 0.2857142857142857,
+              "FPR": 0.23809523809523808,
+              "BA": 0.5059523809523809
+            }
+          }
+        }
+      ],
+      "band_metrics": {
+        "always_enable": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 0.0,
+          "FP": 0.0,
+          "recall": 0.0,
+          "precision": null,
+          "FPR": 0.0,
+          "BA": 0.5
+        },
+        "always_disable": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 27.0,
+          "FP": 152.0,
+          "recall": 1.0,
+          "precision": 0.15083798882681565,
+          "FPR": 1.0,
+          "BA": 0.5
+        },
+        "band_median": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 0.0,
+          "FP": 0.0,
+          "recall": 0.0,
+          "precision": null,
+          "FPR": 0.0,
+          "BA": 0.5
+        },
+        "energy_only": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 27.0,
+          "FP": 152.0,
+          "recall": 1.0,
+          "precision": 0.15083798882681565,
+          "FPR": 1.0,
+          "BA": 0.5
+        },
+        "norm_ridge": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 9.0,
+          "FP": 44.0,
+          "recall": 0.3333333333333333,
+          "precision": 0.16981132075471697,
+          "FPR": 0.2894736842105263,
+          "BA": 0.5219298245614035
+        },
+        "proxy": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 10.0,
+          "FP": 38.0,
+          "recall": 0.37037037037037035,
+          "precision": 0.20833333333333334,
+          "FPR": 0.25,
+          "BA": 0.5601851851851851
+        },
+        "directional_ridge": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 11.0,
+          "FP": 41.0,
+          "recall": 0.4074074074074074,
+          "precision": 0.21153846153846154,
+          "FPR": 0.26973684210526316,
+          "BA": 0.5688352826510721
+        },
+        "internal_transfer": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 12.0,
+          "FP": 29.0,
+          "recall": 0.4444444444444444,
+          "precision": 0.2926829268292683,
+          "FPR": 0.19078947368421054,
+          "BA": 0.6268274853801169
+        },
+        "internal_ridge": {
+          "negative": 27.0,
+          "positive": 152.0,
+          "TP": 10.0,
+          "FP": 44.0,
+          "recall": 0.37037037037037035,
+          "precision": 0.18518518518518517,
+          "FPR": 0.2894736842105263,
+          "BA": 0.540448343079922
+        }
+      },
+      "macro_within_cell_AUC": {
+        "always_enable": 0.5,
+        "always_disable": 0.5,
+        "band_median": 0.8026830870279147,
+        "energy_only": 0.14207195767195768,
+        "norm_ridge": 0.6967169494617771,
+        "proxy": 0.6940521802590769,
+        "directional_ridge": 0.7149119138843276,
+        "internal_transfer": 0.693847400109469,
+        "internal_ridge": 0.678376464148878
+      },
+      "RGB_policies": {
+        "always_enable": {
+          "mse": 0.0024826207979533692,
+          "mean_PSNR": 31.08636843448656,
+          "oracle_regret": 2.2194508339193623e-07,
+          "disable_cases": 0,
+          "harmful_native_kept": 9,
+          "beneficial_native_disabled": 0
+        },
+        "always_disable": {
+          "mse": 0.002568839681996054,
+          "mean_PSNR": 30.744053161357208,
+          "oracle_regret": 8.644082912607665e-05,
+          "disable_cases": 64,
+          "harmful_native_kept": 0,
+          "beneficial_native_disabled": 53
+        },
+        "band_median": {
+          "mse": 0.0024826207979533692,
+          "mean_PSNR": 31.08636843448656,
+          "oracle_regret": 2.2194508339193623e-07,
+          "disable_cases": 0,
+          "harmful_native_kept": 9,
+          "beneficial_native_disabled": 0
+        },
+        "energy_only": {
+          "mse": 0.002568839681996054,
+          "mean_PSNR": 30.744053161357208,
+          "oracle_regret": 8.644082912607665e-05,
+          "disable_cases": 64,
+          "harmful_native_kept": 0,
+          "beneficial_native_disabled": 53
+        },
+        "norm_ridge": {
+          "mse": 0.0024828448691342608,
+          "mean_PSNR": 31.083713260071477,
+          "oracle_regret": 4.4601626428367554e-07,
+          "disable_cases": 10,
+          "harmful_native_kept": 5,
+          "beneficial_native_disabled": 5
+        },
+        "proxy": {
+          "mse": 0.002483054540929187,
+          "mean_PSNR": 31.08562271772353,
+          "oracle_regret": 6.556880592102085e-07,
+          "disable_cases": 7,
+          "harmful_native_kept": 6,
+          "beneficial_native_disabled": 3
+        },
+        "directional_ridge": {
+          "mse": 0.002482941710173414,
+          "mean_PSNR": 31.083007915877502,
+          "oracle_regret": 5.428573034366482e-07,
+          "disable_cases": 12,
+          "harmful_native_kept": 5,
+          "beneficial_native_disabled": 6
+        },
+        "internal_transfer": {
+          "mse": 0.0024861509615022293,
+          "mean_PSNR": 31.075848138635024,
+          "oracle_regret": 3.7521086322521338e-06,
+          "disable_cases": 13,
+          "harmful_native_kept": 4,
+          "beneficial_native_disabled": 7
+        },
+        "internal_ridge": {
+          "mse": 0.002482760622860797,
+          "mean_PSNR": 31.084133666736175,
+          "oracle_regret": 3.6176999081969227e-07,
+          "disable_cases": 9,
+          "harmful_native_kept": 5,
+          "beneficial_native_disabled": 3
+        }
+      },
+      "gates": {
+        "internal_transfer": {
+          "classification_pass": false,
+          "within_cell_AUC_pass": false,
+          "RGB_policy_pass": false,
+          "combined_pass": false,
+          "BA_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                0.005716271438304139,
+                0.24557194247110692
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                0.005716271438304139,
+                0.24557194247110692
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                0.005716271438304139,
+                0.24557194247110692
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                0.005716271438304139,
+                0.24557194247110692
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                -0.0050820198650099015,
+                0.22339926633040144
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                -0.07874036691971466,
+                0.20660248617467583
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                -0.06099190057254573,
+                0.17028772522522526
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          },
+          "within_cell_AUC_improvement_vs_norm": {
+            "ci95": [
+              -0.12549830528833975,
+              0.11996941314107047
+            ],
+            "valid": 1309,
+            "missing": 691
+          },
+          "policy_MSE_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -7.490789973794168e-06,
+                -6.814856345030544e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                4.438123697530579e-05,
+                0.00013034984233119566
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -7.490789973794168e-06,
+                -6.814856345030544e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                4.438123697530579e-05,
+                0.00013034984233119566
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                -7.304280819787889e-06,
+                -4.790983867440192e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                -7.109527183845081e-06,
+                -4.746648179979773e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                -7.213052461609027e-06,
+                -3.477139320939823e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          }
+        },
+        "internal_ridge": {
+          "classification_pass": false,
+          "within_cell_AUC_pass": false,
+          "RGB_policy_pass": false,
+          "combined_pass": false,
+          "BA_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -0.06649233013363448,
+                0.13839751265823844
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                -0.06649233013363448,
+                0.13839751265823844
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -0.06649233013363448,
+                0.13839751265823844
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                -0.06649233013363448,
+                0.13839751265823844
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                -0.046581590715206074,
+                0.08695652173913038
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                -0.18621097781217733,
+                0.1347571012134769
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                -0.11572888148970277,
+                0.041380309658109675
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          },
+          "within_cell_AUC_improvement_vs_norm": {
+            "ci95": [
+              -0.0675811797851272,
+              0.0221080680813439
+            ],
+            "valid": 1309,
+            "missing": 691
+          },
+          "policy_MSE_improvement_vs_controls": {
+            "always_enable": {
+              "ci95": [
+                -3.962068961418865e-07,
+                7.038814347376e-09
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "always_disable": {
+              "ci95": [
+                4.76086055714562e-05,
+                0.00013406147904194198
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "band_median": {
+              "ci95": [
+                -3.962068961418865e-07,
+                7.038814347376e-09
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "energy_only": {
+              "ci95": [
+                4.76086055714562e-05,
+                0.00013406147904194198
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "norm_ridge": {
+              "ci95": [
+                0.0,
+                2.525235204861413e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "proxy": {
+              "ci95": [
+                -5.863805440879297e-07,
+                1.7224740061068506e-06
+              ],
+              "valid": 2000,
+              "missing": 0
+            },
+            "directional_ridge": {
+              "ci95": [
+                0.0,
+                4.4988505604781917e-07
+              ],
+              "valid": 2000,
+              "missing": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "bootstrap": "conditional fixed OOF forecasts; missing-class handling frozen",
+  "SR_training": 0,
+  "GPU": 0,
+  "new_lower_prediction_files": 128,
+  "old_original_predictions_reused": 128
+}

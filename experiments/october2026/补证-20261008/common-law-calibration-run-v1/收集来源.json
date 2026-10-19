@@ -1,0 +1,14 @@
+{
+  "server": "research-175",
+  "remote": "/workspace/SE-INR/codex-20261008-paper-continuation/common-law-calibration-run-v1",
+  "original_archive": "common-law-calibration-run-v1-originals.tar.gz",
+  "archive_sha256": "0b90f25582b579222fb1b61e2635000968946960fb3fae51a18e18d61706f096",
+  "archive_local_sha_verified": true,
+  "root_frozen_hashes_recomputed": true,
+  "root_complete_cohort_recomputed": true,
+  "independent_full_numerical_audit": "审查.py/审查.json; all384 calibration risks and24 development scores independently recomputed",
+  "not_generalization_evidence": true,
+  "audit_sha256": "7e827b661a15578be818de0078384bd9306c2f912e8e8e7587a2571df0436df9",
+  "audit_code_sha256": "b264e2195a0f6b1a6eb2bf19317ee2ebd4594a9d2d4c552ff86c9ccd97684ad1",
+  "max_audit_absolute_error": 4.440892098500626e-16
+}

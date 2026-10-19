@@ -1,0 +1,12 @@
+[
+  {
+    "case": "calibration_0001_x2",
+    "seconds": 0.7653065630001947,
+    "queries_cumulative": 16384
+  },
+  {
+    "case": "calibration_0001_x4",
+    "seconds": 0.13431291398592293,
+    "queries_cumulative": 20480
+  }
+]

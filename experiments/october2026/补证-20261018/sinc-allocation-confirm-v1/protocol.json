@@ -1,0 +1,88 @@
+{
+  "version": "sinc-allocation-confirm-v1",
+  "origin": "Follow-up after sinc-path-patch-v1 rejected input-induced envelope drift as major cause. Preplanned controls showed allocation sensitivity; this newly frozen stage resolves native-norm vs donor-norm and ReLU-switch confounds. Same seen cohort, not newtest. Do not rewrite original hypothesis as confirmed.",
+  "model_root": "/workspace/SE-INR/codex-20261011-readout-probe-v4",
+  "old_root": "/workspace/SE-INR/codex-20261012-readout-cause-run-v1",
+  "helper_root": "/workspace/SE-INR/codex-20261018-sinc-path-code-v1",
+  "helper_sha256": "6344c60d21364f8c8e0fcf89d8f9bc04ccb4a76320d17cb36773a4c3e1fee867",
+  "helper_protocol_sha256": "56f3df2eb815f5239788262fdf79d598bf85e1e43bb221f5c45f9e6252310348",
+  "old_source_manifests": {
+    "input_manifest.json": "b4f88c4b257d297b95cfe490bae2f5466add1afe670feafc72c0e7a0f22d70b9",
+    "prediction_cohort.json": "b6843cf41f676344451160a6986a45cdc3855ae4cb36ca80b2f74e2729c78810",
+    "inherited_manifest.json": "3eddca5eb32ea1c0d8745b1868dd37e52f35e9fcb62c5bb9b5e367164da56544",
+    "cases.json": "24e408138ea00d7b1b868f275b943a9d000339825f81da3b3b555e6dc3a3b51c"
+  },
+  "cohort_sha256": "16487d70b7cd5eee41649644810b503d9121a6c4711675cfd7690ba420d4ceb9",
+  "preflight_families": [
+    "control_low_p0_s0",
+    "mid_axis_p0_s0",
+    "mid_cross_p0_s0"
+  ],
+  "model": "sc-inr",
+  "checkpoint_epoch": 1000,
+  "hypothesis": "In the fixed focal16 middle-frequency failure conditions, native frequency-selective feature attenuation has an adverse allocation conditional on current features and decoder. A uniform allocation matched exactly to native feature-step norm restores positive direction/gain, including with the zero-cell ReLU gates frozen. Total feature-step norm and ReLU switching cannot alone account for this difference.",
+  "interventions": {
+    "recipient": "Only eta1 of each fixed48families. No donor swaps/newpermutations. U from original zero-cell query, native W from original frequency. Original encoder/coef/omega/carrier/phase/skip/ensemble/MLP retained.",
+    "uniform": "t=RMS(U*(W-1))/RMS(U), constant envelope1-t. Exact same aggregate4branch4096query256feature norm as native correction. Compute without truth.",
+    "outputs": "point=sum weights D(U)/2+skip/2+.5; native=sum weights D(U*W)/2+skip/2+.5; uniform=sum weights D(U*(1-t))/2+skip/2+.5; fixed_native=point+sum weights J_D(U)[U*(W-1)]/2; fixed_uniform=point+sum weights J_D(U)[-t*U]/2. Same point baseline. Frozen gates are exact affine counterfactual, not approximation to full network.",
+    "checks": "Original float32 endpoints against oldcohort; matchedfeature RMS1e-12; original prior full/native2e-6; sham not expected identity for uniform; both benefits and harm retained. Autograd JVP and fixedmask finite step on saved16queries preflight+firstformal for both increments."
+  },
+  "evaluation": {
+    "roi_primary": [
+      16,
+      48
+    ],
+    "roi_secondary": [
+      0,
+      64
+    ],
+    "bands": "RGB plus old nonDC Chebyshev [0,.125),[.125,.25),[.25,.5001)",
+    "gain_tol": 1e-08,
+    "direction_tol": 1e-10,
+    "primary": "All32mid, focalold16, nonflip16, sham16. Focal16 middleband paired native vs uniform with full/frozen separately. Report sign counts, negative gain rescued, mean/median MSE improvements and all cases. RGB center/full side effects retained. No CI for dependentgrid.",
+    "support_gate": "Both full and fixed modes require >8/16 focal native negative gains rescued to >=-1e-8, median native-minus-uniform MSE>1e-8; full RGB center median no worse than native beyond1e-8. If fixed restoration fails, cannot claim recovery independent of gate switching. This gate is a bounded descriptive claim check, not statistical significance. Stronger all16 statement only if actually observed."
+  },
+  "numeric": {
+    "endpoint_atol": 2e-06,
+    "feature_atol": 2e-06,
+    "probe_atol": 1e-10,
+    "score_atol": 1e-12,
+    "query_indices": [
+      0,
+      260,
+      520,
+      780,
+      1040,
+      1300,
+      1560,
+      1820,
+      2080,
+      2340,
+      2600,
+      2860,
+      3120,
+      3380,
+      3640,
+      3900
+    ]
+  },
+  "freeze": "Newcode/protocol/cohort hash before execution; verify original manifests/checkpoint/helper. All predictions/probes frozen before truth score. Retrospective cohort. No code change in launched root.",
+  "budget": {
+    "CPU_threads": 1,
+    "nice": 10,
+    "GPU": 0,
+    "training": 0,
+    "preflight_seconds": 90,
+    "formal_seconds": 240,
+    "independent_audit_seconds": 120,
+    "resume": "none; fixedabsolute launchdeadline plus cumulative phases, subprocess timeout; failures preserved; newversion/root for changes"
+  },
+  "limitations": [
+    "SingleSCcheckpoint,x4,zero-vs-native and known synthetic grid",
+    "Conditional allocation intervention, not identification of useful vs harmful individual channels",
+    "No evidence learnedfrequency equalsoutputfrequency or is estimatedincorrectly",
+    "Uniform changes space/channel allocation; prior permutation provides complementary channel-addressing evidence",
+    "Generalization and deployable selector not established; lowcontrol harm retained",
+    "Nonlinear fullrepair and frozenaffine repair are different intervention responses"
+  ]
+}

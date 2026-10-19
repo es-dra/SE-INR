@@ -8,9 +8,9 @@
 \usepackage{hyperref}
 \usepackage[numbers,sort&compress]{natbib}
 
-\title{SC-INR: Decoder-Side Sampling Consistency for Arbitrary-Scale Image Super-Resolution}
-\author{Draft for internal review}
-\date{May 2026}
+\title{SC-INR: An Internal Technical Record of a Constrained Cell Path in Fourier Implicit Arbitrary-Scale Image Super-Resolution}
+\author{Frozen internal record, not for submission}
+\date{August 2026}
 
 \newcommand{\sinc}{\operatorname{sinc}}
 \newcommand{\cell}{\mathbf{c}}
@@ -21,23 +21,28 @@
 \begin{document}
 \maketitle
 
+\noindent\fbox{\parbox{0.94\linewidth}{\textbf{Route status (7 August 2026).}
+The P1.12 source-and-fairness gate for both IPE-LIIF and Thera did not pass.
+P1.13 was not started, and the SC-INR new-method claim is closed. This document
+preserves implementation details and bounded empirical facts for internal
+reproducibility; it is not an active submission manuscript.}}
+\vspace{0.8em}
+
 \begin{abstract}
 Arbitrary-scale image super-resolution (ASISR) commonly represents an image as
-a local implicit function queried at continuous output coordinates. Existing
-Fourier implicit decoders such as LTE improve high-frequency reconstruction, but
-their learned cell-conditioned phase allows the output footprint to directly
-alter the local Fourier phase. This paper studies a more constrained
-decoder-side formulation: the content function is predicted from image features,
-while the output cell enters only through an analytic sampling response. We call
-this family SC-INR. For a Fourier component observed through a box footprint,
-the average response is a product of normalized sinc terms; SC-INR uses this
-response to decouple feature-conditioned content from scale-conditioned
-observation. Our current no-phase variant gives a stable small OOD PSNR gain
-over LTE across three seeds, and substantially improves same-LR cross-scale
-observation consistency in seed1 diagnostics. The feature-conditioned phase
-final candidate shows positive OOD and All-scale mean gains over LIIF and LTE in
-a three-seed benchmark; its comparison to the no-phase variant is reported as
-seed1 context.
+a local implicit function queried at continuous output coordinates. Prior work
+on integrated positional encoding (IPE) already models an output pixel as an
+area and analytically integrates fixed Fourier features over that area. Thera
+further combines content-conditioned sinusoidal fields with an analytic point
+spread function. Against this prior art, this draft studies a narrower question:
+whether an LTE-style content-adaptive Fourier decoder benefits from replacing
+its learned cell-conditioned phase with a constrained footprint response. The
+current SC-INR implementation gives small positive three-seed OOD mean deltas
+over LIIF and LTE under the current bicubic protocol. The pre-frozen provenance
+and fairness requirements for the two direct baselines were not met, so no
+direct-baseline training was started and the method-level claim was closed. The
+present document is therefore a frozen internal technical record, not a claim
+awaiting completion by adjacent experiments.
 \end{abstract}
 
 \section{Introduction}
@@ -57,16 +62,40 @@ This can improve fitting near training scales, but it also gives the network a
 shortcut for moving local texture phase as a function of the requested output
 footprint.
 
-We therefore study \emph{decoder-side sampling consistency}. The central idea is
+We therefore study decoder-side sampling consistency as a hypothesis. The central idea is
 to separate the feature-conditioned continuous content from the scale-conditioned
 observation. In SC-INR, the Fourier coefficient, frequency, and optional content
 phase are functions of local image features only. The output cell affects the
 decoded observation through an analytic sinc response derived from box averaging
 a Fourier component. This is not a claim of whole-network scale equivariance:
 the encoder, degradation model, and sampling protocol are not proven to commute
-with scale transformations. The contribution is instead a constrained implicit
-decoder contract that reduces arbitrary learned cell-conditioned phase
-extrapolation.
+with scale transformations. The implementation intervention recorded here is a
+constrained implicit decoder contract that removes arbitrary learned
+cell-conditioned phase extrapolation; the present evidence does not establish
+this intervention as a new method contribution.
+
+\section{Related Work and Prior-Art Boundary}
+
+IPE-LIIF treats each output pixel as an area rather than a center point and
+analytically integrates sine and cosine positional encodings over a rectangular
+pixel, yielding the same separable sinc form used by SC-INR
+\citep{liu2021ipe}. Mip-NeRF introduced the broader idea of footprint-integrated
+positional encoding for anti-aliased neural fields \citep{barron2021mipnerf}.
+Thera provides a stronger ASISR construction in which a content-conditioned
+local sinusoidal color field is observed through an analytic Gaussian point
+spread function \citep{becker2025thera}. Consequently, pixel-footprint modeling,
+analytic Fourier response, and arbitrary-scale generalization are prior art and
+are not claimed as SC-INR contributions.
+
+Other ASISR work has pursued scale-aware feature extraction and upsampling
+\citep{wang2023eqsr}, local attention and frequency encoding
+\citep{chen2023clit}, and real-world continuous optical zoom data rather than
+pure bicubic degradation \citep{fu2024coz}. The remaining implementation
+distinction is LTE-specific: content-adaptive frequencies are retained while
+the explicit cell path is moved from learned phase to an analytic pre-MLP
+response. P1.12 did not pass the source-and-fairness requirements needed to
+evaluate this distinction against both direct baselines; it is therefore
+retained only as an internal implementation fact.
 
 \section{Method}
 
@@ -88,13 +117,13 @@ the Fourier component appears, not merely how strongly it is observed.
 
 Consider a one-dimensional Fourier component
 \begin{equation}
-  f(x)=A\cos(\pi \omega x+\phi).
+  f(x)=A\cos(\pi(\omega x+\phi)).
 \end{equation}
 The box-averaged observation over a cell of width \(c\) is
 \begin{equation}
-  \frac{1}{c}\int_{x_0-c/2}^{x_0+c/2} A\cos(\pi \omega x+\phi)\,dx
+  \frac{1}{c}\int_{x_0-c/2}^{x_0+c/2} A\cos(\pi(\omega x+\phi))\,dx
   =
-  A\cos(\pi \omega x_0+\phi)\sinc\left(\frac{\omega c}{2}\right),
+  A\cos(\pi(\omega x_0+\phi))\sinc\left(\frac{\omega c}{2}\right),
 \end{equation}
 where \(\sinc(t)=\sin(\pi t)/(\pi t)\). For a two-dimensional rectangular
 footprint, the separable response is
@@ -109,7 +138,7 @@ filter rather than a guaranteed positive attenuation envelope.
 
 \subsection{SC-INR Variants}
 
-The final-candidate SC-INR predicts content terms from features:
+The frozen SC-INR implementation predicts content terms from features:
 \begin{equation}
   A=A(\feat), \qquad \freq=\freq(\feat), \qquad \phi=\phi(\feat),
 \end{equation}
@@ -142,7 +171,7 @@ The feature phase \(\phi(\feat)\) does not receive cell or scale. The previous
 no-phase variant, denoted SC-INR-NoPhi, sets \(\phi=0\). We keep checkpoint and
 raw-result compatibility names separate from paper display names; in older
 result files, the raw key ``SC-INR'' refers to SC-INR-NoPhi, while the current
-final-candidate SC-INR corresponds to raw key ``SC-INR+PhiZ'' in the seed1
+frozen SC-INR implementation corresponds to raw key ``SC-INR+PhiZ'' in the seed1
 historical file and to the cleaned raw key ``SC-INR'' in the seed2/seed3 files.
 
 \section{Experiments}
@@ -158,11 +187,11 @@ on BSD100 and Urban100 subsets for seed1. Paper benchmark tables are generated
 from the canonical benchmark entry \texttt{artifacts/derived/benchmarks/}, which
 records the raw key and canonical model name for every row.
 
-\subsection{Seed1 Final-Candidate Benchmark}
+\subsection{Seed1 Frozen-Implementation Benchmark}
 
 \begin{table}[H]
 \centering
-\caption{Seed1 benchmark context. The final-candidate SC-INR was strongest in
+\caption{Seed1 benchmark context. The frozen SC-INR implementation was strongest in
 seed1, but the current claim should use the three-seed summary in
 Table~\ref{tab:final-multiseed}.}
 \label{tab:seed1}
@@ -180,7 +209,7 @@ LIIF-EQ & 31.1205 & 22.7469 & 25.5381 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:seed1} shows that the final-candidate SC-INR improves seed1 OOD
+Table~\ref{tab:seed1} records that the frozen SC-INR implementation has a positive seed1 OOD
 PSNR by \(+0.0849\) dB over LTE and by \(+0.0295\) dB over SC-INR-NoPhi. This
 is the intended place to show the SC-INR vs SC-INR-NoPhi structural increment.
 
@@ -188,8 +217,8 @@ is the intended place to show the SC-INR vs SC-INR-NoPhi structural increment.
 
 \begin{table}[H]
 \centering
-\caption{Core three-seed benchmark for LIIF, LTE, and SC-INR-NoPhi. The stable
-multi-seed evidence currently belongs to the no-phase variant.}
+\caption{Core three-seed benchmark for LIIF, LTE, and SC-INR-NoPhi. These values
+record behavior under the current protocol and do not establish a general method advantage.}
 \label{tab:multiseed}
 \begin{tabular}{llrrr}
 \toprule
@@ -205,17 +234,16 @@ SC-INR-NoPhi & OOD & 22.7581 & 0.0105 & +0.0507 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:multiseed} indicates that SC-INR-NoPhi gives a stable small OOD
-PSNR gain over LTE, while its ID average is essentially tied with LTE. This is
-consistent with the intended role of decoder-side sampling consistency: improving
-scale extrapolation behavior rather than merely increasing training-scale
-fitting.
+Table~\ref{tab:multiseed} records a small positive OOD mean delta for
+SC-INR-NoPhi over LTE, while its ID average is essentially tied with LTE. This
+is a bounded observation under the current protocol; it does not establish
+general scale-extrapolation improvement or sampling consistency.
 
-\subsection{Final-Candidate Multi-Seed Result}
+\subsection{Frozen SC-INR Multi-Seed Result}
 
 \begin{table}[H]
 \centering
-\caption{Final-candidate SC-INR three-seed benchmark. Deltas are paired seed
+\caption{Frozen SC-INR three-seed benchmark. Deltas are paired seed
 deltas against LIIF and LTE under the same benchmark protocol.}
 \label{tab:final-multiseed}
 \begin{tabular}{lrrrr}
@@ -229,18 +257,19 @@ All & 25.5298 & 0.0403 & +0.0364 & +0.0320 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:final-multiseed} shows that the final-candidate SC-INR retains
-the OOD and All-scale PSNR advantage over LTE and is positive over LIIF across
-ID, OOD, and All splits. We keep SC-INR vs SC-INR-NoPhi as seed1 context rather
-than foregrounding seed2/seed3 differences between those two internal variants.
+Table~\ref{tab:final-multiseed} records positive OOD and All-scale mean deltas
+over LIIF and LTE under this three-seed protocol, while the ID delta versus LTE
+is slightly negative. The deltas are small relative to seed variation and do
+not establish a stable or general method advantage. SC-INR versus SC-INR-NoPhi
+remains seed1 context rather than a multi-seed attribution claim.
 
-\subsection{Cross-Scale Observation Consistency}
+\subsection{Empirical Cross-Grid Agreement Diagnostic}
 
 \begin{table}[H]
 \centering
-\caption{Seed1 same-LR cross-scale observation consistency. Larger consistency
-PSNR indicates closer agreement when outputs at larger scales are compared to
-the \(4\times\) observation under the same LR input.}
+\caption{Seed1 same-LR empirical cross-grid agreement. Larger PSNR indicates
+closer agreement after bicubic resizing larger-scale predictions to the
+\(4\times\) grid under the same LR input. This is not a box-observation test.}
 \label{tab:consistency}
 \begin{tabular}{llrr}
 \toprule
@@ -254,90 +283,20 @@ SC-INR-NoPhi & Urban100 & 47.0694 & +7.7712 \\
 \end{tabular}
 \end{table}
 
-The large consistency gains in Table~\ref{tab:consistency} support the mechanism
-that removing learned cell-conditioned phase is consistent with improved
-same-LR cross-scale agreement. However, diagnostic LTE variants with weakened
-cell response and SC-INR-NoSinc can also score highly on consistency; these
-numbers must be interpreted jointly with reconstruction quality and
-footprint-oracle diagnostics.
+The large values in Table~\ref{tab:consistency} show that removing the learned
+cell-conditioned phase changes cross-grid behavior. They do not establish
+sampling correctness: the comparison uses bicubic resizing rather than the
+declared box observation operator, and cell-insensitive controls can also score
+highly. This diagnostic remains \emph{diagnostic-only}.
 
-\subsection{Footprint Oracle Diagnostic}
+\subsection{Unavailable Historical Diagnostics}
 
-Same-LR consistency alone cannot distinguish a footprint-aware decoder from a
-cell-insensitive decoder. We therefore add a small seed1 diagnostic that keeps
-the \(4\times\) LR input and query grid fixed, changes only the decoder cell,
-and compares the output to a discrete HR box-average oracle at the same query
-locations. The oracle is a piecewise-constant proxy from the available HR image,
-so it is a diagnostic target rather than a true continuous-scene integral.
-
-\begin{table}[H]
-\centering
-\caption{Seed1 footprint-oracle diagnostic on BSD100 and Urban100 first 10
-images. Cell multiplier \(m\) is relative to the native \(4\times\) query grid.
-Lower RMSE is better.}
-\label{tab:footprint-oracle}
-\begin{tabular}{lrrrr}
-\toprule
-Model & Oracle RMSE \(m=2\) & Oracle RMSE \(m=4\) &
-Tracking RMSE \(m=2\) & Tracking RMSE \(m=4\) \\
-\midrule
-LTE & 0.02504 & 0.02309 & 0.03077 & 0.04834 \\
-LTE-NoCellPhase & 0.02611 & 0.02653 & 0.03237 & 0.05134 \\
-SC-INR-NoPhi & 0.02476 & 0.02057 & 0.03069 & 0.04708 \\
-SC-INR & 0.02464 & 0.02148 & 0.03062 & 0.04745 \\
-SC-INR-NoSinc & 0.02612 & 0.02750 & 0.03237 & 0.05134 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Table~\ref{tab:footprint-oracle} shows that SC-INR tracks the footprint oracle
-better than the cell-insensitive NoSinc control under this small diagnostic,
-while LTE-NoCellPhase and SC-INR-NoSinc have zero cell sensitivity and therefore
-inherit the oracle-change error. SC-INR-NoPhi is slightly stronger than the
-final feature-phase SC-INR on this diagnostic, so this result should be read as
-support for the analytic footprint-response mechanism, not as a claim that the
-final variant is best on every auxiliary metric.
-
-\subsection{LTE-to-SC-INR Mechanism Gate}
-
-The footprint-oracle diagnostic compares output behavior, but the central
-mechanism claim is more specific: LTE lets the cell directly change a learned
-phase signal, whereas SC-INR lets cell change a pre-MLP analytic response. We
-therefore add a crop-based seed1 gate that uses the same images, query points,
-and cell multipliers to record LTE's isolated \(h_p(c)\), SC-INR's active
-response, and the footprint-oracle errors. This diagnostic uses BSD100 and
-Urban100 first 5 images, center \(64\times64\) HR crops, and 256 query points
-per image; it is intentionally a mechanism gate, not a replacement for the
-full-image footprint oracle or the multi-seed benchmark.
-
-\begin{table}[H]
-\centering
-\caption{Unified LTE-to-SC-INR mechanism diagnostic, averaged over cell
-multipliers \(m=2,4\). Lower RMSE is better. Signal deltas are measured against
-the native \(m=1\) cell.}
-\label{tab:lte-scinr-mechanism}
-\begin{tabular}{lrrrr}
-\toprule
-Model & Oracle RMSE & Tracking RMSE & \(h_p(c)\) delta & Active response delta \\
-\midrule
-LTE & 0.02623 & 0.04198 & 0.51528 & -- \\
-LTE-NoCellPhase & 0.02714 & 0.04353 & -- & -- \\
-LTE-PhaseZ & 0.02695 & 0.04353 & -- & -- \\
-SC-INR & 0.02512 & 0.04113 & -- & 0.30812 \\
-SC-INR-NoPhi & 0.02476 & 0.04101 & -- & 0.29938 \\
-SC-INR-NoSinc & 0.02729 & 0.04353 & -- & 0.00000 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Table~\ref{tab:lte-scinr-mechanism} directly supports the intended mechanism
-distinction. LTE has a non-zero learned cell-phase signal; NoCellPhase and
-NoSinc remove the active cell response and therefore inherit the oracle-change
-error; SC-INR keeps a non-zero analytic response and tracks the crop oracle
-slightly better than LTE and NoSinc. The table should still be interpreted
-narrowly: the phase norm and response norm are not the same physical quantity,
-and this crop-based diagnostic does not prove that sinc is the unique cause of
-the benchmark gain.
+Earlier drafts included footprint-oracle and unified mechanism tables whose
+canonical artifacts are currently missing. Those tables have been removed from
+this frozen record. They cannot return through routine reruns; any future use
+requires a new Node Contract, restored canonical artifacts, artifact-whitelist
+registration, and controls that reject trivial cell-insensitive or
+incorrect-response behavior.
 
 \subsection{Selected Qualitative Examples}
 
@@ -353,36 +312,40 @@ the benchmark gain.
 \includegraphics[width=\linewidth]{figures/urban100_img004_x8.png}
 \end{minipage}
 \caption{User-confirmed selected Urban100 \(8\times\) examples where the
-final-candidate SC-INR shows clearer local structure than LTE. These are
+frozen SC-INR implementation shows clearer local structure than LTE. These are
 selected examples, not evidence of average visual quality.}
 \label{fig:qualitative}
 \end{figure}
 
 \section{Limitations and Next Steps}
 
-The current evidence is not yet a complete paper claim. First, final-candidate
-SC-INR now has three-seed benchmark evidence against LIIF and LTE, but auxiliary
-metrics for the final candidate remain seed1-only. Second, the w/o-sinc ablation
-is still single-seed and should not be used as a
-unique causal proof of the analytic response. Third, same-LR consistency can
-reward cell-insensitive behavior; the footprint-oracle diagnostic partly closes
-this gap but remains a seed1 small-sample HR proxy, not a proof that the final
-RGB output is an exact box-footprint observation. Finally, PSNR does not fully
-measure perceptual texture quality; qualitative crops and texture-sensitive
-metrics must remain part of the evidence package.
+The primary limitation is prior-art coverage. IPE-LIIF already establishes
+pixel-area integrated Fourier encoding in ASISR, while Thera provides a stronger
+analytic field-observation construction. SC-INR has not yet been compared to
+either under the same protocol. Its sinc response is applied before a nonlinear
+MLP, local ensemble, and residual path, so the final RGB predictor is not an
+exact box integral. The current cross-grid metric uses bicubic resizing and can
+reward cell-insensitive behavior. The synthetic bicubic benchmark also does not
+establish behavior under a measured real camera PSF; COZ provides one relevant
+real-world direction. The P1.12 audit found no verifiable official IPE-LIIF
+software provenance and no immutable Thera checkpoint provenance; Thera's
+model-native training recipe is also not a strict LTE-style factorial. Because
+the pre-frozen dual-baseline gate failed, P1.13 was not started and this route
+was closed rather than extended with adjacent experiments.
 
 \section{Conclusion}
 
-SC-INR reframes output scale in Fourier implicit ASISR decoders as an
-observation footprint rather than a learned phase shortcut. The current results
-support decoder-side sampling consistency as a useful principle: SC-INR-NoPhi
-shows stable small OOD gains and substantially better cross-scale observation
-consistency, while the final-candidate feature-phase SC-INR preserves the OOD
-and All-scale PSNR gain over LTE and improves over LIIF on average.
-The next critical step is to close the remaining evidence gap with final-candidate
-auxiliary metrics, broader footprint-correctness checks, and carefully audited
-qualitative evidence.
+SC-INR is an LTE-specific constrained cell-path implementation, not an
+established new sampling principle. Its three-seed benchmark records small
+positive OOD mean deltas over LIIF and LTE under the current protocol, while the
+existing cross-grid metric and mechanism studies remain diagnostic. The frozen
+dual-baseline gate did not pass, no follow-on training was launched, and the
+SC-INR new-method claim is closed. The code and results are retained only as an
+internal reproducibility and mechanism case study. New external provenance
+could justify a new audit, but would not by itself restore novelty or a method
+claim.
 
+\small
 \bibliographystyle{plainnat}
 \bibliography{references}
 

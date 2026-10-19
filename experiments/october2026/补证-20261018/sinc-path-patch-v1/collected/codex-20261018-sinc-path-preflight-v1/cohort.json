@@ -1,0 +1,23 @@
+[
+  {
+    "family": "control_low_p0_s0",
+    "template": "control_low",
+    "eta0": "o0000",
+    "eta1": "o0000",
+    "focal": false
+  },
+  {
+    "family": "mid_axis_p0_s0",
+    "template": "mid_axis",
+    "eta0": "o0016",
+    "eta1": "o0018",
+    "focal": true
+  },
+  {
+    "family": "mid_cross_p0_s0",
+    "template": "mid_cross",
+    "eta0": "o0016",
+    "eta1": "o0053",
+    "focal": false
+  }
+]

@@ -1,0 +1,66 @@
+\section{Spectral Adaptation as Choosing a Prior}\label{sec:setup}
+
+\paragraph{Setting.} A signal $x$ lives on a continuous domain
+$\Omega\subset\mathbb{R}^d$. We observe $y=Ax+n$ with a known linear operator
+$A$ (blur and decimation, sparse sampling, or the footprint integrals of
+several shifted frames) and $n\sim\mathcal{N}(0,\sigma_n^2 I)$. A continuous
+representation $f_\theta$ is fitted by minimising $\|Af_\theta-y\|^2$
+(possibly with regularisation or early stopping) and queried anywhere.
+
+\begin{proposition}[Fourier features are a GP prior; Bochner]\label{prop:bochner}
+Let $f(u)=\sum_{j=1}^m w_j\varphi_j(u)$ with
+$\varphi_j(u)=\sqrt{2/m}\cos(2\pi b_j^\top u+c_j)$, $b_j\sim p(b)$,
+$c_j\sim\mathcal{U}[0,2\pi)$ and $w\sim\mathcal{N}(0,s^2I)$. As
+$m\to\infty$, $f$ is a zero-mean stationary Gaussian process with covariance
+$k(h)=s^2\,\mathbb{E}_b[\cos(2\pi b^\top h)]$ and spectral density
+$S(\nu)=s^2p(\nu)$.
+\end{proposition}
+Hence a ridge read-out of Fourier features is the GP posterior mean under
+prior spectrum $S$; with $p=\mathcal{N}(0,\sigma^2I)$,
+$S(\nu)\propto\exp(-\|\nu\|^2/2\sigma^2)$. Tuning $\sigma$ (SuperF) or
+choosing frequency parameters from a target spectrum (FreSh, WINNER, SEC)
+thus picks a prior spectrum within a restricted family; a GP with a fitted or
+known spectrum picks it directly. For an MLP on Fourier features trained by
+gradient descent, the lazy-training limit gives kernel regression with a
+stationary NTK modulated by $p$ \citep{tancik2020fourier,jacot2018ntk}, so the
+statement holds to first order; we measure departures from it empirically
+(\S\ref{sec:exp-ab}).
+
+\begin{proposition}[Linear upper bound]\label{prop:bound}
+If $x$ is a stationary Gaussian process with spectrum $P$, every linear
+estimator $\hat x=Gy$ satisfies
+$\mathbb{E}\|x-\hat x\|^2\ge\mathbb{E}\|x-\hat x_{\mathrm{LMMSE}}(P)\|^2$,
+with $\hat x_{\mathrm{LMMSE}}(P)=C_PA^\top(AC_PA^\top+\sigma_n^2I)^{-1}y$.
+\end{proposition}
+For the class of Prop.~\ref{prop:bochner} the true-spectrum LMMSE is
+therefore a ceiling, and the gap between two prior spectra is the cost of
+spectral mismatch.
+
+\begin{definition}[Per-band linear recoverability]
+For a band projector $\Pi_b$,
+\[
+\Rlin(A,\sigma_n,P)=1-\frac{\mathbb{E}\|\Pi_b(x-\hat x_{\mathrm{LMMSE}}(P))\|^2}{\mathbb{E}\|\Pi_b x\|^2}.
+\]
+\end{definition}
+$\Rlin$ depends only on $A$, $\sigma_n$ and $P$. With the generic natural-image
+prior $P\propto1/f^2$ it requires no ground truth and no training; we compute
+it by sampling from the prior, simulating the observation and applying the
+LMMSE, in seconds per task. When a trained or otherwise non-linear estimator
+is evaluated on real images, we report the same quantity measured on data,
+$R_b=1-\|\Pi_b(x-\hat x)\|^2/\|\Pi_b(x-\bar x)\|^2$ on the luminance channel;
+for a trained network we write $\Rnet$.
+
+\paragraph{Bands.} Throughout we use sharp radial sub-bands in HR pixel units,
+$b_1=[0,\tfrac18)$, $b_2=[\tfrac18,\tfrac14)$, $b_3=[\tfrac14,\tfrac12]$
+cycles/pixel. At $\times4$, $b_1$ lies below the LR Nyquist limit and
+$b_2$, $b_3$ lie one and two octaves above it.
+
+\paragraph{Closed form for decimation.} For $A$ = blur $K$ followed by
+decimation by $s$, each LR frequency $\omega$ collects $s^d$ HR frequencies
+$\nu_m=\omega+m/s$, and
+\begin{equation}\label{eq:alias}
+R(\nu_0)=\frac{|\hat K(\nu_0)|^2P(\nu_0)}{\sum_m|\hat K(\nu_m)|^2P(\nu_m)+\sigma_n^2}.
+\end{equation}
+The sum in the denominator is aliasing. In single-image and sparse-pixel
+settings it dominates the sensor noise, which is why $\Rlin$ there is nearly
+insensitive to $\sigma_n$ (Table~\ref{tab:map}).

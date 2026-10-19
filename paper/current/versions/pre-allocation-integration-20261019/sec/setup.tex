@@ -1,0 +1,68 @@
+\section{ASISR Setting and Recovery Measurement}\label{sec:setup}
+
+\paragraph{Three distinct objects.} Let $x$ denote a continuous signal and
+$y=Ax+n$ its low-resolution observation. The input operator $A$ specifies
+blur, sampling and any observation noise. The desired target at coordinate
+$q$ is $(Q_hx)(q)$, where $Q_h$ is a stated output measurement, such as a
+point value or an average over a pixel with shape $h$. The cell input $c$
+is a network conditioning variable. A protocol may set $c=h$, but this
+assignment does not prove that the network computes $Q_h$. Changing $A$,
+$Q_h$ and $c$ are different interventions.
+
+\paragraph{Pretrained ASISR, not per-image fitting.} Our primary ASISR
+models are amortised predictors $\hat x(q)=F_\theta(y,q,c)$: their encoder
+and decoder are trained across images, then held fixed during inference.
+The supplementary inverse tasks instead fit a representation $f_\theta$
+to an individual observation, for example by minimising
+$\|Af_\theta-y\|^2$ with stated regularisation. Their optimisation and
+linear references do not identify the mechanism of a pretrained decoder.
+The historical natural-image targets are discrete HR arrays with
+bicubic LR preparation; they are not certified box integrals of a known
+continuous field. We therefore use pixel-footprint terminology to describe
+the supplied cell and implemented modulation, without assuming a matched
+physical output operator for those targets.
+
+\paragraph{Empirical recovery.} For a stated crop, colour conversion and
+window, let $\Pi_b$ project onto frequency band $b$. For a reconstructed
+image $\hat x$, the empirical score is
+$R_b=1-\|\Pi_b(x-\hat x)\|^2/\|\Pi_b(x-\bar x)\|^2$;
+for a network we write $\Rnet$. It measures error relative to a centred
+zero reconstruction, uses HR truth, and may be negative. Write $S_{ib}$
+and $E_{ib}$ for the signal and error energy in image $i$. The pooled
+measurement is
+\begin{equation}\label{eq:pooled}
+R_b^{\rm emp}=1-\frac{\sum_i E_{ib}}{\sum_i S_{ib}}.
+\end{equation}
+It is not an unweighted mean of per-image recoveries.
+
+\paragraph{Conditional linear reference.} For a specified centred signal
+law $P$, input operator $A$ and noise covariance, the LMMSE estimator
+minimises expected squared error among linear estimators. We denote its
+band recovery by
+\[
+\Rlin=1-\frac{\mathbb E\|\Pi_b(x-\hat x_{\rm LMMSE}(P))\|^2}
+{\mathbb E\|\Pi_bx\|^2}.
+\]
+The generic $1/f^2$ spectrum, its amplitude and centring are assumptions;
+an image-periodogram reference additionally uses target truth. Neither
+is a distribution-free limit on natural-image reconstruction. Classical
+GP, matrix-risk and aliasing formulas are given in
+Appendix~\ref{app:linear}; scalar mismatch calculations are in
+Appendix~\ref{app:mismatch}. Their solver and sampling costs are recorded
+separately from the network measurements.
+
+\paragraph{Bands and scale normalisation.} Historical image bands are
+square annuli in HR pixel units, indexed by $\max(|\nu_x|,|\nu_y|)$:
+$b_1=[0,\tfrac18)$, $b_2=[\tfrac18,\tfrac14)$,
+$b_3=[\tfrac14,\tfrac12]$ cycles/pixel. At $\times4$, the upper two bands
+lie above the LR Nyquist limit. L1 uses the Chebyshev radius
+$\nu=\max(|k_x|,|k_y|)/240$. Seven bins in $u=2s\nu$ place the LR Nyquist
+frequency at $u=1$. For each bin we take the range across
+$s\in\{2,3,4\}$, then the median across bins:
+\begin{equation}\label{eq:collapse}
+D_{\rm in}=\operatorname{median}_{b}\left[\max_s R_b(s)-\min_s R_b(s)\right].
+\end{equation}
+The absolute-frequency control fixes bins at the $s=3$ reference,
+$\nu=u/6$. Smaller $D_{\rm in}$ means greater consistency in this
+measurement, not equality of reconstructed functions. F1/G1 use HR256
+and 73 images; L1/L2 use HR240 and 74, with their own pooling conventions.

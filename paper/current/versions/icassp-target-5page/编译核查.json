@@ -1,0 +1,27 @@
+{
+  "stage": "icassp-target-scientific-version-complete",
+  "pdf_sha256": "7e3b85f951aa87ca2a4fd40755349b895449571ba09a2ffad85c44af7c4d01a1",
+  "pages": 5,
+  "body": "1-4",
+  "references": "5 only",
+  "compiler": "research-175/paper-icassp-target-v1 existing pdflatex/bibtex, final2passes",
+  "warnings": 0,
+  "overfull": 0,
+  "underfull": 4,
+  "undefined": 0,
+  "fonts": "13 fonts all embedded; pdffonts server verified",
+  "render": "preview-icassp/final-page-1..5.png 140dpi",
+  "visual_status": "all5 final pages visually reviewed; no clipping/overlap/overflow; body4 and refs5 balanced",
+  "source_hashes": {
+    "main.tex": "90a077e4df2eefc2b7297a51ca0e0a9e5439a8ec08ac53171bb158d2ce7f035c",
+    "sec/icassp.tex": "2a138495856cac535f80823a57ad0504ea7be7aea42d2968e0604bac3e87c81f",
+    "refs.bib": "fb5eed5b1a3eff694547b9fcfbecfae5419f59af0379433cc193c7f24fd03f7b",
+    "spconf.sty": "dc5d632639040cb183f2ab62780f314845aa021be73048c8a9ec9c2072d64a86",
+    "IEEEbib.bst": "7e6ca0c8b72158d504a12bb091f817c07032a021ba41ca783cca4c2dd80d570b",
+    "figures/icassp-recovery.pdf": "290c0fddd7b584ec2a532dbd87bcb378eb22280e0e9afe29b94f2a7b0ed274d0",
+    "main.pdf": "7e3b85f951aa87ca2a4fd40755349b895449571ba09a2ffad85c44af7c4d01a1"
+  },
+  "scientific_review": "two independent agent reviews; G1 .5 vs L2 .7 thresholds, L2 within-protocol comparator, single-seed frozen probes and prior-art novelty limits corrected",
+  "robustness": "../补证-20261011/icassp-robustness-v1/audit.json; 7551checks, 6.56sec analysis+audit CPU1 GPU0 inference0 training0; root verified87input/source/results hashes and648rows",
+  "submission_state": "not submitted; authors deferred by user; target contribution not author/format gating; 2027 closed, future venue rules to recheck"
+}

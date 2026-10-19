@@ -1,0 +1,78 @@
+{
+  "id": "ranking-ambiguity-sampling-v2-20261008",
+  "stage": "prospective synthetic screening of sampling structure and finite-observation candidate ranking; not a new method or image benchmark",
+  "signal": "8-site real periodic zero-mean Gaussian field, DC=0, four nonnegative spectral parameters. Cosine/sine pair shares variance at k=1,2,3; Nyquist k=4 has one coefficient. Known total latent trace=8, an explicit synthetic family restriction.",
+  "phase_sets": [
+    [
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      3
+    ]
+  ],
+  "observation": "Point decimation by4: each phase observes sites phase and phase+4; duplicate frames have independent noise. Different phase sets differ in acquisition cost; only [0,0] versus [0,1] is measurement-count matched.",
+  "noise_variance": [
+    0.01,
+    0.1
+  ],
+  "candidate_spectra": [
+    "power2",
+    "power3",
+    "power2_swap_k1_k3"
+  ],
+  "truth_spectra": [
+    "power2",
+    "power3",
+    "power2_swap_k1_k3",
+    "middle_spike"
+  ],
+  "normalization": "All spectral shapes scaled so 2*p1+2*p2+2*p3+p4=8; middle_spike raw=[0.1,3,0.1,0.8].",
+  "observational_replicates_N": [
+    32,
+    128,
+    512
+  ],
+  "mc_repeats": 20,
+  "seed": 202610081,
+  "cohort_size": 1920,
+  "confidence_set": "Zero mean is known. For e_i and e_i+/-e_j (m^2 directions), construct exact chi-square variance CIs using N degrees of freedom and Bonferroni alpha/m^2, alpha=.05 per case. Subtract known physical noise variance*direction_norm_squared. Intersect with p>=0 and known trace=8. Candidates fixed independently of these observations.",
+  "risk_interval": "Full-target population squared risk of fixed linear GP candidate is affine in p. LP computes all three pairwise gap intervals, retains primal spectral witnesses and sign-clipped dual bounds with stationarity error bounded over p in [0,8], outward floating buffer1e-8*max(1,objective magnitude), primal residual<=1e-7, expanded duality gap<=1e-6. Certify epsilon-optimal candidate only if every upper gap<=epsilon=1e-6; false certificate if oracle regret>epsilon+1e-10 scoring tolerance. Float checks are numerical diagnostics, not an interval-arithmetic machine proof. Otherwise abstain; empty and numerical failures separate.",
+  "scope_of_guarantee": "Confidence set covers the true synthetic covariance family with probability>=.95 per case. All fixed-arm gap intervals share this event. Certified selection concerns expected risk on a NEW independent realization; not adaptive loss on the covariance-estimation observations, not single-image conditional risk, not unknown or nonstationary natural-image PSD.",
+  "comparators": "Fixed power2 and empirical Bayes marginal likelihood over three fixed candidates. These are diagnostic baselines here; no claim of matching the full real-image CV/GSURE benchmark. Population risk on the known true covariance scored only after all target selections are frozen.",
+  "exact_diagnostics": "After selection freeze, compute exact observation covariance risk-gap intervals and covariance-map ranks. Rank expected2 for phases[0]/[0,0],4 for[0,1]/all. Also evaluate projected-target risk to distinguish visible risk from full-target risk. Spectral-nullspace directions alone need not reverse candidate ranks.",
+  "boundary": "prepare writes observed samples and opaque case metadata separately from truth. select reads observed samples/protocol/fixed candidates only. Whole1920 selection records SHA-frozen before score reads truth. Exact covariance diagnostics are separate truth-based analyses, never used to tune this cohort.",
+  "metrics": [
+    "confidence-set truth coverage",
+    "false certificate count and rate",
+    "certification and abstention rates",
+    "population oracle regret",
+    "risk-gap interval widths",
+    "rank and exact ambiguity",
+    "LP wall time and calls",
+    "complete and failed case counts"
+  ],
+  "claim_gates": "Complete cohort and all LP witness residuals<=1e-7 before any numerical reliability statement. Empirical confidence coverage does not prove the theoretical family assumptions, and few/no false certificates does not certify a population error rate. Compare repeat/diverse phase effects descriptively with all counterexamples; no outcome-dependent case removal, no A-conference readiness claim.",
+  "resources": {
+    "cpu_threads": 1,
+    "nice": 10,
+    "absolute_wall_seconds": 600,
+    "resume_extends_deadline": false,
+    "gpu_processes": 0,
+    "paid_services": 0
+  },
+  "failure": "Absolute budget exhaustion saves incomplete plus append-only selection/score/exact journals, without shortening cohort. Preserve numerical/coverage/certificate failures. Changed source requires new version/root; no silent continuation into frozen root.",
+  "next_stage": "Use exact structural and finite-sample findings to decide whether there is a task-specific contribution beyond classical GSURE/partial-ID/robust design. Before GPU/image work freeze a new protocol and cohort, include calibrated-static/CV/applicable GSURE and marginal likelihood baselines, full costs and actual INR transfer. G2 target0813-0824 remains evaluation history.",
+  "novelty": "Unestablished; general interval and abstention framework explicitly overlaps Montiel Olea/Qiu/Stoye arxiv2312.17623v3. Sampling-specific algebra is a candidate bridge, not automatically novel.",
+  "revision": "Pre-launch independent review found incomplete dual/cost/failure records. Preformal v1 source/protocol/hashes retained under versions/preformal-v1; no formal v1 cohort launched. v2 adds conservative dual bound checks, consistent epsilon diagnosis, append-only partial journals, separate numerical/empty gates and LP phase costs. Grid/model unchanged; new run root formal-v2 required."
+}

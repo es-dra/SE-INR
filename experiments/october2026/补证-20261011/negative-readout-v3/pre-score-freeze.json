@@ -1,0 +1,10 @@
+{
+  "source_sha256": "e073961f45bbd6a17ec39d1b5d07b6adff5014537baabc8f137f712d91cb0c7e",
+  "protocol_sha256": "b0b1c8927c5c0a4f6d5152dbc4655aa950b87b0e2bbfa8eaf88f8cd90de88864",
+  "pre_score_epoch": 1791710556.695682,
+  "review": "../negative-readout-v2/review.json",
+  "version_delta": "only CPU1 instead4 and faulthandler after preserved CPU SIG11, identical predictions/math. v3 preflight complete before formal launch.",
+  "formal_run": "/workspace/SE-INR/codex-20261011-negative-formal-v3",
+  "absolute_and_phase_budget_seconds": 900,
+  "SR_training": false
+}

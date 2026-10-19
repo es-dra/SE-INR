@@ -1,0 +1,442 @@
+{
+  "frozen_utc": "2026-10-11T14:12:16.145827+00:00",
+  "source_sha256": "45f0bc6db8f4d4faa11a70a45666bc1fe43db02aab1f9f6b13c2bcbac37b8603",
+  "protocol_sha256": "30d38b7186e4c8db9c9f2f09f2913d32f6283f93412154c47db2c10196e61c4d",
+  "inputs": [
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u670d\u52a1\u5668\u7ed3\u679c-20261007/claude-20261005-L12/out/l1_inr_BSD100.json",
+      "sha256": "d7c43408f2671a41f13eca266ad95353c97383fc5195255bc810ae511b61ca25",
+      "bytes": 4748092
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u670d\u52a1\u5668\u7ed3\u679c-20261007/claude-20261005-L12/out/l1_inr_Set14.json",
+      "sha256": "5f9facf74a4d6f1a2a854a3d6a417d90b90457af126720b018abe7abdcada37a",
+      "bytes": 2214846
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u670d\u52a1\u5668\u7ed3\u679c-20261007/claude-20261005-L12/out/l1_inr_Urban100.json",
+      "sha256": "b6b89aaf7c754ba0b1dde84c593ea1529704d387b6492d6a2e5bb205f3c5a7e7",
+      "bytes": 4751614
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/out/seed2/f1s_x2.json",
+      "sha256": "3c01c6436f15fd88fb8b1f8ed93eaeef6dec33d2c050d079ca3fab56be9de91d",
+      "bytes": 44183
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/out/seed2/f1s_x3.json",
+      "sha256": "83ddaaccb3b4b094266746898cca11ab73936f3af7d7fa7d0c94aad5cdafce2a",
+      "bytes": 44376
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/out/seed2/f1s_x4.json",
+      "sha256": "25da38a68de79145126cf066ae45d38b1ee87372ab407a61fcf7afeb9caabddc",
+      "bytes": 44561
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/out/seed3/f1s_x2.json",
+      "sha256": "aa66cc1e2acda90af5a00409e9fdd8eea0cea33f73b65cea6517e1a3cbf349cd",
+      "bytes": 44181
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/out/seed3/f1s_x3.json",
+      "sha256": "18021ce2c1f5f888408a4a81434a1f0493b59bfe0a81675c28da405ff37b4b6b",
+      "bytes": 44339
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/out/seed3/f1s_x4.json",
+      "sha256": "acfea65b3ab6f9ac59cd39dd944b9ff03eee7b71b54ddb35ef591d4cb7cae1eb",
+      "bytes": 44573
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/g1/\u72ec\u7acb\u6838\u67e5.json",
+      "sha256": "2604defbd5bbc1bf4b065efb6d373530afaa2cb5b972e87d1e33e64f74f885f8",
+      "bytes": 305617
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261008/paper-baseline-20261008/e3-audit/record-recalculation.json",
+      "sha256": "6e0f23d76835d3dc27f43857773c4ebe904546bb05469ba057d8b756219002a9",
+      "bytes": 23147
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/calibration_fits.json",
+      "sha256": "9e67a884b33903cae8d524d0f8519712c29156d7d3caf114b19225d388e65c49",
+      "bytes": 4501
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/forecast_cohort.json",
+      "sha256": "23bf225189366b9a25664f73dbba9e7aadbfeee5491e4b0892347919fad57e12",
+      "bytes": 566
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/forecasts.json",
+      "sha256": "e12156df072bc7e16a9ce10ac2182441874d3b48a66505d37b48c74d9531ff15",
+      "bytes": 171109
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0825_x2__lte.npz",
+      "sha256": "4d59269c200efe523cc2d6cf62db3d3945d6047bf636ff14bb48e0b9af7ee8a9",
+      "bytes": 522915
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0825_x2__sc-inr.npz",
+      "sha256": "aea9aa3e5a20e7364b27d3cc794e6ab2c347ef81dde75fd93a2b687934c03d9b",
+      "bytes": 523077
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0825_x4__lte.npz",
+      "sha256": "f2146249476f15c2cc02ebe555785ce4ca00b598f48724d0602cdb9ece3d3e3b",
+      "bytes": 522685
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0825_x4__sc-inr.npz",
+      "sha256": "887231a96086c75dfa387382c38dfa3f42c3778183c19d162d73a89f50f997f1",
+      "bytes": 522701
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0826_x2__lte.npz",
+      "sha256": "cfa4ee26fb2d0687e6c94d871daf038193f8f083dc3ce33a3b46f27089cdafcf",
+      "bytes": 508511
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0826_x2__sc-inr.npz",
+      "sha256": "5bc9e122c8b35e8942f51a86af385586e47a70c79f175bfe0d83f1ec71c08a93",
+      "bytes": 507941
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0826_x4__lte.npz",
+      "sha256": "0a7ddf9dc990c5bfa2a718bca9e822d703964c2547026ac307afa2e417881952",
+      "bytes": 505312
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0826_x4__sc-inr.npz",
+      "sha256": "42adbe6af97f11580feab47b1d2fa7e63d2a33a72c7d6e78a4e8c089ca107929",
+      "bytes": 504520
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0827_x2__lte.npz",
+      "sha256": "951d56604214617469a034431655e78e1f100df3c57e4e07102877635ff15961",
+      "bytes": 498957
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0827_x2__sc-inr.npz",
+      "sha256": "1cead2a9809ffa89483662c440d6c6e951005860870418b4fbb4bc28288cfaa5",
+      "bytes": 499105
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0827_x4__lte.npz",
+      "sha256": "0cb1768ad06833b8da27337cfb9fb6cc04b24a0a3f2198b415c48953bcbef6d6",
+      "bytes": 497867
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0827_x4__sc-inr.npz",
+      "sha256": "65e5d953afb86d09c5d295e3c46467cd905eedde4d19c8768addf04dd4cbadea",
+      "bytes": 497899
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0828_x2__lte.npz",
+      "sha256": "2af34544ae9f1e45c006bd839fe83deb31b12cd5d49b87f7891d2b3c19ec184c",
+      "bytes": 532149
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0828_x2__sc-inr.npz",
+      "sha256": "2fcf9041a724d9ad2a9e1c4fc4b63779044f77c117724269b06db60eeb7971c7",
+      "bytes": 531785
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0828_x4__lte.npz",
+      "sha256": "08afa502eacc0802373c6176c95fb700f9200015c29d40549bfd053b1b86f1d5",
+      "bytes": 526244
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0828_x4__sc-inr.npz",
+      "sha256": "88c5e8b8a7d647e5386056490fa2c3c3d872f0a90dc58b02356866adeceb708b",
+      "bytes": 526181
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0829_x2__lte.npz",
+      "sha256": "7ccea11e6eee0ca257942b3226a6b541a347cdd45051540bd453308ed01b88a1",
+      "bytes": 523094
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0829_x2__sc-inr.npz",
+      "sha256": "969ef526f6c050c52d8950998d009fdd1dcc8d6696b798fe2012904d2bd2a3c2",
+      "bytes": 523117
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0829_x4__lte.npz",
+      "sha256": "9ac2414b9872457f9a065d46808230f0452594cfcec497c850b400881cf8f85b",
+      "bytes": 520494
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0829_x4__sc-inr.npz",
+      "sha256": "5f7b53e7062c910239afdba4e10ad2efe7b41b4ec5d58ecaea66cc6d134b88cf",
+      "bytes": 520472
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0830_x2__lte.npz",
+      "sha256": "966cf61a315d7d330b257328b365749c2cda223368dcb4ccf46296e3f21f9748",
+      "bytes": 523247
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0830_x2__sc-inr.npz",
+      "sha256": "7d249ed9a9bc28f129ad515de793997daab3466bdfec12a56915e784c1608266",
+      "bytes": 523041
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0830_x4__lte.npz",
+      "sha256": "1a9c4f4b69e37ff5e9183fa64f67b685c47c4cfe073f050019bd7fb495ee8957",
+      "bytes": 521374
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0830_x4__sc-inr.npz",
+      "sha256": "77c67ddc99ce865906e190e01f4cb9dfd9f70576e9da4f7763c99e1f8863387f",
+      "bytes": 521420
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0831_x2__lte.npz",
+      "sha256": "a4c205a8f67c728061bb50eb7292b41b7d624852082d75503578c339afce4f29",
+      "bytes": 508876
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0831_x2__sc-inr.npz",
+      "sha256": "d954070288e427e04e50809eec08009700dc2f7a134ee31f496910d401101678",
+      "bytes": 508822
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0831_x4__lte.npz",
+      "sha256": "ca64ea29eeac43a5f19d515c41be457b13cc2dfb2028da2d5baecbe08ea93671",
+      "bytes": 508136
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0831_x4__sc-inr.npz",
+      "sha256": "901b7285a5ba4c28def48ff796a5ee6a649133778942c1566540741ccac8e781",
+      "bytes": 507823
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0832_x2__lte.npz",
+      "sha256": "635521f508ff62afdf97b2dc20dffc6972bee68a7318895478a3c0b602776de5",
+      "bytes": 518615
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0832_x2__sc-inr.npz",
+      "sha256": "7c13a21f61d639f52ec9ad63c6d6e345e44dc99c012d95bda15484aa4f40c7ba",
+      "bytes": 518638
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0832_x4__lte.npz",
+      "sha256": "41ab910e8e513ae01a4d3a20a4d93dd1f63edac9d90ad7333dd895507070a685",
+      "bytes": 518263
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0832_x4__sc-inr.npz",
+      "sha256": "52baa1e2b55ea8542c5f37e124b54abd423b328e75a7101cf1c33d544b069100",
+      "bytes": 517973
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0833_x2__lte.npz",
+      "sha256": "43b19507fe82bf0eae64e94f28bbdd2f98a26e11531718996c1295b9e99503a1",
+      "bytes": 476163
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0833_x2__sc-inr.npz",
+      "sha256": "673c005b0b031c5332f0a61bf93b10e020efd4278df7e7829b50143033a2a122",
+      "bytes": 476134
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0833_x4__lte.npz",
+      "sha256": "73e8bc74a0c67617d5f641f8d734b89bf6fd67fadc12ad90396dff0182055ed8",
+      "bytes": 471126
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0833_x4__sc-inr.npz",
+      "sha256": "89229c124463b34eeaac0430b7b9cea01921a2c80bb792b2a865072b5f167525",
+      "bytes": 470879
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0834_x2__lte.npz",
+      "sha256": "b1070d3a2402b18a81086e6c9a9e3d670994d3a1176a59c47658cb489b91e342",
+      "bytes": 513421
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0834_x2__sc-inr.npz",
+      "sha256": "1862cf558ead05ad9309521866e82db4e0ef16a6b438164c86880e66bd202835",
+      "bytes": 513488
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0834_x4__lte.npz",
+      "sha256": "8beabde4d85193ddc51877abe5665d827c0cf5e26249196914058449b2923dc8",
+      "bytes": 512564
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0834_x4__sc-inr.npz",
+      "sha256": "7b21282d423c364882f1d6f8f9c10d39cccdae02001db98093fb2eeba81e1a94",
+      "bytes": 512511
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0835_x2__lte.npz",
+      "sha256": "0b83b597e3239e7ae16acf99fd01b30e713c50dbedd49a1dd3359b0d2e5bdc53",
+      "bytes": 515193
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0835_x2__sc-inr.npz",
+      "sha256": "b32efb1edf0fe87d8d38da46d0ea658405331778d623896fe56ab78d01a4c3cd",
+      "bytes": 515251
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0835_x4__lte.npz",
+      "sha256": "9eec9eeb4a4afabf9bd77455e5fc684e254f5ec1acd50fab770ddee050abbe1b",
+      "bytes": 514422
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0835_x4__sc-inr.npz",
+      "sha256": "6b59dd72cc2c062a018ebb50a3d3ce42b9e1d1793af084081c9b4f9c41545bc2",
+      "bytes": 514327
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0836_x2__lte.npz",
+      "sha256": "c4fe42703df738748d8836cbb60646131856d26e082fc198c76fc138771de192",
+      "bytes": 520428
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0836_x2__sc-inr.npz",
+      "sha256": "cc9f4f46a208cd10ba6716a2b001ebac8d6aa3feadf828e5ab13d5ae6111eead",
+      "bytes": 520235
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0836_x4__lte.npz",
+      "sha256": "5db43a49278bcca1c32c10ce69360c4794c7e229b45044b63141c435c8e1521d",
+      "bytes": 518698
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/predictions/test_0836_x4__sc-inr.npz",
+      "sha256": "f44528efd6ef600b3f0bae66c96b60ecf55de5e50c95074cbcd7ba2cb220a097",
+      "bytes": 518436
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/test_scores.json",
+      "sha256": "47c84404f76cdda29ddf17ae3f2e6e0ae5887bc578841394c41da5388a046fe6",
+      "bytes": 193448
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0825_x2.npy",
+      "sha256": "4d9837c79c79a799952bab2321cf17bfd93dfa0fde77e01575e7d94f6f821c63",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0825_x4.npy",
+      "sha256": "4d9837c79c79a799952bab2321cf17bfd93dfa0fde77e01575e7d94f6f821c63",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0826_x2.npy",
+      "sha256": "eb9c9d20e7508ab89f964c33b24a897308fd2192ac04fa3cb927a7793bd29726",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0826_x4.npy",
+      "sha256": "eb9c9d20e7508ab89f964c33b24a897308fd2192ac04fa3cb927a7793bd29726",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0827_x2.npy",
+      "sha256": "4ad42e984898b6c18b5a2ac05baade04789de1f570865bcf94220e965d14f183",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0827_x4.npy",
+      "sha256": "4ad42e984898b6c18b5a2ac05baade04789de1f570865bcf94220e965d14f183",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0828_x2.npy",
+      "sha256": "df48e54d19221bdbbcf76c3c3e8dce9ab2a12ffb570e800a5bb1d08c79a49a79",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0828_x4.npy",
+      "sha256": "df48e54d19221bdbbcf76c3c3e8dce9ab2a12ffb570e800a5bb1d08c79a49a79",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0829_x2.npy",
+      "sha256": "519ac50efb6600ffcf39c1a797f5fec4a588094b433677efbe6292ff877fd90a",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0829_x4.npy",
+      "sha256": "519ac50efb6600ffcf39c1a797f5fec4a588094b433677efbe6292ff877fd90a",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0830_x2.npy",
+      "sha256": "b0d765691de12b495c5950b58c7804d7fbefa6e0f6a72457d34c8d6386b2ef99",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0830_x4.npy",
+      "sha256": "b0d765691de12b495c5950b58c7804d7fbefa6e0f6a72457d34c8d6386b2ef99",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0831_x2.npy",
+      "sha256": "342c7e4a0d741b4beedc0300d843753f233ad299d00f9965bc79d16eb56cadc8",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0831_x4.npy",
+      "sha256": "342c7e4a0d741b4beedc0300d843753f233ad299d00f9965bc79d16eb56cadc8",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0832_x2.npy",
+      "sha256": "f9b71a5227a0f968e0f3b73f47794addf3a7a16907ae62457071ea175cde99af",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0832_x4.npy",
+      "sha256": "f9b71a5227a0f968e0f3b73f47794addf3a7a16907ae62457071ea175cde99af",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0833_x2.npy",
+      "sha256": "2d3aaa0b5d48617318a1e970a1fda34ec86d2fc7cc790ac2967b78a0f86f7a5a",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0833_x4.npy",
+      "sha256": "2d3aaa0b5d48617318a1e970a1fda34ec86d2fc7cc790ac2967b78a0f86f7a5a",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0834_x2.npy",
+      "sha256": "b6325332faac5b99c6730ec97894bb67e0f788e4482427edb14840479c9cf200",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0834_x4.npy",
+      "sha256": "b6325332faac5b99c6730ec97894bb67e0f788e4482427edb14840479c9cf200",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0835_x2.npy",
+      "sha256": "040b7666eb11f134b7367cd21a4cac624fcdef4ae7b934751f2c476d9c8d7574",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0835_x4.npy",
+      "sha256": "040b7666eb11f134b7367cd21a4cac624fcdef4ae7b934751f2c476d9c8d7574",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0836_x2.npy",
+      "sha256": "15d68b3f8038e1f473e260cbb768b6f5f73ea33e95d50270792e5ac49979814a",
+      "bytes": 196736
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/\u8bba\u6587\u5de5\u4f5c/\u9891\u8c31\u81ea\u9002\u5e94\u8bba\u6587/\u8865\u8bc1-20261011/negative-collected/codex-20261011-negative-formal-v3/truth/test_0836_x4.npy",
+      "sha256": "15d68b3f8038e1f473e260cbb768b6f5f73ea33e95d50270792e5ac49979814a",
+      "bytes": 196736
+    }
+  ]
+}

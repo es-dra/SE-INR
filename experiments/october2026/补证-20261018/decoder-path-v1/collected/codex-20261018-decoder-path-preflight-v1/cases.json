@@ -1,0 +1,47 @@
+[
+  {
+    "id": "preflight_p0_s0_e0",
+    "family": "preflight_p0_s0",
+    "template": "preflight",
+    "phase": 0,
+    "shift": 0,
+    "eta": 0,
+    "effective_eta": 0,
+    "observation": "o0000",
+    "observation_array_sha256": "f91814155f984c5464b9d57b4e620cb15f6fcef941d8b8c48a345ce0120fc380",
+    "input_mean": 0.4999999990686774,
+    "input_variance": 0.002371240565832043,
+    "input_periodic_gradient": 0.0018492653034627438,
+    "high_path_energy": 3.1929398167532035e-08
+  },
+  {
+    "id": "preflight_p0_s0_e0.5",
+    "family": "preflight_p0_s0",
+    "template": "preflight",
+    "phase": 0,
+    "shift": 0,
+    "eta": 0.5,
+    "effective_eta": 0.5,
+    "observation": "o0001",
+    "observation_array_sha256": "a81cf5bc8081ffd30916b28ced80c7f2fced246d01fdb247e1151ad2d1f0a011",
+    "input_mean": 0.5000000013969839,
+    "input_variance": 0.002371249031025131,
+    "input_periodic_gradient": 0.0018492838134989142,
+    "high_path_energy": 3.1929398167532035e-08
+  },
+  {
+    "id": "preflight_p0_s0_e1",
+    "family": "preflight_p0_s0",
+    "template": "preflight",
+    "phase": 0,
+    "shift": 0,
+    "eta": 1,
+    "effective_eta": 1,
+    "observation": "o0002",
+    "observation_array_sha256": "6f6b37ae10b3985a81b47604b18e5b17c1fbff2eb7a26f33b4317e1f4078ea47",
+    "input_mean": 0.5,
+    "input_variance": 0.0023712729419534673,
+    "input_periodic_gradient": 0.0018493380630388856,
+    "high_path_energy": 3.1929398167532035e-08
+  }
+]

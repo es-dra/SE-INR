@@ -1,0 +1,33 @@
+{
+  "stage": "independent post-run CPU LP audit; frozen formal cohort unchanged",
+  "wall_budget_seconds": 120,
+  "elapsed_seconds": 12.465002893994097,
+  "complete": true,
+  "threads": 1,
+  "gpu_used": false,
+  "stats": {
+    "exact": {
+      "planned_endpoints": 384,
+      "checked_endpoints": 384,
+      "solver_failures": 0,
+      "max_lower_violation": 0.0,
+      "max_upper_violation": 0.0,
+      "violations_over_1e_7": 0,
+      "max_primal_residual": 4.000035858098272e-10,
+      "examples": [],
+      "not_checked_endpoints": 0
+    },
+    "selection": {
+      "planned_endpoints": 11322,
+      "checked_endpoints": 11322,
+      "solver_failures": 0,
+      "max_lower_violation": 0.0,
+      "max_upper_violation": 0.0,
+      "violations_over_1e_7": 0,
+      "max_primal_residual": 1.0658141036401503e-14,
+      "examples": [],
+      "not_checked_endpoints": 0
+    }
+  },
+  "limits": "Independent floating LP solutions check conservative direction numerically; original dual multipliers absent and no interval arithmetic proof."
+}

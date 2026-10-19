@@ -1,0 +1,168 @@
+{
+  "started_unix": 1791394267.507409,
+  "gpu_phase_seconds": 500.0976611719525,
+  "invocations": [
+    {
+      "phase": "calibrate",
+      "image": "0801",
+      "noise": 0.01,
+      "started_unix": 1791394267.5089033,
+      "ended_unix": 1791394269.566927,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "prepare",
+      "image": "0801",
+      "noise": 0.005,
+      "started_unix": 1791394271.3091311,
+      "ended_unix": 1791394271.5376132,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "select",
+      "image": "0801",
+      "noise": 0.005,
+      "started_unix": 1791394273.2853494,
+      "ended_unix": 1791394449.3579857,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "prepare",
+      "image": "0801",
+      "noise": 0.01,
+      "started_unix": 1791394451.2166233,
+      "ended_unix": 1791394451.4758096,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "select",
+      "image": "0801",
+      "noise": 0.01,
+      "started_unix": 1791394453.185863,
+      "ended_unix": 1791394516.8737786,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "prepare",
+      "image": "0801",
+      "noise": 0.02,
+      "started_unix": 1791394518.6880527,
+      "ended_unix": 1791394518.910929,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "select",
+      "image": "0801",
+      "noise": 0.02,
+      "started_unix": 1791394520.6117773,
+      "ended_unix": 1791394560.9455004,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "prepare",
+      "image": "0802",
+      "noise": 0.005,
+      "started_unix": 1791394562.7466137,
+      "ended_unix": 1791394562.9539325,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "select",
+      "image": "0802",
+      "noise": 0.005,
+      "started_unix": 1791394564.695492,
+      "ended_unix": 1791394634.3495753,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "prepare",
+      "image": "0802",
+      "noise": 0.01,
+      "started_unix": 1791394636.2185826,
+      "ended_unix": 1791394636.431264,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "select",
+      "image": "0802",
+      "noise": 0.01,
+      "started_unix": 1791394638.233217,
+      "ended_unix": 1791394661.106917,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "prepare",
+      "image": "0802",
+      "noise": 0.02,
+      "started_unix": 1791394662.9431539,
+      "ended_unix": 1791394663.136723,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "select",
+      "image": "0802",
+      "noise": 0.02,
+      "started_unix": 1791394664.857602,
+      "ended_unix": 1791394750.06601,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "freeze-selections",
+      "image": "0801",
+      "noise": 0.01,
+      "started_unix": 1791394751.9435577,
+      "ended_unix": 1791394751.9628112,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "score",
+      "image": "0801",
+      "noise": 0.005,
+      "started_unix": 1791394753.7339947,
+      "ended_unix": 1791394762.9865594,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "score",
+      "image": "0801",
+      "noise": 0.01,
+      "started_unix": 1791394764.81405,
+      "ended_unix": 1791394770.6661208,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "score",
+      "image": "0801",
+      "noise": 0.02,
+      "started_unix": 1791394772.496707,
+      "ended_unix": 1791394776.3960536,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "score",
+      "image": "0802",
+      "noise": 0.005,
+      "started_unix": 1791394778.298611,
+      "ended_unix": 1791394787.6838815,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "score",
+      "image": "0802",
+      "noise": 0.01,
+      "started_unix": 1791394789.5201077,
+      "ended_unix": 1791394795.5988889,
+      "device": "cuda:0"
+    },
+    {
+      "phase": "score",
+      "image": "0802",
+      "noise": 0.02,
+      "started_unix": 1791394797.4542344,
+      "ended_unix": 1791394801.6099126,
+      "device": "cuda:0"
+    }
+  ],
+  "budget_hours": 8,
+  "last_updated_unix": 1791394801.6099236
+}

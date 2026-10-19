@@ -1,0 +1,1658 @@
+[
+  {
+    "id": "0801_ph00_sigma3_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.003079266397632944,
+          "psnr": 25.115527372035725
+        },
+        "clamped": {
+          "mse": 0.0030550661414073736,
+          "psnr": 25.149793829542247
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0028788454088014884,
+          "psnr": 25.407816556870646
+        },
+        "clamped": {
+          "mse": 0.002854949959668071,
+          "psnr": 25.444014994778478
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.0030599710982114232,
+        "expected_noise_mse": 4.3299419923020333e-05,
+        "expected_deterministic_raw_mse": 0.0031032705181344438,
+        "realized_noise_mse": 4.483253020738079e-05,
+        "realized_bias_noise_cross": -2.5537230785820735e-05,
+        "realized_decomposition_mse": 0.0030792663976329836
+      },
+      "shave4": {
+        "bias_squared_mse": 0.002850566156606773,
+        "expected_noise_mse": 4.241909155714386e-05,
+        "expected_deterministic_raw_mse": 0.0028929852481639168,
+        "realized_noise_mse": 4.309527782781276e-05,
+        "realized_bias_noise_cross": -1.481602563308752e-05,
+        "realized_decomposition_mse": 0.002878845408801498
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.004023080151165189,
+          "psnr": 23.95441314964904
+        },
+        "clamped": {
+          "mse": 0.004023080151165189,
+          "psnr": 23.95441314964904
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0026226934959187533,
+          "psnr": 25.812524607665154
+        },
+        "clamped": {
+          "mse": 0.0026226934959187533,
+          "psnr": 25.812524607665154
+        }
+      }
+    },
+    "score_seconds": 0.06669557301211171,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph00_sigma3_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.02781371683265711,
+          "psnr": 15.55740971148315
+        },
+        "clamped": {
+          "mse": 0.01802833693192007,
+          "psnr": 17.440443339876644
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.01059930351591586,
+          "psnr": 19.74722671445821
+        },
+        "clamped": {
+          "mse": 0.009571964792391278,
+          "psnr": 20.189989074779806
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.029493294881405414,
+        "expected_noise_mse": 0.0004944727661392017,
+        "expected_deterministic_raw_mse": 0.029987767647544614,
+        "realized_noise_mse": 0.0004992442244908117,
+        "realized_bias_noise_cross": -0.0021788222732381816,
+        "realized_decomposition_mse": 0.027813716832658042
+      },
+      "shave4": {
+        "bias_squared_mse": 0.01067129028130674,
+        "expected_noise_mse": 0.0002823518314854434,
+        "expected_deterministic_raw_mse": 0.010953642112792183,
+        "realized_noise_mse": 0.0002641118410235636,
+        "realized_bias_noise_cross": -0.00033609860641503056,
+        "realized_decomposition_mse": 0.010599303515915273
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.004023080151165189,
+          "psnr": 23.95441314964904
+        },
+        "clamped": {
+          "mse": 0.004023080151165189,
+          "psnr": 23.95441314964904
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0026226934959187533,
+          "psnr": 25.812524607665154
+        },
+        "clamped": {
+          "mse": 0.0026226934959187533,
+          "psnr": 25.812524607665154
+        }
+      }
+    },
+    "score_seconds": 0.06493687300826423,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph00_sigma10_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.04006459674602572,
+          "psnr": 13.972392241161867
+        },
+        "clamped": {
+          "mse": 0.04006459674602572,
+          "psnr": 13.972392241161867
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.038823578320178506,
+          "psnr": 14.109044387289893
+        },
+        "clamped": {
+          "mse": 0.038823578320178506,
+          "psnr": 14.109044387289893
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.04006027173516283,
+        "expected_noise_mse": 9.903602232263985e-06,
+        "expected_deterministic_raw_mse": 0.04007017533739509,
+        "realized_noise_mse": 1.0394650082680667e-05,
+        "realized_bias_noise_cross": -6.069639219739321e-06,
+        "realized_decomposition_mse": 0.04006459674602577
+      },
+      "shave4": {
+        "bias_squared_mse": 0.03883550704128328,
+        "expected_noise_mse": 1.0185604388558898e-05,
+        "expected_deterministic_raw_mse": 0.03884569264567184,
+        "realized_noise_mse": 1.0506153507372135e-05,
+        "realized_bias_noise_cross": -2.2434874612068156e-05,
+        "realized_decomposition_mse": 0.03882357832017859
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.03854331467290633,
+          "psnr": 14.140509393367326
+        },
+        "clamped": {
+          "mse": 0.03854331467290633,
+          "psnr": 14.140509393367326
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.030577391291871918,
+          "psnr": 15.14599569148428
+        },
+        "clamped": {
+          "mse": 0.030577391291871918,
+          "psnr": 15.14599569148428
+        }
+      }
+    },
+    "score_seconds": 0.05795655000838451,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph00_sigma10_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.15294951712751242,
+          "psnr": 8.1545188977566
+        },
+        "clamped": {
+          "mse": 0.1400356559229551,
+          "psnr": 8.537613700431926
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.16043062790833856,
+          "psnr": 7.9471271671394295
+        },
+        "clamped": {
+          "mse": 0.14771051576089178,
+          "psnr": 8.305885854303627
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.15307208909604322,
+        "expected_noise_mse": 6.343288360105085e-05,
+        "expected_deterministic_raw_mse": 0.15313552197964428,
+        "realized_noise_mse": 7.990114462287067e-05,
+        "realized_bias_noise_cross": -0.0002024731131537996,
+        "realized_decomposition_mse": 0.15294951712751229
+      },
+      "shave4": {
+        "bias_squared_mse": 0.16044896002149042,
+        "expected_noise_mse": 6.296317661001955e-05,
+        "expected_deterministic_raw_mse": 0.16051192319810045,
+        "realized_noise_mse": 7.861482985479971e-05,
+        "realized_bias_noise_cross": -9.694694300690264e-05,
+        "realized_decomposition_mse": 0.1604306279083383
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.03854331467290633,
+          "psnr": 14.140509393367326
+        },
+        "clamped": {
+          "mse": 0.03854331467290633,
+          "psnr": 14.140509393367326
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.030577391291871918,
+          "psnr": 15.14599569148428
+        },
+        "clamped": {
+          "mse": 0.030577391291871918,
+          "psnr": 15.14599569148428
+        }
+      }
+    },
+    "score_seconds": 0.06625844797235914,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph01_sigma3_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0029667812638199836,
+          "psnr": 25.277144723612295
+        },
+        "clamped": {
+          "mse": 0.0029127914377775773,
+          "psnr": 25.356906106915996
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0022178052809452963,
+          "psnr": 26.54076586736548
+        },
+        "clamped": {
+          "mse": 0.0021961116263151978,
+          "psnr": 26.583455888755697
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.002727868216079282,
+        "expected_noise_mse": 0.00024329074417587133,
+        "expected_deterministic_raw_mse": 0.0029711589602551534,
+        "realized_noise_mse": 0.0002768487076718681,
+        "realized_bias_noise_cross": -3.7935659931138045e-05,
+        "realized_decomposition_mse": 0.002966781263820012
+      },
+      "shave4": {
+        "bias_squared_mse": 0.002096744222768785,
+        "expected_noise_mse": 0.00012454479202696225,
+        "expected_deterministic_raw_mse": 0.002221289014795747,
+        "realized_noise_mse": 0.00011803204855633538,
+        "realized_bias_noise_cross": 3.029009620146194e-06,
+        "realized_decomposition_mse": 0.0022178052809452664
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.00321368093947834,
+          "psnr": 24.92997243036982
+        },
+        "clamped": {
+          "mse": 0.003213461052058931,
+          "psnr": 24.930269594779915
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.001976528424239865,
+          "psnr": 27.040969357344874
+        },
+        "clamped": {
+          "mse": 0.001976241224345127,
+          "psnr": 27.041600455743193
+        }
+      }
+    },
+    "score_seconds": 0.07470590798766352,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph01_sigma3_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.022977706956374255,
+          "psnr": 16.38693313588645
+        },
+        "clamped": {
+          "mse": 0.01420437219288972,
+          "psnr": 18.47577956533723
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.009975067716144658,
+          "psnr": 20.010841474058118
+        },
+        "clamped": {
+          "mse": 0.009084541938178484,
+          "psnr": 20.416969658503554
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.024742641940970592,
+        "expected_noise_mse": 0.00043366062666625284,
+        "expected_deterministic_raw_mse": 0.025176302567636845,
+        "realized_noise_mse": 0.00039519014238145115,
+        "realized_bias_noise_cross": -0.002160125126980036,
+        "realized_decomposition_mse": 0.022977706956372006
+      },
+      "shave4": {
+        "bias_squared_mse": 0.010183431397371908,
+        "expected_noise_mse": 0.0002955089095736409,
+        "expected_deterministic_raw_mse": 0.010478940306945548,
+        "realized_noise_mse": 0.00023630065146467962,
+        "realized_bias_noise_cross": -0.00044466433269144557,
+        "realized_decomposition_mse": 0.00997506771614514
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.00321368093947834,
+          "psnr": 24.92997243036982
+        },
+        "clamped": {
+          "mse": 0.003213461052058931,
+          "psnr": 24.930269594779915
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.001976528424239865,
+          "psnr": 27.040969357344874
+        },
+        "clamped": {
+          "mse": 0.001976241224345127,
+          "psnr": 27.041600455743193
+        }
+      }
+    },
+    "score_seconds": 0.07515404300647788,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph01_sigma10_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.03080989337988473,
+          "psnr": 15.113098045914606
+        },
+        "clamped": {
+          "mse": 0.030809813991762053,
+          "psnr": 15.113109236433056
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.029481738634295953,
+          "psnr": 15.304469082954963
+        },
+        "clamped": {
+          "mse": 0.029481634943686736,
+          "psnr": 15.30448435760995
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.030762790860363595,
+        "expected_noise_mse": 4.2077287483403725e-05,
+        "expected_deterministic_raw_mse": 0.030804868147846998,
+        "realized_noise_mse": 4.083637221237178e-05,
+        "realized_bias_noise_cross": 6.2661473087653825e-06,
+        "realized_decomposition_mse": 0.03080989337988473
+      },
+      "shave4": {
+        "bias_squared_mse": 0.029453005161978688,
+        "expected_noise_mse": 4.3307448579982496e-05,
+        "expected_deterministic_raw_mse": 0.02949631261055867,
+        "realized_noise_mse": 4.1551720190124824e-05,
+        "realized_bias_noise_cross": -1.2818247872863644e-05,
+        "realized_decomposition_mse": 0.02948173863429595
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.03259292160133421,
+          "psnr": 14.868767080077795
+        },
+        "clamped": {
+          "mse": 0.032592841752921514,
+          "psnr": 14.868777719739965
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.025221459453425226,
+          "psnr": 15.982297863501582
+        },
+        "clamped": {
+          "mse": 0.02522135516162088,
+          "psnr": 15.9823158217997
+        }
+      }
+    },
+    "score_seconds": 0.06281318800756708,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph01_sigma10_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.6866365193991513,
+          "psnr": 1.6327310194179017
+        },
+        "clamped": {
+          "mse": 0.17355749640884552,
+          "psnr": 7.6055662325627065
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.6879240437730322,
+          "psnr": 1.624595111704477
+        },
+        "clamped": {
+          "mse": 0.17361395684584374,
+          "psnr": 7.604153647730602
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.6721344866043012,
+        "expected_noise_mse": 0.005896844003322176,
+        "expected_deterministic_raw_mse": 0.6780313306076233,
+        "realized_noise_mse": 0.0051382712801989255,
+        "realized_bias_noise_cross": 0.009363761514648933,
+        "realized_decomposition_mse": 0.686636519399149
+      },
+      "shave4": {
+        "bias_squared_mse": 0.6727645510134457,
+        "expected_noise_mse": 0.005744477097259401,
+        "expected_deterministic_raw_mse": 0.6785090281107051,
+        "realized_noise_mse": 0.004936682322837547,
+        "realized_bias_noise_cross": 0.010222810436745926,
+        "realized_decomposition_mse": 0.6879240437730291
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.03259292160133421,
+          "psnr": 14.868767080077795
+        },
+        "clamped": {
+          "mse": 0.032592841752921514,
+          "psnr": 14.868777719739965
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.025221459453425226,
+          "psnr": 15.982297863501582
+        },
+        "clamped": {
+          "mse": 0.02522135516162088,
+          "psnr": 15.9823158217997
+        }
+      }
+    },
+    "score_seconds": 0.07681057299487293,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph02_sigma3_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002135988119656744,
+          "psnr": 26.704011671780634
+        },
+        "clamped": {
+          "mse": 0.0021153029400022435,
+          "psnr": 26.746274269887422
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0018629212021048585,
+          "psnr": 27.29805514515881
+        },
+        "clamped": {
+          "mse": 0.0018422871736257112,
+          "psnr": 27.346426715332818
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.002047851670081516,
+        "expected_noise_mse": 9.74416895049741e-05,
+        "expected_deterministic_raw_mse": 0.0021452933595864903,
+        "realized_noise_mse": 0.00010323059139563488,
+        "realized_bias_noise_cross": -1.509414182033936e-05,
+        "realized_decomposition_mse": 0.0021359881196568115
+      },
+      "shave4": {
+        "bias_squared_mse": 0.0017918271279357449,
+        "expected_noise_mse": 7.53199304976687e-05,
+        "expected_deterministic_raw_mse": 0.0018671470584334135,
+        "realized_noise_mse": 7.415243111478335e-05,
+        "realized_bias_noise_cross": -3.058356945671514e-06,
+        "realized_decomposition_mse": 0.0018629212021048565
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002684331626686286,
+          "psnr": 25.711638317433277
+        },
+        "clamped": {
+          "mse": 0.0026842395205156715,
+          "psnr": 25.711787337351446
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.001708475216626087,
+          "psnr": 27.67391316754361
+        },
+        "clamped": {
+          "mse": 0.001708354914688958,
+          "psnr": 27.674218985892608
+        }
+      }
+    },
+    "score_seconds": 0.07440478401258588,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph02_sigma3_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.021992235259390393,
+          "psnr": 16.57730627324802
+        },
+        "clamped": {
+          "mse": 0.012562448503566232,
+          "psnr": 19.009257055071064
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.008832806272670498,
+          "psnr": 20.53901294711157
+        },
+        "clamped": {
+          "mse": 0.008134681643035048,
+          "psnr": 20.896594388400406
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.024052834645992057,
+        "expected_noise_mse": 0.0004041483511718907,
+        "expected_deterministic_raw_mse": 0.024456982997163947,
+        "realized_noise_mse": 0.00041363144370465166,
+        "realized_bias_noise_cross": -0.0024742308303062326,
+        "realized_decomposition_mse": 0.021992235259390473
+      },
+      "shave4": {
+        "bias_squared_mse": 0.009146688123914193,
+        "expected_noise_mse": 0.00029514341119339746,
+        "expected_deterministic_raw_mse": 0.009441831535107591,
+        "realized_noise_mse": 0.00028205920937924526,
+        "realized_bias_noise_cross": -0.0005959410606221112,
+        "realized_decomposition_mse": 0.008832806272671329
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002684331626686286,
+          "psnr": 25.711638317433277
+        },
+        "clamped": {
+          "mse": 0.0026842395205156715,
+          "psnr": 25.711787337351446
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.001708475216626087,
+          "psnr": 27.67391316754361
+        },
+        "clamped": {
+          "mse": 0.001708354914688958,
+          "psnr": 27.674218985892608
+        }
+      }
+    },
+    "score_seconds": 0.0747668879921548,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph02_sigma10_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.02085248924227351,
+          "psnr": 16.808420941839632
+        },
+        "clamped": {
+          "mse": 0.020852434014985707,
+          "psnr": 16.808432444033844
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.019514550908687717,
+          "psnr": 17.096414387523453
+        },
+        "clamped": {
+          "mse": 0.01951447877508732,
+          "psnr": 17.096430440817564
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.020817552941708214,
+        "expected_noise_mse": 3.565319991839653e-05,
+        "expected_deterministic_raw_mse": 0.020853206141626612,
+        "realized_noise_mse": 3.5702124176207516e-05,
+        "realized_bias_noise_cross": -7.658236109121739e-07,
+        "realized_decomposition_mse": 0.02085248924227351
+      },
+      "shave4": {
+        "bias_squared_mse": 0.019498108962242224,
+        "expected_noise_mse": 3.632365086555707e-05,
+        "expected_deterministic_raw_mse": 0.01953443261310778,
+        "realized_noise_mse": 3.577611880185054e-05,
+        "realized_bias_noise_cross": -1.933417235636089e-05,
+        "realized_decomposition_mse": 0.019514550908687714
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.026533230700155813,
+          "psnr": 15.762098668730308
+        },
+        "clamped": {
+          "mse": 0.026533174955245004,
+          "psnr": 15.76210779303668
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.02026233745234015,
+          "psnr": 16.933104561081358
+        },
+        "clamped": {
+          "mse": 0.020262264642660722,
+          "psnr": 16.93312016683212
+        }
+      }
+    },
+    "score_seconds": 0.06511330598732457,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0801_ph02_sigma10_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 1.9470259930754397,
+          "psnr": -2.8937174945217254
+        },
+        "clamped": {
+          "mse": 0.2050086645286017,
+          "psnr": 6.882277834445398
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 1.9139518785537153,
+          "psnr": -2.8193101434923387
+        },
+        "clamped": {
+          "mse": 0.20149993848966824,
+          "psnr": 6.957250820965777
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 1.9290013331129279,
+        "expected_noise_mse": 0.004938054092945246,
+        "expected_deterministic_raw_mse": 1.9339393872058732,
+        "realized_noise_mse": 0.004179725577732089,
+        "realized_bias_noise_cross": 0.013844934384775668,
+        "realized_decomposition_mse": 1.9470259930754357
+      },
+      "shave4": {
+        "bias_squared_mse": 1.8960292581690026,
+        "expected_noise_mse": 0.0048857043214665585,
+        "expected_deterministic_raw_mse": 1.900914962490469,
+        "realized_noise_mse": 0.004074236435026771,
+        "realized_bias_noise_cross": 0.013848383949680644,
+        "realized_decomposition_mse": 1.91395187855371
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.026533230700155813,
+          "psnr": 15.762098668730308
+        },
+        "clamped": {
+          "mse": 0.026533174955245004,
+          "psnr": 15.76210779303668
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.02026233745234015,
+          "psnr": 16.933104561081358
+        },
+        "clamped": {
+          "mse": 0.020262264642660722,
+          "psnr": 16.93312016683212
+        }
+      }
+    },
+    "score_seconds": 0.07538718599244021,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph00_sigma3_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002244374052044746,
+          "psnr": 26.489047609625768
+        },
+        "clamped": {
+          "mse": 0.00221647058185076,
+          "psnr": 26.543380285084176
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0013788026858818346,
+          "psnr": 28.604978792657406
+        },
+        "clamped": {
+          "mse": 0.001345340374605174,
+          "psnr": 28.71167824128895
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.0021757710994834904,
+        "expected_noise_mse": 4.3299419923020333e-05,
+        "expected_deterministic_raw_mse": 0.002219070519406511,
+        "realized_noise_mse": 4.483252952811051e-05,
+        "realized_bias_noise_cross": 2.3770423033226936e-05,
+        "realized_decomposition_mse": 0.002244374052044828
+      },
+      "shave4": {
+        "bias_squared_mse": 0.001350017462684875,
+        "expected_noise_mse": 4.241909155714386e-05,
+        "expected_deterministic_raw_mse": 0.001392436554242019,
+        "realized_noise_mse": 4.3095277965520135e-05,
+        "realized_bias_noise_cross": -1.4310054768536408e-05,
+        "realized_decomposition_mse": 0.0013788026858818586
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002865524407337691,
+          "psnr": 25.427958880518315
+        },
+        "clamped": {
+          "mse": 0.0028654398915541417,
+          "psnr": 25.42808697323192
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0013661604860550815,
+          "psnr": 28.644982800730965
+        },
+        "clamped": {
+          "mse": 0.0013660500980928946,
+          "psnr": 28.645333731827932
+        }
+      }
+    },
+    "score_seconds": 0.06666612398112193,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph00_sigma3_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.01513394579804228,
+          "psnr": 18.200478257836295
+        },
+        "clamped": {
+          "mse": 0.010791043576497121,
+          "psnr": 19.669365536860848
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0075433315069095746,
+          "psnr": 21.22436805918163
+        },
+        "clamped": {
+          "mse": 0.006293764758891893,
+          "psnr": 22.010894936796184
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.01533681139775668,
+        "expected_noise_mse": 0.0004944727661392017,
+        "expected_deterministic_raw_mse": 0.015831284163895884,
+        "realized_noise_mse": 0.0004992440350729804,
+        "realized_bias_noise_cross": -0.000702109634788122,
+        "realized_decomposition_mse": 0.01513394579804154
+      },
+      "shave4": {
+        "bias_squared_mse": 0.008332109013552946,
+        "expected_noise_mse": 0.0002823518314854434,
+        "expected_deterministic_raw_mse": 0.008614460845038389,
+        "realized_noise_mse": 0.00026411168662659936,
+        "realized_bias_noise_cross": -0.0010528891932699942,
+        "realized_decomposition_mse": 0.00754333150690955
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002865524407337691,
+          "psnr": 25.427958880518315
+        },
+        "clamped": {
+          "mse": 0.0028654398915541417,
+          "psnr": 25.42808697323192
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0013661604860550815,
+          "psnr": 28.644982800730965
+        },
+        "clamped": {
+          "mse": 0.0013660500980928946,
+          "psnr": 28.645333731827932
+        }
+      }
+    },
+    "score_seconds": 0.06508646500878967,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph00_sigma10_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0498386019900812,
+          "psnr": 13.024341484618239
+        },
+        "clamped": {
+          "mse": 0.049838570055086594,
+          "psnr": 13.024344267440354
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.050118406723008116,
+          "psnr": 13.000027437913007
+        },
+        "clamped": {
+          "mse": 0.050118365011994744,
+          "psnr": 13.000031052327682
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.049851109320806775,
+        "expected_noise_mse": 9.903602232263985e-06,
+        "expected_deterministic_raw_mse": 0.04986101292303904,
+        "realized_noise_mse": 1.0394649590998665e-05,
+        "realized_bias_noise_cross": -2.290198031654035e-05,
+        "realized_decomposition_mse": 0.04983860199008123
+      },
+      "shave4": {
+        "bias_squared_mse": 0.05013754971461986,
+        "expected_noise_mse": 1.0185604388558898e-05,
+        "expected_deterministic_raw_mse": 0.050147735319008416,
+        "realized_noise_mse": 1.0506153733189247e-05,
+        "realized_bias_noise_cross": -2.9649145344886873e-05,
+        "realized_decomposition_mse": 0.05011840672300816
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0353361425959331,
+          "psnr": 14.517808611884831
+        },
+        "clamped": {
+          "mse": 0.03533593632367903,
+          "psnr": 14.517833963594612
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.03208353444754907,
+          "psnr": 14.937177941748526
+        },
+        "clamped": {
+          "mse": 0.032083265030727434,
+          "psnr": 14.937214411150123
+        }
+      }
+    },
+    "score_seconds": 0.05741767497966066,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph00_sigma10_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.16482733981285802,
+          "psnr": 7.829707504964371
+        },
+        "clamped": {
+          "mse": 0.15345633935543768,
+          "psnr": 8.14015165946934
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.1583530464183561,
+          "psnr": 8.003735771928897
+        },
+        "clamped": {
+          "mse": 0.14873332104863016,
+          "psnr": 8.275917246426124
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.16480350892323978,
+        "expected_noise_mse": 6.343288360105085e-05,
+        "expected_deterministic_raw_mse": 0.16486694180684083,
+        "realized_noise_mse": 7.990112032202916e-05,
+        "realized_bias_noise_cross": -5.6070230703088086e-05,
+        "realized_decomposition_mse": 0.16482733981285871
+      },
+      "shave4": {
+        "bias_squared_mse": 0.1583526997755204,
+        "expected_noise_mse": 6.296317661001955e-05,
+        "expected_deterministic_raw_mse": 0.15841566295213044,
+        "realized_noise_mse": 7.861480770538046e-05,
+        "realized_bias_noise_cross": -7.826816486942137e-05,
+        "realized_decomposition_mse": 0.15835304641835637
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0353361425959331,
+          "psnr": 14.517808611884831
+        },
+        "clamped": {
+          "mse": 0.03533593632367903,
+          "psnr": 14.517833963594612
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.03208353444754907,
+          "psnr": 14.937177941748526
+        },
+        "clamped": {
+          "mse": 0.032083265030727434,
+          "psnr": 14.937214411150123
+        }
+      }
+    },
+    "score_seconds": 0.06574111300869845,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph01_sigma3_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0022462588919198337,
+          "psnr": 26.48540190704751
+        },
+        "clamped": {
+          "mse": 0.0020767767673580324,
+          "psnr": 26.826101832506044
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0010814417778022935,
+          "psnr": 29.659968569552024
+        },
+        "clamped": {
+          "mse": 0.0010603738487888334,
+          "psnr": 29.74540991488503
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.0017981825098019142,
+        "expected_noise_mse": 0.00024329074417587133,
+        "expected_deterministic_raw_mse": 0.0020414732539777857,
+        "realized_noise_mse": 0.00027684872288787554,
+        "realized_bias_noise_cross": 0.00017122765923003618,
+        "realized_decomposition_mse": 0.0022462588919198263
+      },
+      "shave4": {
+        "bias_squared_mse": 0.0009918552009371042,
+        "expected_noise_mse": 0.00012454479202696225,
+        "expected_deterministic_raw_mse": 0.0011163999929640666,
+        "realized_noise_mse": 0.0001180320536752319,
+        "realized_bias_noise_cross": -2.844547681009896e-05,
+        "realized_decomposition_mse": 0.0010814417778022372
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002721065770736443,
+          "psnr": 25.652609607844845
+        },
+        "clamped": {
+          "mse": 0.002719521775016774,
+          "psnr": 25.655074594699656
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0010136598556666156,
+          "psnr": 29.941077526843856
+        },
+        "clamped": {
+          "mse": 0.0010117149848320945,
+          "psnr": 29.949418174848063
+        }
+      }
+    },
+    "score_seconds": 0.07517246299539693,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph01_sigma3_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.004963429376510526,
+          "psnr": 23.04218153216314
+        },
+        "clamped": {
+          "mse": 0.004552629623199291,
+          "psnr": 23.417376800550073
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.002227704416584375,
+          "psnr": 26.521424341277466
+        },
+        "clamped": {
+          "mse": 0.0021215678515822244,
+          "psnr": 26.733430741511807
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.004629372199936266,
+        "expected_noise_mse": 0.00043366062666625284,
+        "expected_deterministic_raw_mse": 0.0050630328266025185,
+        "realized_noise_mse": 0.00039519007452263434,
+        "realized_bias_noise_cross": -6.113289794861375e-05,
+        "realized_decomposition_mse": 0.004963429376510287
+      },
+      "shave4": {
+        "bias_squared_mse": 0.002254967528094072,
+        "expected_noise_mse": 0.0002955089095736409,
+        "expected_deterministic_raw_mse": 0.002550476437667713,
+        "realized_noise_mse": 0.0002363006214796405,
+        "realized_bias_noise_cross": -0.00026356373298903934,
+        "realized_decomposition_mse": 0.002227704416584673
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.002721065770736443,
+          "psnr": 25.652609607844845
+        },
+        "clamped": {
+          "mse": 0.002719521775016774,
+          "psnr": 25.655074594699656
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0010136598556666156,
+          "psnr": 29.941077526843856
+        },
+        "clamped": {
+          "mse": 0.0010117149848320945,
+          "psnr": 29.949418174848063
+        }
+      }
+    },
+    "score_seconds": 0.07484384899726138,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph01_sigma10_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.03855192454501808,
+          "psnr": 14.139539367201897
+        },
+        "clamped": {
+          "mse": 0.038551738158878045,
+          "psnr": 14.139560363992265
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.038657698753475384,
+          "psnr": 14.127640025685535
+        },
+        "clamped": {
+          "mse": 0.03865746122503221,
+          "psnr": 14.127666710566531
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.03855368565640901,
+        "expected_noise_mse": 4.2077287483403725e-05,
+        "expected_deterministic_raw_mse": 0.038595762943892414,
+        "realized_noise_mse": 4.08363708356579e-05,
+        "realized_bias_noise_cross": -4.25974822265894e-05,
+        "realized_decomposition_mse": 0.038551924545018074
+      },
+      "shave4": {
+        "bias_squared_mse": 0.03864809589422789,
+        "expected_noise_mse": 4.3307448579982496e-05,
+        "expected_deterministic_raw_mse": 0.03869140334280787,
+        "realized_noise_mse": 4.155171946130179e-05,
+        "realized_bias_noise_cross": -3.194886021379796e-05,
+        "realized_decomposition_mse": 0.03865769875347539
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.030085056692704837,
+          "psnr": 15.216491657809119
+        },
+        "clamped": {
+          "mse": 0.030084579264683334,
+          "psnr": 15.216560577739228
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.027002944581975167,
+          "psnr": 15.68588874878958
+        },
+        "clamped": {
+          "mse": 0.027002500320568387,
+          "psnr": 15.685960200946985
+        }
+      }
+    },
+    "score_seconds": 0.06296847001067363,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph01_sigma10_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.9700241975499394,
+          "psnr": 0.1321743199010589
+        },
+        "clamped": {
+          "mse": 0.19471197921711716,
+          "psnr": 7.106073286656287
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.8842725605555228,
+          "psnr": 0.5341385116287625
+        },
+        "clamped": {
+          "mse": 0.18394716260726443,
+          "psnr": 7.353069067918749
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.9504351041458019,
+        "expected_noise_mse": 0.005896844003322176,
+        "expected_deterministic_raw_mse": 0.956331948149124,
+        "realized_noise_mse": 0.005138270410873603,
+        "realized_bias_noise_cross": 0.01445082299325877,
+        "realized_decomposition_mse": 0.9700241975499342
+      },
+      "shave4": {
+        "bias_squared_mse": 0.8663979771990683,
+        "expected_noise_mse": 0.005744477097259401,
+        "expected_deterministic_raw_mse": 0.8721424542963278,
+        "realized_noise_mse": 0.0049366815607600895,
+        "realized_bias_noise_cross": 0.0129379017956895,
+        "realized_decomposition_mse": 0.884272560555518
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.030085056692704837,
+          "psnr": 15.216491657809119
+        },
+        "clamped": {
+          "mse": 0.030084579264683334,
+          "psnr": 15.216560577739228
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.027002944581975167,
+          "psnr": 15.68588874878958
+        },
+        "clamped": {
+          "mse": 0.027002500320568387,
+          "psnr": 15.685960200946985
+        }
+      }
+    },
+    "score_seconds": 0.07643319800263271,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph02_sigma3_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0013747489359898855,
+          "psnr": 28.61776607775489
+        },
+        "clamped": {
+          "mse": 0.0013543212561837224,
+          "psnr": 28.682783051937577
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0009519179572073767,
+          "psnr": 30.214004804679647
+        },
+        "clamped": {
+          "mse": 0.0009338883305149057,
+          "psnr": 30.29705051329428
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.0012440553203468731,
+        "expected_noise_mse": 9.74416895049741e-05,
+        "expected_deterministic_raw_mse": 0.0013414970098518473,
+        "realized_noise_mse": 0.00010323058897041534,
+        "realized_bias_noise_cross": 2.746302667280915e-05,
+        "realized_decomposition_mse": 0.0013747489359900976
+      },
+      "shave4": {
+        "bias_squared_mse": 0.0008842984607295808,
+        "expected_noise_mse": 7.53199304976687e-05,
+        "expected_deterministic_raw_mse": 0.0009596183912272496,
+        "realized_noise_mse": 7.415242454713016e-05,
+        "realized_bias_noise_cross": -6.532928069318889e-06,
+        "realized_decomposition_mse": 0.0009519179572073922
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0022691012182924626,
+          "psnr": 26.441461310143875
+        },
+        "clamped": {
+          "mse": 0.0022681308658693716,
+          "psnr": 26.443318912759114
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0009149384627079298,
+          "psnr": 30.386081149008824
+        },
+        "clamped": {
+          "mse": 0.0009136996651891253,
+          "psnr": 30.39196534228585
+        }
+      }
+    },
+    "score_seconds": 0.07465810698340647,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph02_sigma3_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.004879045179756031,
+          "psnr": 23.116651603202214
+        },
+        "clamped": {
+          "mse": 0.004498397047375803,
+          "psnr": 23.469422145575226
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0030252165651155636,
+          "psnr": 25.192435302121368
+        },
+        "clamped": {
+          "mse": 0.002749157654647542,
+          "psnr": 25.608003541615446
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.0043085139966409,
+        "expected_noise_mse": 0.0004041483511718907,
+        "expected_deterministic_raw_mse": 0.004712662347812791,
+        "realized_noise_mse": 0.00041363148603686166,
+        "realized_bias_noise_cross": 0.0001568996970784537,
+        "realized_decomposition_mse": 0.004879045179756215
+      },
+      "shave4": {
+        "bias_squared_mse": 0.0026610699523027313,
+        "expected_noise_mse": 0.00029514341119339746,
+        "expected_deterministic_raw_mse": 0.0029562133634961287,
+        "realized_noise_mse": 0.00028205921683407785,
+        "realized_bias_noise_cross": 8.208739597933294e-05,
+        "realized_decomposition_mse": 0.003025216565116142
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.0022691012182924626,
+          "psnr": 26.441461310143875
+        },
+        "clamped": {
+          "mse": 0.0022681308658693716,
+          "psnr": 26.443318912759114
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.0009149384627079298,
+          "psnr": 30.386081149008824
+        },
+        "clamped": {
+          "mse": 0.0009136996651891253,
+          "psnr": 30.39196534228585
+        }
+      }
+    },
+    "score_seconds": 0.07470768800703809,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph02_sigma10_rbf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.02522313695934056,
+          "psnr": 15.982009019258802
+        },
+        "clamped": {
+          "mse": 0.02522289820233538,
+          "psnr": 15.982050128872089
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.02491379880609473,
+          "psnr": 16.035600470624807
+        },
+        "clamped": {
+          "mse": 0.024913557117289074,
+          "psnr": 16.035642601744424
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 0.02521976780940337,
+        "expected_noise_mse": 3.565319991839653e-05,
+        "expected_deterministic_raw_mse": 0.02525542100932177,
+        "realized_noise_mse": 3.5702120925274166e-05,
+        "realized_bias_noise_cross": -3.233297098808787e-05,
+        "realized_decomposition_mse": 0.02522313695934056
+      },
+      "shave4": {
+        "bias_squared_mse": 0.024910361009439524,
+        "expected_noise_mse": 3.632365086555707e-05,
+        "expected_deterministic_raw_mse": 0.02494668466030508,
+        "realized_noise_mse": 3.5776115966133686e-05,
+        "realized_bias_noise_cross": -3.233831931093316e-05,
+        "realized_decomposition_mse": 0.024913798806094727
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.02462524738382448,
+          "psnr": 16.086193979109506
+        },
+        "clamped": {
+          "mse": 0.024624395289396167,
+          "psnr": 16.086344258335192
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.021852218136170037,
+          "psnr": 16.60504472862649
+        },
+        "clamped": {
+          "mse": 0.02185156386063229,
+          "psnr": 16.605174762341065
+        }
+      }
+    },
+    "score_seconds": 0.06538265899871476,
+    "peak_rss_bytes": 696664064
+  },
+  {
+    "id": "0802_ph02_sigma10_fixed_rf",
+    "status": "complete",
+    "prediction_cohort_sha256": "61dc04e4d820dbaefb3d5ef431e8fd4e4a2c2df8082fb842d8f1beb5781f39bd",
+    "metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 2.6504131375722597,
+          "psnr": -4.233135755908509
+        },
+        "clamped": {
+          "mse": 0.22287632012114042,
+          "psnr": 6.519360714346314
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 2.4773997388298783,
+          "psnr": -3.939960874745609
+        },
+        "clamped": {
+          "mse": 0.21431579462361144,
+          "psnr": 6.689458211881949
+        }
+      }
+    },
+    "deterministic_risk": {
+      "full": {
+        "bias_squared_mse": 2.6418847183359944,
+        "expected_noise_mse": 0.004938054092945246,
+        "expected_deterministic_raw_mse": 2.6468227724289397,
+        "realized_noise_mse": 0.004179724596557932,
+        "realized_bias_noise_cross": 0.004348694639714016,
+        "realized_decomposition_mse": 2.6504131375722664
+      },
+      "shave4": {
+        "bias_squared_mse": 2.4677574469544923,
+        "expected_noise_mse": 0.0048857043214665585,
+        "expected_deterministic_raw_mse": 2.472643151275959,
+        "realized_noise_mse": 0.004074235466059291,
+        "realized_bias_noise_cross": 0.005568056409330741,
+        "realized_decomposition_mse": 2.4773997388298823
+      }
+    },
+    "old_ff_metrics": {
+      "full": {
+        "unclamped": {
+          "mse": 0.02462524738382448,
+          "psnr": 16.086193979109506
+        },
+        "clamped": {
+          "mse": 0.024624395289396167,
+          "psnr": 16.086344258335192
+        }
+      },
+      "shave4": {
+        "unclamped": {
+          "mse": 0.021852218136170037,
+          "psnr": 16.60504472862649
+        },
+        "clamped": {
+          "mse": 0.02185156386063229,
+          "psnr": 16.605174762341065
+        }
+      }
+    },
+    "score_seconds": 0.07553577801445499,
+    "peak_rss_bytes": 696664064
+  }
+]

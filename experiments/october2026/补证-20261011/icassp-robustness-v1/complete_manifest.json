@@ -1,0 +1,14 @@
+{
+  "files": {
+    "analyze.py": "45f0bc6db8f4d4faa11a70a45666bc1fe43db02aab1f9f6b13c2bcbac37b8603",
+    "audit.py": "97c459c4fb2f992f8af7d23faeb1a35f13f862004a9a887f0c77c0996618cf90",
+    "protocol.json": "30d38b7186e4c8db9c9f2f09f2913d32f6283f93412154c47db2c10196e61c4d",
+    "freeze.json": "3dda13d0aef2fa3e2f5f32463bae97a5adbe9da344c2a49a5e7cc24026170cad",
+    "results.json": "d0e0012dce281cdde963fa803ea7599f7fc24c121f63bf4a2838fbdbc056a887",
+    "audit.json": "bd2a4c38ec4f63cdbb6ef9c07427ea317e25e6d7537250451ad48cdb22ffce60",
+    "run.log": "d1159a4bd2cfd366420df1dc61fe66dedefe35da96e0b1936d99ad84146259fd",
+    "audit.log": "bd2a4c38ec4f63cdbb6ef9c07427ea317e25e6d7537250451ad48cdb22ffce60",
+    "output_manifest.json": "e682f7955001fa9c511c3292f0e9b99a0ec0dcd5af35be60a3e6c665d7ee1334"
+  },
+  "scope": "Completed bounded saved-output retrospective robustness; all original results untouched."
+}

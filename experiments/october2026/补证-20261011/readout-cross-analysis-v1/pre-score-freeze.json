@@ -1,0 +1,10 @@
+{
+  "frozen_epoch": 1791707880.548033,
+  "frozen_utc": "2026-10-11T08:38:00Z",
+  "status": "reviewed before first metric read; base inference running at 40/74",
+  "files": {
+    "protocol.json": "ea182310a35cdba03e41ca98389ca13a87c97177cf44a45fbf65a3542e0c6c40",
+    "analysis.py": "97a60367d8dd2a4ba57c7797c3786e0c7b17f93d37190fc8753c35619b8b28d9"
+  },
+  "review": "Same targets across hints; no fit, inference or changed base protocol; target-aware descriptive scoring only."
+}

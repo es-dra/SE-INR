@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "checked_at_utc": "2026-10-08T05:02:04.764996+00:00",
+  "source_hashes": {
+    "experiment.py": "32fc0534dde79b841bd22ba847c34de11b8ada8525af115abb8806abba215027",
+    "protocol.json": "fca50a58768c66a3ede9c1c7c81e0f7c40f49385c16ad45005a7ba6308635261",
+    "original-e1ff.py": "0a82c9fa16161b525e8570b771bc298140ba9033f61408a2a110cb5f6500174e"
+  },
+  "remote_runtime": "research-175 existing /usr/bin/python3 Torch",
+  "AST_only_original_definitions": true,
+  "CPU_data_geometry": "0801/0802, all three geometries,512 RGB observations; duplicate256 unique versus diverse512; vectorized values equal direct indexing",
+  "FF_output_shape": [
+    512,
+    3
+  ],
+  "trained_on_GPU_during_check": false
+}

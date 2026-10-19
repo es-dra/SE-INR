@@ -1,0 +1,81 @@
+{
+  "schema": "eight-site-task-separation-independent-hand-derivation-v1",
+  "created_utc": "2026-10-08T06:38:41.691149+00:00",
+  "status": "hand-derived identities and theorem candidate with exact scope; not numerically checked by this agent, not a novelty claim",
+  "execution": {
+    "read_sources": [
+      {
+        "path": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/补证-20261008/task-separation-development-v1/protocol.json",
+        "sha256": "b81e8cdd134258b6b6fb3fa6516a3aa5cbebdd3df80a36d90a785e0347c08363"
+      }
+    ],
+    "writes_only": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/补证-20261008/task-separation-development-v1/theory-agent.json",
+    "CPU_numeric_experiment_seconds": 0,
+    "GPU_used": false,
+    "source_protocol_paper_master_edited": false,
+    "task_absolute_deadline_utc": "2026-10-08T07:00:00Z",
+    "agent_delivery_limit_minutes": 10
+  },
+  "model_and_scope": {
+    "signal": "For n=8, Q1,Q3 are orthogonal real DFT cosine/sine rank2 projectors: Qk[i,j]=(1/4)cos(2*pi*k*(i-j)/8). D=Q1-Q3, F=D^2=Q1+Q3. C_theta=I8+theta D. Known magnitude theta0, unknown sign theta in{+theta0,-theta0}. Mean0. 0<theta0<1 ensures full positive definite signal covariance; known positive DC variance1 removes zero-DC degeneracy.",
+    "observation": "A1 selects[0,4,1,5], A2 selects[0,4,2,6], four distinct sites so A_g A_g^T=I4. y=A_g x+epsilon, epsilon~N(0,nu I4), nu>0 fixed and known, a=1+nu. For each geometry K independent latent calibration draws, with only their noisy sampled y observed, plus a fresh independent evaluation latent draw and its4 observed coordinates.",
+    "risk": "R_g(T,theta)=E||T(Y_cal,y_eval)-x_eval||^2 is total8-coordinate trace MSE, not per-coordinate MSE. Divide all risks, gaps and excesses by8 for per-coordinate MSE. No clamping. Oracle uses known theta and fresh y_eval; unknown-sign estimators cannot use HR calibration or spectral labels.",
+    "candidate_class": "The two frozen posterior mean rules B_g,plus y and B_g,minus y have B_g,theta=C_theta A_g^T(A_g C_theta A_g^T+nu I4)^-1. Labels/candidate matrices can be known; true sign is unknown. A calibration-only hard selector chooses a label before seeing evaluation y. General estimator class allows mixtures, nonlinear predictors, randomization, and use of fresh y.",
+    "budget": "Both acquisition designs use exactly4(K+1) noisy scalar measurements. K counts independent latent draws, not four coordinates or frames. Oracle is a reference knowing the true spectrum, not an implementable method granted free extra data. Unknown-sign methods are compared with identical acquisition and information budgets.",
+    "external_information_limit": "All impossibility claims fail if the learner receives extra HR/full-coordinate calibration, true covariance labels, informative side data or correlated latent draws with a richer observation law. In particular the separate32-HR-image common-law calibration workflow is outside this lower-bound information model."
+  },
+  "linear_algebra": {
+    "phase02": "A2 D A2^T=0, because every observed lag is even and cos(pi*d/4)=cos(3*pi*d/4) on even d. F2=A2 F A2^T is a rank2 projector with trF2=2. Consequently S2,theta=a I4 for all theta.",
+    "phase01": "E=A1 D A1^T has eigenvalues+1/sqrt2,-1/sqrt2,0,0. F1=A1 F A1^T is a rank2 projector, E^2=F1/2, E F1=E, trE=0. Thus S1,theta=aI4+theta E, and the two active eigenmode variances are a+theta/sqrt2 and a-theta/sqrt2; other2 variancesa.",
+    "squared_prior": "C_theta^2=I8+2theta D+theta^2 F, trC_theta=8. All noise and covariance inverses are well-defined in the stated range."
+  },
+  "oracle_trace_risk": {
+    "identity": "R_g,oracle(theta)=trC_theta-tr[C_theta A_g^T S_g,theta^-1 A_g C_theta]=8-tr[S_g,theta^-1 A_g C_theta^2 A_g^T].",
+    "phase02_exact": "R2,oracle(theta)=8-(4+2theta^2)/a. It is even in theta.",
+    "phase01_exact": "With h=theta/sqrt2, R1,oracle(theta)=8-{2/a+(1+2h+theta^2)/(a+h)+(1-2h+theta^2)/(a-h)}. It is even in theta.",
+    "gap_exact": "delta=R1,oracle-R2,oracle=theta^2(1+2nu-theta^2)/[a(a^2-theta^2/2)].",
+    "sign_and_range": "delta>0 for0<|theta|<1, nu>0: phase02 has strictly smaller known-spectrum full reconstruction risk. The denominator is positive, and the numerator1+2nu-theta^2 is positive. This is not a covariance-rank assertion.",
+    "useful_bound": "0<delta<theta^2/a because1+2nu-theta^2=(a^2-nu^2-theta^2)<a^2-theta^2/2. No vanishing-noise or singular-prior limit is needed.",
+    "proof_expansion": "Pair active phase01 fractions: numerator sum=2[a(1+theta^2)-theta^2], denominator=a^2-theta^2/2. Subtract from2(1+theta^2)/a to obtaindelta."
+  },
+  "phase02_wrong_fixed_posterior_cost": {
+    "means": "B2,+=(I+theta0 D)A2^T/a; B2,-=(I-theta0 D)A2^T/a; midpointB2,0=A2^T/a.",
+    "posterior_orthogonality": "For any fixed linear B under true theta, R(B,theta)-R_oracle(theta)=tr[(B-B_theta)S_theta(B-B_theta)^T]. This also extends to arbitrary predictors via E||T-E[x|y,theta]||^2, accounting for independent calibration.",
+    "wrong_candidate_exact": "DeltaB=B2,+-B2,-=2theta0 D A2^T/a. The fixed wrong-candidate excess is Gamma2=tr[DeltaB*(aI)*DeltaB^T]=4theta0^2/a*trF2=8theta0^2/a under either sign.",
+    "calibration_only_selector": "Because every calibration law is identical across signs, any calibration-only label rule has sign+ and sign- errors summing1. Thus worst-sign expected selection excess >=Gamma2/2=4theta0^2/a. A fair independent random choice attains this bound. A deterministic constant sign instead has worst excessGamma2.",
+    "fresh_y_dependent_hard_selector": "If a hard selector may also inspect freshy, excess is not generally Gamma2 times ordinary classification error. Nonetheless its two-world average excess remainsGamma2/2 pointwise-integrated, since the sign posterior is1/2 and T is one of the two conditional means. The minimax hard-selection value remainsGamma2/2, attained by symmetric randomization.",
+    "qualification": "4theta0^2/a is a restricted two-posterior selection bound, not an all-estimator lower bound."
+  },
+  "phase02_all_estimator_minimax": {
+    "exact_value": "inf_all_T max_{theta=+/-theta0}[R2(T,theta)-R2,oracle(theta)]=2theta0^2/a, for every K. The corresponding minimax total risk is R2,oracle(theta0)+2theta0^2/a.",
+    "achiever": "T0(y)=B2,0 y=A2^T y/a. This is the conditional mean for the equal mixture of the two priors, since their observation laws are identical. It averages the two posterior means and is allowed by the general estimator class.",
+    "proof": "Let m0=B2,0 y and delta_m=theta0 D A2^T y/a. Under the common law of(Y_cal,y), average squared excess over the two signs is E||T-m0||^2+E||delta_m||^2. The latter=theta0^2/a*trF2=2theta0^2/a. Therefore maximum excess is at least that average lower bound; T0 has exactly this excess at both signs. Randomization cannot improve the squared-loss minimum.",
+    "improvement_over_hard_selection": "Mixing halves the restricted hard-selection minimax excess. Excluding this classical mixture would artificially inflate the claimed adaptation cost."
+  },
+  "phase01_hard_selector_cost": {
+    "difference_operator": "Let theta=theta0, E=A1 D A1^T, F1=2E^2, Tmat=a^2I-theta0^2E^2, G=a D A1^T-A1^T E. DeltaB1=2theta0 G Tmat^-1.",
+    "gram": "G^T G=(a^2-a+1/2)F1; this follows from A1 A1^T=I, A1 D^2 A1^T=F1 and E^2=F1/2.",
+    "wrong_candidate_exact": "Gamma1=8a theta0^2(a^2-a+1/2)/(a^2-theta0^2/2)^2. This is the wrong fixed-posterior excess under either sign. It is finite and positive in the stated range.",
+    "cal_only_hard_risk": "If the label is selected from independent calibration only with symmetric errorPe, fresh evaluation risk is exactlyR1,oracle+Gamma1*Pe. If label selection also uses evaluationy, this simple constant-times-error identity cannot be reused."
+  },
+  "phase01_testing_constants": {
+    "LLR": "Set h=theta0/sqrt2>0. In the eigenbasis ofE, z_plus andz_minus have independent variancesa+h anda-h under sign+, swapped under sign-. Other modes are unchanged. Calibration LLR=h/(a^2-h^2)*sum_i(z_plus_i^2-z_minus_i^2); log determinants cancel. Choose sign+ for nonnegative LLR.",
+    "symmetry": "The sign-swap exchanges the two eigenmodes, so the equal-prior ML rule has the same error probability under both signs. Ties have probability0 forK>=1;K0 can use a fair coin.",
+    "Bhattacharyya_affinity": "One-draw affinity integral sqrt(p_plus p_minus)=sqrt(1-h^2/a^2). ForK iid draws it is(1-h^2/a^2)^(K/2). Since equal-prior error=1/2 integral min(p_plus,p_minus)<=1/2 affinity, Pe<=0.5*(1-theta0^2/(2a^2))^(K/2)<=0.5 exp[-K theta0^2/(4a^2)]. The proposed exponential constant is correct.",
+    "exact_error_optional": "ForK>=1, Pe=P(F_{K,K}<(a-h)/(a+h))=I_{(a-h)/(2a)}(K/2,K/2), whereI is the regularized incomplete beta function. This is an exact scalar distribution identity, not computed by this agent.",
+    "all_estimators_phase01": "The Bayes mixture predictor can update the sign posterior using both calibration and freshy and is at least as good in equal-prior average risk as hard selection. No claim here that the hard ML-posterior selector is globally minimax-optimal. Its explicit upper bound suffices for the separation below."
+  },
+  "budget_matched_non_degenerate_separation": {
+    "statement": "Known-spectrum oracle reconstruction favors phase02 bydelta>0. Under unknown sign with identical4(K+1) acquisition budget, phase02 all-estimator minimax risk isR2,oracle+2theta0^2/a, while a constructive phase01 hard-calibration estimator has worst-sign risk<=R1,oracle+(Gamma1/2)exp[-K theta0^2/(4a^2)].",
+    "sufficient_condition": "Let Hmargin=2theta0^2/a-delta. Since delta<theta0^2/a, Hmargin>theta0^2/a>0. If(Gamma1/2) exp[-K theta0^2/(4a^2)]<Hmargin, the constructive phase01 estimator has strictly smaller worst-sign total risk than every phase02 estimator, despite phase02 having better oracle reconstruction risk.",
+    "integer_K": "A sufficient finite integer is K=max(1,1+ceil(max(0,4a^2/theta0^2*log(Gamma1/(2Hmargin))))). This is a convenient sufficient threshold, not the exact optimal transitionK. It could be loose because the Bhattacharyya bound and hard classification need not be optimal.",
+    "uniform_range": "For any fixed compact0<theta_min<=theta0<=theta_max<1 and0<nu_min<=nu<=nu_max<infinity, all covariance eigenvalues are bounded away from0, noise is positive, Hmargin has a positive lower bound, and Gamma1/a/threshold terms remain finite. Hence a uniform finiteK sufficient condition exists. This excludes an explanation based only on singular priors, zero noise or infinitesimaltheta.",
+    "limits": "The claim is for a known-magnitude two-hypothesis stationary Gaussian law and full8-coordinate squared risk. It is not yet a general alias-block theorem, continuous unknown spectrum result, natural-image claim or nonlinear-INR adaptation theorem. Acquisition costs exclude no hidden independent HR calibration."
+  },
+  "review_judgment": {
+    "algebra_status": "All displayed constants derived by hand independently of root numerical checks; CPU matrix/Monte Carlo validation remains root responsibility under the shared120-second budget. Positive-range conditions and restricted/general estimator distinction are explicit.",
+    "novelty_status": "The example exhibits actual full-risk reversal under matched budgets and nondegenerate covariance, rather than only different ranks. Nevertheless it combines classical Gaussian Bayes prediction, a two-point unidentifiability/mixture argument and standard testing bounds. It is not established as novel.",
+    "prior_art": "Zimmerman2006 already contrasts known-covariance prediction and covariance-estimation design, including hybrid prediction error with estimated covariance. Eight-site constants could be useful illustrative material; they do not alone clear an A-class theoretical gate.",
+    "continue_stop": "Complete the scheduled bounded algebra/primary-art gate. Unless a nontrivial general sharp alias-block/budget bound beyond this classic two-point example emerges by the absolute deadline, close as classical illustrative material; do not launch larger GPU/image experiments to rescue novelty."
+  }
+}

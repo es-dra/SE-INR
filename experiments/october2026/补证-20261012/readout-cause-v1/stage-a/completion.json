@@ -1,0 +1,28 @@
+{
+  "status": "complete and independently reviewed",
+  "time_utc": "2026-10-12T01:30:33.750604+00:00",
+  "cost": {
+    "analysis_full_process_wall_seconds": 1.522662958,
+    "analysis_internal_wall_seconds": 1.350311749993125,
+    "independent_review_wall_seconds": 0.5198291249980684,
+    "total_measured_wall_seconds": 2.042492082998068,
+    "total_analysis_review_CPU_seconds": 1.743695,
+    "CPU_threads": 1,
+    "GPU": 0,
+    "new_inference": 0,
+    "training": 0
+  },
+  "artifact_sha256": {
+    "protocol.json": "e9327b4b2376772a75d3dbb5de696477ce01cf20f522beef75293520f6de444c",
+    "analyze.py": "db1fb78f2fdaa4c5fab280347eb6f793597a68dbd1f63a2c4f4177970bc2b410",
+    "freeze.json": "31cf010377c23a0078fbd8487aba81c6fa190ea5da450034d3adb11db3934850",
+    "input_manifest.json": "913d99ef7e5592b8d08087a5fd7698337958cd9901dbac01a8a094dc0cb46d82",
+    "rows.json": "ffd5a91e3aec8d3d3d6e86302cb86810e613777802001dda632dd55bb8ea644b",
+    "summary.json": "877551b7b1f9a60697a0dd753311235450d6c0446c796dd45b00e66889ef150f",
+    "resources.json": "5503399717907d966f2a32dd157eabe2948e2ea6e1222db389081210091bfbca",
+    "launcher.json": "c5bd04f5ecb4a5886b495c20aee2546eb4b281b212ed8907b9745ac1f737d505",
+    "review.py": "e2afac80bfacf550de0254ea513312002bd806248f54f1913928adf0a0807157",
+    "review.json": "f4ff3cb5fd6783916f83981364da5cdab148863ba5382db4199946d5afb3bb2b"
+  },
+  "limitation": "Retrospective HRoracle decomposition only; calibration image rows and frequencies dependent; no deployable prediction or general causal mechanism."
+}

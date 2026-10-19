@@ -1,3 +1,13 @@
+# 当前模型身份
+
+当前分析中，LTE为已有方法，SC-INR为作者基于LTE实现的实验变体，cell经解析sinc影响MLP前特征。二者不是两个独立模型家族。完整RGB并非精确box积分，未证明全网络尺度等变；SC不以全面优于LTE作为本文贡献。
+
+近期诊断冻结源见`/workspace/SE-INR/codex-20261011-readout-probe-v4/snapshot`，其SC/LTE源hash记录于实验输入manifest；旧dirty工作树中的附加band gate、LIIF operator conditioning等改动不能视作本轮已验证实现。
+
+下方保留原模型raw key及旧方法命名映射。
+
+---
+
 # 模型命名与展示名
 
 本文档约束论文表格、图例和正文中的模型展示名。`configs/registry/models.yaml`
@@ -5,7 +15,7 @@
 
 ## 命名原则
 
-1. 最终候选主方法使用 `SC-INR`。
+1. 已收口的 canonical 历史实现使用 `SC-INR`；该名称只负责解码既有 checkpoint 和结果。
 2. 旧主线和结构变化写成消融或机制对照，不继续扩散旧工程名。
 3. raw JSON key 和历史训练名只作为 provenance 保留。
 4. checkpoint 真实目录使用 canonical 名称；历史训练名保留为 symlink。
@@ -24,23 +34,23 @@
 | `SC-INR-FixedOmega` | `SC-INR-Fixed` | `artifacts/checkpoints/seed1/sc-inr-fixed-omega` | ablation | 固定 frequency basis + analytic sinc |
 | `SC-INR-NoPhi` | legacy `SC-INR` / `SC-INR-Adaptive` | `artifacts/checkpoints/seed*/sc-inr-nophi` | 旧主线/消融 | feature-conditioned omega，无 phase |
 | `SC-INR-NoPhi-Signed` | `SC-INR-Signed` | `artifacts/checkpoints/seed1/sc-inr-nophi-signed` | ablation | signed omega，无 phase |
-| `SC-INR` | seed1 `SC-INR+PhiZ`; seed2/3 clean `SC-INR` | `artifacts/checkpoints/seed*/sc-inr` | 最终候选 | signed omega + feature-conditioned phase |
+| `SC-INR` | seed1 `SC-INR+PhiZ`; seed2/3 clean `SC-INR` | `artifacts/checkpoints/seed*/sc-inr` | 已收口内部候选 | signed omega + feature-conditioned phase；不是活跃主方法 |
 | `SC-INR-EQ` | `SC-INR-EQ` | `artifacts/checkpoints/seed1/sc-inr-eq` | exploratory | Rot-E plumbing + SC-INR decoder contract，不是主方法 |
 | `SC-INR-NoSinc` | `SC-INR-NoSinc` | `artifacts/checkpoints/seed1/sc-inr-nosinc` | ablation | 移除 analytic sinc response |
 
 ## 关键边界
 
-- `SC-INR` 是最终候选，不再写作 `SC-INR+PhiZ`。
+- `SC-INR` 是既有结果的 canonical 名称，不再写作 `SC-INR+PhiZ`；这不表示它仍是活跃主方法。
 - `SC-INR-NoPhi` 才是旧 raw key `SC-INR` 在部分 seed1/core 结果中的含义。
 - `SC-INR-EQ` 只能写成可结合 Rot-E 的探索性扩展，不能作为新主方法。
 - `SC-INR-NoSinc` 的 same-LR consistency 很高，说明该指标会奖励 cell-insensitive
   decoder；不能据此说 NoSinc 更符合 observation modeling。
 
-## 论文写法建议
+## 冻结记录写法
 
 正文可以写：
 
-> We denote the final feature-phase variant as SC-INR. The previous no-phase
+> We denote the frozen feature-phase implementation as SC-INR. The previous no-phase
 > variant is reported as SC-INR-NoPhi.
 
 不要写：
@@ -49,3 +59,5 @@
 
 也不要把历史 raw key、训练目录名或旧日志名放进正文主表。它们只应出现在
 provenance、artifact 白名单或复现说明里。
+
+本 taxonomy 只用于复现和历史结果解码，不能据此恢复 SC-INR 新方法或投稿身份。

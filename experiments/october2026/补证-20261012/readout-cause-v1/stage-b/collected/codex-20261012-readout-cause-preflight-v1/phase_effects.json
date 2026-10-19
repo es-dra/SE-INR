@@ -1,0 +1,626 @@
+[
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      4.287296719453649e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      4.354236790576546e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      4.449823511736353e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      1.0696765589543143e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      1.1859168771770651e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      1.2875533713421488e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      1.759190008908818e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      1.8878024662872833e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      2.0131670379389403e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      3.397454198318748e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      3.4397791788989655e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "full",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      3.5124216993158777e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      6.031084789590371e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      6.0404167958544655e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      6.103209504853928e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      1.3606246501302237e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      1.4263770092131436e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      1.478895188595558e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      1.9832111981373472e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      1.9716550652939403e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      1.8963098993004075e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      5.214110426023707e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      5.217102234912011e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "lte",
+    "roi": "center",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      5.275301721151867e-06
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      5.836493245660844e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      6.04163359726323e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      6.0377553919716e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      4.545702860020448e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      4.430375241209656e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      4.316523895205568e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      3.99479609762646e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      3.9716446820891776e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      3.9542470885954226e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      4.989717594721874e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      5.208509778675471e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "full",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      5.218035317904393e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      -2.8670177959922577e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      -2.4282980306883015e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 0,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      -2.2893865354086523e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      1.391846411108568e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      1.5390903179169016e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 1,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      1.6949715726955163e-08
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      4.018328713213291e-09
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      4.02785726461329e-09
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 2,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      4.1997145210131085e-09
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0,
+    "phase_gains": [
+      -3.0512769150746466e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 0.5,
+    "phase_gains": [
+      -2.626976483011134e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  },
+  {
+    "model": "sc-inr",
+    "roi": "center",
+    "template": "preflight",
+    "band": 3,
+    "shift": 0,
+    "eta": 1,
+    "phase_gains": [
+      -2.5052105389515925e-07
+    ],
+    "range_gain": 0.0,
+    "both_signs": false
+  }
+]

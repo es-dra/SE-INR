@@ -1,0 +1,84 @@
+{
+  "stage": "independent pre-run interface review",
+  "source_sha_at_review": "a70ff66b25375eb43f6ecc54b7400aa988cd7fa7ddba5bd5b3160cecef881751",
+  "protocol_sha_at_review": "19c8942ba9130318beccefa985741f686bb1d5c1b30989ed9166c37b35b50164",
+  "training_launched": false,
+  "GPU_used": false,
+  "test_scope": "AST-only extraction of features/rbf/covariance into fresh numpy namespace; no module import or run invocation",
+  "kernel_and_duplicate_observation_float64_tests": [
+    {
+      "sigma": 3,
+      "method": "rbf",
+      "rbf_direct_formula_maxerror": 8.482103908136196e-14,
+      "fixed_rf_diagonal_norm_error": 2.220446049250313e-16,
+      "cos_difference_identity_error": 2.498001805406602e-16,
+      "coefficient_residual": 8.435435473161975e-13,
+      "response_residual": 1.7623238824480203e-17,
+      "raw_response_identity_error": 4.001243780749064e-13,
+      "posterior_min": 0.1577192883420645,
+      "raw_risk_decomposition_error": 5.967448757360216e-16
+    },
+    {
+      "sigma": 3,
+      "method": "fixed_rf",
+      "rbf_direct_formula_maxerror": 8.482103908136196e-14,
+      "fixed_rf_diagonal_norm_error": 2.220446049250313e-16,
+      "cos_difference_identity_error": 2.498001805406602e-16,
+      "coefficient_residual": 1.0171505420637964e-12,
+      "response_residual": 1.0396093708429669e-16,
+      "raw_response_identity_error": 7.310818617156656e-13,
+      "posterior_min": 0.17488511350436586,
+      "raw_risk_decomposition_error": 4.1092129698938606e-14
+    },
+    {
+      "sigma": 10,
+      "method": "rbf",
+      "rbf_direct_formula_maxerror": 8.381073612895307e-13,
+      "fixed_rf_diagonal_norm_error": 2.220446049250313e-16,
+      "cos_difference_identity_error": 7.771561172376096e-16,
+      "coefficient_residual": 6.140297051747011e-13,
+      "response_residual": 7.955210377953417e-19,
+      "raw_response_identity_error": 1.099120794378905e-14,
+      "posterior_min": 0.8514193027191892,
+      "raw_risk_decomposition_error": 1.1379786002407855e-15
+    },
+    {
+      "sigma": 10,
+      "method": "fixed_rf",
+      "rbf_direct_formula_maxerror": 8.381073612895307e-13,
+      "fixed_rf_diagonal_norm_error": 2.220446049250313e-16,
+      "cos_difference_identity_error": 7.771561172376096e-16,
+      "coefficient_residual": 9.32274905274808e-13,
+      "response_residual": 1.0661437681580503e-16,
+      "raw_response_identity_error": 1.6575629757653587e-13,
+      "posterior_min": 0.8187948296554359,
+      "raw_risk_decomposition_error": 5.370703881624195e-15
+    }
+  ],
+  "prediction_freeze_before_truth": {
+    "cohort_save_line": 203,
+    "truth_access_lines": [
+      218,
+      219
+    ],
+    "all_after": true
+  },
+  "findings": [],
+  "limitations": [
+    "Fixed mean=.5, prior point variance=1, noise/lambda=1e-4 are explicit development choices, not estimated/calibrated from images.",
+    "Bias+noise expected raw MSE is conditional on saved clean/truth and fresh iid noise; not observation-only risk estimator.",
+    "Clamped metrics are scored, no claimed analytic linear risk decomposition.",
+    "Model-implied posterior variance is not calibrated uncertainty.",
+    "All 24 arms fixed and retained; no new selector or NTK equivalence.",
+    "Old FF used only from saved checkpoints/frequency buffer and saved predictions, never re-trained.",
+    "Source AST control flow and numerical subset checks are pre-run checks, not evidence of successful full run."
+  ],
+  "review_status": "pass for bounded CPU development controls; no launch performed by reviewer",
+  "budget_finding_resolution": "Checkpoint added immediately after arrays save, after each score, before summary output and before COMPLETE.",
+  "review_added_logic": [
+    "Kernel minimum eigenvalue<-1e-8 is failure; no jitter or hidden lambda changes.",
+    "Exact nonperiodic integer nearest-distance histogram on shave4 target grid computed from unique observed xy, separately from periodic wraparound maxgap.",
+    "Mean/ridge/optimization confounding and nonnested phase limitations explicitly retained.",
+    "Completed solve/score journals and failure records retained; no score if any prediction missing/failed."
+  ]
+}

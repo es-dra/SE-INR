@@ -1,0 +1,54 @@
+{
+  "reviewer": "independent /root/internal_transfer_review",
+  "timestamp_utc": "2026-10-11T18:12:37.589519+00:00",
+  "source_sha256": "5c04bf81d844fcc5b3820d661c4fd221e6e6f44017413f1b935b1079c9e6a551",
+  "protocol_sha256": "4e426659dd58683049319a1f3114555d46ffb8c818c0c2233a605eb310876f33",
+  "status": "core numerical and leakage logic passed; input snapshot mismatch requires resolution before freeze",
+  "scope": "Static whole-source review and independent synthetic small-matrix tests only; no model inference, no source model import, no HR data read.",
+  "findings": [
+    {
+      "severity": "medium",
+      "id": "snapshot-mismatch",
+      "issue": "Protocol requires complete read-only input-byte snapshot; prepare copies only observations and hashes original predictions and calibration rows. Forecast reads OLD calibration_rows after SHA check; observation copy lacks readonly permissions.",
+      "action": "Before freeze implement complete input snapshot and read local labels or explicitly document hash-locked archival input reuse and mutable copy limitations."
+    },
+    {
+      "severity": "note",
+      "id": "hard-timeout",
+      "issue": "Cooperative guard cannot interrupt a single stalled operation; external timeout is required to enforce absolute budget.",
+      "action": "Parent launch should enforce external bounded timeout and retain failed/incomplete root."
+    }
+  ],
+  "confirmed": [
+    "FFT fullRGB/DC and three bands consistent with stated 128/64/32 spatial regions",
+    "Native cell2/n, zero cell0, midpointcoords2q-1 and outputrescale0.5 correct relative to inherited script",
+    "All labels loaded after lower-feature/prediction-cohort freeze; no old test path used",
+    "8fold whole image split; 224train/32held rows per model fold; standardization and median use onlytrain",
+    "Fixed eligible AUC cells, raw score order, exact tie half credit and whole-draw NaN correct",
+    "Sign epsilon1e-8 and forecast0 classification/policy rules correct",
+    "All seven controls compared for BA and RGBpolicy; withinAUC compared with norm as predeclared; >=1000 finiteCI gate",
+    "Failed combined gate cannot promote; model-specific results retained",
+    "Resource finally writes full run wall even failed phase; no SR gradient/optimizer/GPU"
+  ],
+  "small_matrix_tests": {
+    "checks": 41,
+    "maximum_errors": {
+      "FFT_partition_64": 1.7763568394002505e-15,
+      "FFT_orthogonality_64": 9.86864910777917e-19,
+      "FFT_partition_32": 1.3322676295501878e-15,
+      "FFT_orthogonality_32": 6.5790994051861125e-19,
+      "FFT_partition_128": 1.7763568394002505e-15,
+      "FFT_orthogonality_128": 2.569960705150825e-19,
+      "ridge_augmented_least_squares": 1.5265566588595902e-16,
+      "AUC_multiplicity_scalar": 0.0,
+      "BA_scalar": 0
+    },
+    "wall_seconds": 0.14503604199853726,
+    "passed": true
+  },
+  "limitations": [
+    "OOF fixed-forecast bootstrap ignores refit uncertainty and shared-fold training dependence as disclosed",
+    "Prior original SRcheckpoint training exposure unresolved; only selector holdout",
+    "No independent inference/model reimplementation or actual-data score audit yet"
+  ]
+}

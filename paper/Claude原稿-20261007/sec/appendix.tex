@@ -1,0 +1,17 @@
+\section{Proof of Proposition~\ref{prop:mismatch}}\label{app:proof}
+With $R=p/(p+q)$ the matched gain $R$ attains error $p(1-R)$. The gain
+$g=\kappa p/(\kappa p+q)=\kappa R/(\kappa R+1-R)$ gives error
+$(1-g)^2p+g^2q$. Using $q/p=(1-R)/R$ and $D=\kappa R+1-R$,
+\[
+\frac{(1-g)^2p+g^2q}{p}=\frac{(1-R)\big[(1-R)+\kappa^2R\big]}{D^2}.
+\]
+Subtracting $(1-R)$ and expanding $D^2$, the numerator becomes
+$(1-R)\,R(1-R)(\kappa-1)^2$, which is Eq.~\eqref{eq:delta}.
+For Cor.~\ref{cor:flip},
+$\Delta(R,\kappa)/\Delta(R,1/\kappa)=\big((1-R)\kappa+R\big)^2/\big(1-R+\kappa R\big)^2$,
+which exceeds 1 for $\kappa>1$ iff $(\kappa-1)(1-2R)>0$, i.e.\ iff $R<1/2$
+(also checked numerically).
+
+\section{Reproducibility}
+\PH{Code paths, pre-registration hashes and per-experiment JSON files; see
+SOURCES.md in the draft folder for the current mapping.}

@@ -1,0 +1,10 @@
+{
+  "source_sha256": "c8d8081de04fca82f2fe6af2708a9c820b54ffec861429e10fab37b9cc40054f",
+  "stage_a_summary_sha256": "877551b7b1f9a60697a0dd753311235450d6c0446c796dd45b00e66889ef150f",
+  "stage_b_rows_sha256": "4e0123ce36616aff1b5af15f78bb4db70113bb224a92556df40c2a9bb3fa8ce1",
+  "scope": "all32 calibration images; full controlled primary center ROI, all16 phase/shift families per template. No sampling CI or independent-replicate claim.",
+  "outputs": {
+    "failure-modes.png": "2f818e73d39d54cdb20e56940b3e288efd0d27b4aa21e67aec7b3958e1e7c33f",
+    "controlled-alias-phase.png": "4bf842fcaf220cce3d33d390b3d54ff1c59ac7359d07a421e34a62a7f1bc9669"
+  }
+}

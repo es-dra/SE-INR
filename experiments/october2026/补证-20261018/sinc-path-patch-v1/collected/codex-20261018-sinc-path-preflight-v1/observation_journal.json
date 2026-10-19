@@ -1,0 +1,26 @@
+[
+  {
+    "observation": "o0000",
+    "endpoint_float32_maxdiff": 0.0,
+    "feature_product_maxdiff": 1.1920928955078125e-07,
+    "seconds": 0.41263861604966223
+  },
+  {
+    "observation": "o0016",
+    "endpoint_float32_maxdiff": 0.0,
+    "feature_product_maxdiff": 5.960464477539063e-08,
+    "seconds": 0.42105950706172734
+  },
+  {
+    "observation": "o0018",
+    "endpoint_float32_maxdiff": 0.0,
+    "feature_product_maxdiff": 5.960464477539063e-08,
+    "seconds": 0.36377033102326095
+  },
+  {
+    "observation": "o0053",
+    "endpoint_float32_maxdiff": 0.0,
+    "feature_product_maxdiff": 5.960464477539063e-08,
+    "seconds": 0.3739595140796155
+  }
+]

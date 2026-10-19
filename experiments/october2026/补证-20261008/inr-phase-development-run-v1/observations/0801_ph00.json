@@ -1,0 +1,20 @@
+{
+  "image": "0801",
+  "phases": [
+    0,
+    0
+  ],
+  "crop": [
+    956,
+    614,
+    1084,
+    742
+  ],
+  "source": {
+    "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0801.png",
+    "sha256": "ab5cf6a1cac2d1c2d0792dbd274fd2e53e42118ab6537771a825fd87aa28a60c"
+  },
+  "observation_sha256": "65d51152f0fcddba4ead1de2e5db17c72085a3122aed46e301e4132c9c2fc806",
+  "n_observations": 512,
+  "seed": 1001
+}

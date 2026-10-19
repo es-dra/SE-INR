@@ -1,0 +1,27 @@
+{
+  "frozen_utc": "2026-10-11T15:53:02.995857+00:00",
+  "source_sha256": "8024ff69e85a7ab4ff8215352463f4e912f2d6caefba71f223b1e24ce1593482",
+  "protocol_sha256": "58b036ac84555034daa8a7353cfd5bab649c4e307a0572980dfa98c8075c5cae",
+  "inputs": [
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/服务器结果-20261007/claude-20261005-L12/out/l1_inr_Set14.json",
+      "sha256": "5f9facf74a4d6f1a2a854a3d6a417d90b90457af126720b018abe7abdcada37a",
+      "bytes": 2214846
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/服务器结果-20261007/claude-20261005-L12/out/l1_inr_BSD100.json",
+      "sha256": "d7c43408f2671a41f13eca266ad95353c97383fc5195255bc810ae511b61ca25",
+      "bytes": 4748092
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/服务器结果-20261007/claude-20261005-L12/out/l1_inr_Urban100.json",
+      "sha256": "b6b89aaf7c754ba0b1dde84c593ea1529704d387b6492d6a2e5bb205f3c5a7e7",
+      "bytes": 4751614
+    },
+    {
+      "path": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/补证-20261011/icassp-robustness-v1/results.json",
+      "sha256": "d0e0012dce281cdde963fa803ea7599f7fc24c121f63bf4a2838fbdbc056a887",
+      "bytes": 1018468
+    }
+  ]
+}

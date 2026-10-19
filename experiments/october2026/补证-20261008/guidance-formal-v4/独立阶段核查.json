@@ -1,0 +1,271 @@
+{
+  "observed_resource_snapshot_at": "2026-10-08T06:47:45.849236+08:00",
+  "scope": "Full frozen selection convergence/coverage audit; no target truth read and no effectiveness conclusion",
+  "expected_cases": 36,
+  "downloaded_complete_cases": 36,
+  "cases": [
+    {
+      "case": "0813_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.987327748041901e-06,
+      "max_iterations": 2546,
+      "selection_sha256": "3c57834f8a4c03911e467e8ec0032df26249c01b5b3e6b5984e48938c11b8b01"
+    },
+    {
+      "case": "0813_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.999039127422165e-06,
+      "max_iterations": 1445,
+      "selection_sha256": "a59a167f17b6d2d5a346607dd240bb514f332a11b83f08a3e1b24b71a3a1f5d2"
+    },
+    {
+      "case": "0813_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.992602124921466e-06,
+      "max_iterations": 871,
+      "selection_sha256": "d1e46d40aa448e7ac34cf71ee346da1af2b9ec6a9c388609b1cca2c74ca6c46c"
+    },
+    {
+      "case": "0814_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.990732894544379e-06,
+      "max_iterations": 1595,
+      "selection_sha256": "f28607dc77d9be5ffa94c8a522ddf68073c3359357d88ea5b898dc54e11e422c"
+    },
+    {
+      "case": "0814_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.995124458173698e-06,
+      "max_iterations": 947,
+      "selection_sha256": "2d364c51d59a90a104a3f9ed0357d871e3922d6d70d7aad6a1651abb746d0973"
+    },
+    {
+      "case": "0814_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.989923644740563e-06,
+      "max_iterations": 569,
+      "selection_sha256": "e6b5f3d5a947665805c54a5ac2a0b0492aab4ff92167b36c5650bdf3e6a2efdf"
+    },
+    {
+      "case": "0815_n0p005",
+      "fits": 67,
+      "max_true_residual": 9.995903752467902e-06,
+      "max_iterations": 2673,
+      "selection_sha256": "0e2d3ac31b6dcbc8dccefe3086fd6dfac9a2bc7f09a817380dcb9b075a535ec0"
+    },
+    {
+      "case": "0815_n0p01",
+      "fits": 67,
+      "max_true_residual": 9.989851082448124e-06,
+      "max_iterations": 1567,
+      "selection_sha256": "84c199448657848d5d403167e05fa99aa592dcbd586e3007f6bc33cc5546dd8b"
+    },
+    {
+      "case": "0815_n0p02",
+      "fits": 67,
+      "max_true_residual": 9.995392841434922e-06,
+      "max_iterations": 888,
+      "selection_sha256": "110cfa7c18848559c18026c2222730124f3690624f06de0de593a703d0bef216"
+    },
+    {
+      "case": "0816_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.997813189416386e-06,
+      "max_iterations": 1629,
+      "selection_sha256": "be74309268f790e73c1ab522bd8729b835e73be1721f4f14a9c432f9e51d6615"
+    },
+    {
+      "case": "0816_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.972769061753505e-06,
+      "max_iterations": 985,
+      "selection_sha256": "e470961eecc8de1a4afa637edbc76fc28d28f823534a8b82066c7a46ab69a134"
+    },
+    {
+      "case": "0816_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.98351555277282e-06,
+      "max_iterations": 568,
+      "selection_sha256": "4321e49acc21e0c198e7bfb0c3e64c31073cbcc1445ab940e1a55b12ee583bd5"
+    },
+    {
+      "case": "0817_n0p005",
+      "fits": 67,
+      "max_true_residual": 9.998928706903518e-06,
+      "max_iterations": 2696,
+      "selection_sha256": "2853e1b0271c666b5df6198eb4427dcc527882f0c3d3bdf96d66708f9ed1031b"
+    },
+    {
+      "case": "0817_n0p01",
+      "fits": 67,
+      "max_true_residual": 9.999356855422648e-06,
+      "max_iterations": 1581,
+      "selection_sha256": "ac93715d3dc84d3dfb322b2ca351923c49e3bb5f3fe8c246e84ddfd7a3334378"
+    },
+    {
+      "case": "0817_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.981530063687067e-06,
+      "max_iterations": 912,
+      "selection_sha256": "0c0631bd57724cd0d6b0fde7a9f4bbb6230551f25497c48f4855207a2fffe6af"
+    },
+    {
+      "case": "0818_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.991402077577335e-06,
+      "max_iterations": 3134,
+      "selection_sha256": "499880642bbb4c95f12fb3afbac6ba36175d88ff705a567f7382addf7ba9ba09"
+    },
+    {
+      "case": "0818_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.982351630270849e-06,
+      "max_iterations": 1851,
+      "selection_sha256": "f5bf0e352085d3c5708ee6c9564c104c38d7cfc5ea4fcba31931aab0f9086c61"
+    },
+    {
+      "case": "0818_n0p02",
+      "fits": 67,
+      "max_true_residual": 9.99553139300648e-06,
+      "max_iterations": 1072,
+      "selection_sha256": "072c047f51f62dc07774400a28dc39e2f129ef4990634be9e0ecab967fc110e0"
+    },
+    {
+      "case": "0819_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.987112115029515e-06,
+      "max_iterations": 2076,
+      "selection_sha256": "2b0a7a9668ef25b03aa76b483f6abf7840246eb938eaa6beb41dd8691173a215"
+    },
+    {
+      "case": "0819_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.993017654400376e-06,
+      "max_iterations": 1222,
+      "selection_sha256": "8ff46ce936a0b86ad7037a6a71efae2850ace32032fc91ee51dc6f8c226608b3"
+    },
+    {
+      "case": "0819_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.97522091535498e-06,
+      "max_iterations": 716,
+      "selection_sha256": "a1809f976ce32544078ec90af05fa131a9ed25484c3195ecc0e4af9f332fa4cc"
+    },
+    {
+      "case": "0820_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.999178811004891e-06,
+      "max_iterations": 2346,
+      "selection_sha256": "8af69a28ba7194364aa4571d1766d0d5b61764a96c835239db7e6d33e412db6b"
+    },
+    {
+      "case": "0820_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.99959508579769e-06,
+      "max_iterations": 1377,
+      "selection_sha256": "21cea24d897e021ed75748bc7309603cc6b6cb72b22fdbd95a996dde4d74671c"
+    },
+    {
+      "case": "0820_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.99360338416628e-06,
+      "max_iterations": 816,
+      "selection_sha256": "6b10a7e4aab5a299e20303ce8ccd03ea1ef2d31f141d89bc0a49b178a6c5e7b7"
+    },
+    {
+      "case": "0821_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.986007021484303e-06,
+      "max_iterations": 2368,
+      "selection_sha256": "11ede9e341d76337e5014e5da1a98ed1e2fffcab8169871a36d8437456fbff91"
+    },
+    {
+      "case": "0821_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.998198957655985e-06,
+      "max_iterations": 1357,
+      "selection_sha256": "6dc3465dd8bfa2abb10e4fcb7621bd44aee8effaac2cac09b8a27d0109915957"
+    },
+    {
+      "case": "0821_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.967790259765597e-06,
+      "max_iterations": 765,
+      "selection_sha256": "ecdd4b3cac5dcd710437863bc94ec2e42537bd7c4f79a8719ca98b19659ce1f1"
+    },
+    {
+      "case": "0822_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.989646240431863e-06,
+      "max_iterations": 1927,
+      "selection_sha256": "56a5d91d387e219e39528833eb63c1d11009ae171a8c8fa188642aa799cfe8cc"
+    },
+    {
+      "case": "0822_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.991218159352818e-06,
+      "max_iterations": 1170,
+      "selection_sha256": "eb66991756832f65fd5a096f9369f863a897daf9d13a2441ddf430da17452f19"
+    },
+    {
+      "case": "0822_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.998588717513956e-06,
+      "max_iterations": 666,
+      "selection_sha256": "e179c2610192387ce09e3ab2661891f259949eada4d13dbb310e6a1ae22a09ec"
+    },
+    {
+      "case": "0823_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.999739291663698e-06,
+      "max_iterations": 2368,
+      "selection_sha256": "e12bf4c0fa4add436abde5afc9f97900138d9550ff643cce7b66a01fea163c50"
+    },
+    {
+      "case": "0823_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.990695739841995e-06,
+      "max_iterations": 1362,
+      "selection_sha256": "41e7ce9421b5af19967630aff66052ebf4d398c344a76431b7d9ae697c679c00"
+    },
+    {
+      "case": "0823_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.980611284335487e-06,
+      "max_iterations": 799,
+      "selection_sha256": "c97e61f83db64a5cb33db1459588590cef0c4f740105c370bbe05819edd6c1a8"
+    },
+    {
+      "case": "0824_n0p005",
+      "fits": 66,
+      "max_true_residual": 9.996275140394436e-06,
+      "max_iterations": 2614,
+      "selection_sha256": "7bd5c9cac64048bf78aa722960f8b01b2e55ea7b3d0c846db477f4a28d17c883"
+    },
+    {
+      "case": "0824_n0p01",
+      "fits": 66,
+      "max_true_residual": 9.980122742290557e-06,
+      "max_iterations": 1581,
+      "selection_sha256": "194524f0415f798259990d44b4441324a04a2ded4f078c28908f988b5e459657"
+    },
+    {
+      "case": "0824_n0p02",
+      "fits": 66,
+      "max_true_residual": 9.989792286639599e-06,
+      "max_iterations": 922,
+      "selection_sha256": "adee50c8b97438378a1da6d1edc64e919f7a23eb8d8a417a794aab9dd5a5d4d6"
+    }
+  ],
+  "pending": [],
+  "frozen_sha256": "0b7f8bd4618601125b6316a50282a3c52f86fdbc5374736afb82d7ae50dd2fd5",
+  "selection_cohort_sha256": "64d2053e2e8eafcdeaa0c30a4046b7c17ab8c791bbb73e07864bed58b48a2773",
+  "status": "selection_complete_frozen; evaluation_ongoing",
+  "completed_stage_verification": {
+    "status": "complete",
+    "evaluation_cases": 36,
+    "convergence_and_pixels": "独立图像复核.json",
+    "statistics_and_cost": "独立统计复核-agent.json",
+    "original_selection_snapshot_retained": true
+  }
+}

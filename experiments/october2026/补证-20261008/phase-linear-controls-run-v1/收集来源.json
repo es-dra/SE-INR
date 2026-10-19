@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "165f93a2e8a743c19520314cec99b64deedf4b6c9c9004bb721e45553798f697",
+  "archive_bytes": 340828160,
+  "host": "research-175",
+  "root_pixel_audit_pass": true,
+  "max_shave4_MSE_difference": 4.440892098500626e-16,
+  "local_source_and_all_frozen_outputs_SHA_pass": true,
+  "remote_root": "/workspace/SE-INR/codex-20261008-paper-continuation/phase-linear-controls-run-v1",
+  "development_only": true
+}

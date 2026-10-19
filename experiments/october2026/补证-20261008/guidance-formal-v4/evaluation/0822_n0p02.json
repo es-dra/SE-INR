@@ -1,0 +1,637 @@
+{
+  "case": "0822_n0p02",
+  "status": "complete",
+  "candidates": {
+    "gauss_3": {
+      "mse": 0.006634346902776308,
+      "psnr": 21.78201823437192,
+      "cost": {
+        "seconds": 6.836064618983073,
+        "a_calls": 1259,
+        "at_calls": 630,
+        "interpolated_points": 5280628736,
+        "peak_gpu_bytes": 404753408
+      },
+      "numerics": {
+        "iterations": 628,
+        "relative_residual": 9.084478886635533e-06,
+        "true_relative_residual": 9.084478886635533e-06,
+        "recursive_relative_residual": 9.084478886616298e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.018969142739079726
+          ],
+          [
+            50,
+            0.008804510323206567
+          ],
+          [
+            75,
+            0.0053094391675836995
+          ],
+          [
+            100,
+            0.002407840600126042
+          ],
+          [
+            125,
+            0.0014923727736844534
+          ],
+          [
+            150,
+            0.0013853569546933744
+          ],
+          [
+            175,
+            0.0005638762312266785
+          ],
+          [
+            200,
+            0.0006826660828089705
+          ],
+          [
+            225,
+            0.00039606620528661625
+          ],
+          [
+            250,
+            0.0006122142859599846
+          ],
+          [
+            275,
+            0.0003674702988767156
+          ],
+          [
+            300,
+            0.00020133968748280729
+          ],
+          [
+            325,
+            0.00018293962026254545
+          ],
+          [
+            350,
+            0.000204304441542095
+          ],
+          [
+            375,
+            0.00013211028969748977
+          ],
+          [
+            400,
+            0.0001154354074598256
+          ],
+          [
+            425,
+            0.0001006297768392261
+          ],
+          [
+            450,
+            9.446987305901219e-05
+          ],
+          [
+            475,
+            4.739117902197267e-05
+          ],
+          [
+            500,
+            5.4183080913981223e-05
+          ],
+          [
+            525,
+            2.4802677861195564e-05
+          ],
+          [
+            550,
+            3.7925729288445985e-05
+          ],
+          [
+            575,
+            3.260882181592945e-05
+          ],
+          [
+            600,
+            2.4616771544176505e-05
+          ],
+          [
+            625,
+            1.2707839156190814e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 12.365639330398828
+        },
+        "preconditioner_calls": 628
+      }
+    },
+    "gauss_10": {
+      "mse": 0.0024319812263036357,
+      "psnr": 26.14039781925703,
+      "cost": {
+        "seconds": 2.383158527984051,
+        "a_calls": 469,
+        "at_calls": 235,
+        "interpolated_points": 1967128576,
+        "peak_gpu_bytes": 404753408
+      },
+      "numerics": {
+        "iterations": 233,
+        "relative_residual": 9.85937867402752e-06,
+        "true_relative_residual": 9.85937867402752e-06,
+        "recursive_relative_residual": 9.859378674029272e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.004618593595053658
+          ],
+          [
+            50,
+            0.001195048076739064
+          ],
+          [
+            75,
+            0.0003956027423801711
+          ],
+          [
+            100,
+            0.00021914277266413105
+          ],
+          [
+            125,
+            0.00011949771914194053
+          ],
+          [
+            150,
+            6.108622430655212e-05
+          ],
+          [
+            175,
+            3.649024385592089e-05
+          ],
+          [
+            200,
+            2.0307799617571152e-05
+          ],
+          [
+            225,
+            1.1345825110639643e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 6.788254191553052
+        },
+        "preconditioner_calls": 233
+      }
+    },
+    "gauss_30": {
+      "mse": 0.002318904899326667,
+      "psnr": 26.347170618598803,
+      "cost": {
+        "seconds": 0.8805261880042963,
+        "a_calls": 173,
+        "at_calls": 87,
+        "interpolated_points": 725614592,
+        "peak_gpu_bytes": 404753408
+      },
+      "numerics": {
+        "iterations": 85,
+        "relative_residual": 9.83905019836966e-06,
+        "true_relative_residual": 9.83905019836966e-06,
+        "recursive_relative_residual": 9.83905019836634e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.0008954226045969678
+          ],
+          [
+            50,
+            9.0223549615012e-05
+          ],
+          [
+            75,
+            1.717334178748911e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 3.92366508473248
+        },
+        "preconditioner_calls": 85
+      }
+    },
+    "gauss_60": {
+      "mse": 0.00362539409814977,
+      "psnr": 24.406447765829846,
+      "cost": {
+        "seconds": 0.6895948000019416,
+        "a_calls": 135,
+        "at_calls": 68,
+        "interpolated_points": 566231040,
+        "peak_gpu_bytes": 404753408
+      },
+      "numerics": {
+        "iterations": 66,
+        "relative_residual": 9.531248453818915e-06,
+        "true_relative_residual": 9.531248453818915e-06,
+        "recursive_relative_residual": 9.531248453820757e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.0006926449200224494
+          ],
+          [
+            50,
+            5.297846460965491e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 2.8293899741088167
+        },
+        "preconditioner_calls": 66
+      }
+    },
+    "gauss_128": {
+      "mse": 0.003683398951766334,
+      "psnr": 24.33751239828979,
+      "cost": {
+        "seconds": 0.6065805750258733,
+        "a_calls": 119,
+        "at_calls": 60,
+        "interpolated_points": 499122176,
+        "peak_gpu_bytes": 404753408
+      },
+      "numerics": {
+        "iterations": 58,
+        "relative_residual": 9.95643910095637e-06,
+        "true_relative_residual": 9.95643910095637e-06,
+        "recursive_relative_residual": 9.956439100968689e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.000674565575467516
+          ],
+          [
+            50,
+            3.1568153880660005e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 2.316953073357248
+        },
+        "preconditioner_calls": 58
+      }
+    },
+    "power_2": {
+      "mse": 0.002033060162233459,
+      "psnr": 26.918497695471974,
+      "cost": {
+        "reused_frozen_output": true,
+        "seconds": 0.0
+      },
+      "numerics": {
+        "iterations": 363,
+        "relative_residual": 9.97658770650002e-06,
+        "true_relative_residual": 9.97658770650002e-06,
+        "recursive_relative_residual": 9.976587706491514e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.009537922655073272
+          ],
+          [
+            50,
+            0.003590623698661331
+          ],
+          [
+            75,
+            0.0024885330320390045
+          ],
+          [
+            100,
+            0.0006259901648604976
+          ],
+          [
+            125,
+            0.0003656756252504611
+          ],
+          [
+            150,
+            0.00019871745599493718
+          ],
+          [
+            175,
+            0.00011342950996684026
+          ],
+          [
+            200,
+            4.770633107026892e-05
+          ],
+          [
+            225,
+            6.665583756717022e-05
+          ],
+          [
+            250,
+            3.750571679072885e-05
+          ],
+          [
+            275,
+            4.6281859497947586e-05
+          ],
+          [
+            300,
+            1.5548707203565864e-05
+          ],
+          [
+            325,
+            2.7438158696035355e-05
+          ],
+          [
+            350,
+            1.5401664782639548e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 14.68785856623835
+        },
+        "preconditioner_calls": 363
+      }
+    },
+    "power_2.5": {
+      "mse": 0.0017517608922393048,
+      "psnr": 27.565251734349467,
+      "cost": {
+        "reused_frozen_output": true,
+        "seconds": 0.0
+      },
+      "numerics": {
+        "iterations": 427,
+        "relative_residual": 9.750289173614121e-06,
+        "true_relative_residual": 9.750289173614121e-06,
+        "recursive_relative_residual": 9.75028917360178e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.027797740939545224
+          ],
+          [
+            50,
+            0.004355500524600926
+          ],
+          [
+            75,
+            0.0027328432950951003
+          ],
+          [
+            100,
+            0.0011396677269909965
+          ],
+          [
+            125,
+            0.0005003880401752007
+          ],
+          [
+            150,
+            0.00033198574186117826
+          ],
+          [
+            175,
+            0.0005562040455656888
+          ],
+          [
+            200,
+            8.100420481625885e-05
+          ],
+          [
+            225,
+            7.77675771906389e-05
+          ],
+          [
+            250,
+            0.00010035163631013681
+          ],
+          [
+            275,
+            3.006444376858377e-05
+          ],
+          [
+            300,
+            7.809577868115069e-05
+          ],
+          [
+            325,
+            7.19356462483666e-05
+          ],
+          [
+            350,
+            2.029361453640035e-05
+          ],
+          [
+            375,
+            1.4300455261116368e-05
+          ],
+          [
+            400,
+            3.081395200553887e-05
+          ],
+          [
+            425,
+            1.9188747346271057e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 19.097071629478116
+        },
+        "preconditioner_calls": 427
+      }
+    },
+    "power_3": {
+      "mse": 0.001885862153335885,
+      "psnr": 27.244900550946966,
+      "cost": {
+        "seconds": 4.67324945400469,
+        "a_calls": 921,
+        "at_calls": 461,
+        "interpolated_points": 3862953984,
+        "peak_gpu_bytes": 404753408
+      },
+      "numerics": {
+        "iterations": 459,
+        "relative_residual": 9.588173345938629e-06,
+        "true_relative_residual": 9.588173345938629e-06,
+        "recursive_relative_residual": 9.58817334594455e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.022431607792312097
+          ],
+          [
+            50,
+            0.005287510922284155
+          ],
+          [
+            75,
+            0.0037270675049175094
+          ],
+          [
+            100,
+            0.0009158582093723351
+          ],
+          [
+            125,
+            0.0006302333532562094
+          ],
+          [
+            150,
+            0.0004797500656860264
+          ],
+          [
+            175,
+            0.0004158693888649395
+          ],
+          [
+            200,
+            0.00018213132253326855
+          ],
+          [
+            225,
+            0.00023535293595407415
+          ],
+          [
+            250,
+            7.20633388596069e-05
+          ],
+          [
+            275,
+            8.544126863624178e-05
+          ],
+          [
+            300,
+            4.433974417530144e-05
+          ],
+          [
+            325,
+            5.329216580077505e-05
+          ],
+          [
+            350,
+            7.224365045730743e-05
+          ],
+          [
+            375,
+            0.00010776394506445964
+          ],
+          [
+            400,
+            1.6992518176169615e-05
+          ],
+          [
+            425,
+            1.7564149018065008e-05
+          ],
+          [
+            450,
+            1.927990265368925e-05
+          ]
+        ],
+        "dtype": "float64",
+        "preconditioner": {
+          "kind": "fft",
+          "spectral_power": 0.25,
+          "diagonal_min": 1.0,
+          "diagonal_max": 22.407373334398304
+        },
+        "preconditioner_calls": 459
+      }
+    }
+  },
+  "failures": [],
+  "oracle": "power_2.5",
+  "chosen": {
+    "analysis": "power_2.5",
+    "cv": "power_2.5",
+    "default": "power_2"
+  },
+  "selection_cohort_sha256": "64d2053e2e8eafcdeaa0c30a4046b7c17ab8c791bbb73e07864bed58b48a2773",
+  "truth_sha256": "2ed38d982739f62e7fc47fc10f6884e4699e605d016355b760497d12f6ba4556",
+  "metrics": {
+    "analysis": {
+      "psnr": 27.565251734349467,
+      "regret_db": 0.0,
+      "improvement_over_default_db": 0.6467540388774928,
+      "severe_degradation": false
+    },
+    "cv": {
+      "psnr": 27.565251734349467,
+      "regret_db": 0.0,
+      "improvement_over_default_db": 0.6467540388774928,
+      "severe_degradation": false
+    },
+    "default": {
+      "psnr": 26.918497695471974,
+      "regret_db": 0.6467540388774928,
+      "improvement_over_default_db": 0.0,
+      "severe_degradation": false
+    }
+  }
+}

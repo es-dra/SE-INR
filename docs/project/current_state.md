@@ -1,175 +1,67 @@
-# Current State Capsule
+# 当前研究：尺度输入何时损害重建
 
-本文档是短恢复入口。LIIF/LTE 文献笔记与 SC-INR 对照底稿见
-`docs/project/model_details_liif_lte_scinr.md`；论文 claim 边界见
-`paper/claims_evidence_matrix.md`；可引用产物见 `paper/ARTIFACTS_ALLOWED.md`。
-旧长技术记录已退役，历史结论不得绕过本文件、claim matrix 和 artifact whitelist
-直接进入论文。
+更新：2026-10-19。当前以ICASSP为目标整理分析论文，尚未投稿；没有匹配训练或新模型性能主张。
 
-## 当前研究对象
+## 问题与模型
 
-项目研究 arbitrary-scale image super-resolution 中的 decoder-side scale
-sampling consistency。当前不宣称 whole-network strict scale equivariance。
+连续图像模型用LR图像、查询坐标和目标像素大小cell生成输出。我们研究：同一模型中加入cell修正为何平均有益却会损害部分样本；减小修正幅度能解决多少，改变内部加权能定位什么原因？
 
-推荐表述：
+LTE是已有方法；SC-INR是作者由LTE衍生的实验变体，cell经解析sinc乘在MLP前特征上。SC不作为独立模型家族、精确像素积分、严格尺度等变或优于所有基线的新方法。近期诊断使用冻结源码和已有权重；旧工作树中的新门控等改动未自动成为已验证实现。
 
-- scale sampling consistency
-- sampling-consistent Fourier implicit decoder
-- scale-decoupled observation
-- decoder-side sampling consistency
+## 目前证据
 
-禁止表述：
+| 阶段 | 真实结果 | 能支持的判断与边界 |
+| --- | --- | --- |
+| 自然图平均收益与个体失败 | DIV2K 0837–0868共32图，LTE/SC各两已有种子、×2/×4；native相对zero平均PSNR增益：LTE +0.912/+0.444 dB，SC +0.687/+0.028 dB，但存在整图负例。 | 研究对象是各模型自身cell修正，不是模型之间性能排名。32图×两种子不是64个独立图。zero属训练外参照，非零h3也保留负例，失败标签会随参照改变。 |
+| 幅度与方向分型 | 以d=修正输出−参照、e=真值−参照，MSE收益g=2mean(ed)−mean(d²)。负收益可由方向不对或调整过头产生。统一half修正在zero主口径使总体MSE增加LTE 7.55%/2.77%、SC 5.46%/0.264%。 | 经典恒等式和事后诊断，不是新定理或观察限定选择器。λ=0能消除相对参照的损害；不能说幅度缩减绝对不能修复。 |
+| 完整缩减与稳健性 | 六口径raw/端点clip×shave0/4/8保留主要平均趋势；主口径在0≤λ≤1内看真值选统一λ，总体MSE最优改善zero最多0.0011%、h3最多0.0853%。 | 仅限制这批输出线段的总体净收益，不是负例不可修复或其他修复法的上界；具体失败标签会变。 |
+| 受控高频路径与相位 | 固定×4、240条件、148唯一输入；中心中频LTE 14/32、SC 16/32由正方向变负；保持逐频幅值改变相位也有收益正负变化。 | 目标功率谱或简单频带排序不足以确定这些受控收益。路径同时改变LR统计，不是自然图混叠的一般因果结论。 |
+| 解码开关对照 | 在上述焦点失败η1，固定zero-cell的ReLU开关后LTE仍负13/14、SC16/16；实际非线性响应多数减轻而非制造损害。 | 不能统一归因于后续ReLU开关改变；固定映射仍含解码权重，未证明纯特征自身错误。 |
+| 原假设未成立 | SC焦点16例中，换回旧输入产生的sinc权重仅救回1/16。 | 不支持“输入使尺度权重漂移”是主要解释。保留原冻结假设、预检与完整负结果。 |
+| 原生等总改变量干预 | 保持四分支×4096查询×256特征的总RMS改变量相同，把原按通道/位置差异化加权改为统一缩小。焦点16例中心中频在正常解码与固定开关下均负→正；完整32中频由31负/1正变为32正。焦点16例完整RGB MSE均下降，中位0.3996%（+0.01739 dB），相对原生输出。 | 在指定SC权重、×4和已见周期样本上，分配方式能改变损害，不能只用总调整量或解码开关变化解释。全局RMS相同不代表逐点、逐通道或RGB变化相同；尚未定位单通道语义或真实频率估计错误。 |
+| 必须同时看的反例 | 16低频对照的中心RGB收益由原生16正变为统一缩小16负；其中11/16仍为正方向但过冲。 | 统一缩小是诊断干预，不能当通用改进方案；低频结论是中心RGB，不能外推完整图。 |
 
-- strict scale equivariance
-- scale-equivariant INR
-- whole-network scale equivariance
+现有证据构成范围明确的失败诊断链；尚未建立自然图普遍原因、可靠负收益预测器或自动修复器。效应较小，单SC权重/×4/周期样本的广度仍是投稿风险；核验通过不代表录用竞争力已证实。
 
-## 当前主方法
+## 直接阅读与原件
 
-论文展示名：`SC-INR`
+- [当前论文PDF](../../paper/current/main.pdf)、[TeX](../../paper/current/main.tex)、[完整时间线与来源](../../paper/current/SOURCES.md)。当前PDF为4页正文+1页参考文献，SHA256 `20b269f89276c5274d67fbc396991cc8e9f901c81e27d19d086f7232cdd1ecab`。编译/字体/全页审阅沿用[原核查](../../paper/current/编译核查.json)，本次同步未重新训练或改变论文技术内容。
+- [原始科学记录](../../experiments/october2026/)保留协议、源代码、逐条件评分、失败/开发版本和独立核查；[manifest](../../experiments/october2026/manifest.json)给出逐文件SHA、原件包SHA和原记录引用的服务器路径。公开仓库不装入数据集、checkpoint、大数组、原始运行日志和对话包；未上传不等于删除。
+- research-175当前干净Git目录：`/workspace/SE-INR/SE-INR-current`；旧dirty工作树`/workspace/SE-INR/SC-ASISR`保留；全部`claude-*`、`codex-*`独立实验根和原件仍在`/workspace/SE-INR/`。最新完整运行在`codex-20261019-sinc-allocation-formal-v1`，第一阶段在`codex-20261018-sinc-path-formal-v1`，解码对照在`codex-20261018-decoder-path-formal-v1`，已有编译工程在`paper-allocation-20261019`。
+- 当前诊断冻结模型源在`/workspace/SE-INR/codex-20261011-readout-probe-v4/snapshot`，不是旧dirty工作树的即时内容。诊断脚本保留原运行路径，不保证任意机器不配置数据/权重即可执行。先核协议和输入SHA，不按本页启动旧训练。
 
-实现/配置：
+## 研究脉络及未成立的路线
 
-- registry name: `sc_inr_signed_phiz`
-- train config: `configs/train-div2k/train-sc-inr.yaml`
-- canonical checkpoint: `artifacts/checkpoints/seed{1,2,3}/sc-inr`
-- seed1 历史 raw key：`SC-INR+PhiZ`；旧 checkpoint 目录名不再保留。
+| 时段/探索 | 结果与现在的身份 | 证据入口 |
+| --- | --- | --- |
+| 早期SC-INR新方法与性能探索 | 小幅三seed bicubic收益保留；2026-08-07 IPE-LIIF/Thera来源/公平协议门未同时通过，新方法主张停止。并未进行公平直接对比，不能反向声称被两基线击败。 | [原收口记录](sc_inr_route_closeout_2026-08-07.md)、[冻结旧方法草稿](../../paper/draft/README_zh.md)；旧Git版本仍可追溯。 |
+| 9月读取/采样路线 | 旧入口涉及P/S/R及C4-consistent Gaussian等任务；这些并非当前cell失败诊断的已验证成果，也不自动恢复训练。 | 旧工作树`outputs/research-week-20260906/`及`artifacts/raw_results/asisr_research_handoff_20260914/`原位保留，旧入口原文见下。 |
+| Claude 10月原分析稿 | 频率坐标归一化便于跨倍率比较；G1四组支持粗频带排序，但乘R因子无改善。L2排序复现，优于闭式足迹量仅2/4，函数相似性0/4；不称网络机制证明。 | [Claude原稿](../../paper/Claude原稿-20261007/main.pdf)、[原结果](../../experiments/october2026/服务器结果-20261007/)、[G1](../../experiments/october2026/补证-20261008/g1/)、[L2补齐](../../experiments/october2026/补证-20261008/multiseed/) |
+| 训练前指导与谱歧义 | D11保留最优臂仍1/3失败。G2 36case相对默认+1.105 dB，但36/36同选power2.5，较CV−0.112 dB、成本1.76倍；不是逐图适配。8点Gaussian谱歧义实验1920case中197认证未见错、33空集，认证率10.26%；仅fresh-draw总体风险，经典EB强，理论新颖性不足。 | [10月8日全记录](../../experiments/october2026/补证-20261008/)、[SOURCES](../../paper/current/SOURCES.md)；不作为当前新方法贡献。 |
+| 线性对照与预测开发 | 统一校准law 15/16推荐吻合但15/132排序反例，未超过静态强基线；逐图负收益预测与内部迁移未形成可靠优势。 | [校准](../../experiments/october2026/补证-20261008/common-law-calibration-run-v1/)、[内部迁移](../../experiments/october2026/补证-20261012/readout-internal-transfer-v1/)及SOURCES；开发结果不是未见测试。 |
+| 10月12–19日当前链条 | 从负收益分型、受控路径/相位、固定解码到等量分配干预，正结果和反例一并保留。 | [10月12日](../../experiments/october2026/补证-20261012/)、[10月18–19日](../../experiments/october2026/补证-20261018/)、[历史论文版本](../../paper/current/versions/) |
 
-结构：
+## 当前未解决
 
-- `coef(z)`, `omega(z)`, `phi(z)` 由 feature 预测。
-- `omega = omega_bound * tanh(raw_omega)`, `omega_bound=2.1`。
-- `phi(z)` 是 feature-conditioned phase，不能接收 cell/scale。
-- cell/scale 只通过 analytic sinc response 进入完整 `SC-INR`。
-- `SC-INR-NoSinc` 仅关闭该 response，实际使用 `W=1`。
+不扩展新网络路线、不做匹配训练。接下来由导师审阅现有贡献的重要性和适用范围，再决定是否值得做更广的前瞻验证；没有从这些开发结果推定普适收益。旧自动安排保持暂停，本次仅整理同步。
 
-## 命名边界
+<details>
+<summary>同步前服务器研究入口原文（历史，不是当前任务）</summary>
 
-- `SC-INR`: final candidate, signed omega + feature phase + sinc。
-- `SC-INR-NoPhi`: previous no-phase mainline, 3-seed 稳证据主体。
-- `SC-INR-NoPhi-Signed`: signed omega but no phase。
-- `SC-INR-NoSinc`: signed omega + feature phase, no analytic sinc response。
-- `LIIF-EQ` / `LTE-EQ`: Rot-E 正交 baseline，不是 SC-INR 消融。
-- `SC-INR-EQ`: exploratory Rot-E integration，保留 SC-INR decoder contract；
-  目前只作为单 seed extension/diagnostic，不是主方法。
-- `LTE-NoCellPhase` / `LTE-PhaseZ`: LTE-side diagnostic。
+# 当前研究与运行入口
 
-## 当前证据
+2026-09-14：任意尺度超分目标保留，方法允许重构。当前首选为具有一致C4几何作用的高斯连续表示，先完成现代基线、实现与CPU检查，再在设备可用时做两arm有界pilot。
 
-较稳证据：
+- [最新控制状态](../../outputs/research-week-20260906/status.json)
+- [当前摘要](../../outputs/research-week-20260906/latest-summary.md)
+- [研究复盘与新路线](../../artifacts/raw_results/asisr_research_handoff_20260914/research-renewal-report.md)
+- [交接说明](../../artifacts/raw_results/asisr_research_handoff_20260914/HANDOFF.md)
+- [先导范围与资源上限](../../artifacts/raw_results/asisr_research_handoff_20260914/pilot-scope.json)
 
-- `SC-INR-NoPhi` 有 3-seed core benchmark，OOD 相对 LTE 小幅稳定提升。
-- `SC-INR-NoPhi` seed1 auxiliary 支持 strong same-LR consistency vs LTE。
+S/R已完成；C已取消且不恢复；Ciao/joint暂停资料保留。NVML当前异常，GPU可用性需重新验证，不能依据历史记录启动或重启作业。旧研究结果与前版本入口保留于交接快照。
 
-final `SC-INR` evidence：
+## 2026-09-14 CPU 准备进展
 
-- 3-seed benchmark 已补齐，活跃入口为：
-  `artifacts/derived/benchmarks/paper_main_3seed_summary.csv` 和
-  `artifacts/derived/benchmarks/paper_main_3seed_paired_delta.csv`。
-- final `SC-INR`: ID `31.0738 ± 0.0582`, OOD `22.7578 ± 0.0316`,
-  ALL `25.5298 ± 0.0403`。
-- paired delta vs LIIF: ID `+0.0437 ± 0.0757`, OOD `+0.0328 ± 0.0373`,
-  ALL `+0.0364 ± 0.0499`。
-- paired delta vs LTE: ID `-0.0048 ± 0.0836`, OOD `+0.0504 ± 0.0417`,
-  ALL `+0.0320 ± 0.0555`。
-- `SC-INR` vs `SC-INR-NoPhi` 只展示 seed1 结构增量：OOD `+0.0295`,
-  ALL `+0.0421`；入口为 `artifacts/derived/benchmarks/paper_context_seed1.csv`，
-  不在主表展示 seed2/seed3 两者差异。
-- auxiliary 仍是 seed1：strong same-LR consistency vs LTE，但不是 consistency 最强变体。
-- qualitative: 用户确认 Urban100 img012 x8 和 img004 x8 selected examples，已在
-  `artifacts/derived/paper_figures/qualitative_selected_seed1/` 用当前命名重新导出。
-- mechanism figure: LTE vs SC-INR 结构对比图已生成在
-  `artifacts/derived/paper_figures/lte_scinr_mechanism_2026-05-18/`；它是论文/周报候选图，
-  只说明 cell 进入 decoder 的形式差异，不能替代 `lte_scinr_mechanism_2026-05-16`
-  的 seed1 机制诊断。
+[G0/G1 实现与验证报告](../../artifacts/raw_results/gaussian_geometry_20260914/cpu-preparation/README.md)：论文版网络与新几何投影、训练/开发数据入口、CPU验证和CUDA源码编译已完成；真实GPU核验与短试验等待设备可用。
 
-NoSinc evidence：
-
-- full seed1 benchmark 已并入 `artifacts/derived/benchmarks/paper_context_seed1.csv`；
-  `SC-INR-NoSinc` vs full `SC-INR`，ID `-0.1397`, OOD `-0.0467`,
-  All `-0.0777`。
-- auxiliary: NoSinc same-LR self-consistency 远高于 full `SC-INR`，但这是
-  zero active cell response 的 caveat，不是更正确 observation 的证据。
-- response/omega diagnostics: NoSinc active attenuation 和 cell-only RMSE 均为 0；
-  full `SC-INR` 保留有限 analytic response。
-- effective amplitude diagnostics:
-  `artifacts/derived/diagnostics/effective_amplitude_2026-05-12/` 只作为
-  feature-level mechanism sanity check。它统计 MLP 前 coefficient-pair magnitude
-  proxy 与 `W(omega,c)` 的关系，不能解释为最终 RGB 频谱振幅、数据集级趋势或
-  多 seed 证据。
-- footprint oracle diagnostics:
-  `artifacts/derived/diagnostics/footprint_oracle_2026-05-15/` 固定 x4 LR/query，
-  只改变 cell multiplier，并用 HR piecewise-constant box average 作为 oracle proxy。
-  `SC-INR` 在 multiplier 2/4 下的 oracle RMSE 为 `0.02464/0.02148`，低于
-  `SC-INR-NoSinc` 的 `0.02612/0.02750`；delta-tracking RMSE 为
-  `0.03062/0.04745`，低于 NoSinc 的 `0.03237/0.05134`。该诊断支持 analytic
-  footprint response 区分于 cell-insensitive 负控，但不是真实连续图像 exact integral
-  或 sinc 唯一因果证明。
-- LTE vs SC-INR unified mechanism diagnostics:
-  `artifacts/derived/diagnostics/lte_scinr_mechanism_2026-05-16/` 使用 BSD100/Urban100
-  前 5 张、中心 crop 64、每图 256 query、cell multiplier 1/2/4。m>1 平均下，
-  `SC-INR` delta-tracking RMSE `0.04113`，低于 `LTE` 的 `0.04198` 和
-  `SC-INR-NoSinc` 的 `0.04353`；oracle RMSE `0.02512`，低于 `LTE` 的
-  `0.02623` 和 NoSinc 的 `0.02729`。`LTE` 的 learned `h_p(c)` delta RMS 为
-  `0.51528`，`SC-INR` active response delta RMS 为 `0.30812`，NoSinc 为 `0`。
-  该结果直接补强 `LTE phase(cell) -> SC-INR W(omega,c)` 主脉络，但仍是
-  crop-based seed1 diagnostic。
-- advantage-region diagnostics:
-  `artifacts/derived/diagnostics/sc_inr_advantage_midbudget10_2026-05-21/` 已补充
-  first-10 逐图 paired statistics 和 seed1 预注册局部 crop 候选池。first-10 OOD
-  相对 LTE mean/median/win-rate 为 `+0.0434` / `+0.0320` / `0.746`，相对 LIIF 为
-  `+0.0291` / `+0.0216` / `0.689`。局部 OOD crop 相对 LTE median ΔPSNR
-  `+0.0353`、win-rate `0.628`；相对 LIIF median ΔPSNR `+0.0231`、win-rate
-  `0.596`。当前主展示已收缩为外部基线优势区间：`external_advantage_region_pool.csv`
-  是候选池入口；`figures/external_advantage_crops/` 和 `figures/external_advantage_context_zoom/`
-  是本地渲染候选图目录，只展示 `GT/Bicubic/LIIF/LTE/SC-INR`，NoPhi/NoSinc 留作后续单独消融。
-  候选图只从 OOD 非平坦结构 crop 中选，排序指标为 `min(SC-INR-LIIF, SC-INR-LTE)`；
-  正文优先使用 context+zoom 版本，但采用前需迁移到 `artifacts/derived/paper_figures/` 并登记。
-  x4 sanity pool 的 min external Δ 约为 0，
-  只能作为低倍率边界对照，不能写成 x4 明显优势。该结果支持
-  “selected external-baseline advantage regions”，不能替代全量 3-seed benchmark、
-  证明平均视觉质量更好，或宣称 SC-INR 在所有局部区域普遍优于 LIIF/LTE。
-
-SC-INR-EQ exploratory evidence：
-
-- seed1 full benchmark 已完成：
-  `artifacts/raw_results/seed1/benchmark_sc_inr_eq.json`，并并入
-  `artifacts/derived/benchmarks/paper_context_seed1.csv`。
-- `SC-INR-EQ`: ID `31.1513`, OOD `22.7779`, ALL `25.5691`。
-- single-seed delta vs `LTE-EQ`: ID `+0.0841`, OOD `+0.0749`,
-  ALL `+0.0780`。
-- single-seed delta vs final `SC-INR`: ID `+0.0326`, OOD `+0.0014`,
-  ALL `+0.0118`；应解释为 exploratory Rot-E integration 基本打平
-  final `SC-INR`，不能升级为主方法。
-- 6.1-6.6 mechanism suite 的 active 摘要在：
-  `artifacts/derived/diagnostics/mechanism_suite_2026-05-12/README_zh.md`；
-  完整探索产物只保存在
-  `artifacts/legacy/derived_analysis/mechanism_suite_2026-05-12/`。
-- 6.3 consistency 继续暴露 caveat：`LTE-PhaseZ`、`LTE-NoCellPhase` 和
-  `SC-INR-NoSinc` 的 same-LR consistency 都高于完整 `SC-INR`/`SC-INR-EQ`，
-  所以该指标只能 diagnostic-only。
-
-## 当前最重要缺口
-
-1. paper table 收敛：benchmark 已有 canonical 入口
-   `artifacts/derived/benchmarks/`；下一步只从该入口进入论文表格。
-2. footprint correctness 已有 seed1 小样本 diagnostic gate；下一步若进入论文强证据，
-   需要扩大覆盖或继续作为 appendix diagnostic。不要继续把 same-LR consistency 当作 sinc 主证据。
-3. `SC-INR-EQ` 是 exploratory 分支：benchmark 和机制 suite 已补，但仍缺少更严格的
-   旋转通道顺序、group action、cell-only response 和 analytic sinc 积分语义属性测试。
-4. 项目健康：旧 overview、旧 planning table 和未确认自动 qualitative candidates 已不应作为活跃入口。
-5. LIIF/LTE 文献笔记与 SC-INR 对照底稿已建立：
-   `docs/project/model_details_liif_lte_scinr.md`。后续关于原文理解、方法细节和
-   SC-INR 动机边界，优先在该文档上增量修订。
-6. 工作区清理原则不再单独维护规划文件：对话中先给出清理建议，实际执行时只更新
-   current_state、claim/evidence 入口和 daily memory，避免文档膨胀。
-
-## 当前行动原则
-
-- final `SC-INR` multi-seed 已完成；论文 claim 按 3-seed 中性结论更新。
-- 所有新训练使用 canonical name `sc-inr`，按 seed 分目录保存。
-- 不覆盖已有 seed1、benchmark、checkpoint 或用户改动。
-- 长结果写入 artifact；对话只汇报关键数值、命令、风险。
-- 新 claim 必须同步到 `paper/claims_evidence_matrix.md` 和
-  `paper/ARTIFACTS_ALLOWED.md`。
-- 新 benchmark 表格必须从 `artifacts/derived/benchmarks/` 读取，不直接解释 raw JSON key。
+</details>

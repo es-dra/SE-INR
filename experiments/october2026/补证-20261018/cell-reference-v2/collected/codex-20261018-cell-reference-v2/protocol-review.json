@@ -1,0 +1,62 @@
+{
+  "review_type": "independent static protocol and source-diff review",
+  "reviewed_at": "2026-10-18T07:18:49.532249+00:00",
+  "reviewer": "cell_support_audit",
+  "source_sha256": "03c6e3ef31779cd9c6dfb7370a2633718bdf70eab8cc0578a2535bb69d97fb9d",
+  "protocol_sha256": "7ed4105aa1eade5248031936814c1a263b3e7da2e14373373a78db25e7e02ac0",
+  "v1_source_sha256": "819767ea725beb467f1fb605793538df3c77e9b2a6035b0e1792e8d5cab005a2",
+  "v1_protocol_sha256": "56c67c23fefca918d48c63b46252893eaebe9ab4418206c8b1006f17937217a9",
+  "verdict": "PASS for reuse of retained v1 preflight predictions to validate v2 scoring; no static blocker found for formal launch once scoring validation passes and external launch guard is installed",
+  "changed_functions_ast": [
+    "write",
+    "score"
+  ],
+  "unchanged_functions_ast": [
+    "sha",
+    "manifest",
+    "load",
+    "prepare",
+    "query",
+    "predict",
+    "project",
+    "main"
+  ],
+  "changed_protocol_keys": [
+    "bootstrap",
+    "changes_from_v1",
+    "reference_stability",
+    "version"
+  ],
+  "checks": {
+    "inference_preparation_query_load_and_budget_functions_ast_unchanged": true,
+    "only_write_scalar_serialization_and_score_summaries_changed": true,
+    "numpy_generic_item_preserves_boolean_integer_float_values": true,
+    "json_nonfinite_values_still_rejected": true,
+    "primary_bootstrap_stratified_by_model_scale_reference": true,
+    "shared_image_cluster_resampling_indices_used": true,
+    "cross_scale_pooled_marked_secondary": true,
+    "zero_h3_pairs_match_image_within_model_seed_scale_band": true,
+    "four_way_harm_table_mutually_exclusive_exhaustive": true,
+    "label_agreement_restricted_to_both_harmful": true,
+    "expected_formal_prediction_files": 256,
+    "expected_formal_rgb_predictions": 1024,
+    "expected_formal_contrast_rows": 3072,
+    "expected_preflight_prediction_files": 8,
+    "expected_preflight_contrast_rows": 96,
+    "cell_native_and_classification_algebra_inherited_from_v1_review": true
+  },
+  "scope_limits": [
+    "No image pixels read; no inference or formal run executed by reviewer.",
+    "This is static/AST review, not execution validation of serialization or bootstrap results.",
+    "Parent reports retained v1 preflight inference native/chunk max differences all zero and serialization failure; this review does not independently inspect those artifacts.",
+    "Cross-seed summary remains pooled over scales; use rows for scale-specific scientific claims.",
+    "Three non-DC bands omit DC and cannot by themselves sum to RGB gain.",
+    "Nonzero cell references are in marginal numeric support only; fixed-target interventions are not joint training-distribution support."
+  ],
+  "required_before_formal_launch": [
+    "Validate v2 score and summary JSON on retained excluded-image preflight predictions, in a new output root with source/output provenance.",
+    "Freeze new source/protocol/snapshot/checkpoint hashes before formal inference.",
+    "Keep run output outside source root and install external timeout within fixed 1800-second formal deadline.",
+    "Retain v1 FAILED and incomplete outputs; do not overwrite or convert v1 to success."
+  ]
+}

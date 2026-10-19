@@ -1,0 +1,11 @@
+{
+  "gpu_phase_seconds": 52.75865905798855,
+  "invocations": [
+    {
+      "started_unix": 1791435666.2262793,
+      "ended_unix": 1791435719.2690144,
+      "gpu_phase_wall_seconds": 52.75865905798855,
+      "full_wall_seconds": 53.04273533821106
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "status": "complete",
+  "development_only": true,
+  "n_calibration_images": 32,
+  "n_unique_operators": 12,
+  "n_operator_inputs": 24,
+  "n_calibration_image_arm_rows": 384,
+  "n_development_scores": 24,
+  "n_recommendation_comparisons": 16,
+  "n_pair_comparisons": 132,
+  "n_opposing_pairs": 15,
+  "recommendation_matches": 15,
+  "recommendation_cohort_sha256": "b11ea98ff908f6dae3d9540f4e794ec10d7cbbe00e7cee56820a8b32ef35de00",
+  "stage_wall_seconds": {
+    "operator_verification_seconds": 1.8898791690007783,
+    "calibration_preprocess_seconds": 2.19046185904881,
+    "calibration_arm_seconds": {
+      "ph00_sigma3_rbf": 0.08278039898141287,
+      "ph01_sigma3_rbf": 0.18596461310517043,
+      "ph02_sigma3_rbf": 0.1859856759547256,
+      "ph00_sigma10_rbf": 0.1861135869694408,
+      "ph01_sigma10_rbf": 0.18838082399452105,
+      "ph02_sigma10_rbf": 0.18610699297278188,
+      "ph00_sigma3_fixed_rf": 0.18629098101519048,
+      "ph01_sigma3_fixed_rf": 0.18541828202432953,
+      "ph02_sigma3_fixed_rf": 0.18601540898089297,
+      "ph00_sigma10_fixed_rf": 0.18638977708178572,
+      "ph01_sigma10_fixed_rf": 0.18610943187377416,
+      "ph02_sigma10_fixed_rf": 0.1860903061751742
+    },
+    "second_moment_seconds": 0.14450602300348692,
+    "recommendation_seconds": 0.00026268602232448757,
+    "hash_freeze_seconds": 0.32984087298973463,
+    "postfreeze_score_seconds": 0.17326005300856195
+  },
+  "interpretation": "Fixed finite-ensemble calibration-static recommendations and retrospective expected-raw/realized-clamped scores only. No adaptive selector or generalization conclusion."
+}

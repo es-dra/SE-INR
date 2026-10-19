@@ -1,0 +1,117 @@
+{
+  "version": "negative-readout-v3",
+  "scope": "Prospective fixed-checkpoint cell intervention on 12 DIV2K validation crops. Not globally unseen images or paired-retrained ablation effect. Conventional bicubic proxy and calibrated ridge diagnostics, no new risk theorem.",
+  "inherited_root": "/workspace/SE-INR/codex-20261011-readout-probe-v4",
+  "dataset_root": "/workspace/SE-INR/Data/DIV2K",
+  "models": [
+    "lte",
+    "sc-inr"
+  ],
+  "calibration_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "test_ids": [
+    825,
+    826,
+    827,
+    828,
+    829,
+    830,
+    831,
+    832,
+    833,
+    834,
+    835,
+    836
+  ],
+  "data_protocol": {
+    "crop": 128,
+    "input_scales": [
+      2,
+      4
+    ],
+    "downsample": "torch bicubic antialias align_cornersFalse clampLR0to1",
+    "target": "discrete original HR",
+    "noise": "none",
+    "eval_shave": 4,
+    "RGB_raw": "unclipped",
+    "query": "128 midpoint unit-grid, model coords2q-1 cell2h",
+    "fixed_conditions": [
+      "zero cell",
+      "native1/128 square cell"
+    ],
+    "checkpoint": "epoch1000 no gradient no SR fitting"
+  },
+  "forecast": {
+    "hypothesis": "Signed alignment 2<d,B(y)-F0> minus ||d||² predicts sign of native-readout gain beyond band/scale and magnitude/spectrum.",
+    "proxy": "raw bicubic upsample to128, align_cornersFalse; approximate discrete target, not known box inverse",
+    "gain": "MSE(F0,t)-MSE(Fnative,t)",
+    "normalization": "observable cropped bicubic RGB variance Z=max(mean((B-channelmean)^2),1e-8); no test truth normalization",
+    "bands": "separate fullRGB and perRGB Chebyshev FFT bands on shaved120: [0,1/8),[1/8,1/4),[1/4,.5001), exclude DC in bands; fullRGB includes DC",
+    "baseline": "always_enable,always_disable,calibration scale-band median gain/Z,energy_only=-||d||²,norm_ridge",
+    "ridge_features": "2 scale indicators+4 band indicators+log1p(change_energy/Z),log1p(F0 variance or band energy/Z),log1p(B variance or band energy/Z),log1p(LR gradient/Z),LR spectrum radial centroid,entropy",
+    "candidate": "proxy zero-shot; directional_ridge=same standardized features plus proxyalignment/Z",
+    "ridge_fit": "per model, all32 calibration image×2scale×4outcome rows, fixed lambda1, intercept unpenalized; no tuning or test fit"
+  },
+  "ridge_lambda": 1.0,
+  "sign_epsilon": 1e-08,
+  "wall_budget_seconds": 900,
+  "cpu_threads": 1,
+  "nice": 10,
+  "GPU": 0,
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 20261011,
+  "gate": {
+    "unit": "pooled 12images×2scales×3bands per model, correlation disclosed; RGBpolicy separately24rows",
+    "class": "negative>=12rows spanning>=6imageclusters; recall>=.75; precision>=.6; FPR<=.25; BA exceeds each baseline by>=.05 and each paired image-cluster bootstrap95%lower>0",
+    "policy": "fullRGB policy uses native iff forecast>0 else zero; paired image-cluster95%lower of MSE reduction>0 versus EACH baseline",
+    "combined": "classification AND RGB policy; report each of2candidates/model separately, no best-test selection",
+    "ties": "abs(actualrawgain)<=1e-8 retained counted, excluded sign rates only; forecastzero predicts not harmful for classification but zero-cell for policy",
+    "cost": "complete preparation/inference/calibration/selection/scoring/IO/runtime, zero SR training; proxy lowres prior may fail"
+  },
+  "alias_diagnostic": {
+    "cases": "n16 k_low3/5, n32 k_low9/13, each axis0/1 and phase0/pi4 =>16sharedinputs; two square footprints1/64,2/64; same inference scores low/hightruth",
+    "construction": "k_high=n-k_low, a_high=.25,a_low=.25*k_low/(n-k_low),phase_high=pi-phase_low. One float32 observation shared. Constant .5 is data mean not hard-coded in proxy",
+    "proxy": "FFT principal |m_i|<=floor((n-1)/2), dropsNyquist; divide sinc(m_y/n)sinc(m_x/n), multiply targettransfer and midpoint phase; observation residual disclosed",
+    "freeze": "forecasts cannot use true k/axis/phase; samey guarantees identical forecasts; no guaranteed actualflip, retain noflips",
+    "evaluation": "fresh deterministic counterexample diagnostic; not independent natural generalization or all-estimator impossibility"
+  },
+  "separation": "prepare stores truth separate; predictor never opens test truth/alias_specs. Calibration truth only when fitting. Entire test forecasts/coefficients/prediction SHA freeze before score opens testtruth. All rows retained; numerical failures/incomplete not replaced.",
+  "failure_policy": "new source version/newroot for changes, never patch frozen formal; guard absolutedeadline+900 cumulative phase; do not extend resume, finite preflight120sec using only0001+onealias, no testtruth reads; preserve all failures",
+  "related_sources": [
+    "https://arxiv.org/abs/0804.3010",
+    "https://ojs.aaai.org/index.php/AAAI/article/view/25372"
+  ],
+  "revision": "v1 calibration-only smoke passed; v2 CPU SIG11 before first completed case preserved. v3 only CPU1 limit plus faulthandler; all forecasts/thresholds/900s unchanged."
+}

@@ -1,0 +1,16 @@
+{
+  "status": "Known controls, not novel principles",
+  "sources": [
+    {
+      "title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "url": "https://bmild.github.io/fourfeat/index.html",
+      "verified": "Root opened author primary page. NTK stationary bandwidth and scale under/overfit already studied. Fixed RFF linear kernel is not full MLP NTK or learned effective kernel."
+    },
+    {
+      "title": "Compression Limits for Random Vectors with Linearly Parameterized Second-Order Statistics",
+      "url": "https://sps.ewi.tudelft.nl/pubs/leus15it.pdf",
+      "verified": "Primary publisher/author abstract verified earlier; structured covariance sampling recovery already established; rank is not full prediction risk under a separate target law."
+    }
+  ],
+  "limits": "Classical dense GP and ridge are diagnostic controls; two known images not fresh test, no new selector. Any risk estimated under its own candidate kernel changes the target law across candidates and is not common-truth risk."
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "case": "calibration_0001_x2",
+    "seconds": 2.6826374450465664,
+    "queries_cumulative": 65536
+  },
+  {
+    "case": "calibration_0001_x4",
+    "seconds": 2.356512038037181,
+    "queries_cumulative": 131072
+  },
+  {
+    "case": "alias_n16_k3_a0_p0",
+    "seconds": 0.24146838102024049,
+    "queries_cumulative": 137216
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "identities": {
+    "protocol_sha256": "fca50a58768c66a3ede9c1c7c81e0f7c40f49385c16ad45005a7ba6308635261",
+    "source_sha256": "32fc0534dde79b841bd22ba847c34de11b8ada8525af115abb8806abba215027",
+    "original_source_sha256": "0a82c9fa16161b525e8570b771bc298140ba9033f61408a2a110cb5f6500174e",
+    "data": {
+      "0801": {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0801.png",
+        "sha256": "ab5cf6a1cac2d1c2d0792dbd274fd2e53e42118ab6537771a825fd87aa28a60c"
+      },
+      "0802": {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0802.png",
+        "sha256": "4ad6f3ca8bf740192042978121f05ec493ddbe5a3da5584eaf0d9699c25ee431"
+      }
+    }
+  },
+  "started_unix": 1791435666.2262793,
+  "deadline_unix": 1791442864.9450698
+}

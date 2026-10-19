@@ -1,0 +1,56 @@
+\section{Related Work}\label{sec:related}
+
+\paragraph{ASISR and scale-dependent readout.}
+LIIF \citep{chen2021liif} conditions local decoding on a two-dimensional
+cell. Its original ablation already varies cell size at fixed $\times30$
+queries and discusses area averaging. LTE \citep{lee2022lte} estimates
+local Fourier amplitude and frequency, with cell size entering a learned
+phase estimator. The examined SC-INR implementation modulates features
+with sinc factors and includes separate scale-consistency components.
+These constructions are distinct; common band ordering does not prove a
+shared integration mechanism. MetaSR \citep{hu2019metasr}, SRNO
+\citep{wei2023srno}, CiaoSR \citep{cao2023ciaosr} and HIIF
+\citep{jiang2025hiif} further develop continuous decoders, while a
+controlled re-training benchmark \citep{nasir2026empirical} examines
+architecture and recipe effects.
+
+\paragraph{Integrated encoding and analytic filtering.}
+IPE-LIIF \citep{liu2021ipe} integrates sinusoidal positional encodings over
+a pixel area, yielding sinc attenuation, and compares this encoding with
+plain positional encoding and an additional cell input. Thus neither
+area-dependent encoding nor its comparison with learned cell conditioning
+is new here. Thera \citep{becker2025thera} uses neural heat fields with
+analytic Gaussian filtering for arbitrary-scale readout; Gaussian-splatting
+decoders \citep{chen2025gsasr} offer another representation. Integrating
+features before a nonlinear RGB decoder is different from a certified
+integral of its output, and box and Gaussian target measurements must be
+distinguished. Our current evidence measures paired frequency recovery;
+it does not establish an advantage over these integral-readout methods.
+
+\paragraph{Frequency diagnostics.}
+HyRA \citep{fsds2024} studies impulse responses and a linear/nonlinear
+response decomposition, and introduces Frequency Spectrum Distribution
+Similarity (FSDS); it is not limited to one global scalar. Our measurement
+instead compares signal-normalised reconstruction error in stated bands
+and LR Nyquist units. Fourier ring correlation
+\citep{vanheel2005frc} and scale-decomposed skill scores are related
+agreement diagnostics. We claim neither the first frequency analysis of
+SR nor a new information measure.
+
+\paragraph{Spectral control and inverse-problem references.}
+SIREN \citep{sitzmann2020siren}, Fourier features
+\citep{tancik2020fourier,jacot2018ntk} and FINER \citep{liu2024finer}
+control a representation's frequency preference. FreSh
+\citep{kania2025fresh}, WINNER \citep{winner2025}, SEC \citep{sec2026}
+and WIEN-INR \citep{wieninr} use spectral summaries or multiresolution
+components. These signal-fitting and inverse-task studies differ from
+our primary pretrained ASISR setting. SuperF \citep{superf2026}, DIP
+\citep{ulyanov2018dip} and GP regression \citep{rasmussen2006gp} provide
+context for the supplementary inverse checks. Classical LMMSE and
+sampling analysis \citep{kay1993estimation} supply conditional linear
+references, not a natural-image recovery ceiling. Spectral bias
+\citep{rahaman2019spectral} also does not identify a trained decoder's
+scale-readout mechanism.
+
+\paragraph{Risk estimates and observation consistency.}
+Generalized SURE \citep{eldar2008gsure} supplies risk-based regularization selection under its declared distributional assumptions. A bicubic-reference error difference is instead a prior-dependent proxy, with no unbiased-risk guarantee here. Range/null-space SR \citep{wang2023nullspace} already distinguishes measurement-consistent reconstruction from prior-dependent unobserved components. We do not claim this distinction or a quadratic error identity as a new principle; whether such a proxy forecasts harmful cell intervention beyond simple controls requires a separate held-out comparison.

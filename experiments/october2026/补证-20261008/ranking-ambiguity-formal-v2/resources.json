@@ -1,0 +1,12 @@
+{
+  "stage": "complete",
+  "started_unix": 1791433998.0949268,
+  "selected": 1920,
+  "scored": 1920,
+  "exact_groups": 32,
+  "selection_lp_calls": 11355,
+  "selection_lp_seconds": 11.054326600686181,
+  "total_lp_calls": 11739,
+  "total_lp_seconds": 11.410230522917118,
+  "total_wall_seconds": 18.663275003433228
+}

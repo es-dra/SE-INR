@@ -1,0 +1,10 @@
+{
+  "source_sha256": "1c5efa86c70a91585664232360c6864e80d8b5657b1f8c5a01668353be058995",
+  "rows_sha256": "c268886f41cbc9a7e2b211f6eac3a878492241a2648844ba3eb5b0a69ed74ef5",
+  "figure_sha256": {
+    "allocation-confirmation.pdf": "349c05fdc4dd979739f7c335129901022bdda32ae12caccb0175fbb99b988772",
+    "allocation-confirmation.png": "605167c5217d735dfcfb78139577688833e40e5cfba741951a7c8185d4b003d2"
+  },
+  "wall_seconds": 0.5082682949723676,
+  "scope": "Saved results only;16 dependent focal conditions and16 low controls. Center ROI; first two panels middle band, third RGB. Feature-step RMS matched to native across branches/queries/features; no RGB norm matching claim. No training/inference/GPU."
+}

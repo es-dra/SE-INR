@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-10-07T10:03:31.920310+00:00",
+  "scope": "Independent offline recomputation from saved energy arrays and F1 cell tables; no model inference or retraining.",
+  "checks": {
+    "1|lte": {
+      "rho_Rlin": 0.41068766761497355,
+      "rho_Rnet": 0.4902319902319902,
+      "cells": 27
+    },
+    "1|sc": {
+      "rho_Rlin": 0.39963777521277694,
+      "rho_Rnet": 0.49206349206349204,
+      "cells": 27
+    },
+    "F1_cross_architecture": 0.9847374847374848,
+    "out|lte": {
+      "rho": 0.8223443223443223,
+      "rho_eps": 0.6755613392207918,
+      "ratio_med": 0.5931277451619057,
+      "frac_c": 0.7387387387387387,
+      "image_counts": {
+        "Set14": 14,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "confirm_cells": 27,
+      "image_scale_cases": 222,
+      "max_cell_delta_vs_saved": 0.0,
+      "max_summary_delta_vs_saved": 1.1102230246251565e-16
+    },
+    "out|sc-inr": {
+      "rho": 0.8241758241758241,
+      "rho_eps": 0.6755613392207918,
+      "ratio_med": 0.3608072216969949,
+      "frac_c": 0.6936936936936937,
+      "image_counts": {
+        "Set14": 14,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "confirm_cells": 27,
+      "image_scale_cases": 222,
+      "max_cell_delta_vs_saved": 0.0,
+      "max_summary_delta_vs_saved": 0.0
+    },
+    "out_s2_lte|lte": {
+      "rho": 0.7124542124542125,
+      "rho_eps": 0.5823804648455101,
+      "ratio_med": 0.8225609121731465,
+      "frac_c": 0.7702702702702703,
+      "image_counts": {
+        "Set14": 14,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "confirm_cells": 27,
+      "image_scale_cases": 222,
+      "max_cell_delta_vs_saved": 0.0,
+      "max_summary_delta_vs_saved": 1.1102230246251565e-16
+    },
+    "out_s3_sc-inr|sc-inr": {
+      "rho": 0.7002442002442002,
+      "rho_eps": 0.8735706972682652,
+      "ratio_med": 0.3365712879494756,
+      "frac_c": 0.6531531531531531,
+      "image_counts": {
+        "Set14": 14,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "confirm_cells": 27,
+      "image_scale_cases": 222,
+      "max_cell_delta_vs_saved": 0.0,
+      "max_summary_delta_vs_saved": 0.0
+    }
+  },
+  "other_offline_checks": {
+    "E1": {
+      "low_bias_gp_minus_best_ff_db_no_noise": 2.764,
+      "paired_bootstrap_95pct": [
+        1.986,
+        3.557
+      ],
+      "bootstrap_repeats": 10000,
+      "P1": false,
+      "P2": false,
+      "P3": true,
+      "P4": true
+    },
+    "E2r": {
+      "posterior_spearman": 0.902528,
+      "apriori_spearman": 0.797188,
+      "median_absolute_error": 0.035099,
+      "all_four_frozen_criteria_pass": true,
+      "source_jobs": 60,
+      "aggregate_cells": 60
+    },
+    "D11": {
+      "cost_spearman": 0.855652,
+      "b3_excess_share": 0.555934,
+      "best_arm_matches": "1/3",
+      "diagnostic_uses_truth_and_oracle": true,
+      "b_bootstrap_protocol": 10000,
+      "b_bootstrap_implementation": 2000,
+      "npz_collected_not_reanalyzed": 49
+    },
+    "E3": {
+      "budget_spearman": 0.952132,
+      "network_spread_le_0_03": "10/12",
+      "network_spread_le_0_02": "8/12",
+      "images_per_scale": {
+        "Set14": 13,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "seed": 1,
+      "noise_setting_mismatch_disclosed": true,
+      "pooled_energy_not_rebuilt": true
+    },
+    "E4": {
+      "stale_E2": true,
+      "stale_SC_pair": true,
+      "not_used_as_current_primary_evidence": true
+    }
+  }
+}

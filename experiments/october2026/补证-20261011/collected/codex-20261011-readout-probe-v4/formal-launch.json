@@ -1,0 +1,10 @@
+{
+  "start_epoch": 1791707062.427725,
+  "absolute_deadline_epoch": 1791709462.427725,
+  "budget_seconds": 2400,
+  "source_sha256": "38d3bee3ff93cd3547a46cda906ea9f0cfda2ddf614ac4d8bcada4e07ccc67af",
+  "protocol_sha256": "d0897df4b2b686f920eb0c9ad18f32e8e439f99ab5496cffcae68784e9dacd2e",
+  "device": "cpu",
+  "threads": 4,
+  "nice": 10
+}

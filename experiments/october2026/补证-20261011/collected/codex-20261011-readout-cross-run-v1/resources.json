@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "wall_seconds": 0.7041566371917725,
+  "in_script_wall_seconds": 0.6513453039806336,
+  "cpu_user_seconds": 0.667669,
+  "cpu_system_seconds": 0.364365,
+  "maxrss_kib": 43008,
+  "inference_runs": 0,
+  "training_runs": 0,
+  "gpu_calls": 0
+}

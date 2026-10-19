@@ -1,0 +1,92 @@
+[
+  {
+    "image": "0801",
+    "phase": "00",
+    "fixed_rbf_sigma3": {
+      "arm": "ph00_sigma3_rbf",
+      "expected_raw_mse": 0.0028929852481639168,
+      "expected_raw_regret": 0.0
+    },
+    "ownprior_postfreeze": {
+      "arm": "ph00_sigma3_fixed_rf",
+      "posterior": 0.007939916205233013,
+      "expected_raw_mse": 0.010953642112792183,
+      "expected_raw_regret": 0.008060656864628266
+    }
+  },
+  {
+    "image": "0801",
+    "phase": "01",
+    "fixed_rbf_sigma3": {
+      "arm": "ph01_sigma3_rbf",
+      "expected_raw_mse": 0.002221289014795747,
+      "expected_raw_regret": 0.0
+    },
+    "ownprior_postfreeze": {
+      "arm": "ph01_sigma3_fixed_rf",
+      "posterior": 0.007750718708170967,
+      "expected_raw_mse": 0.010478940306945548,
+      "expected_raw_regret": 0.0082576512921498
+    }
+  },
+  {
+    "image": "0801",
+    "phase": "02",
+    "fixed_rbf_sigma3": {
+      "arm": "ph02_sigma3_rbf",
+      "expected_raw_mse": 0.0018671470584334135,
+      "expected_raw_regret": 0.0
+    },
+    "ownprior_postfreeze": {
+      "arm": "ph02_sigma3_fixed_rf",
+      "posterior": 0.007629205450001711,
+      "expected_raw_mse": 0.009441831535107591,
+      "expected_raw_regret": 0.0075746844766741775
+    }
+  },
+  {
+    "image": "0802",
+    "phase": "00",
+    "fixed_rbf_sigma3": {
+      "arm": "ph00_sigma3_rbf",
+      "expected_raw_mse": 0.0013924365542420185,
+      "expected_raw_regret": 0.0
+    },
+    "ownprior_postfreeze": {
+      "arm": "ph00_sigma3_fixed_rf",
+      "posterior": 0.007939916205233013,
+      "expected_raw_mse": 0.008614460845038389,
+      "expected_raw_regret": 0.00722202429079637
+    }
+  },
+  {
+    "image": "0802",
+    "phase": "01",
+    "fixed_rbf_sigma3": {
+      "arm": "ph01_sigma3_rbf",
+      "expected_raw_mse": 0.0011163999929640666,
+      "expected_raw_regret": 0.0
+    },
+    "ownprior_postfreeze": {
+      "arm": "ph01_sigma3_fixed_rf",
+      "posterior": 0.007750718708170967,
+      "expected_raw_mse": 0.0025504764376677127,
+      "expected_raw_regret": 0.0014340764447036461
+    }
+  },
+  {
+    "image": "0802",
+    "phase": "02",
+    "fixed_rbf_sigma3": {
+      "arm": "ph02_sigma3_rbf",
+      "expected_raw_mse": 0.0009596183912272496,
+      "expected_raw_regret": 0.0
+    },
+    "ownprior_postfreeze": {
+      "arm": "ph02_sigma3_fixed_rf",
+      "posterior": 0.007629205450001711,
+      "expected_raw_mse": 0.0029562133634961287,
+      "expected_raw_regret": 0.001996594972268879
+    }
+  }
+]

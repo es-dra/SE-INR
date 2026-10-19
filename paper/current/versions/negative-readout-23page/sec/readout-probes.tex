@@ -1,0 +1,66 @@
+\section{Frozen-weight readout diagnostics}\label{app:readout-probes}
+\paragraph{Question and separation.}
+G1's three tied scores cannot distinguish a footprint formula from band index. We therefore freeze an additional diagnostic of effect magnitude and sign, separating the input measurement $A$, true target measurement $Q_h$, and decoder hint $c$. These probes neither retrain a decoder nor validate a deployable selector.
+
+\paragraph{Known continuous targets.}
+The field is $x(q)=.5+.25\cos(2\pi k(d_yq_y+d_xq_x)+\phi)$ on the unit square. Input box averages are evaluated analytically on $n\times n$ grids, with $n=16,32$, $k=4,6,10,14,18,26$, $d=(1,0),(0,1),(1,1)$ and $\phi=0,\pi/2$: 72 inputs. We query the central $32\times 32$ positions of a 64-grid, using four box sizes $(1,1),(2,1),(1,2),(2,2)/64$. For each input the observation, encoder features, weights and query centres remain fixed. The target transfer is $T_h=\operatorname{sinc}(kd_yh_y)\operatorname{sinc}(kd_xh_x)$. The evaluated LTE snapshot has no cell clamp, unlike the clamp described in the original LTE paper. All synthetic content differs from natural-image training; zero-cell and rectangular hints additionally differ from isotropic training support.
+
+\paragraph{Reference field and forecasts.}
+Let $F_0=F_\theta(y,q,0)$ and $F_c=F_\theta(y,q,c)$. $F_0$ is a zero-cell conditional reference, not a certified physical point field. With $S_h=\operatorname{mean}[(Q_hx-.5)^2]$, the signed gain is
+\[
+ G_{h,c}=\frac{\operatorname{MSE}(F_0,Q_hx)-\operatorname{MSE}(F_c,Q_hx)}{S_h}.
+\]
+For matched $c=h$, phase-zero data calibrate a band-median baseline and an affine fit in $(1-T_h)^2$; the fixed phase-$\pi/2$ grid evaluates them. Two stronger forecasts substitute either $.5+T_h(F_0-.5)$ or a numerical final-RGB integral $Q_hF_0$ for $F_h$. Both use the known target law for error scoring and are oracle diagnostics. Amplitude scaling also scales the reference's nuisance errors; it is not an exact filter of the true signal. Four- and eight-node midpoint rules per axis are retained. A row is numerically resolved only if their raw MSE difference is at most $10^{-5}$ and at most $.1$ of the native--eight-node discrepancy; this is a refinement check, not an integration certificate.
+
+\paragraph{Frozen criteria and crossed hints.}
+Each stronger forecast must reduce MAE by at least 20\% against both simple baselines in all four model--input-size groups, with active sign accuracy and negative recall at least $.75$. Active effects have $|G|>.001$; negative recall requires at least eight negative scoring rows. Integral forecasts additionally require all evaluation rows to be resolved. Footprints are correlated rows, not independent replicas. An add-on frozen before the first metric read crosses all four hints with all four true targets, reusing the saved predictions: 2304 scores, with no fitting or additional inference. Matching is evaluated against all four hints with raw-MSE tie tolerance $10^{-12}$; this ranking uses target truth.
+
+\begin{table*}[t]\centering\small
+\caption{Complete held-phase diagnostic: 72 correlated scores per group. MAE measures normalised gain. B: calibrated band median; F: affine footprint baseline; S: known-law amplitude scaling; Q: known-law numerical final-RGB integral. Q sign accuracy uses active effects; negative recall retains its full denominator. All stronger-candidate gates fail.}\label{tab:probe-prediction}
+\begin{tabular}{lrrrrrrr}\toprule
+Group & B MAE & F MAE & S MAE & Q MAE & Q sign & Q negative recall & Resolved\\\midrule
+LTE16 & .13285 & .12838 & .23579 & .16820 & .2174 & 2/54 & 72/72\\
+LTE32 & .28486 & .34996 & .33613 & .25082 & .5455 & 8/37 & 71/72\\
+SC16 & .03223 & .04525 & .12427 & .02442 & .8163 & 0/9 & 72/72\\
+SC32 & .23341 & .31576 & .27068 & .18108 & .8305 & 1/11 & 69/72\\\bottomrule
+\end{tabular}
+\end{table*}
+
+\paragraph{Complete prediction results.}
+Amplitude scaling and the integral forecast each pass zero of four complete group gates (Table~\ref{tab:probe-prediction}). SC's integral forecast improves MAE over both baselines by at least 20\% in both groups; its negative recall nevertheless fails. Positive cases comprise 40/49 and 48/59 active SC scores, so high sign accuracy alone can obscure failure on negatives. Its within-band rank correlations are $.690/.535/.727$ at $n=16$ and $.946/.797/.776$ at $n=32$. These finer correlations do not repair the failed criteria. LTE16's integral forecast worsens MAE relative to both simple baselines; LTE32 improves over band index by only 11.95\%, with sign accuracy $.5455$ and negative recall 8/37. Amplitude scaling fails magnitude and negative-recall requirements.
+
+The fixed-grid cluster resampling intervals for the integral forecast's paired MAE difference against band index are $[-.02778,.00863]$ (SC16) and $[-.13611,.01639]$ (SC32), both crossing zero. Against the affine footprint baseline they are $[-.04386,-.00011]$ and $[-.22639,-.05053]$. These are sensitivity intervals on the fixed grid, not population confidence intervals. SC16's negative-recall resampling has two undefined draws out of 2000; both are retained as missing denominators. Across both phases 568/576 rows meet the refinement rule. The eight unresolved rows all have $n=32,k=14,d=(1,1)$: LTE square 2 and SC vertical/horizontal/square 2 in each phase. No rows are discarded. Median native--integral discrepancy divided by $S_h$ is $.03922/.06790$ for LTE16/32 and $.00131/.01324$ for SC16/32. Thus native conditioning differs from the numerically integrated reference on resolved rows, without certifying physical point readout \src{READOUT-20261011}.
+
+\paragraph{Crossed target/hint counterexamples.}
+Matched hints are among the minimum-MSE hints in 18/72, 21/72, 19/72 and 16/72 held-phase targets for LTE16/32 and SC16/32. This is not a comparison to a random policy, and mismatched hints performing better alone does not disprove integration: reference bias can change the best scored hint. Each group has both active signs within all three bands even when only matched hints are retained. Same-input, same-target hint changes also reverse the sign in 32/72, 48/72, 16/72 and 26/72 target groups, respectively (descriptive post-scoring counts with the frozen $.001$ margin). For example, LTE16's horizontal $k=10,\phi=\pi/2$ input and square 1 target have gain $-.19418$ for the square 1 hint and $+.06847$ for the vertical hint. These are training-support diagnostics, not a recommended choice of a physically incorrect footprint. Directional preference is not equivalent to target matching: swapping the true vertical/horizontal target changes the better equal-area hint in only 4/18 held-phase inputs for LTE32 and zero for the other groups \src{READOUT-CROSS-20261011}.
+
+\paragraph{Negative-effect check and audit limits.}
+For $e=F_0-Q_hx$ and $d=F_c-F_0$, $G=-(\operatorname{mean}(d^2)+2\operatorname{mean}(ed))/S_h$. This exact post-hoc identity distinguishes change energy from error alignment; it supplies no prospective predictor. The already-seen barbara image at $\times 2/4$ separately compares same-weight zero-cell conditioning and independently trained ablations. Its HR256 target is a discrete image, not box-integrated truth. Raw RGB errors and RGB-mean Fourier bands are primary, with clipped outputs reported separately. Independent audits re-score the saved outputs without importing the model implementation; they do not independently reimplement the network. Bootstrap resampling of 18 fixed frequency/direction clusters quantifies grid sensitivity, not natural-image generalisation.
+
+\begin{table*}[t]\centering\small
+\caption{All retrospective barbara bands. Paired gain compares separately trained full/ablated models; fixed gain compares native/zero-cell hints of the same full weights. In Fourier bands fixed gain is alignment minus change energy. Raw and clipped scoring agree here. These rows are not new natural-image tests.}\label{tab:probe-natural}
+\begin{tabular}{lrrrr}\toprule
+Model/scale/band & Paired gain & Fixed gain & Change energy & Alignment\\\midrule
+LTE2 b1 & .000032 & .000817 & .000737 & .001555\\
+LTE2 b2 & $-.146774$ & $-.015884$ & .027172 & .011288\\
+LTE2 b3 & $-.100059$ & $-.004291$ & .018503 & .014212\\
+SC2 b1 & .000060 & .000220 & .000170 & .000390\\
+SC2 b2 & $-.264597$ & $-.006248$ & .003483 & $-.002765$\\
+SC2 b3 & $-.193296$ & .009733 & .009779 & .019512\\
+LTE4 b1 & $-.000004$ & .000236 & .000220 & .000456\\
+LTE4 b2 & $-.001428$ & .012507 & .012330 & .024837\\
+LTE4 b3 & .000982 & .002128 & .001354 & .003483\\
+SC4 b1 & .000016 & .000006 & .000003 & .000009\\
+SC4 b2 & $-.002644$ & .000363 & .000242 & .000605\\
+SC4 b3 & .000805 & $-.000692$ & .000251 & $-.000440$\\\bottomrule
+\end{tabular}
+\end{table*}
+
+SC's $\times 2$ high-band paired gain is $-.193296$, close to the original saved value $-.193291$ (maximum difference across its six historical bands $5.76\times 10^{-6}$, with CPU/GPU numerical paths differing). The same-weight gain is instead $+.009733$. Its mid-band fixed loss is $-.006248=-.002765-.003483$: both adverse alignment and change energy contribute. LTE2's mid-band alignment is positive but smaller than change energy, also yielding a loss. These decompositions calculate what happened; they do not explain prospectively why the learned change aligns this way \src{READOUT-20261011}.
+
+\paragraph{Freeze, failures and full cost.}
+All 74 inputs and 152 prediction files were frozen before truth scoring, including 48,709,632 RGB query positions. The fixed 2400-second wall/phase budget completes in 1376.925 seconds; the full launcher records 1377.305 seconds including teardown. CPU user/system time is 4501.156/601.088 seconds, peak recorded RSS 731.3MiB. CPU uses four threads and nice 10; training and GPU processes are zero. A backend segmentation fault in the first preflight and a missing timing executable in an earlier launcher are retained. Disabling MKLDNN passes a distinct 20.51-second preflight before the formal launch; neither the failed roots nor this preflight contributes to formal scores.
+
+The independent saved-output audit verifies 148 input hashes, 152 prediction hashes, 41 frozen source records and four checkpoint identities, recomputing 576 synthetic and 24 natural rows with maximum difference $1.78\times 10^{-15}$ in 1.29 seconds. Cross scoring takes $.704$ seconds, and its independent 2304-row reimplementation takes $.626$ seconds, with maximum difference $3.55\times 10^{-15}$. The complete archive is verified after download. Freeze timestamps and inspected dataflow document artifact order, not an instrumented proof of every filesystem read. No training is initiated on these results: magnitude improvement in two SC groups leaves negative-benefit prediction and a shared quantitative mechanism unsupported.
+
+\input{sec/negative-readout}

@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "wall_seconds": 1.350311749993125,
+  "CPU_seconds": 1.262969,
+  "CPU_threads": 1,
+  "nice": 10,
+  "GPU": 0,
+  "inference": 0,
+  "training": 0,
+  "max_rss_native": 75546624,
+  "end_utc": "2026-10-12T01:28:14.151189+00:00",
+  "cost_scope": "compute+input hash+IO after Python imports; external launcher separately times full process"
+}

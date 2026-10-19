@@ -1,0 +1,54 @@
+\section{Limitations}\label{sec:limits}
+\begin{itemize}
+\item \textbf{Conditional reference.} Classical LMMSE optimality assumes
+specified covariance, noise and operator. A generic spectrum is not a
+universal bound; individual-image periodograms are oracle references.
+\item \textbf{Band approximation.} Scalar decoupling need not hold for
+aliased or rotated observations. Band averaging has no uniform error
+direction. Windows, cropping, clipping and solver floors create additional
+departures from exact theory.
+\item \textbf{Network mechanism.} G1 and L2 establish empirical ordering,
+not a gain-mismatch mechanism or function equivalence. L2 function
+similarity passes in 0/4 groups; superiority over the simple score passes only
+2/4. No scalar-scale-only retraining arm has been evaluated.
+\item \textbf{Failed tests and sensitivity.} F1, E1 switching, D11 winner
+selection and L1 strict collapse retain their failures. E3 similarity
+passes 10/12 at .03 and 8/12 at .02; its .1/.8 reference-regime thresholds
+remain descriptive pending the sensitivity audit.
+\item \textbf{Replication scope.} G1/L2 cover two additional fixed seeds
+and two pairs. G1 uses HR256 and 73 images ($\times3$ means 256/85), while
+L2 uses HR240 and 74. Their pooled rows cannot be interchanged. G1 saves
+per-image recovery but not signal/error energies, limiting independent
+reconstruction of its pooled statistics.
+\item \textbf{Protocol and numerical differences.} E2 windowing changed
+after a one-image pilot. E3 has no injected observation noise although its
+reference uses $\sigma=.002$ and its GP solver $\nu=10^{-5}$. E1's native
+forward geometry differs from its inverse discretisation, and clipped
+outputs are not fixed linear estimators. D11's revised bootstrap covers
+fixed images/noise draws and does not measure training-seed variability.
+\item \textbf{Guidance generalisation.} G2 covers 12 fixed images, three
+noise settings with fixed draws, one operator and one 32-image calibration.
+Zero observed severe degradations does not certify a population rate below
+5\%. Analysis chooses the same prior in all cases, so its improvement
+over the default does not establish target-specific adaptation. It trails
+CV in accuracy and cost. Four-probe variability, calibration mismatch and
+unobserved spectral components remain limitations; no INR architecture
+selection is established. Oracle candidates were not all saved as pixels.
+\item \textbf{EEG evidence.} EEG currently contributes 200 calibration segments;
+the 760-segment test result has not been recovered and is excluded from
+confirmatory claims in this revision.
+\end{itemize}
+
+\section{Conclusion}
+Observation-conditioned linear references clarify spectral mismatch costs
+and their asymmetry. Exact scalar and matrix identities provide the
+foundation; band approximations and neural interpretations require
+separate evidence. Completed experiments support mismatch-cost ranking
+and repeated readout-loss ordering while preserving failures of the earlier
+winner diagnostic, function equivalence and a proposed gain mechanism. Practical
+guidance must specify the reference spectrum and operator and demonstrate
+selection regret against competing baselines. A completed prospective test
+shows that calibrated analysis can improve a fixed GP default, but its
+constant choice, higher regret and higher cost than CV leave adaptive and
+computational advantages unsupported. The formulas are useful conditional
+diagnostics; deployment benefits require direct comparative evidence.

@@ -1,0 +1,390 @@
+{
+  "schema": "ranking-ambiguity-finite-linear-v1",
+  "created_utc": "2026-10-08T04:15:45.108391+00:00",
+  "status": "reviewable technical derivation and CPU sanity checks; not a novelty claim or natural-image guarantee",
+  "scope": {
+    "writes": [
+      "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/补证-20261008/ranking-ambiguity-v1/theory.json"
+    ],
+    "no_paper_edits": true,
+    "no_GPU": true,
+    "no_old_protocol_changes": true,
+    "scope_time_budget_minutes": 10
+  },
+  "definitions": {
+    "model": "x in R^n, y=A x+epsilon in R^m, x~N(0,C(p)), epsilon~N(0,N) independent; A,N known, N positive definite for conditional formulas. W in R^(k x n) is fixed target crop/weight; B_j in R^(n x m), j=1..J, fixed before confidence data.",
+    "covariance_family": "C(p)=sum_l p_l Q_l. Stationary finite-periodic family: Q_l are real PSD projections onto fixed DFT frequency conjugacy groups, or fixed PSD spectral-bin covariance matrices; p>=0. Individual complex Fourier vectors must be paired so C is real symmetric. This discretized family is an assumption, not arbitrary continuous natural-image spectra.",
+    "prior_parameter_set": "P0={p:Gp<=h,Ep=e}, compact convex polytope with declared nonnegativity, energy bounds and any independent calibration bounds. Adding finite bounds makes a conditional assumption; do not invent them after viewing test outcomes.",
+    "observation_map": "H columns are vec_s(A Q_l A^T), using one fixed linear symmetric vectorization. s=vec_s(Sigma_y-N). Exact fiber P_s=P0 intersect {Hp=s}. Equality is equality of Gaussian observation laws only under common known mean and noise.",
+    "risk": "R_j(p)=E_{x,epsilon}||W(B_j y-x)||^2 = v_j^T p+c_j, v_j,l=tr[W(B_j A-I)Q_l(B_j A-I)^T W^T], c_j=tr[W B_j N B_j^T W^T]. These are population risks of fixed estimators.",
+    "gap": "g_jk(p)=R_j(p)-R_k(p)=d_jk^T p+b_jk, d_jk=v_j-v_k, b_jk=c_j-c_k; negative means j is better."
+  },
+  "exact_identifiability": {
+    "restricted_necessary_and_sufficient": "Gap value is identifiable on nonempty exact fiber iff d_jk is orthogonal to span(P_s-P_s). This handles boundary fibers or independently known affine restrictions.",
+    "full_family_condition": "For a fiber with relative interior in its affine slice and no hidden active restrictions: d_jk belongs to row([H;E]). With no E and an interior p, this becomes row(H), equivalently d_jk^T z=0 for all z in ker(H). A statement based on ker(H) alone is only sufficient if positivity collapses the fiber.",
+    "ranking_vs_value": "Gap need not be constant for its sign to be fixed. Candidate j weakly dominates k throughout P_s iff U_jk<=0. A unique universal minimizer j is certified if U_jk<0 for every k!=j; tie-compatible winner sets must be declared separately.",
+    "gap_shift_identity": "If D=C(p1)-C(p2), A D A^T=0, then g_jk(p1)-g_jk(p2)=-2 tr[W(B_j-B_k) A D W^T]. Proof: common tr(W C W^T) cancels between candidates and quadratic B terms cancel between observationally equal worlds.",
+    "projected_target": "If W=L A for known L (including P_range(A^T)=A^dagger A), every target covariance and candidate cross-covariance depends on A C A^T only. Thus every population risk, not merely each gap, is identifiable from Sigma_y,N. Crop W generally has rows outside row(A); no such automatic result."
+  },
+  "exact_interval": {
+    "definition": "[L_jk,U_jk]=[min_{p in P_s} d_jk^T p+b_jk,max_{p in P_s} d_jk^T p+b_jk]. Both endpoints are exact LP optima for this polytope; extrema are attained if nonempty compact. They are uncertainty intervals, not probability intervals.",
+    "algorithm": "Solve two LPs per unordered candidate pair; reuse g_kj=-g_jk and U_jj=L_jj=0. Store solver status, primal feasibility, dual feasibility/duality gap and witness p at extrema. An uncertified infeasible/unbounded/failed solver cannot certify a safe winner.",
+    "regret": "For any uncertainty set P, u_j=max_k U_jk(P)=sup_{p in P}[R_j(p)-min_k R_k(p)]. Minimize u_j for minimax regret. If min_j u_j<=tau, chosen fixed estimator is tau-safe over P; otherwise return no-certified-choice. Since k=j is included, u_j>=0.",
+    "pointwise_qualification": "Different p may attain extrema for different k. The max_k/sup_p interchange is exact for finite k; pairwise witnesses need not describe one common worst world."
+  },
+  "finite_sample_confidence": {
+    "data_required": "K independent y_i~N(0,Sigma_y(p*)) from the same A, N, p*, with known zero mean. Stack T frames of one latent image into one y; those frames are not K independent image realizations. Correlated spatial patches from one stationary image do not satisfy this proof.",
+    "fixed_directions": "Choose M unit directions u_a before seeing confidence samples. e_i and (e_i+e_j)/sqrt(2), i<j, give M=m(m+1)/2 and determine a symmetric covariance exactly in the infinite-data limit. Fewer fixed directions reduce cost but can leave extra ambiguity.",
+    "law_and_bounds": "vhat_a=K^-1 sum_i (u_a^T y_i)^2. K vhat_a/v_a~chi-square_K. With qlo=chi2.ppf(alpha/(2M),K), qhi=chi2.ppf(1-alpha/(2M),K), v_a in [K vhat_a/qhi,K vhat_a/qlo] jointly with probability >=1-alpha by union bound; independence between directions is unnecessary.",
+    "confidence_polytope": "P_hat=P0 intersect all linear slabs: K vhat_a/qhi-u_a^T N u_a <= sum_l p_l u_a^T A Q_l A^T u_a <= K vhat_a/qlo-u_a^T N u_a. Conditional on a valid P0 and the Gaussian iid model, P(p* in P_hat)>=1-alpha.",
+    "safe_population_choice": "Use all gaps over the same P_hat. The finite-candidate minimax-regret rule satisfies R_jhat(p*)-min_j R_j(p*)<=u_jhat with probability >=1-alpha. No extra Bonferroni over candidates is needed because all use the same simultaneous parameter set.",
+    "selection_application": "This statement evaluates the selected B_jhat as a fixed rule on a fresh independent x,y. It does not bound E||W(B_jhat(y) y-x)||^2 for reuse of the same confidence y. Deploying on that same realization needs the conditional-risk analysis below or another valid selection argument.",
+    "mean_noise_calibration": "For an unknown mean estimated from iid data use centered sample variance and df K-1 with its matching normalization. Unknown noise or P0 learned from calibration must be covered by independent/joint confidence sets and their failure probability budget; merely plugging in estimates does not retain the theorem.",
+    "fixed_candidates_requirement": "Candidates may be computed from independent calibration and then frozen. If they are generated from confidence samples, condition on a truly independent construction split; otherwise the fixed-risk derivation does not justify adaptive candidate safety.",
+    "misspecification": "Non-Gaussianity, spatial dependence, varying p between images, motion/noise mismatch or missing true p from P0 invalidate stated coverage. Empirical coverage on natural images is a stress test, not a replacement proof. Empty P_hat is preserved as a no-certificate event, not repaired by outcome-based relaxation."
+  },
+  "conditional_same_observation": {
+    "known_exact_Sigma": "For exact Sigma_y and any p in P_s, mu_p(y)=C(p)A^T Sigma_y^-1 y, V_p=C(p)-C(p)A^T Sigma_y^-1 A C(p). Conditional loss rho_j(y,p)=||W(B_j y-mu_p(y))||^2+tr(W V_p W^T).",
+    "conditional_gap": "rho_j-rho_k=||W B_j y||^2-||W B_k y||^2-2 y^T(B_j-B_k)^T W^T W C(p) A^T Sigma_y^-1 y. It is affine in p when Sigma_y is fixed, so exact-fiber LP intervals certify conditional expected-loss ordering for each y. This is expected loss under the Gaussian conditional model, never a guarantee on realized HR error.",
+    "finite_Sigma_caution": "On finite confidence P_hat, Sigma_y(p)^-1 varies with p: the conditional gap is generally non-affine. Population LP endpoints cannot certify conditional safety. A future implementation would require certified global bounds, special structure or a separately proved conservative bound. Not implemented or claimed in v1.",
+    "conditional_mismatch": "These conditional formulas assume the actual x law is the specified Gaussian family. Natural images may not follow it even if marginal second-order checks fit."
+  },
+  "classic_relationships": {
+    "projected_GSURE": "Projected GSURE already estimates fixed-estimator noise risk on range(A^T) and performs parameter selection; our projected-target identifiability statement is consistent with it. Comparing full target risks under unknown random-signal C is a different object from GSURE for deterministic x. No claim that GSURE universally fails.",
+    "robust_optimization": "Exact LP ambiguity intervals, minimax regret and abstention follow classical set-based robust optimization/decision theory. Their names or combination are not novelty. Any paper contribution must be demonstrated in sharp operator-specific conditions, finite-sample rates/lower bounds or useful additional-measurement design, with closest prior work checked.",
+    "empirical_Bayes": "If AC(p1)A^T=AC(p2)A^T, common-noise Gaussian evidence is identical. Evidence estimates observation law; this does not imply identical full-target conditional decision. This is elementary, not a new theorem.",
+    "spectrum_nonidentifiability": "Neither unidentifiable p nor large posterior uncertainty alone establishes rank ambiguity. Must exhibit sign changes of candidate gaps, or certify the opposite.",
+    "partial_identification": "Generic identified set -> utility/risk gap interval -> robust action is already treated by Partial Identification and Decision Theory (arxiv2312.17623v3, parent independent scan). The finite-dimensional scaffold is not claimed novel."
+  },
+  "proposed_synthetic_interventions": {
+    "stage1": "Two-site real stationary circulant C=F diag(p0,p1) F^T with F=Hadamard/sqrt(2), p0+p1=2. A_epsilon=[[1,0],[1,epsilon]], epsilon=0,.05,.25,1. Known N=nu I, nu=.001,.01,.1,1. p0/2=.05,.25,.5,.75,.95. K=8,32,128,512 iid realizations. W=I versus P_range(A^T). Fixed two limiting spectral GP filters plus uniform default, independently frozen; do not tune candidates per true p.",
+    "budget": "Proposed, not executed: 4*4*5*4=320 covariance cells, two W targets, 100 independent replications; total 64000 target-cell replications. Start with a separately frozen 16-cell CPU screen to estimate runtime, then set an absolute CPU wall cap before the full grid. Do not drop cells after inspecting outcomes; retain incomplete cells and solver failures.",
+    "stage2": "If stage1 validates implementation, an n=8 or16 periodic real DFT family with conjugate groups and decimation/blur; one repeated-phase versus distinct-phase multiframe operator. Fixed blur nulls separate unavoidable ambiguity from diversity-restored identifiability. This stage requires a separate frozen geometry/code manifest before execution.",
+    "comparators": "Default fixed spectrum; evidence/marginal likelihood; projected GSURE for its declared projected target; frame/realization holdout CV with equal total samples; ambiguity minimax choice/abstention; offline p-aware oracle. Oracle is evaluation only. Record total observation allocation, calibration data, LP/kernel calls, runtime and memory.",
+    "outcomes": "Observed covariance fit, rank(H), smallest nonzero singular value of H, exact/finite intervals and witness spectra, true population/conditional gaps separately, regret, severe-degradation rate, abstention rate, empirical confidence coverage, LP statuses and all costs. No expectation that all methods win.",
+    "finite_sample_rate_question": "Study shrinkage only along identifiable directions. When H loses rank, increasing K cannot remove exact-fiber ambiguity. For epsilon>0, poor conditioning can require far more samples; exact full rank alone does not establish practical reliability."
+  },
+  "failure_criteria": [
+    "Any algebra/conditional formula CPU check exceeds 1e-9 (random trace) or 1e-12 (two-site identities): stop before empirical scientific claims.",
+    "Exact-fiber LP falsely certifies winner when witness endpoints have opposite gap signs, or projected risk differs across equal-covariance spectra: implementation failure.",
+    "Under correct iid Gaussian simulation confidence coverage significantly below nominal beyond sampling variation: inspect quantiles, normalization and feasible-set construction before use.",
+    "A certified selected estimator exceeds stated population regret bound at true p (within numerical tolerance): invalid implementation or assumptions; preserve event.",
+    "Reusing same-y population bounds as conditional safety, treating frames as independent realizations, using HR to build the confidence set or adapting the candidate family after target outcomes: protocol invalid.",
+    "Finite-confidence conditional interval is reported as exact via a linear program although Sigma(p)^-1 varies: invalid claim.",
+    "Nearly always abstains or intervals remain vacuous at realistic calibration cost: scientifically valid negative result, not a theorem failure; guidance may be practically unusable.",
+    "Improvement vanishes against same-budget EB/CV/GSURE or is solely due to extra calibration observations: no demonstrated useful decision advantage.",
+    "Theoretical examples and robust LPs provide no operator-specific result beyond classical facts: insufficient novelty for claimed A-class contribution."
+  ],
+  "primary_sources": [
+    {
+      "work": "Eldar, Generalized SURE for Exponential Families",
+      "url": "https://arxiv.org/abs/0804.3010"
+    },
+    {
+      "work": "Giryes, Elad, Eldar, Projected GSURE",
+      "url": "https://arxiv.org/html/1003.3985"
+    },
+    {
+      "work": "Sollich, Gaussian Process Regression with Mismatched Models",
+      "url": "https://arxiv.org/abs/cond-mat/0106475"
+    },
+    {
+      "work": "Sollich, Robust Against Model Mismatch, author manuscript",
+      "url": "https://nms.kcl.ac.uk/peter.sollich/papers_pdf/GP_max_evidence_Sheffield.pdf"
+    },
+    {
+      "work": "Zhang, Inconsistent Estimation and Asymptotically Equal Interpolations, author manuscript",
+      "url": "https://www.stat.purdue.edu/~zhanghao/Paper/JASA2004.pdf"
+    },
+    {
+      "work": "Guillaumin et al., Debiased Spatial Whittle Likelihood",
+      "url": "https://arxiv.org/html/1907.02447"
+    },
+    {
+      "work": "Montiel Olea, Qiu, Stoye, Decision Theory for Treatment Choice Problems with Partial Identification (arxiv v3 June2025)",
+      "url": "https://arxiv.org/abs/2312.17623",
+      "usage": "nearest generic decision framework; parent provided relevance; novelty remains unknown",
+      "verification": "arxiv author abstract opened in this turn; confirms partial-identification decision theory, Gaussian likelihood and minimax-regret rules. Parent provided broader overlap finding; no independent claim of exhaustive theorem match."
+    }
+  ],
+  "cpu_checks": {
+    "execution": "local CPU only; numpy plus standard library; no GPU and no research dataset",
+    "seed": 2026100801,
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "random_general_linear_cases": 40,
+    "max_risk_affine_identity_error": 1.5916157281026244e-12,
+    "stationary_two_site_circulant_example": {
+      "F": [
+        [
+          0.7071067811865475,
+          0.7071067811865475
+        ],
+        [
+          0.7071067811865475,
+          -0.7071067811865475
+        ]
+      ],
+      "A": [
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "noise_covariance": [
+        [
+          0.1
+        ]
+      ],
+      "p_total": 2,
+      "B_candidates": [
+        [
+          [
+            0.9090909090909091
+          ],
+          [
+            0.9090909090909091
+          ]
+        ],
+        [
+          [
+            0.9090909090909091
+          ],
+          [
+            -0.9090909090909091
+          ]
+        ]
+      ],
+      "exact_observation_variance": 1.1,
+      "population_gap_interval": [
+        -3.636363636363636,
+        3.636363636363636
+      ],
+      "analytic_interval": [
+        -3.6363636363636362,
+        3.6363636363636362
+      ],
+      "projected_gap_vertices": [
+        0.0,
+        0.0
+      ],
+      "conditional_y": [
+        0.7
+      ],
+      "conditional_gap_interval": [
+        -1.6198347107438011,
+        1.6198347107438011
+      ],
+      "conditional_formula_max_error": 2.220446049250313e-16,
+      "equal_covariance_gap_shift_error": 0.0,
+      "rank_vs_measurement_diversity": [
+        {
+          "epsilon": 0.0,
+          "rank": 1,
+          "singular_values": [
+            1.4142135623730947,
+            0.0
+          ]
+        },
+        {
+          "epsilon": 0.05,
+          "rank": 2,
+          "singular_values": [
+            1.4168682344279424,
+            0.04987515683227881
+          ]
+        },
+        {
+          "epsilon": 0.25,
+          "rank": 2,
+          "singular_values": [
+            1.4821518529676152,
+            0.23490212801220872
+          ]
+        },
+        {
+          "epsilon": 1.0,
+          "rank": 2,
+          "singular_values": [
+            2.5020788646040066,
+            0.48949091442224524
+          ]
+        }
+      ]
+    },
+    "finite_confidence_monte_carlo": {
+      "K": 32,
+      "alpha": 0.05,
+      "fixed_directions": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ],
+        [
+          0.7071067811865475,
+          0.7071067811865475
+        ]
+      ],
+      "replications": 2000,
+      "covered": 1901,
+      "coverage": 0.9505,
+      "chi_square_quantiles": [
+        16.022561251432442,
+        54.24704341256198
+      ],
+      "cdf_errors": [
+        2.949029909160572e-17,
+        1.1102230246251565e-16
+      ],
+      "scope": "sanity check of coverage behavior; proof uses exact chi-square law and union bound, not observed simulation rate"
+    },
+    "pass": true
+  },
+  "revision": {
+    "previous_sha256": "0e431520044bd0a6514692a3c90ea92a8c7c5d2d33a19d4490541911740fc3cd",
+    "reason": "parent directs sampler-specific eight-site stationary task; broad ambiguity/minimax framework already covered by partial-identification decision theory; fresh-draw population selection only"
+  },
+  "task_specific_eight_site": {
+    "model": "n=8 periodic real stationary Gaussian. DC variance fixed 0. k=1,2,3 share equal variance p_k for normalized cos/sin, Q_k rank2; k=4 normalized real Nyquist, Q4 rank1. C=sum p_k Q_k. p>=0; tr C=2(p1+p2+p3)+p4. These normalization conventions must match code.",
+    "sampler": "decimation factor4; each phase q samples sites [q,q+4] mod8. A stacks frames in phase order [0], [0,0], [0,1], or [0,1,2,3]. Repeated phases have separate independent noise draws within a single y but the same latent x.",
+    "covariance_lags": "c(d)=1/4 sum_{k=1..3} p_k cos(pi*k*d/4)+(p4/8)*(-1)^d.",
+    "single_phase_information": "phase [0]: only lags0,4; 8c0=2p1+2p2+2p3+p4, 8c4=-2p1+2p2-2p3+p4. Thus p1+p3=2(c0-c4), and 2p2+p4=4(c0+c4). rank(H)=2.",
+    "kernel": "ker(H)=span{(1,0,-1,0),(0,1,0,-2)}. Both preserve total variance tr C. Bounding total energy therefore does not remove these ambiguities. Feasible nonnegativity or independent calibration may remove some directions and must be checked on actual fiber.",
+    "candidate_gap_condition": "For a fiber with nontrivial interior along both kernel directions, g_jk=d^T p+b is constant iff d1=d3 and d2=2d4. A fixed sign can still hold without either equality; calculate exact LP endpoints. Failure/positive cases must concern risk-gap signs, not rank(H) alone.",
+    "repeated_phase": "phase [0,0] has rank(H)=2 and same kernel. Within-draw average reduces independent observation noise from nu to nu/2, and repeated noise helps practical estimation, but identical phases do not add latent covariance lag information. More repeats alone cannot identify the missing spectrum allocation.",
+    "diverse_two_phase": "phase [0,1] samples sites0,4,1,5; available lags include0,1,3,4. c1+c3=-p4/4; c1-c3=sqrt(2)*(p1-p3)/4. Therefore p4=-4(c1+c3), p2=2(c0+c4)-p4/2, p1=0.5*[2(c0-c4)+2*sqrt(2)*(c1-c3)], p3=0.5*[2(c0-c4)-2*sqrt(2)*(c1-c3)]. rank(H)=4, all family population risk gaps identifiable at exact observation covariance.",
+    "diversity_boundary": "A for phase[0,1] still has signal nullspace (4 samples<8 coordinates), yet the assumed four-parameter stationary covariance family is identifiable. This does not guarantee deterministic signal recovery or distribution-free HR risk; it isolates covariance-family decision identification.",
+    "all_phases": "[0,1,2,3] samples all8 sites, rank(H)=4. More measured coordinates can change reconstruction noise risk and finite-confidence precision, although exact spectral-family identifiability was already attained at[0,1].",
+    "explicit_failure": "With single or repeated phase and frozen GP candidates q=e1,e3, true worlds p=e1,e3 have equal observation covariance but full W=I risk ordering flips; CPU values below. This is a classical aliasing instance, not a new theorem. Likewise p=e2 and p=2e4 are observationally equal under phase[0].",
+    "positive_controls": "For any phase, W=P_range(A^T) removes gap dependence along covariance kernel; phase[0,1] or all phases identifies every fixed-candidate population gap within this spectral family. Independent calibration fixing the two ambiguous spectral allocations can also close the fiber, at additional data cost.",
+    "finite_samples": "Use frozen coordinate and sum-direction chi-square slabs, K iid zero-mean eight-site Gaussian x realizations, one stacked noisy y per x. Selected B is evaluated on a fresh independent x,y. No same-y safety claim. A covariance-family rank4 control can still require many samples: report confidence width, regret and abstention rather than equating exact rank to finite reliability.",
+    "fair_cost": "phase[0] costs2 noisy scalar samples per realization, [0,0] and[0,1] cost4, all phases cost8. Compare [0,0] vs[0,1] directly at equal measurement cost. For all-phase comparisons show both fixed K and fixed K*m budgets; calibration/selection draws and new evaluation draws are disjoint and counted. Fixed candidate q family must be frozen identically across phase policies.",
+    "suggested_fixed_grid": "phase sets exactly the four above; nu in [.001,.01,.1,1]; K in [8,32,128,512]. True spectra include e1/e3, e2/2e4 plus strict-interior pairs p0 +/- a*(1,0,-1,0), p0 +/- a*(0,1,0,-2), p0=[1,1,1,1], a in [.1,.4]. Freeze p bounds from synthesis design, candidate8 spectra and tau before running; avoid huge generic grid unless cost measured.",
+    "failure_rules": "Preserve a failed/uncertified LP or empty confidence set. A phase[0] fiber falsely identified by energy constraint, duplicated phase reported rank4, identical worlds separated by EB, a projected gap flipping, or a certified fresh-draw population regret violated: numerical/model/protocol failure. Persistent abstention or no advantage versus fair baselines is retained negative evidence.",
+    "novelty": "Unknown. All rank/cosine calculations and LP policy remain classical. Parent identified Partial Identification and Decision Theory, arxiv2312.17623v3, as covering generic observation-equivalence, utility intervals and action selection. Need sampler-specific sharp statistical/cost results beyond this elementary eight-site example before a novelty claim.",
+    "cpu_checks": [
+      {
+        "phases": [
+          0
+        ],
+        "sample_sites": [
+          0,
+          4
+        ],
+        "rank_H": 2,
+        "singular_values": [
+          0.7071067811865476,
+          0.5590169943749475,
+          1.2816104936374889e-17,
+          0.0
+        ],
+        "kernel_test_13_norm": 0.0,
+        "kernel_test_24_norm": 1.1102230246251565e-16,
+        "Q1_Q3_observation_covariance_difference_norm": 0.0,
+        "Q1_Q3_fixed_filter_true_world_gaps": [
+          -1.666666666666666,
+          1.666666666666666
+        ],
+        "candidate_definition": "B_q=C(q) A^T [A C(q) A^T+0.1 I]^-1, frozen q=e1,e3; gap R_Be1-R_Be3; results use full W=I"
+      },
+      {
+        "phases": [
+          0,
+          0
+        ],
+        "sample_sites": [
+          0,
+          4,
+          0,
+          4
+        ],
+        "rank_H": 2,
+        "singular_values": [
+          1.4142135623730951,
+          1.1180339887498947,
+          1.4686870114880514e-16,
+          8.038377910744832e-17
+        ],
+        "kernel_test_13_norm": 0.0,
+        "kernel_test_24_norm": 2.220446049250313e-16,
+        "Q1_Q3_observation_covariance_difference_norm": 0.0,
+        "Q1_Q3_fixed_filter_true_world_gaps": [
+          -1.8181818181818172,
+          1.8181818181818177
+        ],
+        "candidate_definition": "B_q=C(q) A^T [A C(q) A^T+0.1 I]^-1, frozen q=e1,e3; gap R_Be1-R_Be3; results use full W=I"
+      },
+      {
+        "phases": [
+          0,
+          1
+        ],
+        "sample_sites": [
+          0,
+          4,
+          1,
+          5
+        ],
+        "rank_H": 4,
+        "singular_values": [
+          1.0,
+          0.8090169943749475,
+          0.7071067811865472,
+          0.30901699437494745
+        ],
+        "kernel_test_13_norm": 0.9999999999999998,
+        "kernel_test_24_norm": 0.7071067811865475,
+        "Q1_Q3_observation_covariance_difference_norm": 0.9999999999999998,
+        "Q1_Q3_fixed_filter_true_world_gaps": [
+          -4.019918515165234,
+          4.019918515165234
+        ],
+        "candidate_definition": "B_q=C(q) A^T [A C(q) A^T+0.1 I]^-1, frozen q=e1,e3; gap R_Be1-R_Be3; results use full W=I"
+      },
+      {
+        "phases": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "sample_sites": [
+          0,
+          4,
+          1,
+          5,
+          2,
+          6,
+          3,
+          7
+        ],
+        "rank_H": 4,
+        "singular_values": [
+          1.4142135623730956,
+          1.4142135623730951,
+          1.414213562373095,
+          1.0
+        ],
+        "kernel_test_13_norm": 2.0,
+        "kernel_test_24_norm": 2.449489742783178,
+        "Q1_Q3_observation_covariance_difference_norm": 2.0,
+        "Q1_Q3_fixed_filter_true_world_gaps": [
+          -1.9834710743801656,
+          1.9834710743801651
+        ],
+        "candidate_definition": "B_q=C(q) A^T [A C(q) A^T+0.1 I]^-1, frozen q=e1,e3; gap R_Be1-R_Be3; results use full W=I"
+      }
+    ],
+    "inverse_formula_cpu_check": {
+      "cases": 100,
+      "seed": 2026100802,
+      "max_abs_error": 1.0547118733938987e-15,
+      "pass": true
+    }
+  },
+  "active_synthetic_scope": "Eight-site sampler-specific grid above supersedes proposed generic two-site stage grid; two-site values retained only as prior algebra sanity evidence."
+}

@@ -1,0 +1,144 @@
+{
+  "completed_utc": "2026-10-08T10:59:47.942795+00:00",
+  "status": "E3 noise meaning resolved; historical comparisons retained as descriptive reference; no corrected reconstruction claimed",
+  "historical_source_sha_match": {
+    "d8_single.py": true,
+    "e3_h6c.py": true,
+    "预注册-E3-单图多倍率-冻结-20261005.md": true
+  },
+  "sources": {
+    "d8_single.py": "4d1ccbe81b8465c36be9f062da2e674058bf50ecefb3cc23a6b0f4b1258b15e2",
+    "e3_h6c.py": "9ea1244c2b24345566010229194602d10a39a9208e9b0c5d8c4b607e65945fa1",
+    "ana_e3.py": "62046fd9a18f0b8bfe06c0233f0741ba19f5b284219b3b03f082e6727fe11581",
+    "d8_single.json": "481bbc085290debc7b115c7c22f0fb6f8e6a9b0ca0af5544d5d5326b0cee3ac8",
+    "e3_result.json": "5da1e54cb285b4bd65665188eb7573f99a920d02f312991a4f1f149c76a44086",
+    "预注册-E3-单图多倍率-冻结-20261005.md": "28ba8c4afb78c7de35115d6f3b416eb9877906b13d15e6c1b3490e8d8fe3950e",
+    "结果-E3-单图多倍率-20261005.md": "1c66484c23ba3fcb4c648c490396b6740efe2c5267bd9e01689892bdca61cb82",
+    "out/e3_x2.json": "e2f44b118e8203cb0be68208860c83a5565efa70d01e9d1d48b13c4155c0d8a0",
+    "out/e3_x3.json": "8f7d91718e81fec997a10e5750c2fe96e4a0c1182ce9463b6e77219dee6f0ac1",
+    "out/e3_x8.json": "98956e8a5cb8071ef1b0ada63bd500643334174c4852f99230e9cad7d9c511bf"
+  },
+  "static_findings": [
+    {
+      "issue": "physical noise versus estimator regularization",
+      "source": [
+        "d8_single.py:89-90",
+        "e3_h6c.py:54-60"
+      ],
+      "conclusion": "Prior simulation physically adds sigma=.002 Gaussian noise and uses nv=sigma^2=4e-6. Natural-image E3 adds no noise; nv=1e-5 only specifies the regularized GP inverse. sqrt(nv)=.003162 is not injected noise. Do not reinterpret sigma=.002 as only numerical regularization."
+    },
+    {
+      "issue": "linear observation mismatch",
+      "source": [
+        "d8_single.py:67-69",
+        "e3_h6c.py:32",
+        "e3_h6c.py:54"
+      ],
+      "conclusion": "Shared bicubic antialias/downsample dimensions, but natural RGB LR is clipped to [0,1]; GP A has no clipping. Extent of clipping unavailable. Results do not evaluate exactly the same linear observation law."
+    },
+    {
+      "issue": "image domain and scale",
+      "source": [
+        "e3_h6c.py:49-54"
+      ],
+      "conclusion": "First 30 filenames then skip smaller-than-256 images; 13 Set14 + 30 BSD100 + 30 Urban100 = 73, not 74. HR256 centre crop; x3 LR85 = effective ratio256/85, not exactly3. x8 outside trained1–4."
+    },
+    {
+      "issue": "band definition and centering",
+      "source": [
+        "d8_single.py:59-65",
+        "e3_h6c.py:33-37"
+      ],
+      "conclusion": "Square/max(|fx|,|fy|) frequency bands, not radial annuli. b1 [0,1/8), b2 [1/8,1/4), b3 [1/4,.5001). Natural-image X and E exclude DC; prior-window X/E include DC despite global zero-DC prior. Both unwindowed full HR256 and no shave. Prior values mean only 3 draws; not analytic exact band trace risk."
+    },
+    {
+      "issue": "truth-conditioned linear references",
+      "source": [
+        "e3_h6c.py:27-31",
+        "e3_h6c.py:58-60"
+      ],
+      "conclusion": "Generic alpha2 amplitude uses true grayscale variance, not observation-only estimated variance; periodogram subtracts true mean, zero-pads HR256 in512 torus, uses squared FFT /256^2 and1e-12 floor. These are diagnostic references, not deployable observation-only selectors or optimal realized all-linear bounds."
+    },
+    {
+      "issue": "metric and pooling",
+      "source": [
+        "e3_h6c.py:55",
+        "e3_h6c.py:62-67",
+        "ana_e3.py:16-18"
+      ],
+      "conclusion": "Arithmetic RGB average, not perceptual luma. Pooled R=1-sum(error energy)/sum(signal energy); stored per-image ratios cannot recover energy pooling. CI bootstraps unweighted image means of ratios, not pooled-R uncertainty. Cell predictions reuse 9 prior scale-band numbers over three datasets;27 cells not27 independent spectra."
+    },
+    {
+      "issue": "solver certification",
+      "source": [
+        "e3_h6c.py:14-26"
+      ],
+      "conclusion": "CG max800, recurrence threshold1e-6, no saved true residual, iteration count, failure record or pixel prediction. Successful script and scalar records cannot certify solver convergence or optimality."
+    }
+  ],
+  "record_recalculation": {
+    "result_file": "record-recalculation.json",
+    "max_cell_numeric_difference": 0.0,
+    "cpu_seconds": 0.066788,
+    "wall_seconds": 0.10582879100002174,
+    "bootstrap_replicates": 10000,
+    "counts": {
+      "2": {
+        "Set14": 13,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "3": {
+        "Set14": 13,
+        "BSD100": 30,
+        "Urban100": 30
+      },
+      "8": {
+        "Set14": 13,
+        "BSD100": 30,
+        "Urban100": 30
+      }
+    },
+    "verdicts": {
+      "spearman": 0.9521323953226069,
+      "C_n": 12,
+      "C_pass_003": 10,
+      "C_pass_002": 8,
+      "A_n": 9,
+      "A_pass": 9,
+      "A_largest_net_oracle_gap": 0.015565425840608937,
+      "C_smallest_net_oracle_gap": 0.002066313819170329,
+      "C_largest_net_oracle_gap": 0.24415712735182926,
+      "oracle_generic_gap": {
+        "A": 0.010598996362137113,
+        "B": 0.07759679974842489,
+        "C": 0.040262657625882305
+      },
+      "generic_monotone_pairs": 9
+    },
+    "scope": "Saved scalar recovery and pooled records only; no pixel predictions, observation, periodogram, energy sums, CG residuals or checkpoints re-evaluated."
+  },
+  "recompute_feasibility": {
+    "local_saved_fields": [
+      "per_image scalar recovery ratios",
+      "dataset/model/band pooled recovery ratios",
+      "3-draw prior mean band recoveries"
+    ],
+    "missing_for_pixel_recompute": [
+      "original HR images or exact image crop arrays",
+      "LR observations",
+      "512x512 individual periodograms and prior samples",
+      "per-method pixel reconstructions",
+      "signal and error band-energy sums",
+      "CG residuals"
+    ],
+    "feasible_now": "Independent threshold verdicts, rank statistic, per-image ratio bootstrap; completed in0.106s wall/0.067s CPU. No GPU/fit/reconstruction rerun.",
+    "if_desired_later": "Obtain original HR cohort from server via parent; freeze a new retrospective sensitivity protocol, explicitly physical noise0, estimator regularizer nu fixed and varied separately, preserve original network scores/limits. Save unclipped and clipped forward outputs, E/S, spectra, true residuals, compare matched DC/boundary and noise. Original outcomes already seen, so call sensitivity not new confirmatory experiment; not required to retain descriptive baseline."
+  },
+  "wording_recommendations": {
+    "keep": "Across the historical E3 conditions, the low-noise generic-prior simulation ordered the measured regularized linear-reference recovery (Spearman .952); generic-reference recovery decreased with scale in9/9 band–dataset combinations. Four evaluated networks exceeded the periodogram reference in all12 low-reference cells and had range<=.03 in10/12 (<=.02 in8/12).",
+    "replace": "Noise/covariance-matched predicted zone movement -> descriptive scale-dependent movement relative to a low-noise surrogate reference.",
+    "remove": "linear upper bound, Bayes ceiling, no decoder leverage, same observation/noise law, safety/optimality claims from E3.",
+    "explicit_methods_sentence": "The prior diagnostic uses three Gaussian draws with physically injected sigma=.002 noise, whereas the natural-image evaluation has no injected noise and uses regularizer nu=1e-5 for its GP references; LR clipping and DC handling also differ. These references support descriptive ordering rather than a quantitative matched-noise recovery boundary."
+  }
+}

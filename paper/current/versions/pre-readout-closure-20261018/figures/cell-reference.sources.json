@@ -1,0 +1,9 @@
+{
+  "rows": "/workspace/SE-INR/codex-20261018-cell-reference-formal-v2/rows.json",
+  "sha256": "550304d4c363a99f1c9d404375b2c9af15ad50351379614cad3aaf02ef818a79",
+  "records": 256,
+  "images": 32,
+  "selection": "all RGB rows, zero and h3 paired; per model/scale, both seeds",
+  "png_sha256": "84ff92032fb16fea50569fae5e55c879dd23901f71878449d7f3ec1ffed4ef55",
+  "pdf_sha256": "6959086bdaf320226675ef7daf7b3901eb4cd62a5bda24ec880b8f97d6d9c503"
+}

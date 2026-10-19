@@ -1,0 +1,49 @@
+{
+  "stage": "cause-integration-20261014-complete",
+  "pdf_sha256": "ae4b614e5bfbd857df8e7eb80cb3cb1c9cad9f73b0ee6f3f4f47104daecc3f0c",
+  "pages": 5,
+  "body": "1-4",
+  "references": "5 only",
+  "compiler": "research-175/paper-cause-integration-20261014 existing pdflatex/bibtex",
+  "warnings": 0,
+  "overfull": 0,
+  "underfull": 4,
+  "undefined": 0,
+  "fonts": "13 embedded; Type1/CID TrueType, no Type3",
+  "render": "preview-cause-integration/page-1..5.png, 130dpi",
+  "visual_status": "All five FINAL pages viewed after final compile; equations/table/8-panel figure readable, no overlap or clipping. Body column balancing trial rejected for vbox overflow; final normal flow restores zero overflow.",
+  "source_hashes": {
+    "main.tex": "c9358a21bdb5a3bf59daf08fd2180700b0021359c38f156483c4061e059ff7c9",
+    "sec/icassp.tex": "e60784f4075a8a54282d7110456066a726519b0865eaebda7fd0683ca5f83902",
+    "refs.bib": "f448a39c2b1308c7853b40768b7579b851988c7bf0bd0d6b563874d6b1155254",
+    "spconf.sty": "dc5d632639040cb183f2ab62780f314845aa021be73048c8a9ec9c2072d64a86",
+    "IEEEbib.bst": "7e6ca0c8b72158d504a12bb091f817c07032a021ba41ca783cca4c2dd80d570b",
+    "figures/icassp-controlled.pdf": "21feb1e38b48d2586b9148702cd27fb62be1ae404f1235ce382088d37fb47bee",
+    "figures/build-cause-figure.py": "cbc1ea040f308a0dd94cf95bb1a9a07211e61b534f3efebe66c2f9a962904f86",
+    "main.pdf": "ae4b614e5bfbd857df8e7eb80cb3cb1c9cad9f73b0ee6f3f4f47104daecc3f0c"
+  },
+  "scientific_review": {
+    "evidence_auditor": "cause_evidence_audit: independently aggregated stored stage-B rows and verified stage-A/transfer values, denominators, hashes; no model rerun",
+    "manuscript_reviewer": "integrated_paper_review: full scientific review plus targeted second pass; all mandatory issues closed",
+    "fixed_issues": [
+      "Separated Stage A machine-precision boundary from Stage B fixed thresholds",
+      "Specified eligible AUC cells and frozen-OOF conditional bootstrap",
+      "Corrected wall-time vs process CPU-time wording",
+      "Clarified all six amplitudes, phase baseline, true-minus-proxy and strict rescue"
+    ]
+  },
+  "evidence": {
+    "补证-20261012/readout-cause-v1/completion.json": "8deb03e9c7362b66a4e10e5f0f6ef2c5c362cc8365b10f8b6789d0ef0aa680a3",
+    "补证-20261012/readout-cause-v1/stage-a/summary.json": "877551b7b1f9a60697a0dd753311235450d6c0446c796dd45b00e66889ef150f",
+    "补证-20261012/readout-cause-v1/stage-a/review.json": "f4ff3cb5fd6783916f83981364da5cdab148863ba5382db4199946d5afb3bb2b",
+    "补证-20261012/readout-cause-v1/stage-b/interpretation.json": "65d1661dad68561d70d50cf53ec2625606fefd537095ae77aed89a46c9ecfa40",
+    "补证-20261012/readout-cause-v1/stage-b/protocol.json": "a25b0ac0aaf10954b715788322731224b4d5ad503c9f46f8e8ff02af173fce37"
+  },
+  "previous_version": "versions/pre-cause-integration-5page, original PDF f818c4c963565a5c06616b32415e02921edd298d0302005ca765bb098243f34c",
+  "submission_state": "internal scientific review, not submitted; author information deferred by user; no new inference/training/GPU in manuscript integration",
+  "remaining_scientific_limits": [
+    "Natural-image causal prevalence and internal neural mechanism not identified",
+    "Finite synthetic design and zero-cell support differences",
+    "Reliable observation-only decision rule not established"
+  ]
+}

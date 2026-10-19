@@ -1,0 +1,14 @@
+{
+  "source_hashes_match": true,
+  "ranks": [
+    2,
+    2,
+    4,
+    4
+  ],
+  "direct_risk_max_error": 1.7763568394002505e-15,
+  "expanded_duality_gap_max": 1.2076468181021482e-07,
+  "LP_calls": 96,
+  "LP_seconds": 0.09033674685633741,
+  "status": "development numerical algebra only, no prospective efficacy result"
+}

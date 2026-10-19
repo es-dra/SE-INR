@@ -1,0 +1,15 @@
+{
+  "preformal_v1_issues": [
+    "Primal witnesses alone are not LP outer bounds",
+    "partial selections/score at budget interruption needed journals",
+    "empty sets separate from numerical failures",
+    "pure LP phase costs missing"
+  ],
+  "v2_review": "Independent math review passed sign-clipped weak-duality bound with box stationarity correction, outward float padding, epsilon consistency, journals, failure gates, phase costs.",
+  "remaining_limits": [
+    "Floating padding is numerical diagnostics, not a rigorous interval arithmetic machine proof",
+    "summary max witness/duality fields cover selection only; independent audit must include exact separately"
+  ],
+  "unit_check": "remote development-v2.json checks96 LP solves and ranks[2,2,4,4]; no formal outcome used to tune source",
+  "gpu_jobs": 0
+}

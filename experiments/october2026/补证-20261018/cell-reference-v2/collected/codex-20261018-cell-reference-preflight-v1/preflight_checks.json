@@ -1,0 +1,42 @@
+[
+  {
+    "model": "lte_seed1",
+    "scale": 2,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "lte_seed1",
+    "scale": 4,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "sc-inr_seed1",
+    "scale": 2,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "sc-inr_seed1",
+    "scale": 4,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "lte_seed2",
+    "scale": 2,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "lte_seed2",
+    "scale": 4,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "sc-inr_seed2",
+    "scale": 2,
+    "max_native_chunk_difference": 0.0
+  },
+  {
+    "model": "sc-inr_seed2",
+    "scale": 4,
+    "max_native_chunk_difference": 0.0
+  }
+]

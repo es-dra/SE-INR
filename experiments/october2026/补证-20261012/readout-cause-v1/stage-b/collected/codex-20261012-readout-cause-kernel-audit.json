@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "independent numpy Keys cubic a=-.5 antialias support8 with periodic boundary; does not import run.py or torch",
+  "max_abs_matrix_error": 0.0,
+  "operator_sha256": "f5f69de84ea144d8fd41b77fce1e06bd73e1b1049ef44dd93e660442ee970f76",
+  "wall_seconds": 0.000508576980791986,
+  "CPU_threads": 1,
+  "GPU": 0
+}

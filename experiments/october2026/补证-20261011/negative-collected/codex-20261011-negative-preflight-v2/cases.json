@@ -1,0 +1,24 @@
+[
+  {
+    "id": "calibration_0001_x2",
+    "split": "calibration",
+    "image": 1,
+    "n": 64,
+    "scale": 2,
+    "kind": "natural"
+  },
+  {
+    "id": "calibration_0001_x4",
+    "split": "calibration",
+    "image": 1,
+    "n": 32,
+    "scale": 4,
+    "kind": "natural"
+  },
+  {
+    "id": "alias_n16_k3_a0_p0",
+    "split": "alias",
+    "n": 16,
+    "kind": "alias"
+  }
+]

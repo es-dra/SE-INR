@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "wall_seconds": 5.0561113357543945,
+  "script_wall_seconds": 3.732602094009053,
+  "cpu_user": 14.074347,
+  "cpu_system": 1.76978,
+  "maxrss_kib": 662196,
+  "gpu_processes": 0,
+  "SR_training_runs": 0,
+  "phases": [
+    {
+      "phase": "prepare",
+      "seconds": 0.1939280569786206
+    },
+    {
+      "phase": "predict",
+      "seconds": 3.463503937004134
+    },
+    {
+      "phase": "forecast",
+      "seconds": 0.07284666097257286
+    }
+  ]
+}

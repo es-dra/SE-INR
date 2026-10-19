@@ -1,0 +1,47 @@
+\section{Limitations}\label{sec:limits}
+
+\begin{itemize}
+\item \textbf{Theory is classical.} Props.~\ref{prop:bound} and
+\ref{prop:mismatch} are direct consequences of Wiener/LMMSE theory. Our
+contribution is their use as an a-priori diagnostic and prescription for
+spectral adaptation in continuous representations, with cross-task tests.
+\item \textbf{Linear bounds do not bound learned priors.} Trained ASISR
+networks exceed the oracle linear bound in every regime-C cell
+(\S\ref{sec:exp-c}); we report this as a finding.
+\item \textbf{The a-priori budget does not predict components inside a
+network.} F1's pre-registered predictor failed (\S\ref{sec:exp-f1});
+assigning regimes by $\Rnet$ needs ground truth, and at the network layer
+Prop.~\ref{prop:mismatch} gives only a boundary statement.
+\item \textbf{Threshold sensitivity.} ``Decoders have no leverage in regime C''
+holds at a range threshold of 0.03 (10/12 cells) but not at 0.02 (8/12:
+$\times2$ $b_3$ Set14 0.038, Urban100 0.035; $\times8$ $b_2$ Set14 0.021,
+Urban100 0.026) \src{E4-E3sens}. \PH{sensitivity of the regime thresholds
+0.1/0.8.}
+\item \textbf{Multi-frame switch point.} The switch from low-bias to
+spectral-prior arms occurs at $\sigma_n=0.005$, earlier than pre-registered
+(P1 fails), and the generic prior does not reach within 0.6\,dB of the oracle
+at high noise (P2 fails) \src{E1}. The per-frequency diagnostic
+(D11) supports the band-wise account for GP arms (rank correlation 0.856) but
+the predicted cost does not select the best arm (1/3), and the non-linear arms
+were not diagnosed; zone labels alone should not be used to pick a winner.
+\item \textbf{Scalar model.} Random sparse sampling spreads aliasing across
+bands; the one asymmetry counter-example (sparse 10\% $b_1$) lies there.
+\item \textbf{Scale collapse and readout-as-scale.} L1's main criterion fails
+on Set14 (6/9 groups within 0.05; cause undiagnosed). L2 ranks ablation
+losses well, but its magnitudes miss at $\times2/\times3$, and it is
+correlational: no scalar-$s$ arm has been trained \src{L1L2}.
+\item \textbf{Seeds.} F1 currently uses one seed; seeds 2/3 are tested under
+the frozen G1 pre-registration. \PH{update when seeds 2/3
+finish.}
+\item \textbf{Known operator.} $A$ must be known; blind degradation is out of
+scope. The pre-registration did not fix the band-energy window in E2 (Hann
+window added after a one-image run; \S\ref{sec:exp-e2}).
+\end{itemize}
+
+\section{Conclusion}
+\PH{Write after E1 explanation and G1 and D11 results are in. Intended
+message: decide where to spend effort by computing $\Rlin$ first; rank
+representations by the band-summed cost $C(Q)$ with per-band $\kappa_b$, not by
+zone labels; in C only learned priors help; ASISR decoder design
+sits in C, which explains its saturation, and SC-INR's readout acts in the
+bands the learned prior lifts out of C.}

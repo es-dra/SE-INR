@@ -1,0 +1,48 @@
+\section{Related Work}\label{sec:related}
+
+\paragraph{Spectral control in implicit representations.}
+SIREN \citep{sitzmann2020siren} sets the frequency scale $\omega_0$ by hand;
+Fourier features \citep{tancik2020fourier} expose the bandwidth $\sigma$ and
+connect it to the neural tangent kernel \citep{jacot2018ntk}; FINER
+\citep{liu2024finer} widens the reachable frequency set. A recent group
+selects these parameters from the spectrum of the target signal: FreSh
+\citep{kania2025fresh} matches the spectrum of the untrained model to the
+target's, WINNER \citep{winner2025} scales weight noise by the spectral
+centroid, SEC \citep{sec2026} maps the centroid to the optimal parameter via a
+calibration set. WIEN-INR \citep{wieninr} allocates capacity per band. All of
+these address \emph{fitting} a fully observed signal. We study the inverse
+setting, where the spectrum is to be estimated from degraded observations and
+the question is whether it can pay off at all. Spectral bias
+\citep{rahaman2019spectral} explains what an untuned network prefers; our
+budget explains what the observation permits.
+
+\paragraph{Arbitrary-scale super-resolution.}
+LIIF \citep{chen2021liif} decodes a local latent at continuous coordinates
+with a cell (footprint) input; LTE \citep{lee2022lte} adds a local dominant
+frequency estimator; MetaSR \citep{hu2019metasr}, SRNO \citep{wei2023srno},
+CiaoSR \citep{cao2023ciaosr} and HIIF \citep{jiang2025hiif} refine the
+decoder; SC-INR (ours, prior work \TODO{cite}) replaces the cell input with an
+analytic footprint (sinc) readout and enforces scale consistency; Rot-E
+\TODO{cite} adds rotation equivariance. Gaussian-splatting decoders
+\citep{chen2025gsasr} and heat-field decoders with analytic anti-aliasing
+\citep{becker2025thera} form a newer family. A controlled re-training study
+\citep{nasir2026empirical} reports architectural saturation of the MLP/operator
+family. Low-pass behaviour of SR networks has been measured with a global
+scalar \citep{fsds2024}; we measure recovery per band defined by the sampling
+theorem and set it against a computable linear bound. Our analysis explains
+saturation rather than proposing another decoder.
+
+\paragraph{Multi-frame and sparse reconstruction.}
+SuperF \citep{superf2026} fits a Fourier-feature network to multiple shifted
+low-resolution frames and tunes $\sigma$; Deep Image Prior
+\citep{ulyanov2018dip} reconstructs without training data; kriging/GP
+regression \citep{rasmussen2006gp} inserts the spectrum directly as a prior.
+These are the high- and mid-$R$ regimes of our map.
+
+\paragraph{Classical theory and per-band diagnostics.}
+LMMSE/Wiener estimation and aliasing analysis of sampling are textbook
+\citep{kay1993estimation}. Per-frequency agreement measures such as
+Fourier ring correlation in microscopy \citep{vanheel2005frc} and
+scale-decomposed skill scores in forecast verification are close relatives of
+our per-band recoverability; to our knowledge none has been used to predict
+when spectral adaptation of continuous representations helps.

@@ -1,0 +1,16 @@
+{
+  "protocol_sha256": "fb33a2cd687205aefb5bcb848eab75f467c0f2994260d04fbdbd25ef54a92015",
+  "core_sha256": "2dd1b233e48f896244f9de29eb915b692cd367a854dc9eb87b22a64f01d9000a",
+  "experiment_sha256": "c85f74143c4b8a10e90024346ff75109edae8144de87891462ce05568ca5160e",
+  "summary_sha256": "1c843016ff74e41f00704b46b77febca9ccc6c8ce9690a33e426da684841cc45",
+  "torch_version": "2.8.0a0+5228986c39.nv25.05",
+  "mode": "formal",
+  "geometry": {
+    "hr": 256,
+    "scale": 4,
+    "frames": 16,
+    "subsamples": 8,
+    "field": 512,
+    "shave": 8
+  }
+}

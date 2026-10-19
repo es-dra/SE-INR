@@ -1,0 +1,203 @@
+{
+  "scope": "saved-data CPU analysis only; no model inference or new samples",
+  "protocol": "D11-b: same 12 image resamples across all 24 arm/noise points, then average, then Spearman",
+  "D11_b": {
+    "spearman": 0.8556521739130435,
+    "ci_95_percentile": [
+      0.7408695652173913,
+      0.9182608695652174
+    ],
+    "bootstrap_replicates": 10000,
+    "rng": "numpy.default_rng(0)",
+    "passes_frozen_point_threshold": true,
+    "original_2000_ci_reproduced": [
+      0.7434782608695653,
+      0.9182608695652174
+    ],
+    "original_ci": [
+      0.7435,
+      0.9183
+    ],
+    "interpretation": "point criterion passes; CI lower bound remains below 0.8"
+  },
+  "D11_a": {
+    "share_b3": 0.5559335151176655,
+    "ci_95_percentile": [
+      0.463774939118828,
+      0.6184977192582352
+    ],
+    "bootstrap_replicates": 10000,
+    "rng": "independent numpy.default_rng(0)",
+    "passes_frozen_point_threshold": true,
+    "interpretation": "point criterion passes; CI crosses 0.5"
+  },
+  "D11_c": {
+    "per_noise": {
+      "0.005": {
+        "pred_best": "gp_power_2.5",
+        "obs_best": "gp_power_2.0",
+        "match": false
+      },
+      "0.01": {
+        "pred_best": "gp_power_2.5",
+        "obs_best": "gp_power_2.5",
+        "match": true
+      },
+      "0.02": {
+        "pred_best": "gp_power_2.5",
+        "obs_best": "gp_power_3.0",
+        "match": false
+      }
+    },
+    "n_match": 1,
+    "passes_frozen_threshold": false
+  },
+  "bootstrap_limitation": "conditional on these 12 images, fixed noise draws and measured arms; no noise-draw or training-seed variability estimated",
+  "diagnostic_limitation": "R_b uses truth/oracle error and kappa uses oracle spectrum; this is post-hoc diagnosis, not observable-data-only selection",
+  "points": [
+    {
+      "noise": "0.005",
+      "arm": "gp_gauss_3",
+      "pred": 3023619.994852397,
+      "obs": 7038241.044108073
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_gauss_10",
+      "pred": 1940818.2026781857,
+      "obs": 1770763.7291666667
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_gauss_30",
+      "pred": 593859.8905515074,
+      "obs": 670842.1047363281
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_gauss_60",
+      "pred": 3095114.0784990205,
+      "obs": 2949198.293375651
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_gauss_128",
+      "pred": 3649596.087063066,
+      "obs": 4102911.073893229
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_power_2.0",
+      "pred": 1403174.944961641,
+      "obs": 38737.11726888021
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_power_2.5",
+      "pred": 353808.6589274483,
+      "obs": 353164.9676920573
+    },
+    {
+      "noise": "0.005",
+      "arm": "gp_power_3.0",
+      "pred": 675627.4523904423,
+      "obs": 1094359.2805582683
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_gauss_3",
+      "pred": 2834419.0346111287,
+      "obs": 6914052.286946614
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_gauss_10",
+      "pred": 1894721.284054768,
+      "obs": 1788591.0322265625
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_gauss_30",
+      "pred": 626909.561579741,
+      "obs": 1164476.4103190105
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_gauss_60",
+      "pred": 3763182.7662188723,
+      "obs": 3601097.94921875
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_gauss_128",
+      "pred": 4594933.373186781,
+      "obs": 4344670.471354167
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_power_2.0",
+      "pred": 1523082.6825668623,
+      "obs": 690324.1995442709
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_power_2.5",
+      "pred": 355848.10533575545,
+      "obs": 404980.53206380206
+    },
+    {
+      "noise": "0.01",
+      "arm": "gp_power_3.0",
+      "pred": 678816.0258307491,
+      "obs": 982774.9996744791
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_gauss_3",
+      "pred": 2417151.0937964506,
+      "obs": 6691825.2783203125
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_gauss_10",
+      "pred": 1732710.620365329,
+      "obs": 1635537.1360677083
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_gauss_30",
+      "pred": 690540.9384116222,
+      "obs": 1647544.9664713542
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_gauss_60",
+      "pred": 5105021.664622234,
+      "obs": 4330120.7718098955
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_gauss_128",
+      "pred": 6869860.223799612,
+      "obs": 4643421.6728515625
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_power_2.0",
+      "pred": 1589586.0090288909,
+      "obs": 1167385.4306640625
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_power_2.5",
+      "pred": 332994.5403844368,
+      "obs": 546692.1201171875
+    },
+    {
+      "noise": "0.02",
+      "arm": "gp_power_3.0",
+      "pred": 656437.6427053512,
+      "obs": 824783.7529296875
+    }
+  ]
+}

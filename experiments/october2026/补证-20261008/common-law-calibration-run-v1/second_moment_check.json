@@ -1,0 +1,110 @@
+[
+  {
+    "arm": "ph00_sigma3_rbf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.010776192364737116,
+    "absolute_difference": 3.469446951953614e-18
+  },
+  {
+    "arm": "ph01_sigma3_rbf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.00943928633801467,
+    "absolute_difference": 0.0
+  },
+  {
+    "arm": "ph02_sigma3_rbf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.007620302392447049,
+    "absolute_difference": 8.673617379884035e-19
+  },
+  {
+    "arm": "ph00_sigma10_rbf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.03710945896668513,
+    "absolute_difference": 0.0
+  },
+  {
+    "arm": "ph01_sigma10_rbf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.028981022255155045,
+    "absolute_difference": 3.469446951953614e-18
+  },
+  {
+    "arm": "ph02_sigma10_rbf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.020495867798579533,
+    "absolute_difference": 3.469446951953614e-18
+  },
+  {
+    "arm": "ph00_sigma3_fixed_rf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.04944814637180346,
+    "absolute_difference": 0.0
+  },
+  {
+    "arm": "ph01_sigma3_fixed_rf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.029602953801614717,
+    "absolute_difference": 3.469446951953614e-18
+  },
+  {
+    "arm": "ph02_sigma3_fixed_rf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.029778606514463523,
+    "absolute_difference": 3.469446951953614e-18
+  },
+  {
+    "arm": "ph00_sigma10_fixed_rf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.13462280813253585,
+    "absolute_difference": 0.0
+  },
+  {
+    "arm": "ph01_sigma10_fixed_rf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 0.731403974563093,
+    "absolute_difference": 1.1102230246251565e-16
+  },
+  {
+    "arm": "ph02_sigma10_fixed_rf",
+    "residual_matrix_shape": [
+      3136,
+      96
+    ],
+    "equivalent_risk": 1.5554256874822072,
+    "absolute_difference": 0.0
+  }
+]

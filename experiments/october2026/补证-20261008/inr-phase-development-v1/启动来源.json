@@ -1,0 +1,40 @@
+{
+  "root": "/workspace/SE-INR/codex-20261008-paper-continuation/inr-phase-development-run-v1",
+  "log": "/workspace/SE-INR/codex-20261008-paper-continuation/inr-phase-development-run-v1.log",
+  "guard_pid": 18495,
+  "started_unix": 1791435664.9450698,
+  "deadline_unix": 1791442864.9450698,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=15s",
+    "7220s",
+    "nice",
+    "-n",
+    "10",
+    "env",
+    "CUDA_VISIBLE_DEVICES=GPU-7a98572d-91e0-6c35-b4e5-4ac57a77e8cd",
+    "OMP_NUM_THREADS=4",
+    "MKL_NUM_THREADS=4",
+    "OPENBLAS_NUM_THREADS=4",
+    "/usr/bin/python3",
+    "-u",
+    "/workspace/SE-INR/codex-20261008-paper-continuation/inr-phase-development-v1/experiment.py",
+    "--root",
+    "/workspace/SE-INR/codex-20261008-paper-continuation/inr-phase-development-run-v1",
+    "--data-root",
+    "/workspace/SE-INR/Data",
+    "--original-source",
+    "/workspace/SE-INR/claude-20261004-e1/e1ff.py",
+    "--deadline-unix",
+    "1791442864.9450698"
+  ],
+  "source_hashes": {
+    "experiment.py": "32fc0534dde79b841bd22ba847c34de11b8ada8525af115abb8806abba215027",
+    "protocol.json": "fca50a58768c66a3ede9c1c7c81e0f7c40f49385c16ad45005a7ba6308635261",
+    "original-e1ff.py": "0a82c9fa16161b525e8570b771bc298140ba9033f61408a2a110cb5f6500174e"
+  },
+  "gpu_inventory": "GPU-675adc8d-a6ea-1c8b-f833-f8ae8a87cdaa, 14 MiB, 0 %\nGPU-7a98572d-91e0-6c35-b4e5-4ac57a77e8cd, 136 MiB, 0 %\nGPU-42f95d21-12cd-8428-a80b-82b3721abc01, 12 MiB, 0 %\nGPU-4fd8e39c-ecb7-159e-b1f9-930c3066676e, 12 MiB, 0 %\n",
+  "development_only": true,
+  "prelaunch_CPU_geometry_and_AST_pass": true
+}

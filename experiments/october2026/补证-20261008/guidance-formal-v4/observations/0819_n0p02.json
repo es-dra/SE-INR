@@ -1,0 +1,17 @@
+{
+  "image": "0819",
+  "noise": 0.02,
+  "noise_seed": 1001,
+  "matched_operator": true,
+  "source_image_sha256": "fcbc6cb7e7cdb717e94d8c8eaf659d6b2bfa513aa133c0d2c4a8e2aa96092529",
+  "observation_sha256": "5a030c750663e88a90c1394f9821a8299f1714fe6f00c17985965526f702f642",
+  "truth_sha256": "b16532891231c4536831767021ed35b15f698521faeb604cc4bef06812bcf8f8",
+  "preparation": {
+    "seconds": 0.026863709994358942,
+    "a_calls": 1,
+    "at_calls": 0,
+    "interpolated_points": 4194304,
+    "peak_gpu_bytes": 244318208
+  },
+  "selection_may_read_truth": false
+}

@@ -1,0 +1,2580 @@
+{
+  "case": "0802_n0p02",
+  "status": "complete",
+  "scores": {
+    "gauss_3": {
+      "mean": 0.007301838844618846,
+      "probe_risks": [
+        0.00730573276417716,
+        0.007607168414903973,
+        0.0072659664285312,
+        0.007028487770863051
+      ],
+      "cost": [
+        {
+          "seconds": 1.5141702909895685,
+          "a_calls": 279,
+          "at_calls": 140,
+          "interpolated_points": 1142784,
+          "peak_gpu_bytes": 2305024
+        },
+        {
+          "seconds": 1.2377823020215146,
+          "a_calls": 287,
+          "at_calls": 144,
+          "interpolated_points": 1175552,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.2604994279972743,
+          "a_calls": 293,
+          "at_calls": 147,
+          "interpolated_points": 1200128,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.2636673449887894,
+          "a_calls": 293,
+          "at_calls": 147,
+          "interpolated_points": 1200128,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 138,
+          "relative_residual": 9.539820441361612e-06,
+          "true_relative_residual": 9.539820441361612e-06,
+          "recursive_relative_residual": 9.539820441374077e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0062414773896822965
+            ],
+            [
+              50,
+              0.0022326980107663526
+            ],
+            [
+              75,
+              0.0004383794217881959
+            ],
+            [
+              100,
+              0.00012752503559025622
+            ],
+            [
+              125,
+              2.600562638129335e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 142,
+          "relative_residual": 8.822448958067188e-06,
+          "true_relative_residual": 8.822448958067188e-06,
+          "recursive_relative_residual": 8.822448958068198e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.00801065000486693
+            ],
+            [
+              50,
+              0.0028978683207644108
+            ],
+            [
+              75,
+              0.0005321830819697083
+            ],
+            [
+              100,
+              0.0001386924410376866
+            ],
+            [
+              125,
+              3.0310737925471558e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 145,
+          "relative_residual": 9.208025537477383e-06,
+          "true_relative_residual": 9.208025537477383e-06,
+          "recursive_relative_residual": 9.20802553746545e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.009556669220789127
+            ],
+            [
+              50,
+              0.00260602226770895
+            ],
+            [
+              75,
+              0.0006422471091954029
+            ],
+            [
+              100,
+              0.00017521319748582342
+            ],
+            [
+              125,
+              3.4557473662052676e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 145,
+          "relative_residual": 8.940398770212185e-06,
+          "true_relative_residual": 8.940398770212185e-06,
+          "recursive_relative_residual": 8.94039877020609e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.008859997012231224
+            ],
+            [
+              50,
+              0.002622926564490236
+            ],
+            [
+              75,
+              0.0006293457132362224
+            ],
+            [
+              100,
+              0.0001695885555769833
+            ],
+            [
+              125,
+              3.359008686465325e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_10": {
+      "mean": 0.006601187872628537,
+      "probe_risks": [
+        0.006456296035579322,
+        0.006623138706507465,
+        0.006768383071677739,
+        0.006556933676749624
+      ],
+      "cost": [
+        {
+          "seconds": 0.5908082899986766,
+          "a_calls": 137,
+          "at_calls": 69,
+          "interpolated_points": 561152,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.6073277220129967,
+          "a_calls": 141,
+          "at_calls": 71,
+          "interpolated_points": 577536,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.6262661200016737,
+          "a_calls": 145,
+          "at_calls": 73,
+          "interpolated_points": 593920,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.6169070009782445,
+          "a_calls": 145,
+          "at_calls": 73,
+          "interpolated_points": 593920,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 67,
+          "relative_residual": 9.621174488122337e-06,
+          "true_relative_residual": 9.621174488122337e-06,
+          "recursive_relative_residual": 9.621174488127252e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0017668768771008944
+            ],
+            [
+              50,
+              7.584449134543522e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 69,
+          "relative_residual": 9.287839847860417e-06,
+          "true_relative_residual": 9.287839847860417e-06,
+          "recursive_relative_residual": 9.287839847859126e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.001997492818320588
+            ],
+            [
+              50,
+              8.348040615389938e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 71,
+          "relative_residual": 8.58624036453099e-06,
+          "true_relative_residual": 8.58624036453099e-06,
+          "recursive_relative_residual": 8.586240364539652e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0024362851085853866
+            ],
+            [
+              50,
+              0.0001089129330310497
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 71,
+          "relative_residual": 9.801702300565154e-06,
+          "true_relative_residual": 9.801702300565154e-06,
+          "recursive_relative_residual": 9.80170230055046e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.002428794697351427
+            ],
+            [
+              50,
+              0.00010302169048401156
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_30": {
+      "mean": 0.007561666258973437,
+      "probe_risks": [
+        0.0074109394208199545,
+        0.007652669034878218,
+        0.007732893428465502,
+        0.007450163151730071
+      ],
+      "cost": [
+        {
+          "seconds": 0.5374876650166698,
+          "a_calls": 123,
+          "at_calls": 62,
+          "interpolated_points": 503808,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.529964672983624,
+          "a_calls": 123,
+          "at_calls": 62,
+          "interpolated_points": 503808,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5506626860005781,
+          "a_calls": 125,
+          "at_calls": 63,
+          "interpolated_points": 512000,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5368013479746878,
+          "a_calls": 125,
+          "at_calls": 63,
+          "interpolated_points": 512000,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 60,
+          "relative_residual": 8.736889647013765e-06,
+          "true_relative_residual": 8.736889647013765e-06,
+          "recursive_relative_residual": 8.736889647010024e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0013353218154748842
+            ],
+            [
+              50,
+              3.1802551594958035e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 60,
+          "relative_residual": 9.671939530673981e-06,
+          "true_relative_residual": 9.671939530673981e-06,
+          "recursive_relative_residual": 9.67193953060047e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0014324255588656675
+            ],
+            [
+              50,
+              3.556199488823736e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 9.531113936445198e-06,
+          "true_relative_residual": 9.531113936445198e-06,
+          "recursive_relative_residual": 9.531113936439592e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0018138077368592134
+            ],
+            [
+              50,
+              4.359786785821315e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 8.87963455214416e-06,
+          "true_relative_residual": 8.87963455214416e-06,
+          "recursive_relative_residual": 8.879634552141129e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0017480307066561956
+            ],
+            [
+              50,
+              4.391098424102073e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_60": {
+      "mean": 0.007671107572698959,
+      "probe_risks": [
+        0.007521528510782407,
+        0.007771511233121383,
+        0.007843738396764307,
+        0.00754765215012774
+      ],
+      "cost": [
+        {
+          "seconds": 0.5307274950027931,
+          "a_calls": 121,
+          "at_calls": 61,
+          "interpolated_points": 495616,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5304554059985094,
+          "a_calls": 123,
+          "at_calls": 62,
+          "interpolated_points": 503808,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5471350669977255,
+          "a_calls": 125,
+          "at_calls": 63,
+          "interpolated_points": 512000,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5420187069976237,
+          "a_calls": 125,
+          "at_calls": 63,
+          "interpolated_points": 512000,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 59,
+          "relative_residual": 9.845827389748182e-06,
+          "true_relative_residual": 9.845827389748182e-06,
+          "recursive_relative_residual": 9.845827389718069e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0013009204209636026
+            ],
+            [
+              50,
+              2.7635899710997286e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 60,
+          "relative_residual": 9.661796003189394e-06,
+          "true_relative_residual": 9.661796003189394e-06,
+          "recursive_relative_residual": 9.661796003151784e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0013994284271371545
+            ],
+            [
+              50,
+              3.095652303235891e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 8.896337873442028e-06,
+          "true_relative_residual": 8.896337873442028e-06,
+          "recursive_relative_residual": 8.89633787343166e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0017410632154170403
+            ],
+            [
+              50,
+              3.833720397992671e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 8.682972242727769e-06,
+          "true_relative_residual": 8.682972242727769e-06,
+          "recursive_relative_residual": 8.68297224272273e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0016559470577506283
+            ],
+            [
+              50,
+              3.8707652685895335e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_128": {
+      "mean": 0.007700133246489217,
+      "probe_risks": [
+        0.007550964446287883,
+        0.007803085766779749,
+        0.007873163240200117,
+        0.007573319532689121
+      ],
+      "cost": [
+        {
+          "seconds": 0.5298822049808223,
+          "a_calls": 121,
+          "at_calls": 61,
+          "interpolated_points": 495616,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5285519089957234,
+          "a_calls": 123,
+          "at_calls": 62,
+          "interpolated_points": 503808,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5438906970084645,
+          "a_calls": 125,
+          "at_calls": 63,
+          "interpolated_points": 512000,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 0.5391596090048552,
+          "a_calls": 125,
+          "at_calls": 63,
+          "interpolated_points": 512000,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 59,
+          "relative_residual": 9.08304244726982e-06,
+          "true_relative_residual": 9.08304244726982e-06,
+          "recursive_relative_residual": 9.083042447200315e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0012790761644852142
+            ],
+            [
+              50,
+              2.6225458004564904e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 60,
+          "relative_residual": 8.961431114122455e-06,
+          "true_relative_residual": 8.961431114122455e-06,
+          "recursive_relative_residual": 8.961431114126307e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0013809055949677647
+            ],
+            [
+              50,
+              2.951437162505522e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 8.190422757840075e-06,
+          "true_relative_residual": 8.190422757840075e-06,
+          "recursive_relative_residual": 8.19042275781968e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0017141262869516602
+            ],
+            [
+              50,
+              3.687509269727411e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 8.094592909320364e-06,
+          "true_relative_residual": 8.094592909320364e-06,
+          "recursive_relative_residual": 8.094592909315451e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0016230326651559676
+            ],
+            [
+              50,
+              3.821083343233262e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "power_2": {
+      "mean": 0.005360932351817809,
+      "probe_risks": [
+        0.00525783186332386,
+        0.005470814511958751,
+        0.005409359490646927,
+        0.0053057235413417
+      ],
+      "cost": [
+        {
+          "seconds": 1.2278678010043222,
+          "a_calls": 283,
+          "at_calls": 142,
+          "interpolated_points": 1159168,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.2282390909967944,
+          "a_calls": 283,
+          "at_calls": 142,
+          "interpolated_points": 1159168,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.286227530974429,
+          "a_calls": 297,
+          "at_calls": 149,
+          "interpolated_points": 1216512,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.2808181020081975,
+          "a_calls": 297,
+          "at_calls": 149,
+          "interpolated_points": 1216512,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 140,
+          "relative_residual": 9.391416335211264e-06,
+          "true_relative_residual": 9.391416335211264e-06,
+          "recursive_relative_residual": 9.3914163352105e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.007129816283239687
+            ],
+            [
+              50,
+              0.002644814631221782
+            ],
+            [
+              75,
+              0.000658674992319331
+            ],
+            [
+              100,
+              0.00018435354648348057
+            ],
+            [
+              125,
+              1.900231125770232e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 140,
+          "relative_residual": 8.834710848473124e-06,
+          "true_relative_residual": 8.834710848473124e-06,
+          "recursive_relative_residual": 8.834710848486348e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.006793398068259491
+            ],
+            [
+              50,
+              0.0023627835583358257
+            ],
+            [
+              75,
+              0.0007901034203342369
+            ],
+            [
+              100,
+              0.000139489457625511
+            ],
+            [
+              125,
+              2.0366150610453872e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 147,
+          "relative_residual": 7.741889847593123e-06,
+          "true_relative_residual": 7.741889847593123e-06,
+          "recursive_relative_residual": 7.741889847598304e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.010017037408903187
+            ],
+            [
+              50,
+              0.004115490799904718
+            ],
+            [
+              75,
+              0.0005199288755146186
+            ],
+            [
+              100,
+              0.00032523342588594025
+            ],
+            [
+              125,
+              2.7042193582871266e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 147,
+          "relative_residual": 8.520299244829608e-06,
+          "true_relative_residual": 8.520299244829608e-06,
+          "recursive_relative_residual": 8.520299244846943e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0120706196374641
+            ],
+            [
+              50,
+              0.004493905453465074
+            ],
+            [
+              75,
+              0.0005516139089188307
+            ],
+            [
+              100,
+              0.0002449767532009881
+            ],
+            [
+              125,
+              2.7401336114120454e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "power_2.5": {
+      "mean": 0.005091970253195362,
+      "probe_risks": [
+        0.005023545981923102,
+        0.005244491859532924,
+        0.005096555982062103,
+        0.0050032871892633154
+      ],
+      "cost": [
+        {
+          "seconds": 1.3389379489817657,
+          "a_calls": 307,
+          "at_calls": 154,
+          "interpolated_points": 1257472,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.3397228220128454,
+          "a_calls": 311,
+          "at_calls": 156,
+          "interpolated_points": 1273856,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.4411821620014962,
+          "a_calls": 333,
+          "at_calls": 167,
+          "interpolated_points": 1363968,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.4261959139839746,
+          "a_calls": 333,
+          "at_calls": 167,
+          "interpolated_points": 1363968,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 152,
+          "relative_residual": 9.191658198752184e-06,
+          "true_relative_residual": 9.191658198752184e-06,
+          "recursive_relative_residual": 9.19165819875655e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.010054428837336534
+            ],
+            [
+              50,
+              0.0019182806461078173
+            ],
+            [
+              75,
+              0.0005328114221636134
+            ],
+            [
+              100,
+              0.0004109171182859327
+            ],
+            [
+              125,
+              0.00015148053653751147
+            ],
+            [
+              150,
+              1.5102180596887272e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 154,
+          "relative_residual": 9.1290433196314e-06,
+          "true_relative_residual": 9.1290433196314e-06,
+          "recursive_relative_residual": 9.129043319620264e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.014396484104400722
+            ],
+            [
+              50,
+              0.0019529147250766752
+            ],
+            [
+              75,
+              0.0005922253478104062
+            ],
+            [
+              100,
+              0.00034951743455204423
+            ],
+            [
+              125,
+              0.0001288992924368253
+            ],
+            [
+              150,
+              2.0792591340904907e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 165,
+          "relative_residual": 7.842895878828708e-06,
+          "true_relative_residual": 7.842895878828708e-06,
+          "recursive_relative_residual": 7.842895878822702e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.013709001755343295
+            ],
+            [
+              50,
+              0.002621616223189001
+            ],
+            [
+              75,
+              0.0008185576716478521
+            ],
+            [
+              100,
+              0.0006481984923597953
+            ],
+            [
+              125,
+              0.00016731962880542136
+            ],
+            [
+              150,
+              1.756478663769212e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 165,
+          "relative_residual": 9.46462390209522e-06,
+          "true_relative_residual": 9.46462390209522e-06,
+          "recursive_relative_residual": 9.464623902096803e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.016072728778556693
+            ],
+            [
+              50,
+              0.0029306503290589116
+            ],
+            [
+              75,
+              0.0009689765699397687
+            ],
+            [
+              100,
+              0.0005128951982492708
+            ],
+            [
+              125,
+              0.00012615692928090712
+            ],
+            [
+              150,
+              3.2466597400332345e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "power_3": {
+      "mean": 0.005291883026768997,
+      "probe_risks": [
+        0.005249804426171162,
+        0.005481814006160813,
+        0.005265500842432334,
+        0.005170412832311676
+      ],
+      "cost": [
+        {
+          "seconds": 1.4174313890107442,
+          "a_calls": 331,
+          "at_calls": 166,
+          "interpolated_points": 1355776,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.4159356340242084,
+          "a_calls": 327,
+          "at_calls": 164,
+          "interpolated_points": 1339392,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.4494068899948616,
+          "a_calls": 335,
+          "at_calls": 168,
+          "interpolated_points": 1372160,
+          "peak_gpu_bytes": 2329600
+        },
+        {
+          "seconds": 1.486341032985365,
+          "a_calls": 335,
+          "at_calls": 168,
+          "interpolated_points": 1372160,
+          "peak_gpu_bytes": 2329600
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 164,
+          "relative_residual": 7.822827507271985e-06,
+          "true_relative_residual": 7.822827507271985e-06,
+          "recursive_relative_residual": 7.822827507337171e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.009261191014938414
+            ],
+            [
+              50,
+              0.003630576104004684
+            ],
+            [
+              75,
+              0.000537984413281403
+            ],
+            [
+              100,
+              0.00041607260632454165
+            ],
+            [
+              125,
+              5.053968750012687e-05
+            ],
+            [
+              150,
+              2.1996717258414738e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 162,
+          "relative_residual": 9.07142844233772e-06,
+          "true_relative_residual": 9.07142844233772e-06,
+          "recursive_relative_residual": 9.071428442336908e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.01002782602420435
+            ],
+            [
+              50,
+              0.0046802394120741475
+            ],
+            [
+              75,
+              0.0006474745278655915
+            ],
+            [
+              100,
+              0.00047338580368562174
+            ],
+            [
+              125,
+              9.140244652366885e-05
+            ],
+            [
+              150,
+              2.3855458541340475e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 166,
+          "relative_residual": 9.807489016286179e-06,
+          "true_relative_residual": 9.807489016286179e-06,
+          "recursive_relative_residual": 9.807489016292639e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.012950948457436632
+            ],
+            [
+              50,
+              0.006364646329148027
+            ],
+            [
+              75,
+              0.000945860862171309
+            ],
+            [
+              100,
+              0.00039594065010116307
+            ],
+            [
+              125,
+              0.0001551926687376173
+            ],
+            [
+              150,
+              5.04308923553115e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 166,
+          "relative_residual": 9.985445447888324e-06,
+          "true_relative_residual": 9.985445447888324e-06,
+          "recursive_relative_residual": 9.985445447905036e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.014480102787588647
+            ],
+            [
+              50,
+              0.006853828982936653
+            ],
+            [
+              75,
+              0.0010186951344091021
+            ],
+            [
+              100,
+              0.0006539199880539756
+            ],
+            [
+              125,
+              0.00018848734940139382
+            ],
+            [
+              150,
+              4.4529516412507944e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    }
+  },
+  "cv": {
+    "gauss_3": {
+      "mean": 0.0005307154131126919,
+      "fold_risks": [
+        0.00048652429693299296,
+        0.0005489566309946165,
+        0.00054409878442726,
+        0.0005432819400958983
+      ],
+      "cost": [
+        {
+          "seconds": 1.9381145389925223,
+          "a_calls": 232,
+          "at_calls": 116,
+          "interpolated_points": 710656,
+          "peak_gpu_bytes": 2341888
+        },
+        {
+          "seconds": 1.9691711199993733,
+          "a_calls": 236,
+          "at_calls": 118,
+          "interpolated_points": 722944,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 1.9361127250012942,
+          "a_calls": 230,
+          "at_calls": 115,
+          "interpolated_points": 704512,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 1.9537971210083924,
+          "a_calls": 234,
+          "at_calls": 117,
+          "interpolated_points": 716800,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 114,
+          "relative_residual": 9.171966065056974e-06,
+          "true_relative_residual": 9.171966065056974e-06,
+          "recursive_relative_residual": 9.171966065051625e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.003358754656035157
+            ],
+            [
+              50,
+              0.0007680653202028536
+            ],
+            [
+              75,
+              0.00015456534599964827
+            ],
+            [
+              100,
+              3.483665808812294e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 116,
+          "relative_residual": 8.367291174701583e-06,
+          "true_relative_residual": 8.367291174701583e-06,
+          "recursive_relative_residual": 8.36729117469554e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0033089733819767655
+            ],
+            [
+              50,
+              0.0007134848021418317
+            ],
+            [
+              75,
+              0.00013873357198591795
+            ],
+            [
+              100,
+              2.5252833029328218e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 113,
+          "relative_residual": 8.912126525955857e-06,
+          "true_relative_residual": 8.912126525955857e-06,
+          "recursive_relative_residual": 8.912126525957385e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0028411106822657465
+            ],
+            [
+              50,
+              0.0007220499924639283
+            ],
+            [
+              75,
+              0.00011634658456048394
+            ],
+            [
+              100,
+              3.1568209656635037e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 115,
+          "relative_residual": 9.925494921498836e-06,
+          "true_relative_residual": 9.925494921498836e-06,
+          "recursive_relative_residual": 9.925494921494797e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0032048121285013368
+            ],
+            [
+              50,
+              0.0007131889412781299
+            ],
+            [
+              75,
+              0.0001493230261919116
+            ],
+            [
+              100,
+              2.9453045961466963e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_10": {
+      "mean": 0.0008053614628004576,
+      "fold_risks": [
+        0.0007060477492939787,
+        0.0007621748802177316,
+        0.000929623693139708,
+        0.0008235995285504124
+      ],
+      "cost": [
+        {
+          "seconds": 1.0417788280174136,
+          "a_calls": 124,
+          "at_calls": 62,
+          "interpolated_points": 378880,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 1.0511907629843336,
+          "a_calls": 126,
+          "at_calls": 63,
+          "interpolated_points": 385024,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 1.046045367984334,
+          "a_calls": 124,
+          "at_calls": 62,
+          "interpolated_points": 378880,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.9854359460005071,
+          "a_calls": 118,
+          "at_calls": 59,
+          "interpolated_points": 360448,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 60,
+          "relative_residual": 9.824524765290883e-06,
+          "true_relative_residual": 9.824524765290883e-06,
+          "recursive_relative_residual": 9.824524765280039e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.001261775127653791
+            ],
+            [
+              50,
+              4.182289608811722e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 61,
+          "relative_residual": 9.830352180952443e-06,
+          "true_relative_residual": 9.830352180952443e-06,
+          "recursive_relative_residual": 9.830352180984414e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0013663875339536542
+            ],
+            [
+              50,
+              4.174274795703941e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 60,
+          "relative_residual": 9.509823660131251e-06,
+          "true_relative_residual": 9.509823660131251e-06,
+          "recursive_relative_residual": 9.509823660142716e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0013668260513509218
+            ],
+            [
+              50,
+              3.119860236728783e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 57,
+          "relative_residual": 9.991232108622681e-06,
+          "true_relative_residual": 9.991232108622681e-06,
+          "recursive_relative_residual": 9.991232108622092e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0009204329527606304
+            ],
+            [
+              50,
+              2.5095649908559786e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_30": {
+      "mean": 0.0008946932192305662,
+      "fold_risks": [
+        0.0007488584493870454,
+        0.0008258761035959698,
+        0.001114724238985624,
+        0.0008893140849536259
+      ],
+      "cost": [
+        {
+          "seconds": 0.937029758002609,
+          "a_calls": 112,
+          "at_calls": 56,
+          "interpolated_points": 342016,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.943664874008391,
+          "a_calls": 112,
+          "at_calls": 56,
+          "interpolated_points": 342016,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.9165054519835394,
+          "a_calls": 110,
+          "at_calls": 55,
+          "interpolated_points": 335872,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.8921480739954859,
+          "a_calls": 106,
+          "at_calls": 53,
+          "interpolated_points": 323584,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 54,
+          "relative_residual": 9.281886128565903e-06,
+          "true_relative_residual": 9.281886128565903e-06,
+          "recursive_relative_residual": 9.281886128587713e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.001118029102338763
+            ],
+            [
+              50,
+              2.823545596770878e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 54,
+          "relative_residual": 8.390352001641173e-06,
+          "true_relative_residual": 8.390352001641173e-06,
+          "recursive_relative_residual": 8.390352001640461e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0010112106356642786
+            ],
+            [
+              50,
+              2.8708678399640283e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 53,
+          "relative_residual": 7.114048085072727e-06,
+          "true_relative_residual": 7.114048085072727e-06,
+          "recursive_relative_residual": 7.114048085044411e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0016156189175339326
+            ],
+            [
+              50,
+              1.1616397248033347e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 51,
+          "relative_residual": 8.711364792915102e-06,
+          "true_relative_residual": 8.711364792915102e-06,
+          "recursive_relative_residual": 8.711364792916272e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0006815082359118404
+            ],
+            [
+              50,
+              1.0921801388373761e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_60": {
+      "mean": 0.0009064671066236685,
+      "fold_risks": [
+        0.000754221200468188,
+        0.0008335737310896938,
+        0.0011409119777596886,
+        0.0008971615171771043
+      ],
+      "cost": [
+        {
+          "seconds": 0.9572511549922638,
+          "a_calls": 114,
+          "at_calls": 57,
+          "interpolated_points": 348160,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.9335645379906055,
+          "a_calls": 110,
+          "at_calls": 55,
+          "interpolated_points": 335872,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.9186181229888462,
+          "a_calls": 108,
+          "at_calls": 54,
+          "interpolated_points": 329728,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.8969741570181213,
+          "a_calls": 106,
+          "at_calls": 53,
+          "interpolated_points": 323584,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 55,
+          "relative_residual": 9.370811138184093e-06,
+          "true_relative_residual": 9.370811138184093e-06,
+          "recursive_relative_residual": 9.37081113819445e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.001065388045610493
+            ],
+            [
+              50,
+              2.539849525148893e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 53,
+          "relative_residual": 9.558198679279635e-06,
+          "true_relative_residual": 9.558198679279635e-06,
+          "recursive_relative_residual": 9.558198679275606e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0009984281234282797
+            ],
+            [
+              50,
+              1.7048849341800497e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 52,
+          "relative_residual": 7.09869985916428e-06,
+          "true_relative_residual": 7.09869985916428e-06,
+          "recursive_relative_residual": 7.098699859160575e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.00158453545898853
+            ],
+            [
+              50,
+              1.1455417529240883e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 51,
+          "relative_residual": 7.725702135041357e-06,
+          "true_relative_residual": 7.725702135041357e-06,
+          "recursive_relative_residual": 7.72570213504023e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0006694010470131739
+            ],
+            [
+              50,
+              1.0009943732294752e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "gauss_128": {
+      "mean": 0.0009096805461222372,
+      "fold_risks": [
+        0.0007556935985613808,
+        0.0008356486475372092,
+        0.0011481053598965043,
+        0.0008992745784938546
+      ],
+      "cost": [
+        {
+          "seconds": 0.9546565299970098,
+          "a_calls": 114,
+          "at_calls": 57,
+          "interpolated_points": 348160,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.912890213978244,
+          "a_calls": 110,
+          "at_calls": 55,
+          "interpolated_points": 335872,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.9108984469785355,
+          "a_calls": 108,
+          "at_calls": 54,
+          "interpolated_points": 329728,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 0.8773853500024416,
+          "a_calls": 104,
+          "at_calls": 52,
+          "interpolated_points": 317440,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 55,
+          "relative_residual": 8.689986965998823e-06,
+          "true_relative_residual": 8.689986965998823e-06,
+          "recursive_relative_residual": 8.689986965967528e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0010522277282898772
+            ],
+            [
+              50,
+              1.910860438055183e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 53,
+          "relative_residual": 9.56788893794833e-06,
+          "true_relative_residual": 9.56788893794833e-06,
+          "recursive_relative_residual": 9.567888937942308e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0010241185867315872
+            ],
+            [
+              50,
+              1.651467782768777e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 52,
+          "relative_residual": 6.755392005904102e-06,
+          "true_relative_residual": 6.755392005904102e-06,
+          "recursive_relative_residual": 6.7553920059028315e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0014555787943310989
+            ],
+            [
+              50,
+              1.0530356502139205e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 50,
+          "relative_residual": 9.586850200676752e-06,
+          "true_relative_residual": 9.586850200676752e-06,
+          "recursive_relative_residual": 9.586850200673943e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0006676714092256731
+            ],
+            [
+              50,
+              9.586850200673943e-06
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "power_2": {
+      "mean": 0.0006701718407057263,
+      "fold_risks": [
+        0.0005949431596489549,
+        0.000673731155226967,
+        0.0007200567329259319,
+        0.0006919563150210515
+      ],
+      "cost": [
+        {
+          "seconds": 2.0546942010114435,
+          "a_calls": 246,
+          "at_calls": 123,
+          "interpolated_points": 753664,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.041436147002969,
+          "a_calls": 242,
+          "at_calls": 121,
+          "interpolated_points": 741376,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 1.9484933880157769,
+          "a_calls": 234,
+          "at_calls": 117,
+          "interpolated_points": 716800,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.110548241005745,
+          "a_calls": 252,
+          "at_calls": 126,
+          "interpolated_points": 772096,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 121,
+          "relative_residual": 8.541015097147826e-06,
+          "true_relative_residual": 8.541015097147826e-06,
+          "recursive_relative_residual": 8.541015097149149e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.004182649022899636
+            ],
+            [
+              50,
+              0.0018998118576054376
+            ],
+            [
+              75,
+              0.00023118853326606727
+            ],
+            [
+              100,
+              4.6604675900818716e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 119,
+          "relative_residual": 8.007647803298191e-06,
+          "true_relative_residual": 8.007647803298191e-06,
+          "recursive_relative_residual": 8.007647803304361e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.004457037808831184
+            ],
+            [
+              50,
+              0.0011868631548163987
+            ],
+            [
+              75,
+              0.0001934622591775879
+            ],
+            [
+              100,
+              6.22139453862148e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 115,
+          "relative_residual": 9.658842947941166e-06,
+          "true_relative_residual": 9.658842947941166e-06,
+          "recursive_relative_residual": 9.658842947965993e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.003965281110358506
+            ],
+            [
+              50,
+              0.0009125174448791313
+            ],
+            [
+              75,
+              0.00018244008195350455
+            ],
+            [
+              100,
+              3.1111834690005916e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 124,
+          "relative_residual": 7.711551661874196e-06,
+          "true_relative_residual": 7.711551661874196e-06,
+          "recursive_relative_residual": 7.711551661880763e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.003982020787965577
+            ],
+            [
+              50,
+              0.001387044834886821
+            ],
+            [
+              75,
+              0.00017274878382359665
+            ],
+            [
+              100,
+              4.0522848450186115e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "power_2.5": {
+      "mean": 0.0006057551273095892,
+      "fold_risks": [
+        0.0005430164880047186,
+        0.0006187758578901426,
+        0.0006438661174973636,
+        0.0006173620458461323
+      ],
+      "cost": [
+        {
+          "seconds": 2.2444511619978584,
+          "a_calls": 266,
+          "at_calls": 133,
+          "interpolated_points": 815104,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.207398885017028,
+          "a_calls": 264,
+          "at_calls": 132,
+          "interpolated_points": 808960,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.1926305460219737,
+          "a_calls": 260,
+          "at_calls": 130,
+          "interpolated_points": 796672,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.290793872991344,
+          "a_calls": 274,
+          "at_calls": 137,
+          "interpolated_points": 839680,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 131,
+          "relative_residual": 7.440120580658713e-06,
+          "true_relative_residual": 7.440120580658713e-06,
+          "recursive_relative_residual": 7.440120580662194e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.006946381532721471
+            ],
+            [
+              50,
+              0.0007659455780342444
+            ],
+            [
+              75,
+              0.00022650921388652626
+            ],
+            [
+              100,
+              0.00011277135517799668
+            ],
+            [
+              125,
+              3.038585726431769e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 130,
+          "relative_residual": 8.940157117067894e-06,
+          "true_relative_residual": 8.940157117067894e-06,
+          "recursive_relative_residual": 8.940157117065107e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.006533484663138096
+            ],
+            [
+              50,
+              0.0008730871285217744
+            ],
+            [
+              75,
+              0.0002345222327156898
+            ],
+            [
+              100,
+              7.00074906998301e-05
+            ],
+            [
+              125,
+              1.4237582824535508e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 128,
+          "relative_residual": 9.286064121410424e-06,
+          "true_relative_residual": 9.286064121410424e-06,
+          "recursive_relative_residual": 9.28606412141615e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.006839845103316517
+            ],
+            [
+              50,
+              0.0008415458139350658
+            ],
+            [
+              75,
+              0.0002134734683672302
+            ],
+            [
+              100,
+              3.62505865085791e-05
+            ],
+            [
+              125,
+              1.0699631612451999e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 135,
+          "relative_residual": 7.615590488201372e-06,
+          "true_relative_residual": 7.615590488201372e-06,
+          "recursive_relative_residual": 7.615590488198281e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.003857844556567721
+            ],
+            [
+              50,
+              0.0019974495607909715
+            ],
+            [
+              75,
+              0.00022095677371595395
+            ],
+            [
+              100,
+              0.00013228251186073842
+            ],
+            [
+              125,
+              1.462452591618296e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    },
+    "power_3": {
+      "mean": 0.000547743818831451,
+      "fold_risks": [
+        0.0004974473392977243,
+        0.0005656237273158216,
+        0.0005739261911511162,
+        0.0005539780175611423
+      ],
+      "cost": [
+        {
+          "seconds": 2.267439562972868,
+          "a_calls": 270,
+          "at_calls": 135,
+          "interpolated_points": 827392,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.1823356650129426,
+          "a_calls": 266,
+          "at_calls": 133,
+          "interpolated_points": 815104,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.2093345050234348,
+          "a_calls": 264,
+          "at_calls": 132,
+          "interpolated_points": 808960,
+          "peak_gpu_bytes": 2440192
+        },
+        {
+          "seconds": 2.3476367509865668,
+          "a_calls": 280,
+          "at_calls": 140,
+          "interpolated_points": 858112,
+          "peak_gpu_bytes": 2440192
+        }
+      ],
+      "numerics": [
+        {
+          "iterations": 133,
+          "relative_residual": 8.126269513175144e-06,
+          "true_relative_residual": 8.126269513175144e-06,
+          "recursive_relative_residual": 8.1262695131736e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0038737519553554574
+            ],
+            [
+              50,
+              0.0009077330177527103
+            ],
+            [
+              75,
+              0.0012806187290927548
+            ],
+            [
+              100,
+              0.0001504227924374294
+            ],
+            [
+              125,
+              4.026206961379499e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 131,
+          "relative_residual": 8.703857827635565e-06,
+          "true_relative_residual": 8.703857827635565e-06,
+          "recursive_relative_residual": 8.703857827631199e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0040298853563116716
+            ],
+            [
+              50,
+              0.0013965876132472066
+            ],
+            [
+              75,
+              0.00027869619047492076
+            ],
+            [
+              100,
+              0.00014845955204423754
+            ],
+            [
+              125,
+              1.3728696647341246e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 130,
+          "relative_residual": 8.819504011538623e-06,
+          "true_relative_residual": 8.819504011538623e-06,
+          "recursive_relative_residual": 8.8195040115297e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.0034849935684183315
+            ],
+            [
+              50,
+              0.0010270295230355086
+            ],
+            [
+              75,
+              0.0002390586483071409
+            ],
+            [
+              100,
+              0.00011320694714614682
+            ],
+            [
+              125,
+              1.273981529135941e-05
+            ]
+          ],
+          "dtype": "float64"
+        },
+        {
+          "iterations": 138,
+          "relative_residual": 7.1942133670072e-06,
+          "true_relative_residual": 7.1942133670072e-06,
+          "recursive_relative_residual": 7.194213367014012e-06,
+          "true_residual_checks": 1,
+          "residual_restarts": 0,
+          "converged": true,
+          "solver_variance": 0.0004,
+          "checkpoints": [
+            [
+              25,
+              0.003739324770631654
+            ],
+            [
+              50,
+              0.001128887241232905
+            ],
+            [
+              75,
+              0.000688627930724986
+            ],
+            [
+              100,
+              8.254338960861845e-05
+            ],
+            [
+              125,
+              2.9786164371378246e-05
+            ]
+          ],
+          "dtype": "float64"
+        }
+      ]
+    }
+  },
+  "reconstructions": {
+    "power_2.5": {
+      "path": "reconstructions/0802_n0p02_power_2.5.npz",
+      "sha256": "69e5957deb9b1c1c5635c30ab937ea4c4dbdad512362a16817e53fe6d3a4baa9",
+      "cost": {
+        "seconds": 1.278571640024893,
+        "a_calls": 297,
+        "at_calls": 149,
+        "interpolated_points": 1216512,
+        "peak_gpu_bytes": 2479104
+      },
+      "numerics": {
+        "iterations": 147,
+        "relative_residual": 7.834229775064667e-06,
+        "true_relative_residual": 7.834229775064667e-06,
+        "recursive_relative_residual": 7.834229775044665e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.006197966745479345
+          ],
+          [
+            50,
+            0.0009229280473935803
+          ],
+          [
+            75,
+            0.0003882352398295843
+          ],
+          [
+            100,
+            0.00017562866125980854
+          ],
+          [
+            125,
+            4.6367330125710655e-05
+          ]
+        ],
+        "dtype": "float64"
+      }
+    },
+    "gauss_3": {
+      "path": "reconstructions/0802_n0p02_gauss_3.npz",
+      "sha256": "36aa908eb64ea64f0200ea9c27fd66ac02afcd974bd3d66e19e07107f7f8b1e2",
+      "cost": {
+        "seconds": 1.1112105639767833,
+        "a_calls": 259,
+        "at_calls": 130,
+        "interpolated_points": 1060864,
+        "peak_gpu_bytes": 2479104
+      },
+      "numerics": {
+        "iterations": 128,
+        "relative_residual": 8.657392715381892e-06,
+        "true_relative_residual": 8.657392715381892e-06,
+        "recursive_relative_residual": 8.65739271538806e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.003366445233812087
+          ],
+          [
+            50,
+            0.0011208099523196662
+          ],
+          [
+            75,
+            0.00019819754031992506
+          ],
+          [
+            100,
+            5.65613275158878e-05
+          ],
+          [
+            125,
+            1.0428762737416911e-05
+          ]
+        ],
+        "dtype": "float64"
+      }
+    },
+    "power_2": {
+      "path": "reconstructions/0802_n0p02_power_2.npz",
+      "sha256": "2a9d538dc2da8c2f5cfac56b35162b2555b819a5709605656d88eb15c9807ee1",
+      "cost": {
+        "seconds": 1.1321979410131462,
+        "a_calls": 263,
+        "at_calls": 132,
+        "interpolated_points": 1077248,
+        "peak_gpu_bytes": 2479104
+      },
+      "numerics": {
+        "iterations": 130,
+        "relative_residual": 9.383497267930674e-06,
+        "true_relative_residual": 9.383497267930674e-06,
+        "recursive_relative_residual": 9.383497267936412e-06,
+        "true_residual_checks": 1,
+        "residual_restarts": 0,
+        "converged": true,
+        "solver_variance": 0.0004,
+        "checkpoints": [
+          [
+            25,
+            0.004266168931146284
+          ],
+          [
+            50,
+            0.002050793319873448
+          ],
+          [
+            75,
+            0.0003420171872079385
+          ],
+          [
+            100,
+            0.00013811362195049955
+          ],
+          [
+            125,
+            1.507948787443335e-05
+          ]
+        ],
+        "dtype": "float64"
+      }
+    }
+  },
+  "failures": [],
+  "started_unix": 1791394664.8585064,
+  "attempts": [
+    {
+      "seconds": 85.16595551898354,
+      "counts": {
+        "a_calls": 13659,
+        "at_calls": 6843,
+        "interpolated_points": 49885184
+      },
+      "status": "complete"
+    }
+  ],
+  "common_attempts": [
+    {
+      "seconds": 0.14852204799535684,
+      "a_calls": 4,
+      "at_calls": 0,
+      "interpolated_points": 16384,
+      "peak_gpu_bytes": 1236992
+    }
+  ],
+  "common": {
+    "cost": {
+      "seconds": 0.14852204799535684,
+      "a_calls": 4,
+      "at_calls": 0,
+      "interpolated_points": 16384,
+      "peak_gpu_bytes": 1236992
+    },
+    "scale": 0.04472990892018535,
+    "details": {
+      "observed_variance": 0.028548459036498768,
+      "calibration_observed_variance": 0.6293071088458216,
+      "noise_correction": 0.000399609375,
+      "floor": 1e-08
+    },
+    "risk_input_cost": {
+      "seconds": 0.004499771981500089,
+      "a_calls": 4,
+      "at_calls": 0,
+      "interpolated_points": 16384,
+      "peak_gpu_bytes": 1335296
+    },
+    "reference_sha256": "d1ed337059c1d137da44a852449c1a805840fc45f6d0d10564d2507c582a2285"
+  },
+  "chosen": {
+    "analysis": "power_2.5",
+    "cv": "gauss_3",
+    "default": "power_2"
+  },
+  "completed_unix": 1791394750.048282,
+  "observations_sha256": "d577723585035575483ad43415db7103a53b54e293cd7705797c451d4747337a",
+  "frozen_sha256": "67b04ed6af543aa3e5f744ae4d1dc6144cf2d79c0a7aa4ab9cef607939beebd9"
+}

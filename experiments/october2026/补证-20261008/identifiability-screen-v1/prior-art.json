@@ -1,0 +1,63 @@
+{
+  "status": "bounded first-pass primary-literature audit, not an exhaustive novelty certification",
+  "root_live_verified": [
+    {
+      "title": "Designing Optimal Spectral Filters for Inverse Problems",
+      "url": "https://epubs.siam.org/doi/10.1137/100812938",
+      "year": 2011,
+      "overlap": "Independent calibration data and empirical Bayes risk minimization for spectral filtering; abstract inspected."
+    },
+    {
+      "title": "Generalized SURE for Exponential Families: Applications to Regularization",
+      "url": "https://arxiv.org/abs/0804.3010",
+      "year": "2008 preprint / 2009 journal",
+      "overlap": "Observation-based risk estimates for regularization selection; abstract and author text inspected."
+    },
+    {
+      "title": "The Projected GSURE for Automatic Parameter Tuning in Iterative Shrinkage Methods",
+      "url": "https://arxiv.org/abs/1003.3985",
+      "year": "2010 preprint",
+      "overlap": "Projected expected error for ill-posed/rectangular operators, deblurring and image zooming parameter selection; abstract inspected."
+    },
+    {
+      "title": "Gaussian Process Regression with Mismatched Models",
+      "url": "https://arxiv.org/abs/cond-mat/0106475",
+      "year": 2001,
+      "overlap": "GP covariance mismatch and resulting learning curves / overfitting; abstract inspected."
+    }
+  ],
+  "agent_audited_followup_sources": [
+    {
+      "title": "Can Gaussian Process Regression Be Made Robust Against Model Mismatch?",
+      "url": "https://nms.kcl.ac.uk/peter.sollich/papers_pdf/GP_max_evidence_Sheffield.pdf",
+      "year": 2005,
+      "verification": "Agent read primary author manuscript; root has not independently read full text."
+    },
+    {
+      "title": "Inconsistent Estimation and Asymptotically Equal Interpolations in Model-Based Geostatistics",
+      "url": "https://www.stat.purdue.edu/~zhanghao/Paper/JASA2004.pdf",
+      "year": 2004,
+      "verification": "Agent read primary author manuscript; root fetch timed out. Asymptotic interpolation claims not transferred to finite-dimensional toy."
+    },
+    {
+      "title": "The Debiased Spatial Whittle Likelihood",
+      "url": "https://arxiv.org/abs/1907.02447",
+      "year": "2019 preprint / 2022 publication reported by agent",
+      "verification": "Agent read primary source; root has not independently read full text."
+    }
+  ],
+  "candidate_gap": "Task-specific finite-sample ambiguity of full-target candidate risk rankings, rather than identification of every prior parameter. Potential ambiguity intervals and controlled acquisition interventions require further novelty search and proof before being paper contributions.",
+  "baselines_required_if_method_claim": [
+    "calibration-selected static prior",
+    "frame-holdout CV",
+    "applicable Projected GSURE with its projected-risk scope explicit",
+    "empirical Bayes / marginal likelihood",
+    "relevant current spectral INR selection methods"
+  ],
+  "screen_summary": {
+    "single_covariance_pairs": 12,
+    "two_measurement_grid_rows": 60,
+    "max_algebraic_error": 1.7763568394002505e-15,
+    "claim": "Classical identities verified; not a new theorem or evidence of A-conference readiness."
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "dense_risk_identity": {
+    "exact": 1.2503681584775916,
+    "monte_carlo": 1.250057600105342,
+    "relative_error": 0.0002483735451386628,
+    "draws": 200000
+  },
+  "operator_adjoint": {
+    "relative_error": 1.2089662657986101e-15,
+    "geometry": {
+      "hr": 8,
+      "scale": 4,
+      "frames": 2,
+      "subsamples": 2,
+      "field": 16,
+      "shave": 1
+    }
+  },
+  "cg_matches_dense_posterior": {
+    "max_error": 9.006400070177278e-10,
+    "iterations": 56,
+    "relative_residual": 9.161268359742567e-13
+  },
+  "fft_preconditioner_same_posterior": {
+    "max_difference": 9.006528856048135e-10,
+    "pcg_iterations": 56,
+    "unpreconditioned_iterations": 8,
+    "diagonal_min": 1.0,
+    "diagonal_max": 4.161077298175521,
+    "inverse_quadratic_form": 647.3113120283577,
+    "cv_density_uses_training_frame_count": true,
+    "spectral_power": 0.25
+  },
+  "convergence_certified_by_true_residual": {
+    "checks": 1,
+    "recursive_relative_residual": 9.16137831908929e-13,
+    "true_relative_residual": 9.161268359742567e-13
+  },
+  "nonconvergence_is_failure": true,
+  "float32_input_rejected": true,
+  "zero_rhs_intercept": {
+    "iterations": 0,
+    "constant_output_preserved": true
+  },
+  "physical_noise_vs_solver_floor": {
+    "solver_variance": 1e-05,
+    "zero_noise_contribution": 0.0,
+    "incorrect_floor_noise_contribution": 0.0009921750796237747,
+    "zero_and_tiny_noise_same_fixed_y_output": true,
+    "preconditioner_for_identity_check": "none"
+  },
+  "reference_sampler_variance": {
+    "measured": 0.9990046419735631,
+    "expected": 1.0,
+    "draws": 1000
+  },
+  "scale_floor": {
+    "scale": 1e-08,
+    "noise_correction": 0.00035
+  },
+  "status": "pass",
+  "device": "CPU only; no datasets or GPU loaded",
+  "version": "v3 fixed quarter-power FFT SPD PCG; same posterior, main tolerance1e-5 and1200 cap; exact-posterior CPU check uses stronger1e-12",
+  "synthetic_32pixel_16frame_diagnostic": {
+    "note": "CPU synthetic, Gaussian3 reconstruction of power2 sample, not target data; main tolerance1e-5 unchanged",
+    "results": {
+      "none": {
+        "status": "converged",
+        "iterations": 318,
+        "true_relative_residual": 8.045293155135013e-06,
+        "seconds": 0.9918809900118504
+      },
+      "fft": {
+        "status": "converged",
+        "iterations": 821,
+        "true_relative_residual": 9.978997286409779e-06,
+        "seconds": 2.0041398339963052
+      }
+    },
+    "damped_preconditioners": {
+      "0.5": {
+        "status": "converged",
+        "iterations": 270,
+        "true_relative_residual": 8.879234985057745e-06,
+        "seconds": 1.0584731030103285
+      },
+      "0.25": {
+        "status": "converged",
+        "iterations": 255,
+        "true_relative_residual": 9.893424618022152e-06,
+        "seconds": 0.719416239997372
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "version": "readout-probe-v2",
+  "date": "2026-10-11",
+  "purpose": "Stage 1/2 frozen-checkpoint diagnostics; no training and no adaptive model selection",
+  "scope": "Synthetic known continuous cosine fields and retrospective barbara case. All synthetic content is outside natural-image training distribution; rectangular and zero-cell queries are outside isotropic training support. Phase split is a bounded diagnostic, not a natural-image generalization test or an observation-only deployment claim. Analytical amplitudes/target laws are known; oracle forecast uses their scoring truth. No first-integration or new theorem claim.",
+  "input_sizes": [
+    16,
+    32
+  ],
+  "frequencies": [
+    4,
+    6,
+    10,
+    14,
+    18,
+    26
+  ],
+  "directions": [
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "phases": [
+    0.0,
+    1.5707963267948966
+  ],
+  "input_operator": "Unit-domain box averages on n*n midpoint grid, noiseless, exact analytic sinc; fixed per input/case across every target and hint",
+  "amplitude": 0.25,
+  "mean": 0.5,
+  "hr_reference": 64,
+  "query_crop": [
+    16,
+    48
+  ],
+  "target_footprints": {
+    "square1": [
+      1,
+      1
+    ],
+    "vertical": [
+      2,
+      1
+    ],
+    "horizontal": [
+      1,
+      2
+    ],
+    "square2": [
+      2,
+      2
+    ]
+  },
+  "quadrature_orders": [
+    4,
+    8
+  ],
+  "quadrature": "Final RGB point-limit field midpoint integration. Numerical approximation, not exact integration guarantee; save both refinements. Native area condition changes while encoder, coordinates, weights and observation remain fixed.",
+  "query_chunk": 4096,
+  "models": [
+    "lte",
+    "sc-inr"
+  ],
+  "ablated_models": [
+    "lte-nocellphase",
+    "sc-inr-nosinc"
+  ],
+  "checkpoint_root": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed1",
+  "barbara_path": "/workspace/SE-INR/Data/Set14/HR/barbara.png",
+  "natural_protocol": "Known negative example only: center HR256, torch bicubic antialias LR sizes128/64, no noise; full vs point-limit same-weight, and inherited separately retrained ablations. Both raw and clamped, RGB-mean FFT square annuli. No new unseen-test claim; target is discrete HR, not certified box truth.",
+  "prediction_freeze": "All synthetic and natural predictions saved and SHA cohort frozen before truth scoring. Fixed models/no optimization/no parameter selection. Preparation generates y and truth separately.",
+  "calibration": "phase0 only for group-wise band-median and affine footprint-score fit; phase pi/2 for comparison; frequency/direction/target grid fixed, no test tuning",
+  "predictors": [
+    "band-index phase0 median",
+    "affine (1-T)^2 phase0 fit",
+    "known-law amplitude-scaled point output",
+    "known-law final-RGB numerical integral forecast"
+  ],
+  "primary_metrics": [
+    "signed normalized MSE effect native versus point",
+    "within-band rank and MAE versus band/footprint baseline",
+    "negative-effect recall restricted to |actual gain|>.001; active-effect scoring margin, no deployment abstention",
+    "native versus final-RGB quadrature discrepancy",
+    "quadrature refinement error",
+    "exact squared-error change-energy/alignment decomposition; posthoc identity not predictive mechanism"
+  ],
+  "sign_margin": 0.001,
+  "decision_gates": {
+    "prediction_candidate": "MAE >=20% better than BOTH calibrated simple baselines in every model/input-size group, sign accuracy >=.75 and negative recall >=.75 where >=8 negative active cases; otherwise insufficient. This diagnostic does not itself authorize matched training.",
+    "integration": "Report dimensionless discrepancy and convergence. Treat cases with refinement MSE >1e-5 OR refinement MSE >0.1 native/quadrature discrepancy as numerically unresolved for noncommutation claims.",
+    "stop": "Only three-band ordering, only internal sinc identity, or advantages only on unsupported hints are insufficient; keep counterexamples. No new GPU or matched training in this stage."
+  },
+  "resource": {
+    "device": "CPU; CUDA_VISIBLE_DEVICES empty",
+    "nice": 10,
+    "threads": 4,
+    "formal_budget_seconds": 1800,
+    "preflight_budget_seconds": 120,
+    "absolute_deadline": "each new root records launch UTC+its fixed budget before preparation; external timeout at same duration; no resume or extension",
+    "cpu_backend": "ATen fallback; MKLDNN disabled"
+  },
+  "wall_budget_seconds": 1800,
+  "retention": "Preserve all failures/missing cases/raw outputs and frozen source. Source change requires archived version/new run root, never repair into frozen run.",
+  "source_change_from_v1": [
+    "Disable MKLDNN CPU convolution backend following preserved preflight segmentation fault; mathematical forward/checkpoints/cohort unchanged",
+    "NaN-safe within-band correlations",
+    "Implement predeclared quadrature-resolution flags and gate",
+    "Launch record absolute deadline includes import time"
+  ]
+}

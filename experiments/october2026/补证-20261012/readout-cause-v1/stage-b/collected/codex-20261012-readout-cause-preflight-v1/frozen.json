@@ -1,0 +1,10 @@
+{
+  "time_epoch": 1791768776.5975468,
+  "source_sha256": "c1129f950b2a5ebfd447294a966b6cadf23df562b0a7013a6af5334dcaf16acc",
+  "protocol_sha256": "a25b0ac0aaf10954b715788322731224b4d5ad503c9f46f8e8ff02af173fce37",
+  "inputs_sha256": "b7d4f9d8edf0aa2d6b3cff2428c955f65371d86b262942f6704196b896ab9ccc",
+  "inherited_sha256": "3eddca5eb32ea1c0d8745b1868dd37e52f35e9fcb62c5bb9b5e367164da56544",
+  "conditions": 3,
+  "unique_observations": 3,
+  "smoke": true
+}

@@ -1,0 +1,16 @@
+{
+  "protocol_sha256": "d8ddd12ca7b8800b656e38f044ffa2bfa0600c1ab4307b3a06b57eab3d62110b",
+  "core_sha256": "9430cf280904a5b1f2f2f7cd01cff32b01b6f7c67b040ff9135d8c20e0780495",
+  "experiment_sha256": "1f01ddeb730a6579f1d490030322ecb6998362a0a5c35937fd6fec3a7687c27c",
+  "summary_sha256": "1c843016ff74e41f00704b46b77febca9ccc6c8ce9690a33e426da684841cc45",
+  "torch_version": "2.8.0a0+5228986c39.nv25.05",
+  "mode": "development-miniature",
+  "geometry": {
+    "hr": 32,
+    "scale": 4,
+    "frames": 16,
+    "subsamples": 2,
+    "field": 64,
+    "shave": 2
+  }
+}

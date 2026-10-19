@@ -1,0 +1,117 @@
+{
+  "version": "readout-internal-transfer-development-v1",
+  "scope": "Bounded development on previously used calibration images only. Test0825-0836 and all other HR images are not read. Frozen existing LTE/SC checkpoints; no SR training. New LR-only diagnostic inspired by classical cross-scale internal recurrence, not a new mechanism or theorem. Calibration images lie in original DIV2K training split; exact per-checkpoint inclusion is not re-audited. OOF independence is selector fitting only, not unseen-network image generalization.",
+  "hypotheses": [
+    "H1: At a fixed model, upscaling factor and frequency band, the signed native-versus-zero-cell gain in a lower-resolution self-reconstruction task predicts the corresponding target-task gain across images.",
+    "H2: Adding only this lower-task signed gain to the existing magnitude/spectrum ridge improves held-image-out harmful-gain detection and RGB policy over all simple controls.",
+    "Counterexample: lower-task native gain may be positive while true task gain is negative because second downsampling removes informative texture or changes aliasing. Retain all such cases; do not add texture thresholds after results."
+  ],
+  "inherited_model_root": "/workspace/SE-INR/codex-20261011-readout-probe-v4",
+  "inherited_output_root": "/workspace/SE-INR/codex-20261011-negative-formal-v3",
+  "calibration_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "models": [
+    "lte",
+    "sc-inr"
+  ],
+  "scales": [
+    2,
+    4
+  ],
+  "data": {
+    "original_target": "stored HR128 centre crops; original truth scoring reused after features freeze",
+    "original_observation": "saved bicubic-AA LR y,64 or32; no repeated original HR inference",
+    "lower_input": "F.interpolate(y, size=(128/s/s), bicubic, antialias=True, align_corners=False), clamp0to1",
+    "lower_target": "the observed y itself,64 or32; no unknown HR enters lower-task gain",
+    "lower_queries": "midpoint n*n grid, model coordinate2q-1; nativecell2/n vs zero",
+    "evaluation_region": "same spatial fraction as HR shave4: lower target shave4/s (2 or1); lower scored side60 or30 vs original120",
+    "bands": "fullRGB includes DC; three raw RGB Chebyshev FFT bands [0,1/8),[1/8,1/4),[1/4,.5001), exclude DC. Same scale, same cycles/output-pixel boundaries; different discrete supports disclosed",
+    "normalization": "Zlow=max(mean((croppedy-channelmean)^2),1e-8); Zupper inherited observable bicubic variance; t=lowergain/Zlow",
+    "predictions": "raw RGB, no output clipping, no augmentation, one lower level, preserve all cases"
+  },
+  "features_and_controls": {
+    "zero_shot_candidate": "internal_transfer=t*Zupper; predicts harmful iff forecast<0; RGB native iff forecast>0",
+    "augmented_candidate": "internal_ridge = inherited12dim norm features plus t, standardized on other folds; target gain/Zupper; ridge lambda1 intercept unpenalized",
+    "baselines": [
+      "always_enable",
+      "always_disable",
+      "band_median",
+      "energy_only",
+      "norm_ridge",
+      "proxy",
+      "directional_ridge"
+    ],
+    "folds": "8 fixed image groups, fold=(image_id-1)%8; hold all scales/bands of four images out jointly; model-specific fits on remaining28 images; mean/std and band median recomputed training folds only",
+    "selection": "no hyperparameter, feature, threshold, crop, band or scale search; both candidates and models reported separately; no best-result selection"
+  },
+  "primary_evaluation": {
+    "sign_epsilon_raw": 1e-08,
+    "class": "per model pooled32images*2scales*3bands; negative>=12rows spanning>=6images; recall>=.75 precision>=.6 FPR<=.25; BA exceeds every baseline by>=.05 and paired image-cluster 95% lower>0",
+    "within_cell": "report every model*scale*band cell, negatives/positives/ties, sign table; macro pairwise harm-AUC over cells with both signs. At least3 of6 eligible cells and candidate-vs-norm AUC improvement>=.05 and paired-image95% lower>0 required. This prevents between-band or between-scale sorting from carrying the claim. Ties in forecast contribute .5; no actual ties in AUC.",
+    "RGB_policy": "native if predictedgain>0 else zero,32images*2scales; paired-image95% lower MSE improvement>0 versus EVERY control; also PSNR/regret and harmful/beneficial switch counts",
+    "promotion_gate": "classification AND within-cell AUC AND RGB policy for the same candidate/model. This is only a DEVELOPMENT go/no-go; independent new cohort needs another frozen protocol. If none passes, do not infer an effective selector or start matching training.",
+    "uncertainty": "2000 image-cluster resamples seed20261012; all scales/bands of image resampled jointly. Model-specific OOF fits NOT retrained in each bootstrap, intervals conditional on fixed OOF forecasts, overlapping fits and in-training images disclosed; no global/generalization coverage claim.",
+    "bootstrap_missing": "Freeze eligible model/scale/band cells from complete development cohort; use same cells in every resample. AUC draw missing either class in any eligible cell is undefined and excluded as a whole, not silently averaged over fewer cells; report valid/missing draws. BA missing a class likewise undefined. Require>=1000 valid of2000 draws for a CI-based promotion; else inconclusive.",
+    "forecast_zero": "forecast<0 flags harmful; forecast==0 flags not harmful for classification but chooses zero-cell for RGB policy. Actual abs(gain)<=1e-8 retained, excluded from sign/AUC denominators only.",
+    "AUC_score": "raw signed predicted gain, identical scoring convention for every method; lower predicted gain indicates greater harm."
+  },
+  "freeze": {
+    "before_inference": "source+protocol+64observations+128originalprediction+calibration_rows+oldcheckpoint/source hashes recorded; original target labels loaded only after all lower features/predictions frozen. Copy input bytes to new root read-only snapshot; old dirs untouched",
+    "before_scoring": "all512lower outcome features and128lower prediction NPZ hashes; OOF score labels come from previously used calibration_rows, retrospective development not newly blinded confirmation",
+    "audit": "Independent pixel/FFT feature, folds/no-leak fit, all metrics/gates/bootstrap/cost/hash checks; inference/model reimplementation scope separate"
+  },
+  "budget": {
+    "GPU": 0,
+    "CPU_threads": 1,
+    "nice": 10,
+    "run_cumulative_phase_seconds": 900,
+    "absolute_wall_seconds_from_launch": 1800,
+    "preflight_max_seconds": 120,
+    "analysis_audit_max_seconds": 180,
+    "resume": "absolute deadline fixed at launch, never reset; errors/missing retained; source changes need new version/root",
+    "root_active_wall_seconds": 3600,
+    "root_absolute_deadline_utc": "2026-10-11T19:06:11+00:00"
+  },
+  "related_sources": [
+    {
+      "url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Shocher_Zero-Shot_Super-Resolution_Using_CVPR_2018_paper.html",
+      "claim": "ZSSR uses internal recurrence and lower-resolution examples to train per-image CNN; this trial uses frozen model pair to forecast intervention gain, no CNN adaptation. Internal recurrence principle not novel."
+    },
+    {
+      "url": "https://www.wisdom.weizmann.ac.il/~vision/SingleImageSR.html",
+      "claim": "Glasner/Bagon/Irani2009 established within/across-scale patch recurrence for SR; recurrence alone does not imply intervention-gain transfer."
+    }
+  ]
+}

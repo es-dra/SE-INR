@@ -1,0 +1,1045 @@
+{
+  "groups": {
+    "lte/center/b0": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 2,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 1,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 2.1490746990503384e-06,
+        "mid": -2.6842473211960056e-06,
+        "native": 1.8975233664325083e-06,
+        "full": 6.0582119066613486e-06
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 2,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 1,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/center/b1": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -4.743415382609906e-08,
+        "mid": 5.5510339285280046e-08,
+        "native": 2.2452531572639746e-08,
+        "full": 1.421963957507372e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/center/b2": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -6.082519251513644e-07,
+        "mid": -4.0813821275586264e-07,
+        "native": -3.092014240013115e-07,
+        "full": 1.950393916893321e-08
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/center/b3": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 2.2218414466110104e-06,
+        "mid": -2.99348867789096e-06,
+        "native": 1.5736844317679248e-06,
+        "full": 5.235479595933679e-06
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/full/b0": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -4.300216418375229e-06,
+        "mid": -1.8939717940230126e-07,
+        "native": 3.2790513334106535e-06,
+        "full": 4.363775019199462e-06
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/full/b1": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -1.326530972375677e-07,
+        "mid": -5.665712503461428e-08,
+        "native": -1.927529979946327e-07,
+        "full": 1.181047441043413e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/full/b2": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -4.086558951686316e-07,
+        "mid": -2.539241127731944e-07,
+        "native": -2.3561947880081507e-07,
+        "full": 1.8867209824258938e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "lte/full/b3": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -4.302973819571505e-06,
+        "mid": -4.91007158886471e-07,
+        "native": 3.207308907464602e-06,
+        "full": 3.4498744460140324e-06
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 3,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/center/b0": {
+      "n": 3,
+      "full_direction_negative": 3,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 3,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 3,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -4.570114221742255e-07,
+        "mid": -8.56797786823778e-08,
+        "native": -3.971599995987137e-07,
+        "full": -2.5284020304197475e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/center/b1": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 2,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 1,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 1.0839839412785984e-08,
+        "mid": 1.6012183734808775e-08,
+        "native": 1.7465049507419872e-08,
+        "full": 1.5419717950596494e-08
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 2,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 1,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/center/b2": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 3
+      },
+      "mean_gain": {
+        "ref": -1.2210791170033644e-11,
+        "mid": 2.958839035830816e-09,
+        "native": 4.805961178890751e-09,
+        "full": 4.081947346228902e-09
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 3
+      }
+    },
+    "sc-inr/center/b3": {
+      "n": 3,
+      "full_direction_negative": 3,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 3,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 3,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": -4.678427518322687e-07,
+        "mid": -1.0495044226778986e-07,
+        "native": -4.2020186446071006e-07,
+        "full": -2.7279893975470124e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 0,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 3,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/full/b0": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 1.0018414975612552e-06,
+        "mid": 7.307804445050459e-07,
+        "native": 2.914371007827362e-08,
+        "full": 5.971822791863608e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/full/b1": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 3.014783345695349e-08,
+        "mid": 4.6627649355983764e-08,
+        "native": 4.7221779583549284e-08,
+        "full": 4.4308742998121695e-08
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/full/b2": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 3.541374902495016e-08,
+        "mid": 3.975031209777625e-08,
+        "native": 3.458577607483661e-08,
+        "full": 3.9735455839726455e-08
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    },
+    "sc-inr/full/b3": {
+      "n": 3,
+      "full_direction_negative": 0,
+      "ref_direction_among_full_negative": {
+        "positive": 0,
+        "negative": 0,
+        "boundary": 0
+      },
+      "all_anchor_negative_among_full_negative": 0,
+      "all_anchor_positive_among_full_negative": 0,
+      "direction_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "mean_gain": {
+        "ref": 9.400107942684163e-07,
+        "mid": 6.449995877767044e-07,
+        "native": -5.3747040197495517e-08,
+        "full": 5.138617269364627e-07
+      },
+      "numerical_sensitive_direction": 0,
+      "numerical_sensitive_gain": 0,
+      "transition_note": "Unqualified transition matrices include sensitive rows; stable matrices below exclude corresponding sensitive rows.",
+      "direction_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      },
+      "gain_transition_stable": {
+        "positive->positive": 3,
+        "positive->negative": 0,
+        "positive->boundary": 0,
+        "negative->positive": 0,
+        "negative->negative": 0,
+        "negative->boundary": 0,
+        "boundary->positive": 0,
+        "boundary->negative": 0,
+        "boundary->boundary": 0
+      }
+    }
+  },
+  "midband_center_reproduction": {
+    "lte": {
+      "old32_positive_to_negative": 0,
+      "full_positive_to_negative": 0,
+      "numerical_sensitive_direction": 0
+    },
+    "sc-inr": {
+      "old32_positive_to_negative": 0,
+      "full_positive_to_negative": 0,
+      "numerical_sensitive_direction": 0
+    }
+  },
+  "rows": 48,
+  "conditions": 3,
+  "scope": "Retrospective controlled intervention on unchanged old synthetic cohort, old LTE and LTE-derived SC checkpoint. Distinguish fixed-reference-decoder adverse feature step from direction change associated with nonlinear ReLU gate changes. No feature-space standalone correctness or unique physical cause claim. No training or new predictor.",
+  "training": 0,
+  "GPU": 0
+}

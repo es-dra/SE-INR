@@ -1,0 +1,20 @@
+32d60ee70553cc1f9f081da2d03c579ada80a0e96844ada4c6b9948a336bbe94  预注册-L1L2-20261005.md  frozen_utc=2026-10-04T22:29:53Z
+3ebc828d0d1a68286ed7db9d106b5f6d8765b19674df801b5a897814681cfd62  common.py  written_utc=2026-10-04T22:33:25Z  (before any output)
+57980ec28e808dcc5d8762035a57a57bee6e7b924e2d0df2fbb12323031e21b0  l1.py  written_utc=2026-10-04T22:33:25Z  (before any output)
+527c252c28d2b9f5fdb5898596eba93f1d79415761c306524ef1dec03f6701f5  l2.py  written_utc=2026-10-04T22:33:25Z  (before any output)
+c4c54ed48976d0a2fae879a8e99fbf994b7ad243dd09c9a35f02e0f8f2d495f2  ana_l12.py  written_utc=2026-10-04T22:33:25Z  (before any output)
+81f0743dde4fcde4fe07e6d02591a83c9de3541cfd83eb670f3050e04f135d3a  预注册-L1L2-附录-20261005.md  frozen_utc=2026-10-04T22:35:49Z
+0e71d3cf9bb9cfcb1ca6420e2b36e3041a246b5bc9c3e08acf8c1011baa1c1d8  ana_l12.py  written_utc=2026-10-04T22:35:49Z  (v2: +H2d per appendix; before any formal output; v1 sha above superseded)
+aee39eb3caad0bcb8387f24d06691418321b3ae553e047a723e764cbecb808bf  run_l12.sh
+c3add5096774a08b9e4068deac982f877f282dab33452362cdb8c6289bf3bb67  run_l12.sh  (fixed thera interpreter path; symlink lost venv)
+0e71d3cf9bb9cfcb1ca6420e2b36e3041a246b5bc9c3e08acf8c1011baa1c1d8  ana_l12.py  used_for_analysis_utc=2026-10-04T22:59:53Z
+BUG disclosed 2026-10-04T23:00:15Z: l2.py chdir before abspath(outdir) -> outputs written to pilot/out and pilot/smoke/out; moved unchanged into out/ and smoke/out_l2/
+DIAG 2026-10-04T23:01:14Z: ContinuousSR native entry at exactly x2 gives MSE~0.12-0.14 (Set14 baboon/barbara) vs bicubic 0.002-0.004; x3/x4 normal. Model/entry behaviour, not changed; H1e judged as-is.
+730289d61dfa02e74e82766fddd357290209aee550924510c2f84186ba5cd722  预注册-L2b-20261005.md  frozen_utc=2026-10-04T23:04:43Z
+c4e4a244622e038f8ff61ea187b2c64d7bff45b8a3df46eca952bc84be76ee97  l2b.py  written_utc=2026-10-04T23:05:18Z  (before any delta computed)
+6e36a947d9bca9ce6edce4e1f86435697a7bc081c61f638958bc6ef0ceb8c657  ana_l2b.py  written_utc=2026-10-04T23:05:18Z  (before any delta computed)
+--- 2026-10-05T11:01:23Z 以下 diag/ 为事后诊断，描述性，不改任何冻结判定
+2c50e5c930c0ae932eb7bfeb9f821c59cb6c0b047748df93620970d54a0d8c9f  diag/diag_set14.py 47ed8bd1da2ed7be5563cc65e8562fcdadc6f7498c404121a233d1ab3e678a18  diag/diag_set14b.py bef07a01497223f0bf91a23a9fdd9711d2df400e9db3283f12fbc346960b219e  diag/diag_contsr.py  (事后诊断，描述性)
+8e9b839b8538519baa0f6dccbcc63a023bf75b34c0bb11aced5491f68255a042  预注册-L2-seed23复核-部分-20261006.md  frozen_utc=2026-10-06T00:48:30Z
+18012d18db2f5b059b1c3a069f849a84c27b17039bfd539bdda93e521928551f  l2s.py  written_utc=2026-10-06T00:49:00Z  (seed23 partial; before any seed2/3 L2 output)
+63d463efbdccb0a332ea21ec4ab2eb17533d1e133594d7a5e3e3d73299aa124e  ana_l2s.py  written_utc=2026-10-06T00:49:00Z  (seed23 partial; before any seed2/3 L2 output)

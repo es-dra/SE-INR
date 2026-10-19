@@ -1,0 +1,63 @@
+{
+  "id": "task-separation-development-v1",
+  "status": "planned_single_bounded_theory_gate; not_proven_or_novel",
+  "scope": "No new GPU, training, image scoring or formal cohort. One algebra/primary-art gate; a classical eight-point example is not an A-class contribution.",
+  "budget": {
+    "absolute_deadline_utc": "2026-10-08T07:00:00Z",
+    "cumulative_root_active_wall_seconds": 1800,
+    "resume_extends_deadline": false,
+    "cpu_numeric_check_seconds": 120,
+    "cpu_threads": 4,
+    "gpu_processes": 0
+  },
+  "candidate": {
+    "dimension": 8,
+    "Qk": "Qk[i,j]=2/8*cos(2*pi*k*(i-j)/8), k=1,3",
+    "Ctheta": "I+theta*(Q1-Q3), 0<abs(theta)<1, positive noise variance nu",
+    "geometry01": [
+      0,
+      4,
+      1,
+      5
+    ],
+    "geometry02": [
+      0,
+      4,
+      2,
+      6
+    ],
+    "risk_normalization": "trace squared Euclidean risk; divide by8 for per-coordinate MSE",
+    "oracle_gap_candidate": "theta^2*(1+2*nu-theta^2)/[(1+nu)*((1+nu)^2-theta^2/2)]",
+    "wrong_candidate_regret_02_candidate": "8*theta0^2/(1+nu)",
+    "minimax_regret_lower_02_candidate": "4*theta0^2/(1+nu)",
+    "phase01_error_bound_candidate": "0.5*exp[-K*theta0^2/(4*(1+nu)^2)]",
+    "training_evaluation": "K independent stationary Gaussian calibration draws plus independent evaluation draw; total4*(K+1) measurements each geometry",
+    "checks_this_turn": "Only3 deterministic matrix oracle-gap evaluations agree; no proof of selection bounds or generalized novelty"
+  },
+  "gate": [
+    "Independently derive all constants and specify fixed candidate class versus all estimators; forbid treating restricted-selector regret lower bound as total-risk minimax lower bound.",
+    "Check exact Bayes mixture/hybrid estimators and known classical experimental-design results before interpreting separation.",
+    "Seek a stated nontrivial alias-block sharp bound with matching upper/lower behavior in dimension,blur and sampling budget.",
+    "If only two-point testing plus eight-point example remains by deadline, close this candidate as classical illustrative material, report negative novelty judgment, do not launch larger image/GPU experiments to rescue it."
+  ],
+  "primary_art": [
+    {
+      "title": "Optimal network design for spatial prediction, covariance parameter estimation, and empirical prediction",
+      "author": "Dale L. Zimmerman",
+      "year": 2006,
+      "doi": "10.1002/env.769",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/env.769",
+      "claim_verified": "Publisher search extract: known-covariance prediction and covariance estimation designs often antithetical; hybrid prediction criterion already considered."
+    },
+    {
+      "title": "Blind Multi-Band Signal Reconstruction: Compressed Sensing for Analog Signals",
+      "url": "https://arxiv.org/abs/0709.1563",
+      "claim_verified": "Author abstract: unknown band locations require twice known-spectrum minimum rate in this sparse perfect-reconstruction setting; not our Gaussian-risk theorem."
+    },
+    {
+      "title": "Fast Compressed Power Spectrum Estimation",
+      "url": "https://arxiv.org/abs/1903.09918",
+      "claim_verified": "Author abstract: multicoset sampling structure and recovery condition previously studied."
+    }
+  ]
+}

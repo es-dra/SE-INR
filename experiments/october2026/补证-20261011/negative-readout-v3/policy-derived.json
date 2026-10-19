@@ -1,0 +1,86 @@
+[
+  {
+    "model": "lte",
+    "predictor": "always_enable",
+    "delta_mean_PSNR_vs_native": 0.0,
+    "disabled": 0
+  },
+  {
+    "model": "lte",
+    "predictor": "always_disable",
+    "delta_mean_PSNR_vs_native": -0.8797290334781863,
+    "disabled": 24
+  },
+  {
+    "model": "lte",
+    "predictor": "band_median",
+    "delta_mean_PSNR_vs_native": 0.0,
+    "disabled": 0
+  },
+  {
+    "model": "lte",
+    "predictor": "energy_only",
+    "delta_mean_PSNR_vs_native": -0.8797290334781863,
+    "disabled": 24
+  },
+  {
+    "model": "lte",
+    "predictor": "norm_ridge",
+    "delta_mean_PSNR_vs_native": -0.08075135056609832,
+    "disabled": 3
+  },
+  {
+    "model": "lte",
+    "predictor": "proxy",
+    "delta_mean_PSNR_vs_native": -0.8797290334781863,
+    "disabled": 24
+  },
+  {
+    "model": "lte",
+    "predictor": "directional_ridge",
+    "delta_mean_PSNR_vs_native": -0.08075135056609832,
+    "disabled": 3
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "always_enable",
+    "delta_mean_PSNR_vs_native": 0.0,
+    "disabled": 0
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "always_disable",
+    "delta_mean_PSNR_vs_native": -0.4072243148552848,
+    "disabled": 24
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "band_median",
+    "delta_mean_PSNR_vs_native": 0.0,
+    "disabled": 0
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "energy_only",
+    "delta_mean_PSNR_vs_native": -0.4072243148552848,
+    "disabled": 24
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "norm_ridge",
+    "delta_mean_PSNR_vs_native": 7.834089179681314e-05,
+    "disabled": 1
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "proxy",
+    "delta_mean_PSNR_vs_native": -0.004669414019315458,
+    "disabled": 5
+  },
+  {
+    "model": "sc-inr",
+    "predictor": "directional_ridge",
+    "delta_mean_PSNR_vs_native": -0.004236544690486177,
+    "disabled": 3
+  }
+]

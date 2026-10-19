@@ -1,0 +1,67 @@
+{
+  "status": "bounded novelty audit; absence of a matching title is not a novelty proof",
+  "sources": [
+    {
+      "id": "partial-id",
+      "title": "Decision Theory for Treatment Choice Problems with Partial Identification",
+      "url": "https://arxiv.org/html/2312.17623v3",
+      "verified_scope": "Generic observation-equivalence, utility/risk contrast identified set, sign-based action selection already covered. Root opened full primary text."
+    },
+    {
+      "id": "robust-wiener",
+      "title": "On Robust Wiener Filtering",
+      "url": "https://collaborate.princeton.edu/en/publications/on-robust-wiener-filtering",
+      "verified_scope": "Worst-case spectral uncertainty and least-favorable priors; agent inspected institution primary abstract, no full-text proof audit."
+    },
+    {
+      "id": "risk-estimator-limit",
+      "title": "Risk Estimators for Choosing Regularization Parameters in Ill-Posed Problems - Properties and Limitations",
+      "url": "https://arxiv.org/html/1701.04970v2",
+      "verified_scope": "Risk estimation and unstable tuning in ill-posed problems are known; root opened full primary text."
+    },
+    {
+      "id": "goal-oriented",
+      "title": "Goal-Oriented Optimal Design of Experiments for Large-Scale Bayesian Linear Inverse Problems",
+      "url": "https://arxiv.org/abs/1802.06517",
+      "verified_scope": "Task-oriented acquisition and uncertainty reduction are established; agent inspected primary paper."
+    },
+    {
+      "id": "variance-estimability",
+      "title": "Estimability analysis of variance and covariance components",
+      "url": "https://link.springer.com/article/10.1007/s00190-006-0122-0",
+      "verified_scope": "Agent verified author full text Definition1/equations3,4: tr(HU_k)=f_k is same quadratic unbiased contrast criterion. Root opened official Springer article and abstract."
+    },
+    {
+      "id": "minque",
+      "title": "Estimation of variance and covariance components--MINQUE theory",
+      "url": "https://www.sciencedirect.com/science/article/pii/0047259X71900017",
+      "verified_scope": "Direct quadratic contrast and variance minimization classical; agent inspected publisher abstract, not full text."
+    },
+    {
+      "id": "compressed-covariance",
+      "title": "Compression Limits for Random Vectors with Linearly Parameterized Second-Order Statistics",
+      "url": "https://arxiv.org/abs/1311.0737",
+      "verified_scope": "Structured covariance identification under compressed observations and sampling design already studied; root opened primary arXiv abstract."
+    },
+    {
+      "id": "ensure",
+      "title": "ENSURE: A General Approach for Unsupervised Training of Deep Image Reconstruction Algorithms",
+      "url": "https://arxiv.org/abs/2010.10631",
+      "verified_scope": "Root opened primary arXiv abstract. Operator ensembles address projected/full-MSE distinction; mechanism differs from fixed A and stationary covariance family."
+    },
+    {
+      "id": "contrast-design",
+      "title": "About optimal designs for estimating variance components with respect to the MIVQUE criterion",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378375899002177",
+      "verified_scope": "Variance-component contrast C-optimal design already known; agent verified primary abstract."
+    }
+  ],
+  "excluded_novelty_claims": [
+    "Observation equivalence alone",
+    "LP identified risk intervals and abstention as a new general decision theory",
+    "Direct unbiased quadratic risk contrast or min-variance estimation as a new principle",
+    "Rank-deficient signal operator nevertheless identifies structured covariance as a new general fact"
+  ],
+  "remaining_research_gate": "Task-specific sharp finite-observation/cost predictions and actual continuous-representation interventions must offer knowledge beyond these classical tools. Current synthetic root confirms structure but low certification and strong EB baseline do not establish practical novelty.",
+  "current_paper_body": "Compiled 13-page baseline preserved; these research-stage notes/results not yet inserted as a new contribution."
+}

@@ -1,0 +1,17 @@
+\section{Interpreting Readout Comparisons}\label{sec:zones}
+LTE conditions a learned phase on cell size \citep{lee2022lte}; the
+examined SC implementation instead modulates learned Fourier features
+with sinc factors. These paths need not realise the same output integral.
+Even analytic integration of an intermediate feature does not certify
+integration of the final RGB output after a nonlinear decoder. A matched
+training ablation changes learned weights as well as the removed path;
+a fixed-checkpoint cell intervention answers a different question.
+
+Historical protocols label linear reference recovery as high (A,
+$R\ge.8$), intermediate (B), or low (C, $R<.1$). These are fixed audit
+labels with untested threshold sensitivity, not causal regimes for a
+network. Removing a component may improve or harm a band regardless of
+its reference label. We therefore evaluate the signed paired loss,
+coarse ordering, magnitude and function similarity separately.
+Classical scalar mismatch identities do not supply a quantitative
+network readout mechanism (Appendix~\ref{app:mismatch}).

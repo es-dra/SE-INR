@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "rows": 12288,
+  "curves": 3232,
+  "source_freeze_sha256": "3ec82f6fb1bb3653e0308bffec3586c5220da81d4543847cab40ca3c0495554a",
+  "outputs": {
+    "budget.json": "07d42d755ed67276526ce5818d8f0376e1aa0ea81ef545ca12495064b8a5a54d",
+    "cost.json": "118a8aff95bd215f85e41622438697f504ba76502395248f00b9c66eac533597",
+    "curves.json": "c2fc9b40241ccc66d5acf5e6707b11fdf0ab38e9e80996b306c191e44c5ab174",
+    "input_freeze.json": "47f40c5012cf2c9a63ece60268e4082f696690bd35242fa520020efef719733d",
+    "native_rows.json": "422acd4f646e999d70e462959b70769b65f9abe35ed7f37012dd4604ddb843a1",
+    "rows.json": "f4174ff3eebb74d969602657b1dac19b37565a02a35f32ed8ff1214cb69b10c4",
+    "selected_examples.json": "46e29d63589074f6aa0d2da663b2c9288f5cbff884b6e38eba8be662d0dc0cad",
+    "source_freeze.json": "3ec82f6fb1bb3653e0308bffec3586c5220da81d4543847cab40ca3c0495554a",
+    "summary.json": "d13d9b7a4658685aa24fad2643d7619fb8ca0a8304acc2a142aca123fd07e5a5"
+  }
+}

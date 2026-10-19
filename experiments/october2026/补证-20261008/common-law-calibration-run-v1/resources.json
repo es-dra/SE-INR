@@ -1,0 +1,17 @@
+{
+  "stage": "complete",
+  "began_unix": 1791439377.423677,
+  "deadline_unix": 1791439977.3767319,
+  "inputs_verified": 24,
+  "calibration_rows": 384,
+  "scored": 24,
+  "current": "0802_ph02_sigma10_fixed_rf",
+  "ended_unix": 1791439385.6564608,
+  "full_wall_seconds": 8.232784724998055,
+  "cumulative_cpu_phase_wall_seconds": 8.23278502500034,
+  "process_user_cpu_seconds": 10.931648000000001,
+  "process_system_cpu_seconds": 12.9473,
+  "peak_rss_bytes": 798310400,
+  "cpu_threads": 4,
+  "gpu_processes": 0
+}

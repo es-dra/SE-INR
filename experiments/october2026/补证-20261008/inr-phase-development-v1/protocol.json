@@ -1,0 +1,16 @@
+{
+  "id": "inr-phase-development-v1-20261008",
+  "scope": "Development interface only, two previously seen images, no selection rule, no confirmatory effect or novelty claim",
+  "source": "Archive original-e1ff.py; AST extracts only class FF and function gauss_B; never imports original top-level training",
+  "data": "Read-only DIV2K_valid_HR/0801.png and 0802.png; centered native128 crop, float RGB /255, avg_pool2d(2) produces HR64",
+  "geometry": "Matched point sampling at scale4: y=0,4,...,60; x=phase,phase+4,...<64; phase pairs [0,0],[0,1],[0,2]. Only horizontal phases differ. This does not identify the full 2D spectrum, and differs from old E1 integrated footprints.",
+  "observation": "Each image/geometry has two 16x16 frames, iid Gaussian noise std .01 using independent local CPU Generator seed1001; both sigma models reuse identical saved Y",
+  "model": {"frequencies":256,"coordinate_order":"(x+.5,y+.5)/64","sigma":[3,10],"seed":0,"hidden_widths":[256,256,256,256],"activation":"ReLU","output_channels":3},
+  "training": {"steps":2000,"optimizer":"Adam","learning_rate":0.001,"schedule":"CosineAnnealingLR T_max2000 eta_min0.00005","loss":"all observed RGB point MSE","dtype":"float32"},
+  "cohort": {"images":["0801","0802"],"phase_sets":[[0,0],[0,1],[0,2]],"fits":12},
+  "evaluation": "Save both unclamped and [0,1]-clamped full HR64 predictions; RGB MSE and PSNR on shave4 region; noisy observation loss, full steps loss history, model/optimizer/scheduler weights and convergence/finite state",
+  "resources": {"gpu_processes":1,"absolute_wall_seconds":7200,"cumulative_gpu_phase_seconds":7200,"resume_extends_deadline":false,"cpu_threads":4,"nice":10,"gpu_memory_fraction":0.15,"gpu_identity":"root launcher chooses A800 UUID and CUDA_VISIBLE_DEVICES; this script uses visible CUDA index0"},
+  "failure": "Per-step deadline and cumulative phase checks, no cohort truncation, finite loss/gradient/weights check, partial model/optimizer/history and current progress retained on budget/signal/failure. Resume same source/data/observation hashes only, no deadline extension.",
+  "costs": "Full invocation wall and cumulative CUDA-phase wall including failed work; per-fit synchronized training/finalization wall; peak allocated/reserved bytes. These are shared-device wall durations, not GPU busy-time or exclusive speed.",
+  "limits": ["No claims from two development images or one seed", "No hyperparameter selection, no formal effect comparison", "Only horizontal phase changes; vertical aliasing remains", "Point-sampling matched geometry differs from native E1 footprint mismatch", "GPU run authorized by root only; implementation agent does not launch GPU"]
+}

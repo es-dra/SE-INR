@@ -1,0 +1,60 @@
+{
+  "case": "0801_n0p01",
+  "status": "failed",
+  "scores": {},
+  "cv": {},
+  "reconstructions": {},
+  "failures": [
+    {
+      "type": "NumericalFailure",
+      "message": "CG did not converge: 1200 iterations, recursive residual 5.1847895e-05, true residual 5.1847895e-05",
+      "unix": 1791397040.2956445,
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/SE-INR/codex-20261008-paper-continuation/guidance/experiment.py\", line 253, in select\n    xh, info = gp_mean(yr, op, ps, noise, budget_check=budget.check)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/SE-INR/codex-20261008-paper-continuation/guidance/core.py\", line 219, in gp_mean\n    raise NumericalFailure(f'CG did not converge: {max_iters} iterations, '\ncore.NumericalFailure: CG did not converge: 1200 iterations, recursive residual 5.1847895e-05, true residual 5.1847895e-05\n"
+    }
+  ],
+  "started_unix": 1791397007.8165393,
+  "attempts": [
+    {
+      "seconds": 32.419125462009106,
+      "counts": {
+        "a_calls": 2411,
+        "at_calls": 1202,
+        "interpolated_points": 10112466944
+      },
+      "status": "failed"
+    }
+  ],
+  "common_attempts": [
+    {
+      "seconds": 0.19045532902237028,
+      "a_calls": 4,
+      "at_calls": 0,
+      "interpolated_points": 16777216,
+      "peak_gpu_bytes": 295174144
+    }
+  ],
+  "common": {
+    "cost": {
+      "seconds": 0.19045532902237028,
+      "a_calls": 4,
+      "at_calls": 0,
+      "interpolated_points": 16777216,
+      "peak_gpu_bytes": 295174144
+    },
+    "scale": 0.0779085889108927,
+    "details": {
+      "observed_variance": 0.06676378343882383,
+      "calibration_observed_variance": 0.8556666973002025,
+      "noise_correction": 9.999847412109376e-05,
+      "floor": 1e-08
+    },
+    "risk_input_cost": {
+      "seconds": 0.018442135013174266,
+      "a_calls": 4,
+      "at_calls": 0,
+      "interpolated_points": 16777216,
+      "peak_gpu_bytes": 302514176
+    },
+    "reference_sha256": "1731124d1f500e90a1d16a33600d4b09d9a63c2e895e40b1161ea7bdcb96c61d"
+  }
+}

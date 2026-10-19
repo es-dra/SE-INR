@@ -1,0 +1,8 @@
+{
+  "start_epoch": 1791708494.826325,
+  "absolute_deadline_epoch": 1791708614.826325,
+  "budget_seconds": 120,
+  "source_sha256": "62dadf5deb2d1148c5b464d56860c108d0aba2f6bbfdb6fa6f2ab6bb6947f7e3",
+  "threads": 4,
+  "nice": 10
+}

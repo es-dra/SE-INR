@@ -1,0 +1,78 @@
+{
+  "stage": "allocation-integration-20261019-complete",
+  "pdf_sha256": "20b269f89276c5274d67fbc396991cc8e9f901c81e27d19d086f7232cdd1ecab",
+  "pages": 5,
+  "body": "1-4",
+  "references": "5",
+  "compiler": "research-175 existing pdflatex/BibTeX; /workspace/SE-INR/paper-allocation-20261019",
+  "warnings": 0,
+  "overfull": 0,
+  "underfull": 5,
+  "undefined": 0,
+  "fonts": "19 embedded fonts, no Type3",
+  "render": "preview-allocation/page-1..5.png; final115dpi all5pages viewed",
+  "visual_status": "All final pages reviewed; no overlap or clipping. New figure generated at7-inch print size, readable6.5-7.5pt text; output curve retained. Body final columns arranged explicitly; no margin/font shrink.",
+  "source_hashes": {
+    "main.tex": "c9358a21bdb5a3bf59daf08fd2180700b0021359c38f156483c4061e059ff7c9",
+    "sec/icassp.tex": "d3807625c5bb029ad09a44c4412ce605cca30b65bff614d341ec176ddb7997f2",
+    "main.pdf": "20b269f89276c5274d67fbc396991cc8e9f901c81e27d19d086f7232cdd1ecab",
+    "refs.bib": "f448a39c2b1308c7853b40768b7579b851988c7bf0bd0d6b563874d6b1155254",
+    "spconf.sty": "dc5d632639040cb183f2ab62780f314845aa021be73048c8a9ec9c2072d64a86",
+    "IEEEbib.bst": "7e6ca0c8b72158d504a12bb091f817c07032a021ba41ca783cca4c2dd80d570b",
+    "figures/attenuation.pdf": "68f9b39450aaa287ea29aee560f05628b1fbb2d59b6664d6cb9d6389e8efd1ee",
+    "figures/allocation-confirmation.pdf": "6fcb766ce37ddbce780b944da0422ecb436cce7e8270ea0b4a8caab0b7b575a6",
+    "figures/allocation-confirmation.sources.json": "d9c526c149124f634fa3c56787f685c7c4b1add6c25d0cd9982c171a82ec73bf",
+    "figures/make_allocation_figure.py": "e608de8d1128d1005e0a927475139cf4f37489e4158653309836f5492d67787e"
+  },
+  "render_hashes": {
+    "page-1.png": "573ac3c78539b6a12eae6530353284d01749f42e9668bd4f4f6d56ca315734dd",
+    "page-2.png": "5151d08dd32b2e81faaca924661b3b10af04278a4faad24936fc744903ed3b99",
+    "page-3.png": "7d567b22e1cd0b331c6140d1cbeec26f62c220b9c23901bfc97ecd41378abc61",
+    "page-4.png": "a83d06f0d8b056b737d042f179ca17154670d99fbde258c23ea6c5999dfaaaa0",
+    "page-5.png": "afc4e151ae0ed6862e382793044c054539926dd09541d3eae82ff9aea3e1763a"
+  },
+  "scientific_integration": [
+    "Abstract/introduction/contribution now targetallocation beyond globalfeature-step norm andReLU switching, not genericbenefit/harm",
+    "Original drift hypothesis rejection1/16 retained; donor-norm controls distinguished from separately frozen native-norm confirmation",
+    "Crossed residual/step16positive old vs16negative new retained",
+    "Native-matched uniform rescues16/16 focal and31/32 original negative allclass; same fixedgates result",
+    "Lowfrequencycontrol centreRGB16positive->16negative retained, with11positivealignment overshoot",
+    "Centre andfull64 RGB effectmedians andsmallmagnitude explicit",
+    "Uniform output attenuation aggregate-ceiling wording fixed; lambda0removes individual harm",
+    "SC identity remains LTE-derived; no naturalimage mechanism/generalrepair/truefrequency semanticclaim"
+  ],
+  "experimental_provenance": {
+    "stage1": "../补证-20261018/sinc-path-patch-v1/verification.json",
+    "stage2": "../补证-20261018/sinc-allocation-confirm-v1/verification.json",
+    "independent_scoring": "Both stages full384rows rescored; full/fixedMLP probes16queries*4branches/family independently reconstructed. Fullnorm static+logged, not allfeatures independent replay.",
+    "new_model_experiments_this_integration": 0,
+    "matching_training": 0,
+    "GPU": 0
+  },
+  "previous_version": "versions/pre-allocation-integration-20261019",
+  "current_version": "versions/allocation-diagnosis-5page",
+  "submission_state": "Internal scientific review, not submitted; author fields deferred",
+  "remaining_scientific_limits": [
+    "Allocation evidence singleSCseed1 x4 knownperiodicgrid, not naturalimage causalvalidation",
+    "Small absoluteRGB effect; importance andnovelty remain reviewerjudgments",
+    "No useful-channel/truefrequency semanticidentification or deployable selector",
+    "No populationCI on dependentcontrolledgrid"
+  ],
+  "scientific_review": {
+    "status": "independent final source/PDF scientific review: no blocking issue",
+    "scope": "Read protocols, formal summaries, verification/audits, revised source/main-text and PDF pages3/4. Root viewed all5 final pages. Not independent retraining/all-feature replay.",
+    "resolved": [
+      "lambda0 distinction",
+      "donor/native norm and global-feature/RGB norm distinction",
+      "fixed-gate counterfactual interpretation",
+      "lowcontrol overshoot11/16 and centre/fullROI medians",
+      "rejected drift hypothesis not rewritten as positive"
+    ],
+    "reviewer_assessment": "Core contribution clearer/stronger than prior phenomenology due equalnorm intervention+fixedgates+counterexample. ICASSP bounded analysis more defensible, not strongaccept guarantee.",
+    "remaining_priority": [
+      "Breadth: single ownSC checkpoint, x4 seenperiodicgrid; naturalimages do not validateallocationcause",
+      "Significance: smallRGB effect and no channel semantics/generalphysicalcause",
+      "Artificialintervention/reference scope; no observation-only policy"
+    ]
+  }
+}

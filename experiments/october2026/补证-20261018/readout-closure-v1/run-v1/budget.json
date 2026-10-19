@@ -1,0 +1,9 @@
+{
+  "start_unix": 1792325564.544578,
+  "deadline_unix": 1792326164.544578,
+  "absolute_wall_seconds": 600,
+  "cumulative_phase_seconds": 600,
+  "cpu_threads": 1,
+  "nice": 10,
+  "resume": false
+}

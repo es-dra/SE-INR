@@ -1,0 +1,1322 @@
+[
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_fixed_rf",
+    "calibration_gap": 0.019845192570188748,
+    "actual_expected_raw_gap": 0.0004747018058466352,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_fixed_rf",
+    "calibration_gap": 0.019669539857339935,
+    "actual_expected_raw_gap": 0.0015118105776845917,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_fixed_rf",
+    "calibration_gap": -0.08517466176073239,
+    "actual_expected_raw_gap": -0.14955828108530828,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.6819558281912896,
+    "actual_expected_raw_gap": -0.667555385997913,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.5059775411104037,
+    "actual_expected_raw_gap": -1.8899613203776768,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.03867195400706634,
+    "actual_expected_raw_gap": 0.008060656864628266,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.04000886003378879,
+    "actual_expected_raw_gap": 0.008732353097996436,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.04182784397935641,
+    "actual_expected_raw_gap": 0.00908649505435877,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.012338687405118329,
+    "actual_expected_raw_gap": -0.02789205053287965,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.020467124116648413,
+    "actual_expected_raw_gap": -0.018542670497766485,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.028952278573223925,
+    "actual_expected_raw_gap": -0.008580790500315598,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_fixed_rf",
+    "calibration_gap": -0.00017565271284881306,
+    "actual_expected_raw_gap": 0.0010371087718379565,
+    "calibration_sign": -1,
+    "actual_sign": 1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_fixed_rf",
+    "calibration_gap": -0.10501985433092115,
+    "actual_expected_raw_gap": -0.1500329828911549,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.7018010207614784,
+    "actual_expected_raw_gap": -0.6680300878037596,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.5258227336805925,
+    "actual_expected_raw_gap": -1.8904360221835235,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.018826761436877594,
+    "actual_expected_raw_gap": 0.007585955058781631,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.020163667463600043,
+    "actual_expected_raw_gap": 0.0082576512921498,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.021982651409167664,
+    "actual_expected_raw_gap": 0.008611793248512134,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.007506505165070419,
+    "actual_expected_raw_gap": -0.02836675233872629,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.0006219315464596649,
+    "actual_expected_raw_gap": -0.019017372303613122,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.009107086003035177,
+    "actual_expected_raw_gap": -0.009055492306162233,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_fixed_rf",
+    "calibration_gap": -0.10484420161807233,
+    "actual_expected_raw_gap": -0.15107009166299287,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.7016253680486296,
+    "actual_expected_raw_gap": -0.6690671965755975,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.5256470809677436,
+    "actual_expected_raw_gap": -1.8914731309553614,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.019002414149726407,
+    "actual_expected_raw_gap": 0.006548846286943674,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.020339320176448857,
+    "actual_expected_raw_gap": 0.007220542520311844,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.022158304122016477,
+    "actual_expected_raw_gap": 0.0075746844766741775,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.007330852452221606,
+    "actual_expected_raw_gap": -0.029403861110564245,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.000797584259308478,
+    "actual_expected_raw_gap": -0.02005448107545108,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.00928273871588399,
+    "actual_expected_raw_gap": -0.01009260107800019,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.5967811664305573,
+    "actual_expected_raw_gap": -0.5179971049126046,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.4208028793496714,
+    "actual_expected_raw_gap": -1.7404030392923686,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.12384661576779873,
+    "actual_expected_raw_gap": 0.15761893794993653,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.1251835217945212,
+    "actual_expected_raw_gap": 0.15829063418330472,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.1270025057400888,
+    "actual_expected_raw_gap": 0.15864477613966704,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.09751334916585072,
+    "actual_expected_raw_gap": 0.12166623055242862,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.10564178587738081,
+    "actual_expected_raw_gap": 0.1310156105875418,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.11412694033395632,
+    "actual_expected_raw_gap": 0.14097749058499268,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -0.8240217129191141,
+    "actual_expected_raw_gap": -1.222405934379764,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.720627782198356,
+    "actual_expected_raw_gap": 0.6756160428625412,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.7219646882250784,
+    "actual_expected_raw_gap": 0.6762877390959093,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.7237836721706461,
+    "actual_expected_raw_gap": 0.6766418810522717,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.694294515596408,
+    "actual_expected_raw_gap": 0.6396633354650333,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.702422952307938,
+    "actual_expected_raw_gap": 0.6490127155001465,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.7109081067645135,
+    "actual_expected_raw_gap": 0.6589745954975973,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 1.54464949511747,
+    "actual_expected_raw_gap": 1.8980219772423053,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 1.5459864011441926,
+    "actual_expected_raw_gap": 1.8986936734756734,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 1.5478053850897602,
+    "actual_expected_raw_gap": 1.8990478154320356,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 1.518316228515522,
+    "actual_expected_raw_gap": 1.8620692698447971,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 1.5264446652270522,
+    "actual_expected_raw_gap": 1.8714186498799104,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 1.5349298196836276,
+    "actual_expected_raw_gap": 1.8813805298773614,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.0013369060267224495,
+    "actual_expected_raw_gap": 0.0006716962333681697,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.00315588997229007,
+    "actual_expected_raw_gap": 0.0010258381897305033,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.026333266601948013,
+    "actual_expected_raw_gap": -0.03595270739750792,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": -0.01820482989041793,
+    "actual_expected_raw_gap": -0.026603327362394753,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": -0.009719675433842417,
+    "actual_expected_raw_gap": -0.016641447364943864,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.0018189839455676204,
+    "actual_expected_raw_gap": 0.0003541419563623336,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.027670172628670463,
+    "actual_expected_raw_gap": -0.03662440363087609,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": -0.01954173591714038,
+    "actual_expected_raw_gap": -0.027275023595762924,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": -0.011056581460564867,
+    "actual_expected_raw_gap": -0.017313143598312035,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_rbf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.029489156574238083,
+    "actual_expected_raw_gap": -0.036978545587238426,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": -0.021360719862708,
+    "actual_expected_raw_gap": -0.027629165552125256,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": -0.012875565406132487,
+    "actual_expected_raw_gap": -0.017667285554674367,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.008128436711530084,
+    "actual_expected_raw_gap": 0.009349380035113167,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma10_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.016613591168105596,
+    "actual_expected_raw_gap": 0.019311260032564056,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma10_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.008485154456575512,
+    "actual_expected_raw_gap": 0.009961879997450889,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_fixed_rf",
+    "calibration_gap": 0.019845192570188748,
+    "actual_expected_raw_gap": 0.006063984407370677,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_fixed_rf",
+    "calibration_gap": 0.019669539857339935,
+    "actual_expected_raw_gap": 0.005658247481542261,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_fixed_rf",
+    "calibration_gap": -0.08517466176073239,
+    "actual_expected_raw_gap": -0.14980120210709205,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.6819558281912896,
+    "actual_expected_raw_gap": -0.8635279934512894,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.5059775411104037,
+    "actual_expected_raw_gap": -2.4640286904309208,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.03867195400706634,
+    "actual_expected_raw_gap": 0.00722202429079637,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.04000886003378879,
+    "actual_expected_raw_gap": 0.0074980608520743225,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.04182784397935641,
+    "actual_expected_raw_gap": 0.00765484245381114,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.012338687405118329,
+    "actual_expected_raw_gap": -0.041533274473970025,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.020467124116648413,
+    "actual_expected_raw_gap": -0.03007694249776948,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.028952278573223925,
+    "actual_expected_raw_gap": -0.016332223815266694,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_fixed_rf",
+    "calibration_gap": -0.00017565271284881306,
+    "actual_expected_raw_gap": -0.00040573692582841596,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_fixed_rf",
+    "calibration_gap": -0.10501985433092115,
+    "actual_expected_raw_gap": -0.15586518651446274,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.7018010207614784,
+    "actual_expected_raw_gap": -0.86959197785866,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.5258227336805925,
+    "actual_expected_raw_gap": -2.470092674838291,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.018826761436877594,
+    "actual_expected_raw_gap": 0.0011580398834256942,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.020163667463600043,
+    "actual_expected_raw_gap": 0.0014340764447036461,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.021982651409167664,
+    "actual_expected_raw_gap": 0.0015908580464404631,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.007506505165070419,
+    "actual_expected_raw_gap": -0.047597258881340705,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.0006219315464596649,
+    "actual_expected_raw_gap": -0.03614092690514016,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.009107086003035177,
+    "actual_expected_raw_gap": -0.022396208222637368,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_fixed_rf",
+    "calibration_gap": -0.10484420161807233,
+    "actual_expected_raw_gap": -0.1554594495886343,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.7016253680486296,
+    "actual_expected_raw_gap": -0.8691862409328316,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.5256470809677436,
+    "actual_expected_raw_gap": -2.469686937912463,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.019002414149726407,
+    "actual_expected_raw_gap": 0.0015637768092541101,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.020339320176448857,
+    "actual_expected_raw_gap": 0.001839813370532062,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.022158304122016477,
+    "actual_expected_raw_gap": 0.001996594972268879,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.007330852452221606,
+    "actual_expected_raw_gap": -0.04719152195551229,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.000797584259308478,
+    "actual_expected_raw_gap": -0.03573518997931174,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.00928273871588399,
+    "actual_expected_raw_gap": -0.021990471296808953,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_fixed_rf",
+    "calibration_gap": -0.5967811664305573,
+    "actual_expected_raw_gap": -0.7137267913441974,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -1.4208028793496714,
+    "actual_expected_raw_gap": -2.3142274883238287,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.12384661576779873,
+    "actual_expected_raw_gap": 0.15702322639788843,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.1251835217945212,
+    "actual_expected_raw_gap": 0.15729926295916638,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.1270025057400888,
+    "actual_expected_raw_gap": 0.1574560445609032,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.09751334916585072,
+    "actual_expected_raw_gap": 0.10826792763312203,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.10564178587738081,
+    "actual_expected_raw_gap": 0.11972425960932256,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.11412694033395632,
+    "actual_expected_raw_gap": 0.13346897829182536,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_fixed_rf",
+    "calibration_gap": -0.8240217129191141,
+    "actual_expected_raw_gap": -1.6005006969796312,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 0.720627782198356,
+    "actual_expected_raw_gap": 0.8707500177420857,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.7219646882250784,
+    "actual_expected_raw_gap": 0.8710260543033637,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.7237836721706461,
+    "actual_expected_raw_gap": 0.8711828359051005,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.694294515596408,
+    "actual_expected_raw_gap": 0.8219947189773193,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.702422952307938,
+    "actual_expected_raw_gap": 0.8334510509535199,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.7109081067645135,
+    "actual_expected_raw_gap": 0.8471957696360227,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma3_rbf",
+    "calibration_gap": 1.54464949511747,
+    "actual_expected_raw_gap": 2.471250714721717,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 1.5459864011441926,
+    "actual_expected_raw_gap": 2.471526751282995,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 1.5478053850897602,
+    "actual_expected_raw_gap": 2.471683532884732,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 1.518316228515522,
+    "actual_expected_raw_gap": 2.4224954159569507,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 1.5264446652270522,
+    "actual_expected_raw_gap": 2.433951747933151,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma10_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 1.5349298196836276,
+    "actual_expected_raw_gap": 2.4476964666156538,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph01_sigma3_rbf",
+    "calibration_gap": 0.0013369060267224495,
+    "actual_expected_raw_gap": 0.00027603656127795197,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.00315588997229007,
+    "actual_expected_raw_gap": 0.00043281816301476896,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.026333266601948013,
+    "actual_expected_raw_gap": -0.0487552987647664,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": -0.01820482989041793,
+    "actual_expected_raw_gap": -0.037298966788565854,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": -0.009719675433842417,
+    "actual_expected_raw_gap": -0.023554248106063064,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph02_sigma3_rbf",
+    "calibration_gap": 0.0018189839455676204,
+    "actual_expected_raw_gap": 0.000156781601736817,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.027670172628670463,
+    "actual_expected_raw_gap": -0.04903133532604435,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": -0.01954173591714038,
+    "actual_expected_raw_gap": -0.0375750033498438,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": -0.011056581460564867,
+    "actual_expected_raw_gap": -0.023830284667341016,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_rbf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": -0.029489156574238083,
+    "actual_expected_raw_gap": -0.04918811692778117,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": -0.021360719862708,
+    "actual_expected_raw_gap": -0.037731784951580624,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": -0.012875565406132487,
+    "actual_expected_raw_gap": -0.02398706626907783,
+    "calibration_sign": -1,
+    "actual_sign": -1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_rbf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.008128436711530084,
+    "actual_expected_raw_gap": 0.011456331976200544,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma10_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.016613591168105596,
+    "actual_expected_raw_gap": 0.025201050658703334,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma10_rbf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.008485154456575512,
+    "actual_expected_raw_gap": 0.01374471868250279,
+    "calibration_sign": 1,
+    "actual_sign": 1,
+    "opposing": false
+  }
+]

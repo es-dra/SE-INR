@@ -1,0 +1,57 @@
+% 分析型论文正文初稿 v0（2026-10-05）
+% 版式：通用 article 双栏，投稿前替换为目标会议模板（CVPR/ICCV/NeurIPS 等）。
+% 约定：\src{...} 标出每个数字的出处（结果文件），终稿把 \showsrcfalse 打开即隐藏。
+%       \PH{...} 为占位，注明原因；不得在占位处填未核对的数字。
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,multirow}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\setlength{\emergencystretch}{2em}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{natbib}
+
+\newif\ifshowsrc \showsrcfalse
+\newcommand{\src}[1]{\ifshowsrc{\textcolor{gray}{\scriptsize[src: #1]}}\fi}
+\newcommand{\PH}[1]{\par\noindent\fcolorbox{red}{yellow!20}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\footnotesize\textbf{PLACEHOLDER:} #1}}}
+\newcommand{\TODO}[1]{\textcolor{red}{\footnotesize[TODO: #1]}}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+
+\newcommand{\Rlin}{R_b^{\mathrm{lin}}}
+\newcommand{\Rnet}{R_b^{\mathrm{net}}}
+
+\title{Frequency Recovery and Readout Effects\\
+in Arbitrary-Scale Super-Resolution}
+\author{Working research draft}
+\date{Revised 11 October 2026}
+
+\begin{document}
+\maketitle
+
+\input{sec/abstract}
+\input{sec/intro}
+\input{sec/related}
+\input{sec/setup}
+\input{sec/zones}
+\input{sec/experiments}
+\input{sec/limitations}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\clearpage
+\appendix
+\section*{Supplementary material}
+Extended ASISR results and auxiliary experiments are followed by classical derivations, reproducibility limits and exploratory controls.
+\input{sec/extended-experiments}
+\input{sec/readout-probes}
+\input{sec/appendix}
+\end{document}

@@ -1,0 +1,58 @@
+{
+  "status": "complete_negative_development_no_promotion",
+  "timestamp_utc": "2026-10-11T18:22:31.687060+00:00",
+  "source_sha256": "33e4ee426f202e8358bc83c98ff57761b9b83bacbd223e84802dbf62910c06d1",
+  "protocol_sha256": "4e426659dd58683049319a1f3114555d46ffb8c818c0c2233a605eb310876f33",
+  "archive_sha256": "70f8e65368d85130c973afb0ebfe693fbacc6aebe22f1e49c96f07a54b923a3c",
+  "summary_sha256": "5bdec835b40aba3a7c7c7d4cb05b8cd1457055e16ea592f2b630194ae0401f33",
+  "audit_v2_sha256": "677b709ef4cf19d434497358c559dd82da141f3151b63021346c3cf5d205ca71",
+  "audit_v1_preserved_sha256": "49da06b36d50fcc8c7fcb3eec2db954a64047891349af5ce6735d698da0a3269",
+  "root_preprocess_check_sha256": "0a8f505b78dc631616ee8d25472838a2b0eebe725b53bcac9852654cfec949d5",
+  "new_prediction_pairs": 128,
+  "lower_rows": 512,
+  "OOF_rows": 512,
+  "combined_passes": 0,
+  "candidate_model_combinations": 4,
+  "cost": {
+    "development": {
+      "status": "complete",
+      "wall_seconds": 27.97450283006765,
+      "cpu_seconds": 27.851583158,
+      "peak_rss_bytes": 670601216,
+      "phase_seconds": {
+        "prepare": 0.2017518220236525,
+        "lower_inference_and_features": 27.646523823961616,
+        "OOF": 0.06636444898322225,
+        "analysis": 0.05915412004105747
+      },
+      "CPU_threads": 1,
+      "nice": 10,
+      "GPU": 0,
+      "SR_training": 0,
+      "end_epoch": 1791742526.7125094,
+      "cost_scope": "incremental lower inference+OOF+scoring+IO; inherited original inference cost separately recorded in old resources, not zero"
+    },
+    "shell_full_seconds": 29.68,
+    "preflight_shell_seconds": 2.73,
+    "independent_audit_wall_total": 2.0502186250232626,
+    "independent_audit_CPU_total": 1.9945300000000001,
+    "root_preprocess_check_seconds": 0.09801032091490924,
+    "inherited_upper_inference": "reused, old run cost retained; not zero deployment cost",
+    "GPU": 0,
+    "SR_training": 0
+  },
+  "preserved_failures": [
+    "Initial time wrapper /usr/bin/time unavailable, before Python; bash time -p retry ran unchanged frozen source.",
+    "Initial local archive check before scp completion failed, later complete archive SHA verified.",
+    "System Python tarfile lacks filter keyword; bundled Python safe data filter succeeded.",
+    "audit v1:193 local permission failures after safe tar extraction; server and archive all0444. v2 checks frozen archive modes; no numerical change."
+  ],
+  "conclusion": "Lower self-reconstruction gain contains some pooled classification signal, but no reliable within-model/scale/band superiority plus RGB-policy benefit; do not promote candidate or initiate matching SR training.",
+  "limitations": [
+    "Previously used training-split calibration32 only; image OOF excludes selector fitting, not original model training.",
+    "2000 fixed-OOF bootstrap conditional intervals, not model-training or external generalization guarantee.",
+    "Native cell and texture/alias content change across resolutions; transfer failure does not identify its cause.",
+    "Audit recomputes scoring/fits and root checks same torch preprocessing primitive/checkpoint bytes; no independent network implementation."
+  ],
+  "manuscript": "Current five-page PDF f818c4c9 retained unchanged. New development evidence recorded in SOURCES, not promoted as confirmed contribution."
+}

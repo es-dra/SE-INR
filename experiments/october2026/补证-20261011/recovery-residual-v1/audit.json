@@ -1,0 +1,3820 @@
+{
+  "scope": "Independent from original three JSON ring arrays with scalar summation loops; no import analyze.py, no image/model preprocessing audit.",
+  "passed": false,
+  "checks": 80243,
+  "max_abs_error": 1.4901161193847656e-08,
+  "failures": [
+    {
+      "label": "Set14.energy.2",
+      "expected": 13511116.44660924,
+      "observed": 13511116.446609244
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 7324892.267619236,
+      "observed": 7324892.267619235
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 21195919.64263892,
+      "observed": 21195919.642638918
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 5540098.837065602,
+      "observed": 5540098.8370656
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 11987119.543421794,
+      "observed": 11987119.543421792
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 36583827.116945446,
+      "observed": 36583827.11694544
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 19444854.678965032,
+      "observed": 19444854.67896503
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 1386915.1851066232,
+      "observed": 1386915.1851066235
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 5184125.143998982,
+      "observed": 5184125.143998983
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 1386915.1851066232,
+      "observed": 1386915.1851066235
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 7326333.259352216,
+      "observed": 7326333.259352215
+    },
+    {
+      "label": "Set14.energy.8",
+      "expected": 3375978.0775195207,
+      "observed": 3375978.07751952
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 5087063.206035875,
+      "observed": 5087063.206035877
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 1473270.3388733845,
+      "observed": 1473270.3388733838
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 6661061.132520976,
+      "observed": 6661061.132520974
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 2984907.9158998914,
+      "observed": 2984907.915899892
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 1680061.465579739,
+      "observed": 1680061.4655797386
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 8091634.4588144235,
+      "observed": 8091634.458814423
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 1100168.747546254,
+      "observed": 1100168.7475462537
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 952402.1077920394,
+      "observed": 952402.1077920393
+    },
+    {
+      "label": "Set14.energy.8",
+      "expected": 1507941.9039342795,
+      "observed": 1507941.9039342792
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 3125148.12404665,
+      "observed": 3125148.1240466507
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 5159141.359980323,
+      "observed": 5159141.359980322
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 451920.05941234657,
+      "observed": 451920.0594123466
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 6529828.147926372,
+      "observed": 6529828.147926371
+    },
+    {
+      "label": "Set14.energy.2",
+      "expected": 1694065.2640127323,
+      "observed": 1694065.264012732
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 3270652.422827131,
+      "observed": 3270652.4228271316
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 2035446.7228365124,
+      "observed": 2035446.7228365126
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 543594.9137158087,
+      "observed": 543594.9137158085
+    },
+    {
+      "label": "Set14.energy.8",
+      "expected": 760874.878790183,
+      "observed": 760874.8787901829
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 451920.05941234657,
+      "observed": 451920.0594123466
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 1650931.193791293,
+      "observed": 1650931.1937912928
+    },
+    {
+      "label": "Set14.energy.13",
+      "expected": 1797750.1903913901,
+      "observed": 1797750.1903913904
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 1034995.9597619204,
+      "observed": 1034995.9597619205
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 3337358.1820120085,
+      "observed": 3337358.182012008
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 1107112.25434812,
+      "observed": 1107112.2543481197
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 1392096.1498850577,
+      "observed": 1392096.1498850575
+    },
+    {
+      "label": "Set14.energy.13",
+      "expected": 957553.8531344122,
+      "observed": 957553.8531344121
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 607920.1312864951,
+      "observed": 607920.1312864952
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 864439.2949320788,
+      "observed": 864439.2949320789
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 348812.64845020423,
+      "observed": 348812.6484502042
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 652957.1593417724,
+      "observed": 652957.1593417726
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 280511.91041302483,
+      "observed": 280511.9104130249
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 708743.9529961289,
+      "observed": 708743.952996129
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 383601.6771969963,
+      "observed": 383601.6771969964
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 190865.88303483246,
+      "observed": 190865.88303483243
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 678264.7363385838,
+      "observed": 678264.7363385839
+    },
+    {
+      "label": "Set14.energy.2",
+      "expected": 746797.5273895084,
+      "observed": 746797.5273895083
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 190865.88303483246,
+      "observed": 190865.88303483243
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 516992.2647826456,
+      "observed": 516992.2647826457
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 247635.0890554693,
+      "observed": 247635.08905546926
+    },
+    {
+      "label": "Set14.energy.8",
+      "expected": 313126.62874284654,
+      "observed": 313126.6287428466
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 367670.3639900524,
+      "observed": 367670.36399005237
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 243487.85313578942,
+      "observed": 243487.85313578945
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 271448.0794680584,
+      "observed": 271448.0794680585
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 7993013.23932003,
+      "observed": 7993013.2393200295
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 7637280.088719557,
+      "observed": 7637280.088719555
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 8093868.402274959,
+      "observed": 8093868.402274958
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 26703300.775042973,
+      "observed": 26703300.775042977
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 11162820.276978165,
+      "observed": 11162820.276978167
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 14773703.931194961,
+      "observed": 14773703.93119496
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 23919370.525764473,
+      "observed": 23919370.52576447
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 1991637.0744300848,
+      "observed": 1991637.0744300843
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 3461831.2961260662,
+      "observed": 3461831.2961260667
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 1991637.0744300848,
+      "observed": 1991637.0744300843
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 11816952.449693006,
+      "observed": 11816952.449693004
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 2460856.7111677434,
+      "observed": 2460856.711167744
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 10762431.803190863,
+      "observed": 10762431.803190865
+    },
+    {
+      "label": "Set14.energy.13",
+      "expected": 22871589.650922563,
+      "observed": 22871589.650922567
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 1018633.3636148558,
+      "observed": 1018633.3636148557
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 1018633.3636148558,
+      "observed": 1018633.3636148557
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 3629537.8428022973,
+      "observed": 3629537.842802298
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 1584200.4398794288,
+      "observed": 1584200.4398794286
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 3783625.5608217227,
+      "observed": 3783625.560821723
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 7428593.249178531,
+      "observed": 7428593.24917853
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 1098991.3677556776,
+      "observed": 1098991.3677556773
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 5061142.872103388,
+      "observed": 5061142.8721033875
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 827701.0804978838,
+      "observed": 827701.080497884
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 3370729.017186883,
+      "observed": 3370729.0171868834
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 7052038.080236016,
+      "observed": 7052038.080236015
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 4842483.974881861,
+      "observed": 4842483.974881862
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 2940014.8261788283,
+      "observed": 2940014.826178828
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 418222.44873946387,
+      "observed": 418222.4487394639
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 1944849.1855437919,
+      "observed": 1944849.1855437916
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 4935796.711075513,
+      "observed": 4935796.711075514
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 666423.7541904429,
+      "observed": 666423.7541904427
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 2277284.53877269,
+      "observed": 2277284.5387726896
+    },
+    {
+      "label": "Set14.energy.8",
+      "expected": 847578.5576112913,
+      "observed": 847578.5576112914
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 2006905.3518905775,
+      "observed": 2006905.3518905772
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 418222.44873946387,
+      "observed": 418222.4487394639
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 325638.77092255483,
+      "observed": 325638.7709225549
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 1294520.0527393161,
+      "observed": 1294520.0527393164
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 4878689.920487693,
+      "observed": 4878689.920487692
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 538181.9987272224,
+      "observed": 538181.9987272223
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 1558044.5623628546,
+      "observed": 1558044.5623628548
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 325638.77092255483,
+      "observed": 325638.7709225549
+    },
+    {
+      "label": "Set14.energy.13",
+      "expected": 1356809.494051062,
+      "observed": 1356809.4940510623
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 248111.2744028653,
+      "observed": 248111.27440286533
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 928584.2298543492,
+      "observed": 928584.2298543493
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 863874.7461050493,
+      "observed": 863874.7461050492
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 3063260.7981644166,
+      "observed": 3063260.798164416
+    },
+    {
+      "label": "Set14.energy.2",
+      "expected": 980733.9575180777,
+      "observed": 980733.9575180778
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 479855.62559228943,
+      "observed": 479855.6255922895
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 1040888.6487640794,
+      "observed": 1040888.6487640796
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 248111.2744028653,
+      "observed": 248111.27440286533
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 774380.5007547048,
+      "observed": 774380.5007547047
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 7482584.1174547635,
+      "observed": 7482584.117454763
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 7482584.1174547635,
+      "observed": 7482584.117454763
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 9149622.711896673,
+      "observed": 9149622.711896675
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 26421297.196380895,
+      "observed": 26421297.19638089
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 9159642.453624414,
+      "observed": 9159642.453624416
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 27926117.45861846,
+      "observed": 27926117.458618462
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 14345451.905957233,
+      "observed": 14345451.905957235
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 9270509.874224728,
+      "observed": 9270509.874224726
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 2986806.3580825347,
+      "observed": 2986806.358082535
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 4468494.20838346,
+      "observed": 4468494.208383459
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 2986806.3580825347,
+      "observed": 2986806.358082535
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 12285470.674082546,
+      "observed": 12285470.674082544
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 3686985.2091616294,
+      "observed": 3686985.209161629
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 13049626.374404926,
+      "observed": 13049626.374404924
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 1122855.0517053714,
+      "observed": 1122855.0517053716
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 1829243.4904440707,
+      "observed": 1829243.4904440704
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 1122855.0517053714,
+      "observed": 1122855.0517053716
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 1853113.627903972,
+      "observed": 1853113.6279039723
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 3841250.4075642033,
+      "observed": 3841250.407564203
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 9789794.064564563,
+      "observed": 9789794.064564565
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 1442599.2859482695,
+      "observed": 1442599.2859482698
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 6395228.304560105,
+      "observed": 6395228.304560104
+    },
+    {
+      "label": "Set14.emin",
+      "expected": 858924.2035861957,
+      "observed": 858924.2035861956
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 3029185.757963534,
+      "observed": 3029185.7579635344
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 1653486.749756667,
+      "observed": 1653486.7497566668
+    },
+    {
+      "label": "Set14.energy.1",
+      "expected": 858924.2035861957,
+      "observed": 858924.2035861956
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 2914269.8076836145,
+      "observed": 2914269.807683615
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 3144101.7082434534,
+      "observed": 3144101.708243454
+    },
+    {
+      "label": "Set14.energy.10",
+      "expected": 6319152.630683341,
+      "observed": 6319152.63068334
+    },
+    {
+      "label": "Set14.energy.11",
+      "expected": 920826.8638056063,
+      "observed": 920826.8638056061
+    },
+    {
+      "label": "Set14.energy.12",
+      "expected": 4221795.038965953,
+      "observed": 4221795.038965952
+    },
+    {
+      "label": "Set14.emedian",
+      "expected": 1999403.0014926337,
+      "observed": 1999403.001492634
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 1942961.4977924216,
+      "observed": 1942961.4977924218
+    },
+    {
+      "label": "Set14.energy.2",
+      "expected": 1675494.854765291,
+      "observed": 1675494.8547652909
+    },
+    {
+      "label": "Set14.energy.5",
+      "expected": 650817.239022117,
+      "observed": 650817.2390221169
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 1768152.9521641606,
+      "observed": 1768152.9521641608
+    },
+    {
+      "label": "Set14.energy.13",
+      "expected": 2668471.4152517742,
+      "observed": 2668471.415251774
+    },
+    {
+      "label": "Set14.energy.0",
+      "expected": 794362.4568611584,
+      "observed": 794362.4568611585
+    },
+    {
+      "label": "Set14.energy.3",
+      "expected": 2045738.869027871,
+      "observed": 2045738.8690278707
+    },
+    {
+      "label": "Set14.energy.4",
+      "expected": 3496971.9683189443,
+      "observed": 3496971.968318944
+    },
+    {
+      "label": "Set14.energy.6",
+      "expected": 1667930.6892141465,
+      "observed": 1667930.6892141462
+    },
+    {
+      "label": "Set14.energy.7",
+      "expected": 387485.27552595106,
+      "observed": 387485.2755259511
+    },
+    {
+      "label": "Set14.energy.9",
+      "expected": 1521526.2886465613,
+      "observed": 1521526.2886465616
+    },
+    {
+      "label": "Set14.energy.13",
+      "expected": 1846017.3258211014,
+      "observed": 1846017.3258211012
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 3244743.023296403,
+      "observed": 3244743.0232964032
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 8315432.744928892,
+      "observed": 8315432.744928891
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 5569676.644401111,
+      "observed": 5569676.64440111
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 15569398.622651478,
+      "observed": 15569398.62265148
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 12009341.02736395,
+      "observed": 12009341.027363949
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 6017735.238253996,
+      "observed": 6017735.238253997
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 20527286.927299738,
+      "observed": 20527286.92729974
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 6148627.04840502,
+      "observed": 6148627.0484050205
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 11916776.15841561,
+      "observed": 11916776.158415608
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 25658171.8194699,
+      "observed": 25658171.819469903
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 3244743.023296403,
+      "observed": 3244743.0232964032
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 23945099.346981376,
+      "observed": 23945099.346981373
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 22863291.58534127,
+      "observed": 22863291.585341275
+    },
+    {
+      "label": "BSD100.energy.23",
+      "expected": 7135176.309886175,
+      "observed": 7135176.309886174
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 10193800.81424681,
+      "observed": 10193800.814246811
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 18176935.324488245,
+      "observed": 18176935.32448825
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 14045812.998865942,
+      "observed": 14045812.998865943
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 1213031.921843449,
+      "observed": 1213031.9218434491
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 4728850.211721871,
+      "observed": 4728850.211721872
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 4351229.5438654665,
+      "observed": 4351229.543865467
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 2548279.4702597973,
+      "observed": 2548279.470259797
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 7198283.11219138,
+      "observed": 7198283.112191379
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 6435851.635057557,
+      "observed": 6435851.635057558
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 5370359.331216913,
+      "observed": 5370359.331216912
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 1213031.921843449,
+      "observed": 1213031.9218434491
+    },
+    {
+      "label": "BSD100.energy.17",
+      "expected": 1884648.5405581938,
+      "observed": 1884648.5405581936
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 6778031.14335354,
+      "observed": 6778031.143353542
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 11784472.192665454,
+      "observed": 11784472.192665452
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 7401060.04145293,
+      "observed": 7401060.041452929
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 21298200.244074695,
+      "observed": 21298200.2440747
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 3585485.460988755,
+      "observed": 3585485.4609887553
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 6524072.987983401,
+      "observed": 6524072.987983402
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 3240985.034841835,
+      "observed": 3240985.0348418346
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 4208673.440734817,
+      "observed": 4208673.440734816
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 1428423.360946509,
+      "observed": 1428423.3609465086
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 6490780.973986023,
+      "observed": 6490780.973986022
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 1345039.699674997,
+      "observed": 1345039.6996749968
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 7544248.913858536,
+      "observed": 7544248.913858535
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 3835769.945347164,
+      "observed": 3835769.9453471643
+    },
+    {
+      "label": "BSD100.energy.23",
+      "expected": 1698496.5452926443,
+      "observed": 1698496.545292644
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 2577559.5245658085,
+      "observed": 2577559.524565808
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 1380780.3805628715,
+      "observed": 1380780.3805628717
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 3004594.577268172,
+      "observed": 3004594.5772681725
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 18241669.203200184,
+      "observed": 18241669.20320018
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 2268172.611785207,
+      "observed": 2268172.6117852065
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 5337163.786937733,
+      "observed": 5337163.786937732
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 1160915.7787921962,
+      "observed": 1160915.778792196
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 2311166.1856173626,
+      "observed": 2311166.185617362
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 961360.700735548,
+      "observed": 961360.7007355479
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 2223893.150042937,
+      "observed": 2223893.1500429367
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 2420251.5140679833,
+      "observed": 2420251.514067983
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 873532.9267189906,
+      "observed": 873532.9267189903
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 1456556.748832558,
+      "observed": 1456556.7488325578
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 897542.213472205,
+      "observed": 897542.2134722051
+    },
+    {
+      "label": "BSD100.energy.13",
+      "expected": 1770906.6511138894,
+      "observed": 1770906.6511138892
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 3833018.7795957155,
+      "observed": 3833018.779595715
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 4757114.869986711,
+      "observed": 4757114.869986712
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 4631961.297155531,
+      "observed": 4631961.297155532
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 4645330.512230953,
+      "observed": 4645330.512230954
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 3912339.6045758035,
+      "observed": 3912339.604575804
+    },
+    {
+      "label": "BSD100.energy.23",
+      "expected": 1044888.5385409658,
+      "observed": 1044888.5385409656
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 957468.1806199824,
+      "observed": 957468.1806199823
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 1835500.3157499763,
+      "observed": 1835500.315749976
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 917166.1431405667,
+      "observed": 917166.1431405664
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 1366108.6264213952,
+      "observed": 1366108.6264213955
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 3261834.7970335344,
+      "observed": 3261834.797033535
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 1364348.7106493989,
+      "observed": 1364348.710649399
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 2283128.439587815,
+      "observed": 2283128.4395878147
+    },
+    {
+      "label": "BSD100.energy.13",
+      "expected": 1057257.2586847877,
+      "observed": 1057257.2586847874
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 1777998.921262306,
+      "observed": 1777998.9212623057
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 3258962.779036072,
+      "observed": 3258962.7790360716
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 2797661.589610799,
+      "observed": 2797661.5896107997
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 3678241.8237309773,
+      "observed": 3678241.8237309777
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 1247063.108299432,
+      "observed": 1247063.1082994323
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 1262596.8868915264,
+      "observed": 1262596.8868915262
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 11424103.44406544,
+      "observed": 11424103.444065442
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 199495.48499292665,
+      "observed": 199495.48499292668
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 818371.7825339914,
+      "observed": 818371.7825339916
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 1108518.5979502457,
+      "observed": 1108518.597950246
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 2187790.2877155766,
+      "observed": 2187790.287715577
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 456010.65758874,
+      "observed": 456010.6575887401
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 387225.683766802,
+      "observed": 387225.6837668021
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 696366.2407474075,
+      "observed": 696366.2407474077
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 1989987.2943696494,
+      "observed": 1989987.2943696491
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 801970.7867090297,
+      "observed": 801970.7867090298
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 1521964.8336042364,
+      "observed": 1521964.8336042366
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 1558170.2611465687,
+      "observed": 1558170.2611465692
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 834772.7783589532,
+      "observed": 834772.7783589533
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 199495.48499292665,
+      "observed": 199495.48499292668
+    },
+    {
+      "label": "BSD100.energy.17",
+      "expected": 304474.84686926124,
+      "observed": 304474.8468692612
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 3043099.4127684115,
+      "observed": 3043099.412768411
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 416250.1824793579,
+      "observed": 416250.182479358
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 774868.884978185,
+      "observed": 774868.8849781848
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 798099.1673474018,
+      "observed": 798099.167347402
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 324450.9709781393,
+      "observed": 324450.97097813926
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 923734.2561703986,
+      "observed": 923734.2561703987
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 7622298.866548181,
+      "observed": 7622298.8665481815
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 171374.58121437047,
+      "observed": 171374.5812143704
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 565113.5060814621,
+      "observed": 565113.5060814624
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 1097117.066864957,
+      "observed": 1097117.0668649569
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 782080.6161844096,
+      "observed": 782080.6161844095
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 313561.0879449263,
+      "observed": 313561.08794492634
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 657668.8735613729,
+      "observed": 657668.873561373
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 1391178.029916632,
+      "observed": 1391178.0299166318
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 505242.5896681795,
+      "observed": 505242.58966817945
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 193633.91071147373,
+      "observed": 193633.91071147376
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 199874.91546969695,
+      "observed": 199874.91546969698
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 236195.18843175346,
+      "observed": 236195.18843175343
+    },
+    {
+      "label": "BSD100.energy.13",
+      "expected": 451505.63286865625,
+      "observed": 451505.63286865613
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 460963.0047700044,
+      "observed": 460963.00477000437
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 171374.58121437047,
+      "observed": 171374.5812143704
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 1163991.3719175644,
+      "observed": 1163991.3719175647
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 1729862.2195749923,
+      "observed": 1729862.219574992
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 1010824.69706371,
+      "observed": 1010824.6970637101
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 2501691.4679334606,
+      "observed": 2501691.467933461
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 536568.259851932,
+      "observed": 536568.2598519321
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 593658.7523109925,
+      "observed": 593658.7523109926
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 216472.83480948853,
+      "observed": 216472.8348094885
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 774900.722098235,
+      "observed": 774900.7220982349
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 4411048.655323271,
+      "observed": 4411048.655323272
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 20730095.480649486,
+      "observed": 20730095.480649482
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 10256303.520680618,
+      "observed": 10256303.52068062
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 10567844.80983875,
+      "observed": 10567844.809838751
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 22962793.355173852,
+      "observed": 22962793.35517385
+    },
+    {
+      "label": "BSD100.energy.13",
+      "expected": 10877540.335004013,
+      "observed": 10877540.335004015
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 27975553.13291293,
+      "observed": 27975553.132912926
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 23816978.85348203,
+      "observed": 23816978.853482034
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 7102855.183875862,
+      "observed": 7102855.183875863
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 13828186.423842264,
+      "observed": 13828186.423842266
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 19384281.649795223,
+      "observed": 19384281.649795227
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 4411048.655323271,
+      "observed": 4411048.655323272
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 18469107.46399519,
+      "observed": 18469107.463995192
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 31481001.324943367,
+      "observed": 31481001.32494337
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 1453338.9193636272,
+      "observed": 1453338.919363627
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 4750679.118432841,
+      "observed": 4750679.118432842
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 9367833.557298614,
+      "observed": 9367833.557298616
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 2893047.731941026,
+      "observed": 2893047.7319410257
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 4595737.970619566,
+      "observed": 4595737.970619565
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 7855034.663249244,
+      "observed": 7855034.663249243
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 10409133.172008293,
+      "observed": 10409133.172008295
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 6991129.03042991,
+      "observed": 6991129.030429909
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 3254006.02101456,
+      "observed": 3254006.0210145595
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 6762974.020888619,
+      "observed": 6762974.02088862
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 15688688.151271125,
+      "observed": 15688688.151271123
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 1453338.9193636272,
+      "observed": 1453338.919363627
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 7423541.659709624,
+      "observed": 7423541.659709625
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 3539096.251385682,
+      "observed": 3539096.2513856813
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 9798366.411214948,
+      "observed": 9798366.411214946
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 4954923.606675999,
+      "observed": 4954923.606675998
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 16451325.016544297,
+      "observed": 16451325.016544295
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 3354496.5588922836,
+      "observed": 3354496.558892284
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 3124069.272616393,
+      "observed": 3124069.2726163934
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 1885467.4193938973,
+      "observed": 1885467.419393897
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 5954605.658801431,
+      "observed": 5954605.65880143
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 7283009.80294883,
+      "observed": 7283009.802948831
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 4068548.644384612,
+      "observed": 4068548.6443846114
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 1810717.852922955,
+      "observed": 1810717.8529229553
+    },
+    {
+      "label": "BSD100.energy.17",
+      "expected": 1328475.4811772401,
+      "observed": 1328475.48117724
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 4816875.9606066365,
+      "observed": 4816875.960606637
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 2376967.9958514953,
+      "observed": 2376967.995851496
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 5602849.5766448425,
+      "observed": 5602849.576644842
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 3189008.4803925264,
+      "observed": 3189008.480392526
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 4023935.9458440794,
+      "observed": 4023935.945844079
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 2710106.7704308615,
+      "observed": 2710106.770430862
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 4872218.730047111,
+      "observed": 4872218.730047112
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 1216449.763036216,
+      "observed": 1216449.7630362161
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 2380771.0229152436,
+      "observed": 2380771.0229152427
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 1241478.6473432863,
+      "observed": 1241478.6473432865
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 3554817.2906363746,
+      "observed": 3554817.290636375
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 1178885.866533503,
+      "observed": 1178885.8665335032
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 5622825.766204017,
+      "observed": 5622825.766204018
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 2385087.373704685,
+      "observed": 2385087.3737046854
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 1146535.8139883836,
+      "observed": 1146535.8139883834
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 6850975.433956133,
+      "observed": 6850975.433956131
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 5163259.100551463,
+      "observed": 5163259.100551462
+    },
+    {
+      "label": "BSD100.energy.23",
+      "expected": 1648075.7486670208,
+      "observed": 1648075.748667021
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 2067828.7228217928,
+      "observed": 2067828.7228217926
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 1033918.6947660936,
+      "observed": 1033918.6947660937
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 13208113.754312063,
+      "observed": 13208113.75431206
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 2371893.7067573764,
+      "observed": 2371893.706757377
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 858157.7582469081,
+      "observed": 858157.7582469082
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 1649922.633654141,
+      "observed": 1649922.6336541409
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 1856788.9836916602,
+      "observed": 1856788.9836916598
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 11913131.584927239,
+      "observed": 11913131.58492724
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 1795548.0102090503,
+      "observed": 1795548.0102090505
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 3777200.8525951705,
+      "observed": 3777200.85259517
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 689143.2517454268,
+      "observed": 689143.2517454267
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 1570196.1063672747,
+      "observed": 1570196.1063672744
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 622711.3388736738,
+      "observed": 622711.3388736737
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 2675747.186539665,
+      "observed": 2675747.1865396653
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 3322233.12223805,
+      "observed": 3322233.1222380497
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 3270186.8884356073,
+      "observed": 3270186.888435608
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 3272675.698998089,
+      "observed": 3272675.6989980894
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 1296330.298413361,
+      "observed": 1296330.2984133607
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 634158.5759825284,
+      "observed": 634158.5759825283
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 10588441.026696166,
+      "observed": 10588441.026696168
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 1646927.678795111,
+      "observed": 1646927.6787951107
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 1359383.5034999228,
+      "observed": 1359383.503499923
+    },
+    {
+      "label": "BSD100.energy.5",
+      "expected": 543400.2073875053,
+      "observed": 543400.2073875052
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 3097544.546295834,
+      "observed": 3097544.5462958342
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 2081120.1420515755,
+      "observed": 2081120.1420515757
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 2831012.774043339,
+      "observed": 2831012.7740433393
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 575957.6535233998,
+      "observed": 575957.6535233997
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 1103569.0109933633,
+      "observed": 1103569.010993363
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 9517444.026957495,
+      "observed": 9517444.026957493
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 13387492.204341708,
+      "observed": 13387492.20434171
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 11627681.240394708,
+      "observed": 11627681.240394706
+    },
+    {
+      "label": "BSD100.energy.4",
+      "expected": 12516963.465073405,
+      "observed": 12516963.465073407
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 25291134.616333224,
+      "observed": 25291134.61633322
+    },
+    {
+      "label": "BSD100.energy.11",
+      "expected": 7165518.847583698,
+      "observed": 7165518.847583697
+    },
+    {
+      "label": "BSD100.energy.13",
+      "expected": 11611465.778490968,
+      "observed": 11611465.77849097
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 5023839.833839657,
+      "observed": 5023839.833839656
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 21466617.036988262,
+      "observed": 21466617.036988266
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 24703759.548467677,
+      "observed": 24703759.54846768
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 17580620.14614748,
+      "observed": 17580620.146147482
+    },
+    {
+      "label": "BSD100.energy.22",
+      "expected": 7359618.157695594,
+      "observed": 7359618.157695593
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 14258020.94361001,
+      "observed": 14258020.943610013
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 20759462.3252365,
+      "observed": 20759462.325236503
+    },
+    {
+      "label": "BSD100.energy.29",
+      "expected": 31392095.848841954,
+      "observed": 31392095.84884195
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 2169267.771141824,
+      "observed": 2169267.7711418234
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 6186046.339713755,
+      "observed": 6186046.339713756
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 3762867.0867152074,
+      "observed": 3762867.086715207
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 3985451.895375568,
+      "observed": 3985451.8953755684
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 4064584.640048449,
+      "observed": 4064584.6400484494
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 7347171.196606594,
+      "observed": 7347171.196606593
+    },
+    {
+      "label": "BSD100.energy.15",
+      "expected": 15283264.714482207,
+      "observed": 15283264.714482209
+    },
+    {
+      "label": "BSD100.energy.17",
+      "expected": 2169267.771141824,
+      "observed": 2169267.7711418234
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 14991837.399678046,
+      "observed": 14991837.399678044
+    },
+    {
+      "label": "BSD100.energy.23",
+      "expected": 4960479.256776074,
+      "observed": 4960479.256776073
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 12114298.217017015,
+      "observed": 12114298.217017017
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 6812863.512127305,
+      "observed": 6812863.512127304
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 2400688.967608376,
+      "observed": 2400688.9676083755
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 9497755.924005058,
+      "observed": 9497755.92400506
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 921215.8918636482,
+      "observed": 921215.8918636481
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 3038677.9784581503,
+      "observed": 3038677.97845815
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 5407836.034322581,
+      "observed": 5407836.034322582
+    },
+    {
+      "label": "BSD100.energy.3",
+      "expected": 1806809.557685903,
+      "observed": 1806809.5576859033
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 5577328.915127282,
+      "observed": 5577328.915127281
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 2032283.3428784274,
+      "observed": 2032283.3428784276
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 2084042.4083565709,
+      "observed": 2084042.4083565706
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 921215.8918636482,
+      "observed": 921215.8918636481
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 5372630.76971805,
+      "observed": 5372630.769718051
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 7871454.185663224,
+      "observed": 7871454.185663223
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 6300207.610747581,
+      "observed": 6300207.610747582
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 3125004.7013134435,
+      "observed": 3125004.701313443
+    },
+    {
+      "label": "BSD100.energy.26",
+      "expected": 2893396.2416640176,
+      "observed": 2893396.241664017
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 1540601.7692960002,
+      "observed": 1540601.7692960005
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 3043817.9598896704,
+      "observed": 3043817.95988967
+    },
+    {
+      "label": "BSD100.energy.2",
+      "expected": 4986990.85398765,
+      "observed": 4986990.853987651
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 4840550.924600538,
+      "observed": 4840550.924600537
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 5968927.870057367,
+      "observed": 5968927.870057368
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 3762923.3551650657,
+      "observed": 3762923.3551650653
+    },
+    {
+      "label": "BSD100.energy.17",
+      "expected": 1120487.4920696858,
+      "observed": 1120487.4920696856
+    },
+    {
+      "label": "BSD100.energy.18",
+      "expected": 3982104.658459889,
+      "observed": 3982104.6584598892
+    },
+    {
+      "label": "BSD100.energy.23",
+      "expected": 1747984.1088962753,
+      "observed": 1747984.108896275
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 2052986.0076472093,
+      "observed": 2052986.0076472096
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 3348712.575897184,
+      "observed": 3348712.5758971837
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 1991463.8615959217,
+      "observed": 1991463.861595922
+    },
+    {
+      "label": "BSD100.energy.7",
+      "expected": 3697536.900502875,
+      "observed": 3697536.9005028745
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 960633.786868421,
+      "observed": 960633.7868684209
+    },
+    {
+      "label": "BSD100.energy.10",
+      "expected": 4325802.010372808,
+      "observed": 4325802.010372807
+    },
+    {
+      "label": "BSD100.energy.13",
+      "expected": 1873387.3137704858,
+      "observed": 1873387.3137704856
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 3120296.7875292045,
+      "observed": 3120296.787529205
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 3991431.619027741,
+      "observed": 3991431.6190277413
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 5044373.196610054,
+      "observed": 5044373.196610053
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 1081214.527382256,
+      "observed": 1081214.5273822562
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 2695583.6678145262,
+      "observed": 2695583.6678145267
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 1993000.8553521286,
+      "observed": 1993000.8553521289
+    },
+    {
+      "label": "BSD100.emin",
+      "expected": 377138.2514387433,
+      "observed": 377138.25143874326
+    },
+    {
+      "label": "BSD100.emedian",
+      "expected": 1871803.1367663236,
+      "observed": 1871803.1367663238
+    },
+    {
+      "label": "BSD100.energy.0",
+      "expected": 1924254.7481357206,
+      "observed": 1924254.7481357208
+    },
+    {
+      "label": "BSD100.energy.9",
+      "expected": 834074.4077025366,
+      "observed": 834074.4077025363
+    },
+    {
+      "label": "BSD100.energy.16",
+      "expected": 377138.2514387433,
+      "observed": 377138.25143874326
+    },
+    {
+      "label": "BSD100.energy.17",
+      "expected": 662938.0825536944,
+      "observed": 662938.0825536945
+    },
+    {
+      "label": "BSD100.energy.20",
+      "expected": 3843082.2041059574,
+      "observed": 3843082.204105957
+    },
+    {
+      "label": "BSD100.energy.21",
+      "expected": 3988723.548222543,
+      "observed": 3988723.5482225427
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 978968.0349987857,
+      "observed": 978968.0349987856
+    },
+    {
+      "label": "BSD100.energy.28",
+      "expected": 1783421.0739151645,
+      "observed": 1783421.0739151647
+    },
+    {
+      "label": "BSD100.energy.1",
+      "expected": 1573181.1397167789,
+      "observed": 1573181.1397167786
+    },
+    {
+      "label": "BSD100.energy.6",
+      "expected": 1856834.2593055074,
+      "observed": 1856834.2593055076
+    },
+    {
+      "label": "BSD100.energy.8",
+      "expected": 1951619.1980174447,
+      "observed": 1951619.1980174445
+    },
+    {
+      "label": "BSD100.energy.12",
+      "expected": 650210.8909940026,
+      "observed": 650210.8909940027
+    },
+    {
+      "label": "BSD100.energy.14",
+      "expected": 2546323.5267683985,
+      "observed": 2546323.526768398
+    },
+    {
+      "label": "BSD100.energy.19",
+      "expected": 3164140.1978617497,
+      "observed": 3164140.197861749
+    },
+    {
+      "label": "BSD100.energy.24",
+      "expected": 655589.4332447705,
+      "observed": 655589.4332447706
+    },
+    {
+      "label": "BSD100.energy.25",
+      "expected": 1705026.0911353836,
+      "observed": 1705026.0911353838
+    },
+    {
+      "label": "BSD100.energy.27",
+      "expected": 704642.799771077,
+      "observed": 704642.7997710769
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 14770958.631634284,
+      "observed": 14770958.631634286
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 52246288.46010007,
+      "observed": 52246288.46010006
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 31699760.89532027,
+      "observed": 31699760.895320274
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 22529197.762627367,
+      "observed": 22529197.76262737
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 22159039.35025956,
+      "observed": 22159039.350259557
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 34206254.77276395,
+      "observed": 34206254.77276396
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 3177946.9044246604,
+      "observed": 3177946.904424661
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 29092383.00815775,
+      "observed": 29092383.008157752
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 26106012.547289453,
+      "observed": 26106012.547289457
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 11624472.59468726,
+      "observed": 11624472.594687263
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 7568638.315631338,
+      "observed": 7568638.315631339
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 23304813.10755199,
+      "observed": 23304813.10755198
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 10806667.959892727,
+      "observed": 10806667.959892724
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 2886608.6569653004,
+      "observed": 2886608.6569653
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 8197399.565691404,
+      "observed": 8197399.565691403
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 26153954.618184377,
+      "observed": 26153954.61818438
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 3364554.2636375367,
+      "observed": 3364554.263637537
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 7800928.736754858,
+      "observed": 7800928.736754857
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 6064209.472920531,
+      "observed": 6064209.472920532
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 15483112.041897636,
+      "observed": 15483112.041897634
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 11189612.743384456,
+      "observed": 11189612.743384454
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1996889.4496580332,
+      "observed": 1996889.449658033
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 7069570.462076982,
+      "observed": 7069570.4620769825
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 5585348.350093657,
+      "observed": 5585348.350093658
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 30910218.302972104,
+      "observed": 30910218.302972108
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 5505756.04293693,
+      "observed": 5505756.042936932
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 3594600.6927568964,
+      "observed": 3594600.692756897
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 4531042.36959028,
+      "observed": 4531042.369590279
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 3010711.1367800026,
+      "observed": 3010711.136780002
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 10673465.881992573,
+      "observed": 10673465.88199257
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 767239.1014182786,
+      "observed": 767239.1014182785
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 4727245.562573139,
+      "observed": 4727245.5625731405
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 3387387.8813604806,
+      "observed": 3387387.88136048
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 7059759.502994786,
+      "observed": 7059759.502994785
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 6065890.148433577,
+      "observed": 6065890.148433578
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 4693997.287374068,
+      "observed": 4693997.287374069
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 4760493.83777221,
+      "observed": 4760493.837772212
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 982431.7012457001,
+      "observed": 982431.7012457002
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 8645051.300428083,
+      "observed": 8645051.300428085
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 5153453.122191393,
+      "observed": 5153453.122191392
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1465811.0015779098,
+      "observed": 1465811.00157791
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 7934292.49264425,
+      "observed": 7934292.492644251
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 2370899.5979987876,
+      "observed": 2370899.597998787
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 767239.1014182786,
+      "observed": 767239.1014182785
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 6314804.281824136,
+      "observed": 6314804.281824137
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 6363830.10103526,
+      "observed": 6363830.101035261
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 3983910.0777697344,
+      "observed": 3983910.077769735
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 5665064.875130385,
+      "observed": 5665064.875130383
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 3735930.3717869055,
+      "observed": 3735930.371786906
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 7551114.583538603,
+      "observed": 7551114.583538604
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1716938.7209048741,
+      "observed": 1716938.7209048737
+    },
+    {
+      "label": "Urban100.energy.12",
+      "expected": 2796980.1634865864,
+      "observed": 2796980.163486586
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 5558325.074539487,
+      "observed": 5558325.074539488
+    },
+    {
+      "label": "Urban100.energy.14",
+      "expected": 4660503.618983874,
+      "observed": 4660503.618983876
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 5635410.689648476,
+      "observed": 5635410.689648477
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 4650039.501236356,
+      "observed": 4650039.501236357
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 4773836.858328955,
+      "observed": 4773836.858328954
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 4900161.603501165,
+      "observed": 4900161.603501166
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 720594.7058458923,
+      "observed": 720594.7058458925
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 26374024.026639044,
+      "observed": 26374024.02663904
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 1541688.3884593148,
+      "observed": 1541688.388459315
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 949254.7601595534,
+      "observed": 949254.7601595533
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 2695336.108256953,
+      "observed": 2695336.1082569524
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 1230200.366500499,
+      "observed": 1230200.3665004992
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 4231889.783752563,
+      "observed": 4231889.783752564
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 202616.55934679648,
+      "observed": 202616.5593467965
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 1861822.2377780965,
+      "observed": 1861822.237778096
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 2171958.516061737,
+      "observed": 2171958.5160617377
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 4362070.682934902,
+      "observed": 4362070.682934903
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 2640102.8803590797,
+      "observed": 2640102.88035908
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 2475591.679476197,
+      "observed": 2475591.6794761964
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 592736.9175495739,
+      "observed": 592736.9175495738
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 15849323.798482403,
+      "observed": 15849323.798482405
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 5882077.587252498,
+      "observed": 5882077.587252497
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 2608729.795650461,
+      "observed": 2608729.7956504608
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1822003.731953671,
+      "observed": 1822003.7319536712
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 4471047.0574683575,
+      "observed": 4471047.057468357
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 4079335.6175989383,
+      "observed": 4079335.6175989388
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 4572180.233663695,
+      "observed": 4572180.233663694
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 202616.55934679648,
+      "observed": 202616.5593467965
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 2943341.0711265034,
+      "observed": 2943341.071126503
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 835879.9000804737,
+      "observed": 835879.9000804739
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 103422.18411184457,
+      "observed": 103422.18411184456
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 1990863.1211066034,
+      "observed": 1990863.1211066032
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 2907269.2976332805,
+      "observed": 2907269.297633281
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 1369857.080101182,
+      "observed": 1369857.0801011822
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 10237718.144291207,
+      "observed": 10237718.144291205
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 217454.60922353648,
+      "observed": 217454.6092235365
+    },
+    {
+      "label": "Urban100.energy.12",
+      "expected": 1087373.2802269056,
+      "observed": 1087373.2802269058
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 3578621.663664249,
+      "observed": 3578621.6636642497
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 2133025.4691221407,
+      "observed": 2133025.469122141
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 2756611.1479274374,
+      "observed": 2756611.147927437
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 2282481.3064397206,
+      "observed": 2282481.30643972
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 103422.18411184457,
+      "observed": 103422.18411184456
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 3038527.7696027965,
+      "observed": 3038527.769602797
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 828510.1561380486,
+      "observed": 828510.1561380485
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 830398.1840343201,
+      "observed": 830398.1840343203
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 1905518.1515064945,
+      "observed": 1905518.1515064943
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 2066247.251130896,
+      "observed": 2066247.2511308957
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 1201221.338621869,
+      "observed": 1201221.3386218688
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 708083.2103696036,
+      "observed": 708083.2103696037
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 1008721.6128896658,
+      "observed": 1008721.6128896659
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 2155475.287142008,
+      "observed": 2155475.2871420085
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 842691.8439907464,
+      "observed": 842691.8439907463
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 119616.37281612816,
+      "observed": 119616.37281612818
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 1311176.4754692777,
+      "observed": 1311176.4754692775
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 1072028.25587936,
+      "observed": 1072028.2558793603
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 1771392.6771036407,
+      "observed": 1771392.6771036405
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 3205772.3499045745,
+      "observed": 3205772.349904574
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 5272499.135089986,
+      "observed": 5272499.135089987
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 583339.296397507,
+      "observed": 583339.2963975071
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 372972.1335776376,
+      "observed": 372972.13357763755
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 1804688.8700978553,
+      "observed": 1804688.8700978558
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 19785636.227652844,
+      "observed": 19785636.227652848
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 10734900.243574085,
+      "observed": 10734900.243574083
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 19015596.0678008,
+      "observed": 19015596.067800805
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 35016529.04886718,
+      "observed": 35016529.04886717
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 23870597.845107537,
+      "observed": 23870597.84510754
+    },
+    {
+      "label": "Urban100.energy.12",
+      "expected": 15038408.829961265,
+      "observed": 15038408.829961263
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 60985438.861182556,
+      "observed": 60985438.86118256
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 45260968.112691075,
+      "observed": 45260968.11269108
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 11886682.335439866,
+      "observed": 11886682.335439868
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 8623649.735243395,
+      "observed": 8623649.735243393
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 7704546.963399951,
+      "observed": 7704546.963399952
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 32942110.56535632,
+      "observed": 32942110.565356318
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 1450038.8428827866,
+      "observed": 1450038.8428827869
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 7828699.412045259,
+      "observed": 7828699.412045258
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 3942329.5254590865,
+      "observed": 3942329.525459087
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 9604767.035434537,
+      "observed": 9604767.035434535
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 14527171.551755145,
+      "observed": 14527171.551755143
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 13250704.665464988,
+      "observed": 13250704.665464986
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 1450038.8428827866,
+      "observed": 1450038.8428827869
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 11656114.928193863,
+      "observed": 11656114.928193865
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 15590797.607563227,
+      "observed": 15590797.607563224
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1710537.0363266433,
+      "observed": 1710537.0363266435
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 15208061.050882488,
+      "observed": 15208061.05088249
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 8347030.610231632,
+      "observed": 8347030.610231631
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 14085415.565044492,
+      "observed": 14085415.565044494
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 3311764.2522540498,
+      "observed": 3311764.25225405
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 4239466.298183109,
+      "observed": 4239466.298183108
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 14720539.369210694,
+      "observed": 14720539.369210692
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 839604.6167533942,
+      "observed": 839604.6167533941
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 2242586.552323662,
+      "observed": 2242586.5523236627
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 7769289.521345744,
+      "observed": 7769289.521345743
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 8233826.002952266,
+      "observed": 8233826.0029522665
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 839604.6167533942,
+      "observed": 839604.6167533941
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 11933913.625481015,
+      "observed": 11933913.625481017
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1409393.3937093941,
+      "observed": 1409393.393709394
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 8951590.290761398,
+      "observed": 8951590.2907614
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 3846261.7037607282,
+      "observed": 3846261.7037607287
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 20910139.932318173,
+      "observed": 20910139.93231817
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 6980060.298879309,
+      "observed": 6980060.298879308
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 3950569.6855114857,
+      "observed": 3950569.685511486
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 943754.0323089297,
+      "observed": 943754.0323089296
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 2170099.4636127274,
+      "observed": 2170099.463612727
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 7919383.80006174,
+      "observed": 7919383.800061739
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 8218687.751309721,
+      "observed": 8218687.751309722
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 549228.76083533,
+      "observed": 549228.7608353299
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 2962937.9498600755,
+      "observed": 2962937.949860075
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 8177768.315734106,
+      "observed": 8177768.315734105
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 4145659.6447496335,
+      "observed": 4145659.6447496326
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 10566462.100654833,
+      "observed": 10566462.100654831
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 756150.9501739757,
+      "observed": 756150.9501739756
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1059118.8888837846,
+      "observed": 1059118.8888837849
+    },
+    {
+      "label": "Urban100.energy.14",
+      "expected": 3850320.4232230657,
+      "observed": 3850320.423223065
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 7191280.006430056,
+      "observed": 7191280.006430055
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 4116571.251440605,
+      "observed": 4116571.2514406047
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 713789.3419369506,
+      "observed": 713789.3419369507
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 945930.8573978089,
+      "observed": 945930.857397809
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 549228.76083533,
+      "observed": 549228.7608353299
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 1641156.0736555343,
+      "observed": 1641156.0736555345
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 2119655.347555977,
+      "observed": 2119655.3475559773
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 3174834.273215774,
+      "observed": 3174834.2732157735
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 1402163.518685168,
+      "observed": 1402163.5186851677
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 548737.2321954421,
+      "observed": 548737.2321954422
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 5752408.844466957,
+      "observed": 5752408.844466958
+    },
+    {
+      "label": "Urban100.energy.12",
+      "expected": 2040219.2134076753,
+      "observed": 2040219.2134076757
+    },
+    {
+      "label": "Urban100.energy.14",
+      "expected": 4030880.326747363,
+      "observed": 4030880.3267473625
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 4847825.77524622,
+      "observed": 4847825.775246221
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 6874590.48321565,
+      "observed": 6874590.483215649
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 3983328.1008974547,
+      "observed": 3983328.100897454
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 813008.1313293759,
+      "observed": 813008.131329376
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 514624.7563832676,
+      "observed": 514624.7563832677
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 1362200.51395202,
+      "observed": 1362200.5139520206
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 3859225.0062651387,
+      "observed": 3859225.006265138
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 3934601.6096117343,
+      "observed": 3934601.609611734
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 1964574.878853551,
+      "observed": 1964574.8788535509
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 1832533.905711784,
+      "observed": 1832533.9057117843
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 2576399.7798391995,
+      "observed": 2576399.779839199
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 2479880.2686453187,
+      "observed": 2479880.268645319
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 771915.5840720106,
+      "observed": 771915.5840720107
+    },
+    {
+      "label": "Urban100.energy.14",
+      "expected": 3152548.6014334,
+      "observed": 3152548.6014334005
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 3582955.1981080705,
+      "observed": 3582955.198108071
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 3128885.615612584,
+      "observed": 3128885.6156125846
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 3592415.8288010163,
+      "observed": 3592415.828801016
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 2950327.73161401,
+      "observed": 2950327.7316140104
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 1050785.4635837632,
+      "observed": 1050785.4635837635
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 893333.636169045,
+      "observed": 893333.6361690451
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 201978.1733402711,
+      "observed": 201978.17334027108
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 1532236.7096544018,
+      "observed": 1532236.709654402
+    },
+    {
+      "label": "Urban100.energy.2",
+      "expected": 3614449.800976581,
+      "observed": 3614449.8009765805
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 2441634.9484199737,
+      "observed": 2441634.948419974
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 575154.5413959416,
+      "observed": 575154.5413959415
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 351451.9007597358,
+      "observed": 351451.90075973584
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 5320477.738152896,
+      "observed": 5320477.738152897
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 2231405.250554582,
+      "observed": 2231405.2505545816
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 1615508.634883725,
+      "observed": 1615508.6348837246
+    },
+    {
+      "label": "Urban100.energy.14",
+      "expected": 2858510.927263997,
+      "observed": 2858510.9272639975
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 3643177.7823277,
+      "observed": 3643177.7823276995
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 3804556.9310282874,
+      "observed": 3804556.931028288
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 3467553.5365374093,
+      "observed": 3467553.5365374098
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 15456941.646045545,
+      "observed": 15456941.646045547
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 2630165.1428001784,
+      "observed": 2630165.142800178
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 201978.1733402711,
+      "observed": 201978.17334027108
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 329256.86389837007,
+      "observed": 329256.8638983701
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 1003696.8289818576,
+      "observed": 1003696.8289818577
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 744560.9393058682,
+      "observed": 744560.9393058683
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 1920121.3860137467,
+      "observed": 1920121.3860137465
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 3069943.7861113213,
+      "observed": 3069943.7861113218
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 3661798.8051887574,
+      "observed": 3661798.805188757
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 12101785.69809471,
+      "observed": 12101785.698094709
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 43410153.43670595,
+      "observed": 43410153.43670594
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 10137411.746945646,
+      "observed": 10137411.746945648
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 4203017.215189302,
+      "observed": 4203017.215189303
+    },
+    {
+      "label": "Urban100.energy.14",
+      "expected": 27503984.91850849,
+      "observed": 27503984.91850848
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 96835833.71086383,
+      "observed": 96835833.71086384
+    },
+    {
+      "label": "Urban100.energy.17",
+      "expected": 6674354.168055785,
+      "observed": 6674354.168055786
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 51352490.735166036,
+      "observed": 51352490.73516603
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 23783405.830278374,
+      "observed": 23783405.830278378
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 11048130.507668544,
+      "observed": 11048130.507668542
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 12369258.963078337,
+      "observed": 12369258.963078339
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 6040770.62180545,
+      "observed": 6040770.621805451
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 24623467.70917782,
+      "observed": 24623467.709177822
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 3661798.8051887574,
+      "observed": 3661798.805188757
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 8288845.103687215,
+      "observed": 8288845.103687216
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 8408706.554471705,
+      "observed": 8408706.554471707
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 32203620.060887318,
+      "observed": 32203620.06088732
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 34028996.08352599,
+      "observed": 34028996.083525985
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 1892312.0942017038,
+      "observed": 1892312.0942017036
+    },
+    {
+      "label": "Urban100.emedian",
+      "expected": 10570883.217361303,
+      "observed": 10570883.217361305
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 45088836.237373434,
+      "observed": 45088836.23737343
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 12531485.88134477,
+      "observed": 12531485.881344767
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 14740051.988609558,
+      "observed": 14740051.98860956
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 26736657.079090238,
+      "observed": 26736657.07909024
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 2078812.716723627,
+      "observed": 2078812.7167236272
+    },
+    {
+      "label": "Urban100.energy.12",
+      "expected": 9609234.502556471,
+      "observed": 9609234.502556473
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 4165264.53192416,
+      "observed": 4165264.5319241597
+    },
+    {
+      "label": "Urban100.energy.21",
+      "expected": 7171956.533110578,
+      "observed": 7171956.533110579
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 7984349.066702512,
+      "observed": 7984349.06670251
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 1892312.0942017038,
+      "observed": 1892312.0942017036
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 3422515.4653553953,
+      "observed": 3422515.465355396
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 16877332.94139001,
+      "observed": 16877332.941390008
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 2312386.3477446637,
+      "observed": 2312386.347744664
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 4509402.558363449,
+      "observed": 4509402.558363448
+    },
+    {
+      "label": "Urban100.energy.7",
+      "expected": 9997711.8812826,
+      "observed": 9997711.881282598
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 7469597.693673713,
+      "observed": 7469597.693673712
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 16291749.400739025,
+      "observed": 16291749.400739027
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 1187271.0034446034,
+      "observed": 1187271.0034446032
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 994296.5627635964,
+      "observed": 994296.5627635965
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 2891602.948384342,
+      "observed": 2891602.9483843413
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 13341342.040482061,
+      "observed": 13341342.040482063
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 683125.7475451924,
+      "observed": 683125.7475451923
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 3383269.632735709,
+      "observed": 3383269.6327357087
+    },
+    {
+      "label": "Urban100.energy.3",
+      "expected": 14263205.871197963,
+      "observed": 14263205.871197965
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 683125.7475451924,
+      "observed": 683125.7475451923
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 10860742.647151053,
+      "observed": 10860742.647151055
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 3785062.7361868564,
+      "observed": 3785062.736186857
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 7262538.045073319,
+      "observed": 7262538.04507332
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 2221989.420844931,
+      "observed": 2221989.4208449307
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 798995.4459011286,
+      "observed": 798995.4459011285
+    },
+    {
+      "label": "Urban100.energy.27",
+      "expected": 1808873.9730937206,
+      "observed": 1808873.9730937204
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 6703875.7389067,
+      "observed": 6703875.738906699
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 7064638.855534644,
+      "observed": 7064638.855534645
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 441373.0022081202,
+      "observed": 441373.00220812013
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 1460413.949419784,
+      "observed": 1460413.9494197837
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 3848783.12842758,
+      "observed": 3848783.1284275795
+    },
+    {
+      "label": "Urban100.energy.6",
+      "expected": 1947792.379034912,
+      "observed": 1947792.3790349122
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 846358.3984146996,
+      "observed": 846358.3984146997
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 3284507.7258901256,
+      "observed": 3284507.725890126
+    },
+    {
+      "label": "Urban100.energy.15",
+      "expected": 5572499.15739249,
+      "observed": 5572499.157392491
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 748173.3090152991,
+      "observed": 748173.309015299
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 9102072.08320579,
+      "observed": 9102072.083205787
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 441373.0022081202,
+      "observed": 441373.00220812013
+    },
+    {
+      "label": "Urban100.energy.26",
+      "expected": 2732047.3756369236,
+      "observed": 2732047.375636923
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 3969590.1430858723,
+      "observed": 3969590.143085872
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 395529.0361038882,
+      "observed": 395529.0361038881
+    },
+    {
+      "label": "Urban100.energy.1",
+      "expected": 2041478.0858974676,
+      "observed": 2041478.0858974673
+    },
+    {
+      "label": "Urban100.energy.4",
+      "expected": 2767088.636995258,
+      "observed": 2767088.6369952583
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 2691139.4380745776,
+      "observed": 2691139.438074578
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 4591693.439857824,
+      "observed": 4591693.439857825
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 786905.8310355478,
+      "observed": 786905.8310355479
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 2983611.377557974,
+      "observed": 2983611.3775579743
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 7146480.758544285,
+      "observed": 7146480.758544286
+    },
+    {
+      "label": "Urban100.energy.18",
+      "expected": 14544785.421326973,
+      "observed": 14544785.421326974
+    },
+    {
+      "label": "Urban100.energy.19",
+      "expected": 3254490.6583672203,
+      "observed": 3254490.65836722
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 475498.19947384926,
+      "observed": 475498.1994738492
+    },
+    {
+      "label": "Urban100.energy.23",
+      "expected": 18460812.362490132,
+      "observed": 18460812.362490136
+    },
+    {
+      "label": "Urban100.energy.24",
+      "expected": 1394478.0154861629,
+      "observed": 1394478.0154861626
+    },
+    {
+      "label": "Urban100.energy.25",
+      "expected": 395529.0361038882,
+      "observed": 395529.0361038881
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 3714293.9630137323,
+      "observed": 3714293.963013733
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 3590710.6967645376,
+      "observed": 3590710.696764538
+    },
+    {
+      "label": "Urban100.emin",
+      "expected": 327160.4987377134,
+      "observed": 327160.49873771344
+    },
+    {
+      "label": "Urban100.energy.0",
+      "expected": 1719863.106739287,
+      "observed": 1719863.1067392873
+    },
+    {
+      "label": "Urban100.energy.5",
+      "expected": 2517365.715467261,
+      "observed": 2517365.7154672607
+    },
+    {
+      "label": "Urban100.energy.8",
+      "expected": 387980.21772521076,
+      "observed": 387980.2177252107
+    },
+    {
+      "label": "Urban100.energy.9",
+      "expected": 4629309.810194844,
+      "observed": 4629309.810194843
+    },
+    {
+      "label": "Urban100.energy.10",
+      "expected": 2625218.908264434,
+      "observed": 2625218.9082644335
+    },
+    {
+      "label": "Urban100.energy.11",
+      "expected": 756833.558691981,
+      "observed": 756833.5586919811
+    },
+    {
+      "label": "Urban100.energy.12",
+      "expected": 1659008.2134001984,
+      "observed": 1659008.2134001986
+    },
+    {
+      "label": "Urban100.energy.13",
+      "expected": 3219132.6820995263,
+      "observed": 3219132.682099526
+    },
+    {
+      "label": "Urban100.energy.16",
+      "expected": 4885823.194920986,
+      "observed": 4885823.194920987
+    },
+    {
+      "label": "Urban100.energy.20",
+      "expected": 327160.4987377134,
+      "observed": 327160.49873771344
+    },
+    {
+      "label": "Urban100.energy.22",
+      "expected": 458904.807205667,
+      "observed": 458904.80720566696
+    },
+    {
+      "label": "Urban100.energy.28",
+      "expected": 2900847.067763311,
+      "observed": 2900847.0677633104
+    },
+    {
+      "label": "Urban100.energy.29",
+      "expected": 3007845.7400182984,
+      "observed": 3007845.740018298
+    }
+  ],
+  "groups": 27,
+  "pairs": 567,
+  "summary": [
+    {
+      "dataset": "Set14",
+      "groups": 9,
+      "original_strict_pass": 1,
+      "equal_strict_pass": 9,
+      "fixed_strict_pass": 9,
+      "fixed_D_below_original": 9
+    },
+    {
+      "dataset": "BSD100",
+      "groups": 9,
+      "original_strict_pass": 9,
+      "equal_strict_pass": 9,
+      "fixed_strict_pass": 9,
+      "fixed_D_below_original": 9
+    },
+    {
+      "dataset": "Urban100",
+      "groups": 9,
+      "original_strict_pass": 9,
+      "equal_strict_pass": 9,
+      "fixed_strict_pass": 7,
+      "fixed_D_below_original": 0
+    }
+  ],
+  "bootstrap": "All 2000 paired draws independently recomputed with integer multiplicity and scalar sums, all 27 group intervals checked.",
+  "hashes": {
+    "source_sha256": "8024ff69e85a7ab4ff8215352463f4e912f2d6caefba71f223b1e24ce1593482",
+    "protocol_sha256": "58b036ac84555034daa8a7353cfd5bab649c4e307a0572980dfa98c8075c5cae",
+    "results_sha256": "201c9e4271f16b306a5de58bacb9aca8228025f5e8c19e12fce08362eae4da05",
+    "audit_source_sha256": "f831ca3d6d5014c75997e828ad0b0f556ec73842950dc351747fddfbe1dec9db"
+  },
+  "cost": {
+    "wall_seconds": 2.465080666996073,
+    "cpu_seconds": 2.445122,
+    "peak_rss_bytes": 91062272,
+    "CPU_threads": 1,
+    "GPU": 0,
+    "inference": 0,
+    "training": 0
+  },
+  "scientific_limits": [
+    "Same u maps to different HR frequency supports across scales; neither per-image gap nor decomposition is isolated architecture causality.",
+    "S enters both weights and denominator; components not independent physical causes.",
+    "Target-spectrum weights use HR truth; not deployable observation-only forecasts.",
+    "Repeated seeds/models share target images and weights, not independent texture replications.",
+    "Bootstrap intervals describe resampling of frozen finite benchmark images, not universal population guarantees.",
+    "No texture/JPEG/blockiness diagnosis from radial energies alone; no original RGB or checkpoint rerun."
+  ]
+}

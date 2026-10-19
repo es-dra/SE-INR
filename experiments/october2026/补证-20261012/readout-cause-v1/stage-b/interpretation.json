@@ -1,0 +1,460 @@
+{
+  "scope": "Root descriptive consolidation of frozen complete results, no new fits/inference/threshold changes. Related finite synthetic grid, no prevalence claim.",
+  "rows_sha256": "4e0123ce36616aff1b5af15f78bb4db70113bb224a92556df40c2a9bb3fa8ce1",
+  "strata": [
+    {
+      "model": "lte",
+      "roi": "center",
+      "group": "mid_target",
+      "pairs": 32,
+      "negative_eta0": 18,
+      "negative_eta1": 32,
+      "gain_positive_to_negative": 14,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 14,
+      "delta_gain_negative": 29,
+      "delta_gain_positive": 3,
+      "delta_gain_mean": -6.725412032108791e-06,
+      "phase_both_signs_groups": 0,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -1.8960299463983716e-05,
+        -1.481033192977238e-07
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.7891622286409018,
+        -0.006282723852434994
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.03413835310433725,
+        -0.0002728466590320734
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "center",
+      "group": "high_target",
+      "pairs": 32,
+      "negative_eta0": 16,
+      "negative_eta1": 16,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 16,
+      "delta_gain_positive": 16,
+      "delta_gain_mean": 7.029682703073249e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -4.820732752153223e-06,
+        6.013878764133968e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.20117722487225534,
+        0.2501661873783434
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.008728239190778,
+        0.010878191933094139
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "center",
+      "group": "mid_RGB",
+      "pairs": 32,
+      "negative_eta0": 11,
+      "negative_eta1": 32,
+      "gain_positive_to_negative": 21,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 26,
+      "delta_gain_negative": 32,
+      "delta_gain_positive": 0,
+      "delta_gain_mean": -1.7571916175375445e-05,
+      "phase_both_signs_groups": 0,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -2.8246759148638483e-05,
+        -1.1050795485675023e-05
+      ],
+      "relative_gain_percent_range_eta1": [
+        -1.1454110218609088,
+        -0.45686588361418745
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.049461835666031954,
+        -0.019796246429166747
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "center",
+      "group": "high_RGB",
+      "pairs": 32,
+      "negative_eta0": 16,
+      "negative_eta1": 16,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 16,
+      "delta_gain_positive": 16,
+      "delta_gain_mean": 6.189785461377557e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -4.032845811713804e-06,
+        6.832286482114092e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.1682355762098761,
+        0.2840877452383576
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.0073002391614555365,
+        0.012355332327235803
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "full",
+      "group": "mid_target",
+      "pairs": 32,
+      "negative_eta0": 14,
+      "negative_eta1": 31,
+      "gain_positive_to_negative": 17,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 17,
+      "delta_gain_negative": 31,
+      "delta_gain_positive": 1,
+      "delta_gain_mean": -1.130334550496326e-05,
+      "phase_both_signs_groups": 1,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -2.6616239866522184e-05,
+        7.546479532873247e-07
+      ],
+      "relative_gain_percent_range_eta1": [
+        -1.1228158119044753,
+        0.032176624042763315
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.04849154238804638,
+        0.0013976378952103785
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "full",
+      "group": "high_target",
+      "pairs": 32,
+      "negative_eta0": 16,
+      "negative_eta1": 15,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 1,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 15,
+      "delta_gain_positive": 15,
+      "delta_gain_mean": 6.731455710356116e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -5.6433290267429714e-06,
+        9.935708340393264e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.23559336957438892,
+        0.4123722550316086
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.010219656342938244,
+        0.017946127393997962
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "full",
+      "group": "mid_RGB",
+      "pairs": 32,
+      "negative_eta0": 11,
+      "negative_eta1": 32,
+      "gain_positive_to_negative": 21,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 27,
+      "delta_gain_negative": 32,
+      "delta_gain_positive": 0,
+      "delta_gain_mean": -2.298273628391752e-05,
+      "phase_both_signs_groups": 0,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -3.892427018596222e-05,
+        -9.07136836849308e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -1.6030522452174119,
+        -0.3769637863378853
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.06906754732786705,
+        -0.016340549564996226
+      ]
+    },
+    {
+      "model": "lte",
+      "roi": "full",
+      "group": "high_RGB",
+      "pairs": 32,
+      "negative_eta0": 12,
+      "negative_eta1": 9,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 3,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 18,
+      "delta_gain_positive": 14,
+      "delta_gain_mean": 6.885181984320448e-08,
+      "phase_both_signs_groups": 5,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -4.930090264897331e-06,
+        1.0912891717905753e-05
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.2056428591886298,
+        0.4525446663429273
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.008921785532295131,
+        0.019698370798243648
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "center",
+      "group": "mid_target",
+      "pairs": 32,
+      "negative_eta0": 15,
+      "negative_eta1": 31,
+      "gain_positive_to_negative": 16,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 16,
+      "delta_gain_negative": 32,
+      "delta_gain_positive": 0,
+      "delta_gain_mean": -1.065128524856208e-06,
+      "phase_both_signs_groups": 1,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -1.875804239203152e-06,
+        6.269236658409602e-08
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.07912321539312857,
+        0.002617298905300058
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.003434918853577676,
+        0.00011366933474598664
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "center",
+      "group": "high_target",
+      "pairs": 32,
+      "negative_eta0": 17,
+      "negative_eta1": 15,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 2,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 11,
+      "delta_gain_positive": 19,
+      "delta_gain_mean": 2.333808874445593e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -9.203637365475664e-07,
+        4.7573358259419066e-07
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.038346865157481626,
+        0.019822986217419142
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.0016650639641016326,
+        0.000860986692363517
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "center",
+      "group": "mid_RGB",
+      "pairs": 32,
+      "negative_eta0": 14,
+      "negative_eta1": 29,
+      "gain_positive_to_negative": 14,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 15,
+      "delta_gain_negative": 29,
+      "delta_gain_positive": 3,
+      "delta_gain_mean": -6.629645991095869e-07,
+      "phase_both_signs_groups": 3,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -1.510654154386181e-06,
+        4.481039422798115e-07
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.0617967602974208,
+        0.01815608661489765
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.0026829702906626795,
+        0.00078858041281899
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "center",
+      "group": "high_RGB",
+      "pairs": 32,
+      "negative_eta0": 16,
+      "negative_eta1": 15,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 1,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 10,
+      "delta_gain_positive": 19,
+      "delta_gain_mean": 2.3559782053931525e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -9.040679896672038e-07,
+        4.923477728490874e-07
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.03766486634675435,
+        0.020513205133607222
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.0016354563847017375,
+        0.0008909685657964689
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "full",
+      "group": "mid_target",
+      "pairs": 32,
+      "negative_eta0": 15,
+      "negative_eta1": 23,
+      "gain_positive_to_negative": 7,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 8,
+      "delta_gain_negative": 31,
+      "delta_gain_positive": 1,
+      "delta_gain_mean": -8.406475516357383e-07,
+      "phase_both_signs_groups": 6,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -2.5552489290132582e-06,
+        1.0018459616119996e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.10717926590602168,
+        0.0427690544785526
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.004652243700532158,
+        0.0018578337529155645
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "full",
+      "group": "high_target",
+      "pairs": 32,
+      "negative_eta0": 13,
+      "negative_eta1": 13,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 12,
+      "delta_gain_positive": 15,
+      "delta_gain_mean": 2.2014234540311864e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -1.1163834028279397e-06,
+        1.014445126459266e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.04667849747543769,
+        0.042209133446809356
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.002026748396654176,
+        0.0018335063549860982
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "full",
+      "group": "mid_RGB",
+      "pairs": 32,
+      "negative_eta0": 15,
+      "negative_eta1": 19,
+      "gain_positive_to_negative": 4,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 5,
+      "delta_gain_negative": 24,
+      "delta_gain_positive": 7,
+      "delta_gain_mean": -4.5066232660908245e-07,
+      "phase_both_signs_groups": 6,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -2.4232449574355074e-06,
+        1.3991591156776832e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.09739931212368669,
+        0.058058700359072526
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.0042279397216238935,
+        0.002522189565352582
+      ]
+    },
+    {
+      "model": "sc-inr",
+      "roi": "full",
+      "group": "high_RGB",
+      "pairs": 32,
+      "negative_eta0": 13,
+      "negative_eta1": 13,
+      "gain_positive_to_negative": 0,
+      "gain_negative_to_positive": 0,
+      "alignment_positive_to_negative": 0,
+      "delta_gain_negative": 12,
+      "delta_gain_positive": 15,
+      "delta_gain_mean": 2.3853323766963004e-08,
+      "phase_both_signs_groups": 8,
+      "phase_groups": 8,
+      "gain_range_eta1": [
+        -1.0208577692306584e-06,
+        1.0944768500586663e-06
+      ],
+      "relative_gain_percent_range_eta1": [
+        -0.042659979297521536,
+        0.045516506510154736
+      ],
+      "readout_PSNR_difference_range_eta1": [
+        -0.001852304292473579,
+        0.001977206773155382
+      ]
+    }
+  ],
+  "limitations": [
+    "Target phase changes alter truth; eta0 shared y means no input-driven network phase response.",
+    "Target power equality does not imply LR power/gradient equality.",
+    "eta changes specified high-branch observation operator and input statistics jointly.",
+    "Readout gain and total reconstruction risk differ; report raw and relative effect sizes."
+  ]
+}

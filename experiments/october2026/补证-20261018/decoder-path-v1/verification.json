@@ -1,0 +1,74 @@
+{
+  "status": "completed_and_independently_audited",
+  "archive_remote_sha256": "629ddf01f67fecaa57fbe9b44f4b593a4515e58dce9f329fe14d36ef6ba218a7",
+  "files_sha256": {
+    "run.py": "e9aa79148616711ba2c5f836cb381dc1fbc6ac6a8d1f821e5d85367e6e56fac4",
+    "protocol.json": "a3f7bebeb6bd7c6c8f2089a1611151b1cf22182085b557c969d01233e84f4943",
+    "independent_audit.py": "8b5de32decc8c3a60dc47b5dba1c3957117af2f015a5c49ee5845513e9869611",
+    "independent_audit.json": "6116e187c24bebf92faae8480ca3937f8767c157be464067e5a7aff3e28e1156",
+    "descriptive_summary.py": "2ea818aaf8fe3228ec10ba20a211ac844a7c9489c0b3002cab34b30a85ed4c58",
+    "descriptive_summary.json": "37fc74af4d8596fa17beddc5de29585c947aba9beb4fec2a1faa9df79eebcc08",
+    "codex-20261018-decoder-path-originals-v1.tar": "629ddf01f67fecaa57fbe9b44f4b593a4515e58dce9f329fe14d36ef6ba218a7"
+  },
+  "focal_results": {
+    "lte": {
+      "original_flips": 14,
+      "original_mid_conditions": 32,
+      "eta1_fixed_ref_negative": 13,
+      "eta1_all_three_anchors_negative": 10,
+      "eta1_all_three_anchors_positive": 0,
+      "fixed_ref_eta0_and_eta1_negative": 8,
+      "eta1_gain_improved_by_full_vs_ref": 10,
+      "eta1_gain_worsened_by_full_vs_ref": 4,
+      "mean_full_minus_ref_gain_at_eta1": 1.4697478464462996e-06
+    },
+    "sc-inr": {
+      "original_flips": 16,
+      "original_mid_conditions": 32,
+      "eta1_fixed_ref_negative": 16,
+      "eta1_all_three_anchors_negative": 14,
+      "eta1_all_three_anchors_positive": 0,
+      "fixed_ref_eta0_and_eta1_negative": 5,
+      "eta1_gain_improved_by_full_vs_ref": 14,
+      "eta1_gain_worsened_by_full_vs_ref": 2,
+      "mean_full_minus_ref_gain_at_eta1": 4.1482012577869463e-07
+    }
+  },
+  "formal_resources": {
+    "status": "complete",
+    "wall_seconds": 410.88638162612915,
+    "script_seconds": 409.46230075205676,
+    "cpu_seconds": 408.935068,
+    "peak_rss_kib": 910140,
+    "phase_seconds": {
+      "prepare": 1.9691153429448605,
+      "inference": 400.89018285798375,
+      "score": 6.598142453934997
+    },
+    "CPU_threads": 1,
+    "nice": 10,
+    "GPU": 0,
+    "training": 0,
+    "end_epoch": 1792337115.7459998
+  },
+  "preflight_resources": {
+    "status": "complete",
+    "wall_seconds": 11.399504899978638,
+    "script_seconds": 9.862280715024099,
+    "cpu_seconds": 11.055717,
+    "peak_rss_kib": 921264,
+    "phase_seconds": {
+      "prepare": 0.22507267200853676,
+      "inference": 9.552026511984877,
+      "score": 0.0849250090541318
+    },
+    "CPU_threads": 1,
+    "nice": 10,
+    "GPU": 0,
+    "training": 0,
+    "end_epoch": 1792336651.6646738
+  },
+  "formal_parent_wall_seconds": 411.3100049495697,
+  "audit_parent_wall_seconds": 4.0627007484436035,
+  "scope": "Existing dependent controlled conditions. Fixed-mask maps retain decoder weights. Anchors and residuals may differ across eta; no pure-feature causal fraction. Independent NumPy derivatives cover 8 saved queries x4 branches per model-input; complete pixel scoring independently recomputed. Main PDF unchanged; no matching training."
+}

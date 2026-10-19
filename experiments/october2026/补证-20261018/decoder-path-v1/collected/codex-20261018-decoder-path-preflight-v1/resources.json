@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "wall_seconds": 11.399504899978638,
+  "script_seconds": 9.862280715024099,
+  "cpu_seconds": 11.055717,
+  "peak_rss_kib": 921264,
+  "phase_seconds": {
+    "prepare": 0.22507267200853676,
+    "inference": 9.552026511984877,
+    "score": 0.0849250090541318
+  },
+  "CPU_threads": 1,
+  "nice": 10,
+  "GPU": 0,
+  "training": 0,
+  "end_epoch": 1792336651.6646738
+}

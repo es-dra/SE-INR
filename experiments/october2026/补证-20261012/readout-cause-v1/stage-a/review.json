@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "checks": 24244,
+  "errors": [],
+  "max_absolute_error": 6.639133687258436e-14,
+  "rows": 512,
+  "groups": 26,
+  "full_input_hashes_checked": 195,
+  "review_source_sha256": "e2afac80bfacf550de0254ea513312002bd806248f54f1913928adf0a0807157",
+  "analysis_source_sha256": "db1fb78f2fdaa4c5fab280347eb6f793597a68dbd1f63a2c4f4177970bc2b410",
+  "protocol_sha256": "e9327b4b2376772a75d3dbb5de696477ce01cf20f522beef75293520f6de444c",
+  "wall_seconds": 0.5198291249980684,
+  "CPU_seconds": 0.480726,
+  "nice": 10,
+  "CPU_threads": 1,
+  "limitations": [
+    "Retrospective calibration only; oracle HR alignment is not observation-only prediction.",
+    "Output delta scaling is not a cell-parameter intervention.",
+    "No original model inference or checkpoint validation was performed.",
+    "Direction and overshoot are exact error geometry classifications, not causal network mechanisms."
+  ]
+}

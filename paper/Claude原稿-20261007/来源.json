@@ -1,0 +1,119 @@
+{
+  "retrieved_on": "2026-10-07 Asia/Shanghai",
+  "project": "SC-ASISR",
+  "paper_thread": "https://claude.ai/epitaxy/project/chan_01VW46txaMf4tdNbMTu7w2tQ?thread=cmsg_01VW46txaMf4tdNbMTu7w2tQNRtEP2UXyg8W5tCeW8R4bm",
+  "latest_followup_thread": "https://claude.ai/epitaxy/project/chan_01VW46txaMf4tdNbMTu7w2tQ?thread=cmsg_01VW46txaMf4tdNbMTu7w2tQFwvVZD5ZNnTiQMMYPtbPXz",
+  "method": "Downloaded original files through authenticated Claude UI; original bytes preserved. PDF text read and all 10 pages rendered. Conversation updates read through 2026-10-06; no independent rerun of their experiments.",
+  "files": [
+    {
+      "file": "main.pdf",
+      "claude_project_path": "paper/draft/main.pdf",
+      "bytes": 499784,
+      "sha256": "a3a7493ad79061299659aa3fe1ed0a4f16247161806d546100f8e465c25c3814"
+    },
+    {
+      "file": "SOURCES.md",
+      "claude_project_path": "paper/draft/SOURCES.md",
+      "bytes": 2867,
+      "sha256": "6a2936f501882c259a38eb12e873a54d12839024b99b4e7126f0f7fcf95362ed"
+    },
+    {
+      "file": "论文主线-v3-20261005-20261005T132242-4322.md",
+      "claude_project_path": "论文主线-v3-20261005-20261005T132242-4322.md",
+      "bytes": 11262,
+      "sha256": "29f70bec880f7f5864e0e6ea05628bdaaa2dad8a24a70db29b67b568e587f83d"
+    },
+    {
+      "file": "main.tex",
+      "claude_project_path": "paper/draft/main.tex",
+      "bytes": 1735,
+      "sha256": "7a9ddbb658e0131d92ddeff61f5a90532d710252588b41d0c8598ccc34a50c25",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "refs.bib",
+      "claude_project_path": "paper/draft/refs.bib",
+      "bytes": 4989,
+      "sha256": "fb23619aa26fa17641bd08102cf5cb89230fbf5fcb2536c005ab71a44adc4070",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/abstract.tex",
+      "claude_project_path": "paper/draft/sec/abstract.tex",
+      "bytes": 1893,
+      "sha256": "5e5d2892074a337267e556c6f106aa15fb20e4b00e34ec97d514d0abcec0afdf",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/appendix.tex",
+      "claude_project_path": "paper/draft/sec/appendix.tex",
+      "bytes": 834,
+      "sha256": "f4ee7692980ef2fdaf80877fdd38071477aa260112545e4a0171e289f3834ef9",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/experiments.tex",
+      "claude_project_path": "paper/draft/sec/experiments.tex",
+      "bytes": 22142,
+      "sha256": "c575af560fb70825a78c02dc7f8f711fcc1a05e72aeb6a669d9507084da98b44",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/intro.tex",
+      "claude_project_path": "paper/draft/sec/intro.tex",
+      "bytes": 4941,
+      "sha256": "b1da4d7156ef5ef66d32d6a1e4eb01c9aeef6d8f171aceec930757f7bbe8c8d5",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/limitations.tex",
+      "claude_project_path": "paper/draft/sec/limitations.tex",
+      "bytes": 2850,
+      "sha256": "dcbd013a939a9133d5bac68ffd687a4be739537f3ae169fca4d7de89363fe82b",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/related.tex",
+      "claude_project_path": "paper/draft/sec/related.tex",
+      "bytes": 3039,
+      "sha256": "b0c8ee7bac3b8a26bc81cd05f5d731615743c1f0c0f6a33176be717fc713bf8f",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/setup.tex",
+      "claude_project_path": "paper/draft/sec/setup.tex",
+      "bytes": 3602,
+      "sha256": "189a0a863b2f0c7c51f30edfc4f562f687a0238c46013e2965543d76f1d43578",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "sec/zones.tex",
+      "claude_project_path": "paper/draft/sec/zones.tex",
+      "bytes": 7550,
+      "sha256": "37dab27df38bb84c02c68d57a01bd645328cf0079ffe46eb3df8d0f19d0a5d3e",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "derivation/推导修正-v1-20261005.md",
+      "claude_project_path": "paper/derivation/推导修正-v1-20261005.md",
+      "bytes": 20672,
+      "sha256": "1197fd0615ced4036d0224e96f6641fd9ecea6a7f01db83b19aae0c7dbed2f51",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "derivation/预注册-G1.sha256",
+      "claude_project_path": "paper/derivation/预注册-G1.sha256",
+      "bytes": 125,
+      "sha256": "1b6542eb49c664142e7628cc7952b84620de8c1d0dd88a601244dfc60af276dc",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    },
+    {
+      "file": "derivation/预注册-G1-读出损失与足迹增益偏差-20261005.md",
+      "claude_project_path": "paper/derivation/预注册-G1-读出损失与足迹增益偏差-20261005.md",
+      "bytes": 3439,
+      "sha256": "548b26fec4d0d7ed34365915acea3888853f54d5967a811b9a6ebc62a61ca311",
+      "retrieved_on": "2026-10-08 Asia/Shanghai"
+    }
+  ],
+  "source_recovery": "Complete main.tex, refs.bib and all eight input sections downloaded through authenticated Claude UI on 2026-10-08; original bytes preserved."
+}

@@ -1,0 +1,122 @@
+{
+  "version": "icassp-robustness-v1",
+  "scope": "Retrospective fixed sensitivity of saved L1/G1/negative-readout-v3 outputs; not new confirmatory evidence or predictor development. No inference, fitting, training, GPU or source modification of inherited experiments.",
+  "fixed_checks": {
+    "L1": {
+      "models": [
+        "liif",
+        "lte",
+        "sc-inr"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "datasets": [
+        "Set14",
+        "BSD100",
+        "Urban100"
+      ],
+      "scales": [
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "u_bin_edges": [
+        0.25,
+        0.5,
+        0.75,
+        1,
+        1.25,
+        1.5,
+        1.75,
+        2
+      ],
+      "domains": [
+        "all seven bins",
+        "below Nyquist first3",
+        "above Nyquist last4"
+      ],
+      "absolute_control": "fixed original s=3 u/6 bins for every check, without interpolating saved rings",
+      "poolings": [
+        "sum E/sum S",
+        "unweighted mean per-image recovery"
+      ],
+      "primary_threshold_005": "retain original, not retune"
+    },
+    "G1": {
+      "groups": [
+        "LTE2",
+        "SC2",
+        "LTE3",
+        "SC3"
+      ],
+      "poolings": [
+        "original saved pooled R",
+        "new uniform image mean R"
+      ],
+      "predictor": "band indices1/2/3 tied rank; original footprint ranking exactly same",
+      "limits": "No per-image E/S, so original energy weighting cannot be independently repooled. No shifted band evaluation from G1 saved R."
+    },
+    "negative": {
+      "cohort": "12 already-scored images0825..0836 x2/x4 x LTE/SC, saved full128 predictions only",
+      "shaves": [
+        0,
+        4,
+        8
+      ],
+      "band_cutoffs": [
+        [
+          0.125,
+          0.25
+        ],
+        [
+          0.1,
+          0.2
+        ],
+        [
+          0.16666666666666666,
+          0.3333333333333333
+        ]
+      ],
+      "gain": "raw RGB MSE0-MSEnative, perRGBFFT bands exclude DC; eps1e-8",
+      "forecast_handling": "only original frozen FULL RGB policies applied unchanged to shave sensitivity; shifted bands report actual effects only, no forecasts, re-fit or criterion re-test",
+      "bootstrap": "10000 fixed-seed20261011 image clusters for fullRGB fixedpolicy deltaMSE vsnative; retrospective marginal sensitivity, not joint CI or prospective test"
+    },
+    "E3": {
+      "low": [
+        0.05,
+        0.1,
+        0.15
+      ],
+      "high": [
+        0.7,
+        0.8,
+        0.9
+      ],
+      "scope": "27 saved scalar records only, supplementary archive check; not primary contribution"
+    }
+  },
+  "cumulative_analysis_wall_budget_seconds": 600,
+  "absolute_deadline_unix": 1791728836.145004,
+  "absolute_deadline_utc": "2026-10-11T14:27:16.145005+00:00",
+  "CPU_threads": 1,
+  "nice": 10,
+  "GPU": 0,
+  "failure_handling": "retain complete failures/missing; no optimized threshold selection, no restarts that extend deadline; source revisions require new version/root"
+}

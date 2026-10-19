@@ -1,0 +1,18 @@
+[
+  {
+    "phase": "prepare",
+    "seconds": 5.785228152002674
+  },
+  {
+    "phase": "predict",
+    "seconds": 213.01393312599976
+  },
+  {
+    "phase": "forecast",
+    "seconds": 3.3498141239979304
+  },
+  {
+    "phase": "score",
+    "seconds": 0.7043308260035701
+  }
+]

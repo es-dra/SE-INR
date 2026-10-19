@@ -1,0 +1,12 @@
+{
+  "epoch": 1792336642.0272267,
+  "source_root": "/workspace/SE-INR/codex-20261012-readout-cause-preflight-v1",
+  "source_sha256": "e9aa79148616711ba2c5f836cb381dc1fbc6ac6a8d1f821e5d85367e6e56fac4",
+  "protocol_sha256": "a3f7bebeb6bd7c6c8f2089a1611151b1cf22182085b557c969d01233e84f4943",
+  "input_manifest_sha256": "b7d4f9d8edf0aa2d6b3cff2428c955f65371d86b262942f6704196b896ab9ccc",
+  "old_prediction_cohort_sha256": "2085eadb5ec3662bb7fadbc382a0dded7ab74648146388906169530f943d4326",
+  "inherited_manifest_sha256": "3eddca5eb32ea1c0d8745b1868dd37e52f35e9fcb62c5bb9b5e367164da56544",
+  "conditions": 3,
+  "observations": 3,
+  "preflight": true
+}

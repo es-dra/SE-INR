@@ -1,0 +1,6 @@
+{
+  "start_epoch": 1791768830.0740967,
+  "deadline_epoch": 1791769730.0740967,
+  "cumulative_phase_seconds": 600,
+  "scope": "fixed finite controlled cohort; no adaptation"
+}

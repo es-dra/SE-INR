@@ -1,0 +1,40 @@
+{
+  "scope": "Development geometry only; no truth/predictions read; nearest-neighbor distance alone cannot distinguish phase01/02 on discrete shave4 target",
+  "rows": [
+    {
+      "phase": "00",
+      "unique_observed_locations": 256,
+      "shave4_squared_nearest_distance_histogram": {
+        "0": 196,
+        "1": 784,
+        "2": 784,
+        "4": 392,
+        "5": 784,
+        "8": 196
+      }
+    },
+    {
+      "phase": "01",
+      "unique_observed_locations": 512,
+      "shave4_squared_nearest_distance_histogram": {
+        "0": 392,
+        "1": 1176,
+        "2": 784,
+        "4": 392,
+        "5": 392
+      }
+    },
+    {
+      "phase": "02",
+      "unique_observed_locations": 512,
+      "shave4_squared_nearest_distance_histogram": {
+        "0": 392,
+        "1": 1176,
+        "2": 784,
+        "4": 392,
+        "5": 392
+      }
+    }
+  ],
+  "CPU_wall_seconds": 0.06494129204656929
+}

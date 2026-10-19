@@ -1,0 +1,93 @@
+{
+  "id": "0802_ph00_sigma3_rbf",
+  "geometry": "0802_ph00",
+  "sigma": 3,
+  "method": "rbf",
+  "status": "complete",
+  "source_observations_sha256": "612712b197dc1e28cc76d1a6dc9c14e09e703bcaa72f0022134aad8217c29520",
+  "source_ff_checkpoint_sha256": "933ff9204707cd84fe342c0cf3868bbc38c42c1b79acc4adca94d61837ce8143",
+  "arrays_sha256": "f13ffca8a95985445b5409272bd48b258fd1d96331999983ba7e2d610df5648d",
+  "relative_true_residual": 1.949838901766591e-13,
+  "linear_response_relative_residual": 5.582626154560727e-16,
+  "condition_number": 88392.91777066284,
+  "min_cholesky_pivot": 0.014140203782168669,
+  "min_kernel_eigenvalue": -2.0909825690410203e-15,
+  "max_kernel_eigenvalue": 8.839191776881457,
+  "kernel_ranks": {
+    "1e-12": 256,
+    "1e-10": 256,
+    "1e-08": 256,
+    "1e-06": 256
+  },
+  "coverage": {
+    "horizontal": {
+      "unique_sites": 16,
+      "periodic_max_gap": 4
+    },
+    "vertical": {
+      "unique_sites": 16,
+      "periodic_max_gap": 4
+    },
+    "unique_observed_pixels": 256,
+    "n_noisy_observations": 512,
+    "nearest_observed_shave4": {
+      "metric": "Nonperiodic Euclidean distance to unique observation xy; exact squared pixel distance bins",
+      "n_target_pixels": 3136,
+      "histogram": [
+        {
+          "squared_distance_pixels": 0,
+          "distance_pixels": 0.0,
+          "distance_coordinate_units": 0.0,
+          "count": 196
+        },
+        {
+          "squared_distance_pixels": 1,
+          "distance_pixels": 1.0,
+          "distance_coordinate_units": 0.015625,
+          "count": 784
+        },
+        {
+          "squared_distance_pixels": 2,
+          "distance_pixels": 1.4142135623730951,
+          "distance_coordinate_units": 0.02209708691207961,
+          "count": 784
+        },
+        {
+          "squared_distance_pixels": 4,
+          "distance_pixels": 2.0,
+          "distance_coordinate_units": 0.03125,
+          "count": 392
+        },
+        {
+          "squared_distance_pixels": 5,
+          "distance_pixels": 2.23606797749979,
+          "distance_coordinate_units": 0.034938562148434216,
+          "count": 784
+        },
+        {
+          "squared_distance_pixels": 8,
+          "distance_pixels": 2.8284271247461903,
+          "distance_coordinate_units": 0.04419417382415922,
+          "count": 196
+        }
+      ]
+    },
+    "interpretation": "Horizontal periodic maxgap is only a geometric description; phase observation sets are nonnested and the kernel is nonperiodic. Integer shave4 phase01/02 targets can share nearest-distance histograms despite different continuous periodic maxgap; no scalar distance explanation of PSNR is claimed."
+  },
+  "model_implied_variance": {
+    "full_mean": 0.0466090814119365,
+    "shave4_mean": 0.024961636404903103,
+    "minimum": 4.998633124031482e-05,
+    "negative_entries": 0
+  },
+  "stage_wall_seconds": {
+    "kernel_seconds": 0.02703201601980254,
+    "eigen_seconds": 0.01050410300376825,
+    "cholesky_and_coefficient_seconds": 0.003634972992585972,
+    "response_and_prediction_seconds": 0.05434562498703599,
+    "posterior_variance_seconds": 0.00834504800150171,
+    "save_seconds": 0.3733269950025715
+  },
+  "total_case_wall_seconds": 0.5281760669895448,
+  "peak_rss_bytes": 693452800
+}

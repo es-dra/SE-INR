@@ -1,0 +1,86 @@
+{
+  "phase00": {
+    "chosen": "ph00_sigma3_rbf",
+    "risk": 0.01077619236473712,
+    "candidates": [
+      "ph00_sigma3_fixed_rf",
+      "ph00_sigma10_fixed_rf",
+      "ph00_sigma3_rbf",
+      "ph00_sigma10_rbf"
+    ]
+  },
+  "phase01": {
+    "chosen": "ph01_sigma3_rbf",
+    "risk": 0.00943928633801467,
+    "candidates": [
+      "ph01_sigma3_fixed_rf",
+      "ph01_sigma10_fixed_rf",
+      "ph01_sigma3_rbf",
+      "ph01_sigma10_rbf"
+    ]
+  },
+  "phase02": {
+    "chosen": "ph02_sigma3_rbf",
+    "risk": 0.0076203023924470495,
+    "candidates": [
+      "ph02_sigma3_fixed_rf",
+      "ph02_sigma10_fixed_rf",
+      "ph02_sigma3_rbf",
+      "ph02_sigma10_rbf"
+    ]
+  },
+  "rbf_sigma3": {
+    "chosen": "ph02_sigma3_rbf",
+    "risk": 0.0076203023924470495,
+    "candidates": [
+      "ph00_sigma3_rbf",
+      "ph01_sigma3_rbf",
+      "ph02_sigma3_rbf"
+    ]
+  },
+  "rbf_sigma10": {
+    "chosen": "ph02_sigma10_rbf",
+    "risk": 0.020495867798579537,
+    "candidates": [
+      "ph00_sigma10_rbf",
+      "ph01_sigma10_rbf",
+      "ph02_sigma10_rbf"
+    ]
+  },
+  "fixed_rf_sigma3": {
+    "chosen": "ph01_sigma3_fixed_rf",
+    "risk": 0.029602953801614713,
+    "candidates": [
+      "ph00_sigma3_fixed_rf",
+      "ph01_sigma3_fixed_rf",
+      "ph02_sigma3_fixed_rf"
+    ]
+  },
+  "fixed_rf_sigma10": {
+    "chosen": "ph00_sigma10_fixed_rf",
+    "risk": 0.13462280813253585,
+    "candidates": [
+      "ph00_sigma10_fixed_rf",
+      "ph01_sigma10_fixed_rf",
+      "ph02_sigma10_fixed_rf"
+    ]
+  },
+  "global": {
+    "chosen": "ph02_sigma3_rbf",
+    "risk": 0.0076203023924470495,
+    "candidates": [
+      "ph00_sigma3_fixed_rf",
+      "ph01_sigma3_fixed_rf",
+      "ph02_sigma3_fixed_rf",
+      "ph00_sigma10_fixed_rf",
+      "ph01_sigma10_fixed_rf",
+      "ph02_sigma10_fixed_rf",
+      "ph00_sigma3_rbf",
+      "ph01_sigma3_rbf",
+      "ph02_sigma3_rbf",
+      "ph00_sigma10_rbf",
+      "ph01_sigma10_rbf",
+      "ph02_sigma10_rbf"
+    ]
+  }
+}

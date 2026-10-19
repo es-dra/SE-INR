@@ -1,0 +1,50 @@
+[
+  {
+    "image": 801,
+    "scale": 2,
+    "model": "lte_seed1",
+    "seconds": 2.972571082005743
+  },
+  {
+    "image": 801,
+    "scale": 4,
+    "model": "lte_seed1",
+    "seconds": 2.7197848670184612
+  },
+  {
+    "image": 801,
+    "scale": 2,
+    "model": "sc-inr_seed1",
+    "seconds": 4.044611914025154
+  },
+  {
+    "image": 801,
+    "scale": 4,
+    "model": "sc-inr_seed1",
+    "seconds": 3.840132254001219
+  },
+  {
+    "image": 801,
+    "scale": 2,
+    "model": "lte_seed2",
+    "seconds": 2.844901171978563
+  },
+  {
+    "image": 801,
+    "scale": 4,
+    "model": "lte_seed2",
+    "seconds": 2.6845178449875675
+  },
+  {
+    "image": 801,
+    "scale": 2,
+    "model": "sc-inr_seed2",
+    "seconds": 3.9425373570411466
+  },
+  {
+    "image": 801,
+    "scale": 4,
+    "model": "sc-inr_seed2",
+    "seconds": 3.576436630974058
+  }
+]

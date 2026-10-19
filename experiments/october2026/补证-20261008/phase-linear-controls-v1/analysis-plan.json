@@ -1,0 +1,193 @@
+{
+  "schema": "phase-linear-control-preregistered-analysis-plan-v1",
+  "created_utc": "2026-10-08T05:23:18.344657+00:00",
+  "status": "analytical predictions and evaluation formulas only; prospective control not scientific contribution or confirmed effect",
+  "provenance": {
+    "read_sources": [
+      {
+        "path": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/补证-20261008/inr-phase-development-v1/protocol.json",
+        "sha256": "fca50a58768c66a3ede9c1c7c81e0f7c40f49385c16ad45005a7ba6308635261"
+      }
+    ],
+    "read_control_results": false,
+    "read_images_or_target_truth": false,
+    "GPU_launched": false,
+    "writes_only": "/Users/deepmath/Research/Image-Processing/论文工作/频谱自适应论文/补证-20261008/phase-linear-controls-v1/analysis-plan.json",
+    "no_code_protocol_body_edits": true,
+    "geometry_arithmetic_only": true
+  },
+  "scope": {
+    "reuse": "Reuse the six saved image/geometry observations from old development: images0801/0802, phases[0,0],[0,1],[0,2], two16x16 frames=512 noisy point observations per RGB channel. Same saved y and noise realization across all four linear configurations, and same preprocessing as nonlinear development.",
+    "coordinates": "64x64 points z_xy=((x+.5)/64,(y+.5)/64), x,y=0..63. y sites0,4,...,60. Frame q x sitesq,q+4,...<64. Only horizontal phase differs. Target W selects x,y=4..59 (P=56*56=3136 target pixels).",
+    "models": "sigma3/10 separately, exact RBF and seed0 finite random Fourier linear features. Fixed observation noise variance nu=1e-4, mean .5 per RGB channel, prior amplitude1. No intercept fit, no spectral adaptation, no hyperparameter selector.",
+    "primary_output": "Unclamped posterior mean for exact linear-risk decomposition. Clamped predictions may be descriptive secondary outputs only; clamp makes the fixed linear formulas inapplicable.",
+    "effect_scope": "Two previously seen images and one RF seed are development controls. No new independent natural-image test, no repeated-noise population estimate, no conference readiness or superiority claim.",
+    "completed_control_objective": "Complete the four fixed linear configurations on the same six old geometry/image records, with analytical decomposition. Further mechanism work is a separate later scope; retain conflicting orderings without declaring one universal phase superior."
+  },
+  "kernels_and_posterior": {
+    "RBF": "k_sigma(z,zprime)=exp[-2*pi^2*sigma^2*||z-zprime||^2]. This is stationary on R^2 and nonperiodic on the unit square; use ordinary Euclidean coordinate difference, no wrapping. Standard lengthscale ell=1/(2*pi*sigma).",
+    "RFF": "For exactly frozen seed0 frequencies omega_r~N(0,sigma^2 I), r1..256, Phi_sigma(z)=[cos(2*pi*omega_r^T z),sin(2*pi*omega_r^T z)]/sqrt(256). k_RF=Phi Phi^T=(1/256)sum cos(2*pi omega_r^T(z-zprime)); diagonal1 and E_omega k_RF=k_RBF. Preserve frequency arrays/hash. Same base seed gives paired draws across sigma only if the frequency construction actually scales the same base matrix.",
+    "finite_RFF_domain": "RF kernel is stationary in Euclidean displacement but generally has no common unit-square period because frequencies are not integers. Individual trigonometric components do not make the square a periodic torus. Finite256 features may induce anisotropy and approximation error.",
+    "fixed_operator": "Let Z_o be512 observed coordinates (retain duplicate rows) and Z_t the target crop. K_oo=k(Z_o,Z_o), K_to=k(Z_t,Z_o), G=K_oo+nu I, B=K_to G^-1. For all3 channels mu_hat_t=.5+B(Y-.5). Solve via Cholesky; do not form G^-1 explicitly.",
+    "primal_RFF_equivalence": "B_RF=Phi_t (Phi_o^T Phi_o+nu I)^-1 Phi_o^T=K_to(K_oo+nu I)^-1. This is exact fixed-feature ridge/Gaussian linear regression with coefficient priorI512, not a trained MLP or its full NTK.",
+    "duplicate_identity": "For phase[0,0], identical coordinates and independent per-frame noise give exact equivalence to256 unique sites, averaged observations and effective noise nu/2. This is a numerical unit identity for mean/variance/operator noise risk, not a new empirical result."
+  },
+  "analysis1_self_prior_posterior_variance": {
+    "formula": "V_t=K_tt-K_to G^-1 K_ot. Only diag(V_t) is required: v_i=k(z_i,z_i)-[B K_ot]_ii=1-sum_a B_ia K_to_ia. With Cholesky G=LL^T, T=L^-1 K_ot, v_i=1-||T[:,i]||^2. vbar=(1/P)sum_target v_i.",
+    "meaning": "Under this specific kernel as the actual Gaussian data prior and matched observation noise, vbar is the posterior expected squared error per RGB scalar of its own posterior mean, averaged over the crop. It depends on coordinates/kernel/noise and not on y; with common independent same-kernel RGB priors the channel average is identical.",
+    "critical_comparison_limit": "sigma3, sigma10 and finite RF kernels specify different data priors C_i. Comparing their own vbar is not a comparison of actual risk under one common image distribution, and cannot select a better sigma for these images. Smooth/simple priors can have low self-uncertainty while having large bias on a rough truth. Unit diagonal normalization does not make the priors equal.",
+    "observational_geometry_prediction": "For a fixed kernel, adding independent observations to a nested coordinate set cannot increase posterior variance. The three512-observation phase sets are not nested: repeated second frame is replaced by a shifted frame. Therefore no universal order among their crop-average posterior variances follows from this monotonicity.",
+    "prospective_heuristic": "For the short RBF lengthscale sigma10, phase02 has two neighboring observations around many missing columns, whereas phase01 clusters adjacent sampled columns and leaves alternating gaps1/3. Expect this to sometimes reduce self-prior variance more than phase01. This is a hypothesis, not a guaranteed ordering; vertical spacing4 remains. For sigma3 long correlations can make all geometries more predictable; do not infer common-truth superiority. Finite RF seed may depart from exact RBF.",
+    "pre_truth_analysis": "Compute/report vbar and variance maps for all four fixed models and all geometries before truth-based comparisons. Retain hypotheses even if ordering fails; do not retrospectively use lowest vbar as a validated selector."
+  },
+  "analysis2_fixed_truth_noise_risk": {
+    "notation": "X is the fixed64x64 clean RGB truth after the declared preprocessing. X_o=A X, X_t=W X. Let Z_o=X_o-.5 and Z_t=X_t-.5; observed noise E=Y-X_o. B already maps512 observations to the3136 target sites. Define a=B Z_o-Z_t and n=B E. Channels C=3.",
+    "expected_conditional_risk": "R_noise(X;B)=||a||_F^2/(P C)+nu*||B||_F^2/P. This is exact expected pixel/channel MSE over hypothetical independent Gaussian noise with this fixed X, A, B and mean. It does not require X to follow the kernel prior.",
+    "empirical_exact_decomposition": "MSE_unclamped=||a+n||_F^2/(P C)=bias2+noise2+cross, where bias2=||a||_F^2/(P C), noise2=||B E||_F^2/(P C), cross=2<a,B E>/(P C). Reconstructed MSE must match direct saved-prediction MSE; retain signed cross, including negative values.",
+    "noise_expectation": "E noise2=nu||B||_F^2/P; E cross=0. One saved noise draw may differ from expected risk, especially when a is large; measured noisy MSE cannot be treated as expected noise risk or a repeated-noise confidence interval.",
+    "cross_variance": "Var(cross)=4 nu ||B^T a||_F^2/(P^2 C^2). Var(noise2)=2 nu^2 tr[(B^T B)^2]/(P^2 C). The Gaussian cubic moment gives Cov(noise2,cross)=0, although they are generally not independent. Their sum gives Var(MSE) at fixed truth.",
+    "paired_comparison": "Across models within one geometry use identical saved E; paired differences share noise. Independent-noise variances must not be added to manufacture uncertainty on paired comparisons. Across geometries follow actual saved observation/noise provenance, not an assumed common array.",
+    "truth_boundary": "Bias and cross decompositions use HR truth only in the scoring phase, after all model/kernel settings and primary predictions are fixed. They explain these cases retrospectively; they are not a deployable truth-free selection rule.",
+    "PSNR": "Decompose MSE, not PSNR. PSNR=10log10(1/MSE) for pixel range1 is nonlinear; PSNR at expected MSE is not expected PSNR. Report per-image results and any averaging convention explicitly."
+  },
+  "geometry_specific_predictions": {
+    "periodic_gap": "For intuition on a continuous periodic horizontal axis: maxgap4 for duplicatephase00,3 forphase01,2 forphase02. Vertical maxgap4 in all. Those continuous periodic scalar gaps are not a complete descriptor of these nonperiodic kernels.",
+    "integer_crop_fact": "On the actual integer target crop4..59, phase01 andphase02 have exactly the same horizontal nearest-observation distance histogram:28 columns distance0 and28 distance1. They also have identical vertical distances and hence identical full2D nearest-Euclidean distance distribution. The distance-only statistic cannot explain any phase01/02 difference.",
+    "what_remains": "This rules out nearest-distance alone, not spatial coverage generally: two-neighbor placement, clustering, joint observation correlations K_oo, K_to leverage and spatial location of truth structure differ. Label effects according to those quantities rather than covariance-map rank or a single distance scalar.",
+    "boundaries": "Kernels use nonwrapped distances. Near domain boundaries the periodic maxgap intuition differs from actual nearest neighbors. Shave4 removes the strongest edge targets, but nonperiodic global conditioning still affects interior predictions. Do not silently wrap either kernels or the observation geometry.",
+    "empirical_coverage_vs_spectrum": "Only horizontal phase changes; the vertical grid still leaves gaps4 and aliasing. Better horizontal coverage alone does not establish full2D spectral recovery. A phase01/02 comparison is equal-cost with512 observations and512 unique sites; phase00 has512 noisy measurements but256 unique sites."
+  },
+  "common_prior_if_later_needed": {
+    "not_implemented": "This stage does not implement a new calibrated selector or expand the experimental route.",
+    "formula": "For a single common true centered second-moment matrix G_star=E[(X-.5)(X-.5)^T], shared by all models, expected risk is tr[W(B_full A-I)G_star(B_full A-I)^T W^T]/P +nu||W B_full||_F^2/P per identically weighted channel. G_star can include a nonzero mean relative to .5; Gaussianity is unnecessary for this linear second-moment identity.",
+    "calibration": "Choose a physically/methodologically justified common G_star from a separately fixed calibration image set, with identical preprocessing/coordinates/mean convention, before evaluating target truths. Fit amplitudes/spectral bins or an empirical low-rank second moment on calibration only; freeze data IDs, preprocessing, estimator, uncertainties and hashes. Use the same calibrated G_star for every candidate, not a different sigma-specific prior.",
+    "scope_limit": "Independent calibration estimates a distributional proxy; transfer to0801/0802 or future images is an assumption, not guaranteed by the formulas. Account for calibration data and computation and do not treat correlated patches or RGB channels as iid independent images. No truth-driven posthoc choice of G_star, sigma or amplitude."
+  },
+  "separating_from_covariance_identifiability": {
+    "different_problem": "The8-point study had an unknown stationary covariance family and independent Gaussian latent realizations, and asked whether observation covariance determines full risk-gap functionals. These controls plug in already known candidate kernels and reconstruct two fixed natural images; they do not estimate an unknown covariance family.",
+    "no_rank_transfer": "The8-point phase01 rank4/phase02 rank3 result depends on its tiny spectral family and sampling group. It does not transfer as a covariance identifiability fact to64x64 RBF/RFF, much less a nonlinear trained network. Both here change ordinary sample locations and kernel geometry.",
+    "coverage_explanation_gate": "If an INR phase effect is reproduced by exact RBF or fixed RF ridge together with matching bias/noise decomposition and geometry effects, that supports an ordinary sampling/kernel explanation for these cases. It does not prove a unique cause or a new identifiability mechanism. If the effect differs, inspect finite-feature approximation, optimization, nonlinear representation and target bias separately; a residual difference is not automatically evidence for an unknown-spectrum mechanism.",
+    "future_candidate_question": "A possible later question is how alias-block or joint-correlation mismatch changes full-target risk ranking, beyond covariance rank or nearest-point distance. Requires its own defined common data prior, operator-specific predictions and independent evaluation; not implemented or claimed here.",
+    "primary_research_interpretation": "This stage separates two objectives: sampling for reconstruction under a fixed assumed/known prior versus sampling to learn an unknown spectral prior or identify candidate rankings. They need not favor the same phase. The control does not seek or prove a universally best phase, and the known-kernel posterior formulas do not solve unknown-prior selection.",
+    "later_claim_gates": "Any later sampler-specific adaptation-cost or alias-block tradeoff question must define both objectives on the same operator/data family, compare equal acquisition/calibration costs, establish a nontrivial prediction beyond nearest-distance/covariance rank, and test new independently frozen cases with failures. Classical optimal experimental design, variance-component estimation and partial-identification decision theory already cover the abstract principles; a new name or isolated reversal is not novelty. No additional derivation or experiment is authorized by this analysis plan."
+  },
+  "numerical_and_cost_controls": {
+    "precision": "Prefer float64 factorization/solves and variance/noise-risk accumulation; nu fixed1e-4 makes G positive definite in exact arithmetic. Unit diagonal bounds lambda_max(Koo)<=512, so condition(G)<=1+512/nu about5.12e6. Float32 forward error can be material; report dtype and exact residual. Do not add unreported jitter or change nu to rescue a failure.",
+    "checks": "Recompute relative solve residual ||G Z-K_ot||_F/max(||K_ot||_F,tiny); target <=1e-9 in float64, preserve value and failure. Check symmetry, finite matrices/predictions, positive Cholesky diagonals, feature diagonal1 and variance in[0,1] up to stated arithmetic tolerance. Negative posterior variance beyond1e-9 is a failure, not clipped away. Tiny negatives may be rounded only in a labeled descriptive summary with raw minima retained.",
+    "identity_gate": "Duplicate-site averaging identity and kernel dual/primal RF identity are meaningful implementation checks. Direct MSE vs bias2+noise2+cross must agree to1e-10 absolute in float64, or a declared floating-scale bound; preserve failed rows. Compute all decomposition terms with the same unclamped B, saved observations and target mask.",
+    "efficient_computation": "No4096x4096 Ktt required: diagonal1 and target-to-observation blocks suffice. Compute target means/variance in blocks. G is512x512, Cholesky O(512^3); target solves O(P*512^2) dominate if all columns processed; K_to and B each P*512 float64 about12.85MB at P3136. RF features are512-dimensional; share geometry/factor across RGB.",
+    "budget_fairness": "Reuse all six observation records identically, fixed sigma3/10 and four configs; record kernel construction/factor/solve/scoring wall, peak memory and numerical failures. Include analytic bias-risk scoring cost separately because it uses truth and is unavailable at deployment. Linear controls are solved estimators, not training-budget matched nonlinearINR competitors; explain this role. No fitted bandwidth, amplitude, extra observations or selector budget is hidden.",
+    "RFF_vs_RBF": "Finite256 frequency expectation is RBF, but one sample is not exact RBF and can be anisotropic. Preserve seed/frequency hash and fixed normalization; inspect their kernel approximation only as a descriptive control. One RF seed does not estimate typical finite-feature behavior."
+  },
+  "failure_modes_and_claims": [
+    "Posterior variance lower for sigma3 but actual fixed-truth bias/risk larger: retained mismatch result, not invalid mathematics.",
+    "phase02 does not beat phase01 despite smaller continuous periodic maxgap: predicted ordering is heuristic; integer nearest distance already matches and joint correlation/boundary effects can differ.",
+    "Duplicatephase00 beats a diverse phase: possible noise averaging/local geometry tradeoff; no monotonic theorem was violated.",
+    "Unclamped decomposition disagrees with direct MSE: wrong mean/crop/channel scaling, saved observation mismatch or implementation failure; stop interpretation.",
+    "Clamped MSE is substituted in the linear decomposition: invalid analysis.",
+    "Vertical aliasing remains or noise-cross dominates one case: preserve and avoid claiming complete2D spectral recovery.",
+    "RFF and RBF differ: finite feature/kernel approximation is an available explanation, not evidence of learned-network spectral adaptation.",
+    "Single noisy realization/one RF seed/two seen images are promoted to population reliability or a validated model selector: unsupported.",
+    "Different model self-priors are compared as though they share one true risk distribution: unsupported.",
+    "Covariance rank or nearest-distance alone is used as cause: incomplete; analyze joint correlations and declared prior assumptions."
+  ],
+  "prior_work_and_novelty": {
+    "Fourier_features": "Tancik et al.2020 already used NTK kernel bandwidth to explain frequency scale in coordinate networks. Author page https://bmild.github.io/fourfeat/index.html was independently checked by parent; this plan does not claim a new bandwidth explanation.",
+    "RFF_boundary": "Fixed RFF ridge is neither the complete MLP NTK nor the kernel of the trained nonlinear network. Its role is a linear feature/kernel control. Kernel ridge/posterior variance, bias-variance-noise decomposition and sampling coverage are standard analysis tools.",
+    "status": "This control study is not a new contribution. Its value is to eliminate overly broad explanations and expose a sharper later question; no publication novelty or A-class readiness claim.",
+    "classical_coverage": "Known-prior reconstruction variance is a standard optimal-experimental-design objective; unknown covariance parameters belong to variance-component/identification theory; uncertain action ranking overlaps partial-identification decision theory. This round supplies controls and interpretation boundaries, not a claimed new abstract principle."
+  },
+  "analytic_geometry_values": [
+    {
+      "phases": [
+        0,
+        0
+      ],
+      "observations_including_duplicates": 512,
+      "unique_sites": 256,
+      "periodic_continuous_horizontal_max_gap_pixels": 4,
+      "shave4_integer_target_horizontal_nearest_distance_histogram": {
+        "0": 14,
+        "1": 28,
+        "2": 14
+      },
+      "shave4_integer_target_vertical_nearest_distance_histogram": {
+        "0": 14,
+        "1": 28,
+        "2": 14
+      },
+      "target_mean_nearest_Euclidean_distance_squared_pixels": 3.0,
+      "target_max_nearest_Euclidean_distance_pixels": 2.8284271247461903
+    },
+    {
+      "phases": [
+        0,
+        1
+      ],
+      "observations_including_duplicates": 512,
+      "unique_sites": 512,
+      "periodic_continuous_horizontal_max_gap_pixels": 3,
+      "shave4_integer_target_horizontal_nearest_distance_histogram": {
+        "0": 28,
+        "1": 28
+      },
+      "shave4_integer_target_vertical_nearest_distance_histogram": {
+        "0": 14,
+        "1": 28,
+        "2": 14
+      },
+      "target_mean_nearest_Euclidean_distance_squared_pixels": 2.0,
+      "target_max_nearest_Euclidean_distance_pixels": 2.23606797749979
+    },
+    {
+      "phases": [
+        0,
+        2
+      ],
+      "observations_including_duplicates": 512,
+      "unique_sites": 512,
+      "periodic_continuous_horizontal_max_gap_pixels": 2,
+      "shave4_integer_target_horizontal_nearest_distance_histogram": {
+        "0": 28,
+        "1": 28
+      },
+      "shave4_integer_target_vertical_nearest_distance_histogram": {
+        "0": 14,
+        "1": 28,
+        "2": 14
+      },
+      "target_mean_nearest_Euclidean_distance_squared_pixels": 2.0,
+      "target_max_nearest_Euclidean_distance_pixels": 2.23606797749979
+    }
+  ],
+  "analytic_kernel_scales": [
+    {
+      "sigma": 3,
+      "RBF_standard_lengthscale_normalized": 0.05305164769729845,
+      "RBF_standard_lengthscale_pixels": 3.3953054526271007,
+      "axis_kernel_correlation_at_d_pixels": {
+        "1": 0.9575548404311648,
+        "2": 0.8407262815149845,
+        "3": 0.6768195638626083,
+        "4": 0.49959547428354645
+      },
+      "finite_RFF_draw_is_not_an_exact_RBF": true
+    },
+    {
+      "sigma": 10,
+      "RBF_standard_lengthscale_normalized": 0.015915494309189534,
+      "RBF_standard_lengthscale_pixels": 1.0185916357881302,
+      "axis_kernel_correlation_at_d_pixels": {
+        "1": 0.6176000017753711,
+        "2": 0.1454886634865615,
+        "3": 0.01307270910061742,
+        "4": 0.00044803982323466773
+      },
+      "finite_RFF_draw_is_not_an_exact_RBF": true
+    }
+  ],
+  "revision": {
+    "previous_unfrozen_plan_sha256": "256978ef269c05b41c3883a84a11b4a0af588cab0f9896f42ee4f607ca43e7a4",
+    "reason": "parent narrows research interpretation to known-prior reconstruction versus unknown-prior/candidate-selection objectives; no new calculation or control-result access"
+  }
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.012338687405118329,
+    "actual_expected_raw_gap": -0.02789205053287965,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.020467124116648413,
+    "actual_expected_raw_gap": -0.018542670497766485,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.028952278573223925,
+    "actual_expected_raw_gap": -0.008580790500315598,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma3_fixed_rf",
+    "calibration_gap": -0.00017565271284881306,
+    "actual_expected_raw_gap": 0.0010371087718379565,
+    "calibration_sign": -1,
+    "actual_sign": 1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.0006219315464596649,
+    "actual_expected_raw_gap": -0.019017372303613122,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.009107086003035177,
+    "actual_expected_raw_gap": -0.009055492306162233,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.000797584259308478,
+    "actual_expected_raw_gap": -0.02005448107545108,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0801",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.00928273871588399,
+    "actual_expected_raw_gap": -0.01009260107800019,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph00_sigma10_rbf",
+    "calibration_gap": 0.012338687405118329,
+    "actual_expected_raw_gap": -0.041533274473970025,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.020467124116648413,
+    "actual_expected_raw_gap": -0.03007694249776948,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph00_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.028952278573223925,
+    "actual_expected_raw_gap": -0.016332223815266694,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.0006219315464596649,
+    "actual_expected_raw_gap": -0.03614092690514016,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph01_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.009107086003035177,
+    "actual_expected_raw_gap": -0.022396208222637368,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph01_sigma10_rbf",
+    "calibration_gap": 0.000797584259308478,
+    "actual_expected_raw_gap": -0.03573518997931174,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  },
+  {
+    "image": "0802",
+    "arm_a": "ph02_sigma3_fixed_rf",
+    "arm_b": "ph02_sigma10_rbf",
+    "calibration_gap": 0.00928273871588399,
+    "actual_expected_raw_gap": -0.021990471296808953,
+    "calibration_sign": 1,
+    "actual_sign": -1,
+    "opposing": true
+  }
+]

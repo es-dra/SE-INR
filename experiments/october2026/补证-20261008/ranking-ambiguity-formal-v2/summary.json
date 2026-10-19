@@ -1,0 +1,124 @@
+{
+  "cohort_size": 1920,
+  "complete": true,
+  "groups": {
+    "[[0], 32]": {
+      "cases": 160,
+      "certified": 0,
+      "coverage": 0.95,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.029968987620888,
+      "static_regret_mean": 0.9966143829437115
+    },
+    "[[0], 128]": {
+      "cases": 160,
+      "certified": 0,
+      "coverage": 0.975,
+      "false_certificates": 0,
+      "eb_regret_mean": 0.9968684726035942,
+      "static_regret_mean": 0.9966143829437115
+    },
+    "[[0], 512]": {
+      "cases": 160,
+      "certified": 0,
+      "coverage": 0.96875,
+      "false_certificates": 0,
+      "eb_regret_mean": 0.9881530905520247,
+      "static_regret_mean": 0.9966143829437115
+    },
+    "[[0, 0], 32]": {
+      "cases": 160,
+      "certified": 0,
+      "coverage": 0.9625,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.0287297339263395,
+      "static_regret_mean": 1.0125106061540972
+    },
+    "[[0, 0], 128]": {
+      "cases": 160,
+      "certified": 0,
+      "coverage": 0.9875,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.0045397810428582,
+      "static_regret_mean": 1.0125106061540974
+    },
+    "[[0, 0], 512]": {
+      "cases": 160,
+      "certified": 0,
+      "coverage": 0.975,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.0043374046717957,
+      "static_regret_mean": 1.0125106061540976
+    },
+    "[[0, 1], 32]": {
+      "cases": 160,
+      "certified": 15,
+      "coverage": 0.9375,
+      "false_certificates": 0,
+      "eb_regret_mean": 0.006114631075214642,
+      "static_regret_mean": 2.0774465636256383
+    },
+    "[[0, 1], 128]": {
+      "cases": 160,
+      "certified": 40,
+      "coverage": 0.9625,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.6653345369377347e-17,
+      "static_regret_mean": 2.0774465636256387
+    },
+    "[[0, 1], 512]": {
+      "cases": 160,
+      "certified": 42,
+      "coverage": 0.925,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.5265566588595904e-17,
+      "static_regret_mean": 2.0774465636256387
+    },
+    "[[0, 1, 2, 3], 32]": {
+      "cases": 160,
+      "certified": 20,
+      "coverage": 0.9625,
+      "false_certificates": 0,
+      "eb_regret_mean": 0.0004138080781543362,
+      "static_regret_mean": 0.04095566038200319
+    },
+    "[[0, 1, 2, 3], 128]": {
+      "cases": 160,
+      "certified": 40,
+      "coverage": 0.95625,
+      "false_certificates": 0,
+      "eb_regret_mean": 2.463307335887066e-17,
+      "static_regret_mean": 0.04095566038200319
+    },
+    "[[0, 1, 2, 3], 512]": {
+      "cases": 160,
+      "certified": 40,
+      "coverage": 0.94375,
+      "false_certificates": 0,
+      "eb_regret_mean": 1.8388068845354155e-17,
+      "static_regret_mean": 0.04095566038200319
+    }
+  },
+  "certificate_population_regret_tolerance": 1e-06,
+  "confidence_set_coverage": 0.9588541666666667,
+  "certified": 197,
+  "false_certificates": 0,
+  "selection_interval_status_counts": {
+    "empty": 33,
+    "ok": 1887
+  },
+  "exact_interval_status_counts": {
+    "ok": 64
+  },
+  "numerical_checks_pass": true,
+  "max_primal_witness_residual": 8.881784197001252e-15,
+  "max_expanded_duality_gap": 2.0564088387686752e-07,
+  "LP_calls": 11739,
+  "total_wall_seconds": 18.662725687026978,
+  "selection_lp_calls": 11355,
+  "selection_lp_seconds": 11.054326600686181,
+  "exact_lp_calls": 384,
+  "exact_lp_seconds": 0.3559039222309366,
+  "selection_seconds_sum": 13.538271240831818,
+  "interpretation": "Synthetic conditional-family check only; no same-y adaptive risk, natural-image reliability, method novelty or A-conference readiness claim."
+}

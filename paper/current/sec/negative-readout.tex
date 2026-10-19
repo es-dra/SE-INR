@@ -1,0 +1,73 @@
+\subsection{Observation-only prediction of harmful readout}\label{app:negative-readout}
+\paragraph{Falsifiable hypothesis.}
+A readout change can harm reconstruction either because it points away from the target or because its squared magnitude exceeds the improvement from alignment. The previous truth-based decomposition does not predict this direction. For a target proxy $b=B(y)$ and fixed outputs $p=F_0(y)$, $h=F_c(y)$, let $d=h-p$. We test the observable forecast
+\[
+ \widehat G=2\operatorname{mean}[(b-p)d]-\operatorname{mean}(d^2).
+\]
+For the raw actual gain $G=\operatorname{MSE}(p,t)-\operatorname{MSE}(h,t)$,
+\[
+ G-\widehat G=2\operatorname{mean}[(t-b)d].
+\]
+These are classical quadratic identities, not a new risk estimate. In particular, a small proxy error alone is insufficient if it couples to $d$. Our falsifiable prediction is that proxy alignment adds sign information beyond band, scale and magnitude/spectrum features, and that its use reduces the full-RGB loss of a policy choosing native versus zero-cell output.
+
+\paragraph{Calibration and prospective comparison.}
+We freeze DIV2K training images 0001--0032 for calibration and validation images 0825--0836 for evaluation, using centre HR128 crops, bicubic antialiased LR at $\times2/4$, no injected noise, and the same inherited LTE/SC epoch-1000 weights. The evaluation images were not scored in our earlier continuation cohorts; this does not establish that they were globally unseen during the inherited model development. Native square cell $1/128$ and zero-cell queries share LR, weights and centres. HR is the original discrete target. The proxy is raw bicubic upsampling of LR, not inversion of a box operator. All errors are unclipped RGB; a four-pixel shave gives a $120\times120$ region. Three per-channel Fourier bands use Chebyshev radius $[0,1/8),[1/8,1/4),[1/4,.5001)$, excluding DC; full-RGB loss includes DC and is scored separately. The normaliser $Z$ is the cropped proxy's mean channel-centred variance, floored at $10^{-8}$, never test truth energy.
+
+Controls are always enabling/disabling the change, a calibration scale/band median, change energy alone, and a calibrated norm/spectrum ridge. This ridge uses scale/band indicators, log-normalised change/reference/proxy energy, LR gradient, spectral centroid and entropy. A directional ridge adds just the signed proxy-alignment feature to the same basis. Both use calibration-only standardisation, unpenalised intercept and fixed ridge penalty one, without hyperparameter search. The two candidates are the unfitted proxy forecast and directional ridge; neither is selected post-test. Calibration truth fits coefficients only, with no SR network optimisation. All evaluation predictions, coefficients and forecasts are SHA-frozen before evaluation truth is opened for scoring. Preparation necessarily reads HR to form LR; the freeze documents prediction/scoring order, not absence of all historical truth access.
+
+\paragraph{Predetermined decision criteria.}
+Raw effects with $|G|\le10^{-8}$ remain in the ledger but do not enter sign rates. Each model has 72 correlated band scores and 24 full-RGB decisions from 12 images. A candidate needs at least 12 negative rows spanning six images, negative recall $\ge.75$, precision $\ge.6$, false-positive rate $\le.25$, and balanced accuracy at least $.05$ above every control. Every paired image-cluster bootstrap interval must have positive lower bound for this accuracy difference. A full-RGB policy uses native output only for a positive forecast; its paired MSE reduction must likewise have positive lower bound against every control. Both classification and policy requirements must pass. We retain all 10,000 fixed-seed resamples, including undefined class denominators. These marginal intervals are not a simultaneous 95\% guarantee, and correlated bands/scales do not increase the independent image count. The forecaster needs both decoded outputs, so its cost includes that additional query rather than claiming pre-inference guidance.
+
+\paragraph{Equal-observation diagnostic.}
+Sixteen fixed axis-aligned periodic pairs use $n=16$ with low frequency $k=3,5$, or $n=32$ with $k=9,13$, on both axes and phases $0,\pi/4$. The high member has frequency $n-k$, amplitude $.25$ and phase $\pi-\phi$; the low member has amplitude $.25k/(n-k)$ and phase $\phi$. Their input box averages coincide, and one float32 observation and model inference serve both truths. The observable periodic proxy divides principal-mode input sinc transfer and applies each target's sinc transfer, retaining midpoint phases and dropping Nyquist rows/columns. Targets are square $1/64$ and $2/64$ footprints. Thus each pair has an identical forecast, while its scored effects need not coincide. Actual sign reversals are not guaranteed or used to select pairs; unchanged signs are retained. In general $Av=0$ changes the gain by $2\operatorname{mean}[(Q_hv)d]$, so spectral ambiguity alone need not imply ambiguity of this particular decision. This is a task-specific diagnostic, not an all-estimator impossibility theorem.
+
+\begin{table*}[t]\centering\small
+\caption{Complete prospective sign comparison. LTE has only one negative band row in one image; SC has 14 in nine images. All 72 rows per model are active. TP/negative is harmful-effect recall; FP/positive is rejection of useful changes. BA is balanced accuracy and normalised MAE uses observable $Z$. These dependent rows do not constitute 72 independent images. Neither candidate passes.}\label{tab:negative-sign}
+\begin{tabular}{llrrrrr}\toprule
+Model & Forecast & TP/negative & FP/positive & Precision & BA & MAE/$Z$\\\midrule
+LTE & Enable & 0/1 & 0/71 & -- & 0.500 & -- \\
+LTE & Disable & 1/1 & 71/71 & 0.014 & 0.500 & -- \\
+LTE & Band median & 0/1 & 0/71 & -- & 0.500 & 0.00556 \\
+LTE & Energy only & 1/1 & 71/71 & 0.014 & 0.500 & 0.01152 \\
+LTE & Norm/spectrum ridge & 1/1 & 11/71 & 0.083 & 0.923 & 0.00187 \\
+LTE & Proxy & 1/1 & 57/71 & 0.017 & 0.599 & 0.01599 \\
+LTE & Directional ridge & 1/1 & 11/71 & 0.083 & 0.923 & 0.00192 \\
+SC & Enable & 0/14 & 0/58 & -- & 0.500 & -- \\
+SC & Disable & 14/14 & 58/58 & 0.194 & 0.500 & -- \\
+SC & Band median & 0/14 & 0/58 & -- & 0.500 & 0.00206 \\
+SC & Energy only & 14/14 & 58/58 & 0.194 & 0.500 & 0.00420 \\
+SC & Norm/spectrum ridge & 6/14 & 15/58 & 0.286 & 0.585 & 0.00117 \\
+SC & Proxy & 4/14 & 15/58 & 0.211 & 0.514 & 0.00341 \\
+SC & Directional ridge & 6/14 & 17/58 & 0.261 & 0.568 & 0.00124 \\
+\bottomrule\end{tabular}\end{table*}
+
+\paragraph{Complete held-out results.}
+The two candidates pass zero of four model/candidate combined gates. SC supplies 14 harmful band effects across nine images, meeting the denominator requirement, yet proxy recall is 4/14, precision 4/19 and BA $.51355$. Norm/spectrum ridge attains 6/14, 6/21 and $.58498$; adding alignment retains 6/14, raises false positives from 15 to 17, and lowers BA to $.56773$. Its paired BA difference versus norm/spectrum ridge has bootstrap interval $[-.16667,.14286]$. Directional MAE is $.001245$ versus $.001169$ for norm/spectrum features alone. Thus this directional feature does not show incremental prediction. LTE has only one harmful band effect and no harmful full-RGB effect; its 3562/10,000 class-deficient resamples are retained. Its directional and norm/spectrum classification decisions coincide. This cohort cannot certify LTE negative-effect generalisation.
+
+\begin{table*}[t]\centering\small
+\caption{All full-RGB policies on 24 correlated image/scale decisions per model. Raw MSE is multiplied by $10^3$. Mean per-case PSNR difference is relative to always enabling native readout; this differs from transforming pooled MSE. No candidate policy passes all comparison intervals.}\label{tab:negative-policy}
+\begin{tabular}{llrrr}\toprule
+Model & Policy & Mean MSE $\times10^3$ & Mean $\Delta$PSNR (dB) & Disable count\\\midrule
+LTE & Enable & 4.080753 & +0.000000 & 0/24 \\
+LTE & Disable & 4.662668 & -0.879729 & 24/24 \\
+LTE & Band median & 4.080753 & +0.000000 & 0/24 \\
+LTE & Energy only & 4.662668 & -0.879729 & 24/24 \\
+LTE & Norm/spectrum ridge & 4.082702 & -0.080751 & 3/24 \\
+LTE & Proxy & 4.662668 & -0.879729 & 24/24 \\
+LTE & Directional ridge & 4.082702 & -0.080751 & 3/24 \\
+SC & Enable & 4.142177 & +0.000000 & 0/24 \\
+SC & Disable & 4.342272 & -0.407224 & 24/24 \\
+SC & Band median & 4.142177 & +0.000000 & 0/24 \\
+SC & Energy only & 4.342272 & -0.407224 & 24/24 \\
+SC & Norm/spectrum ridge & 4.142158 & +0.000078 & 1/24 \\
+SC & Proxy & 4.129060 & -0.004669 & 5/24 \\
+SC & Directional ridge & 4.144702 & -0.004237 & 3/24 \\
+\bottomrule\end{tabular}\end{table*}
+
+SC has five harmful full-RGB effects among 24 decisions. The proxy slightly reduces pooled MSE from $.00414218$ to $.00412906$, but its paired reduction interval versus always enabling is $[-6.81\times10^{-6},4.78\times10^{-5}]$, crossing zero; mean per-case PSNR instead changes by $-.004669$dB. Directional ridge increases MSE to $.00414470$. For LTE the proxy disables all 24 beneficial changes, reducing mean PSNR by $.879729$dB. A high harmful-effect recall alone therefore is not a useful control policy. Full numerical ledgers retain each image, scale and band rather than conditioning on successful decisions.
+
+\paragraph{Actual ambiguity and interpretation.}
+There are 27 active low/high sign reversals among 64 fixed model/footprint pairs: nine LTE and eighteen SC, from 16 shared inputs. The analytic observation-pair discrepancy is at most $2.44\times10^{-15}$, and the low-target proxy error at most $4.86\times10^{-8}$, including float32 observation rounding. For SC with $n=16,k=3$, vertical phase-zero input and footprint $2/64$, the same observable forecast is $+2.14955\times10^{-7}$: the low truth has gain $+2.14958\times10^{-7}$, but the aliased high truth has $-3.47008\times10^{-6}$. Forecasts cannot distinguish these identical observations without extra assumptions. This specific task/weights counterexample does not say every ambiguous spectrum reverses the decision or that no prior-dependent average-risk selector can help. The natural-image proxy failure and periodic-box ambiguity have different forward models; they are not interchangeable validation evidence.
+
+\paragraph{Full cost and preserved failures.}
+The formal run completes all 104 observations and 208 prediction files, with 512 calibration rows, 192 evaluation rows and 128 alias-truth scores. Forecast cohort SHA is frozen before test scoring. It takes 224.192 seconds including launch, with preparation/inference/forecast/scoring costs $5.785/213.014/3.350/.704$ seconds; 5,865,472 RGB queries, CPU user/system $215.174/8.830$ seconds, RSS 1534.1MiB, one CPU thread and nice 10. GPU use and SR training are zero. Calibration coefficients are ordinary ridge fits, not decoder training. A 5.056-second initial calibration-only preflight passes; a four-thread CPU crash before the first completed prediction is retained with no full resource record (fixed 120-second ceiling), then a distinct 7.048-second single-thread preflight passes. The root cause of the crash is not established. No matched training follows the failed gates. The diagnostic identifies a boundary and a failed incremental feature, leaving a reliable readout-loss predictor unsupported \src{NEGATIVE-READOUT-20261011}.
