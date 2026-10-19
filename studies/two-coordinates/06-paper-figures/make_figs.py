@@ -1,0 +1,95 @@
+"""Paper figures from frozen run outputs (read-only). Writes fig1_recovery.pdf, fig2_cell.pdf, numbers.json."""
+import json, collections, glob, sys, numpy as np, torch, torch.nn.functional as F
+import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+from PIL import Image
+RUNS = '/workspace/SE-INR/runs'
+plt.rcParams.update({'font.size': 8, 'axes.titlesize': 8, 'axes.labelsize': 8, 'legend.fontsize': 6.5, 'lines.linewidth': 1.2})
+COL = {2: '#1b6ca8', 3: '#2a9d8f', 4: '#e9a03b', 6: '#c8553d'}
+def load(p, key=('model', 'seed', 's', 'lo')):
+    A = collections.defaultdict(collections.Counter); T = collections.Counter()
+    for r in json.load(open(p)):
+        k = tuple(r[x] for x in key); A[k].update(r['err']); T[k] += r['tgt']
+    return A, T
+A2, T2 = load(f'{RUNS}/claude-20261019-two-coordinates-v2/formal/rows.json', ('model', 's', 'lo'))
+R = lambda A, T, k: 1 - A[k]['1.0']/T[k]
+# bicubic R_lin on the same cohort
+H = 240; SH = 4; N = H-2*SH; f = np.fft.fftfreq(N); RR = np.maximum(abs(f[:, None]), abs(f[None, :]))
+def spec(x): return np.fft.fft2(x.astype('float64')[SH:H-SH, SH:H-SH], axes=(0, 1))
+BL = collections.Counter(); BT = collections.Counter()
+for p in sorted(glob.glob('/workspace/SE-INR/Data/DIV2K_valid_HR/*.png')):
+    if not 869 <= int(p[-8:-4]) <= 900: continue
+    im = Image.open(p).convert('RGB'); w, h = im.size; l, t = (w-H)//2, (h-H)//2
+    x = np.asarray(im.crop((l, t, l+H, t+H)), dtype='float32')/255; T = spec(x); xt = torch.from_numpy(x.transpose(2, 0, 1))[None]
+    for s in (2, 3, 4, 6):
+        y = F.interpolate(xt, size=(H//s,)*2, mode='bicubic', align_corners=False, antialias=True).clamp(0, 1)
+        up = F.interpolate(y, size=(H, H), mode='bicubic', align_corners=False)[0].numpy().transpose(1, 2, 0); S = spec(up)
+        u = 2*s*RR
+        for lo in np.arange(0, s, .25):
+            mk = (u >= lo) & (u < lo+.25) & (RR > 0); BL[(s, lo)] += (abs(T[mk]-S[mk])**2).sum(); BT[(s, lo)] += (abs(T[mk])**2).sum()
+num = {}
+fig, ax = plt.subplots(1, 3, figsize=(7.0, 2.1))
+for s in (2, 3, 4, 6):
+    us = np.arange(0, s, .25)
+    rn = [np.mean([R(A2, T2, (m, s, float(b))) for m in ['liif', 'lte', 'sc-inr']]) for b in us]
+    rl = [1 - BL[(s, b)]/BT[(s, b)] for b in us]
+    ax[0].plot(us+.125, rn, '-', color=COL[s], label=f'×{s} network'); ax[0].plot(us+.125, rl, ':', color=COL[s])
+    num[f'Rnet_x{s}'] = dict(zip([f'{b:.2f}' for b in us], map(float, rn))); num[f'Rlin_x{s}'] = dict(zip([f'{b:.2f}' for b in us], map(float, rl)))
+ax[0].axvline(1, color='k', lw=.6, ls='--'); ax[0].set_xlim(0, 4); ax[0].set_xlabel('u = ν / ν_LR'); ax[0].set_ylabel('band recovery R(u)')
+ax[0].set_title('(a) recovery vs u'); ax[0].legend(frameon=False, loc='upper right')
+# (b) decoder spread at x4 incl. GaussianSR
+Ag, Tg = load(f'{RUNS}/claude-20261019-encoder-v3/formal_gs/rows.json', ('model', 's', 'lo'))
+us = np.arange(0, 4, .25)
+for m, lab, c in [('liif', 'LIIF', '#1b6ca8'), ('lte', 'LTE', '#2a9d8f'), ('sc-inr', 'SC-INR', '#e9a03b')]:
+    ax[1].plot(us+.125, [R(A2, T2, (m, 4, float(b))) for b in us], color=c, label=lab)
+ax[1].plot(us+.125, [R(Ag, Tg, ('gaussiansr', 4, float(b))) for b in us], color='#c8553d', ls='--', label='GaussianSR')
+ax[1].axvline(1, color='k', lw=.6, ls='--'); ax[1].set_xlabel('u'); ax[1].set_title('(b) four decoders, ×4'); ax[1].legend(frameon=False)
+# (c) what training / encoder change: epoch100 - epoch1000 (seed1), and RDN-EDSR if available
+A1, T1 = load(f'{RUNS}/claude-20261019-two-coordinates-v2/formal/rows.json')
+for s in (2, 3, 4):
+    us = np.arange(0, s if s < 4 else 4, .25)
+    de = []
+    for b in us:
+        v = []
+        for m in ['liif', 'lte', 'sc-inr']:
+            Ae, Te = load(f'{RUNS}/claude-20261019-prior-v4/early_{m}/rows.json', ('model', 's', 'lo')) if False else (None, None)
+        de.append(None)
+EA = {m: load(f'{RUNS}/claude-20261019-prior-v4/early_{m}/rows.json', ('model', 's', 'lo')) for m in ['liif', 'lte', 'sc-inr']}
+for s in (2, 3, 4):
+    us = np.arange(0, s, .25)
+    d = [np.mean([(1-EA[m][0][(m, s, float(b))]['1.0']/EA[m][1][(m, s, float(b))]) - R(A1, T1, (m, 1, s, float(b))) for m in ['liif', 'lte', 'sc-inr']]) for b in us]
+    ax[2].plot(us+.125, -np.array(d), color=COL[s], label=f'×{s} training 100→1000 ep')
+    num[f'dR_training_x{s}'] = dict(zip([f'{b:.2f}' for b in us], map(float, -np.array(d))))
+enc = glob.glob('/workspace/SE-INR/claude-20261019-encoder-train-v5/eval_rdn/rows.json') + glob.glob(f'{RUNS}/claude-20261019-encoder-train-v5/eval_rdn/rows.json')
+if enc:
+    base = enc[0].replace('eval_rdn', 'eval_edsr'); Ar, Tr = load(enc[0], ('s', 'lo')); Ae, Te = load(base, ('s', 'lo'))
+    for s in (2, 3, 4):
+        us = np.arange(0, s, .25)
+        ax[2].plot(us+.125, [R(Ar, Tr, (s, float(b))) - R(Ae, Te, (s, float(b))) for b in us], color=COL[s], ls='--', label=f'×{s} RDN − EDSR' if s == 4 else None)
+ax[2].axvline(1, color='k', lw=.6, ls='--'); ax[2].axhline(0, color='k', lw=.4); ax[2].set_xlabel('u'); ax[2].set_ylabel('ΔR'); ax[2].set_title('(c) what training/encoder adds'); ax[2].legend(frameon=False, fontsize=6)
+fig.tight_layout(); fig.savefig('fig1_recovery.pdf'); fig.savefig('fig1_recovery.png', dpi=200)
+# Fig 2
+tr = {tuple(eval(k)): np.array(v) for k, v in json.load(open(f'{RUNS}/claude-20261019-cell-mismatch-v1/transfer.json')).items()}
+fig, ax = plt.subplots(1, 3, figsize=(7.0, 2.1))
+for s in (2, 3, 4, 6):
+    rb = [b for b in range(16) if tr.get(('lte', s, '2.0', b)) is not None and tr[('lte', s, '2.0', b)][1] > 0]
+    ax[0].plot([b/32+1/64 for b in rb], [tr[('lte', s, '2.0', b)][0]/tr[('lte', s, '2.0', b)][1] for b in rb], color=COL[s], label=f'×{s}')
+ax[0].set_xlabel('r (cycles / HR pixel)'); ax[0].set_ylabel('w(r)'); ax[0].set_title('(a) transfer of cell×2 (LTE)'); ax[0].legend(frameon=False)
+A2s, T2s = load(f'{RUNS}/claude-20261019-two-coordinates-v2/formal/rows.json', ('model', 's', 'lo'))
+for s in (2, 3, 4, 6):
+    nat = sum(A2s[k]['1.0'] for k in A2s if k[0] == 'lte' and k[1] == s); Hh = collections.Counter()
+    for b in np.arange(0, s, .25): k = ('lte', s, float(b)); Hh[int(b/(2*s)/0.0625+1e-9)] += 100*(A2s[k]['2.0']-A2s[k]['1.0'])/nat
+    ax[1].plot([i*0.0625+0.03125 for i in range(8)], [Hh[i] for i in range(8)], 'o-', ms=2.5, color=COL[s], label=f'×{s}')
+ax[1].set_xlabel('r (cycles / HR pixel)'); ax[1].set_ylabel('cost of cell×2 (% native MSE)'); ax[1].set_title('(b) where the cost lands'); ax[1].legend(frameon=False)
+cd = {}
+for m, c in [('liif', '#1b6ca8'), ('lte', '#2a9d8f'), ('sc-inr', '#e9a03b')]:
+    y = []
+    for s in (2, 3, 4, 6):
+        n = sum(A2s[k]['1.0'] for k in A2s if k[0] == m and k[1] == s); d2 = sum(A2s[k]['2.0'] for k in A2s if k[0] == m and k[1] == s)
+        h = sum(A2s[k]['0.5'] for k in A2s if k[0] == m and k[1] == s); y.append((10*np.log10(d2/n), 10*np.log10(h/n)))
+    cd[m] = y
+    ax[2].plot([2, 3, 4, 6], [a for a, b in y], 'o-', ms=2.5, color=c, label=f'{m.upper()} cell×2')
+    ax[2].plot([2, 3, 4, 6], [b for a, b in y], 's:', ms=2.5, color=c)
+ax[2].set_xlabel('scale'); ax[2].set_ylabel('PSNR loss (dB)'); ax[2].set_title('(c) cost vs scale'); ax[2].legend(frameon=False)
+num['cell_cost_db'] = cd
+fig.tight_layout(); fig.savefig('fig2_cell.pdf'); fig.savefig('fig2_cell.png', dpi=200)
+json.dump(num, open('numbers.json', 'w'), indent=1); print('ok')
