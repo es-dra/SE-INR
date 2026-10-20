@@ -44,7 +44,7 @@ for m, lab, c in [('liif', 'LIIF', '#1b6ca8'), ('lte', 'LTE', '#2a9d8f'), ('sc-i
 ax[1].plot(us+.125, [R(Ag, Tg, ('gaussiansr', 4, float(b))) for b in us], color='#c8553d', ls='--', label='GaussianSR')
 ax[1].axvline(1, color='k', lw=.6, ls='--'); ax[1].set_xlabel('u'); ax[1].set_title('(b) four decoders, ×4'); ax[1].legend(frameon=False)
 # (c) what changes R(u): all at x4, differences in R
-V5 = '/workspace/SE-INR/claude-20261019-encoder-train-v5'; V7 = '/workspace/SE-INR/claude-20261020-swinir-v7'
+V5 = '/workspace/SE-INR/runs/claude-20261019-encoder-train-v5'; V7 = '/workspace/SE-INR/runs/claude-20261020-swinir-v7'
 A1, T1 = load(f'{RUNS}/claude-20261019-two-coordinates-v2/formal/rows.json')
 EA = {m: load(f'{RUNS}/claude-20261019-prior-v4/early_{m}/rows.json', ('model', 's', 'lo')) for m in ['liif', 'lte', 'sc-inr']}
 us = np.arange(0, 4, .25); s = 4
@@ -60,7 +60,7 @@ pair(f'{V5}/eval_tinydec/rows.json', f'{V5}/eval_edsr/rows.json', '2×64 − 4×
 ax[2].axvline(1, color='k', lw=.6, ls='--'); ax[2].axhline(0, color='k', lw=.4); ax[2].set_xlabel('u'); ax[2].set_ylabel('ΔR (×4)'); ax[2].set_title('(c) what changes R(u)'); ax[2].legend(frameon=False, fontsize=5.5, loc='lower left')
 fig.tight_layout(); fig.savefig('fig1_recovery.pdf'); fig.savefig('fig1_recovery.png', dpi=200)
 # Fig 2
-tr = {tuple(eval(k)): np.array(v) for k, v in json.load(open('/workspace/SE-INR/claude-20261020-transfer-v11/transfer_v11.json')).items()}
+tr = {tuple(eval(k)): np.array(v) for k, v in json.load(open('/workspace/SE-INR/runs/claude-20261020-transfer-v11/transfer_v11.json')).items()}
 fig, ax = plt.subplots(1, 3, figsize=(7.0, 2.1))
 for s in (2, 3, 4, 6):
     rb = [b for b in range(16) if all(tr[(m, s, '2.0', b)][1] > 0 for m in ['liif', 'lte', 'sc-inr'])]

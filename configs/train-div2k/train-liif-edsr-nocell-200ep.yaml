@@ -44,7 +44,7 @@ train_dataset:
     args:
       cache: in_memory
       repeat: 20
-      root_path: /workspace/SE-INR/Data/DIV2K_train_HR
+      root_path: Data/DIV2K_train_HR
     name: image-folder
   wrapper:
     args:
@@ -60,7 +60,7 @@ val_dataset:
       cache: in_memory
       first_k: 10
       repeat: 160
-      root_path: /workspace/SE-INR/Data/DIV2K_valid_HR
+      root_path: Data/DIV2K_valid_HR
     name: image-folder
   wrapper:
     args:

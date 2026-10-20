@@ -1,0 +1,9 @@
+torch>=2.0
+torchvision
+numpy
+pillow
+pyyaml
+tqdm
+scipy
+matplotlib
+timm  # SwinIR encoder only

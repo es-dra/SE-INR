@@ -5,3 +5,7 @@ from . import mlp
 from . import liif
 from . import lte
 from . import sc_inr_adaptive
+try:
+    from . import swinir  # needs timm
+except ImportError:
+    pass

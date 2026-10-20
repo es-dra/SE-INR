@@ -1,1 +1,0 @@
-server: research-175:/workspace/SE-INR/claude-20261020-swinir-v7

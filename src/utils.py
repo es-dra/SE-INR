@@ -2,13 +2,9 @@ import os
 import time
 import shutil
 import math
-import scipy.io as sio    
 import torch
 import numpy as np
 from torch.optim import SGD, Adam
-from skimage import io
-#from tensorboardX import SummaryWriter
-import pytorch_ssim
 
 
 class Averager():
@@ -167,19 +163,26 @@ def calc_ssim(sr, hr, dataset=None, scale=1, rgb_range=1):
 
     sr = sr[..., shave:-shave, shave:-shave]
     hr = hr[..., shave:-shave, shave:-shave]
+    import pytorch_ssim  # optional dependency, only needed for SSIM
     ssim = pytorch_ssim.ssim(sr.detach().cpu(),hr.detach().cpu())
     return ssim
 
 def save_results(filename, iterm_save):
-            tensor_cpu = (iterm_save*255).byte().permute(1, 2, 0).cpu()
-            io.imsave(('{}.png'.format(filename)), tensor_cpu) 
-            
+    from skimage import io  # optional dependency
+    tensor_cpu = (iterm_save*255).byte().permute(1, 2, 0).cpu()
+    io.imsave('{}.png'.format(filename), tensor_cpu)
+
+
 def save_results_mat(filename, iterm_save):
-            tensor_cpu = iterm_save.permute(1, 2, 0).cpu().numpy()
-            sio.savemat(('{}.mat'.format(filename)), {'sr':tensor_cpu}) 
-                
+    import scipy.io as sio  # optional dependency
+    tensor_cpu = iterm_save.permute(1, 2, 0).cpu().numpy()
+    sio.savemat('{}.mat'.format(filename), {'sr': tensor_cpu})
+
+
 def save_psnr(save_path, psnr_all):
-    sio.savemat(('{}.mat'.format(save_path)), {'psnr_all':psnr_all}) 
+    import scipy.io as sio  # optional dependency
+    sio.savemat('{}.mat'.format(save_path), {'psnr_all': psnr_all})
+
 
 def create_gaussian_kernel(kernel_size: int, sigma: float):
     # 检查kernel_size是否为奇数

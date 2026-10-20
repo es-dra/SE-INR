@@ -1,1 +1,0 @@
-server: research-175:/workspace/SE-INR/runs/claude-20261020-theory-check (exploratory, not pre-registered)
