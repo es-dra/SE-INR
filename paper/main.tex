@@ -40,9 +40,9 @@ That cell inputs can occasionally hurt is already known~\cite{liu2021ipe}. Our c
 \textbf{Measurements.} After a 4-pixel shave, errors are split by Chebyshev FFT radius into $u$-bins of width $0.25$. Then $R(u)=1-\mathrm{MSE}_u/E_u$, with $E_u$ the target energy in the bin. The cell sweep multiplies the native cell by $m\in[\tfrac12,2]$ (11 values).
 
 \section{Recovery lives in $u$}
-Fig.~\ref{fig:rec}a shows $R(u)$ for four scales. Below the LR Nyquist limit ($u<1$) networks and bicubic interpolation both recover most energy. Between $u=0.75$ and $2$ the network recovers far more: at $u=1$, $0.68$ versus $0.20$ for bicubic; at $u=1.5$, $0.36$ versus $0.04$. Curves at different scales nearly coincide, but only approximately. Bicubic interpolation collapses in $u$ as well, so the collapse itself mainly reflects approximately scale-invariant image statistics and a degradation defined in LR coordinates. What matters below is which parts of the network can move the curve. Our frozen tolerance (spread $\le0.05$) held in 45/54 cases; the misses sit in the $\times2$ bin closest to the HR Nyquist limit.
+Fig.~\ref{fig:rec}a shows $R(u)$ for four scales. Below the LR Nyquist limit ($u<1$) networks and bicubic interpolation both recover most energy. Between $u=0.75$ and $2$ the network recovers far more: at $u=1$, $0.68$ versus $0.20$ for bicubic; at $u=1.5$, $0.36$ versus $0.04$. Curves at different scales nearly coincide, but only approximately. Bicubic interpolation collapses in $u$ as well, so the collapse itself mainly reflects approximately scale-invariant image statistics and a degradation defined in LR coordinates. What matters below is which parts of the network can move the curve. Our frozen tolerance (spread $\le0.05$) held in 45/54 crop cases and in 53/72 full-image cases; the misses concentrate near the HR Nyquist limit at $\times2$.
 
-\emph{Decoders do not move $R(u)$.} On a shared EDSR-baseline encoder, LIIF, LTE, SC-INR and GaussianSR differ by at most $0.010$ in every bin (18/18 and 18/18; Fig.~\ref{fig:rec}b). Correspondingly, their PSNR differs by only $0.03$--$0.06$\,dB, shrinking from $\times2$ to $\times6$.
+\emph{Decoders do not move $R(u)$.} On a shared EDSR-baseline encoder, LIIF, LTE, SC-INR and GaussianSR differ by at most $0.010$ in every bin (18/18 and 18/18; Fig.~\ref{fig:rec}b). Correspondingly, their PSNR differs by only $0.03$--$0.06$\,dB, shrinking from $\times2$ to $\times6$. On full Set14, BSD100 and Urban100 images the four decoders stay within $0.019$ in every bin $u\in[0.5,2)$ (54/54), and all of them exceed bicubic by $0.31$--$0.59$ at $u\in[1,1.25)$.
 
 \emph{Training and capacity do.} Between epoch 100 and 1000, $R(u)$ rises by up to $0.045$ for $u\ge1$ (12/12 bins). It is unchanged below $u<0.75$ ($\le0.008$; 9/9; Fig.~\ref{fig:rec}c). With decoder and recipe fixed, an RDN encoder raises $R(u)$ by up to $0.053$ for $u\ge1$ (12/12) and leaves $u<0.75$ unchanged (9/9). A SwinIR encoder does the same at an equal 50 epochs (12/12, 9/9; Fig.~\ref{fig:rec}c). External checkpoints (RDN-BTC, official EDSR) underperformed under our degradation and are not used as encoder evidence.
 
@@ -103,8 +103,9 @@ Before training we froze three design predictions (Table~\ref{tab:budget}). (D2)
 \label{tab:gates}
 \begin{tabular}{p{5.3cm}r}\toprule
 Prediction & Outcome\\\midrule
-$R(u)$ spread across scales $\le0.05$ & 45/54 \textbf{fail}\\
+$R(u)$ spread across scales $\le0.05$ & 45/54, 53/72 \textbf{fail}\\
 decoders within 0.03 (four decoders) & 18/18, 18/18\\
+\quad same, full benchmark images & 54/54\\
 training raises only $u\ge1$ & 12/12; 9/9\\
 cell$\times2$ cost peaks at $r\in[0.19,0.375)$ & 36/36 (LIIF family)\\
 cost $\sim$ recovered energy ($\rho\ge0.7$) & 0.77--0.78\\
@@ -123,7 +124,7 @@ encoder gain $>$ decoder loss (D3) & pass\\\bottomrule
 \end{table}
 
 \section{Limitations and conclusion}
-We study bicubic degradation, centre crops, convolutional and Transformer encoders and LIIF-style training. The $u$-collapse is approximate. The filter model of the cell holds for large mismatch only. Its frequency locus is specific to decoder families. Within these limits, ASISR gains lie in what the network learns above the LR Nyquist limit, and learned capacity, not decoder form, sets that prior. The cell is an HR-frequency control whose reach is the recovered energy at the frequencies it filters. Eq.~\eqref{eq:law} therefore tells in advance at which scales a new cell or footprint design can matter: only where $R(2sr)$ is still substantial at the frequencies the design changes.
+We study bicubic degradation, centre crops (full images for the decoder test), convolutional and Transformer encoders and LIIF-style training. The $u$-collapse is approximate. The filter model of the cell holds for large mismatch only. Its frequency locus is specific to decoder families. Within these limits, ASISR gains lie in what the network learns above the LR Nyquist limit, and learned capacity, not decoder form, sets that prior. The cell is an HR-frequency control whose reach is the recovered energy at the frequencies it filters. Eq.~\eqref{eq:law} therefore tells in advance at which scales a new cell or footprint design can matter: only where $R(2sr)$ is still substantial at the frequencies the design changes.
 
 \bibliographystyle{IEEEbib}
 \bibliography{refs}

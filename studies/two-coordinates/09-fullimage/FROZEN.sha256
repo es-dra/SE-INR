@@ -3,3 +3,6 @@ d5d9905853447d49e045aab1179085f9655253f25df09c5763a0c1fc1c2305df  run_full.py
 58f5e7605cbd7e198992356e67dea018e2050c1fc62379a3b1ca123b91eba041  score_v9.py
 745374f68084e0fa096da54b944de17d4f4753be312c8ba907ea530667bdb0a8  launch.sh
 Tue Oct 20 04:55:37 UTC 2026
+9a47b447177df33477f5dfd41f30e2b6a905bfc22df080bd8c1d191a610fcb36  gs_retry.sh
+amendment: GaussianSR rerun with cuDNN disabled after CUDNN_STATUS_NOT_SUPPORTED on full images; gates unchanged
+Tue Oct 20 05:52:38 UTC 2026
