@@ -25,6 +25,10 @@ Notation: `s` = scale, `r` = HR frequency (cycles/HR pixel, Chebyshev radius), `
 | 05b decoder budget | 2×64 decoder; no cell input | D1 small decoder ≤0.05 dB loss at ×4+ | **fail**: −0.14 to −0.20 dB at all scales, only u≥0.75 |
 | | | D2 no-cell loss decays, ≤0.03 dB at ×4+ | **fail (narrow)**: −0.09/−0.03/−0.04/−0.00 dB |
 | | | D3 encoder gain > decoder loss | pass (0.23 vs 0.15 dB at ×4) |
-| 07 SwinIR encoder | LIIF + SwinIR vs EDSR at equal 50 epochs (eval crop fix, amendment 3) | S1–S3 | pass 12/12, 9/9, pass (+0.17/+0.18/+0.12/+0.07 dB); training continues to 200 |
+| 07 SwinIR encoder | LIIF + SwinIR vs EDSR at equal 50 epochs (eval crop fix, amendment 3) | S1–S3 | pass 12/12, 9/9, pass (+0.17/+0.18/+0.12/+0.07 dB); epoch 200: pass 12/12, 9/9, pass (+0.41/+0.32/+0.26/+0.25 dB) |
+| 08 seed-2 replication | all matched arms, seed 2 | K1–K3 | pass 11/12; 12/12, 9/9; 12/12, 9/9 |
+| 09 full images | Set14/BSD100/Urban100 full | F1 decoder invariance; F2 collapse; F3 bicubic gap | pass 54/54; **fail** 53/72; pass |
+| 11 transfer replication | DIV2K, three decoders | W1–W3 | pass 9/9, 6/6, 105/105 |
+| 12 Gaussian-blur degradation | EDSR/RDN/no-cell retrained | G1–G4 (capacity acts where linear recovery is incomplete) | running |
 
 Transfer-function analysis (`01-cell-mismatch/transfer.py`): the cell acts approximately as an HR-frequency low-pass on the native output, `P_m ≈ w_m(r)·P_1`, whose shape is nearly scale-independent. For m = 2, `(1−w)²|P_1|²` ranks per-band cost with Spearman 0.86–0.91 and accounts for 70–77% of it. For small mismatch (m = 4/3) the first-order cross-term dominates and the filter model does not hold.

@@ -55,7 +55,7 @@ def pair(pa, pb, lab, c, ls):
     v = [R(Aa, Ta, (s, float(b))) - R(Ab, Tb, (s, float(b))) for b in us]; num['dR_'+lab] = list(map(float, v))
     ax[2].plot(us+.125, v, color=c, ls=ls, label=lab)
 pair(f'{V5}/eval_rdn/rows.json', f'{V5}/eval_edsr/rows.json', 'RDN − EDSR encoder', '#1b6ca8', '-')
-pair(f'{V7}/eval50_swinir/rows.json', f'{V5}/interim50_edsr/rows.json', 'SwinIR − EDSR (50 ep)', '#2a9d8f', '--')
+pair(f'{V7}/eval200_swinir/rows.json', f'{V5}/eval_edsr/rows.json', 'SwinIR − EDSR encoder', '#2a9d8f', '--')
 pair(f'{V5}/eval_tinydec/rows.json', f'{V5}/eval_edsr/rows.json', '2×64 − 4×256 decoder', '#c8553d', ':')
 ax[2].axvline(1, color='k', lw=.6, ls='--'); ax[2].axhline(0, color='k', lw=.4); ax[2].set_xlabel('u'); ax[2].set_ylabel('ΔR (×4)'); ax[2].set_title('(c) what changes R(u)'); ax[2].legend(frameon=False, fontsize=5.5, loc='lower left')
 fig.tight_layout(); fig.savefig('fig1_recovery.pdf'); fig.savefig('fig1_recovery.png', dpi=200)

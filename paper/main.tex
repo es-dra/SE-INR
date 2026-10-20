@@ -87,14 +87,14 @@ The two coordinates meet here: the cell supplies a filter in $r$, the network su
 \section{What is a lever}
 \label{sec:lever}
 \begin{table}[t]\centering\small
-\caption{Matched LIIF training (200 epochs, mean of two seeds): PSNR change (dB) relative to the EDSR-baseline LIIF. All 95\% image-bootstrap intervals exclude zero except those marked $^{\circ}$. $^\dagger$One seed, equal 50 epochs.}
+\caption{Matched LIIF training (200 epochs, mean of two seeds): PSNR change (dB) relative to the EDSR-baseline LIIF. All 95\% image-bootstrap intervals exclude zero except those marked $^{\circ}$. $^\dagger$One seed.}
 \label{tab:budget}
 \begin{tabular}{lcccc}\toprule
 Change & $\times2$ & $\times3$ & $\times4$ & $\times6$\\\midrule
 decoder MLP $2\times64$ & $-0.21$ & $-0.17$ & $-0.13$ & $-0.11$\\
 no cell input & $-0.10$ & $-0.03^{\circ}$ & $-0.02^{\circ}$ & $-0.00^{\circ}$\\
 RDN encoder & $+0.30$ & $+0.23$ & $+0.23$ & $+0.18$\\
-SwinIR encoder$^\dagger$ & $+0.17$ & $+0.18$ & $+0.12$ & $+0.07$\\\bottomrule
+SwinIR encoder$^\dagger$ & $+0.41$ & $+0.32$ & $+0.26$ & $+0.25$\\\bottomrule
 \end{tabular}
 \end{table}
 Table~\ref{tab:budget} tests the consequences by retraining. Removing the cell input costs 0.10\,dB at $\times2$, where the doubled-cell probe showed large leverage. From $\times3$ on its effect is indistinguishable from zero, as Eq.~\eqref{eq:law} predicts. Stronger encoders help at all scales. Before training we had also predicted that a much smaller decoder MLP would be harmless at large scales. That failed: it costs 0.11--0.21\,dB at every scale in both seeds, again only for $u\gtrsim0.75$ (Fig.~\ref{fig:rec}c). The decoder MLP thus stores part of the above-Nyquist prior. The accurate reading is that decoder \emph{form} is not a lever, since four designs give identical $R(u)$, while learned capacity is, wherever it sits.

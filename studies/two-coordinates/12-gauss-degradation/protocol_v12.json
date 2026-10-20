@@ -1,0 +1,10 @@
+{"version":"claude-20261021-gaussdeg-v12",
+ "question":"Generality of the account under a second degradation. Hypothesis refined from the bicubic results: learned capacity acts where linear (bicubic) recovery is incomplete, not at a fixed u. Under a Gaussian-blur degradation (sigma = 0.6 s HR px, then bicubic resize without anti-aliasing) linear recovery is incomplete already below the LR Nyquist limit, so capacity should act there too.",
+ "training":"LIIF 200 epochs, seed 1, recipe of v5 with the wrapper replaced by sr-implicit-downsampled-gauss (train and val). Arms: edsr, rdn, edsr-nocell.",
+ "eval":"run_v3 with the LR made by the same gauss_down; DIV2K 0869-0900 centre 240; cell sweep.",
+ "predictions_frozen_before_training":{
+  "G1_where":"Across u-bins in [0,2) at x2,3,4: bins with RDN-minus-EDSR dR > 0.005 coincide with bins where the bicubic-upsampling R(u) under this degradation is < 0.9; agreement >= 80% of bins.",
+  "G2_below_nyquist":"RDN-minus-EDSR dR > 0.005 in at least one bin with u < 0.75 at each of x2,3,4 (capacity acts below Nyquist when linear recovery is incomplete there).",
+  "G3_encoder_gain":"RDN PSNR gain over EDSR > 0 at x2,3,4,6.",
+  "G4_cell":"no-cell PSNR loss at x2 exceeds that at x4 and x6, and is <= 0.05 dB at x4 and x6."},
+ "compute":"GPU0 A800: rdn; GPU1 A800: edsr then nocell (shared with other users' jobs)."}
