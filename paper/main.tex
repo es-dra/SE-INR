@@ -1,131 +1,131 @@
-% Draft 2026-10-20 (results filled from frozen runs).
+% Submission draft, 2026-10-20. Format: IEEE SPS conference (4 pages + 1 page of references).
 \documentclass{article}
 \usepackage{spconf,amsmath,amssymb,graphicx,booktabs}
 \usepackage[T1]{fontenc}
 \usepackage{times}
 \usepackage{microtype}
-\usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
-\newcommand{\pending}[1]{\textcolor{red}{[#1]}}
 \title{Recovery Lives in $u$, Conditioning Acts in $r$:\\
 Where Arbitrary-Scale Super-Resolution Gains Come From}
 \name{Anonymous authors}
-\address{Draft for internal review}
+\address{Anonymous institution}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution (ASISR) networks pair an image encoder with an implicit decoder that also receives the target pixel size (cell). Decoder and cell designs have multiplied, yet their gains shrink at large scales. We explain this with two frequency coordinates. Measured per band, recovery is a function of frequency normalised by the low-resolution Nyquist limit, $u$. It is the same for four decoder designs on a shared encoder (within 0.01). Training and a stronger encoder raise it only for $u\ge 1$. The cell, in contrast, acts on the output as a low-pass in high-resolution frequency $r$. For large mismatch, its cost is predicted by the recovered energy at the frequencies it attenuates. Because a fixed $r$ moves to larger $u$ as scale grows, where little is recovered, the cell's leverage vanishes. Doubling the cell costs 2.1--2.5\,dB at $\times2$, 0.13\,dB at $\times4$ and at most 0.03\,dB at $\times6$. All tests were pre-registered with frozen predictions; failed predictions are reported. Matched training over two seeds confirms that a stronger encoder (RDN, SwinIR) raises recovery only above the LR Nyquist limit (+0.07 to +0.30\,dB) and that removing the cell costs 0.10\,dB at $\times2$ but nothing measurable from $\times3$ on. Decoder \emph{design} barely matters, whereas cutting decoder \emph{capacity} costs 0.11--0.21\,dB at every scale, which contradicts our frozen prediction.
+Arbitrary-scale super-resolution (ASISR) networks pair an image encoder with an implicit decoder that also receives the target pixel size, the \emph{cell}. Decoder and cell designs keep multiplying, yet their gains shrink at large scales. We explain this with two frequency coordinates. Per-band recovery is a function of frequency normalised by the low-resolution (LR) Nyquist limit, $u$. Four decoder designs on a shared encoder give the same recovery to within 0.02, on crops and on full benchmark images. Longer training, a stronger encoder (RDN, SwinIR) and a larger decoder MLP raise recovery only for $u\gtrsim0.75$. The cell, by contrast, acts on the output as a low-pass filter in high-resolution frequency $r$. From the orthogonality principle we derive that its cost is the recovered energy it filters away. A fixed $r$ moves to larger $u$ as the scale grows, where little has been recovered, so the cell's leverage vanishes. Doubling the cell costs 2.3\,dB at $\times2$, 0.13\,dB at $\times4$ and nothing measurable at $\times6$. Removing the cell input from training costs 0.10\,dB at $\times2$ and is indistinguishable from zero from $\times3$ on. All predictions were registered before the experiments, and we report those that failed.
 \end{abstract}
 \begin{keywords}
 Arbitrary-scale super-resolution, implicit neural representation, frequency analysis, scale conditioning
 \end{keywords}
 
 \section{Introduction}
-LIIF~\cite{chen2021liif} reconstructs an image at continuous coordinates. It decodes local encoder features together with the query offset and the target cell size. Many decoders followed: LTE's local Fourier estimator~\cite{lee2022lte}, integrated positional encoding~\cite{liu2021ipe}, attention-based decoders~\cite{cao2023ciaosr}, neural operators~\cite{wei2023srno}, Gaussian splatting~\cite{hu2024gaussiansr} and filtered heat fields~\cite{becker2025thera}. A recent benchmark reports saturation, with gains predictable from model complexity, compute and data~\cite{nasir2026empirical}. A spectral decoder with a learned global bandwidth also reports leads that shrink at large scales without explaining them~\cite{shad2026gblsr}. Frequency analyses describe low-pass behaviour~\cite{fsds2024}, probe responses~\cite{kawai2026frequency} or scale anchoring~\cite{wang2026scaleanchoring}. They do not say \emph{where} a decoder or the cell can still change the output, or why that space disappears as the scale grows.
+\label{sec:intro}
+LIIF~\cite{chen2021liif} reconstructs an image at continuous coordinates by decoding local encoder features together with the query offset and the target cell size. Many decoders have followed: local Fourier estimators~\cite{lee2022lte}, integrated positional encoding~\cite{liu2021ipe}, implicit attention~\cite{cao2023ciaosr}, neural operators~\cite{wei2023srno}, Gaussian splatting~\cite{hu2024gaussiansr} and filtered heat fields~\cite{becker2025thera}. Their gains are small. A recent benchmark reports saturation, with improvements that follow model size, compute and data rather than decoder form~\cite{nasir2026empirical}. A spectral decoder reports leads over strong baselines that vanish at large scales, without an explanation~\cite{shad2026gblsr}. Frequency analyses of SR networks characterise low-pass behaviour~\cite{fsds2024} and sinusoidal responses~\cite{kawai2026frequency}, and study how frequency representations transfer across resolutions~\cite{wang2026scaleanchoring}. None of them locates \emph{where} in frequency a decoder or the cell can still change the output, or why that room shrinks with scale.
 
-We answer with two coordinates. For scale $s$ and HR frequency $r$ (cycles per HR pixel), let $u=2sr$ be the frequency relative to the LR Nyquist limit. Our claims are:
+We answer with two coordinates. For scale $s$ and HR frequency $r$ (cycles per HR pixel), $u=2sr$ is the frequency relative to the LR Nyquist limit. We make three claims.
 \begin{enumerate}
-\item \textbf{Recovery lives in $u$.} Per-band recovery $R(u)$ is nearly scale-independent and decoder-independent. Training, encoder capacity and decoder capacity change it only above $u\approx0.75$; decoder design does not.
-\item \textbf{Conditioning acts in $r$.} Changing the cell multiplies the native output by an approximately scale-independent low-pass $w(r)$. Its cost is bounded by the recovered energy at those $r$, so the cell's leverage decays with scale.
-\item \textbf{Consequence.} The cell input can be dropped at large scales, and decoder design is not a lever. The capacity that learns the above-Nyquist prior, whether in the encoder or in the decoder MLP, is. We test this with matched training.
+\item \textbf{Recovery lives in $u$.} Per-band recovery $R(u)$ does not depend on decoder design. What moves it is learned capacity (training time, encoder or decoder MLP), and only above $u\approx0.75$.
+\item \textbf{Conditioning acts in $r$.} Changing the cell filters the native output by an approximately scale-independent low-pass $w(r)$. Its cost equals the recovered energy at the filtered frequencies (Eq.~\eqref{eq:law}), so the cell's leverage decays with scale.
+\item \textbf{Consequences.} At $\times3$ and above, the cell input can be removed at no measurable cost. Decoder form is not a lever, whereas capacity is, wherever it sits.
 \end{enumerate}
-That cell inputs can occasionally hurt is already known~\cite{liu2021ipe}. Our contribution is a quantitative account of where any decoder- or cell-side change can act at all. Every experiment followed a frozen protocol (code, predictions and scoring hashed before results); Table~\ref{tab:gates} lists outcomes, including failures.
+That the cell input can sometimes hurt is known~\cite{liu2021ipe}. Our contribution is a quantitative account of where decoder- and cell-side changes can act at all. Each experiment fixed its code, predictions and scoring before running; Table~\ref{tab:gates} lists every outcome.
 
 \section{Setup}
-\textbf{Models.} LIIF, LTE and SC-INR (an LTE-derived variant whose cell enters through an analytic sinc weight) share an EDSR-baseline encoder~\cite{lim2017edsr} and the LIIF training recipe (DIV2K~\cite{agustsson2017div2k}, scales $\mathcal U(1,4)$, 1000 epochs, three seeds). We add GaussianSR~\cite{hu2024gaussiansr} (EDSR-baseline encoder) and RDN-BTC~\cite{zhang2018rdn,pak2023btc}. For matched comparisons we train LIIF for 200 epochs with an identical recipe and EDSR-baseline, RDN or SwinIR~\cite{liang2021swinir} encoders, a reduced decoder ($2\times64$ MLP) or no cell input.
+\label{sec:setup}
+\textbf{Models.} LIIF, LTE~\cite{lee2022lte} and SC-INR (an LTE variant whose cell enters through an analytic sinc weight) share an EDSR-baseline encoder~\cite{lim2017edsr} and the LIIF recipe: DIV2K~\cite{agustsson2017div2k}, scales drawn from $\mathcal U(1,4)$, 1000 epochs, three seeds. GaussianSR~\cite{hu2024gaussiansr} adds a fourth decoder on the same encoder. For matched comparisons we retrain LIIF for 200 epochs with one recipe, changing only one component: an RDN~\cite{zhang2018rdn} or SwinIR~\cite{liang2021swinir} encoder, a smaller decoder MLP ($2\times64$ instead of $4\times256$), or no cell input.
 
-\textbf{Data and degradation.} Fresh DIV2K valid 0869--0900 (never used in this project), Set14~\cite{zeyde2010single}, BSD100~\cite{martin2001database} and Urban100~\cite{huang2015urban}. We take centre $240^2$ crops and bicubic anti-aliased downsampling at $\times\{2,3,4,6\}$; $\times6$ lies outside training support.
+\textbf{Data.} We use DIV2K validation images 0869--0900, not used for any model selection, and full Set14~\cite{zeyde2010single}, BSD100~\cite{martin2001database} and Urban100~\cite{huang2015urban}. LR inputs come from anti-aliased bicubic downsampling at $\times\{2,3,4,6\}$; $\times6$ lies outside the training range. Unless stated otherwise we evaluate centre $240^2$ crops.
 
-\textbf{Measurements.} After a 4-pixel shave, errors are split by Chebyshev FFT radius into $u$-bins of width $0.25$. Then $R(u)=1-\mathrm{MSE}_u/E_u$, with $E_u$ the target energy in the bin. The cell sweep multiplies the native cell by $m\in[\tfrac12,2]$ (11 values).
+\textbf{Measures.} After a 4-pixel shave, the error and the target spectrum are split by Chebyshev frequency radius into $u$-bins of width $0.25$. We define $R(u)=1-\mathrm{MSE}_u/E_u$, where $E_u$ is the target energy in the bin. To probe the cell, we multiply the native cell by $m\in[\frac12,2]$ at fixed input and query.
 
 \section{Recovery lives in $u$}
-Fig.~\ref{fig:rec}a shows $R(u)$ for four scales. Below the LR Nyquist limit ($u<1$) networks and bicubic interpolation both recover most energy. Between $u=0.75$ and $2$ the network recovers far more: at $u=1$, $0.68$ versus $0.20$ for bicubic; at $u=1.5$, $0.36$ versus $0.04$. Curves at different scales nearly coincide, but only approximately. Bicubic interpolation collapses in $u$ as well, so the collapse itself mainly reflects approximately scale-invariant image statistics and a degradation defined in LR coordinates. What matters below is which parts of the network can move the curve. Our frozen tolerance (spread $\le0.05$) held in 45/54 crop cases and in 53/72 full-image cases; the misses concentrate near the HR Nyquist limit at $\times2$.
+\label{sec:u}
+Below the LR Nyquist limit, networks and bicubic interpolation both recover nearly everything (Fig.~\ref{fig:rec}a). The networks' advantage lies in $0.75\lesssim u\lesssim2$: at $u=1$, $R=0.68$ against $0.20$ for bicubic; at $u=1.5$, $0.36$ against $0.04$. Curves for different scales nearly coincide. This is partly generic: bicubic interpolation collapses in $u$ too, reflecting roughly scale-invariant image statistics and a degradation defined on the LR grid. The collapse is also only approximate (Table~\ref{tab:gates}, first row). Our claims therefore rest on which components can \emph{move} $R(u)$.
 
-\emph{Decoders do not move $R(u)$.} On a shared EDSR-baseline encoder, LIIF, LTE, SC-INR and GaussianSR differ by at most $0.010$ in every bin (18/18 and 18/18; Fig.~\ref{fig:rec}b). Correspondingly, their PSNR differs by only $0.03$--$0.06$\,dB, shrinking from $\times2$ to $\times6$. On full Set14, BSD100 and Urban100 images the four decoders stay within $0.019$ in every bin $u\in[0.5,2)$ (54/54), and all of them exceed bicubic by $0.31$--$0.59$ at $u\in[1,1.25)$.
+\textbf{Decoder design does not.} On a shared encoder, LIIF, LTE, SC-INR and GaussianSR differ by at most $0.010$ in every bin (95\% image-bootstrap interval $[0.007,0.016]$; Fig.~\ref{fig:rec}b). On full Set14, BSD100 and Urban100 images the spread stays below $0.019$ in all 54 dataset--scale--bin cells. Accordingly, their PSNR differs by only 0.03--0.06\,dB.
 
-\emph{Training and capacity do.} Between epoch 100 and 1000, $R(u)$ rises by up to $0.045$ for $u\ge1$ (12/12 bins). It is unchanged below $u<0.75$ ($\le0.008$; 9/9; Fig.~\ref{fig:rec}c). With decoder and recipe fixed, an RDN encoder raises $R(u)$ by up to $0.053$ for $u\ge1$ (12/12) and leaves $u<0.75$ unchanged (9/9). A SwinIR encoder does the same at an equal 50 epochs (12/12, 9/9; Fig.~\ref{fig:rec}c). External checkpoints (RDN-BTC, official EDSR) underperformed under our degradation and are not used as encoder evidence.
+\textbf{Learned capacity does, above $u\approx0.75$.} Three interventions change $R(u)$, and all three act only there (Fig.~\ref{fig:rec}c). From epoch 100 to 1000, $R$ rises by up to $0.045$ for $u\ge1$ while changing by at most $0.008$ below $u<0.75$. With the recipe fixed, an RDN encoder raises $R$ by up to about $0.05$ for $u\ge1$ in both seeds, and SwinIR does likewise, with $u<0.75$ unchanged. Shrinking the decoder MLP lowers $R$ over the same range. Table~\ref{tab:budget} gives the PSNR effects.
 
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig1_recovery.pdf}
 \vspace{-6mm}
-\caption{(a) Band recovery $R(u)$ at four scales (solid: mean of three decoders and three seeds; dotted: bicubic). (b) Four decoders on the same encoder. (c) Change in $R(u)$ at $\times4$ from longer training, stronger encoders and a smaller decoder MLP.}
+\caption{Recovery in the LR-normalised coordinate $u$. (a) $R(u)$ at four scales (solid: mean of three decoders and three seeds; dotted: bicubic). (b) Four decoders on the same encoder at $\times4$. (c) Change in $R(u)$ at $\times4$ from longer training, stronger encoders and a smaller decoder MLP.}
 \label{fig:rec}
 \end{figure*}
 
 \section{Conditioning acts in $r$}
-Let $P_1$ be the native output and $P_m$ the output with cell multiplied by $m$. Projected per band, we find
+\label{sec:r}
+Let $P_1$ be the native output and $P_m$ the output with the cell multiplied by $m$, both projected onto band $b$. Empirically,
 \begin{equation}
-P_{m,b}\approx w_{m}(r_b)\,P_{1,b},\quad w_m(r)\in\mathbb R,
+P_{m,b}\approx w_m(r_b)\,P_{1,b},\qquad w_m(r)\in\mathbb R,
 \label{eq:filter}
 \end{equation}
-a low-pass in HR frequency whose shape depends only weakly on scale (Fig.~\ref{fig:cell}a). Writing $e_b=T_b-P_{1,b}$ for the native error, Eq.~\eqref{eq:filter} gives the exact expansion
+where $w_2$ is a low-pass in HR frequency with its minimum at $r\approx0.3$ for all three LIIF-family decoders (Fig.~\ref{fig:cell}a). With $e_b=T_b-P_{1,b}$ the native error, Eq.~\eqref{eq:filter} gives the exact expansion
 \begin{equation}
 \Delta\mathrm{MSE}_b=2(1-w)\,\mathrm{Re}\langle e_b,P_{1,b}\rangle+(1-w)^2\|P_{1,b}\|^2 .
 \label{eq:leverage}
 \end{equation}
-If the native output were the conditional mean, the orthogonality principle would give $\langle e_b,P_{1,b}\rangle\approx0$. Two things follow. The first-order term vanishes, which is what calibration of the native cell means. The emitted energy equals the recovered energy, $\|P_{1,b}\|^2\approx R_bE_b$. Hence
+For an output equal to the conditional mean, the orthogonality principle gives $\langle e_b,P_{1,b}\rangle=0$. The first-order term then vanishes, which is what a calibrated native cell means. The emitted energy also equals the recovered energy, $\|P_{1,b}\|^2=R_bE_b$. Hence
 \begin{equation}
 \Delta\mathrm{MSE}(s)\approx\sum_r\big(1-w(r)\big)^2\,R(2sr)\,E(r).
 \label{eq:law}
 \end{equation}
-The two coordinates meet in Eq.~\eqref{eq:law}: the cell supplies a filter in $r$, the network supplies recovery in $u=2sr$. Because $R$ decreases in $u$, the same filter acts on ever less recovered energy as $s$ grows.
+The two coordinates meet here: the cell supplies a filter in $r$, the network supplies recovery in $u=2sr$. Because $R$ falls with $u$, the same filter removes less and less recovered energy as $s$ grows.
 
-\emph{Checking the assumptions.} The models are trained with an $L_1$ loss, so orthogonality can only hold approximately. A frozen replication on the fresh DIV2K images with all three LIIF-family decoders supports the approximation. $|\langle e_b,P_{1,b}\rangle|/\|P_{1,b}\|^2\le0.15$ in all 105 bins with $u<2$. The minimum of $w_2(r)$ lies at $r=0.28$--$0.34$ for every decoder at $\times2$--$\times4$, drifting slightly lower as the scale grows (9/9). For $m=2$, Eq.~\eqref{eq:law} predicts the measured cost at $\times3$ and $\times4$ to within a factor 0.71--0.84 (6/6). It underpredicts consistently, because the cell also changes the output beyond a per-band scalar; on Set14 the shortfall reaches about $2\times$ at $\times2$.
+\textbf{Checking the derivation.} The networks are trained with an $L_1$ loss, so orthogonality can only hold approximately. On the DIV2K images we find $|\langle e_b,P_{1,b}\rangle|/\|P_{1,b}\|^2\le0.15$ in all 105 bins with $u<2$, for all three decoders. For $m=2$, Eq.~\eqref{eq:law} predicts the measured cost at $\times3$ and $\times4$ to within a factor of 0.71--0.84. It underpredicts consistently, because the cell also changes the output beyond a per-band scalar. At $\times2$ the shortfall reaches about $2\times$ on Set14. For small mismatch ($m=4/3$) the first-order term dominates and the approximation fails.
 
-\emph{Tests.} For $m=2$, the cost peaks at $r\approx0.25$ for every model, seed and scale (36/36; Fig.~\ref{fig:cell}b). Its magnitude tracks recovered energy (Spearman $0.77$--$0.78$). The second-order term ranks per-band cost with $\rho=0.86$--$0.91$ and accounts for $70$--$77\%$ of it. Cost decays monotonically with scale for all nine model--seed pairs (Fig.~\ref{fig:cell}c), and also for GaussianSR and RDN-BTC. The native cell is close to calibrated: the best fixed multiplier improves on it by at most $0.017$\,dB. Its optimum drifts slightly above $m=1$ at $\times4$--$\times6$, so the frozen ``native is optimal'' gate failed (20/27).
-
-\emph{Limits of the model.} For small mismatch ($m=4/3$) the first-order term dominates and Eq.~\eqref{eq:filter} does not predict cost. The peak at $r\approx0.25$ holds only for the LIIF family; GaussianSR and BTC peak elsewhere. We had also predicted that a too-small cell (requesting detail) would cost more than a too-large one, by analogy with prior-mismatch asymmetry. The opposite held (33/144), so we withdraw that hypothesis.
+\textbf{Consequences.} The cost of a doubled cell peaks at $r\approx0.25$ for every LIIF-family model, seed and scale (Fig.~\ref{fig:cell}b), and it tracks recovered energy (Spearman 0.77--0.78). It decays monotonically with scale: 2.3\,dB at $\times2$, 0.40\,dB at $\times3$, 0.13\,dB at $\times4$ and $0.01$\,dB at $\times6$ (interval includes zero; Fig.~\ref{fig:cell}c). The decay also holds for GaussianSR and for an external RDN-BTC model~\cite{pak2023btc}, although their cost peaks at other $r$. The native cell is close to optimal: no fixed multiplier improves on it by more than $0.017$\,dB.
 
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig2_cell.pdf}
 \vspace{-6mm}
-\caption{(a) Spectral transfer $w(r)$ of doubling the cell (LTE, Set14). (b) Where its cost lands in HR frequency. (c) PSNR cost of doubling (solid) or halving (dotted) the cell, by scale.}
+\caption{Conditioning in the HR coordinate $r$. (a) Spectral transfer $w_2(r)$ of doubling the cell (mean of three decoders). (b) Where its cost lands (LTE). (c) PSNR cost of doubling (solid) or halving (dotted) the cell, by scale.}
 \label{fig:cell}
 \end{figure*}
 
-\section{Consequence: what is a lever}
+\section{What is a lever}
+\label{sec:lever}
 \begin{table}[t]\centering\small
-\caption{Matched LIIF training (200 epochs, mean of two seeds): PSNR change (dB, non-DC) relative to EDSR-baseline LIIF on DIV2K 0869--0900. All 95\% image-bootstrap intervals exclude 0 except $^{\circ}$. $^\dagger$One seed, compared with EDSR at an equal 50 epochs.}
+\caption{Matched LIIF training (200 epochs, mean of two seeds): PSNR change (dB) relative to the EDSR-baseline LIIF. All 95\% image-bootstrap intervals exclude zero except those marked $^{\circ}$. $^\dagger$One seed, equal 50 epochs.}
 \label{tab:budget}
 \begin{tabular}{lcccc}\toprule
-Arm & $\times2$ & $\times3$ & $\times4$ & $\times6$\\\midrule
-decoder $2\times64$ & $-0.21$ & $-0.17$ & $-0.13$ & $-0.11$\\
+Change & $\times2$ & $\times3$ & $\times4$ & $\times6$\\\midrule
+decoder MLP $2\times64$ & $-0.21$ & $-0.17$ & $-0.13$ & $-0.11$\\
 no cell input & $-0.10$ & $-0.03^{\circ}$ & $-0.02^{\circ}$ & $-0.00^{\circ}$\\
 RDN encoder & $+0.30$ & $+0.23$ & $+0.23$ & $+0.18$\\
 SwinIR encoder$^\dagger$ & $+0.17$ & $+0.18$ & $+0.12$ & $+0.07$\\\bottomrule
 \end{tabular}
 \end{table}
-Before training we froze three design predictions (Table~\ref{tab:budget}). (D2) Removing the cell input costs little at large scales. With two seeds it costs 0.10\,dB at $\times2$ and is indistinguishable from zero from $\times3$ on. The seed-1 gate still failed narrowly, because $\times4$ exceeded $\times3$ and the 0.03\,dB bound. (D3) A stronger encoder helps more than a reduced decoder hurts. This held: RDN adds 0.23\,dB at $\times4$, and both RDN and SwinIR raise $R(u)$ only above the LR Nyquist limit. (D1) A $4\times$ smaller decoder MLP costs $\le0.05$\,dB at $\times4$/$\times6$. This \emph{failed}: it costs 0.11--0.21\,dB at every scale (both seeds), again only for $u\ge0.75$. The decoder MLP therefore also stores part of the above-Nyquist prior. The correct reading is that decoder \emph{design} is not a lever (four designs, identical $R(u)$), while learned capacity anywhere in the network is. Per parameter, the decoder MLP is the more efficient place for it (about 0.3M parameters for 0.15\,dB, against about 20M for RDN's 0.23\,dB). The scale-dependent cell is the part that can be dropped at large scales.
+Table~\ref{tab:budget} tests the consequences by retraining. Removing the cell input costs 0.10\,dB at $\times2$, where the doubled-cell probe showed large leverage. From $\times3$ on its effect is indistinguishable from zero, as Eq.~\eqref{eq:law} predicts. Stronger encoders help at all scales. Before training we had also predicted that a much smaller decoder MLP would be harmless at large scales. That failed: it costs 0.11--0.21\,dB at every scale in both seeds, again only for $u\gtrsim0.75$ (Fig.~\ref{fig:rec}c). The decoder MLP thus stores part of the above-Nyquist prior. The accurate reading is that decoder \emph{form} is not a lever, since four designs give identical $R(u)$, while learned capacity is, wherever it sits.
 
 \begin{table}[t]\centering\small
-\caption{Pre-registered predictions and outcomes.}
+\caption{Registered predictions and outcomes. Fractions count bins, models, seeds or scales as specified before each run.}
 \label{tab:gates}
-\begin{tabular}{p{5.3cm}r}\toprule
+\begin{tabular}{p{5.25cm}r}\toprule
 Prediction & Outcome\\\midrule
-$R(u)$ spread across scales $\le0.05$ & 45/54, 53/72 \textbf{fail}\\
-decoders within 0.03 (four decoders) & 18/18, 18/18\\
-\quad same, full benchmark images & 54/54\\
-training raises only $u\ge1$ & 12/12; 9/9\\
-cell$\times2$ cost peaks at $r\in[0.19,0.375)$ & 36/36 (LIIF family)\\
-cost $\sim$ recovered energy ($\rho\ge0.7$) & 0.77--0.78\\
-leverage decays with scale & 9/9\\
-law Eq.~\eqref{eq:law} within $\times[0.7,1.3]$ ($\times3$/$\times4$) & 6/6\\
-$|\langle e,P_1\rangle|/\|P_1\|^2\le0.15$ & 105/105\\
-native cell optimal & 20/27 \textbf{fail}\\
-too-small cell costs more & 33/144 \textbf{fail}\\
-$\ge$80\% of cost at $u\ge1$ & 75\% \textbf{fail}\\
-RDN raises only $u\ge1$ (T1--T3) & 12/12; 9/9; pass\\
-SwinIR raises only $u\ge1$ (ep.\,50) & 12/12; 9/9; pass\\
-small decoder costs $\le0.05$\,dB at $\times4$+ (D1) & \textbf{fail}\\
-no-cell cost decays, $\le0.03$\,dB at $\times4$+ (D2) & \textbf{fail} (narrow)\\
-encoder gain $>$ decoder loss (D3) & pass\\
-seed-2 replication of all arms (K1--K3) & 11/12; 12/12, 9/9; 12/12, 9/9\\\bottomrule
+$R(u)$ spread across scales $\le0.05$ (crops; full images) & 45/54; 53/72 \textbf{fail}\\
+four decoders within 0.03 (crops; full images) & 36/36; 54/54\\
+training raises $R$ only for $u\ge1$ & 12/12; 9/9\\
+RDN / SwinIR raise $R$ only for $u\ge1$ & pass / pass\\
+seed-2 replication of matched arms & 11/12; pass\\
+cell$\times2$ cost peaks at $r\in[0.19,0.375)$ & 36/36\\
+cell cost tracks recovered energy ($\rho\ge0.7$) & 0.77--0.78\\
+cell leverage decays with scale & 9/9\\
+Eq.~\eqref{eq:law} within $\times[0.7,1.3]$ at $\times3$/$\times4$ & 6/6\\
+near-orthogonality ($\le0.15$) & 105/105\\
+native cell is the optimum & 20/27 \textbf{fail}\\
+a too-small cell costs more than a too-large one & 33/144 \textbf{fail}\\
+$\ge80\%$ of cell cost at $u\ge1$ & 75\% \textbf{fail}\\
+small decoder harmless at $\times4$+ & \textbf{fail}\\
+no-cell cost $\le0.03$\,dB at $\times4$+ (seed 1) & \textbf{fail} (narrow)\\
+encoder gain exceeds small-decoder loss & pass\\\bottomrule
 \end{tabular}
 \end{table}
 
 \section{Limitations and conclusion}
-We study bicubic degradation, centre crops (full images for the decoder test), convolutional and Transformer encoders and LIIF-style training. The $u$-collapse is approximate. The filter model of the cell holds for large mismatch only. Its frequency locus is specific to decoder families. Within these limits, ASISR gains lie in what the network learns above the LR Nyquist limit, and learned capacity, not decoder form, sets that prior. The cell is an HR-frequency control whose reach is the recovered energy at the frequencies it filters. Eq.~\eqref{eq:law} therefore tells in advance at which scales a new cell or footprint design can matter: only where $R(2sr)$ is still substantial at the frequencies the design changes.
+\label{sec:conc}
+We study bicubic degradation, LIIF-style training, and convolutional and Transformer encoders. The matched arms use two seeds and short schedules. The filter model holds for large mismatch only, and the frequency at which the cell acts depends on the decoder family. Within these limits, ASISR gains come from what the network learns above the LR Nyquist limit. Learned capacity, not decoder form, sets that prior. The cell is an HR-frequency control whose reach is the recovered energy it filters. Eq.~\eqref{eq:law} thus tells in advance at which scales a new cell or footprint design can matter: only where $R(2sr)$ remains substantial at the frequencies the design alters.
 
 \bibliographystyle{IEEEbib}
 \bibliography{refs}
