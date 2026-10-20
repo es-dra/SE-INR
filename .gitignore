@@ -1,5 +1,5 @@
 # Data, checkpoints, outputs
-Data/
+Data
 artifacts/
 save/
 save-seeds/
@@ -29,5 +29,4 @@ __pycache__/
 .vscode/
 .idea/
 memory/
-save/
 probe.json
