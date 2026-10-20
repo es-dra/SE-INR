@@ -1,0 +1,3 @@
+{"date":"2026-10-19T16:45Z","before_any_result":true,
+ "reason":"SwinIR trains at ~13 min/epoch on the shared GPU (~43 h for 200 epochs).",
+ "change":"Add a primary equal-epoch check at epoch 50: SwinIR-LIIF epoch-50 vs EDSR-LIIF epoch-50 (identical LR schedule up to epoch 100), same gates S1-S3. The 200-epoch comparison stays as the final check if training completes."}

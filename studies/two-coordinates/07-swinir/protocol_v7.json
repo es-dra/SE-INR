@@ -1,0 +1,8 @@
+{"version":"claude-20261020-swinir-v7",
+ "question":"Breadth for the encoder claim: with the LIIF decoder and the identical 200-epoch recipe of v5, does a Transformer encoder (SwinIR, official LTE repo models/swinir.py) also raise R(u) only above the LR Nyquist relative to EDSR-baseline?",
+ "comparison":"liif-edsr-200ep from claude-20261019-encoder-train-v5 (same recipe, seed 1). Eval with run_v3.py on DIV2K 0869-0900.",
+ "predictions_frozen_before_training":{
+  "S1":"SwinIR-LIIF R(u) > EDSR-LIIF R(u) in >=80% of u-bins in [1,2) at x2,3,4.",
+  "S2":"|difference| <= 0.01 in >=80% of u-bins in [0,0.75) at x2,3,4.",
+  "S3":"SwinIR-LIIF m=2 cell cost decreases strictly x2>x3>x4>x6."},
+ "caveat":"SwinIR trained with LIIF batch16/inp48 recipe, not its original recipe; single seed; short schedule. User approved running the official LTE SwinIR code on 2026-10-19."}

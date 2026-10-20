@@ -9,3 +9,8 @@ a934e73a50c54f239d5dca4829ac67ff6981e5d28d35406844a747a667c829d5  protocol_v6.js
 20b9bc60995c961a0c19d3694abc7097465ab0cf338702ff8424308951cff455  train-liif-edsr-tinydec-200ep.yaml
 868b1cdc70771c6417c65d78111a320cafa1cbfeea3addeacc3c5649a1e62a07  train-liif-edsr-nocell-200ep.yaml
 Mon Oct 19 16:06:07 UTC 2026
+15fc1a7b13a1c6fda635b08d09446d691eab870bc9bb4d8115ff84b184fa6195  score_v6.py
+Mon Oct 19 16:19:47 UTC 2026
+4b5d3647b2fd555a70eb0255850ddff66d4435672a4a5efbebc2c89c86155216  score_v6.py
+score_v6.py: JSON serialization fix only (numpy bool), gates unchanged
+Tue Oct 20 04:40:42 UTC 2026
