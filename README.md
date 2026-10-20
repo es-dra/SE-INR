@@ -58,8 +58,8 @@ Use `--crop 0` for full images, `--degradation gauss` for the Gaussian-blur degr
 
 ## Reproducing the paper
 
-Each folder in `studies/two-coordinates/` holds the protocol (`protocol*.json`), the exact scripts that ran, the scoring script, its output and `FROZEN.sha256` with hashes recorded before results were read. Those scripts keep the absolute server paths they ran with. To rerun on another machine, use `tools/frequency_probe.py`, which implements the same measurement with configurable paths. Checkpoints and datasets are not included.
+Each folder in `studies/two-coordinates/` holds the protocol (`protocol*.json`), the exact scripts that ran, the scoring script, its output and `FROZEN.sha256` with hashes recorded before results were read. Those scripts keep the absolute server paths they ran with. To rerun on another machine, use `tools/frequency_probe.py`, which implements the same measurement with configurable paths. Trained weights are not released; datasets are not included.
 
 ## Acknowledgements and licence
 
-This code builds on LIIF, LTE, EDSR-PyTorch, BTC (RDN encoder) and SwinIR; see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). The repository licence is to be added before public release.
+This code builds on LIIF, LTE, EDSR-PyTorch, BTC (RDN encoder) and SwinIR; see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). This repository is released under the BSD 3-Clause licence ([`LICENSE`](LICENSE)).
