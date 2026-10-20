@@ -1,0 +1,9 @@
+{"version":"claude-20261020-fullimage-v9",
+ "question":"Do the u-collapse and decoder-invariance of R(u) hold on full benchmark images rather than 240-pixel centre crops?",
+ "data":"Set14 (14), BSD100 (100), Urban100 (100) full HR images cropped to a multiple of 12 (top-left aligned), bicubic antialias LR at x2,3,4,6; native cell only; shave 4; Chebyshev u-bins width 0.25 per image.",
+ "models":"LIIF/LTE/SC-INR seeds 1-3 (epoch-last, 1000 ep) and GaussianSR (external, EDSR-baseline encoder).",
+ "predictions_frozen_before_run":{
+  "F1_decoder_invariance":"Per dataset and scale in {2,3,4}, for u-bins in [0.5,2): max-min of R(u) across the four decoders (LIIF/LTE/SC seed means, GaussianSR) <= 0.03. PASS if >=90% of (dataset,scale,bin).",
+  "F2_u_collapse":"Per dataset and decoder (seed mean), for u-bins in [0.5,2): max-min across scales {2,3,4} <= 0.05. PASS if >=80% of (dataset,decoder,bin).",
+  "F3_bicubic_gap":"Per dataset, network R(u) exceeds bicubic R(u) by >=0.2 at u-bin [1,1.25) for scales 2,3,4. PASS if all 9."},
+ "compute":"GPU inference only"}

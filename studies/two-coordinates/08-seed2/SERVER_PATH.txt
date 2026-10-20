@@ -1,0 +1,1 @@
+server: research-175:/workspace/SE-INR/claude-20261020-seed2-v8

@@ -1,0 +1,9 @@
+{"version":"claude-20261020-seed2-v8",
+ "question":"Do the matched-training results of v5/v6 (seed 1) replicate with an independent training seed?",
+ "arms":"LIIF 200 epochs, identical configs to v5/v6 (edsr, rdn, edsr-tinydec, edsr-nocell), --seed 2. Eval: run_v3.py (cell sweep, DIV2K 0869-0900, centre 240). Devices pinned with CUDA_DEVICE_ORDER=PCI_BUS_ID.",
+ "seed1_reference_delta_db":{"rdn":[0.3128,0.2259,0.226,0.1726],"tinydec":[-0.2001,-0.1708,-0.1525,-0.1358],"nocell":[-0.0884,-0.0338,-0.0375,-0.0037]},
+ "predictions_frozen_before_training":{
+  "K1_sign_and_size":"For each arm and scale (x2,x3,x4,x6), the seed-2 PSNR delta vs seed-2 EDSR has the seed-1 sign and lies within [0.5x, 2x] of the seed-1 value; for nocell x6 (|seed1|<0.01) require |delta|<=0.02 instead. PASS if >=10/12.",
+  "K2_encoder_location":"RDN seed 2: R(u) higher than EDSR seed 2 in >=80% of u-bins in [1,2) and |diff|<=0.01 in >=80% of bins in [0,0.75) at x2,3,4.",
+  "K3_decoder_location":"tinydec seed 2: R(u) lower than EDSR seed 2 in >=80% of bins in [1,2) and |diff|<=0.01 in >=80% of bins in [0,0.75) at x2,3,4."},
+ "compute":"GPU1 A800: rdn; GPU2 4090: edsr; GPU3 4090: tinydec then nocell"}
