@@ -1,0 +1,211 @@
+{
+ "W1": "9/9",
+ "W1_PASS": true,
+ "W2": "6/6",
+ "W2_PASS": true,
+ "W3": "105/105",
+ "W3_PASS": true,
+ "detail": {
+  "W1": [
+   {
+    "model": "liif",
+    "s": 2,
+    "r_min": 0.34375,
+    "ok": true
+   },
+   {
+    "model": "liif",
+    "s": 3,
+    "r_min": 0.3125,
+    "ok": true
+   },
+   {
+    "model": "liif",
+    "s": 4,
+    "r_min": 0.28125,
+    "ok": true
+   },
+   {
+    "model": "lte",
+    "s": 2,
+    "r_min": 0.34375,
+    "ok": true
+   },
+   {
+    "model": "lte",
+    "s": 3,
+    "r_min": 0.3125,
+    "ok": true
+   },
+   {
+    "model": "lte",
+    "s": 4,
+    "r_min": 0.28125,
+    "ok": true
+   },
+   {
+    "model": "sc-inr",
+    "s": 2,
+    "r_min": 0.34375,
+    "ok": true
+   },
+   {
+    "model": "sc-inr",
+    "s": 3,
+    "r_min": 0.3125,
+    "ok": true
+   },
+   {
+    "model": "sc-inr",
+    "s": 4,
+    "r_min": 0.28125,
+    "ok": true
+   }
+  ],
+  "W2": [
+   {
+    "model": "liif",
+    "s": 3,
+    "ratio": 0.7061188467836741,
+    "ok": true
+   },
+   {
+    "model": "liif",
+    "s": 4,
+    "ratio": 0.7967177844228772,
+    "ok": true
+   },
+   {
+    "model": "lte",
+    "s": 3,
+    "ratio": 0.721646319315928,
+    "ok": true
+   },
+   {
+    "model": "lte",
+    "s": 4,
+    "ratio": 0.8044124679164607,
+    "ok": true
+   },
+   {
+    "model": "sc-inr",
+    "s": 3,
+    "ratio": 0.7276459158694929,
+    "ok": true
+   },
+   {
+    "model": "sc-inr",
+    "s": 4,
+    "ratio": 0.8431998081937275,
+    "ok": true
+   }
+  ],
+  "W3": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ]
+ }
+}

@@ -1,0 +1,8 @@
+{"version":"claude-20261020-transfer-v11",
+ "question":"Replicate the cell transfer function and the leverage law (Eq. law in the draft) on fresh images and all three LIIF-family decoders.",
+ "data":"DIV2K valid 0869-0900 centre 240; LIIF/LTE/SC-INR seed 1 (epoch 1000); scales 2,3,4,6; m in {0.5,1,4/3,2}; r-bins width 1/32.",
+ "predictions_frozen_before_run":{
+  "W1":"For m=2, the minimum of w(r) lies in r in [0.25,0.375) for every model at x2,3,4. PASS if 9/9.",
+  "W2":"For m=2, the law sum_b (1-w_b)^2 R_b E_b predicts measured cost within a factor in [0.7,1.3] at x3 and x4 for all 3 models. PASS if >=5/6.",
+  "W3":"|<e_b,P_1b>|/|P_1b|^2 <= 0.15 for every r-bin with u<2 at x2,3,4, all models. PASS if >=90% of bins."},
+ "compute":"GPU inference only"}

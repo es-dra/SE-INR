@@ -1,0 +1,191 @@
+{
+ "decoder_max_spread_x2": {
+  "point": 0.0097,
+  "ci": [
+   0.0069,
+   0.0136
+  ]
+ },
+ "decoder_max_spread_x3": {
+  "point": 0.0096,
+  "ci": [
+   0.0072,
+   0.0125
+  ]
+ },
+ "decoder_max_spread_x4": {
+  "point": 0.0101,
+  "ci": [
+   0.0074,
+   0.0157
+  ]
+ },
+ "cell_m2.0_cost_db_x2": {
+  "point": 2.2723,
+  "ci": [
+   1.9116,
+   2.7369
+  ]
+ },
+ "cell_m0.5_cost_db_x2": {
+  "point": 0.3351,
+  "ci": [
+   0.1993,
+   0.5265
+  ]
+ },
+ "cell_m2.0_cost_db_x3": {
+  "point": 0.4012,
+  "ci": [
+   0.2742,
+   0.5642
+  ]
+ },
+ "cell_m0.5_cost_db_x3": {
+  "point": 0.1078,
+  "ci": [
+   0.0668,
+   0.1679
+  ]
+ },
+ "cell_m2.0_cost_db_x4": {
+  "point": 0.1274,
+  "ci": [
+   0.0644,
+   0.2305
+  ]
+ },
+ "cell_m0.5_cost_db_x4": {
+  "point": 0.0477,
+  "ci": [
+   0.0357,
+   0.0634
+  ]
+ },
+ "cell_m2.0_cost_db_x6": {
+  "point": 0.0053,
+  "ci": [
+   -0.0193,
+   0.0362
+  ]
+ },
+ "cell_m0.5_cost_db_x6": {
+  "point": 0.0278,
+  "ci": [
+   0.0217,
+   0.0359
+  ]
+ },
+ "rdn_vs_edsr_db_x2": {
+  "point": 0.3128,
+  "ci": [
+   0.2334,
+   0.3953
+  ]
+ },
+ "rdn_vs_edsr_db_x3": {
+  "point": 0.2259,
+  "ci": [
+   0.1638,
+   0.3017
+  ]
+ },
+ "rdn_vs_edsr_db_x4": {
+  "point": 0.226,
+  "ci": [
+   0.1654,
+   0.3115
+  ]
+ },
+ "rdn_vs_edsr_db_x6": {
+  "point": 0.1726,
+  "ci": [
+   0.1124,
+   0.2557
+  ]
+ },
+ "tinydec_vs_edsr_db_x2": {
+  "point": -0.2001,
+  "ci": [
+   -0.2677,
+   -0.1432
+  ]
+ },
+ "tinydec_vs_edsr_db_x3": {
+  "point": -0.1708,
+  "ci": [
+   -0.248,
+   -0.1122
+  ]
+ },
+ "tinydec_vs_edsr_db_x4": {
+  "point": -0.1525,
+  "ci": [
+   -0.2487,
+   -0.0899
+  ]
+ },
+ "tinydec_vs_edsr_db_x6": {
+  "point": -0.1358,
+  "ci": [
+   -0.2076,
+   -0.0794
+  ]
+ },
+ "nocell_vs_edsr_db_x2": {
+  "point": -0.0884,
+  "ci": [
+   -0.1344,
+   -0.05
+  ]
+ },
+ "nocell_vs_edsr_db_x3": {
+  "point": -0.0338,
+  "ci": [
+   -0.0913,
+   0.0108
+  ]
+ },
+ "nocell_vs_edsr_db_x4": {
+  "point": -0.0375,
+  "ci": [
+   -0.0824,
+   0.0053
+  ]
+ },
+ "nocell_vs_edsr_db_x6": {
+  "point": -0.0037,
+  "ci": [
+   -0.0403,
+   0.031
+  ]
+ },
+ "swinir50_vs_edsr50_db_x2": {
+  "point": 0.1699,
+  "ci": [
+   0.1107,
+   0.234
+  ]
+ },
+ "swinir50_vs_edsr50_db_x3": {
+  "point": 0.1777,
+  "ci": [
+   0.126,
+   0.2326
+  ]
+ },
+ "swinir50_vs_edsr50_db_x4": {
+  "point": 0.1221,
+  "ci": [
+   0.0759,
+   0.1731
+  ]
+ },
+ "swinir50_vs_edsr50_db_x6": {
+  "point": 0.0699,
+  "ci": [
+   0.0021,
+   0.1359
+  ]
+ }
+}
