@@ -1,0 +1,27 @@
+{
+ "image": "img_036.png",
+ "median_gain_db": 0.42433977127075195,
+ "crop": [
+  760,
+  256,
+  48
+ ],
+ "psnr_full": {
+  "HR": null,
+  "Bicubic": 25.37,
+  "EDSR-LIIF": 29.03,
+  "no cell": 28.8,
+  "decoder 2x64": 28.61,
+  "RDN-LIIF": 29.45,
+  "SwinIR-LIIF": 29.33
+ },
+ "psnr_crop": {
+  "HR": null,
+  "Bicubic": 20.27,
+  "EDSR-LIIF": 21.53,
+  "no cell": 21.4,
+  "decoder 2x64": 21.37,
+  "RDN-LIIF": 21.71,
+  "SwinIR-LIIF": 21.78
+ }
+}

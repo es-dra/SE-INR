@@ -86,6 +86,13 @@ The two coordinates meet here: the cell supplies a filter in $r$, the network su
 \label{fig:cell}
 \end{figure*}
 
+\begin{figure*}[t]\centering
+\includegraphics[width=\textwidth]{figures/fig3_qualitative.pdf}
+\vspace{-6mm}
+\caption{$\times4$ on Urban100 \texttt{img\_036} (the image with the median RDN gain; the $48^2$ crop with the most HR gradient energy, chosen by rule before viewing outputs). Top: crops with crop PSNR (Y). Bottom: absolute Y error. The stripe pattern beyond the LR Nyquist limit is lost by every model; the encoder and decoder capacity change mainly the edges just above it.}
+\label{fig:qual}
+\end{figure*}
+
 \section{What is a lever}
 \label{sec:lever}
 \begin{table}[t]\centering\small
@@ -100,6 +107,8 @@ SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{tabular}
 \end{table}
 Table~\ref{tab:budget} tests the consequences by retraining. Stronger encoders help at every scale. Shrinking the decoder MLP hurts at every scale (0.24--0.28\,dB), and again only for $u\gtrsim0.75$ (Fig.~\ref{fig:rec}c). Before training we had predicted that it would be harmless at large scales; that failed. The decoder MLP thus stores part of the above-Nyquist prior. The accurate reading is that decoder \emph{form} is not a lever, since four designs give identical $R(u)$, while learned capacity is, wherever it sits.
+
+Figure~\ref{fig:qual} shows a typical case: no model recovers the stripe pattern well above the LR Nyquist limit, and the differences between models concentrate on edges close to it.
 
 Removing the cell input separates two roles of the cell. As an inference-time control, its leverage vanishes from $\times3$ on, exactly as Eq.~\eqref{eq:law} predicts. A model \emph{trained} without it, however, loses about 0.1\,dB at every scale, consistently in both seeds. On the DIV2K images the loss is smaller (0.10\,dB at $\times2$, then indistinguishable from zero), where our registered prediction failed only narrowly. The loss does not shrink with scale, and on full Set14 images it sits above the Nyquist limit ($R$ lower by 0.01--0.02 for $u\ge2$). Supplying the cell during multi-scale training therefore helps the network learn the above-Nyquist prior, even though the same input has no measurable effect at large scales at inference. Our account explains the second fact, not the first.
 

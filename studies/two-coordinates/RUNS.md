@@ -18,3 +18,4 @@ Every stage ran on the authors' GPU server. Frozen scripts keep the absolute pat
 | `11-transfer` | `/workspace/SE-INR/runs/claude-20261020-transfer-v11` |
 | `12-gauss-degradation` | `/workspace/SE-INR/runs/claude-20261021-gaussdeg-v12` |
 | `13-benchmark` | `/workspace/SE-INR/runs/claude-20261022-benchmark-v13` |
+| `14-qualitative` | `/workspace/SE-INR/runs/claude-20261023-qualitative-v14` |
