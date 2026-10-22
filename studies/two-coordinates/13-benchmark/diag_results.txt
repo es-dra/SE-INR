@@ -1,0 +1,4 @@
+benchmark-protocol DIV2K-valid100 edsr-200ep x4 result: 30.3435
+benchmark-protocol DIV2K-valid100 edsr-200ep x6 result: 28.1257
+benchmark-protocol DIV2K-valid100 edsr-nocell-200ep x4 result: 30.3014
+benchmark-protocol DIV2K-valid100 edsr-nocell-200ep x6 result: 28.0892

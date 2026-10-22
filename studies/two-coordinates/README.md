@@ -30,5 +30,6 @@ Notation: `s` = scale, `r` = HR frequency (cycles/HR pixel, Chebyshev radius), `
 | 09 full images | Set14/BSD100/Urban100 full | F1 decoder invariance; F2 collapse; F3 bicubic gap | pass 54/54; **fail** 53/72; pass |
 | 11 transfer replication | DIV2K, three decoders | W1–W3 | pass 9/9, 6/6, 105/105 |
 | 12 Gaussian-blur degradation | EDSR/RDN/no-cell retrained | G1 gain bins match incomplete-linear bins; G2 capacity also acts below Nyquist; G3 RDN gain; G4 cell effect vanishes | pass 20/24; **fail** (gain only from u≈0.75; even EDSR recovers u<0.75 almost fully); pass (+0.33/+0.27/+0.23/+0.19 dB); pass |
+| 13 standard benchmarks | matched arms, full Set5/Set14/BSD100/Urban100, Y-PSNR | descriptive | tinydec −0.24 to −0.28, no-cell −0.09 to −0.13 (all scales, both seeds), RDN +0.25 to +0.35, SwinIR +0.34 to +0.46 dB |
 
 Transfer-function analysis (`01-cell-mismatch/transfer.py`): the cell acts approximately as an HR-frequency low-pass on the native output, `P_m ≈ w_m(r)·P_1`, whose shape is nearly scale-independent. For m = 2, `(1−w)²|P_1|²` ranks per-band cost with Spearman 0.86–0.91 and accounts for 70–77% of it. For small mismatch (m = 4/3) the first-order cross-term dominates and the filter model does not hold.
