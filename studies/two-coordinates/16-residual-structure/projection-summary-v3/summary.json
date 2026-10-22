@@ -1,6 +1,6 @@
 {
   "source": {
-    "path": "/Users/deepmath/Research/Image-Processing/SE-INR/studies/two-coordinates/16-residual-structure/inputs/projections/projection_stats.json",
+    "path": "studies/two-coordinates/16-residual-structure/inputs/projections/projection_stats.json",
     "sha256": "c1d5187c0a5611124b1257e6949f71107c5ee9fcfd02f5112d2588eb8d367224"
   },
   "script_sha256": "83ff492f54cd102f81fc7865de946b71c5dc39b908965678ec64da3b208064a9",

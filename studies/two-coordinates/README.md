@@ -1,6 +1,8 @@
-# Shared recovery profiles, calibrated cell responses and training controls
+# Shared recovery, sustained cell responses and training gains
 
-> **Review handoff, 2026-10-23:** stage 17 is complete and independently verified. The rebuilt source/PDF and cleaned repository are handed off now at the user's request. Stage 18 continues on the server; its verdicts remain explicitly pending. See the [Claude continuation entry](../../README.md#接续给-claude只剩训练结果相关收尾) and [run locations](RUNS.md).
+> **Study status, 2026-10-23:** stage 17 is complete and independently verified; stage 18 training and its integrated evaluation are running. Final training-source verdicts are not yet available. See [run locations](RUNS.md).
+
+The descriptive stage-17 endpoint pattern is J6/J2 ≥ 1 in 11/12 conditions (0.94–2.47). Individual 95% interval lower bounds range from 0.81 to 1.57 and upper bounds from 1.08 to 4.48; this is not a pooled interval or a new preregistered pass. See `17-equal-step-response/score/summary.json`, `endpoint_contrasts`.
 
 Original registered stages retain frozen protocols, predictions, scoring scripts and subsequent scoring amendments. Stages 15–16 are retrospective saved-data audits. Failed predictions are kept. Historical SERVER_PATH.txt files and RUNS.md locate original runs and their retained large-output hashes.
 

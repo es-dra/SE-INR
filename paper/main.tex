@@ -1,20 +1,20 @@
 % Prospective reconstruction, 2026-10-23.
-% Review handoff: stage 17 complete; stage 18 running, outcomes explicitly pending.
+% Stage 17 complete; stage 18 training-source results await completion.
 \documentclass{article}
 \usepackage{spconf,amsmath,amssymb,graphicx,booktabs}
 \usepackage[T1]{fontenc}
 \usepackage{times}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
-\title{Shared Recovery Profiles, Calibrated Cell Responses,\\
-and Scale-Conditioned Learning in Arbitrary-Scale Super-Resolution}
+\title{Shared Recovery, Sustained Cell Responses, and Training Gains\\
+in Arbitrary-Scale Super-Resolution}
 \name{Anonymous authors}
 \address{Anonymous institution}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution combines learned image features, continuous decoding and target-pixel-size conditioning. We identify the frequency range in which additional capacity helps, and distinguish the response to cell size from its value during learning. First, recovery profiles are closely shared by the tested decoder families, while stronger encoders, larger MLPs and longer training improve recovery mainly from input-normalised frequency $u\approx0.75$ upward. This low-frequency saturation persists under a second, Gaussian-blur degradation. Second, fixed cell multipliers change the actual decoder-input step with scale. We control this step directly and separate output-change energy from its alignment with reconstruction error. A prospective full-image test finds 11 materially increasing adjacent-scale responses under family-wide correction, so declining fixed-multiplier cost does not establish universal response decay. Third, dimension-preserving constant-cell and shuffled-cell training test the contribution of correctly paired conditioning under a matched 200-epoch recipe. These training comparisons are in progress; this review draft makes no training-source claim. Together, these experiments connect frequency-localised capacity gains with controlled measurements of scale conditioning.
+Arbitrary-scale super-resolution exhibits shared frequency recovery, sustained responses to cell size, and gains from cell-conditioned learning. First, tested decoder families share recovery profiles, while stronger encoders, larger MLPs and longer training help mainly above input-normalised frequency $u\approx0.75$: longer training changes recovery below this boundary by at most 0.0013. Low-frequency saturation persists under Gaussian blur. Second, at equal decoder-input steps, cell-induced output changes generally remain as large or grow with scale: $J_6/J_2\ge1$ in 11 of 12 conditions, with point estimates 0.94--2.47. This descriptive pattern separates sustained output response from declining fixed-multiplier cost, which combines shrinking input steps and error alignment. Third, removing cell during training loses about 0.10\,dB in a matched two-seed benchmark. Constant-cell and shuffled-cell controls retain the input dimensions to test whether correct scale pairing explains this gain; these 200-epoch comparisons are in progress, so its source remains unresolved. Together, the findings distinguish where capacity helps, how cell changes the output, and what remains to be explained about its training benefit.
 \end{abstract}
 \begin{keywords}
 Arbitrary-scale super-resolution, implicit representation, frequency recovery, scale conditioning
@@ -26,7 +26,7 @@ Continuous-coordinate super-resolution decodes local image features at arbitrary
 
 Prior work links performance to model size and training~\cite{nasir2026empirical} and studies spectral decoding's efficiency--accuracy trade-off~\cite{shad2026gblsr}. HyRA analyses nonlinear compensation of low-pass phase distortion~\cite{fsds2024}; LIIF, integrated encoding and heat fields connect cell to edges and filtering~\cite{chen2021liif,liu2021ipe,becker2025thera}. We locate capacity gains and distinguish cell-induced output change, error cost and training benefit.
 
-We show that (1) tested decoder forms share recovery profiles, with capacity gains concentrated near and above $u=0.75$; (2) calibrated cell steps reject universal response decay while separating response from error alignment; and (3) dimension-preserving training controls test correctly paired conditioning. The training-source verdict remains pending. Table~\ref{tab:gates} retains original failures.
+Our findings are: (1) decoder families share recovery profiles, with capacity gains mainly above $u\approx0.75$ and lower-band changes no larger than 0.0013 from longer training; (2) equal-step cell response is sustained or larger at $\times6$ than $\times2$ in 11/12 conditions, separating response strength from error cost; and (3) cell improves learning by about 0.10\,dB, with dimension-preserving controls testing the source of this gain. The third finding's source awaits the ongoing training controls; Table~\ref{tab:gates} retains all prediction failures.
 
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig1_recovery.pdf}
@@ -50,11 +50,11 @@ After retraining with Gaussian blur ($\sigma=0.6s$ HR pixels) and non-antialiase
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig2_equal_step.pdf}
 \vspace{-3mm}
-\caption{Equal-step output responses need not decrease with scale. Each curve averages three decoder families and two seeds on one full-image dataset. Shading shows pointwise 95\% paired-image bootstrap intervals, conditional on these checkpoints; the logarithmic axis reports $J$. Prediction gates use separately specified multiplicity corrections.}
+\caption{Equal-step output responses need not decrease with scale. Each curve averages three decoder families and two seeds on one full-image dataset. Shading shows pointwise 95\% paired-image bootstrap intervals, conditional on these checkpoints; the logarithmic axis reports $J$. Endpoint ratios are descriptive; the frozen prediction gates are reported separately in Table~\ref{tab:gates}.}
 \label{fig:step}
 \end{figure*}
 
-\section{Calibrating the response to cell}
+\section{Cell responses persist as scale increases}
 \label{sec:step}
 \textbf{Equal multipliers imply unequal interventions.} For output side length $L$, the implementations multiply the supplied cell $2/L$ by the LR feature-grid size $L/s$. The decoder receives $c=2/s$ on each axis. Multiplying cell by $m$ therefore gives the per-axis step
 \begin{equation}
@@ -71,11 +71,9 @@ D=\|e-\delta\|^2-\|e\|^2
 \end{equation}
 We report $J$, $D$ and the alignment term in RGB-mean MSE units. Small cost can arise from an output change that corrects existing error. The dB cost additionally depends on native MSE $V$ through $10\log_{10}(1+D/V)$.
 
-\textbf{Prospective equal-step test.} Protocol, predictions, input identities and scoring code are frozen before inference on all 246 images in DIV2K 0869--0900, Set14, BSD100 and Urban100, using LIIF/LTE/SC-INR with two seeds. Common top-left modcrop-12 fixes HR support across scales; inputs use anti-aliased bicubic resizing, outputs remain unclipped, and measurements shave four pixels. We set $h\in\{-0.25,0.25,0.5\}$ on both axes. Complete $r$ and $u$ spectra, including DC and Nyquist, sum to the spatial metrics.
+\textbf{Sustained equal-step response.} At the same decoder-input step, cell-induced output changes generally do not weaken with scale and are often larger (Fig.~\ref{fig:step}). Across four datasets and three steps, $J_6/J_2\ge1$ in 11/12 conditions; point estimates span 0.94--2.47. The individual 95\% interval lower bounds span 0.81--1.57 and upper bounds 1.08--4.48; these ranges summarise 12 intervals, not a pooled interval. The smallest estimate is Urban100 at $h=0.25$, 0.94 $[0.81,1.08]$, and the largest is Set14 at $h=-0.25$, 2.47 $[1.47,4.48]$. This is a descriptive endpoint pattern, not a new preregistered success or a claim that every response increases significantly.
 
-The primary prediction is a material violation of universal monotone response decay: at least one of the 36 prespecified dataset--step--adjacent-scale ratios has a one-sided, Bonferroni-corrected bootstrap lower bound above 1.10. We use 10,000 paired image resamples per dataset after averaging the fixed architectures and seeds. Separate predictions require a supported reversal in all 12 dataset--step conditions, and Set14 $J_6/J_2>1$ at both positive steps with corrected lower bounds above one. These gates are scored separately.
-
-\textbf{Calibrated responses remain substantial.} The primary gate passes: 11/36 adjacent comparisons have family-wide corrected increases exceeding 10\%, including seven positive-step $\times2\!\to\!\times3$ comparisons with cells inside the training interval. All 12 dataset--step conditions pass their separate three-comparison gates (Fig.~\ref{fig:step}). The auxiliary Set14 endpoint prediction fails: at $h=0.25$, $J_6/J_2=1.65$ with interval $[0.96,2.71]$.
+The frozen experiment measures all 246 full images from DIV2K 0869--0900, Set14, BSD100 and Urban100 with LIIF/LTE/SC-INR, two seeds and $h\in\{-0.25,0.25,0.5\}$, using paired within-dataset image bootstrap intervals. Matched image support, preprocessing, 10,000 resamples and multiplicity rules are documented in the repository; Table~\ref{tab:gates} separately reports the frozen existence, condition-wise and Set14 endpoint tests, including the failed Set14 prediction.
 
 Response and cost can move in opposite directions. On BSD100 at $h=0.5$, $J_6/J_2=1.24$ $[1.06,1.44]$, but $D$ falls from $79.42$ to $40.77$ in $10^{-6}$ MSE (paired change $-38.65$ $[-55.13,-22.01]$; descriptive 95\% intervals, without multiplicity correction). Across datasets at this step, $r\ge0.375$ accounts for 43.5--50.7\% of $J$ at $\times2$, but only 2.4--3.0\% at $\times6$; the middle band $r\in[0.1875,0.375)$ accounts for 60.5--66.7\% at $\times6$.
 
@@ -105,7 +103,7 @@ SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{table}
 
 \begin{table}[t]\centering\small
-\caption{Registered predictions and retained failures. Counts are satisfying checks, followed by overall pass (P) or fail (F); they are not independent experiments. All original prediction records remain in the repository. Stages 17--18 are frozen prospectively; the scalar decomposition is retrospective.}
+\caption{Registered predictions and retained failures. Counts are satisfying checks, followed by overall pass (P) or fail (F); they are not independent experiments. All original prediction records remain in the repository. Stages 17--18 are frozen prospectively. Stage 17 uses one-sided Bonferroni bounds over 36 adjacent tests, three tests per condition, or two Set14 endpoints; the 11/12 descriptive endpoint count is not a new prediction.}
 \label{tab:gates}
 \begin{tabular}{p{4.8cm}r}\toprule
 Prediction & Outcome\\\midrule
@@ -122,7 +120,7 @@ $\ge80\%$ absolute cost lies at $u\ge1$ & 311/414 F\\
 external RDN-BTC; EDSR gain & 0/12; 0/4 F\\
 external cell locus (GaussianSR; BTC) & 2/4; 3/4 F\\
 no-cell loss decays to negligible cost & F\\\midrule
-17: corrected adjacent-scale increase & 11/36 P\\
+17: $\ge1/36$ corrected increases $>10\%$ & 11/36 P\\
 17: increase in all 12 conditions & 12/12 P\\
 17: both positive-step Set14 endpoints & 1/2 F\\
 18: native advantage (constant; shuffle) & pending\\
@@ -138,10 +136,10 @@ We freeze predictions and scoring before training, select epoch 200 regardless o
 
 The primary predictions require native cell to outperform each new arm by at least 0.05\,dB in the dataset- and scale-balanced mean, with both seeds positive and a Bonferroni-adjusted 97.5\% paired-image interval above zero. Separate equivalence tests ask whether each arm lies within $\pm0.03$\,dB of no-cell; failure to establish equivalence is retained. Training comparisons use 2,000 within-dataset paired image resamples, conditional on the two seeds.
 
-\textbf{Review-draft status.} All four frozen 200-epoch runs are in progress. Benchmark effects, recovery localisation, inference-policy sensitivity and the four prediction verdicts will be reported after the integrated pipeline completes; no partial validation result is used as a final outcome. These contrasts assess correct pairing, retained dimensions and training noise; their interpretation is limited to this recipe.
+\textbf{Training-control status.} All four frozen 200-epoch runs are in progress. Benchmark effects, recovery localisation, inference-policy sensitivity and the four prediction verdicts will be reported after the integrated pipeline completes; no partial validation result is used as a final outcome. These contrasts assess correct pairing, retained dimensions and training noise; their interpretation is limited to this recipe.
 
 \section{Conclusion and scope}
-Recovery profiles locate a shared range in which trained capacity improves reconstruction. Cell analysis requires a calibrated decoder-input step and separate measurements of output change and error alignment. Dimension-preserving training controls then test the value of correctly paired conditioning. Equal-step measurements reject universal response decay while retaining a failed endpoint prediction. The source of the training benefit remains open until the registered comparisons complete.
+Recovery profiles are shared across tested decoders, while capacity gains concentrate above $u\approx0.75$. At equal decoder-input steps, cell response is sustained or larger in 11/12 endpoint comparisons. Shrinking steps and error alignment explain why a fixed-multiplier cost decline need not mean weaker output response. Cell improves learning by about 0.10\,dB; the constant/shuffled-cell comparisons will distinguish the role of correct pairing from retained input dimensions. Their source verdict remains pending.
 
 Evidence is limited to the tested architectures, recipes and two degradations. New measurements were specified prospectively on previously studied images/checkpoints. Image-bootstrap intervals condition on fixed trained seeds; finite interventions and ablations do not identify a unique internal mechanism.
 
