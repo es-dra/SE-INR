@@ -1,4 +1,4 @@
-% Submission draft, 2026-10-20. Format: IEEE SPS conference (4 pages + 1 page of references).
+% Submission draft, 2026-10-22. Format: IEEE SPS conference (4 pages + 1 page of references).
 \documentclass{article}
 \usepackage{spconf,amsmath,amssymb,graphicx,booktabs}
 \usepackage[T1]{fontenc}
@@ -35,7 +35,7 @@ That the cell input can sometimes hurt is known~\cite{liu2021ipe}. Our contribut
 \label{sec:setup}
 \textbf{Models.} LIIF, LTE~\cite{lee2022lte} and SC-INR (an LTE variant whose cell enters through an analytic sinc weight) share an EDSR-baseline encoder~\cite{lim2017edsr} and the LIIF recipe: DIV2K~\cite{agustsson2017div2k}, scales drawn from $\mathcal U(1,4)$, 1000 epochs, three seeds. GaussianSR~\cite{hu2024gaussiansr} adds a fourth decoder on the same encoder. For matched comparisons we retrain LIIF for 200 epochs with one recipe, changing only one component: an RDN~\cite{zhang2018rdn} or SwinIR~\cite{liang2021swinir} encoder, a smaller decoder MLP ($2\times64$ instead of $4\times256$), or no cell input.
 
-\textbf{Data.} We use DIV2K validation images 0869--0900, not used for any model selection, and full Set14~\cite{zeyde2010single}, BSD100~\cite{martin2001database} and Urban100~\cite{huang2015urban}. LR inputs come from anti-aliased bicubic downsampling at $\times\{2,3,4,6\}$; $\times6$ lies outside the training range. Unless stated otherwise we evaluate centre $240^2$ crops.
+\textbf{Data.} We use DIV2K validation images 0869--0900, not used for any model selection, and full Set14~\cite{zeyde2010single}, BSD100~\cite{martin2001database} and Urban100~\cite{huang2015urban}. LR inputs come from anti-aliased bicubic downsampling at $\times\{2,3,4,6\}$; $\times6$ lies outside the training range. Frequency analyses use centre $240^2$ crops unless stated otherwise; Table~\ref{tab:budget} reports standard Y-channel PSNR on full benchmark images.
 
 \textbf{Measures.} After a 4-pixel shave, the error and the target spectrum are split by Chebyshev frequency radius into $u$-bins of width $0.25$. We define $R(u)=1-\mathrm{MSE}_u/E_u$, where $E_u$ is the target energy in the bin. To probe the cell, we multiply the native cell by $m\in[\frac12,2]$ at fixed input and query.
 
@@ -99,9 +99,9 @@ RDN encoder & $+0.35$ & $+0.29$ & $+0.28$ & $+0.25$\\
 SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{tabular}
 \end{table}
-Table~\ref{tab:budget} tests the consequences by retraining, on standard benchmarks. Stronger encoders help at every scale. Shrinking the decoder MLP hurts at every scale (0.24--0.28\,dB), and again only for $u\gtrsim0.75$ (Fig.~\ref{fig:rec}c). Before training we had predicted that it would be harmless at large scales; that failed. The decoder MLP thus stores part of the above-Nyquist prior. The accurate reading is that decoder \emph{form} is not a lever, since four designs give identical $R(u)$, while learned capacity is, wherever it sits.
+Table~\ref{tab:budget} tests the consequences by retraining. Stronger encoders help at every scale. Shrinking the decoder MLP hurts at every scale (0.24--0.28\,dB), and again only for $u\gtrsim0.75$ (Fig.~\ref{fig:rec}c). Before training we had predicted that it would be harmless at large scales; that failed. The decoder MLP thus stores part of the above-Nyquist prior. The accurate reading is that decoder \emph{form} is not a lever, since four designs give identical $R(u)$, while learned capacity is, wherever it sits.
 
-Removing the cell input separates two roles of the cell. As an inference-time control, its leverage vanishes from $\times3$ on, exactly as Eq.~\eqref{eq:law} predicts. A model \emph{trained} without it, however, loses about 0.1\,dB at every scale, consistently in both seeds. On the DIV2K images the loss is smaller (0.10\,dB at $\times2$, then indistinguishable from zero), which is why our seed-1 prediction failed only narrowly there. The loss does not shrink with scale, and on full Set14 images it sits above the Nyquist limit ($R$ lower by 0.01--0.02 for $u\ge2$). Supplying the cell during multi-scale training therefore helps the network learn the above-Nyquist prior, even though the same input has no measurable effect at large scales at inference. Our account explains the second fact, not the first.
+Removing the cell input separates two roles of the cell. As an inference-time control, its leverage vanishes from $\times3$ on, exactly as Eq.~\eqref{eq:law} predicts. A model \emph{trained} without it, however, loses about 0.1\,dB at every scale, consistently in both seeds. On the DIV2K images the loss is smaller (0.10\,dB at $\times2$, then indistinguishable from zero), where our registered prediction failed only narrowly. The loss does not shrink with scale, and on full Set14 images it sits above the Nyquist limit ($R$ lower by 0.01--0.02 for $u\ge2$). Supplying the cell during multi-scale training therefore helps the network learn the above-Nyquist prior, even though the same input has no measurable effect at large scales at inference. Our account explains the second fact, not the first.
 
 \begin{table}[t]\centering\small
 \caption{Registered predictions and outcomes. Fractions count bins, models, seeds or scales as specified before each run. $^*$Descriptive, not registered.}
