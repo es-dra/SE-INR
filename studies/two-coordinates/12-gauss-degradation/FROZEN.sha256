@@ -10,3 +10,10 @@ ebef1edcb70ef8884a133ef9c5ff95d872663605e6136175d84824310741cca8  protocol_v12.j
 f239a3d1259b433802aee5586b5514c4654da91f1e05998ee550bed43ad08429  train-gauss-nocell.yaml
 f8d982f6b7b16c68d10a50656ac3cc5393703811f19e5e50aa5d20f2e70f3d1e  train-gauss-rdn.yaml
 Tue Oct 20 21:31:21 UTC 2026
+eval_rdn rerun: first attempt failed with No CUDA GPUs available (env), no change to code or gates
+Thu Oct 22 14:14:39 UTC 2026
+7e1fc60a560aeb3b24866434b3e6132c6e90897bf98e365a217ac8d1c9e37ed4  run_v3_gauss_cpu.py
+amendment: GPUs became unavailable in the container (NVML Unknown Error); RDN eval rerun on CPU with identical code apart from the device; gates unchanged
+Thu Oct 22 14:15:02 UTC 2026
+note: CPU attempt was killed by a dropped connection; GPUs available again, eval rerun on GPU with the original run_v3_gauss.py
+Thu Oct 22 14:16:36 UTC 2026

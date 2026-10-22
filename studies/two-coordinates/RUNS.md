@@ -16,4 +16,4 @@ Every stage ran on the authors' GPU server. Frozen scripts keep the absolute pat
 | `09-fullimage` | `/workspace/SE-INR/runs/claude-20261020-fullimage-v9` |
 | `10-theory-check` | `/workspace/SE-INR/runs/claude-20261020-theory-check` |
 | `11-transfer` | `/workspace/SE-INR/runs/claude-20261020-transfer-v11` |
-| `12-gauss-degradation` | `/workspace/SE-INR/claude-20261021-gaussdeg-v12` (moves to runs/ when finished) |
+| `12-gauss-degradation` | `/workspace/SE-INR/runs/claude-20261021-gaussdeg-v12` |
