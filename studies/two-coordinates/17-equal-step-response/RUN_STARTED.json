@@ -1,0 +1,12 @@
+{
+  "started_at_utc": "2026-10-22T19:32:54.556412+00:00",
+  "frozen_sha256": "a77f84a54fb09676a6e6703b345ff8ce30d42597bfc874f29561bff552f9fb06",
+  "gpus": [
+    "0",
+    "1",
+    "2",
+    "3"
+  ],
+  "cuda_device_order": "PCI_BUS_ID",
+  "shard_timeout_hours": 12
+}

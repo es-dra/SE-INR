@@ -1,0 +1,138 @@
+{
+  "operation": "TrueType font re-embedding of existing figures, unchanged scientific data",
+  "model_calls": 0,
+  "training_runs": 0,
+  "cpu_bicubic_only": true,
+  "layout_change": "Figure 1(c) legend moved below all panels, preserving all curves and labels; 7.0 by 2.3 inches, minimum legend font 6 pt. Figure 3 geometry unchanged.",
+  "source_files_sha256": {
+    "/workspace/SE-INR/runs/claude-20261020-paper-figures/make_figs.py": "bfa5307268873f6dd2116bb1ee26f980e607d0e7bf5731cac1127c68f5c3ec64",
+    "/workspace/SE-INR/runs/claude-20261020-paper-figures/numbers.json": "ebed1c89cd2b50bc8d800c6f736092cfe99860a6d4a8a6e554af1802f7af89f4",
+    "/workspace/SE-INR/runs/claude-20261020-paper-figures/fig1_recovery.pdf": "ab903c5b1b8a56ebe4dab3e684b0b703cd17c1a1c4e53a3f1858f130d0fbe87d",
+    "/workspace/SE-INR/runs/claude-20261023-qualitative-v14/qual.py": "f3e377359dcc3e6d7f0bdf5971cea419384fd2d8b0d2897af430b9b98f816db9",
+    "/workspace/SE-INR/runs/claude-20261023-qualitative-v14/FROZEN.sha256": "6541a0d0cf31b9450a69c2d40373d46be1f1c2c94b4d70bfc21f9b8c29a8564e",
+    "/workspace/SE-INR/runs/claude-20261023-qualitative-v14/qual_meta.json": "d2ef31f2b0b495e049ca3487ca22506ca0127d6337d82b4a7c9cc958d80a8fed",
+    "/workspace/SE-INR/runs/claude-20261023-qualitative-v14/crops.npz": "6e695e3190b58ba985e314915336b13d6304cac68adc7f234dc9851658f8b99c",
+    "/workspace/SE-INR/runs/claude-20261023-qualitative-v14/fig3_qualitative.pdf": "2d3cd2ef2dc1475981e3419387ab0841276bc4a0cbe956e84eb65fe6059b9dd1",
+    "../repository_numbers.json": "98c0b8526a782f431cacf51f4b0da8dde0513d1dab5c16bb2774250e7742924a",
+    "../repository_qual_meta.json": "d2ef31f2b0b495e049ca3487ca22506ca0127d6337d82b4a7c9cc958d80a8fed",
+    "/workspace/SE-INR/runs/claude-20261019-two-coordinates-v2/formal/rows.json": "1f3b3af4f0e66f86e8c5c192f5ab753ee6694845966007dbc064711596b462ca",
+    "/workspace/SE-INR/runs/claude-20261019-encoder-v3/formal_gs/rows.json": "a9804d5d1bb4fff5c51b1cdfa154461b1cf9cd53f4b3d54f021f4cdfa3852318",
+    "/workspace/SE-INR/runs/claude-20261019-prior-v4/early_liif/rows.json": "d6e4de23fe31be0ea83d57f898a08fd23c1e5b7b515245eef9d50dd114c3770c",
+    "/workspace/SE-INR/runs/claude-20261019-prior-v4/early_lte/rows.json": "eef874e6641efe3ec84dd24b5f8c3d30fe83f0fccea8ee3c9c147e772dfb4289",
+    "/workspace/SE-INR/runs/claude-20261019-prior-v4/early_sc-inr/rows.json": "5a0fe4ba7ee555ffb6d0c092e6e6d2abc1824653e0103f421e220b748602131f",
+    "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/eval_edsr/rows.json": "5538f040e2e1cd1f40efd640311b03e18da640b62e86f0d0890e9b70f60adf85",
+    "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/eval_rdn/rows.json": "8e75dd922af12b5c93ff27ebc93f666f441c1e8a8a5613b6ed80b7fa7ca9f23c",
+    "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/eval_tinydec/rows.json": "f39fc36e8218fbfcaabeb6bb33449f2dd9fbbec12b95b97f9f892b38e90a90db",
+    "/workspace/SE-INR/runs/claude-20261020-swinir-v7/eval200_swinir/rows.json": "fafd68467e9eb11489469cc2e4886ba5fae46257aeba0dcb9ef3e642e3483df2",
+    "/workspace/SE-INR/runs/claude-20261020-transfer-v11/transfer_v11.json": "af22f86e245b4ab9444956cb5fc23deb2a3977cd97f0c847564160eb831352a7",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0869.png": "68a693195536fc94bc34ce7ff0e041990916fed73164a7c2dce00098a178ac75",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0870.png": "f03f496bb0f21d53012723782bfdbcbbde66115c45c35aa7d83373c304a9c041",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0871.png": "777df9ed736ff3ccc73388e90de36e131c002dfac64767f3b8ebccdd2cd5f058",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0872.png": "028ca10affee013698c7f15068fe4813a9d7b2c24f2bd40dac68305774a5577a",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0873.png": "3fcb2ae160dd255180854eaf54051c40cd205421367d0352144bb7490bc9afb1",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0874.png": "11cb511247d70d84adad5557a720254e5f73e3786dbcd399c6053a1982ce1784",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0875.png": "3c4859b59635fe7fcd6ec182c798eb3af44a2eafb6e8b891df3db62d0da3c5e2",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0876.png": "9d5a819847876bb0061bf1fd42b8bd97e8aef89d1f5fb09b1669b7e9546a25f1",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0877.png": "4e0fb583729accf7b93e07b2b81ce8d919f6490cee2d1f90db90b60095a59165",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0878.png": "e1aff248577bc04ddeba4f48a62aff421ca06450a703e4a450dd401e1efd9546",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0879.png": "ad5eb9637c891994c00f44358cf0a5238f642b8796b5cacaa8b59ba8bb51553a",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0880.png": "db5773c6e460824c5132c23917492fda7acd370c87e9ae6293a0103fee2b642d",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0881.png": "d2fba016ee3cee2395b677524d7ae2b2f6750cea1a6df4edc41f2977bd5d1b7c",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0882.png": "573345fb42061a43fe8f1c0b3b9faf57cdd77189782a4d89b78c31e421f19115",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0883.png": "3355621b3d834c320a66879e6cd23988df29f504f6cdecd22f1984b432a7e55a",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0884.png": "06a928200ad757ff2422ecd2e12986bb90e3bf6b64c6062e5d31f864cdc992bc",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0885.png": "36f1c2b8af6d898354506ef3f78d386156cf1c1f1397c165a84e74cf6484d800",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0886.png": "26af6bcdeea90b9900a021bf20a0550d9a1e107c59b4f05c96e8bccf0ab35db8",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0887.png": "a0a893c9417fcd04067bf254512801f92ae7c795b686e05f7389853c9fb78b11",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0888.png": "82a8d193f4eb0819ad3e48c048d13860d0b8f34d6fafc9b626e304294db3ba12",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0889.png": "a8f73c42065e3193c4deb883dcb3bc432a3f838e9be5bacea708ee39eb2c6e04",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0890.png": "67069da53af2b4f5237030631b0b5e087b8014d7b0f59917d96924aca1ab433c",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0891.png": "8e36e76f3675831c87b2e645e70ef33513b898dc09beb20b0bdcc61cc6d63bed",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0892.png": "7fb05e491f00963e64b53a0f3f7a3d1af51f1434e7fd4898d4b84c479e1f66f9",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0893.png": "cdcef3c0f0dd65da7ca0c4e75b672dd1f87f778740cb42d675bcb13dc1b3c307",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0894.png": "f412ff02984a0de7acc7e1209d02f8dcaa18ac76008fa260cf7c355e4a77976c",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0895.png": "a1c0888648fed4eb909c6e7f5f5db220ae98861294ebfdfa14b2c72567e96b2b",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0896.png": "367c698aa344cea6e790239f04bae168ef204ae771f6ea05285e5255fad2f84f",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0897.png": "dca63f56dba4a2a2c6b920c4b0406c6c6459d8f7ffb0d20322f51fbbc8f14b38",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0898.png": "4cd6696b8e59615ceacff729181dd9b0cc5ea936ea9a57e089bb1fe4fe87c347",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0899.png": "77e25eca6c3828abbea8f7fcf360d9be7f496513aa9ec08ff3f2e3a9c272e60e",
+    "/workspace/SE-INR/Data/DIV2K_valid_HR/0900.png": "06717f2a8f5d21fcec9a9229a7ecaab44dec0343406a59464382f5c4fdea3023"
+  },
+  "sources_unchanged_after_rendering": true,
+  "render_script_sha256": "6aaf59b3558f56539022b3e3f51990cb24d79b4ffb3eb0c39edafb74deac15cf",
+  "recovery": {
+    "server_reference_numeric_values": 208,
+    "server_reference_max_abs_difference": 0.0,
+    "repository_reference_numeric_values": 180,
+    "repository_reference_max_abs_difference": 0.0,
+    "comparison": "Exact float64 array equality, no tolerance; all keys and numeric values checked"
+  },
+  "qualitative": {
+    "image_and_crop_metadata": {
+      "image": "img_036.png",
+      "median_gain_db": 0.42433977127075195,
+      "crop": [
+        760,
+        256,
+        48
+      ],
+      "psnr_full": {
+        "HR": null,
+        "Bicubic": 25.37,
+        "EDSR-LIIF": 29.03,
+        "no cell": 28.8,
+        "decoder 2x64": 28.61,
+        "RDN-LIIF": 29.45,
+        "SwinIR-LIIF": 29.33
+      },
+      "psnr_crop": {
+        "HR": null,
+        "Bicubic": 20.27,
+        "EDSR-LIIF": 21.53,
+        "no cell": 21.4,
+        "decoder 2x64": 21.37,
+        "RDN-LIIF": 21.71,
+        "SwinIR-LIIF": 21.78
+      }
+    },
+    "saved_crops_sha256": "6e695e3190b58ba985e314915336b13d6304cac68adc7f234dc9851658f8b99c",
+    "crop_psnr_recomputed": {
+      "Bicubic": 20.273876190185547,
+      "EDSR-LIIF": 21.527621746063232,
+      "no cell": 21.39516830444336,
+      "decoder 2x64": 21.372954845428467,
+      "RDN-LIIF": 21.71217679977417,
+      "SwinIR-LIIF": 21.775245666503906
+    },
+    "all_displayed_psnr_equal_at_original_two_decimal_precision": true,
+    "selection_repeated": false,
+    "original_freeze_boundary": "The historical FROZEN.sha256 records qual.py only, not crops.npz or metadata. The final script hash matches; metadata matches the repository. Output hashes are established before this redraw, not claimed as historical pre-registration.",
+    "full_image_psnr": "Preserved original metadata; cannot recompute full-image PSNR from saved windows"
+  },
+  "pdf_fonts": {
+    "fig1_recovery.pdf": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nBMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes     15  0\n",
+    "fig3_qualitative.pdf": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nBMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes     28  0\n"
+  },
+  "outputs_sha256": {
+    "fig1_recovery.pdf": "dcda8c559714bc8314a30382f716ef4b324a4b052203b9d5379605647acbdd6a",
+    "fig3_qualitative.pdf": "10f414eced5d32c6d1a6f4be9972834cddc7770cc97c37548fdeea57b19923b2"
+  },
+  "visual_inspection": {
+    "status": "pass",
+    "inspector": "paper_positive_review independent subagent",
+    "method": "Poppler rendered latest PDFs at 2000px; inspected both images",
+    "findings": "No clipped or overlapping text; Figure 1(c) negative curve no longer occluded by legend; Figure 3 reproduces all saved windows and shared error scale.",
+    "fig1_page_points": [
+      504,
+      165.6
+    ],
+    "fig3_page_points": [
+      504,
+      169.2
+    ],
+    "minimum_legend_font_points": 6
+  },
+  "run_root": "/workspace/SE-INR/runs/codex-20261023-paper-figures-v1/final",
+  "source_path_note": "Relative input paths resolve against run_root.",
+  "renderer_local_path": "paper/render_shared_figures.py"
+}

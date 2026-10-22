@@ -1,0 +1,18 @@
+{
+  "primary_id": "P17-equal-step",
+  "prediction": "At equal decoder-cell step, output-change energy does not obey a universal monotone decrease with scale: at least one prespecified dataset/step/adjacent-scale contrast has a materially larger J at the higher scale.",
+  "prior_basis": "Fixed-m perturbations confound the size of the decoder intervention with scale, and prior crop analyses showed that cost and response can behave differently. The sign and strength of the response under the complete, exactly matched full-image grid remain to be measured. The universal claim is deliberately allowed to fail.",
+  "condition_grid": "4 datasets x 3 h values = 12 separately scored conditions",
+  "adjacent_pairs": [[2,3],[3,4],[4,6]],
+  "material_increase_ratio": 1.1,
+  "material_decrease_ratio": 0.9,
+  "per_condition_pass": "At least one adjacent ratio J_high/J_low has paired bootstrap one-sided Bonferroni lower bound (quantile .05/3) >1.10. The 10% threshold requires an effect larger than small numerical or practically negligible differences. A non-significant decline is never counted as support.",
+  "global_pass": "At least one of all 36 prespecified adjacent ratios has paired-bootstrap lower bound at quantile .05/36 >1.10. This controls the full family before selecting any reversal. Otherwise P17-equal-step FAILS; absence of significant decline never supports it.",
+  "stronger_prediction_id": "P17-all-conditions",
+  "stronger_prediction": "All 12 dataset/step conditions pass their prespecified within-condition three-comparison corrected gate. This separate stronger claim FAILS if any condition fails; failure does not invalidate a supported restricted reversal under the primary family-wide gate.",
+  "direction_prediction_id": "P17-Set14-positive",
+  "direction_prediction": "On Set14 at both h=+0.25 and h=+0.5, J at scale 6 exceeds J at scale 2. For both endpoint ratios, report point and 95% paired CI; this auxiliary prediction PASSES only if both lower .025 quantiles exceed 1 (one-sided Bonferroni correction for two endpoints). Otherwise it FAILS, distinguishing opposite direction from unresolved uncertainty.",
+  "diagnostic_labels": {"supported_material_reversal": "per-condition pass", "supported_material_monotone_decrease": "all 3 adjacent ratios have simultaneous one-sided upper bounds (quantile 1-.05/3) <.90", "unresolved_or_small": "neither criterion is met; this still fails the positive prediction and is not evidence of equal response"},
+  "secondary_reporting_without_gate": ["J, D, -2A and V with paired image intervals at every scale and step", "DC, output-r and LR-normalized-u frequency contributions", "J and D endpoint differences and ratios where denominator is positive/stable", "architecture and checkpoint-seed strata", "training-cell marginal support for native and perturbed cells", "nominal fixed-m history is contextual and is not substituted into this experiment"],
+  "prediction_counting": "One primary non-universality claim, one explicitly stronger all-condition claim, and one Set14 direction claim are scored separately. The 36 contrasts are not counted as 36 successful predictions. All results, including failures and unresolved conditions, remain in the repository summary."
+}

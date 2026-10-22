@@ -1,0 +1,28 @@
+{
+  "experiment_id": "equal-step-response-v1",
+  "status": "Predeclared specification; frozen status is established only by FROZEN.sha256 and input_manifest.json preceding RUN_STARTED.json, not by this text field.",
+  "base_commit": "11d3a63139f846442aaed1865fb708e043cd88dc",
+  "question": "Does output response necessarily decrease with upsampling scale when the change in each decoder cell coordinate is held fixed?",
+  "prospective_boundary": "Predictions, scoring and all code are frozen before these full-image measurements. Images and checkpoints are not unseen: stages 1 and 16 examined 240-pixel center crops, including some h=-0.25 conditions and an approximate positive h=1/3 endpoint contrast. This is a prospectively specified new measurement, not a held-out-image or blind discovery claim.",
+  "checkpoint_template": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed{seed}/{model}/epoch-last.pth",
+  "checkpoint_epoch": 1000,
+  "source_root": "/workspace/SE-INR/runs/claude-20261019-cell-mismatch-v1/src",
+  "models": ["liif", "lte", "sc-inr"],
+  "seeds": [1, 2],
+  "datasets": {
+    "DIV2K": {"root": "/workspace/SE-INR/Data/DIV2K_valid_HR", "first": 869, "last": 900, "count": 32},
+    "Set14": {"root": "/workspace/SE-INR/Data/Set14/HR", "count": 14},
+    "BSD100": {"root": "/workspace/SE-INR/Data/BSD100/HR", "count": 100},
+    "Urban100": {"root": "/workspace/SE-INR/Data/Urban100/HR", "count": 100}
+  },
+  "scales": [2, 3, 4, 6],
+  "steps": [-0.25, 0.25, 0.5],
+  "cell_rule": "m=1+h*s/2; native decoder cell c=2/s; perturbed c=2/s+h in EACH axis. External query cell is (m*2/H,m*2/W), and encoder features must be H/s by W/s. The two-axis step squared is 2*h*h; per-axis h is used throughout.",
+  "training_cell_support": "Training effective scales were [1,4], so decoder cell c is within [0.5,2]. State native/perturbed marginal support separately; being inside this interval does not establish full training-distribution support. At h=-.25, perturbed c is below .5 for s=3,4,6; at positive h, all perturbed c values are within [.5,2]. Native s=6 remains outside the training range.",
+  "preprocessing": {"colors": "RGB float32 /255", "hr_crop": "whole image top-left modcrop to multiples of lcm(2,3,4,6)=12; identical HR support at all scales", "lr": "torch interpolate bicubic antialias=True align_corners=False, clamp[0,1]", "input_normalization": "2*LR-1", "output": "0.5*network_output+0.5; float32, unclipped", "shave": 4},
+  "inference": {"precision": "float32; TF32 disabled; eval and no_grad", "query_chunk": 30000, "save_full_predictions": false, "outputs_per_image_scale": 4, "source_frozen_separately": true, "no_training": true},
+  "metrics": {"primary": "J=mean((P_h-P_0)^2) on shaved full RGB image, including DC", "secondary": "D=mean((T-P_h)^2)-mean((T-P_0)^2); A=mean((T-P_0)*(P_h-P_0)); V=mean((T-P_0)^2); D=J-2A", "spectral": "2D unwindowed FFT on shaved image, normalized by 3*(H_shaved*W_shaved)^2. Report DC separately; non-DC Chebyshev radius r=max(|fx|,|fy|), fixed output-r bins of width 1/32 plus exact Nyquist r=.5; LR-normalized u=2*s*r bins width .25 with last bin including u=s. Every decomposition includes all frequencies and sums to the spatial metric.", "weighting": "Per-image RGB means; equal weight for every image within a dataset, then equal weight across 3 architectures and 2 checkpoint seeds. Datasets never pooled for primary tests. Model/seed strata also reported without treating them as independent images."},
+  "bootstrap": {"unit": "image within each dataset; same image indices across all models, seeds, scales, steps and spectral bins; distinct deterministic random streams per dataset", "replicates": 10000, "seed": 20261023, "interval": "paired percentile two-sided 95%; primary non-universality test uses one-sided alpha=.05/36 Bonferroni bounds for all 36 comparisons; per-dataset/step diagnostics use alpha=.05/3 bounds for three adjacent comparisons", "population_boundary": "image sampling uncertainty conditional on these 6 checkpoints; not a training-seed population CI"},
+  "failure_policy": "No failed image/checkpoint is dropped or replaced. A failed worker preserves partial outputs and creates FAILED.json; scoring refuses an incomplete grid. No adaptive threshold, crop, spectrum, model or cohort changes after inference begins. Code changes require a new frozen version and explicit amendment.",
+  "execution": "launch.sh verifies FROZEN.sha256 and sets CUDA_DEVICE_ORDER=PCI_BUS_ID, then executes deterministic model/seed shards on selected GPU IDs, then invokes score.py only if every shard completed. Checkpoint and image SHA256 hashes are frozen before the first model load. No original run is modified."
+}

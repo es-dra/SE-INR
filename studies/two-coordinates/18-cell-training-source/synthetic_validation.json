@@ -1,0 +1,92 @@
+{
+  "status": "pass",
+  "scope": "CPU synthetic checks only; zero trained checkpoints or image data read, zero GPU inference/training",
+  "constant_cell": 0.9242188453177678,
+  "validated_script_sha256": {
+    "cell_source.py": "5a37768d87e5912eb1c0cd3ffc8021e2231272f3f81ad5a31fd1ba6d410ad0e1",
+    "score.py": "fcbe337041eb91085258a35b330c7b47d9c079121bb99e90b136d5b981071afe",
+    "protocol.json": "35f53be8f076a1110bc38cc7991ff281a4ec641173ee1af5dc32c63925895712",
+    "validate_synthetic.py": "4b11d883df8fb46ad9594a44edbacd77ab6f3b38d70fb9cee56c4408bbef9fe0"
+  },
+  "checks": {
+    "initial_weights_and_global_rng_seed1": true,
+    "initial_weights_and_global_rng_seed2": true,
+    "constant_assignment_rng_audit": {
+      "mode": "constant",
+      "batches": 1000,
+      "samples": 16000,
+      "fixed_index_count": null,
+      "same_cell_value_fraction": 0.0,
+      "native_mean": 1.7418123967945576,
+      "assigned_mean": 0.9242188632488251,
+      "native_variance": 0.021278945650849757,
+      "assigned_variance": 1.4099832412739488e-14,
+      "correlation": 1.9613252897004314e-06,
+      "constant_expected": 0.9242188453177678,
+      "exact_marginal_sum_error": 13081.49653673172,
+      "exact_marginal_square_error": 35216.14182548939
+    },
+    "shuffle_assignment_rng_audit": {
+      "mode": "shuffle",
+      "batches": 1000,
+      "samples": 16000,
+      "fixed_index_count": 0,
+      "same_cell_value_fraction": 0.0,
+      "native_mean": 1.7418123967945576,
+      "assigned_mean": 1.7418123967945576,
+      "native_variance": 0.021278945650849757,
+      "assigned_variance": 0.021278945650849757,
+      "correlation": -0.06175497356713116,
+      "constant_expected": 0.9242188453177678,
+      "exact_marginal_sum_error": 0.0,
+      "exact_marginal_square_error": 0.0
+    },
+    "scoring_pass_case": {
+      "T1_constant": {
+        "pass": true,
+        "criterion": "native-minus-arm >=0.05 dB, Bonferroni-adjusted 97.5% paired-image CI lower>0, both fixed seeds positive",
+        "observed": 0.10000000000000142,
+        "ci": [
+          0.10000000000000142,
+          0.10000000000000142
+        ],
+        "seed_means": [
+          0.10000000000000142,
+          0.10000000000000142
+        ]
+      },
+      "T1_shuffle": {
+        "pass": true,
+        "criterion": "native-minus-arm >=0.05 dB, Bonferroni-adjusted 97.5% paired-image CI lower>0, both fixed seeds positive",
+        "observed": 0.10000000000000142,
+        "ci": [
+          0.10000000000000142,
+          0.10000000000000142
+        ],
+        "seed_means": [
+          0.10000000000000142,
+          0.10000000000000142
+        ]
+      },
+      "T2_constant_equivalent_nocell": {
+        "pass": true,
+        "criterion": "95% CI wholly within +/-0.03 dB; two equivalence tests with Bonferroni alpha .025 each",
+        "observed": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "T2_shuffle_equivalent_nocell": {
+        "pass": true,
+        "criterion": "95% CI wholly within +/-0.03 dB; two equivalence tests with Bonferroni alpha .025 each",
+        "observed": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "duplicate_rejected": true
+  }
+}

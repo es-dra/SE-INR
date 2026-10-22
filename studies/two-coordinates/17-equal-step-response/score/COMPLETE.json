@@ -1,0 +1,79 @@
+{
+  "summary_sha256": "6991437ad85d9476ee56f05117b6294a69f68697e2cce907744df72b40c5795f",
+  "prediction_results": {
+    "P17-equal-step": {
+      "status": "PASS",
+      "supported_pairs": 11,
+      "family_size": 36,
+      "lower_quantile": 0.001388888888888889,
+      "threshold": 1.1
+    },
+    "P17-all-conditions": {
+      "status": "PASS",
+      "supported_conditions": 12,
+      "condition_count": 12,
+      "within_condition_lower_quantile": 0.016666666666666666,
+      "threshold": 1.1
+    },
+    "P17-Set14-positive": {
+      "status": "FAIL",
+      "endpoint_details": [
+        {
+          "dataset": "Set14",
+          "h": 0.25,
+          "start_scale": 2,
+          "end_scale": 6,
+          "J_ratio": 1.6527797362171954,
+          "J_ratio_ci_low": 0.9645038776942824,
+          "J_ratio_ci_high": 2.7079111458710345,
+          "J_difference": 1.2473438791191831e-05,
+          "J_difference_ci_low": -7.297369225632077e-07,
+          "J_difference_ci_high": 2.8180825258497174e-05,
+          "D_difference": -2.1351179220146647e-05,
+          "D_difference_ci_low": -4.5414846322962546e-05,
+          "D_difference_ci_high": -2.33690392007544e-06,
+          "A_difference": 1.6912309005669163e-05,
+          "A_difference_ci_low": 4.6042765885324e-06,
+          "A_difference_ci_high": 3.432239590701678e-05,
+          "V_difference": 0.0033527139507064344,
+          "V_difference_ci_low": 0.00219468777598014,
+          "V_difference_ci_high": 0.0046250527315843904,
+          "E_difference": 0.0,
+          "E_difference_ci_low": 0.0,
+          "E_difference_ci_high": 0.0
+        },
+        {
+          "dataset": "Set14",
+          "h": 0.5,
+          "start_scale": 2,
+          "end_scale": 6,
+          "J_ratio": 2.00660170289649,
+          "J_ratio_ci_low": 1.1273039204971977,
+          "J_ratio_ci_high": 3.2924047348264396,
+          "J_difference": 7.102928571396955e-05,
+          "J_difference_ci_low": 9.274197477478271e-06,
+          "J_difference_ci_high": 0.00014738159645027538,
+          "D_difference": 5.725073228278073e-06,
+          "D_difference_ci_low": -5.317825714200477e-05,
+          "D_difference_ci_high": 7.003111000739278e-05,
+          "A_difference": 3.2652106242845764e-05,
+          "A_difference_ci_low": 2.4145967130526786e-06,
+          "A_difference_ci_high": 7.751076995944049e-05,
+          "V_difference": 0.0033527139507064344,
+          "V_difference_ci_low": 0.00219468777598014,
+          "V_difference_ci_high": 0.0046250527315843904,
+          "E_difference": 0.0,
+          "E_difference_ci_low": 0.0,
+          "E_difference_ci_high": 0.0
+        }
+      ],
+      "lower_quantile": 0.025,
+      "threshold": 1.0
+    }
+  },
+  "checks": {
+    "identity_max_abs": 4.4533604234842095e-17,
+    "parseval_max_abs": 8.559819519859957e-14,
+    "records": 17712
+  }
+}

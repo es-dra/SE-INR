@@ -1,0 +1,7 @@
+{
+  "T1_constant": "Native-minus-constant balanced mean Y-PSNR >=0.05 dB; both fixed seeds positive; Bonferroni-adjusted 97.5% paired-image CI excludes0 in positive direction.",
+  "T1_shuffle": "Native-minus-shuffle(native inference) same criterion, forming a family of two primary comparisons.",
+  "T2_constant": "Constant and no-cell equivalent within +/-0.03 dB: 95% paired-image CI wholly inside equivalence margin; two TOST comparisons Bonferroni alpha0.025 each.",
+  "T2_shuffle": "Shuffle(native inference) and no-cell same equivalence criterion. Failure of equivalence is reported as failure/inconclusive, never interpreted as proof of difference or equivalence.",
+  "recovery": "Descriptive predeclared regions u<0.75, [0.75,1), [1,2), >=2; all quarter-u bins retained, paired CIs reported. No success-bin selection or additional gate."
+}

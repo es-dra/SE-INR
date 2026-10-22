@@ -1,8 +1,0 @@
-{
-  "passed": false,
-  "failure_stage": "plot import after numerical summaries were written",
-  "error": "ModuleNotFoundError: No module named 'matplotlib'",
-  "runtime": "/Users/deepmath/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-  "raw_inputs_modified": false,
-  "resolution": "Re-executed in the existing /tmp/se-inr-energy-filter-env/bin/python environment into projection-summary-v2; fixed-band figure revision is projection-summary-v3."
-}

@@ -1,145 +1,152 @@
-% Evidence-aligned revision, 2026-10-23. Original tracked version archived.
+% Prospective reconstruction, 2026-10-23.
+% Review handoff: stage 17 complete; stage 18 running, outcomes explicitly pending.
 \documentclass{article}
 \usepackage{spconf,amsmath,amssymb,graphicx,booktabs}
 \usepackage[T1]{fontenc}
 \usepackage{times}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
-\title{Recovery and Conditioning in Arbitrary-Scale Super-Resolution:\\
-A Two-Coordinate Analysis}
+\title{Shared Recovery Profiles, Calibrated Cell Responses,\\
+and Scale-Conditioned Learning in Arbitrary-Scale Super-Resolution}
 \name{Anonymous authors}
 \address{Anonymous institution}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution networks decode image features at continuous coordinates, often conditioned on target pixel size, or cell. We separate frequency recovery from the response to this condition. Recovery profiles are similar across four tested decoder designs in input-Nyquist-normalised frequency; capacity changes act mainly above a relative frequency of about 0.75. Cell responses cannot be reduced to a fixed low-pass filter acting on recovered energy. On saved DIV2K and Set14 outputs, recovery and fitted filter changes account for about 41\% of the measured doubled-cell cost decrease from $\times2$ to $\times6$. Non-scalar changes account for much of the remainder and can worsen or correct native errors. A further confound is intervention size: a fixed cell multiplier gives a decoder-input step proportional to inverse scale. Step-normalised responses and matched-step comparisons do not support a universal loss of sensitivity. Existing retraining without cell still loses about 0.1\,dB across scales. The resulting audit separates recovery, intervention size and error alignment, with retained negative results and explicit prediction limits.
+Arbitrary-scale super-resolution combines learned image features, continuous decoding and target-pixel-size conditioning. We identify the frequency range in which additional capacity helps, and distinguish the response to cell size from its value during learning. First, recovery profiles are closely shared by the tested decoder families, while stronger encoders, larger MLPs and longer training improve recovery mainly from input-normalised frequency $u\approx0.75$ upward. This low-frequency saturation persists under a second, Gaussian-blur degradation. Second, fixed cell multipliers change the actual decoder-input step with scale. We control this step directly and separate output-change energy from its alignment with reconstruction error. A prospective full-image test finds 11 materially increasing adjacent-scale responses under family-wide correction, so declining fixed-multiplier cost does not establish universal response decay. Third, dimension-preserving constant-cell and shuffled-cell training test the contribution of correctly paired conditioning under a matched 200-epoch recipe. These training comparisons are in progress; this review draft makes no training-source claim. Together, these experiments connect frequency-localised capacity gains with controlled measurements of scale conditioning.
 \end{abstract}
 \begin{keywords}
-Arbitrary-scale super-resolution, implicit representation, frequency analysis, scale conditioning
+Arbitrary-scale super-resolution, implicit representation, frequency recovery, scale conditioning
 \end{keywords}
 
 \section{Introduction}
 \label{sec:intro}
-LIIF~\cite{chen2021liif} reconstructs images at continuous queries from local features, offsets and cell size. Later designs include local Fourier estimators~\cite{lee2022lte}, integrated positional encoding~\cite{liu2021ipe}, implicit attention~\cite{cao2023ciaosr}, neural operators~\cite{wei2023srno}, Gaussian splatting~\cite{hu2024gaussiansr} and heat-field filtering~\cite{becker2025thera}. An empirical benchmark already attributes much improvement to size and training rather than decoder novelty~\cite{nasir2026empirical}; a recent spectral decoder trades matched-baseline PSNR for efficiency~\cite{shad2026gblsr}. We examine what changes in the reconstructed signal.
+Continuous-coordinate super-resolution decodes local image features at arbitrary output locations. LIIF~\cite{chen2021liif} conditions this decoder on target pixel size, or \emph{cell}; subsequent designs use local Fourier estimators~\cite{lee2022lte}, integrated positional encoding~\cite{liu2021ipe}, implicit attention~\cite{cao2023ciaosr}, neural operators~\cite{wei2023srno}, Gaussian splatting~\cite{hu2024gaussiansr} or heat-field filtering~\cite{becker2025thera}. Which parts of the recovered signal benefit from these choices, and what information does cell contribute?
 
-Frequency explanations have important precedents. HyRA decomposes an SR mapping using its impulse response and shows that nonlinear responses compensate phase distortions of its low-pass component~\cite{fsds2024}. LIIF itself observed that changing cell at large scales can visibly affect edges without improving PSNR~\cite{chen2021liif}. Integrated encoding and heat fields explicitly relate scale to filtering~\cite{liu2021ipe,becker2025thera}. We instead hold each LR input and query grid fixed, change only cell, and quantify output change and its alignment with native error. Our non-scalar response is not a nonlinear component in HyRA's sense.
+Prior work links performance to model size and training~\cite{nasir2026empirical} and studies spectral decoding's efficiency--accuracy trade-off~\cite{shad2026gblsr}. HyRA analyses nonlinear compensation of low-pass phase distortion~\cite{fsds2024}; LIIF, integrated encoding and heat fields connect cell to edges and filtering~\cite{chen2021liif,liu2021ipe,becker2025thera}. We locate capacity gains and distinguish cell-induced output change, error cost and training benefit.
 
-We (i) locate recovery and capacity effects in input-normalised frequency $u=2sr$, with scale $s$ and output frequency $r$; (ii) audit a scalar-filter explanation of cell cost, retaining residuals and images that reverse the mean trend; and (iii) distinguish decreasing fixed-multiplier cost from sensitivity to a fixed decoder-input step. These distinctions also separate inference perturbations from the training benefit of cell.
+We show that (1) tested decoder forms share recovery profiles, with capacity gains concentrated near and above $u=0.75$; (2) calibrated cell steps reject universal response decay while separating response from error alignment; and (3) dimension-preserving training controls test correctly paired conditioning. The training-source verdict remains pending. Table~\ref{tab:gates} retains original failures.
 
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig1_recovery.pdf}
-\vspace{-5mm}
-\caption{Recovery in input-normalised frequency $u$. (a) Three decoder families and three seeds at four scales; dotted curves are bicubic. (b) Decoder comparison at $\times4$; GaussianSR is an external checkpoint. (c) Effects of training duration, encoder and MLP capacity.}
+\vspace{-4mm}
+\caption{Shared recovery profiles and frequency-localised capacity effects. (a) Three decoder families and three seeds at four scales; dotted curves are bicubic. (b) Decoder comparison at $\times4$; GaussianSR is an external checkpoint with a different recipe. (c) Effects of training duration, encoder and MLP capacity. The plotted points represent frequency bands.}
 \label{fig:rec}
 \end{figure*}
 
-\section{Setup and frequency recovery}
+\section{Shared recovery profiles and capacity}
 \label{sec:u}
-\textbf{Models and data.} LIIF, LTE and SC-INR (an LTE-derived experimental variant with analytic sinc cell weights) use the EDSR-baseline architecture~\cite{lim2017edsr}, separately learned encoder weights and a common DIV2K~\cite{agustsson2017div2k} recipe: scales from $\mathcal U(1,4)$, 1000 epochs and three seeds. GaussianSR uses an external 2000-epoch EDSR checkpoint with a different recipe; it is an additional comparison, not a matched ablation. Matched 200-epoch LIIF arms change the encoder to RDN~\cite{zhang2018rdn} or SwinIR~\cite{liang2021swinir}, reduce the MLP from $4\times256$ to $2\times64$, or remove cell. These are recipe-matched, not parameter- or compute-matched comparisons.
+\textbf{Models and measurement.} LIIF, LTE and SC-INR (an LTE-derived experimental variant with analytic sinc cell weights) use the EDSR-baseline architecture~\cite{lim2017edsr}, separately learned encoder weights and a common DIV2K~\cite{agustsson2017div2k} recipe: scales from $\mathcal U(1,4)$, 1000 epochs and three seeds. GaussianSR uses an external 2000-epoch EDSR checkpoint and provides an additional comparison. Matched 200-epoch LIIF arms change the encoder to RDN~\cite{zhang2018rdn} or SwinIR~\cite{liang2021swinir}, reduce the MLP from $4\times256$ to $2\times64$, or remove cell. These comparisons match recipes; parameter counts and compute differ.
 
-We use anti-aliased bicubic inputs at $\times\{2,3,4,6\}$; $\times6$ is outside the training range. Crop frequency analyses use $240^2$ centre crops and shave four pixels. Define $r=\max(|f_x|,|f_y|)$ in cycles per output pixel, and $u=2sr$. Recovery is $R_b=1-V_b/E_b$, with target energy $E_b$ and native error energy $V_b$, in bins of width $0.25$ in $u$. Standard full-image Y-PSNR uses Set5, Set14~\cite{zeyde2010single}, BSD100~\cite{martin2001database}, Urban100~\cite{huang2015urban} and shave equal to scale. Original stages include registered predictions and failures; the residual and step analyses below are retrospective.
+Let $r=\max(|f_x|,|f_y|)$ be frequency in cycles per output pixel and $u=2sr$ its value relative to the input Nyquist limit at scale $s$. Recovery in band $b$ is $R_b=1-V_b/E_b$, where error energy $V_b$ and target energy $E_b$ are pooled over images before taking the ratio. Original crop analyses use DIV2K 0869--0900, $240^2$ centre crops, quarter-$u$ bins, anti-aliased bicubic inputs and a four-pixel shave. Full-image recovery additionally covers Set14~\cite{zeyde2010single}, BSD100~\cite{martin2001database} and Urban100~\cite{huang2015urban}. We evaluate $\times2/3/4/6$; $\times6$ lies outside the training scale range.
 
-\textbf{What changes recovery.} On DIV2K 0869--0900, networks exceed bicubic mainly around and above the input Nyquist limit (Fig.~\ref{fig:rec}a). Cross-scale agreement is approximate, with retained failures in Table~\ref{tab:gates}. Among the three matched decoder families, maximum crop spread is about 0.010 (image-bootstrap interval $[0.007,0.016]$, excluding GaussianSR). Including GaussianSR, all 54 tested full-image dataset--scale--band comparisons have spread below 0.019. This supports similar tested profiles, not universal decoder equivalence.
+\textbf{A shared recovery regime.} Across $\times2/3/4$, the three matched decoder families have a maximum scale-specific band spread of 0.010, attained at $\times4$, in the registered $0.5\le u<2$ comparison (paired image-bootstrap 95\% interval $[0.007,0.016]$ at that scale). With GaussianSR included, all 54 full-image dataset--scale--band comparisons stay below 0.019. Closely shared profiles extend across the tested decoder forms and image collections (Fig.~\ref{fig:rec}a,b), although the stricter cross-scale-collapse prediction fails its registered tolerance gates.
 
-Longer training, stronger encoders and a larger MLP change recovery primarily from $u\approx0.75$ upward (Fig.~\ref{fig:rec}c). Under Gaussian blur followed by bicubic resizing without antialiasing, a predicted extension of capacity gains to lower frequencies failed: the baseline network already recovers those bands nearly completely. This boundary is empirical, not a theorem about Nyquist. Table~\ref{tab:budget} reports full-image gains and losses.
+\textbf{Capacity improves the incompletely recovered bands.} Longer training, stronger encoders and a larger MLP change recovery primarily from $u\approx0.75$ upward (Fig.~\ref{fig:rec}c). From epoch 100 to 1000, gains in $1\le u<2$ range from 0.0245 to 0.0464 across the three decoder families and $\times2/3/4$, while changes below $u=0.75$ are at most 0.0013. Matched RDN and smaller-MLP experiments replicate the high-frequency improvement and loss, respectively, with a second training seed. Decoder form and decoder capacity therefore have distinct empirical effects.
 
-
-
-\begin{figure*}[t]\centering
-\includegraphics[width=\textwidth]{figures/fig2_residual.pdf}
-\vspace{-3mm}
-\caption{Saved Set14 outputs, $m=2$, $0<r<0.5$. (a) Frequency allocation of the $\times2\!\to\!\times6$ decrease in $H$. (b) Signed image contributions, retaining all 14 images. (c) Residual energy under finer real projections. Channel and frequency refinements are separate branches; extra fit flexibility is diagnostic, not predictive evidence.}
-\label{fig:residual}
-\end{figure*}
-
-\section{Auditing the cell response}
-\label{sec:r}
-For native output $P$, perturbed output $P_m$ and target $T$, write $e=T-P$ and $\delta=P_m-P$. At fixed input and queries, the exact error change is
-\begin{equation}
-D=\|e-\delta\|^2-\|e\|^2
- =\underbrace{\|\delta\|^2}_{J}-2\operatorname{Re}\langle e,\delta\rangle.
-\label{eq:exact}
-\end{equation}
-Small $D$ may reflect small response, cancellation, or both. All energy terms use RGB-mean MSE units; their shares are not dB shares.
-
-\textbf{A scalar filter is incomplete.} In each output-frequency band fit real $w=\operatorname{Re}\langle P,P_m\rangle/\|P\|^2$ and retain $\epsilon=P_m-wP$. Fit separately by model, scale and multiplier, pooling images and seeds. With $C=\operatorname{Re}\langle e,P\rangle$ and $U=\|P\|^2$, the identity $RE=E-V=U+2C$ gives
-\begin{align}
-D &= Q+G+H,\label{eq:law}\\
-Q &= \sum_b(1-w_b)^2R_bE_b,\nonumber\\
-G &= \sum_b2w_b(1-w_b)C_b,\nonumber\\
-H &= \sum_b\{\|\epsilon_b\|^2-2\operatorname{Re}\langle e_b,\epsilon_b\rangle\}.\nonumber
-\end{align}
-Fitting makes $\operatorname{Re}\langle P_b,\epsilon_b\rangle=0$ after pooling; no prediction--error orthogonality is assumed. Image allocations retain $-2(1-w_b)\operatorname{Re}\langle P_b,\epsilon_b\rangle$, which cancels only after pooling.
-
-DIV2K transfer statistics cover 32 images, one seed and 16 bands with $0<r<0.5$, excluding DC and the exact Nyquist outer ring. For $m=2$, $Q/D$ is 0.44, 0.72, 0.81 and 2.50 at $\times2/3/4/6$. Intermediate-scale agreement partly reflects cancellation between $G$ and $H$. The fitted strength also changes: in $r\in[0.3125,0.34375)$, mean $w$ rises from 0.307 to 0.807 between $\times2$ and $\times6$. Similar affected frequency ranges do not imply a fixed filter.
-
-Holding HR images and $r$ bands fixed, we symmetrically split $\Delta Q$ between changes in $(1-w)^2$ and $RE$, averaging the two orders of changing them. Recovery and filter changes account for 22.7\% and 18.7\% of the measured $\times2\!\to\!\times6$ decrease; $G,H$ account for 4.2\%,54.4\%. On saved Set14 predictions (14 images, two seeds), the shares are 27.3\%,14.3\%,$-0.04$\%,58.5\%. The Set14 $H$ share has paired image-bootstrap interval $[42.0,67.0]$\%, conditional on these trained seeds. This is retrospective accounting, not causal or held-out prediction.
-
-\textbf{Frequency and image structure.} Of the Set14 $H$ decrease, 70.9\% lies in $r\in[0.1875,0.375)$; the same band contributes 78.5\% on DIV2K. Comic, monarch and zebra contribute 64.1\% of the Set14 net $H$ decrease, while barbara contributes $-18.8$\% (Fig.~\ref{fig:residual}). At $\times2$, barbara's MSE improves by $616\times10^{-6}$ after doubling cell, with a negative $H$. Non-scalar changes are not uniformly harmful. Removing any one image and refitting $w$ leaves $H$ at 56.8--61.4\% of the total decrease. Per-image-and-seed filters still leave 53.9\%, so pooling alone does not close the gap.
-
-\textbf{What the residual contains.} Fit real gains separately for each saved image and seed: (A) per band, (B) per band and RGB channel, (C) per Fourier frequency, or (D) per frequency and channel. At $\times2$, these retain 93.2\%, 93.1\%, 45.5\% and 40.7\% of pooled residual energy; at $\times6$, 84.7\%, 84.3\%, 35.4\% and 29.0\%. Within-band frequency variation matters more than RGB sharing. Even D cannot represent the quadrature component relative to native phase; negative gains absorb $\pi$ flips. Its residual energy falls from $119.0$ to $14.9$ in $10^{-6}$ MSE, but its contribution to error changes from $+84.8$ to $-1.9$. These are fitted subspace diagnostics, not an identified network mechanism or evidence of predictive improvement.
-
-
+After retraining with Gaussian blur ($\sigma=0.6s$ HR pixels) and non-antialiased bicubic resizing, RDN improves PSNR at all scales but changes recovery below $u=0.75$ by at most 0.0006, failing the registered lower-band-gain prediction. This one-seed result extends low-frequency saturation to a second degradation. Table~\ref{tab:budget} and Fig.~\ref{fig:qual} show benchmark and visual effects.
 
 \begin{figure*}[t]\centering
-\includegraphics[width=\textwidth]{figures/fig3_step_controls.pdf}
+\includegraphics[width=\textwidth]{figures/fig2_equal_step.pdf}
 \vspace{-3mm}
-\caption{Original float32 response moments, all non-DC crop frequencies, three models and two seeds. (a) Doubled-cell output-change energy $J$, relative to $\times2$. (b) The same comparison after dividing by the squared decoder-input step. (c) Matched positive-step comparison; intervals resample paired images within each dataset, retaining fixed trained seeds.}
+\caption{Equal-step output responses need not decrease with scale. Each curve averages three decoder families and two seeds on one full-image dataset. Shading shows pointwise 95\% paired-image bootstrap intervals, conditional on these checkpoints; the logarithmic axis reports $J$. Prediction gates use separately specified multiplicity corrections.}
 \label{fig:step}
 \end{figure*}
 
-\section{Intervention size, cost and training}
+\section{Calibrating the response to cell}
 \label{sec:step}
-\textbf{Fixed multiplier is not fixed input step.} For output side length $L$, the implementations multiply cell $2/L$ by LR feature-grid size $L/s$. The decoder therefore receives $c=2/s$ on each axis, and multiplier $m$ changes it by
+\textbf{Equal multipliers imply unequal interventions.} For output side length $L$, the implementations multiply the supplied cell $2/L$ by the LR feature-grid size $L/s$. The decoder receives $c=2/s$ on each axis. Multiplying cell by $m$ therefore gives the per-axis step
 \begin{equation}
-h=2(m-1)/s.
+h=\frac{2(m-1)}s,\qquad m=1+\frac{hs}{2}.
 \label{eq:step}
 \end{equation}
-Both axes change together; $h$ denotes the per-axis step. For $m=2$ it shrinks from 1 to $1/3$ between $\times2$ and $\times6$. Set14 residual energy decreases from $292.7$ to $51.5$ in units of $10^{-6}$ MSE, but division by $h^2$ gives $292.7$, $213.5$, $337.9$, $463.3$ across scales. Raw decline does not establish declining unit-step response. This finite-difference diagnostic is not a Jacobian estimate: features, native cell and relative query coordinates also change with scale.
+For fixed $m=2$, this step falls from 1 to $1/3$ between $\times2$ and $\times6$. A declining perturbation cost consequently combines changing input step with changing network response.
 
-We reuse original float32 response moments on all 214 Set14/BSD100/Urban100 crops, three models and two seeds. At approximately equal positive step $h=1/3$, compare $(s,m)=(2,1.3333)$ and $(6,2)$; steps differ by 0.01\%. Mean output-change energy $J$ at $\times6$ is 2.26, 1.09 and 0.77 times its $\times2$ value across these datasets (Fig.~\ref{fig:step}); paired image-bootstrap intervals are $[1.31,3.97]$, $[0.91,1.28]$, $[0.61,0.96]$. A negative-step control uses $(2,0.75),(3,0.625),(4,0.5)$, all exactly $h=-0.25$, and is likewise dataset-dependent: BSD100 response energy falls 26\%, while mean MSE cost rises 218\%. These controls challenge a universal sensitivity collapse but do not isolate scale causally: input features and training-support status differ.
+For native prediction $P$, perturbed prediction $P_h$, target $T$, native error $e=T-P$ and output change $\delta=P_h-P$, the MSE change is
+\begin{equation}
+D=\|e-\delta\|^2-\|e\|^2
+=\underbrace{\|\delta\|^2}_{J}-2\operatorname{Re}\langle e,\delta\rangle.
+\label{eq:exact}
+\end{equation}
+We report $J$, $D$ and the alignment term in RGB-mean MSE units. Small cost can arise from an output change that corrects existing error. The dB cost additionally depends on native MSE $V$ through $10\log_{10}(1+D/V)$.
 
-\textbf{Small cost does not mean no response.} On Set14 at $\times6$, doubled cell changes output by $J=82.5\times10^{-6}$ MSE. Error alignment cancels $62.7\times10^{-6}$, leaving $D=19.8\times10^{-6}$ (Eq.~\ref{eq:exact}). The dB cost is $10\log_{10}(1+D/V)$; native MSE $V$ also grows with scale. The original approximately 2.3/0.40/0.13/0.01\,dB sequence on DIV2K remains valid for its fixed-multiplier protocol; it does not establish that cell ceases to act from $\times3$. Halved-cell and small-perturbation failures remain in the study records.
+\textbf{Prospective equal-step test.} Protocol, predictions, input identities and scoring code are frozen before inference on all 246 images in DIV2K 0869--0900, Set14, BSD100 and Urban100, using LIIF/LTE/SC-INR with two seeds. Common top-left modcrop-12 fixes HR support across scales; inputs use anti-aliased bicubic resizing, outputs remain unclipped, and measurements shave four pixels. We set $h\in\{-0.25,0.25,0.5\}$ on both axes. Complete $r$ and $u$ spectra, including DC and Nyquist, sum to the spatial metrics.
 
+The primary prediction is a material violation of universal monotone response decay: at least one of the 36 prespecified dataset--step--adjacent-scale ratios has a one-sided, Bonferroni-corrected bootstrap lower bound above 1.10. We use 10,000 paired image resamples per dataset after averaging the fixed architectures and seeds. Separate predictions require a supported reversal in all 12 dataset--step conditions, and Set14 $J_6/J_2>1$ at both positive steps with corrected lower bounds above one. These gates are scored separately.
 
+\textbf{Calibrated responses remain substantial.} The primary gate passes: 11/36 adjacent comparisons have family-wide corrected increases exceeding 10\%, including seven positive-step $\times2\!\to\!\times3$ comparisons with cells inside the training interval. All 12 dataset--step conditions pass their separate three-comparison gates (Fig.~\ref{fig:step}). The auxiliary Set14 endpoint prediction fails: at $h=0.25$, $J_6/J_2=1.65$ with interval $[0.96,2.71]$.
 
-\textbf{Training is separate.} Removing cell during training costs about 0.1\,dB at every benchmark scale, consistently in two seeds (Table~\ref{tab:budget}). A smaller MLP also hurts at every scale, despite the registered prediction that it would be harmless at large scales. Inference perturbations cannot identify why cell improves learning. These results motivate examining trained capacity and conditioning separately, without declaring decoder form generally irrelevant.
+Response and cost can move in opposite directions. On BSD100 at $h=0.5$, $J_6/J_2=1.24$ $[1.06,1.44]$, but $D$ falls from $79.42$ to $40.77$ in $10^{-6}$ MSE (paired change $-38.65$ $[-55.13,-22.01]$; descriptive 95\% intervals, without multiplicity correction). Across datasets at this step, $r\ge0.375$ accounts for 43.5--50.7\% of $J$ at $\times2$, but only 2.4--3.0\% at $\times6$; the middle band $r\in[0.1875,0.375)$ accounts for 60.5--66.7\% at $\times6$.
+
+These finite interventions compare responses across changing features and native conditions. Negative steps leave the training cell interval at some scales, and native $\times6$ is outside it; marginal support is reported for each condition.
+
+\textbf{Scope of a scalar explanation.} A retrospective real-gain fit gives $Q=\sum_b(1-w_b)^2R_bE_b$, fitting $w_b$ to native and perturbed outputs. In the original DIV2K bands, doubled-cell $Q/D$ is 0.44, 0.72, 0.81 and 2.50 at $\times2/3/4/6$. Recovery and fitted-filter changes jointly account for 41.4\% of the $\times2\!\to\!\times6$ MSE-cost decline (Set14: 41.5\%); alignment and non-scalar terms complete the accounting. Projections, image rankings and negative cases remain in the repository.
+
+\begin{figure*}[t]\centering
+\includegraphics[width=\textwidth]{figures/fig3_qualitative.pdf}
+\vspace{-3mm}
+\caption{Rule-selected $\times4$ recovery example, Urban100 img\_036. Before visual inspection, the image is selected at the upper-median rank of whole-image RDN--EDSR Y-PSNR gain (51st of 100); the $48\times48$ window maximises HR gradient energy on a stride-eight grid. Top: reconstructions and window Y-PSNR. Bottom: absolute Y error, shared range $[0,0.25]$. The fixed example illustrates the existing capacity and no-cell arms.}
+\label{fig:qual}
+\end{figure*}
 
 \begin{table}[t]\centering\small
-\caption{Matched 200-epoch LIIF arms: mean full-image Y-PSNR change (dB) relative to EDSR LIIF, over four datasets and two seeds. $^\dagger$One seed. Parameter counts and compute differ.}
+\caption{Mean full-image Y-PSNR change (dB) relative to native EDSR-LIIF: four datasets, $\times2/3/4/6$, matched 200-epoch arms and two seeds. Shuffled cell uses native cell at evaluation. $^\dagger$One seed. Parameter counts and compute differ for capacity changes.}
 \label{tab:budget}
-\begin{tabular}{lcccc}\toprule
+\begin{tabular}{lrrrr}\toprule
 Change & $\times2$ & $\times3$ & $\times4$ & $\times6$\\\midrule
 MLP $2\times64$ & $-0.25$ & $-0.26$ & $-0.28$ & $-0.24$\\
 no cell input & $-0.13$ & $-0.09$ & $-0.11$ & $-0.10$\\
+constant cell & \multicolumn{4}{c}{pending}\\
+shuffled cell & \multicolumn{4}{c}{pending}\\
 RDN encoder & $+0.35$ & $+0.29$ & $+0.28$ & $+0.25$\\
 SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[t]\centering\small
-\caption{Selected original registered predictions: satisfying cases / total, followed by overall gate status where failed. New residual and step analyses are retrospective.}
+\caption{Registered predictions and retained failures. Counts are satisfying checks, followed by overall pass (P) or fail (F); they are not independent experiments. All original prediction records remain in the repository. Stages 17--18 are frozen prospectively; the scalar decomposition is retrospective.}
 \label{tab:gates}
-\begin{tabular}{p{5.0cm}r}\toprule
+\begin{tabular}{p{4.8cm}r}\toprule
 Prediction & Outcome\\\midrule
-strict $R(u)$ collapse (crops; full) & 45/54; 53/72 (fail)\\
-decoder spread $\le0.03$ (crops; full) & 36/36; 54/54\\
-doubled-cell peak $r\in[.19,.375)$ & 36/36\\
-fixed-multiplier cost declines & 9/9\\
-$Q/D\in[.7,1.3]$ at $\times3/4$ & 6/6\\
-best cell within 10\% of native ($s\le4$) & 20/27 (fail)\\
-smaller cell costs more & 33/144 (fail)\\
-small MLP harmless at large scales & fail\\
-blur moves capacity gains below Nyquist & fail\\\bottomrule
+strict $R(u)$ collapse (crops; full) & 45/54; 53/72 F\\
+decoder spread $\le0.03$ (crops; full) & 36/36; 54/54 P\\
+doubled-cell peak $r\in[.19,.375)$ & 36/36 P\\
+fixed-multiplier cost declines & 9/9 P\\
+$Q/D\in[.7,1.3]$ at $\times3/4$ & 6/6 P\\
+best cell within 10\% of native ($s\le4$) & 20/27 F\\
+smaller cell costs more & 33/144 F\\
+small MLP harmless at large scales & F\\
+blur moves gains below $u=0.75$ & 0/3 F\\
+$\ge80\%$ absolute cost lies at $u\ge1$ & 311/414 F\\
+external RDN-BTC; EDSR gain & 0/12; 0/4 F\\
+external cell locus (GaussianSR; BTC) & 2/4; 3/4 F\\
+no-cell loss decays to negligible cost & F\\\midrule
+17: corrected adjacent-scale increase & 11/36 P\\
+17: increase in all 12 conditions & 12/12 P\\
+17: both positive-step Set14 endpoints & 1/2 F\\
+18: native advantage (constant; shuffle) & pending\\
+18: no-cell equivalence (constant; shuffle) & pending\\\bottomrule
 \end{tabular}
 \end{table}
 
-\section{Limits and conclusion}
-Evidence concerns the tested models, degradations and finite interventions. Detailed projections use 14 saved Set14 images quantized to float16; source moments, Parseval checks and all-non-DC sensitivity are retained. DIV2K aggregates cannot supply image uncertainty. Bootstrap intervals describe image sampling conditional on existing trained seeds. Image rankings and flexible projections are post hoc, not held-out explanations.
+\section{What cell contributes during learning}
+\label{sec:training}
+Removing cell during training loses approximately 0.1\,dB across benchmark scales in the existing two-seed comparison. To test the source of this benefit, we add two EDSR-LIIF arms under the same 200-epoch recipe and two seeds. Both retain the native decoder's two cell inputs and parameter count. Constant-input weights can be absorbed into the first-layer bias, adding no expressivity. The \emph{constant} arm receives the training mean of the actual cell coordinate, $c_0=\mathbb E[96/\operatorname{round}(48s)]$ for $s\sim\mathcal U(1,4)$, at every query and evaluation geometry. The \emph{shuffled} arm receives another sample's complete cell vector, using a random batch derangement. This preserves the empirical cell marginal while removing the correct pairing. A separate random generator preserves the data and model-initialisation streams, and assignment statistics verify the intervention. Queries and image features can still carry other scale cues.
 
-The two frequency coordinates organise recovery and conditioning, but a fixed scalar filter does not explain the measured response. A more complete audit retains non-scalar changes, error alignment and the actual intervention step. It corrects the inference from small net PSNR costs to absent conditioning. Predicting response or benefit from unperturbed outputs, and explaining cell's training benefit, remain open; exact accounting alone is not a new causal theory.
+We freeze predictions and scoring before training, select epoch 200 regardless of validation, and reevaluate the existing native/no-cell checkpoints with the same evaluator. Standard full-image Y-PSNR follows the original PIL-bicubic protocol, clamps outputs and shaves by scale on Set5, Set14, BSD100 and Urban100. We also measure quarter-$u$ recovery on the original DIV2K crop cohort. The shuffled arm's primary evaluation uses native cell; fixed-mean and four independent marginal-cell assignments per image provide predeclared sensitivity checks.
 
+The primary predictions require native cell to outperform each new arm by at least 0.05\,dB in the dataset- and scale-balanced mean, with both seeds positive and a Bonferroni-adjusted 97.5\% paired-image interval above zero. Separate equivalence tests ask whether each arm lies within $\pm0.03$\,dB of no-cell; failure to establish equivalence is retained. Training comparisons use 2,000 within-dataset paired image resamples, conditional on the two seeds.
+
+\textbf{Review-draft status.} All four frozen 200-epoch runs are in progress. Benchmark effects, recovery localisation, inference-policy sensitivity and the four prediction verdicts will be reported after the integrated pipeline completes; no partial validation result is used as a final outcome. These contrasts assess correct pairing, retained dimensions and training noise; their interpretation is limited to this recipe.
+
+\section{Conclusion and scope}
+Recovery profiles locate a shared range in which trained capacity improves reconstruction. Cell analysis requires a calibrated decoder-input step and separate measurements of output change and error alignment. Dimension-preserving training controls then test the value of correctly paired conditioning. Equal-step measurements reject universal response decay while retaining a failed endpoint prediction. The source of the training benefit remains open until the registered comparisons complete.
+
+Evidence is limited to the tested architectures, recipes and two degradations. New measurements were specified prospectively on previously studied images/checkpoints. Image-bootstrap intervals condition on fixed trained seeds; finite interventions and ablations do not identify a unique internal mechanism.
+
+\clearpage
+\raggedbottom
 \bibliographystyle{IEEEbib}
 \bibliography{refs}
 \end{document}

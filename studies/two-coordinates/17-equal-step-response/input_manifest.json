@@ -1,0 +1,3238 @@
+{
+  "frozen_at_utc": "2026-10-22T19:32:32.130498+00:00",
+  "images": {
+    "DIV2K": [
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0869.png",
+        "image": "0869",
+        "sha256": "68a693195536fc94bc34ce7ff0e041990916fed73164a7c2dce00098a178ac75",
+        "original_hw": [
+          2040,
+          1356
+        ],
+        "crop_hw": [
+          2040,
+          1356
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0870.png",
+        "image": "0870",
+        "sha256": "f03f496bb0f21d53012723782bfdbcbbde66115c45c35aa7d83373c304a9c041",
+        "original_hw": [
+          1572,
+          2040
+        ],
+        "crop_hw": [
+          1572,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0871.png",
+        "image": "0871",
+        "sha256": "777df9ed736ff3ccc73388e90de36e131c002dfac64767f3b8ebccdd2cd5f058",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0872.png",
+        "image": "0872",
+        "sha256": "028ca10affee013698c7f15068fe4813a9d7b2c24f2bd40dac68305774a5577a",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0873.png",
+        "image": "0873",
+        "sha256": "3fcb2ae160dd255180854eaf54051c40cd205421367d0352144bb7490bc9afb1",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0874.png",
+        "image": "0874",
+        "sha256": "11cb511247d70d84adad5557a720254e5f73e3786dbcd399c6053a1982ce1784",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0875.png",
+        "image": "0875",
+        "sha256": "3c4859b59635fe7fcd6ec182c798eb3af44a2eafb6e8b891df3db62d0da3c5e2",
+        "original_hw": [
+          1536,
+          2040
+        ],
+        "crop_hw": [
+          1536,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0876.png",
+        "image": "0876",
+        "sha256": "9d5a819847876bb0061bf1fd42b8bd97e8aef89d1f5fb09b1669b7e9546a25f1",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0877.png",
+        "image": "0877",
+        "sha256": "4e0fb583729accf7b93e07b2b81ce8d919f6490cee2d1f90db90b60095a59165",
+        "original_hw": [
+          1152,
+          2040
+        ],
+        "crop_hw": [
+          1152,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0878.png",
+        "image": "0878",
+        "sha256": "e1aff248577bc04ddeba4f48a62aff421ca06450a703e4a450dd401e1efd9546",
+        "original_hw": [
+          1740,
+          2040
+        ],
+        "crop_hw": [
+          1740,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0879.png",
+        "image": "0879",
+        "sha256": "ad5eb9637c891994c00f44358cf0a5238f642b8796b5cacaa8b59ba8bb51553a",
+        "original_hw": [
+          1872,
+          2040
+        ],
+        "crop_hw": [
+          1872,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0880.png",
+        "image": "0880",
+        "sha256": "db5773c6e460824c5132c23917492fda7acd370c87e9ae6293a0103fee2b642d",
+        "original_hw": [
+          2040,
+          1356
+        ],
+        "crop_hw": [
+          2040,
+          1356
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0881.png",
+        "image": "0881",
+        "sha256": "d2fba016ee3cee2395b677524d7ae2b2f6750cea1a6df4edc41f2977bd5d1b7c",
+        "original_hw": [
+          1260,
+          2040
+        ],
+        "crop_hw": [
+          1260,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0882.png",
+        "image": "0882",
+        "sha256": "573345fb42061a43fe8f1c0b3b9faf57cdd77189782a4d89b78c31e421f19115",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0883.png",
+        "image": "0883",
+        "sha256": "3355621b3d834c320a66879e6cd23988df29f504f6cdecd22f1984b432a7e55a",
+        "original_hw": [
+          1380,
+          2040
+        ],
+        "crop_hw": [
+          1380,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0884.png",
+        "image": "0884",
+        "sha256": "06a928200ad757ff2422ecd2e12986bb90e3bf6b64c6062e5d31f864cdc992bc",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0885.png",
+        "image": "0885",
+        "sha256": "36f1c2b8af6d898354506ef3f78d386156cf1c1f1397c165a84e74cf6484d800",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0886.png",
+        "image": "0886",
+        "sha256": "26af6bcdeea90b9900a021bf20a0550d9a1e107c59b4f05c96e8bccf0ab35db8",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0887.png",
+        "image": "0887",
+        "sha256": "a0a893c9417fcd04067bf254512801f92ae7c795b686e05f7389853c9fb78b11",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0888.png",
+        "image": "0888",
+        "sha256": "82a8d193f4eb0819ad3e48c048d13860d0b8f34d6fafc9b626e304294db3ba12",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0889.png",
+        "image": "0889",
+        "sha256": "a8f73c42065e3193c4deb883dcb3bc432a3f838e9be5bacea708ee39eb2c6e04",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0890.png",
+        "image": "0890",
+        "sha256": "67069da53af2b4f5237030631b0b5e087b8014d7b0f59917d96924aca1ab433c",
+        "original_hw": [
+          1368,
+          2040
+        ],
+        "crop_hw": [
+          1368,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0891.png",
+        "image": "0891",
+        "sha256": "8e36e76f3675831c87b2e645e70ef33513b898dc09beb20b0bdcc61cc6d63bed",
+        "original_hw": [
+          2040,
+          1668
+        ],
+        "crop_hw": [
+          2040,
+          1668
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0892.png",
+        "image": "0892",
+        "sha256": "7fb05e491f00963e64b53a0f3f7a3d1af51f1434e7fd4898d4b84c479e1f66f9",
+        "original_hw": [
+          1284,
+          2040
+        ],
+        "crop_hw": [
+          1284,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0893.png",
+        "image": "0893",
+        "sha256": "cdcef3c0f0dd65da7ca0c4e75b672dd1f87f778740cb42d675bcb13dc1b3c307",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0894.png",
+        "image": "0894",
+        "sha256": "f412ff02984a0de7acc7e1209d02f8dcaa18ac76008fa260cf7c355e4a77976c",
+        "original_hw": [
+          2040,
+          1356
+        ],
+        "crop_hw": [
+          2040,
+          1356
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0895.png",
+        "image": "0895",
+        "sha256": "a1c0888648fed4eb909c6e7f5f5db220ae98861294ebfdfa14b2c72567e96b2b",
+        "original_hw": [
+          1284,
+          2040
+        ],
+        "crop_hw": [
+          1284,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0896.png",
+        "image": "0896",
+        "sha256": "367c698aa344cea6e790239f04bae168ef204ae771f6ea05285e5255fad2f84f",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0897.png",
+        "image": "0897",
+        "sha256": "dca63f56dba4a2a2c6b920c4b0406c6c6459d8f7ffb0d20322f51fbbc8f14b38",
+        "original_hw": [
+          1368,
+          2040
+        ],
+        "crop_hw": [
+          1368,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0898.png",
+        "image": "0898",
+        "sha256": "4cd6696b8e59615ceacff729181dd9b0cc5ea936ea9a57e089bb1fe4fe87c347",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0899.png",
+        "image": "0899",
+        "sha256": "77e25eca6c3828abbea8f7fcf360d9be7f496513aa9ec08ff3f2e3a9c272e60e",
+        "original_hw": [
+          1356,
+          2040
+        ],
+        "crop_hw": [
+          1356,
+          2040
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/DIV2K_valid_HR/0900.png",
+        "image": "0900",
+        "sha256": "06717f2a8f5d21fcec9a9229a7ecaab44dec0343406a59464382f5c4fdea3023",
+        "original_hw": [
+          1152,
+          2040
+        ],
+        "crop_hw": [
+          1152,
+          2040
+        ]
+      }
+    ],
+    "Set14": [
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/baboon.png",
+        "image": "baboon",
+        "sha256": "d6d964802ed3a9f7f1d5ac6b6965f74ae30ad710da91d2e81e4e17997d16828d",
+        "original_hw": [
+          480,
+          500
+        ],
+        "crop_hw": [
+          480,
+          492
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/barbara.png",
+        "image": "barbara",
+        "sha256": "be75586a5bea0904e224dbc6c7021b16ceef657cb18bdff76e48fe12644c921c",
+        "original_hw": [
+          576,
+          720
+        ],
+        "crop_hw": [
+          576,
+          720
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/bridge.png",
+        "image": "bridge",
+        "sha256": "f747f4e8158e673d2bba8f79d6de13836f99017a217411de358460525f58446d",
+        "original_hw": [
+          512,
+          512
+        ],
+        "crop_hw": [
+          504,
+          504
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/coastguard.png",
+        "image": "coastguard",
+        "sha256": "7603a7dc392c5659bc141b29292ce70fdec5bd97c199951c2e3e2f8474bb3ab4",
+        "original_hw": [
+          288,
+          352
+        ],
+        "crop_hw": [
+          288,
+          348
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/comic.png",
+        "image": "comic",
+        "sha256": "a95170a286d43e057fdaf6316b81c086eed54bec63836f1b9494c39b58c7f996",
+        "original_hw": [
+          361,
+          250
+        ],
+        "crop_hw": [
+          360,
+          240
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/face.png",
+        "image": "face",
+        "sha256": "bd11e546929da18317ac8482de0ddbc2fe4b94f7109b87d581c74613cf904d36",
+        "original_hw": [
+          276,
+          276
+        ],
+        "crop_hw": [
+          276,
+          276
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/flowers.png",
+        "image": "flowers",
+        "sha256": "51b3264c9d6f9f0d7dcc9981725917e72face84c27118f070b0da349476f169d",
+        "original_hw": [
+          362,
+          500
+        ],
+        "crop_hw": [
+          360,
+          492
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/foreman.png",
+        "image": "foreman",
+        "sha256": "b8dfa6b1ea4c9ee1a816bfdad48266082753f4290f46c0c7be79e6163dbe33ed",
+        "original_hw": [
+          288,
+          352
+        ],
+        "crop_hw": [
+          288,
+          348
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/lenna.png",
+        "image": "lenna",
+        "sha256": "871671c097f41fe73a20ba87ca022e8e912f1ad4dce89d9d61deb159079ea7d3",
+        "original_hw": [
+          512,
+          512
+        ],
+        "crop_hw": [
+          504,
+          504
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/man.png",
+        "image": "man",
+        "sha256": "9a2eff63a413076cce1f4a9a36b1ddc8e03fe87a068a84facd67cae86aee7534",
+        "original_hw": [
+          512,
+          512
+        ],
+        "crop_hw": [
+          504,
+          504
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/monarch.png",
+        "image": "monarch",
+        "sha256": "e90dbbbc114fea7614408645f86fc239509192a71d13b3d46831330b51186eae",
+        "original_hw": [
+          512,
+          768
+        ],
+        "crop_hw": [
+          504,
+          768
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/pepper.png",
+        "image": "pepper",
+        "sha256": "1966a1cf689837459a589ff434de66fb811eedf3f5e262bbe53591ca90ce73d6",
+        "original_hw": [
+          512,
+          512
+        ],
+        "crop_hw": [
+          504,
+          504
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/ppt3.png",
+        "image": "ppt3",
+        "sha256": "e541a55e452e816ca8c507baa1fb2db390afbe255316103fe9b7f144b4b79f61",
+        "original_hw": [
+          656,
+          529
+        ],
+        "crop_hw": [
+          648,
+          528
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Set14/HR/zebra.png",
+        "image": "zebra",
+        "sha256": "0ccede2cf326528669134a7e65eeb6b77bebed4ca75fbdc29ac3492f82816458",
+        "original_hw": [
+          391,
+          586
+        ],
+        "crop_hw": [
+          384,
+          576
+        ]
+      }
+    ],
+    "BSD100": [
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/101085.png",
+        "image": "101085",
+        "sha256": "d2eac549a80ef5a013a47e155d5505a4c06730fb16ecf78a27e05636ec648399",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/101087.png",
+        "image": "101087",
+        "sha256": "1ac7094d57c9bc5e8a56965b5ab2d242cde70c80bfb1e76e76d46a1313cb415e",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/102061.png",
+        "image": "102061",
+        "sha256": "0393500a5a02f471476cee9e34183d028efc9c296e915da14f538af818f045c2",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/103070.png",
+        "image": "103070",
+        "sha256": "d5d7af4cae419d6b20f726e6f7b2e227cc9e2f3e656935c0d2043c118ccabf55",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/105025.png",
+        "image": "105025",
+        "sha256": "9014426012557ba77cfc5480f58f3327441a1a626ca4974c0229b98e621c14e6",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/106024.png",
+        "image": "106024",
+        "sha256": "8ab1fd15eca80c60be91bc068294497345b85b0c8ddbc392ff4b92530897005e",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/108005.png",
+        "image": "108005",
+        "sha256": "971f2d4965bece16699e40bff5ecc5d77b615af3bcac20bce3df8ce35ce22ab8",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/108070.png",
+        "image": "108070",
+        "sha256": "bb1d30a464497ae0bdc47944a45e9d38e687b1b36e2f7c0fcbd0cd66fdcca3d0",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/108082.png",
+        "image": "108082",
+        "sha256": "4f0889cdf52c5e87877d71225c1d1229dde313a5713c30139fc68762fe311299",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/109053.png",
+        "image": "109053",
+        "sha256": "4bdc5a0ad463fbc8ba55ac5c23f30f0d947660c58e65b15bc982f05b8796602f",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/119082.png",
+        "image": "119082",
+        "sha256": "d6f591adc7c5c43e5c515efb817d8a4896f35cb7bec99d4a2cd66726a1b27b1d",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/12084.png",
+        "image": "12084",
+        "sha256": "15de9212c4c7c6472e645a6961463ec808fe401cb4dc8c3da33e9f2124618952",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/123074.png",
+        "image": "123074",
+        "sha256": "1773ac71b6cfcf53a244a647e14253063c27a508db644cdc544234b69a5f40d9",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/126007.png",
+        "image": "126007",
+        "sha256": "396fac5fa651eef33115fb3a3d5d48ae62f13b71aa58479dab9aa8c0cad80859",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/130026.png",
+        "image": "130026",
+        "sha256": "7f77285eadd5bc20479b4e6ff1ef85c82b5abb6b3c519b24790819a47b41e1f7",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/134035.png",
+        "image": "134035",
+        "sha256": "2fc0c6ced02cedcadd10c40bfb59e16f96db39d7fded38c31150fa476ae39dce",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/14037.png",
+        "image": "14037",
+        "sha256": "fe6601accc31b6bc7266eb7fcccfecffbb93e00e672dfcc3a2370c3db5e36c5c",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/143090.png",
+        "image": "143090",
+        "sha256": "ea9cef04c46d27312a9589ef84368bf00cdffb944e96144df5d9d47a350571b4",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/145086.png",
+        "image": "145086",
+        "sha256": "9bfa80e56b8c9f01b1c5dab099b72c06a55f7f9cab2efc1e3b6774ee7418107b",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/147091.png",
+        "image": "147091",
+        "sha256": "2e44dfcc4c542e354239f59392858ca532be3da65cc2caee03f967e70a7393c1",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/148026.png",
+        "image": "148026",
+        "sha256": "177f099f9dcf170ae97efd21b066f78e9c054c931f935e7db7330b9034c1a6c8",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/148089.png",
+        "image": "148089",
+        "sha256": "f43e1372a5c9acf68ea31c826c9fb23d00bf2da450bf7a48c234b35268719c08",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/156065.png",
+        "image": "156065",
+        "sha256": "8a1f44b2e23246eef416aae3ce2889b2cb2a9890503a84f091ead4b5d305e848",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/157055.png",
+        "image": "157055",
+        "sha256": "89f18c5a393f9ebbcae436de9ecf83f8f1a571abe47d24cb5b92e723f88223fc",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/159008.png",
+        "image": "159008",
+        "sha256": "364600e87d13f22390018331bd003b239f82f311eb3087a2b04fc9ed2cbd2d9a",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/160068.png",
+        "image": "160068",
+        "sha256": "7395f2829f1e0d2e52304d6695461d1b64a56ec72bbe6378ff9d156bb033cb99",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/16077.png",
+        "image": "16077",
+        "sha256": "0d2392ea552fc88c67bf4713f894782c612be36b684bb73ce671b139193ef15c",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/163085.png",
+        "image": "163085",
+        "sha256": "a063e26715ec76c750e419b7d3d468d2a7272b280d180be7411f9844cd82b155",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/167062.png",
+        "image": "167062",
+        "sha256": "a299b07480dffb56b13a263fdf55348bb5e66eafbe08ba7ba02e77cb4b535876",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/167083.png",
+        "image": "167083",
+        "sha256": "16f849c39c5a99247e5c4c31b6fb957ac74e058a4e76210fee31fd5dfd0c8e25",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/170057.png",
+        "image": "170057",
+        "sha256": "c1a558c1c9622b8254ed95577e7b1d6ecc886779ae38de2e0bce72f3eed6884d",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/175032.png",
+        "image": "175032",
+        "sha256": "5c89cdbeddefcd46d731ffcccec54560a85c8dea354ffc3a45448a69d476488a",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/175043.png",
+        "image": "175043",
+        "sha256": "a182475311d1dfcabb04dcc8d66908b9e97ad965eb25b666904cc09590607bc1",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/182053.png",
+        "image": "182053",
+        "sha256": "200eb08895f995c1a09e348b48ad30172911af81fd949299f95b7b6b45879eb1",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/189080.png",
+        "image": "189080",
+        "sha256": "6c7917585e4782945198ee809d2e16976729ed03f9428b4439fac16fe3642d70",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/19021.png",
+        "image": "19021",
+        "sha256": "95cffe9758bfa78543528212bdb5f04639ae06a66b20308760281be30ea8bc76",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/196073.png",
+        "image": "196073",
+        "sha256": "c36c0f782e6dc5a89e843ede49472208a23ccc7db723fe4dec073a9ba1fd6d49",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/197017.png",
+        "image": "197017",
+        "sha256": "f80d1d2e31b7f68a884aa09d28cb877c8428c90c456c93e8535c39c8aa63ea8d",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/208001.png",
+        "image": "208001",
+        "sha256": "598644c16ee232fa1d01b6e0b08ac476763da775cead3819fbd9d0bec59e00b8",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/210088.png",
+        "image": "210088",
+        "sha256": "70e373cf7a109d3c16bb3e3697d42e70ffd855900cc9752a3f7b7177052c6f88",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/21077.png",
+        "image": "21077",
+        "sha256": "efbcb87a41f51420478c9facf17cab60a4b2689bab275bca5a8d049a8b592858",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/216081.png",
+        "image": "216081",
+        "sha256": "16991acedc510b3d6ca0d19b174f325d6a6af31409a1aeaf1936874a65407838",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/219090.png",
+        "image": "219090",
+        "sha256": "445a1dde8dd878b55d94934a4eb0532578ce2c1515b917d8ad322e2e22a5d171",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/220075.png",
+        "image": "220075",
+        "sha256": "cabfedafc32104c6d8af85bb671895cab1d1a0bce7f8ac392d7b5f68b9c3c380",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/223061.png",
+        "image": "223061",
+        "sha256": "cc0e4f81c652b003366123a91a6519af06361c2bedf73dd253c4f4742f9e9319",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/227092.png",
+        "image": "227092",
+        "sha256": "fe57fd0ae1e0ffb0cec65b8a7362b9b6d701b35aec4564b54a6a5495611e1ae9",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/229036.png",
+        "image": "229036",
+        "sha256": "f2633964ab62fe9de8ea221b621e565f3d4cd28db8d6ca681aad94505aade4c9",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/236037.png",
+        "image": "236037",
+        "sha256": "1105e99cfac3c6be2bd32cd16739fca8211e2161ccb22ee7e2e4c480558013d9",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/24077.png",
+        "image": "24077",
+        "sha256": "6257ec894a5182ab357c457a641cfe5da81357a0a965a58ebc3229a033f35d21",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/241004.png",
+        "image": "241004",
+        "sha256": "7631813159b6d8ae58c8969ec80bd6b3f44fe2aec05e09219e40358feff7ebbb",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/241048.png",
+        "image": "241048",
+        "sha256": "643db51057f94acec79ee7db1138a04fa6fd6a211d003fd9ec99df330bab8057",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/253027.png",
+        "image": "253027",
+        "sha256": "d25fddbe78c858c6a15500280b732649b45273963c20a4bf1ed31a75d5481d33",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/253055.png",
+        "image": "253055",
+        "sha256": "f76fd900ecbe9786ea5e25b57597c362f092d7fe1c086275477cf99851f43ff5",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/260058.png",
+        "image": "260058",
+        "sha256": "ef2872174062856c4605b11de4004e7dcffcf9b2fc65c3da11d11ddf3f331769",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/271035.png",
+        "image": "271035",
+        "sha256": "b1d634f865c1032fe6d1c59cf04277b90b1d8ed9cc968740528db5357d4c0219",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/285079.png",
+        "image": "285079",
+        "sha256": "ddaed2e6a2931b7b5170a2d6fba240163774b950a8cb33a22033a7f6e7a00f18",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/291000.png",
+        "image": "291000",
+        "sha256": "f78447a169d1cbbd962a0e38117a1d1604fdb608b7e29468f7c6af8a452039dd",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/295087.png",
+        "image": "295087",
+        "sha256": "48c93a8c547fbe8c0ff90328209569dd4a76a965286173058f8a684b6cd456dc",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/296007.png",
+        "image": "296007",
+        "sha256": "c950c1554beeb4d5194031d4d30540da272fc86948265c398628f956cd8b0425",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/296059.png",
+        "image": "296059",
+        "sha256": "4675477b863d16cdc9dcdc979fc4855c7e2f15d63ea2b834d02ab1a65fe752e9",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/299086.png",
+        "image": "299086",
+        "sha256": "af644b58ee9f9faa73f09c1e5addadffe61bac1df8739b08de17b2cf4c4033ed",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/300091.png",
+        "image": "300091",
+        "sha256": "4ed7ec9dcbc556f210b9750edf20edb2e0ddea23e261664fed2a7874aa344fbb",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/302008.png",
+        "image": "302008",
+        "sha256": "deb9b72627de61d2fa54ac6233a7344af7c6d39a8e34a31a649f87f6116f13e6",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/304034.png",
+        "image": "304034",
+        "sha256": "66a783ba5ead710c26e11872825353d375d13c2f62b7ee2904fae23d7ccf3abb",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/304074.png",
+        "image": "304074",
+        "sha256": "cc507ab302f5552e3916d8224312f00042e0b20577bf5206dca30d74b60e859e",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/306005.png",
+        "image": "306005",
+        "sha256": "079fedbc47f447c024d7e0085e6f416d0352e03f7c0d21cca11399c29e58cb6c",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/3096.png",
+        "image": "3096",
+        "sha256": "8fd9f62bad0f64a35563689bad9cc9ded51c4d9b6332952fe9f0d57303c6bdd5",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/33039.png",
+        "image": "33039",
+        "sha256": "4653856c732ccb9861981ce7490dcc93dc216d91b29a5feb62744491defd17da",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/351093.png",
+        "image": "351093",
+        "sha256": "818a694971fee142a3b60407542eeea5945c0a16d5bb70ee6ec76d37b18598e6",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/361010.png",
+        "image": "361010",
+        "sha256": "f0c6cc3d21c3b607ead1ac0697e0768dcfae3f59eea98e0de67070f630455e09",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/37073.png",
+        "image": "37073",
+        "sha256": "3efd81b919f3c68aa71f2fc6276034f57730f94115fb95f96cb6f8ffd988f19d",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/376043.png",
+        "image": "376043",
+        "sha256": "3acaab395c9b4a4e9f0df36f418fbaa2b3a106a015129add23b4a970cb3b3817",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/38082.png",
+        "image": "38082",
+        "sha256": "55570452740d1983d2c1e5a4a08175646fe7b9168c290c54072191587361915d",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/38092.png",
+        "image": "38092",
+        "sha256": "065d7ee0dca7f86aa3cf9ceaa693ebda03d268a610edee7fabdec38ff8f71092",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/385039.png",
+        "image": "385039",
+        "sha256": "38a13606ae7415f0d303ce6cef451aed34af05fae25673baf50df563ebc4e173",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/41033.png",
+        "image": "41033",
+        "sha256": "99d7025bf78b4bd23a4168b277d06faa4668af0c6fbd89e63b2f171a691df41c",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/41069.png",
+        "image": "41069",
+        "sha256": "8ff05bc46473b4fe03a019c7080b96eecc8bd9143e96b273d21f0010eaeee511",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/42012.png",
+        "image": "42012",
+        "sha256": "630f9db8ef0505fe714bd220cbe396ec1e365863eff26f43fb7446ac99545f35",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/42049.png",
+        "image": "42049",
+        "sha256": "9395e4139e821c7d9506bfcd62c557562dca2ad35f681e6ae107c31d5ed761d8",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/43074.png",
+        "image": "43074",
+        "sha256": "8a36214818a185aa27bfd5c9b12588bcf39ddd3b43a0e8452fea037ade8dc7d5",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/45096.png",
+        "image": "45096",
+        "sha256": "be24ef5408f34b71c7f5397e1fded0f32d3b9fb3d16d6b5980e4f180f9c4b099",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/54082.png",
+        "image": "54082",
+        "sha256": "f035b4b24627a3f480427f52a53117e5c7ba3246957ac8b608afdb60c8ed51dc",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/55073.png",
+        "image": "55073",
+        "sha256": "bd6fa75c45554cabaa9d85260d8cabb43eaaa599c1041802aa33e0889b755441",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/58060.png",
+        "image": "58060",
+        "sha256": "d365d5ab4e33cac83312b219093aac4f71873a7ace91ef203d6771ee2c2bc176",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/62096.png",
+        "image": "62096",
+        "sha256": "b75d691a5d1c8c92aec1547566bb27aebf5271f2551c84acf449ecb480de8b4f",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/65033.png",
+        "image": "65033",
+        "sha256": "d544548972addcaf9b18f3b4cec02fdd2b0f7183ed352b483981e7e1771b6e14",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/66053.png",
+        "image": "66053",
+        "sha256": "ebfb69c64874450da58afa5cd3baf4927c8280ffbd36dc36ed8bc1b7eff168d2",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/69015.png",
+        "image": "69015",
+        "sha256": "f1efe9c87a9b26ab506957d421a3e5e0c0422681b8cff4d48395008d21032ac0",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/69020.png",
+        "image": "69020",
+        "sha256": "e8b7028e88d3427e44fcc7b8366f9ebbd7b5c4cbd580617103dff0c75971940a",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/69040.png",
+        "image": "69040",
+        "sha256": "cb76997c254c4f5d02a1e6f812308e19bc9384bc5af5a0fdbbacce65e52d629c",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/76053.png",
+        "image": "76053",
+        "sha256": "5f3f2ee732e25dc0c6156c7c011029e0f946f77a9df247247318fe1b454c147e",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/78004.png",
+        "image": "78004",
+        "sha256": "3e73700ab7d7f3d6393e43c9065b33c2602a95608be6659c3f263e9e94d73a22",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/8023.png",
+        "image": "8023",
+        "sha256": "4accd5794682321b500a8aa87bfd2614190dad8e5aa4ad81d8867cb9f539b728",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/85048.png",
+        "image": "85048",
+        "sha256": "d8f5f2a796f0840b005a954ce9cfe3793c43f25def2bd7bbe7096dff8d77efee",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/86000.png",
+        "image": "86000",
+        "sha256": "dce5d55ff8ceca05cefc7f87aa7777c1ca574a06bcad1ee0f1e1b06649e7f7d0",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/86016.png",
+        "image": "86016",
+        "sha256": "d7e6fc0057066877b26741a2e5722cc19e4bd0b8c9670c11fa40c59c4a83ace1",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/86068.png",
+        "image": "86068",
+        "sha256": "cb1b7cef96f5aa95811465d51dc74d1c05a97270e0b7646826a9d53f68f6faa1",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/87046.png",
+        "image": "87046",
+        "sha256": "589041b0527584d98c7b646b72d5551d5685f2c5afc954fa6f2bbdb376b0e365",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/89072.png",
+        "image": "89072",
+        "sha256": "b2ccf470beaa7b8a0f559468d56747a109a9c803f432a06c3a0a4766e08af6b2",
+        "original_hw": [
+          481,
+          321
+        ],
+        "crop_hw": [
+          480,
+          312
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/BSD100/HR/97033.png",
+        "image": "97033",
+        "sha256": "ab08af0849c10e149ff08d28eb7a78236d51e65e0fe924ee1b8e212778404aa4",
+        "original_hw": [
+          321,
+          481
+        ],
+        "crop_hw": [
+          312,
+          480
+        ]
+      }
+    ],
+    "Urban100": [
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_001.png",
+        "image": "img_001",
+        "sha256": "7505cf2e689d5b53bfb0ee50229c4f6698b03fafe6b0df952dffb418d49d9634",
+        "original_hw": [
+          644,
+          1024
+        ],
+        "crop_hw": [
+          636,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_002.png",
+        "image": "img_002",
+        "sha256": "7ff144b68dc9d9177a4b91906b25a0c44817e63360f6d88782f84e792b03d881",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_003.png",
+        "image": "img_003",
+        "sha256": "0c570832754b347f59305110d8b4c5df2315962fec05ab0c2fc742d278feef81",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_004.png",
+        "image": "img_004",
+        "sha256": "9490e3baab9a6b406c24d167ab3000f6104e3a93fd05cdfec4dd585eccfd1f7b",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_005.png",
+        "image": "img_005",
+        "sha256": "682419775634cc7a3a46ddb89b643660f0c55ea0569bcd26de93e854ab1c75cd",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_006.png",
+        "image": "img_006",
+        "sha256": "90cefb417513deb4e30ecc1a15ee8c7379caf52b2003e5e0eb963ac15f522ba0",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_007.png",
+        "image": "img_007",
+        "sha256": "d845d48147f4b42950948c5f8a32c426ed537e3861947be180b07f4a03172e83",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_008.png",
+        "image": "img_008",
+        "sha256": "b62264cdeffa4d1035f13ba1fbf6635c103eef8541a617073402c65596601774",
+        "original_hw": [
+          572,
+          1024
+        ],
+        "crop_hw": [
+          564,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_009.png",
+        "image": "img_009",
+        "sha256": "ad7a722a2d787299bd05b91c1b5f2dc51babc056a25e40876524b63b6d4fb1af",
+        "original_hw": [
+          796,
+          1024
+        ],
+        "crop_hw": [
+          792,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_010.png",
+        "image": "img_010",
+        "sha256": "ba89ea521d19fd38fb7585598fe2ef59f7794337bae0164f9ac6925b22ca73f4",
+        "original_hw": [
+          816,
+          1024
+        ],
+        "crop_hw": [
+          816,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_011.png",
+        "image": "img_011",
+        "sha256": "808135b39d4dd1f9a8b5a5026f52284d8365039d8f3661eff1619d0604687ea3",
+        "original_hw": [
+          1024,
+          564
+        ],
+        "crop_hw": [
+          1020,
+          564
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_012.png",
+        "image": "img_012",
+        "sha256": "e16cba482064e751a389aa2725e77758e9a424bacea413f7e7b833fd5d186ec4",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_013.png",
+        "image": "img_013",
+        "sha256": "1ea6f4575aa8108903e9604f042e752f72a07eccd76f94f146737837305c3939",
+        "original_hw": [
+          764,
+          1024
+        ],
+        "crop_hw": [
+          756,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_014.png",
+        "image": "img_014",
+        "sha256": "bd5c93cefefab3301ea166f4e871a9b3cbc88513b1b5e01fe957db0fbfc8699f",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_015.png",
+        "image": "img_015",
+        "sha256": "ca9a0a6cb91cc695f5cd82a7cae28a8e9c6c45b98c273a0aa762610e1123dec8",
+        "original_hw": [
+          772,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_016.png",
+        "image": "img_016",
+        "sha256": "73cae0512e13688753199683d9298c7884707c047ec39a2ff07440f3ee7cb7e1",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_017.png",
+        "image": "img_017",
+        "sha256": "3ae052668aa48b367de5675a2fc0225658f0d159f96f6657b672f043b61a2c68",
+        "original_hw": [
+          692,
+          1024
+        ],
+        "crop_hw": [
+          684,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_018.png",
+        "image": "img_018",
+        "sha256": "298e6b719205876059c4cd1e939857af8c6e9445eb3e0003098d62f40bead2e9",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_019.png",
+        "image": "img_019",
+        "sha256": "60b41dd35854657e417c9577cf9741a6c5cc374a0153cf8a1c4334d70d6fe6a2",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_020.png",
+        "image": "img_020",
+        "sha256": "f78f356ca20b82206dbb1a189784d7ae968f7037f8911c4275c973850b8c4f77",
+        "original_hw": [
+          960,
+          1280
+        ],
+        "crop_hw": [
+          960,
+          1272
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_021.png",
+        "image": "img_021",
+        "sha256": "1666f5f0606d184251f1cb57b87321de6a06c2def607f887238426f4364a0756",
+        "original_hw": [
+          1200,
+          796
+        ],
+        "crop_hw": [
+          1200,
+          792
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_022.png",
+        "image": "img_022",
+        "sha256": "db128d36e6acd82bcbc10259f7f06e8f9bd8a8bd65d98ecace27f451eca8815f",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_023.png",
+        "image": "img_023",
+        "sha256": "d3b6ceaef23f72954b6f81eeb7585a6a6516f9b7cfd9292b2726da905786282b",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_024.png",
+        "image": "img_024",
+        "sha256": "90bd63810c30c3fda456f8760559a20666b6f42cd9117ad487a0f7d3e53105a2",
+        "original_hw": [
+          660,
+          1024
+        ],
+        "crop_hw": [
+          660,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_025.png",
+        "image": "img_025",
+        "sha256": "33def2b1e48e75fa0aae550997aeb81c5107c68cb27ec91367aad898b57771b7",
+        "original_hw": [
+          736,
+          1024
+        ],
+        "crop_hw": [
+          732,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_026.png",
+        "image": "img_026",
+        "sha256": "7f89168719760b45f388571d0b2ffd0c349cbaa92cc153c9f34faa10fe15f6b3",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_027.png",
+        "image": "img_027",
+        "sha256": "1f68fce3d85ff8b9102c0dcb17e67b3203e4f4ce051f443d618371ff5bb3522b",
+        "original_hw": [
+          832,
+          1024
+        ],
+        "crop_hw": [
+          828,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_028.png",
+        "image": "img_028",
+        "sha256": "3e3ab91b6faf8e6fc3d3be18cf113020300bab19362ee91fcc5a45cc598b392d",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_029.png",
+        "image": "img_029",
+        "sha256": "38db05fad751b6f773bebf74506e54bd425d454bf49d69c62d06f0c79901805b",
+        "original_hw": [
+          676,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_030.png",
+        "image": "img_030",
+        "sha256": "8e938f82e2b52311d450a5fea97533f406ed1b744a20b19bc307ac5c38303fae",
+        "original_hw": [
+          1024,
+          680
+        ],
+        "crop_hw": [
+          1020,
+          672
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_031.png",
+        "image": "img_031",
+        "sha256": "d9c8541971a69748b3184e79af008792c4404b225d61f53135beb1176947e6d4",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_032.png",
+        "image": "img_032",
+        "sha256": "9bae234ca8bfc9f6461509f54426815968fb35882be4c3e711e59e128ad24fd5",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_033.png",
+        "image": "img_033",
+        "sha256": "13b895d9e393c1f6f3039a1103bbf0827fd2d1db9dd5e3c5092d16ab216d7141",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_034.png",
+        "image": "img_034",
+        "sha256": "e10e24fd61e69780bef342ffdfd1ed3b8fbd955927764718319fd856401a2122",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_035.png",
+        "image": "img_035",
+        "sha256": "184fd2d69749dc650855a0b58184bbaee2b274e520826a56d1d4f680008d383f",
+        "original_hw": [
+          688,
+          1024
+        ],
+        "crop_hw": [
+          684,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_036.png",
+        "image": "img_036",
+        "sha256": "fd6fe8ad4e0fdf29de6a54366633d5660c229af632b0ad0a24781e5f78bd1043",
+        "original_hw": [
+          1024,
+          700
+        ],
+        "crop_hw": [
+          1020,
+          696
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_037.png",
+        "image": "img_037",
+        "sha256": "acc412301646a7d1451a598ebee8d224087b2720db0bdac68dee1c210c855ab1",
+        "original_hw": [
+          1024,
+          740
+        ],
+        "crop_hw": [
+          1020,
+          732
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_038.png",
+        "image": "img_038",
+        "sha256": "1e930c7749f69109a29e8312c82a7ac199d021567f726399dfb9f827a1b33ab3",
+        "original_hw": [
+          1024,
+          768
+        ],
+        "crop_hw": [
+          1020,
+          768
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_039.png",
+        "image": "img_039",
+        "sha256": "fd603c80549d87302836169f804f2b3263a721b639447e5b67ac4f8f02260000",
+        "original_hw": [
+          1024,
+          768
+        ],
+        "crop_hw": [
+          1020,
+          768
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_040.png",
+        "image": "img_040",
+        "sha256": "565fa0182a422cfff4ed90c353324ed0d4dd9ae540bd33eb8a82f8b66bf1ffc9",
+        "original_hw": [
+          576,
+          1024
+        ],
+        "crop_hw": [
+          576,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_041.png",
+        "image": "img_041",
+        "sha256": "9bea5ac5c1d24465f2a72ff683c73ddd7fc7d32173cb05e06859358521ec0c68",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_042.png",
+        "image": "img_042",
+        "sha256": "825d5fe0d2bf39dd8f59c3ff66b69fd8e998ff9a552f1f7a1f3729efb170c3d7",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_043.png",
+        "image": "img_043",
+        "sha256": "dd4111dd3a8f8dbeaf80a13466ada25bb5f59c5dcd02ae330c154c88a2bd480b",
+        "original_hw": [
+          672,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_044.png",
+        "image": "img_044",
+        "sha256": "2ec7a0d1dab45d3ca4173515b5c62e5cdfda82a8bbc1191cb7c0fbbf027f4b85",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_045.png",
+        "image": "img_045",
+        "sha256": "37e0fb45ac0a6372695f0519ab63f909a6478134ba022ff2079f84c9bef368ee",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_046.png",
+        "image": "img_046",
+        "sha256": "7719c09bd17acd36ae5bb8a10188386b479a88258f9c4ed434c75581ecdb1f0f",
+        "original_hw": [
+          1024,
+          692
+        ],
+        "crop_hw": [
+          1020,
+          684
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_047.png",
+        "image": "img_047",
+        "sha256": "4c017d333bb73ea9c945a40eb621ba12eddfa084c5a4c913b2894ef4b3a7130b",
+        "original_hw": [
+          616,
+          1024
+        ],
+        "crop_hw": [
+          612,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_048.png",
+        "image": "img_048",
+        "sha256": "39cd8320b8d87d446f040430f8293f0d90fe7ce2b51560a6942886e5032feed0",
+        "original_hw": [
+          1024,
+          684
+        ],
+        "crop_hw": [
+          1020,
+          684
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_049.png",
+        "image": "img_049",
+        "sha256": "e42b9ac1965e1b578206dc3acd9313fbdde43683f0168c880aeb67022845fce9",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_050.png",
+        "image": "img_050",
+        "sha256": "99dbae436de97c187371c788df3a8aa5916f7deb272ddce87b1c7aadaf75587b",
+        "original_hw": [
+          1024,
+          680
+        ],
+        "crop_hw": [
+          1020,
+          672
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_051.png",
+        "image": "img_051",
+        "sha256": "dd2ce67dc387e9d3296767fda2ad9fa88049e8cb6260e8b6442bc899a63b4300",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_052.png",
+        "image": "img_052",
+        "sha256": "69571f8b913e09dba52d74c87f60771d4a4c9bf45160771df034ec676ecc01c0",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_053.png",
+        "image": "img_053",
+        "sha256": "5d7f7bb7f8f6878699b71527c713c3976e6967f8d1f10cb763d3ceb2ea4f3c47",
+        "original_hw": [
+          656,
+          1024
+        ],
+        "crop_hw": [
+          648,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_054.png",
+        "image": "img_054",
+        "sha256": "70ff7c69bd8d2ddd4fc1e760ffe9a91b4a3c45e0b53b805a218cffc7bd696151",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_055.png",
+        "image": "img_055",
+        "sha256": "a3ecf3b50b2866e3643426d539a0d5fd4bd49df8753cdd85c1482d4c5fbb3c1b",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_056.png",
+        "image": "img_056",
+        "sha256": "bd7ac6675c131cb7a9d3483ceb88f7f2aa9cb152a01737e0f243ae35aa725afe",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_057.png",
+        "image": "img_057",
+        "sha256": "5a4bad32d52464b46a5cd6d0604c5490fca424e0c9404c2001c07b90c12c3d6a",
+        "original_hw": [
+          724,
+          1024
+        ],
+        "crop_hw": [
+          720,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_058.png",
+        "image": "img_058",
+        "sha256": "9e2421461a94d5525948b777ae21d2973256a4751b4e5e9663e3a208c1fcfd42",
+        "original_hw": [
+          692,
+          1024
+        ],
+        "crop_hw": [
+          684,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_059.png",
+        "image": "img_059",
+        "sha256": "efd9bd4d556867a3f62f6aaef580db6c2852599182902b50b09eb3aa6ad05f5b",
+        "original_hw": [
+          664,
+          1024
+        ],
+        "crop_hw": [
+          660,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_060.png",
+        "image": "img_060",
+        "sha256": "1b1e9c69d81a0fc67e112336416caf3903bc35d53acc5fc4d667c705d7e535d2",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_061.png",
+        "image": "img_061",
+        "sha256": "d58f4c147d660b8a9b3a74c308966e7151547442dfa47b94d0f6e560ee14605e",
+        "original_hw": [
+          672,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_062.png",
+        "image": "img_062",
+        "sha256": "078e4dab5883641ef67f4ee0097b40fbb48ea5552c9aebf75f6b1b1321f78118",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_063.png",
+        "image": "img_063",
+        "sha256": "f70733bd4142326d969e1aa8a8c1b21e4f1b4f537f26642fdf8e512da8871a65",
+        "original_hw": [
+          980,
+          1000
+        ],
+        "crop_hw": [
+          972,
+          996
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_064.png",
+        "image": "img_064",
+        "sha256": "b57b5047b68e00337fb856be39a93564a515fe62ef46dea2a08514b799e3dd6b",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_065.png",
+        "image": "img_065",
+        "sha256": "ed8a3b5840f260e9512f99068780f3a977150c04e3026ba6f290484f10c31b32",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_066.png",
+        "image": "img_066",
+        "sha256": "48e40043aaecbe7ae13a7bba3c78a9e04886d09d37707719d3b981054da000fb",
+        "original_hw": [
+          864,
+          1024
+        ],
+        "crop_hw": [
+          864,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_067.png",
+        "image": "img_067",
+        "sha256": "aff18d8afdab96d9a251a012f1d460982d6f6514b53a5ffad6d870d5992614cc",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_068.png",
+        "image": "img_068",
+        "sha256": "0c8c1a274e2906334d7e891f9304ab766f2137b8b3ff5efbe6106e2ba271d534",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_069.png",
+        "image": "img_069",
+        "sha256": "88e3922b23c8d583fd5ea532cf313b61baf8ad53294e9b2a7e46c229c414fd2f",
+        "original_hw": [
+          824,
+          1200
+        ],
+        "crop_hw": [
+          816,
+          1200
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_070.png",
+        "image": "img_070",
+        "sha256": "364c661cbe853a77a9e9583365c246ab30a2be2fe498d88973876c338aba1a77",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_071.png",
+        "image": "img_071",
+        "sha256": "7c828c96ed88c1ae880cebc794f65533f18b3587c0b8b79272631572533ac8c2",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_072.png",
+        "image": "img_072",
+        "sha256": "322cb0eab6bec784eaa64732129541ce6edc11746b6d3a059722dd28f0769056",
+        "original_hw": [
+          1024,
+          680
+        ],
+        "crop_hw": [
+          1020,
+          672
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_073.png",
+        "image": "img_073",
+        "sha256": "1da7a91b159d23b6932fa29f71832c801f101a70e7555f194f5174ade9d75bdf",
+        "original_hw": [
+          764,
+          1024
+        ],
+        "crop_hw": [
+          756,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_074.png",
+        "image": "img_074",
+        "sha256": "3d1d42ac816192c68de3f8c75da214a486fd11ca183ea984641f1a3370a9e035",
+        "original_hw": [
+          1024,
+          680
+        ],
+        "crop_hw": [
+          1020,
+          672
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_075.png",
+        "image": "img_075",
+        "sha256": "bae72b60ccb3539c315d72a74cced224261618511d72de421018860c046a0d8c",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_076.png",
+        "image": "img_076",
+        "sha256": "ed48a2715157494ce836419aaf30926a7064210e4e18e380bcb45bc1e98664b9",
+        "original_hw": [
+          676,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_077.png",
+        "image": "img_077",
+        "sha256": "6da7172156a79089edbb4087c4698245568bc721327e0dc5abbe81a6b047dfd7",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_078.png",
+        "image": "img_078",
+        "sha256": "63784decb6cc1eaa1a038134192cc330635d5d31ab97b43fd089cdf1e1e85c91",
+        "original_hw": [
+          732,
+          1024
+        ],
+        "crop_hw": [
+          732,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_079.png",
+        "image": "img_079",
+        "sha256": "52fbe301654a693fbdcec31169b837552d4df6dbf81536c8d70d75e40f8acabd",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_080.png",
+        "image": "img_080",
+        "sha256": "f6dee2b6105657187174040d972f3b78a89296071c0618d9eccac7be87c472b9",
+        "original_hw": [
+          1036,
+          776
+        ],
+        "crop_hw": [
+          1032,
+          768
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_081.png",
+        "image": "img_081",
+        "sha256": "f36b49d23d9bb206f8c3ec537b57bd44ed008f3f632706ac02eba73e175fa3d0",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_082.png",
+        "image": "img_082",
+        "sha256": "936e9fde66edec069168b80be5edb02715ba8e4dc4762feff0e895b38e8e4ce2",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_083.png",
+        "image": "img_083",
+        "sha256": "b11dbf8def01258e730f753d00309965d824c62807458fd200ca4612321aa2db",
+        "original_hw": [
+          1024,
+          1004
+        ],
+        "crop_hw": [
+          1020,
+          996
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_084.png",
+        "image": "img_084",
+        "sha256": "30d0c6072b7d106f4ec858e484be8ea096a0ddbd6d6392922c5fc5d899905446",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_085.png",
+        "image": "img_085",
+        "sha256": "8fc12215f5824b99f7996d15e09103e1af16188fbee50ddf5ee0892ebf0f459e",
+        "original_hw": [
+          676,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_086.png",
+        "image": "img_086",
+        "sha256": "d135b4c8cf3a4428625ea49c37b9ec7c08c7031617f156de82c97163d0317b3a",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_087.png",
+        "image": "img_087",
+        "sha256": "0716f8750cdcbad96423072e0d156c109796911196bab162ce28e1169ce88185",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_088.png",
+        "image": "img_088",
+        "sha256": "4a18490d388f738966b777ff91be6afa699e42b3199a9d71c8c479ff87db2421",
+        "original_hw": [
+          672,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_089.png",
+        "image": "img_089",
+        "sha256": "b5ecd14de994a8a3700a7ff273aade36b4010581d354e54c09a6cfe354d0441d",
+        "original_hw": [
+          1024,
+          768
+        ],
+        "crop_hw": [
+          1020,
+          768
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_090.png",
+        "image": "img_090",
+        "sha256": "57e22535ab778040419b5c7c005d68efc196b4bcd0e8e58ffe97d2e98d34a982",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_091.png",
+        "image": "img_091",
+        "sha256": "2deb746649d1fe05a00c5de05b31abdfdd7d48be8259b002974f78ef87182524",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_092.png",
+        "image": "img_092",
+        "sha256": "a3e1438320b93671885a1ac6424ff6e964109748e7e207fd0d594f06e2c2f42d",
+        "original_hw": [
+          692,
+          1024
+        ],
+        "crop_hw": [
+          684,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_093.png",
+        "image": "img_093",
+        "sha256": "378e0e49ab249f3dfc6c46f8e27c0b2761cf75a0b527411005e69680d5251df4",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_094.png",
+        "image": "img_094",
+        "sha256": "138b6c224bacc7a4375aa257c4d213e7f93c9f476ebe1534afd60d14e555b5c3",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_095.png",
+        "image": "img_095",
+        "sha256": "6416cc5bbdf9f0d612d98aaddab1f8a98ff6ddafec201799ca89647f79b88f4d",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_096.png",
+        "image": "img_096",
+        "sha256": "7391c902e4a5a7546266bdca70c5ce928132a227491d3c91688b4d617bd66f93",
+        "original_hw": [
+          768,
+          1024
+        ],
+        "crop_hw": [
+          768,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_097.png",
+        "image": "img_097",
+        "sha256": "8ffc78b12dd06854c3c28ba8d7b7fc34a038059b1836e0c06e92fd2b8e849f5e",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_098.png",
+        "image": "img_098",
+        "sha256": "97bbe2a24143a258a97368ce36ab48f2e4430e8765ec6cf51cecad50f482e603",
+        "original_hw": [
+          680,
+          1024
+        ],
+        "crop_hw": [
+          672,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_099.png",
+        "image": "img_099",
+        "sha256": "22477f5eb9af4479aae1f988ce421572d65b6d8e1aff4824336a41169e19d801",
+        "original_hw": [
+          804,
+          1024
+        ],
+        "crop_hw": [
+          804,
+          1020
+        ]
+      },
+      {
+        "path": "/workspace/SE-INR/Data/Urban100/HR/img_100.png",
+        "image": "img_100",
+        "sha256": "2a64511c4a2a596f9b1f50fd90a2d9613bf94f4647bcedc66e1ee170d4ac4d7a",
+        "original_hw": [
+          1024,
+          1024
+        ],
+        "crop_hw": [
+          1020,
+          1020
+        ]
+      }
+    ]
+  },
+  "checkpoints": {
+    "liif:seed1": {
+      "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed1/liif/epoch-last.pth",
+      "sha256": "097e6ce1e15dcc72b872efedee6db5ce99c57293e10eb6083e7569399118e50a"
+    },
+    "liif:seed2": {
+      "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed2/liif/epoch-last.pth",
+      "sha256": "6d0d5a6c78490c0bdcb0bf9602da48789ad9b0638d28178ec59a71f1be39feac"
+    },
+    "lte:seed1": {
+      "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed1/lte/epoch-last.pth",
+      "sha256": "ec4fbfad06b42ba5cb44e6be1cc4bb1b3c953ea56df0970970e0afc87b44ff0e"
+    },
+    "lte:seed2": {
+      "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed2/lte/epoch-last.pth",
+      "sha256": "1f5ac26b4fee3f42fe49c5082e9d399eadf99518299d7e31e4d7400268a16d0f"
+    },
+    "sc-inr:seed1": {
+      "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed1/sc-inr/epoch-last.pth",
+      "sha256": "c444cbe7c42e180ecae69e153e4a9c308792e293be3d4101dd388c8009967644"
+    },
+    "sc-inr:seed2": {
+      "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed2/sc-inr/epoch-last.pth",
+      "sha256": "f3b3c3fee9d8e6efe5b11832bd37b43bb01faeb2a0339b99d6f51842aa537c10"
+    }
+  },
+  "full_image_pixels": 185371776
+}

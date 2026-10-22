@@ -1,0 +1,24 @@
+{
+  "created_utc": "2026-10-22T19:33:55Z",
+  "source": "/workspace/SE-INR/SE-INR-current",
+  "git_head": "11d3a63139f846442aaed1865fb708e043cd88dc",
+  "checkpoint_sha256": {
+    "native_s1": {
+      "path": "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/save/liif-edsr-200ep/epoch-last.pth",
+      "sha256": "9a5ff9480f752abe1764b805c3c8be97a2fdd4387eb24d62e783357c4e8876e4"
+    },
+    "native_s2": {
+      "path": "/workspace/SE-INR/runs/claude-20261020-seed2-v8/save/liif-edsr-seed2/epoch-last.pth",
+      "sha256": "861db6fb5e0426cee9692ca84e3c98bdcaa53606f27ee58dcae90d7a7686273d"
+    },
+    "nocell_s1": {
+      "path": "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/save/liif-edsr-nocell-200ep/epoch-last.pth",
+      "sha256": "b73b4cede67f39dd5e7032b7575d1ccb3f7863e32ebba693c49701a0426bb215"
+    },
+    "nocell_s2": {
+      "path": "/workspace/SE-INR/runs/claude-20261020-seed2-v8/save/liif-nocell-seed2/epoch-last.pth",
+      "sha256": "82919e962984e5207916cc4f57b68166bd1ddd01cff6321d97477c8f24f9f384"
+    }
+  },
+  "predictions_frozen_before_training": true
+}

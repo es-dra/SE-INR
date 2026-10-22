@@ -1,0 +1,12 @@
+{
+  "started_utc": "2026-10-22T20:30:41Z",
+  "equal_step_score_sha256": "6991437ad85d9476ee56f05117b6294a69f68697e2cce907744df72b40c5795f",
+  "sequence_script_sha256": "d8149807cbd5b1a5b5dbdb4ad0ca0c379f873e9a6ff45350819015d954e8f3bf",
+  "training_frozen_sha256": "b601cf3d197cc81bfe0e6691f1c310457c8c936e49985e7e073062e4e06c1fb1",
+  "gpus_constant_s1_constant_s2_shuffle_s1_shuffle_s2": [
+    0,
+    2,
+    1,
+    3
+  ]
+}

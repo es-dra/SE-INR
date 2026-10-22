@@ -1,0 +1,91 @@
+{
+  "version": "codex-20261023-cell-training-source-v1",
+  "status": "prospective; freeze this protocol, prediction and scoring sources before any new arm runs",
+  "question": "Does the epoch-200 LIIF cell benefit require correctly paired scale information, rather than retained input dimension alone?",
+  "source_commit": "11d3a63139f846442aaed1865fb708e043cd88dc",
+  "source_policy": "Copy current source, verify the trainer, LIIF and wrapper hashes against both old baseline snapshots; hash all copied source. Never edit the original source or old runs.",
+  "expected_source_sha256": {
+    "entrypoints/train.py": "c9dce5ecf0acd7d48299e0e01e219f713098111c2f71b99c81d05b09b3722674",
+    "src/models/liif.py": "06cf26371a5439c192b1de2c10219f307dec08e63c4a99e661568376a5fbeeb4",
+    "src/datasets/wrappers.py": "c07c0484e01daa960c77391d90162e6fb457e5f39a53c673ff03f282f5e3fa12"
+  },
+  "data_root": "/workspace/SE-INR/Data",
+  "recipe": {
+    "architecture": "EDSR-baseline, unfold, local ensemble, LIIF MLP 4x256; two cell dimensions retained in both new arms",
+    "epochs": 200,
+    "seed": [
+      1,
+      2
+    ],
+    "training": "Original DIV2K dataset, repeat20, LR48 patch, independent per-sample scale Uniform[1,4], rounded HR edge round(48*s), sample_q2304, augment true, batch16, unchanged original trainer/Adam/scheduler/validation and no AMP",
+    "learning_rate": 0.0001,
+    "lr_milestones": [
+      100,
+      150
+    ],
+    "lr_gamma": 0.5,
+    "checkpoint": "epoch-last.pth with epoch==200, regardless of validation outcome; no tuning, selection or restart",
+    "deterministic": false,
+    "constant": "actual decoder rel_cell c0 = E[96/round(48*s)] for s~Uniform[1,4], with half weight at rounded endpoints 48 and 192; both axes constant. Divide by feature H/W before unchanged LIIF multiplies internally.",
+    "shuffle": "Each training batch16, independently sampled uniform random derangement of sample indices; same permutation for both cell axes and all queries. Preserves empirical cell marginal per batch exactly, no fixed index. Equal quantized values may occur and are counted. Independent CPU torch.Generator seed 180000+training_seed preserves global training RNG.",
+    "audit": "First up to1000 training batches: fixed indices (must0), equal-value rate, native/assigned mean and variance, correlation, exact sum/squares matching. Save per-epoch elapsed and GPU resource snapshots. Audit does not select runs."
+  },
+  "evaluation": {
+    "benchmark": "Full Set5/Set14/BSD100/Urban100, original SRImplicitDownsampled at fixed integer scale; original PIL bicubic resize, top-left divisible HR crop; output clamp[0,1], Y-PSNR with shave=scale using unchanged utils.calc_psnr. Keep each image.",
+    "recovery": "DIV2K0869-0900 center240 RGB crops; torch bicubic antialias downsample clamped[0,1], un-clipped output, shave4, RGB Fourier error/target power, u=2*s*Chebyshev radius, width0.25 bins excluding DC including outer ring; same evaluator geometry as old stage05. Keep all bins including failures and negatives.",
+    "primary_policy": {
+      "native": "native cell",
+      "nocell": "cell ignored",
+      "constant": "training constant, at every scale and geometry",
+      "shuffle": "native cell supplied at evaluation, predeclared conventional inference policy"
+    },
+    "shuffle_sensitivity": {
+      "mean": "fixed training-marginal mean c0",
+      "marginal": "Four deterministic independent marginal draws per image, held fixed across scales; c=96/round(48*(1+3*v)), v from SHA256(cell-source-20261023:dataset:image:draw) first8bytes/2^64. Average PSNR metrics across draws, not predictions; variance across policies is reported. This finite draw check is not exhaustive distribution integration."
+    }
+  },
+  "scales": [
+    2,
+    3,
+    4,
+    6
+  ],
+  "predictions": {
+    "T1_constant": "Native-minus-constant balanced mean Y-PSNR >=0.05 dB; both fixed seeds positive; Bonferroni-adjusted 97.5% paired-image CI excludes0 in positive direction.",
+    "T1_shuffle": "Native-minus-shuffle(native inference) same criterion, forming a family of two primary comparisons.",
+    "T2_constant": "Constant and no-cell equivalent within +/-0.03 dB: 95% paired-image CI wholly inside equivalence margin; two TOST comparisons Bonferroni alpha0.025 each.",
+    "T2_shuffle": "Shuffle(native inference) and no-cell same equivalence criterion. Failure of equivalence is reported as failure/inconclusive, never interpreted as proof of difference or equivalence.",
+    "recovery": "Descriptive predeclared regions u<0.75, [0.75,1), [1,2), >=2; all quarter-u bins retained, paired CIs reported. No success-bin selection or additional gate."
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 181023,
+    "resampling": "Within each dataset sample image identities with replacement, pair all arms/seeds/scales/policies; fixed trained seeds averaged. Dataset means equally weighted then scales equally weighted, avoiding dominance of100-image datasets. Recovery resamples the32 DIV2K identities; mean of seed-specific aggregate energy ratios.",
+    "scope": "Image variation conditional on these two trained seeds; no population-of-seeds inference; per-dataset-scale and frequency-bin CIs are descriptive95% without multiplicity claims."
+  },
+  "compute": {
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "training_walltime_historical": "Native s1/s2 about2.0h, no-cell1.9-3.5h, based on logs of old frozen runs",
+    "schedule": "Four slots on four explicitly assigned single GPUs; one hard24h timeout covers each entire slot: new training plus all policies of its evaluation plus the assigned old baseline evaluation (conservative inclusion). TERM at24h, forced kill after120s cleanup grace. All four slots run concurrently. Global scorer runs only when every required evaluation slot completed.",
+    "retry": "No failed-slot rerun, no outcome-dependent tuning or early stopping; preserve failed exit/log and report incomplete if resource deadline hit."
+  },
+  "interpretation": "Native advantage over both retained-dimension ablations supports usefulness of correct scale-cell pairing under this recipe. It does not isolate a unique internal causal mechanism: constant changes feature distribution, shuffle injects input noise, optimization/regularization/initialization remain alternatives. Two extra scalar inputs change parameter count by512 relative to no-cell. Native cell at evaluation reintroduces pairing in shuffled model; fixed-mean and independent marginal policies bound this ambiguity. No architecture-wide or all-recipe universal claim.",
+  "baseline_checkpoints": {
+    "native_s1": {
+      "path": "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/save/liif-edsr-200ep/epoch-last.pth",
+      "sha256": "9a5ff9480f752abe1764b805c3c8be97a2fdd4387eb24d62e783357c4e8876e4"
+    },
+    "native_s2": {
+      "path": "/workspace/SE-INR/runs/claude-20261020-seed2-v8/save/liif-edsr-seed2/epoch-last.pth",
+      "sha256": "861db6fb5e0426cee9692ca84e3c98bdcaa53606f27ee58dcae90d7a7686273d"
+    },
+    "nocell_s1": {
+      "path": "/workspace/SE-INR/runs/claude-20261019-encoder-train-v5/save/liif-edsr-nocell-200ep/epoch-last.pth",
+      "sha256": "b73b4cede67f39dd5e7032b7575d1ccb3f7863e32ebba693c49701a0426bb215"
+    },
+    "nocell_s2": {
+      "path": "/workspace/SE-INR/runs/claude-20261020-seed2-v8/save/liif-nocell-seed2/epoch-last.pth",
+      "sha256": "82919e962984e5207916cc4f57b68166bd1ddd01cff6321d97477c8f24f9f384"
+    }
+  }
+}
