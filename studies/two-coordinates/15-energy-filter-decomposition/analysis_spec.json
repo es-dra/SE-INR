@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-23",
+  "type": "retrospective descriptive analysis of previously saved statistics and predictions",
+  "source_commit": "5fe66382863f9db9bc818e81a6222700e0d8e986",
+  "question": "Separate recovery R and fitted cell-transfer w contributions to the decline of cell-mismatch cost with scale, and quantify the approximation remainder.",
+  "authorization": "Existing data only; no training or new model inference.",
+  "primary": "DIV2K 0869-0900, 32 center-240 crops, seed 1, LIIF/LTE/SC-INR; original v11 aggregate sufficient statistics",
+  "replication": "Set14, 14 center-240 crops, seeds 1 and 2, same three models; saved float16 v1 predictions, no network execution",
+  "scales": [2, 3, 4, 6],
+  "cell_multipliers": [0.5, 1.3333, 2.0],
+  "primary_scope": "Original 16 fixed r bands, width 1/32, 0<r<0.5; DC and exact Nyquist outer row/column excluded",
+  "additional_scope": "For saved Set14 predictions, separately audit DC and Nyquist outer ring, and include all non-DC bins as sensitivity analysis",
+  "normalization": "RGB-mean spatial MSE units: original v11 sums divided once by (32 * 3 * 232^4); per-image saved statistics divided once by (3 * 232^4)",
+  "definitions": {
+    "C,U,E,V,K,D": "<T-P,P>, |P|^2, |T|^2, |T-P|^2, <P,Pm>, |T-Pm|^2-|T-P|^2; real inner products",
+    "B": "E-V=R*E=U+2*C; signed, never clipped",
+    "w": "K/U, fitted separately for each model, scale, multiplier and frequency band",
+    "a": "(1-w)^2",
+    "Q": "sum(a*B)",
+    "G": "sum(2*w*(1-w)*C)",
+    "H": "D-Q-G = sum(|epsilon|^2-2*<T-P,epsilon>), epsilon=Pm-w*P",
+    "F_R": "sum((B_s-B_t)*(a_s+a_t)/2)",
+    "F_w": "sum((a_s-a_t)*(B_s+B_t)/2)",
+    "identity": "D_s-D_t=F_R+F_w+(G_s-G_t)+(H_s-H_t)"
+  },
+  "aggregation": "Fit w per model after pooling images and seeds; derive quantities first, then equal-weight the three models. Cross-scale target energies must agree.",
+  "pairs": [[2,3],[3,4],[4,6],[2,4],[3,6],[2,6]],
+  "uncertainty": "DIV2K has aggregate points only. Set14 uses 2000 paired image-cluster bootstrap samples, fixed seed 20261023, resampling all scales/models/seeds together and refitting w in each sample. Conditional on the two existing trained seeds; not training-population uncertainty.",
+  "limitations": [
+    "This is not a new preregistered hypothesis test and does not alter frozen source results.",
+    "R and w attribution is descriptive, not causal or an out-of-sample prediction.",
+    "Q can be negative where R is negative; negative terms are retained.",
+    "MSE component shares are not dB component shares; baseline MSE changes with scale.",
+    "Saved Set14 predictions are float16 and provide a separate cohort, not image confidence intervals for DIV2K.",
+    "The training benefit of cell is not identified by this inference perturbation analysis."
+  ]
+}

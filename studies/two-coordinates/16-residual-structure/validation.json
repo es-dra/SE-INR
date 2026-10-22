@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "date": "2026-10-23",
+  "training_jobs_started": 0,
+  "model_inference_calls": 0,
+  "source_commit": "5fe66382863f9db9bc818e81a6222700e0d8e986",
+  "original_inputs_preserved": true,
+  "projection_input_hashes_match_stage15": true,
+  "projection_extraction_validation": "inputs/projections/check.json",
+  "projection_aggregation_validation": "projection-summary-v3/check.json",
+  "localization_max_identity_error": 4.484648126489889e-15,
+  "response_independent_validation": "step-controls-v1/validation.json",
+  "response_summary_rows_checked": 1200,
+  "response_pair_rows_checked": 1320,
+  "projection_retained_percent_checked": {
+    "2": {
+      "pooled": 100.0,
+      "A": 93.1939,
+      "B": 93.087,
+      "C": 45.473,
+      "D": 40.6505
+    },
+    "6": {
+      "pooled": 100.0,
+      "A": 84.686,
+      "B": 84.2841,
+      "C": 35.3667,
+      "D": 28.9571
+    }
+  },
+  "independent_review": {
+    "scientific_claims": "Reviewed against stage15, localization-v2, projection-v3, step controls and original figure data. Corrected band-as-point values, registered satisfaction counts, P5 criterion and image/seed fit definition.",
+    "novelty": "Independent review against LIIF, LTE, HyRA and capacity literature: contribution is calibrated intervention analysis; causal mechanism, prospective prediction and training benefit remain open."
+  },
+  "paper": {
+    "pages": 5,
+    "body_within_first_four_pages": true,
+    "all_five_pages_rendered_and_visually_inspected": true,
+    "overfull_boxes": 0,
+    "undefined_references": 0,
+    "all_fonts_embedded": true,
+    "source_sha256": "f73a8b6ed9ce89222e4b131d138ff94720a0bf9e4ad8bdcdee6055dd3c3495e5",
+    "pdf_sha256": "982061505c4e28302daa252801bb51e687327a07fe90e7877ce1f2451151b018",
+    "build_root": "/workspace/SE-INR/runs/codex-20261023-residual-structure-v1/paper-build-v2",
+    "visual_review": "No clipping or overlaps in new figures or body. Existing recovery figure retained and checked against its source numbers."
+  },
+  "sha256": {
+    "analysis_spec.json": "77284860576dbbb837994d2ea12f606f74bffba11bacb4e5e8eaba7742e20498",
+    "localize.py": "58c78ca32b4d4d43d14ef527d715a935d607144b7ca35a2cae9e668be775ddee",
+    "project_saved.py": "f9a861464697b69e7f479fe081d2f8c79ae10fc306b1dd11652bc10116550819",
+    "summarize_projections.py": "83ff492f54cd102f81fc7865de946b71c5dc39b908965678ec64da3b208064a9",
+    "step_controls.py": "b6226a938f8ecc25692d59264992a964ce890b5cf87f9406d633ef1f93e010d6",
+    "extract_all_response.py": "2d081973abdbddd396b775069a7b535e175527d9fe5989d38d65590d8d6753cd",
+    "paper_figures.py": "f9ce551565bf552f9012ad148df117101cdaecb538b0ce6fde9c8f9fa869b153",
+    "localization-v2/report.json": "df63f6aeabf1acac8a1abb04511e5387d69f96be7a8412a40c68ac3091d0e57c",
+    "projection-summary-v3/summary.json": "efe6eda806f763cee25099587ee3520bbb15c79c1890555834789d3e0d443111",
+    "step-controls-v1/report.json": "40570ad19a0e3d0114cf4f46fd8bb3bc2b44110abfffd34cb6ae0a5e3fc0e690",
+    "inputs/projections/projection_stats.json": "c1d5187c0a5611124b1257e6949f71107c5ee9fcfd02f5112d2588eb8d367224",
+    "inputs/projections/source_manifest.json": "58fc51c3046a68801282630486d34709c5b1d225c997a89bab6487fa8c525351",
+    "inputs/response-all/response_stats.json.gz": "ae805dae5693ff2659b87a2de359b2fa47b2eb96da3195f37f5333bf86263fd0",
+    "inputs/paper-before-residual-audit.tar": "5ea76568a740b26a8e21bfe321b277fb109afeec8588328649edf4b99251a45c"
+  }
+}

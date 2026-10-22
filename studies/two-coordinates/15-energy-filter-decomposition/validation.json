@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-23",
+  "source_commit": "5fe66382863f9db9bc818e81a6222700e0d8e986",
+  "scope": "retrospective saved-data CPU analysis; no training or model inference",
+  "raw_v11_sha256": "af22f86e245b4ab9444956cb5fc23deb2a3977cd97f0c847564160eb831352a7",
+  "saved_set14_statistics_sha256": "172399dbc3dc5c59a9c9c00d306a29c631dd7d908c7a24589e784b4e266d1b24",
+  "final_results_sha256": "d1428097991d5fcaf7eb3845c318eb732f5655b40d51dcfb5db31af137d4976a",
+  "scripts": {
+    "analyze.py": "803b8ea9618e0127d59f49d9f5bf50afa2207acb6aa29aec7097a6029973b322",
+    "extract_saved.py": "668ff96410053fcabe602a4d69a461d1636e7deeeba675e44e888e2ac8db2170"
+  },
+  "set14_extraction": {
+    "passed": true,
+    "records": 1008,
+    "prediction_files": 336,
+    "images": 14,
+    "parseval_and_B_identity_comparisons": 26208,
+    "max_abs_error": 1.887379141862766e-15,
+    "seconds": 20.259487674105912
+  },
+  "independent_div2k_standard_library_recomputation": {
+    "passed": true,
+    "max_abs_MSE_difference": 8.67e-19,
+    "checks": "all model-scale-multiplier totals and pair decompositions"
+  },
+  "independent_bootstrap_loop_comparison": {
+    "passed": true,
+    "samples": 2000,
+    "max_abs_amount_CI_difference": 1.76e-19,
+    "max_abs_share_CI_difference": 2.33e-14
+  },
+  "old_Set14_transfer_crosscheck": {
+    "passed": true,
+    "common_groups": 576,
+    "sample_count_each_group": 28,
+    "compared_statistics": 2304,
+    "fields": [
+      "K",
+      "U",
+      "D",
+      "J=Z+U-2K"
+    ],
+    "max_normalized_sum_abs_difference": 1.26515e-14,
+    "note": "sum of 28 samples; roundoff from summation and subtractive cancellation; excludes unsupported mu .75 and absent DC/outer ring"
+  },
+  "visual_check": {
+    "file": "final/decomposition.png",
+    "passed": true,
+    "notes": "All panels and confidence-interval endpoints visible; no legend obscures bars."
+  },
+  "boundaries": [
+    "No DIV2K image CI is recoverable from aggregated v11 inputs.",
+    "Set14 predictions are existing float16 outputs.",
+    "Primary scope is 0<r<0.5; outer ring and DC audited separately.",
+    "MSE accounting and dB denominator accounting are separate.",
+    "Bootstrap conditions on existing training seeds.",
+    "Attribution is descriptive and symmetric; not causal or a prospective prediction.",
+    "Original frozen outputs and paper sources were not modified."
+  ],
+  "current_artifact": "final/results.json",
+  "intermediate_artifacts": [
+    "div2k-pass1/results.json",
+    "results/results.json"
+  ]
+}

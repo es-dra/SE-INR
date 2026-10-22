@@ -1,15 +1,18 @@
 # Two Coordinates of Arbitrary-Scale Super-Resolution
 
-Code and pre-registered study records for the paper
-**"Recovery Lives in u, Conditioning Acts in r: Where Arbitrary-Scale Super-Resolution Gains Come From"** ([`paper/main.pdf`](paper/main.pdf)).
+Code, registered study records and retrospective audits for the paper **"Recovery and Conditioning in Arbitrary-Scale Super-Resolution: A Two-Coordinate Analysis"** ([PDF](paper/main.pdf)).
 
-**Question.** Implicit-decoder ASISR models (LIIF and successors) keep adding decoder and cell-conditioning designs, yet gains shrink at large scales. Where in frequency can a decoder or the cell input still change the output?
+**2026-10-23 revision:** the manuscript incorporates saved-output decomposition, residual localization and controls for the actual cell-input step. These analyses use existing predictions and sufficient statistics only: no training or model inference. Original protocols, failures and paper source are preserved. See the [evidence and limits](studies/two-coordinates/README.md).
+
+**Question.** Where do recovery and conditioning responses occur in frequency, and what does a small cell-perturbation cost actually establish?
 
 **Findings.**
-1. *Recovery lives in u.* Per-band recovery depends on frequency normalised by the LR Nyquist limit, u = 2·s·r. It is identical across four decoder designs on a shared encoder. Learned capacity (training time, encoder, decoder MLP width) raises it only above u ≈ 0.75.
-2. *Conditioning acts in r.* Changing the cell filters the output by a low-pass in HR frequency r. Its cost is the recovered energy it filters away, so the cell's leverage vanishes as the scale grows. Removing the cell input costs 0.10 dB at ×2 and nothing measurable from ×3 on.
 
-Every experiment fixed its protocol, predictions and scoring script before running; failed predictions are reported (Table 2 of the paper, and [`studies/two-coordinates`](studies/two-coordinates/README.md)).
+1. *Recovery in u.* Profiles are similar across the tested decoder designs; strict cross-scale collapse fails some registered checks. Capacity effects occur mainly from u ≈ 0.75 upward. Matched families share an encoder architecture, not learned weights; GaussianSR is an external checkpoint with a different recipe.
+2. *Cell response beyond a scalar filter.* Changes in recovery R and fitted filter strength w jointly account for about 41% of the doubled-cell ×2→×6 MSE-cost decrease. The non-scalar net term accounts for 54% on DIV2K and 59% on Set14. Most of that decline occurs in r ∈ [0.1875,0.375); images can contribute in opposite directions. Finer real-frequency fits reduce residual energy but leave a quadrature component.
+3. *Intervention size and error alignment matter.* A fixed multiplier m gives per-axis decoder-input step h = 2(m−1)/s. Matched-step comparisons across 214 images do not support universal sensitivity loss. Output changes may correct existing errors; dB costs also depend on native MSE. Existing no-cell retraining loses roughly 0.1 dB across all benchmark scales.
+
+Original registered stages retain protocols, scoring revisions and failed predictions. Stages 15–16 are explicitly retrospective diagnostics, not held-out prediction tests. Exact accounting and fitted projections do not identify a causal network mechanism or explain the training benefit of cell.
 
 ## Layout
 
@@ -58,7 +61,7 @@ Use `--crop 0` for full images, `--degradation gauss` for the Gaussian-blur degr
 
 ## Reproducing the paper
 
-Each folder in `studies/two-coordinates/` holds the protocol (`protocol*.json`), the exact scripts that ran, the scoring script, its output and `FROZEN.sha256` with hashes recorded before results were read. Those scripts keep the absolute server paths they ran with. To rerun on another machine, use `tools/frequency_probe.py`, which implements the same measurement with configurable paths. Trained weights are not released; datasets are not included.
+Registered folders retain their protocols, original scripts, scoring outputs and recorded hashes. Stages 15–16 contain analysis specifications, extracted sufficient statistics, source manifests, validation results and analysis scripts. Their uncertainty estimates condition on existing trained seeds. Historical scripts keep their server paths; tools/frequency_probe.py provides configurable paths for the original recovery and cell measurements. Trained weights and datasets are not included.
 
 ## Acknowledgements and licence
 

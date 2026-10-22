@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-23",
+  "type": "retrospective diagnostic decomposition of existing saved outputs",
+  "question": "Locate the non-scalar remainder by frequency and image, and determine which measured factors accompany its decline with scale.",
+  "source_commit": "5fe66382863f9db9bc818e81a6222700e0d8e986",
+  "existing_work": "stage 15 (uncommitted local analysis) is retained; no raw outputs are replaced",
+  "authorization": "Saved data only. No new model inference or training. Improve the manuscript where supported and assess scientific contribution.",
+  "primary_data": "Set14 14 center-240 crops, 3 models, 2 fixed trained seeds, scales 2/3/4/6; existing float16 predictions and float32 HR targets",
+  "crosschecks": "DIV2K v11 aggregate statistics; existing Set14/BSD100/Urban100 original per-band response moments",
+  "multipliers": [
+    0.5,
+    1.3333,
+    2.0
+  ],
+  "primary_scope": "Original 16 r bins, 0<r<0.5; Nyquist outer ring and DC audited separately",
+  "localization": {
+    "fixed_regions": [
+      [
+        0,
+        0.1875
+      ],
+      [
+        0.1875,
+        0.375
+      ],
+      [
+        0.375,
+        0.5
+      ]
+    ],
+    "image_attribution": "All 14 images and negative contributions retained. Pooled-w attribution includes the per-image P-epsilon cross term; it vanishes only after pooling.",
+    "heterogeneity": "Top-1/top-3 shares are descriptive; leave-one-image-out refits w; training seeds are fixed, not independent image replications.",
+    "energy_decomposition": "J_epsilon = kappa * U, kappa=J_epsilon/U; symmetric separation of output-energy and normalized-residual changes. Inspect alignment rho=<e,epsilon>/sqrt(V*J_epsilon)."
+  },
+  "projection_diagnostics": {
+    "A": "One real transfer coefficient per image, seed and r band, shared across RGB",
+    "B": "Separate real coefficient per image, seed, r band and RGB channel",
+    "C": "Separate real coefficient per image, seed and Fourier frequency, shared across RGB",
+    "D": "Separate real coefficient per image, seed, Fourier frequency and RGB channel",
+    "nesting": "A->B->D and A->C->D; B and C are not nested",
+    "interpretation": "D residual is quadrature relative to native phase. Negative real coefficients can absorb pi phase flips; native-zero modes are recorded separately. Extra fitting freedom diagnoses representation limits and does not establish prediction or causal mechanism."
+  },
+  "validation": "Exact error identities, Parseval checks, old-source hash and moments crosschecks; independent numerical review. No p-hacking or new held-out claim for previously inspected images.",
+  "paper": "Preserve original tracked paper in inputs/paper-before-residual-audit.tar; revise evidence and explanatory limits, compile and visually inspect the final five-page manuscript.",
+  "scientific_limits": "An algebraic accounting identity is not itself a novel theory. Distinguish descriptive causes of a numerical decrease, network mechanism, and out-of-sample prediction. Do not infer conference acceptance from the analysis.",
+  "step_controls": {
+    "source": "Original float32 response moments: 214 images, 3 models, 2 fixed seeds, 4 scales, all 10 non-native multipliers; 51,360 records.",
+    "per_axis_step": "h = 2*(m-1)/s",
+    "primary_pairs": "positive: (2,1.3333) vs (6,2), 0.01% step discrepancy; negative: (2,.75),(3,.625),(4,.5), exact h=-.25",
+    "scope": "all non-DC frequencies; separately from the retained 16-bin projection scope",
+    "limits": "Retrospective analysis after observing scale trends. Query offsets, features, native cell and support status are not controlled across scales. No causal Jacobian or new held-out claim.",
+    "bootstrap": "2,000 paired image samples per dataset; model and trained seed fixed."
+  },
+  "final_directories": [
+    "localization-v2",
+    "projection-summary-v3",
+    "step-controls-v1",
+    "paper-validation/build-v2-pages"
+  ]
+}

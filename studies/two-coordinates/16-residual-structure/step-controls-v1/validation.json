@@ -1,0 +1,14 @@
+{
+  "independent_method": "stdlib statistics.mean of original records; reconstructed all group scalars and paired contrasts without importing analysis implementation",
+  "summary_rows_checked": 1200,
+  "paired_rows_checked": 1320,
+  "max_scalar_abs_error": 2.6645352591003757e-15,
+  "source_input_sha256": "ae805dae5693ff2659b87a2de359b2fa47b2eb96da3195f37f5333bf86263fd0",
+  "report_sha256": "40570ad19a0e3d0114cf4f46fd8bb3bc2b44110abfffd34cb6ae0a5e3fc0e690",
+  "script_sha256": "b6226a938f8ecc25692d59264992a964ce890b5cf87f9406d633ef1f93e010d6",
+  "support_flags_verified": true,
+  "ratio_of_means_verified": true,
+  "script_and_input_provenance_verified": true,
+  "bootstrap_samples_per_dataset": 2000,
+  "model_calls": 0
+}

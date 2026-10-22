@@ -1,0 +1,26 @@
+[
+  {
+    "path": "localization-v2/pairs.csv",
+    "sha256": "b2b0e32df7fa0a6a0e5df49435b61e76a11d6cac5384b835d1e94f0a9b4ce369"
+  },
+  {
+    "path": "localization-v2/image_ranking.csv",
+    "sha256": "6d0942d1b6fdf33d113adc08fa25f06a275b4ce749e5d4396fdd38457c618374"
+  },
+  {
+    "path": "projection-summary-v3/scales.csv",
+    "sha256": "9dd2b4474fb117c6c6f4990ebf32b923fe90a6b8f86a9c763925306b8113ec13"
+  },
+  {
+    "path": "localization-v2/bands.csv",
+    "sha256": "0e59562d4cf92cbf55aa242eb7de78cf5287a70d04a2ec8a2e4931d223c7b17b"
+  },
+  {
+    "path": "step-controls-v1/scales.csv",
+    "sha256": "fb1acb1aa00f56a494de98fabf9c02fe2b6b47d8b4d477f7f9b0e7a1c9c9cf7e"
+  },
+  {
+    "path": "step-controls-v1/primary_contrasts.csv",
+    "sha256": "6abd6cdaa1cd359ce82760ccac719f16432b229b247afa83c3e79a44f50acd3e"
+  }
+]
