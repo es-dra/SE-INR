@@ -1,6 +1,6 @@
 # Recovery, Cell Response and Learning in Arbitrary-Scale Super-Resolution
 
-> **Study status, 2026-10-23:** stage 17 is complete and independently verified. The manuscript has four body pages and references on page 5. Stage 18 training-source comparisons are still running; no source-of-benefit verdict is reported before their frozen evaluation and independent verification finish.
+> **Study status, 2026-10-23:** stages 17 and 18 are complete and independently verified. The manuscript reports all four stage-18 prediction outcomes. Original evaluation failures and the authorised recovery are retained in the evidence record.
 
 Code and evidence for **"Shared Recovery, Sustained Cell Responses, and Training Gains in Arbitrary-Scale Super-Resolution"** ([source](paper/main.tex), [PDF](paper/main.pdf)).
 
@@ -10,7 +10,7 @@ The paper asks where additional learning capacity improves reconstruction, how t
 
 1. **Shared recovery profiles, localised capacity gains.** Recovery profiles are close across the tested decoder designs. Stronger encoders, larger MLPs and longer training affect recovery mainly from input-normalised frequency u ≈ 0.75 upward; low-frequency saturation persists with a second, Gaussian-blur degradation. This is a result for the tested models and recipes, not universal decoder independence. Strict cross-scale collapse fails its registered gates.
 2. **Cell responses persist or increase at equal decoder-input steps.** From ×2 to ×6, response energy J has an endpoint ratio J6/J2 ≥ 1 in 11 of 12 dataset–step conditions, with point estimates 0.94–2.47. Individual paired-bootstrap 95% interval lower bounds span 0.81–1.57 and upper bounds 1.08–4.48; these are ranges of condition-specific bounds, not one pooled interval. Fixed-multiplier cost reductions reflect both the shrinking input step h = 2(m−1)/s and error alignment, rather than establishing weaker cell responses. This endpoint pattern is descriptive, not a newly registered success. The original registered gates and the failed stronger Set14 endpoint prediction remain in the prediction ledger and manuscript Table 2.
-3. **Cell improves training; matched controls test why.** Removing cell reduces standard benchmark performance by about 0.10 dB in the existing matched comparisons. Constant-cell and shuffled-cell arms preserve input dimensions while removing correct scale pairing, using 200 epochs and two seeds. Their frozen Y-PSNR and R(u) evaluations will distinguish the role of correctly paired scale information from the additional input; the source of the benefit is not yet established.
+3. **Correctly paired scale information supplies the cell training gain.** Native cell exceeds constant-cell and shuffled-cell training by 0.100 dB [0.061, 0.149] and 0.097 dB [0.058, 0.145] (97.5% paired-image intervals), under the same 200-epoch, two-seed recipe. Both controls retain the two input dimensions and pass equivalence to no-cell within ±0.03 dB. All four frozen predictions pass. This supports correct pairing beyond extra input dimensions, without identifying a unique internal mechanism.
 
 The retrospective decomposition remains a bounded supporting result: changes in recovery R and fitted filter strength w jointly explain about 41% of the fixed-multiplier ×2→×6 MSE-cost decrease. Net cost also depends on error alignment and non-scalar responses. Detailed projections and image rankings are in stages 15–16; they are not prospective tests or a unique causal explanation.
 
@@ -19,7 +19,7 @@ The retrospective decomposition remains a bounded supporting result: changes in 
 - [Manuscript source](paper/main.tex) and [PDF](paper/main.pdf).
 - [Complete prediction ledger](studies/two-coordinates/README.md), including original failures and scoring amendments.
 - [Stage 17 frozen protocol](studies/two-coordinates/17-equal-step-response/protocol.json), [formal scores](studies/two-coordinates/17-equal-step-response/score/summary.json), [independent verification](studies/two-coordinates/17-equal-step-response/score/independent_validation.json) and [frequency summaries](studies/two-coordinates/17-equal-step-response/score/frequency_summary.json).
-- [Stage 18 frozen protocol](studies/two-coordinates/18-cell-training-source/protocol.json), [predictions](studies/two-coordinates/18-cell-training-source/predictions.json) and [synthetic intervention checks](studies/two-coordinates/18-cell-training-source/synthetic_validation.json).
+- [Stage 18 frozen protocol](studies/two-coordinates/18-cell-training-source/protocol.json), [predictions](studies/two-coordinates/18-cell-training-source/predictions.json) and [synthetic intervention checks](studies/two-coordinates/18-cell-training-source/synthetic_validation.json), [final scores](studies/two-coordinates/18-cell-training-source/scores/summary.json) and [independent verification](studies/two-coordinates/18-cell-training-source/scores/independent_validation.json).
 - [Server run locations](studies/two-coordinates/RUNS.md) and [SHA256/path archive manifest](studies/two-coordinates/server-artifacts.json).
 
 ## Layout
@@ -82,3 +82,5 @@ Expanded data, saved predictions, weights and intermediate versions stay on the 
 ## Acknowledgements and licence
 
 This code builds on LIIF, LTE, EDSR-PyTorch, BTC (RDN encoder) and SwinIR; see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). This repository is released under the BSD 3-Clause licence ([`LICENSE`](LICENSE)).
+
+Stage 18 evaluated eight checkpoint slots and verified all 50,328 records. Training finished once; initial evaluations failed during CUDA initialization. The authorised evaluation-only recovery reused unchanged checkpoints and frozen evaluator/scorer bytes. Original failure paths and final large-output hashes are retained in the [result manifest](studies/two-coordinates/18-cell-training-source/results-manifest.json). No training was repeated.

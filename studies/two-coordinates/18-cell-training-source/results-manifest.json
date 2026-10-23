@@ -1,0 +1,112 @@
+{
+  "original_run": "/workspace/SE-INR/runs/codex-20261023-cell-training-source-v1",
+  "evaluation_recovery": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1",
+  "training_repeated": false,
+  "frozen_code_changed": false,
+  "original_pipeline_exit": {
+    "exit_code": 1,
+    "ended_utc": "2026-10-22T23:16:38Z"
+  },
+  "artifacts": [
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/nocell_s1/rows.jsonl.gz",
+      "bytes": 62432,
+      "sha256": "277e8b3ed45ebe2ef35ad71dfb35f9092fc4ba736bba18c07b080c04fc4a9091"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/native_s1/rows.jsonl.gz",
+      "bytes": 62374,
+      "sha256": "8b3c34e06371c3372e75b7c8d047d4e33613604d93bfbdefffa971095dd9d751"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/nocell_s2/rows.jsonl.gz",
+      "bytes": 62406,
+      "sha256": "be56511b9bfe71dc570f02e4ddb2597d65e31d86c9eb52acceac7ebec2362790"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/shuffle_s2/rows.jsonl.gz",
+      "bytes": 236582,
+      "sha256": "9f28c38547df51645d18d9e4c36e0f08b8f61a380a1d1cf15fed7c2d8e1c4a87"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/shuffle_s1/rows.jsonl.gz",
+      "bytes": 237641,
+      "sha256": "4c0f3979d3534c6e136dbf9db462df6db9f321c796552c46ccbd13fae9ae5bb0"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/constant_s1/rows.jsonl.gz",
+      "bytes": 62381,
+      "sha256": "d6f995eb4943b785565b6296e00d33faca0f76e3627cd97e9113d7d53b40a341"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/native_s2/rows.jsonl.gz",
+      "bytes": 62440,
+      "sha256": "4a646ed7e749176c39f0d96dc901302664005ebcf792d842d8cbfb7d61272de3"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/constant_s2/rows.jsonl.gz",
+      "bytes": 62399,
+      "sha256": "37507d564adc06b90595ed97e2b25d90a79f0be012cdee4c2b65e36ec3a14b21"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/nocell_s1/COMPLETE.json",
+      "bytes": 30777,
+      "sha256": "cb0b71c38d4ba4f2e9be7610847276fa6826da3be890b884cc743c55d3207673"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/native_s1/COMPLETE.json",
+      "bytes": 30771,
+      "sha256": "8be5b1b5885db4ea312eda3067e057172767d0cade86575a719d81281af4b0ae"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/nocell_s2/COMPLETE.json",
+      "bytes": 30766,
+      "sha256": "dab39a9be2f6f100ac85f6efc0c256a093bac881771783461a00e95ccb0bc17c"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/shuffle_s2/COMPLETE.json",
+      "bytes": 30862,
+      "sha256": "3c2833f936f4b6c1cb363b07c23f0b5719331ff15bea4f567afb54bbe0ea4fea"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/shuffle_s1/COMPLETE.json",
+      "bytes": 30860,
+      "sha256": "0817fb08a20529e3e023652ce9f47db53e017f7b29fab27d74f754ebf42e576a"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/constant_s1/COMPLETE.json",
+      "bytes": 30776,
+      "sha256": "d19b87cfa248895104ce9a258d34e114c703fff62a5e47455eba7a0ea3ffc0ca"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/native_s2/COMPLETE.json",
+      "bytes": 30765,
+      "sha256": "4d6bd8c4200f0d7a8823cee6eaf4fe7ce22b3d6f03c1e0500a23d999d021aa88"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/evaluation/constant_s2/COMPLETE.json",
+      "bytes": 30776,
+      "sha256": "5c5ed7e5074786523a6a571b41494af12cafacc77531481c409ac22fc2e5c40b"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/scores/summary.json",
+      "bytes": 132317,
+      "sha256": "26235a758b03b9050f26147d66b7ff6ae4f1301c2eee2eef0faf2486f176a42b"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-evaluation-recovery-v1/scores/independent_validation.json",
+      "bytes": 63030,
+      "sha256": "802dde31e8b6f2445917cb2405754147d9f0a9b545f8c677055cbc49557f4bc0"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-training-source-v1/PIPELINE_EXIT.json",
+      "bytes": 54,
+      "sha256": "64a2ad8edcc2f7b4ba4186debe940e4b93e5c450adf8116e196141c995f9d511"
+    },
+    {
+      "path": "/workspace/SE-INR/runs/codex-20261023-cell-training-source-v1/PIPELINE_FAILED.txt",
+      "bytes": 77,
+      "sha256": "4538eb6e8b4c600299ffce291583a3a70d68c1bc3c7eb3ec1ddba2e3b248f795"
+    }
+  ]
+}

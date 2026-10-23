@@ -1,5 +1,5 @@
 % Prospective reconstruction, 2026-10-23.
-% Stage 17 complete; stage 18 training-source results await completion.
+% Stages 17 and 18 complete and independently verified; evaluation recovery retained.
 \documentclass{article}
 \usepackage{spconf,amsmath,amssymb,graphicx,booktabs}
 \usepackage[T1]{fontenc}
@@ -14,7 +14,7 @@ in Arbitrary-Scale Super-Resolution}
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution exhibits shared frequency recovery, sustained responses to cell size, and gains from cell-conditioned learning. First, tested decoder families share recovery profiles, while stronger encoders, larger MLPs and longer training help mainly above input-normalised frequency $u\approx0.75$: longer training changes recovery below this boundary by at most 0.0013. Low-frequency saturation persists under Gaussian blur. Second, at equal decoder-input steps, cell-induced output changes generally remain as large or grow with scale: $J_6/J_2\ge1$ in 11 of 12 conditions, with point estimates 0.94--2.47. This descriptive pattern separates sustained output response from declining fixed-multiplier cost, which combines shrinking input steps and error alignment. Third, removing cell during training loses about 0.10\,dB in a matched two-seed benchmark. Constant-cell and shuffled-cell controls retain the input dimensions to test whether correct scale pairing explains this gain; these 200-epoch comparisons are in progress, so its source remains unresolved. Together, the findings distinguish where capacity helps, how cell changes the output, and what remains to be explained about its training benefit.
+Arbitrary-scale super-resolution exhibits shared frequency recovery, sustained responses to cell size, and gains from cell-conditioned learning. First, tested decoder families share recovery profiles, while stronger encoders, larger MLPs and longer training help mainly above input-normalised frequency $u\approx0.75$: longer training changes recovery below this boundary by at most 0.0013. Low-frequency saturation persists under Gaussian blur. Second, at equal decoder-input steps, cell-induced output changes generally remain as large or grow with scale: $J_6/J_2\ge1$ in 11 of 12 conditions, with point estimates 0.94--2.47. This descriptive pattern separates sustained output response from declining fixed-multiplier cost, which combines shrinking input steps and error alignment. Third, correctly paired cell improves learning: native cell exceeds constant-cell and shuffled-cell training by 0.100 and 0.097\,dB, respectively, under a matched 200-epoch, two-seed recipe. Both dimension-preserving controls are equivalent to no-cell within the registered $\pm0.03$\,dB margin. The gain therefore depends on correctly paired scale information, beyond retaining two extra inputs. Together, the findings distinguish where capacity helps, how cell changes the output, and why its pairing matters during learning.
 \end{abstract}
 \begin{keywords}
 Arbitrary-scale super-resolution, implicit representation, frequency recovery, scale conditioning
@@ -26,7 +26,7 @@ Continuous-coordinate super-resolution decodes local image features at arbitrary
 
 Prior work links performance to model size and training~\cite{nasir2026empirical} and studies spectral decoding's efficiency--accuracy trade-off~\cite{shad2026gblsr}. HyRA analyses nonlinear compensation of low-pass phase distortion~\cite{fsds2024}; LIIF, integrated encoding and heat fields connect cell to edges and filtering~\cite{chen2021liif,liu2021ipe,becker2025thera}. We locate capacity gains and distinguish cell-induced output change, error cost and training benefit.
 
-Our findings are: (1) decoder families share recovery profiles, with capacity gains mainly above $u\approx0.75$ and lower-band changes no larger than 0.0013 from longer training; (2) equal-step cell response is sustained or larger at $\times6$ than $\times2$ in 11/12 conditions, separating response strength from error cost; and (3) cell improves learning by about 0.10\,dB, with dimension-preserving controls testing the source of this gain. The third finding's source awaits the ongoing training controls; Table~\ref{tab:gates} retains all prediction failures.
+Our findings are: (1) decoder families share recovery profiles, with capacity gains mainly above $u\approx0.75$ and lower-band changes no larger than 0.0013 from longer training; (2) equal-step cell response is sustained or larger at $\times6$ than $\times2$ in 11/12 conditions, separating response strength from error cost; and (3) correctly paired cell provides a 0.100/0.097\,dB advantage over constant/shuffled cell, both equivalent to no-cell within $\pm0.03$\,dB. Table~\ref{tab:gates} retains all prediction failures.
 
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig1_recovery.pdf}
@@ -95,8 +95,8 @@ These finite interventions compare responses across changing features and native
 Change & $\times2$ & $\times3$ & $\times4$ & $\times6$\\\midrule
 MLP $2\times64$ & $-0.25$ & $-0.26$ & $-0.28$ & $-0.24$\\
 no cell input & $-0.13$ & $-0.09$ & $-0.11$ & $-0.10$\\
-constant cell & \multicolumn{4}{c}{pending}\\
-shuffled cell & \multicolumn{4}{c}{pending}\\
+constant cell & $-0.13$ & $-0.08$ & $-0.09$ & $-0.10$\\
+shuffled cell & $-0.12$ & $-0.09$ & $-0.09$ & $-0.09$\\
 RDN encoder & $+0.35$ & $+0.29$ & $+0.28$ & $+0.25$\\
 SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{tabular}
@@ -123,23 +123,25 @@ no-cell loss decays to negligible cost & F\\\midrule
 17: $\ge1/36$ corrected increases $>10\%$ & 11/36 P\\
 17: increase in all 12 conditions & 12/12 P\\
 17: both positive-step Set14 endpoints & 1/2 F\\
-18: native advantage (constant; shuffle) & pending\\
-18: no-cell equivalence (constant; shuffle) & pending\\\bottomrule
+18: native advantage (constant; shuffle) & P; P\\
+18: no-cell equivalence (constant; shuffle) & P; P\\\bottomrule
 \end{tabular}
 \end{table}
 
 \section{What cell contributes during learning}
 \label{sec:training}
-Removing cell during training loses approximately 0.1\,dB across benchmark scales in the existing two-seed comparison. To test the source of this benefit, we add two EDSR-LIIF arms under the same 200-epoch recipe and two seeds. Both retain the native decoder's two cell inputs and parameter count. Constant-input weights can be absorbed into the first-layer bias, adding no expressivity. The \emph{constant} arm receives the training mean of the actual cell coordinate, $c_0=\mathbb E[96/\operatorname{round}(48s)]$ for $s\sim\mathcal U(1,4)$, at every query and evaluation geometry. The \emph{shuffled} arm receives another sample's complete cell vector, using a random batch derangement. This preserves the empirical cell marginal while removing the correct pairing. A separate random generator preserves the data and model-initialisation streams, and assignment statistics verify the intervention. Queries and image features can still carry other scale cues.
+\textbf{Correct pairing supplies the training gain.} Native cell exceeds constant-cell and shuffled-cell training by 0.100\,dB $[0.061,0.149]$ and 0.097\,dB $[0.058,0.145]$, respectively (97.5\% paired-image intervals). Both seeds favour native cell in each comparison. Both controls also pass the registered no-cell equivalence tests: no-cell minus constant is $-0.005$\,dB $[-0.014,0.003]$, and no-cell minus shuffle is $-0.009$\,dB $[-0.017,-0.001]$ (95\% intervals), wholly within $\pm0.03$\,dB. Thus all four predictions pass (Table~\ref{tab:gates}). Retaining the extra inputs without correct scale pairing does not recover the native-cell benefit.
 
-We freeze predictions and scoring before training, select epoch 200 regardless of validation, and reevaluate the existing native/no-cell checkpoints with the same evaluator. Standard full-image Y-PSNR follows the original PIL-bicubic protocol, clamps outputs and shaves by scale on Set5, Set14, BSD100 and Urban100. We also measure quarter-$u$ recovery on the original DIV2K crop cohort. The shuffled arm's primary evaluation uses native cell; fixed-mean and four independent marginal-cell assignments per image provide predeclared sensitivity checks.
+\textbf{Dimension-preserving controls.} Both new EDSR-LIIF arms retain the native decoder's two cell inputs and parameter count, under the same 200-epoch recipe and two seeds. The constant arm receives the training mean actual cell coordinate, $c_0=0.9242188453$, at every query and evaluation geometry; its input weights can be absorbed into the first-layer bias. The shuffled arm receives another sample's complete cell vector through a batch derangement, preserving the empirical marginal while removing correct pairing. Separate random generators preserve data and initialisation streams; assignment audits verify the interventions.
 
-The primary predictions require native cell to outperform each new arm by at least 0.05\,dB in the dataset- and scale-balanced mean, with both seeds positive and a Bonferroni-adjusted 97.5\% paired-image interval above zero. Separate equivalence tests ask whether each arm lies within $\pm0.03$\,dB of no-cell; failure to establish equivalence is retained. Training comparisons use 2,000 within-dataset paired image resamples, conditional on the two seeds.
+Frozen scoring uses epoch 200 regardless of validation and reevaluates native/no-cell baselines identically: full-image Y-PSNR on Set5/Set14/BSD100/Urban100 at four scales, plus DIV2K crop $R(u)$. Predictions require native-minus-control $\ge0.05$\,dB in the dataset- and scale-balanced mean, positive effects in both seeds and corrected intervals above zero; equivalence requires the entire 95\% interval inside $\pm0.03$\,dB. Image bootstrap intervals condition on the two seeds; full protocols and independent verification of all 50,328 records are in the repository.
 
-\textbf{Training-control status.} All four frozen 200-epoch runs are in progress. Benchmark effects, recovery localisation, inference-policy sensitivity and the four prediction verdicts will be reported after the integrated pipeline completes; no partial validation result is used as a final outcome. These contrasts assess correct pairing, retained dimensions and training noise; their interpretation is limited to this recipe.
+\textbf{Frequency and inference-policy checks.} The recovery difference $R_{\rm native}-R_{\rm control}$ is small below $u=0.75$: its absolute quarter-band difference stays below 0.00048 for both controls at all four scales. At $\times2$, mean differences over $1\le u<2$ are 0.0146 $[0.0068,0.0245]$ for constant and 0.0165 $[0.0100,0.0246]$ for shuffle (descriptive 95\% intervals). Higher-scale region intervals often include zero, so these crop results do not imply a uniform bandwise advantage. For the shuffled model, switching among native, mean and four independent marginal-cell inference policies changes balanced benchmark PSNR by only 0.00014\,dB across all six policies. Its loss is therefore not recovered by these test-time cell assignments.
+
+These controls support correctly paired explicit scale information as the source of the benefit in this recipe. They do not identify a unique internal mechanism: queries and features retain other scale cues, and shuffling also injects training noise. All original training runs completed; an authorised evaluation-only recovery resolved a CUDA-initialisation failure using unchanged weights and frozen evaluation/scoring code. The original failure and recovery provenance are retained.
 
 \section{Conclusion and scope}
-Recovery profiles are shared across tested decoders, while capacity gains concentrate above $u\approx0.75$. At equal decoder-input steps, cell response is sustained or larger in 11/12 endpoint comparisons. Shrinking steps and error alignment explain why a fixed-multiplier cost decline need not mean weaker output response. Cell improves learning by about 0.10\,dB; the constant/shuffled-cell comparisons will distinguish the role of correct pairing from retained input dimensions. Their source verdict remains pending.
+Recovery profiles are shared across tested decoders, while capacity gains concentrate above $u\approx0.75$. At equal decoder-input steps, cell response is sustained or larger in 11/12 endpoint comparisons. Shrinking steps and error alignment explain why a fixed-multiplier cost decline need not mean weaker output response. Correctly paired cell improves learning by 0.100/0.097\,dB over constant/shuffled controls, which are equivalent to no-cell within $\pm0.03$\,dB. The training gain depends on paired scale information, beyond the additional input dimensions.
 
 Evidence is limited to the tested architectures, recipes and two degradations. New measurements were specified prospectively on previously studied images/checkpoints. Image-bootstrap intervals condition on fixed trained seeds; finite interventions and ablations do not identify a unique internal mechanism.
 
