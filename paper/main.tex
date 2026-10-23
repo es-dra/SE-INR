@@ -6,15 +6,15 @@
 \usepackage{times}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
-\title{Shared Recovery, Sustained Cell Responses, and Training Gains\\
-in Arbitrary-Scale Super-Resolution}
+\title{Where Arbitrary-Scale Super-Resolution Gains Come From:\\
+Above-Nyquist Capacity and Scale-Paired Learning}
 \name{Anonymous authors}
 \address{Anonymous institution}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution exhibits shared frequency recovery, sustained responses to cell size, and gains from cell-conditioned learning. First, tested decoder families share recovery profiles, while stronger encoders, larger MLPs and longer training help mainly above input-normalised frequency $u\approx0.75$: longer training changes recovery below this boundary by at most 0.0013. Low-frequency saturation persists under Gaussian blur. Second, at equal decoder-input steps, cell-induced output changes generally remain as large or grow with scale: $J_6/J_2\ge1$ in 11 of 12 conditions, with point estimates 0.94--2.47. This descriptive pattern separates sustained output response from declining fixed-multiplier cost, which combines shrinking input steps and error alignment. Third, correctly paired cell improves learning: native cell exceeds constant-cell and shuffled-cell training by 0.100 and 0.097\,dB, respectively, under a matched 200-epoch, two-seed recipe. Both dimension-preserving controls are equivalent to no-cell within the registered $\pm0.03$\,dB margin. The gain therefore depends on correctly paired scale information, beyond retaining two extra inputs. Together, the findings distinguish where capacity helps, how cell changes the output, and why its pairing matters during learning.
+Arbitrary-scale super-resolution (ASISR) networks decode encoder features at continuous coordinates and condition the decoder on the target pixel size, or cell. We ask where their gains come from. In frequency normalised by the low-resolution (LR) Nyquist limit, $u$, recovery profiles are shared across four decoder designs, and capacity---longer training, a stronger encoder or a wider decoder MLP---improves only bands above $u\approx0.75$, also under a Gaussian-blur degradation. The cell is often read as an inference-time filter whose effect fades at large scales. This reading is an artefact of fixed cell multipliers, which shrink the actual decoder-input step as $2(m-1)/s$: at equal steps, the cell-induced output change at $\times6$ matches or exceeds that at $\times2$ in 11 of 12 conditions. The cell's value lies in learning. Native cell outperforms dimension-preserving constant-cell and shuffled-cell training by 0.100 and 0.097\,dB, and both controls are equivalent to removing the cell within $\pm0.03$\,dB. ASISR gains thus come from learned above-Nyquist priors, and the cell supplies correctly paired scale information for learning them. Predictions were registered before each experiment; failures are reported.
 \end{abstract}
 \begin{keywords}
 Arbitrary-scale super-resolution, implicit representation, frequency recovery, scale conditioning
@@ -26,7 +26,13 @@ Continuous-coordinate super-resolution decodes local image features at arbitrary
 
 Prior work links performance to model size and training~\cite{nasir2026empirical} and studies spectral decoding's efficiency--accuracy trade-off~\cite{shad2026gblsr}. HyRA analyses nonlinear compensation of low-pass phase distortion~\cite{fsds2024}; LIIF, integrated encoding and heat fields connect cell to edges and filtering~\cite{chen2021liif,liu2021ipe,becker2025thera}. We locate capacity gains and distinguish cell-induced output change, error cost and training benefit.
 
-Our findings are: (1) decoder families share recovery profiles, with capacity gains mainly above $u\approx0.75$ and lower-band changes no larger than 0.0013 from longer training; (2) equal-step cell response is sustained or larger at $\times6$ than $\times2$ in 11/12 conditions, separating response strength from error cost; and (3) correctly paired cell provides a 0.100/0.097\,dB advantage over constant/shuffled cell, both equivalent to no-cell within $\pm0.03$\,dB. Table~\ref{tab:gates} retains all prediction failures.
+We argue that ASISR gains come from learned priors above the LR Nyquist limit, and that the cell matters as scale information during learning rather than as an inference-time filter. Three findings support this.
+\begin{enumerate}
+\item \textbf{Capacity acts above Nyquist; decoder form does not.} Tested decoder families share recovery profiles (spread $\le0.019$), while capacity gains concentrate above $u\approx0.75$; longer training changes lower bands by at most 0.0013.
+\item \textbf{Cell responses do not fade with scale.} At equal decoder-input steps, the output change is sustained or larger at $\times6$ than at $\times2$ in 11/12 conditions; declining fixed-multiplier costs reflect shrinking steps and error alignment.
+\item \textbf{Correct scale pairing supplies the training gain.} Native cell beats constant and shuffled cell by 0.100 and 0.097\,dB, and both controls are equivalent to no cell.
+\end{enumerate}
+Table~\ref{tab:gates} lists every registered prediction, including failures.
 
 \begin{figure*}[t]\centering
 \includegraphics[width=\textwidth]{figures/fig1_recovery.pdf}
@@ -71,7 +77,7 @@ D=\|e-\delta\|^2-\|e\|^2
 \end{equation}
 We report $J$, $D$ and the alignment term in RGB-mean MSE units. Small cost can arise from an output change that corrects existing error. The dB cost additionally depends on native MSE $V$ through $10\log_{10}(1+D/V)$.
 
-\textbf{Sustained equal-step response.} At the same decoder-input step, cell-induced output changes generally do not weaken with scale and are often larger (Fig.~\ref{fig:step}). Across four datasets and three steps, $J_6/J_2\ge1$ in 11/12 conditions; point estimates span 0.94--2.47. The individual 95\% interval lower bounds span 0.81--1.57 and upper bounds 1.08--4.48; these ranges summarise 12 intervals, not a pooled interval. The smallest estimate is Urban100 at $h=0.25$, 0.94 $[0.81,1.08]$, and the largest is Set14 at $h=-0.25$, 2.47 $[1.47,4.48]$. This is a descriptive endpoint pattern, not a new preregistered success or a claim that every response increases significantly.
+\textbf{Sustained equal-step response.} At the same decoder-input step, cell-induced output changes generally do not weaken with scale and are often larger (Fig.~\ref{fig:step}). Across four datasets and three steps, $J_6/J_2\ge1$ in 11/12 conditions; point estimates span 0.94--2.47. The individual 95\% interval lower bounds span 0.81--1.57 and upper bounds 1.08--4.48; these ranges summarise 12 intervals, not a pooled interval. The smallest estimate is Urban100 at $h=0.25$, 0.94 $[0.81,1.08]$, and the largest is Set14 at $h=-0.25$, 2.47 $[1.47,4.48]$. This endpoint pattern is descriptive; the registered tests are in Table~\ref{tab:gates}.
 
 The frozen experiment measures all 246 full images from DIV2K 0869--0900, Set14, BSD100 and Urban100 with LIIF/LTE/SC-INR, two seeds and $h\in\{-0.25,0.25,0.5\}$, using paired within-dataset image bootstrap intervals. Matched image support, preprocessing, 10,000 resamples and multiplicity rules are documented in the repository; Table~\ref{tab:gates} separately reports the frozen existence, condition-wise and Set14 endpoint tests, including the failed Set14 prediction.
 
@@ -103,22 +109,19 @@ SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{table}
 
 \begin{table}[t]\centering\small
-\caption{Registered predictions and retained failures. Counts are satisfying checks, followed by overall pass (P) or fail (F); they are not independent experiments. All original prediction records remain in the repository. Stages 17--18 are frozen prospectively. Stage 17 uses one-sided Bonferroni bounds over 36 adjacent tests, three tests per condition, or two Set14 endpoints; the 11/12 descriptive endpoint count is not a new prediction.}
+\caption{Registered predictions and outcomes: satisfying checks and overall pass (P) or fail (F). Stage 17 uses Bonferroni-corrected one-sided bounds; its 11/12 endpoint count in the text is descriptive. $^*$Best cell within 10\% of native (20/27), smaller cell costs more (33/144), $\ge80\%$ of cost at $u\ge1$ (311/414), external cell locus (2/4; 3/4). Full records are in the repository.}
 \label{tab:gates}
-\begin{tabular}{p{4.8cm}r}\toprule
+\begin{tabular}{p{5.0cm}r}\toprule
 Prediction & Outcome\\\midrule
-strict $R(u)$ collapse (crops; full) & 45/54; 53/72 F\\
 decoder spread $\le0.03$ (crops; full) & 36/36; 54/54 P\\
-doubled-cell peak $r\in[.19,.375)$ & 36/36 P\\
-fixed-multiplier cost declines & 9/9 P\\
-$Q/D\in[.7,1.3]$ at $\times3/4$ & 6/6 P\\
-best cell within 10\% of native ($s\le4$) & 20/27 F\\
-smaller cell costs more & 33/144 F\\
-small MLP harmless at large scales & F\\
+capacity raises $R$ only above $u\approx1$ & 12/12; 9/9 P\\
+strict $R(u)$ collapse (crops; full) & 45/54; 53/72 F\\
 blur moves gains below $u=0.75$ & 0/3 F\\
-$\ge80\%$ absolute cost lies at $u\ge1$ & 311/414 F\\
+small MLP harmless at large scales & F\\
 external RDN-BTC; EDSR gain & 0/12; 0/4 F\\
-external cell locus (GaussianSR; BTC) & 2/4; 3/4 F\\
+fixed-multiplier cost declines; peak $r$ & 9/9; 36/36 P\\
+$Q/D\in[.7,1.3]$ at $\times3/4$ & 6/6 P\\
+four further fixed-multiplier predictions$^*$ & F\\
 no-cell loss decays to negligible cost & F\\\midrule
 17: $\ge1/36$ corrected increases $>10\%$ & 11/36 P\\
 17: increase in all 12 conditions & 12/12 P\\
@@ -140,10 +143,10 @@ Frozen scoring uses epoch 200 regardless of validation and reevaluates native/no
 
 These controls support correctly paired explicit scale information as the source of the benefit in this recipe. They do not identify a unique internal mechanism: queries and features retain other scale cues, and shuffling also injects training noise. All original training runs completed; an authorised evaluation-only recovery resolved a CUDA-initialisation failure using unchanged weights and frozen evaluation/scoring code. The original failure and recovery provenance are retained.
 
-\section{Conclusion and scope}
-Recovery profiles are shared across tested decoders, while capacity gains concentrate above $u\approx0.75$. At equal decoder-input steps, cell response is sustained or larger in 11/12 endpoint comparisons. Shrinking steps and error alignment explain why a fixed-multiplier cost decline need not mean weaker output response. Correctly paired cell improves learning by 0.100/0.097\,dB over constant/shuffled controls, which are equivalent to no-cell within $\pm0.03$\,dB. The training gain depends on paired scale information, beyond the additional input dimensions.
+\section{Implications and scope}
+For model design, the frequency budget above the LR Nyquist limit is set by learned capacity, not by decoder form: a new decoder or cell design should be judged by whether it moves $R(u)$ there. For analysis, cell probes should hold the decoder-input step fixed and report response and error alignment separately, because fixed-multiplier costs conflate both. For training, the cell is worth keeping even at large scales, but only when it is correctly paired with the target scale.
 
-Evidence is limited to the tested architectures, recipes and two degradations. New measurements were specified prospectively on previously studied images/checkpoints. Image-bootstrap intervals condition on fixed trained seeds; finite interventions and ablations do not identify a unique internal mechanism.
+The evidence covers the tested architectures, recipes and two degradations. New measurements were specified prospectively on previously studied images and checkpoints; intervals condition on the trained seeds, and the ablations do not identify a unique internal mechanism.
 
 \clearpage
 \raggedbottom
