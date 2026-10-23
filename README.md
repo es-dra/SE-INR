@@ -2,7 +2,7 @@
 
 > **Study status, 2026-10-23:** stages 17 and 18 are complete and independently verified. The manuscript reports all four stage-18 prediction outcomes. Original evaluation failures and the authorised recovery are retained in the evidence record.
 
-Code and evidence for **"Where Arbitrary-Scale Super-Resolution Gains Come From: Above-Nyquist Capacity and Scale-Paired Learning"** ([source](paper/main.tex), [PDF](paper/main.pdf)).
+Code and evidence for **"Where Arbitrary-Scale Super-Resolution Gains Come From: High-Frequency Capacity and Scale-Paired Learning"** ([source](paper/main.tex), [PDF](paper/main.pdf)).
 
 The paper asks where additional learning capacity improves reconstruction, how to measure the decoder's response to cell, and why cell helps during training. The [study record](studies/two-coordinates/README.md) connects each claim to its protocol and results, including failed predictions.
 

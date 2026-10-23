@@ -13,18 +13,18 @@
   "warnings_or_overfull": [],
   "embedded_fonts": 19,
   "type3_fonts": 0,
-  "visual_check": "All five pages rendered and inspected after the framing revision; no clipping or overlap; references only on page 5. Fresh build and committed PDF have identical text on each page.",
-  "server_build_root": "/tmp/se-inr-final-review-323670a",
+  "visual_check": "Current manuscript rebuilt without warnings; five pages, references only on page 5; page 4 visually inspected without clipping. All-page visual inspection was performed on the preceding framing version.",
+  "server_build_root": "/tmp/se-inr-review-6e1b8b1",
   "files_sha256": {
-    "main.tex": "1ff7d15551940b6479b6d55380bda77c67656a8773636990b2fb56b9b3eba6cc",
+    "main.tex": "ea0e1ee437db56bbcc82be557b71894b2fe2e4051001e22511e58bd0c19ea64a",
     "refs.bib": "39547aefff2e16f07f47d0e140039fe3b2d0ac07aa9d5fe84267d35710d090ce",
     "spconf.sty": "dc5d632639040cb183f2ab62780f314845aa021be73048c8a9ec9c2072d64a86",
     "IEEEbib.bst": "7e6ca0c8b72158d504a12bb091f817c07032a021ba41ca783cca4c2dd80d570b",
-    "main.pdf": "0861793be5c53653b7345f4210240edc287a94b4e59f7a074e457a3b9052c533",
+    "main.pdf": "98add2de3361865deb63a22b2f02957ffee5b7c42df23f8bd85492ec4b79073d",
     "figures/fig2_equal_step.pdf": "4947285f9760c8bd49a4e6c7bdf854260cef63d59036831b8481a776e8ec4ae8",
     "figures/fig1_recovery.pdf": "dcda8c559714bc8314a30382f716ef4b324a4b052203b9d5379605647acbdd6a",
     "figures/fig3_qualitative.pdf": "10f414eced5d32c6d1a6f4be9972834cddc7770cc97c37548fdeea57b19923b2"
   },
-  "reviewed_manuscript_commit": "323670ad950ab2689752ce13def38d47864ca7b7",
-  "scientific_claim_review": "changes requested: frequency boundary, mechanism scope, and registered capacity gate wording"
+  "reviewed_manuscript_commit": "6e1b8b146bbf887ab88fcae6aa00cebd0e31c738",
+  "scientific_claim_review": "Previous three findings resolved; no new substantive blocker identified within this review scope."
 }
