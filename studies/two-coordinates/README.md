@@ -1,6 +1,6 @@
 # Shared recovery, sustained cell responses and training gains
 
-> **Study status, 2026-10-23:** stage 17 is complete and independently verified; stage 18 training and its integrated evaluation are running. Final training-source verdicts are not yet available. See [run locations](RUNS.md).
+> **Study status, 2026-10-23:** stage 17 is complete and independently verified; stage 18 training completed; original evaluation failed at CUDA initialization. An authorized evaluation-only recovery is running with unchanged checkpoints and frozen scoring (see RUNS). Final training-source verdicts are not yet available. See [run locations](RUNS.md).
 
 The descriptive stage-17 endpoint pattern is J6/J2 ≥ 1 in 11/12 conditions (0.94–2.47). Individual 95% interval lower bounds range from 0.81 to 1.57 and upper bounds from 1.08 to 4.48; this is not a pooled interval or a new preregistered pass. See `17-equal-step-response/score/summary.json`, `endpoint_contrasts`.
 
