@@ -33,3 +33,10 @@
 
 
 Claude 审阅本轮论文正文与贡献边界；用户决定投稿去向和公开时机。当前不增加实验，不自动创建公开仓库。最终编译、页数和同步证据见 `paper/validation.json` 与本轮交付。
+
+## 2026-10-23 Claude 按终审意见定点修改
+
+- P1 Nyquist：标题改为 High-Frequency Capacity；“only/does not”改为“mainly/near and above Nyquist”；结论不再把已测设计的相近曲线写成上限。
+- P1 训练收益：删去“rather than an inference-time filter”等排他表述，改为“cell 在推理时持续起作用，正确配对的尺度信息带来训练收益”。
+- P2 表 2：容量行恢复冻结命题原文（1≤u<2 提升；u<0.75 |ΔR|≤0.01），表注说明计数为每个解码器 12/9 个频段。
+- 编译 4+1 页，无警告。下一步：用户请导师通读，决定投稿去向。

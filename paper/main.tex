@@ -7,14 +7,14 @@
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 \title{Where Arbitrary-Scale Super-Resolution Gains Come From:\\
-Above-Nyquist Capacity and Scale-Paired Learning}
+High-Frequency Capacity and Scale-Paired Learning}
 \name{Anonymous authors}
 \address{Anonymous institution}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution (ASISR) networks decode encoder features at continuous coordinates and condition the decoder on the target pixel size, or cell. We ask where their gains come from. In frequency normalised by the low-resolution (LR) Nyquist limit, $u$, recovery profiles are shared across four decoder designs, and capacity---longer training, a stronger encoder or a wider decoder MLP---improves only bands above $u\approx0.75$, also under a Gaussian-blur degradation. The cell is often read as an inference-time filter whose effect fades at large scales. This reading is an artefact of fixed cell multipliers, which shrink the actual decoder-input step as $2(m-1)/s$: at equal steps, the cell-induced output change at $\times6$ matches or exceeds that at $\times2$ in 11 of 12 conditions. The cell's value lies in learning. Native cell outperforms dimension-preserving constant-cell and shuffled-cell training by 0.100 and 0.097\,dB, and both controls are equivalent to removing the cell within $\pm0.03$\,dB. ASISR gains thus come from learned above-Nyquist priors, and the cell supplies correctly paired scale information for learning them. Predictions were registered before each experiment; failures are reported.
+Arbitrary-scale super-resolution (ASISR) networks decode encoder features at continuous coordinates and condition the decoder on the target pixel size, or cell. We ask where their gains come from. In frequency normalised by the low-resolution (LR) Nyquist limit, $u$, recovery profiles are shared across four decoder designs, and capacity---longer training, a stronger encoder or a wider decoder MLP---improves mainly bands near and above the Nyquist limit ($u\gtrsim0.75$), also under a Gaussian-blur degradation. The cell is often thought to lose its effect at large scales. This impression is an artefact of fixed cell multipliers, which shrink the actual decoder-input step as $2(m-1)/s$: at equal steps, the cell-induced output change at $\times6$ matches or exceeds that at $\times2$ in 11 of 12 conditions. The cell also matters during learning: native cell outperforms dimension-preserving constant-cell and shuffled-cell training by 0.100 and 0.097\,dB, and both controls are equivalent to removing the cell within $\pm0.03$\,dB. ASISR gains thus concentrate where learned priors fill bands near and above the Nyquist limit, the cell keeps acting at inference, and correctly paired scale information improves learning. Predictions were registered before each experiment; failures are reported.
 \end{abstract}
 \begin{keywords}
 Arbitrary-scale super-resolution, implicit representation, frequency recovery, scale conditioning
@@ -26,9 +26,9 @@ Continuous-coordinate super-resolution decodes local image features at arbitrary
 
 Prior work links performance to model size and training~\cite{nasir2026empirical} and studies spectral decoding's efficiency--accuracy trade-off~\cite{shad2026gblsr}. HyRA analyses nonlinear compensation of low-pass phase distortion~\cite{fsds2024}; LIIF, integrated encoding and heat fields connect cell to edges and filtering~\cite{chen2021liif,liu2021ipe,becker2025thera}. We locate capacity gains and distinguish cell-induced output change, error cost and training benefit.
 
-We argue that ASISR gains come from learned priors above the LR Nyquist limit, and that the cell matters as scale information during learning rather than as an inference-time filter. Three findings support this.
+We argue that ASISR gains come mainly from learned capacity in bands near and above the LR Nyquist limit, that the cell keeps acting at inference at all tested scales, and that correctly paired scale information provides a training benefit. Three findings support this.
 \begin{enumerate}
-\item \textbf{Capacity acts above Nyquist; decoder form does not.} Tested decoder families share recovery profiles (spread $\le0.019$), while capacity gains concentrate above $u\approx0.75$; longer training changes lower bands by at most 0.0013.
+\item \textbf{Capacity gains concentrate near and above Nyquist.} Tested decoder forms share recovery profiles (spread $\le0.019$), while capacity gains concentrate from $u\approx0.75$ upward; longer training changes lower bands by at most 0.0013.
 \item \textbf{Cell responses do not fade with scale.} At equal decoder-input steps, the output change is sustained or larger at $\times6$ than at $\times2$ in 11/12 conditions; declining fixed-multiplier costs reflect shrinking steps and error alignment.
 \item \textbf{Correct scale pairing supplies the training gain.} Native cell beats constant and shuffled cell by 0.100 and 0.097\,dB, and both controls are equivalent to no cell.
 \end{enumerate}
@@ -108,13 +108,13 @@ SwinIR encoder$^\dagger$ & $+0.46$ & $+0.42$ & $+0.42$ & $+0.34$\\\bottomrule
 \end{tabular}
 \end{table}
 
-\begin{table}[t]\centering\small
-\caption{Registered predictions and outcomes: satisfying checks and overall pass (P) or fail (F). Stage 17 uses Bonferroni-corrected one-sided bounds; its 11/12 endpoint count in the text is descriptive. $^*$Best cell within 10\% of native (20/27), smaller cell costs more (33/144), $\ge80\%$ of cost at $u\ge1$ (311/414), external cell locus (2/4; 3/4). Full records are in the repository.}
+\begin{table}[t]\centering\footnotesize
+\caption{Registered predictions and outcomes: satisfying checks and overall pass (P) or fail (F). Stage 17 uses Bonferroni-corrected one-sided bounds; its 11/12 endpoint count in the text is descriptive. Training counts are per decoder (12 high-band bins, 9 low-band bins). $^*$Best cell within 10\% of native (20/27), smaller cell costs more (33/144), $\ge80\%$ of cost at $u\ge1$ (311/414), external cell locus (2/4; 3/4).}
 \label{tab:gates}
 \begin{tabular}{p{5.0cm}r}\toprule
 Prediction & Outcome\\\midrule
 decoder spread $\le0.03$ (crops; full) & 36/36; 54/54 P\\
-capacity raises $R$ only above $u\approx1$ & 12/12; 9/9 P\\
+training gain at $1{\le}u{<}2$; $|\Delta R|{\le}.01$ at $u{<}.75$ & 12/12; 9/9 P\\
 strict $R(u)$ collapse (crops; full) & 45/54; 53/72 F\\
 blur moves gains below $u=0.75$ & 0/3 F\\
 small MLP harmless at large scales & F\\
@@ -144,7 +144,7 @@ Frozen scoring uses epoch 200 regardless of validation and reevaluates native/no
 These controls support correctly paired explicit scale information as the source of the benefit in this recipe. They do not identify a unique internal mechanism: queries and features retain other scale cues, and shuffling also injects training noise. All original training runs completed; an authorised evaluation-only recovery resolved a CUDA-initialisation failure using unchanged weights and frozen evaluation/scoring code. The original failure and recovery provenance are retained.
 
 \section{Implications and scope}
-For model design, the frequency budget above the LR Nyquist limit is set by learned capacity, not by decoder form: a new decoder or cell design should be judged by whether it moves $R(u)$ there. For analysis, cell probes should hold the decoder-input step fixed and report response and error alignment separately, because fixed-multiplier costs conflate both. For training, the cell is worth keeping even at large scales, but only when it is correctly paired with the target scale.
+For model design, learned capacity paid off near and above the LR Nyquist limit, and the tested decoder forms changed that range little: a new decoder or cell design should be judged by whether it moves $R(u)$ there. For analysis, cell probes should hold the decoder-input step fixed and report response and error alignment separately, because fixed-multiplier costs conflate both. For training, the cell is worth keeping even at large scales, but only when it is correctly paired with the target scale.
 
 The evidence covers the tested architectures, recipes and two degradations. New measurements were specified prospectively on previously studied images and checkpoints; intervals condition on the trained seeds, and the ablations do not identify a unique internal mechanism.
 
