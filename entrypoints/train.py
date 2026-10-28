@@ -128,8 +128,25 @@ def prepare_training(train_loader=None):
     return model, optimizer, epoch_start, lr_scheduler, step_scheduler
 
 
+def band_loss(pred, gt, scale, spec):
+    """L1 on the Fourier error of a contiguous HR window, restricted to u = 2*s*r >= u_min.
+
+    r is the Chebyshev frequency in cycles per HR pixel; u is its value relative to the LR Nyquist limit.
+    """
+    import torch
+    b, q, c = pred.shape
+    w = int(round(q ** 0.5))
+    err = (pred - gt).view(b, w, w, c).permute(0, 3, 1, 2)
+    spec_err = torch.fft.fft2(err, norm='ortho').abs()
+    f = torch.fft.fftfreq(w, device=pred.device).abs()
+    r = torch.maximum(f[:, None], f[None, :])
+    u = 2 * scale.view(b, 1, 1) * r[None]
+    mask = ((u >= spec.get('u_min', 0.75)) & (r[None] > 0)).float().unsqueeze(1)
+    return (spec_err * mask).sum() / (mask.sum() * c).clamp_min(1.0)
+
+
 def train(train_loader, model, optimizer, lr_scheduler=None, step_scheduler=False,
-          lambda_cons=0.0, grad_clip=None, use_amp=False):
+          lambda_cons=0.0, grad_clip=None, use_amp=False, freq_loss=None):
     model.train()
     loss_fn = nn.L1Loss()
     train_loss = utils.Averager()
@@ -168,6 +185,8 @@ def train(train_loader, model, optimizer, lr_scheduler=None, step_scheduler=Fals
             else:
                 pred = model(inp, batch['coord'], batch['cell'])
                 loss = loss_fn(pred, gt)
+                if freq_loss is not None:
+                    loss = loss + freq_loss['weight'] * band_loss(pred, gt, batch['scale'][:, 0], freq_loss)
 
         train_loss.add(loss.item())
 
@@ -277,7 +296,7 @@ def main(config_, save_path, args=None):
 
         train_loss = train(train_loader, model, optimizer,
                            lr_scheduler=lr_scheduler, step_scheduler=step_scheduler,
-                           lambda_cons=lambda_cons, grad_clip=grad_clip,
+                           lambda_cons=lambda_cons, grad_clip=grad_clip, freq_loss=config.get('freq_loss'),
                            use_amp=config.get('use_amp', False))
         if not step_scheduler and lr_scheduler is not None:
             lr_scheduler.step()

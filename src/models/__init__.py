@@ -3,6 +3,7 @@ from . import edsr
 from . import rdn
 from . import mlp
 from . import liif
+from . import liif_sp
 from . import lte
 from . import sc_inr_adaptive
 try:

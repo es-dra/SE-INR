@@ -1,0 +1,12 @@
+{"version": "claude-20261029-sp-pilot-v1",
+ "question": "Do the two components derived from the analysis -- scale-paired FiLM modulation of every decoder layer (finding 3: correctly paired scale information drives the cell's training gain) and a u-normalised high-band loss (finding 1: capacity gains concentrate at u>=0.75) -- improve EDSR-LIIF beyond a parameter-matched wider MLP?",
+ "status": "pilot, one seed; go/no-go for a two-seed confirmation",
+ "arms": {"base": "EDSR-LIIF, window sampling (48x48 contiguous HR window, 2304 queries)", "film": "base + FiLM scale modulation (liif_sp, +137k params)", "uloss": "base + 0.5 x L1 of Fourier error restricted to u>=0.75 on the window", "full": "film + uloss", "wide": "base with MLP hidden 316 (1.7055M params, matched to film/full 1.7048M)"},
+ "recipe": "configs/train-div2k/train-liif-edsr-200ep.yaml otherwise unchanged: DIV2K, scales U(1,4), 200 epochs, milestones 100/150, seed 1. lambda=0.5 chosen before training from loss magnitudes of the existing 200-epoch EDSR-LIIF on training windows (L1 0.039, band 0.045); no test data used.",
+ "evaluation": "entrypoints/test.py benchmark protocol (Y-PSNR, shave=scale) on full Set5/Set14/BSD100/Urban100 at x2/3/4/6; balanced mean over the 16 cells. R(u) with tools/frequency_probe.py on DIV2K 0869-0900 centre 240 crops.",
+ "predictions_frozen_before_training": {
+  "P1_method": "full - base >= +0.05 dB balanced mean",
+  "P2_beyond_capacity": "full - wide >= +0.03 dB balanced mean",
+  "P3_components": "descriptive: film - base and uloss - base",
+  "P4_where": "descriptive: share of positive R(u) gain (full - base) at u>=0.75 over x2/3/4"},
+ "decision_rule": "If P1 and P2 both hold, run seed 2 for all arms before any claim. Otherwise report and revise the method before further training."}

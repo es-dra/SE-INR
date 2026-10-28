@@ -39,3 +39,9 @@ Claude 审阅本轮论文正文与贡献边界；用户决定投稿去向和公�
 - P1 训练收益：删去“rather than an inference-time filter”等排他表述，改为“cell 在推理时持续起作用，正确配对的尺度信息带来训练收益”。
 - P2 表 2：容量行恢复冻结命题原文（1≤u<2 提升；u<0.75 |ΔR|≤0.01），表注说明计数为每个解码器 12/9 个频段。
 - 编译 4+1 页，无警告。下一步：用户请导师通读，决定投稿去向。
+
+## 2026-10-29 方向调整（用户）：小论文需方法突破，同时兼顾硕士开题
+
+- 方法：尺度配对的高频解码器。部件一 FiLM 尺度调制（`src/models/liif_sp.py`，依据发现 3）；部件二 u 归一化高频损失（`entrypoints/train.py` 的 `freq_loss`，依据发现 1），训练改用连续窗口采样（`src/datasets/window_wrapper.py`）。
+- 试点 `studies/method-sp/01-pilot`（服务器 runs/claude-20261029-sp-pilot-v1）：base / film / uloss / full / wide（参数量对齐）五组，200 epoch，seed 1，GPU1，约 17 小时，自动评分。门槛：full−base ≥0.05 dB 且 full−wide ≥0.03 dB，通过后再跑 seed 2。
+- 开题：题目建议“面向任意尺度图像超分辨率的频谱感知连续表示方法研究”，三部分：分析框架（已完成）→ 方法（本试点）→ EEG 推广（视数据而定）。试点出结果后写初稿。

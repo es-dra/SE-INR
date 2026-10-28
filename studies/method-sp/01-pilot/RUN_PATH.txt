@@ -1,0 +1,1 @@
+server: /workspace/SE-INR/runs/claude-20261029-sp-pilot-v1
