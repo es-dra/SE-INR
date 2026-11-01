@@ -1,0 +1,155 @@
+{
+ "version": "claude-20261101-footprint-v1",
+ "question": "Scale conditioning is learned only on symmetric cells c_x = c_y = 2/s with s in [1,4]. Does a decoder whose cell response is an analytic footprint integral (SC-INR: sinc(w_x c_x/2) sinc(w_y c_y/2)) behave differently from decoders that learn the cell as an input token (LIIF concatenation, LTE cell-to-phase) once the cell leaves the training manifold: asymmetric scales, scales above 4, downscaling and cross-scale consistency?",
+ "identifiability_argument": "With c_x = c_y at every training sample, a first-layer or phase-layer weight pair (w_x, w_y) is constrained only through w_x + w_y. The per-axis response of LIIF and LTE to an asymmetric cell is therefore not determined by training and is expected to vary with the initialisation seed. SC-INR fixes the per-axis response analytically; its frequency map does not depend on the cell.",
+ "status": "prospective inference on existing checkpoints; no training; one integrated freeze -> run -> score pipeline",
+ "models": [
+  "liif",
+  "lte",
+  "sc-inr"
+ ],
+ "checkpoint_root": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed{seed}/{model}/epoch-last.pth",
+ "checkpoint_epoch": 1000,
+ "seeds_policy": "all of seeds 1,2,3 whose checkpoints exist for every model at freeze time; recorded in input_manifest.json",
+ "datasets": {
+  "DIV2K": {
+   "root": "DIV2K_valid_HR",
+   "first": 869,
+   "last": 900
+  },
+  "Set14": {
+   "root": "Set14/HR"
+  },
+  "BSD100": {
+   "root": "BSD100/HR"
+  },
+  "Urban100": {
+   "root": "Urban100/HR"
+  }
+ },
+ "preprocessing": {
+  "hr_crop": "whole image, top-left modcrop to multiples of 24 (lcm of 1.5, 2, 3, 4, 6, 8, 12 denominators); identical HR support for every condition",
+  "lr": "torch interpolate bicubic antialias=True align_corners=False to (H/s_y, W/s_x), clamp [0,1]",
+  "input_normalization": "2*LR-1",
+  "output": "0.5*network_output+0.5, float32; PSNR-Y uses the clipped output, spectral energies the unclipped output",
+  "psnr_y": "ITU-R BT.601 luma of clipped RGB, shave ceil(max(s_y, s_x)) pixels, per-image dB",
+  "mse_rgb": "unclipped RGB mean squared error after a four-pixel shave",
+  "spectral": "rectangular FFT of the shaved error and target; DC stored separately; energies normalised so that their sum equals the spatial mean square"
+ },
+ "conditions": {
+  "symmetric_scales": [
+   1.5,
+   2,
+   3,
+   4,
+   6,
+   8,
+   12
+  ],
+  "asymmetric_pairs_sy_sx": [
+   [
+    1.5,
+    3
+   ],
+   [
+    3,
+    1.5
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    4,
+    2
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    4,
+    3
+   ],
+   [
+    2,
+    6
+   ],
+   [
+    6,
+    2
+   ]
+  ],
+  "asymmetric_in_support": "pairs with both scales <= 4 (eight pairs); pairs containing 6 are reported separately",
+  "cell_policies": {
+   "native": "decoder cell (2/s_y, 2/s_x): the true per-axis footprint",
+   "swap": "decoder cell (2/s_x, 2/s_y): axes exchanged; wrong on both axes, same multiset of values",
+   "iso": "decoder cell (2/g, 2/g) with g = sqrt(s_y s_x): a symmetric substitute inside the training manifold"
+  },
+  "consistency_pairs_hi_lo": [
+   [
+    4,
+    2
+   ],
+   [
+    3,
+    1.5
+   ]
+  ],
+  "consistency_metric": "from one LR (HR/s_hi), predict the full grid at s_hi and the half grid at s_lo = s_hi/2; compare the 2x2 box average of the s_hi output with the s_lo output (RGB PSNR, shave 4 on the low grid); also compare both with the box-averaged HR and the bicubic-antialiased HR",
+  "downscale": {
+   "side": 240,
+   "input": "centre crop of the HR image with the given side, fed as the network input",
+   "output_scale": 0.5,
+   "decoder_cell": 4.0,
+   "references": [
+    "2x2 box average of the input",
+    "bicubic antialiased resize of the input"
+   ],
+   "baselines": [
+    "nearest subsampling",
+    "bicubic antialiased resize"
+   ]
+  },
+  "u_bins": "u = 2 s r with Chebyshev radius r; width 0.25 up to u = 4 plus an overflow bin; asymmetric conditions use u = max(2 s_y |f_y|, 2 s_x |f_x|) and additionally a 5x5 grid over (u_y, u_x) with edges 0, 0.5, 1, 1.5, 2, inf"
+ },
+ "inference": {
+  "precision": "float32, TF32 disabled, eval, no_grad",
+  "query_chunk": 30000,
+  "save_full_predictions": false,
+  "no_training": true,
+  "shard_timeout_hours": 12
+ },
+ "scoring": {
+  "balanced_mean": "per image -> per dataset -> equal weight over datasets -> equal weight over the conditions named by each statistic; seeds averaged per image before any contrast",
+  "bootstrap": "paired image bootstrap within each dataset, 10,000 resamples, numpy default_rng(20261101); one index draw per dataset shared by all statistics; intervals condition on the trained seeds",
+  "gate_alpha": "one-sided 0.05/5 lower bounds for the five registered gates; descriptive statistics use two-sided 95% intervals"
+ },
+ "predictions_frozen_before_run": {
+  "G1_scinr_axis_identified": "SC-INR, eight in-support asymmetric pairs: balanced mean of PSNR-Y(native) - PSNR-Y(swap) has corrected lower bound > 0, and every seed's balanced mean is > 0.",
+  "G2a_scinr_exceeds_liif": "The native-minus-swap gain of SC-INR exceeds that of LIIF: corrected lower bound of the paired difference-of-differences > 0.",
+  "G2b_scinr_exceeds_lte": "Same contrast against LTE.",
+  "G3_scinr_native_beats_iso": "SC-INR: PSNR-Y(native) - PSNR-Y(iso) over the eight in-support pairs has corrected lower bound > 0.",
+  "G4_consistency": "Prior uncertain (the sinc weights precede a nonlinear MLP and the bilinear skip ignores the footprint). SC-INR's consistency PSNR, averaged over the two pairs, exceeds both LIIF's and LTE's with corrected lower bounds > 0.",
+  "descriptive_not_gated": [
+   "LIIF and LTE native-minus-swap and native-minus-iso per seed with two-sided intervals: the identifiability argument predicts seed-dependent signs and native <= iso.",
+   "Asymmetric degradation relative to the symmetric references at s_y and s_x for every model.",
+   "R(u_y, u_x) grids per model and policy: a wrong cell on one axis should raise error along that axis for SC-INR only.",
+   "Pairs containing 6, scales 6/8/12 and the downscale condition: PSNR and R profiles, expected to be dominated by the shared encoder with small decoder differences."
+  ]
+ },
+ "interpretations": {
+  "A_footprint": "If G1-G3 pass and LIIF/LTE show seed-dependent or non-positive native-minus-iso gains, the analytic footprint response is what makes the cell well defined outside the training manifold; the symmetric in-support equality of all decoders (stage 02) is then the first prediction of the same account.",
+  "B_token": "If LIIF and LTE match SC-INR's native-minus-swap gain, the learned token generalises per axis without having been trained on asymmetric cells and the identifiability argument is wrong in practice; if G4 fails while G1-G3 pass, the current SC-INR is footprint-aware in its features but not footprint-exact in its output, which motivates a linear-readout variant."
+ },
+ "decision_rule": "Report all outcomes. Only if A is supported does the planned next stage (an exact linear-readout variant and the never-trained no-sinc ablation) justify training time.",
+ "compute": "GPU inference only on devices named at launch; about 40 full-image forward passes per image and checkpoint; no training runs."
+}
