@@ -1,0 +1,21 @@
+{
+ "version": "claude-20261102-warp-v1",
+ "status": "evaluation protocol prepared and smoke-tested on CPU; not yet frozen (inputs on the server are needed to fix hashes)",
+ "question": "When the output sampling geometry is a general homography rather than a symmetric scale, does the analytic footprint response transfer without any warp training, and where does it matter: only where the footprint is anisotropic or rotated (LTEW/SRWarp in-scale and out-of-scale), or decisively where the output is coarser than the input (minification)?",
+ "protocols": {
+  "ltew-warp": "LTEW release: warped LR inputs with forward 3x3 matrices (.pth) and HR ground truth, in-scale and out-of-scale splits for Set5/Set14/B100/Urban100/DIV2K; output grid = HR; masked PSNR (Y, no shave) over pixels whose source lies inside the input, following LTEW's calc_mpsnr. Matrix convention (input px -> output px, integer centres) is checked on SRWarp's validation set, which ships ground truth: the bicubic-point baseline must reach a plausible PSNR; otherwise --invert-matrix.",
+  "ltew-asym": "LTEW's 24 asymmetric pairs (three in-scale, three out-of-scale per dataset), LR by per-axis PIL bicubic exactly as LTEW's sr-asp-implicit-downsampled wrapper; evaluated as a diagonal homography through the same code path.",
+  "minify": "our split: input = HR image, output = HR-sized grid under a perspective tilt with local minification (strength 0.3/0.6/0.9, fixed seed); reference = 8x8 supersampled bicubic backward warp, i.e. the box-filtered warp. Baselines: bicubic point warp (aliased) and the supersampled warp itself (upper bound)."
+ },
+ "footprints": {
+  "token": "LIIF, LTE, SC-INR with the axis-aligned cell = bounding box of the parallelogram J[-1/2,1/2]^2 (reduces to the exact per-axis cell for scaling)",
+  "jac": "SC-INR and SC-INR-exact with the parallelogram footprint through the sinc response: W_k = sinc(w_k . J e_row) sinc(w_k . J e_col); for diagonal J identical to the cell path (verified to 0)"
+ },
+ "expectations_written_before_running": {
+  "E1": "ltew-warp in-scale: zero-shot models trained on symmetric scales lose to LTEW's published numbers (trained on warps); among them SC-INR >= LTE and the jac footprint >= token footprint by a small margin. This is a transfer check, not a claim of superiority.",
+  "E2": "ltew-asym: reproduces the stage-01 ordering on LTEW's own pairs; out-of-scale pairs (one factor up to 8) widen the LTE gap.",
+  "E3": "minify: bicubic-point aliases where local scale < 1; SC-INR (jac) and SC-INR-exact approach the supersampled reference, LIIF/LTE do not improve on bicubic-point there. This is the setting the footprint view is for; a failure here would falsify the practical value of the analytic response.",
+  "not_claimed": "no PSNR superiority at symmetric in-range scales; LTEW-level warping quality without warp training"
+ },
+ "compute": "inference only; LTEW sets about 400 images x 2 splits, minify 3 strengths per image; a few GPU-hours in total"
+}

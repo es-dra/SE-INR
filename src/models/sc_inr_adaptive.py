@@ -214,7 +214,10 @@ class SCINRAdaptive(nn.Module):
 
         return self.feat
 
-    def query_rgb(self, coord: torch.Tensor, cell: torch.Tensor = None) -> torch.Tensor:
+    def query_rgb(self, coord: torch.Tensor, cell: torch.Tensor = None, jac: torch.Tensor = None) -> torch.Tensor:
+        """jac: optional [B, Q, 2, 2] local Jacobian d(LR y, x)/d(output row, col) in LR pixels per output pixel.
+        When given, the sinc response is that of the parallelogram footprint jac @ [-1/2, 1/2]^2 instead of the
+        axis-aligned cell: W_k = sinc(w_k . J e_row) sinc(w_k . J e_col). Cell is then ignored."""
         feat = self.feat
         coef = self.coeff
         omega_map = self.omega_map
@@ -259,6 +262,8 @@ class SCINRAdaptive(nn.Module):
                 rel_coord[:, :, 0] *= feat.shape[-2]
                 rel_coord[:, :, 1] *= feat.shape[-1]
 
+                if cell is None:
+                    cell = torch.full_like(coord, 2.0 / max(feat.shape[-2:]))
                 rel_cell = cell.clone()
                 rel_cell[:, :, 0] *= feat.shape[-2]
                 rel_cell[:, :, 1] *= feat.shape[-1]
@@ -285,12 +290,17 @@ class SCINRAdaptive(nn.Module):
                 omega_x = q_omega[:, :, :, 0]  # [B, Q, K]
                 omega_y = q_omega[:, :, :, 1]  # [B, Q, K]
 
-                if self.use_sinc_response:
+                if not self.use_sinc_response:
+                    W = torch.ones_like(q_phase)
+                elif jac is not None:
+                    # omega is in cycles per LR pixel along (y, x); jac columns are the footprint edge vectors in LR pixels
+                    e_row = omega_x * jac[:, :, 0, 0:1] + omega_y * jac[:, :, 1, 0:1]
+                    e_col = omega_x * jac[:, :, 0, 1:2] + omega_y * jac[:, :, 1, 1:2]
+                    W = analytic_sinc(e_row) * analytic_sinc(e_col)
+                else:
                     sinc_x = analytic_sinc(omega_x * c_x / 2)  # [B, Q, K]
                     sinc_y = analytic_sinc(omega_y * c_y / 2)  # [B, Q, K]
                     W = sinc_x * sinc_y
-                else:
-                    W = torch.ones_like(q_phase)
 
                 # Step 4: sinc-weighted Fourier features
                 fourier_cos_w = fourier_cos * W

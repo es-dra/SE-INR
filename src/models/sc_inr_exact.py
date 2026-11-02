@@ -104,7 +104,9 @@ class SCINRExact(nn.Module):
         self.phase_map = self.phase(self.feat) if self.phase is not None else None
         return self.feat
 
-    def query_rgb(self, coord, cell):
+    def query_rgb(self, coord, cell, jac=None):
+        if jac is not None:
+            return self._query_jac(coord, jac)
         B, Q = coord.shape[:2]
         fh, fw = self.feat.shape[-2:]
         yq = (coord[..., 0] + 1) / 2 * fh
@@ -176,6 +178,44 @@ class SCINRExact(nn.Module):
         v = F.grid_sample(self.inp, g, mode='bilinear', padding_mode='border', align_corners=False)
         v = v[:, :, :, 0].permute(0, 2, 1).reshape(B, Q, P // 4, -1)
         return (v * w[..., None]).sum(dim=2)
+
+    def _query_jac(self, coord, jac):
+        """Parallelogram footprint jac @ [-1/2, 1/2]^2 (LR px per output px). The sinusoid integrates exactly over the
+        parallelogram (|det J| sinc(w.Je_row) sinc(w.Je_col) at its centre); the bilinear blend weights are taken at the
+        centre, so this path is footprint-exact per cell but not partitioned across cells (used for warping evaluation)."""
+        B, Q = coord.shape[:2]
+        fh, fw = self.feat.shape[-2:]
+        yq = (coord[..., 0] + 1) / 2 * fh - 0.5
+        xq = (coord[..., 1] + 1) / 2 * fw - 0.5
+        y0, x0 = torch.floor(yq).clamp(0, fh - 2), torch.floor(xq).clamp(0, fw - 2)
+        ty, tx = (yq - y0).clamp(0, 1), (xq - x0).clamp(0, 1)
+        jy = torch.stack([y0, y0, y0 + 1, y0 + 1], -1).long()
+        jx = torch.stack([x0, x0 + 1, x0, x0 + 1], -1).long()
+        w = torch.stack([(1 - ty) * (1 - tx), (1 - ty) * tx, ty * (1 - tx), ty * tx], -1)      # [B, Q, 4]
+        flat = jy * fw + jx
+
+        def gather(m):
+            C = m.shape[1]
+            g = m.reshape(B, C, fh * fw).gather(2, flat.reshape(B, 1, -1).expand(B, C, -1))
+            return g.reshape(B, C, Q, 4).permute(0, 2, 3, 1)
+
+        coef = gather(self.coef_map)
+        om = gather(self.omega_map).reshape(B, Q, 4, self.K, 2)
+        wy, wx = om[..., 0], om[..., 1]
+        dy = (yq + 0.5)[..., None] - (jy.to(yq.dtype) + 0.5)
+        dx = (xq + 0.5)[..., None] - (jx.to(xq.dtype) + 0.5)
+        theta = 2 * math.pi * (wy * dy[..., None] + wx * dx[..., None])
+        if self.phase_map is not None:
+            theta = theta + gather(self.phase_map)
+        e_row = wy * jac[:, :, None, 0, 0, None] + wx * jac[:, :, None, 1, 0, None]
+        e_col = wy * jac[:, :, None, 0, 1, None] + wx * jac[:, :, None, 1, 1, None]
+        att = torch.sinc(e_row) * torch.sinc(e_col)
+        feats = torch.cat([att * torch.cos(theta), att * torch.sin(theta)], dim=-1) * coef * w[..., None]
+        out = F.linear(feats, self.readout.weight).sum(dim=2) + self.readout.bias
+        if self.base == 'bilinear':
+            g = torch.stack([(xq + 0.5) / fw * 2 - 1, (yq + 0.5) / fh * 2 - 1], -1).reshape(B, Q, 1, 2)
+            out = out + F.grid_sample(self.inp, g, mode='bilinear', padding_mode='border', align_corners=False)[:, :, :, 0].permute(0, 2, 1)
+        return out
 
     def forward(self, inp, coord, cell):
         self.gen_feat(inp)
