@@ -1,0 +1,18 @@
+{
+  "model": "lte",
+  "seed": "3",
+  "registry_name": "lte",
+  "started_at_utc": "2026-11-02T08:35:03.713452+00:00",
+  "device": "cuda",
+  "device_name": "NVIDIA A800 80GB PCIe",
+  "cuda_visible_devices": "1",
+  "torch_version": "2.8.0a0+5228986c39.nv25.05",
+  "frozen_sha256": "947de83703ca5cadc59f50a6910b3fcb02f1af2257097eb4d29daf7b5717bab9",
+  "checkpoint": {
+    "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed3/lte/epoch-last.pth",
+    "sha256": "85b19c8dc4c2263b7e48c781b3a1cbab513a82ac71adc5c9c3742b8a18aff024",
+    "registry_name": "lte",
+    "epoch": 1000,
+    "parameters": 1714267
+  }
+}

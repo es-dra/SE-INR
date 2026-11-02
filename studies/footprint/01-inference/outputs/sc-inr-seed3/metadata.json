@@ -1,0 +1,18 @@
+{
+  "model": "sc-inr",
+  "seed": "3",
+  "registry_name": "sc_inr_signed_phiz",
+  "started_at_utc": "2026-11-02T08:43:13.522899+00:00",
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "3",
+  "torch_version": "2.8.0a0+5228986c39.nv25.05",
+  "frozen_sha256": "947de83703ca5cadc59f50a6910b3fcb02f1af2257097eb4d29daf7b5717bab9",
+  "checkpoint": {
+    "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed3/sc-inr/epoch-last.pth",
+    "sha256": "518262950d3299b5a1c4cc60d184cdbe2ac7f389dbf776b4615d76933de396ae",
+    "registry_name": "sc_inr_signed_phiz",
+    "epoch": 1000,
+    "parameters": 1722203
+  }
+}

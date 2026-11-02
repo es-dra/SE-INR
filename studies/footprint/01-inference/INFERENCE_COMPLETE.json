@@ -1,0 +1,60 @@
+{
+  "seconds": 6800.142055273056,
+  "finished": [
+    {
+      "model": "sc-inr",
+      "seed": "1",
+      "gpu": "3",
+      "returncode": 0
+    },
+    {
+      "model": "lte",
+      "seed": "1",
+      "gpu": "1",
+      "returncode": 0
+    },
+    {
+      "model": "liif",
+      "seed": "1",
+      "gpu": "0",
+      "returncode": 0
+    },
+    {
+      "model": "liif",
+      "seed": "2",
+      "gpu": "3",
+      "returncode": 0
+    },
+    {
+      "model": "lte",
+      "seed": "2",
+      "gpu": "1",
+      "returncode": 0
+    },
+    {
+      "model": "liif",
+      "seed": "3",
+      "gpu": "3",
+      "returncode": 0
+    },
+    {
+      "model": "sc-inr",
+      "seed": "2",
+      "gpu": "0",
+      "returncode": 0
+    },
+    {
+      "model": "sc-inr",
+      "seed": "3",
+      "gpu": "3",
+      "returncode": 0
+    },
+    {
+      "model": "lte",
+      "seed": "3",
+      "gpu": "1",
+      "returncode": 0
+    }
+  ],
+  "frozen_sha256": "947de83703ca5cadc59f50a6910b3fcb02f1af2257097eb4d29daf7b5717bab9"
+}

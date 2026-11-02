@@ -1,0 +1,18 @@
+{
+  "model": "sc-inr",
+  "seed": "2",
+  "registry_name": "sc_inr_signed_phiz",
+  "started_at_utc": "2026-11-02T08:05:13.572278+00:00",
+  "device": "cuda",
+  "device_name": "NVIDIA A800 80GB PCIe",
+  "cuda_visible_devices": "0",
+  "torch_version": "2.8.0a0+5228986c39.nv25.05",
+  "frozen_sha256": "947de83703ca5cadc59f50a6910b3fcb02f1af2257097eb4d29daf7b5717bab9",
+  "checkpoint": {
+    "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed2/sc-inr/epoch-last.pth",
+    "sha256": "f3b3c3fee9d8e6efe5b11832bd37b43bb01faeb2a0339b99d6f51842aa537c10",
+    "registry_name": "sc_inr_signed_phiz",
+    "epoch": 1000,
+    "parameters": 1722203
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "records": 9840,
+  "seconds": 2359.2214863300323,
+  "training_runs": 0,
+  "parseval_max_abs": 1.3877787807814457e-17,
+  "records_sha256": "0ce7f9029a7e24cb5b9188a7dbefe5b1a168781641076b9155121e1a76597849",
+  "frozen_sha256": "947de83703ca5cadc59f50a6910b3fcb02f1af2257097eb4d29daf7b5717bab9"
+}

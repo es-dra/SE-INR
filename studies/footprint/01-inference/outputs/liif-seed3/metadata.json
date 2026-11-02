@@ -1,0 +1,18 @@
+{
+  "model": "liif",
+  "seed": "3",
+  "registry_name": "liif",
+  "started_at_utc": "2026-11-02T08:14:03.538471+00:00",
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "3",
+  "torch_version": "2.8.0a0+5228986c39.nv25.05",
+  "frozen_sha256": "947de83703ca5cadc59f50a6910b3fcb02f1af2257097eb4d29daf7b5717bab9",
+  "checkpoint": {
+    "path": "/workspace/SE-INR/SC-ASISR/artifacts/checkpoints/seed3/liif/epoch-last.pth",
+    "sha256": "d3638bf440265eda0deee2627912f9602e315f53d8006d2a30d5123c90e57dbe",
+    "registry_name": "liif",
+    "epoch": 1000,
+    "parameters": 1567323
+  }
+}
