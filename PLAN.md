@@ -35,6 +35,14 @@
 - 第 1、2 级（训练，`studies/footprint/02-training/`，200 epoch 配方、2 种子）：lte、sc-inr、sc-inr-nosinc、liif-asym、lte-asym、sc-inr-exact（足迹精确线性读出，`src/models/sc_inr_exact.py`，参数 1.68M 与 LTE 对齐）、lte-linear。冻结预测 T1–T5 见该目录 protocol.json。
 - 新模型已在 CPU 上验证：盒平均 ×4 输出等于 ×2 输出、(4,2) 等于 (2,2)、×1 等于 ×0.5，误差 1e-7。
 
+## 2026-11-02 阶段 01 结果（三解码器 1000 epoch 各 3 种子，88,560 条记录）
+
+- G1、G2 通过：SC-INR 真实 cell 减互换 cell +0.069 dB（三种子均正），高于 LIIF 0.071、LTE 0.100。G3 失败：SC-INR 真实 cell 减对称替代 −0.045（sinc 之后的 MLP 只见过各向同性衰减）。G4 失败：一致性 LIIF 44.48、SC-INR 44.35、LTE 43.71 dB。
+- 命题 1 定量命中：LTE 非对称倍率种子极差 0.9–3.6 dB（对称 ≤0.02），真实 cell 比对称替代低 1.364；LIIF 对调换不敏感（−0.002）。零成本修正：LTE 用几何平均 cell 回收 1.33 dB。
+- 缩小 0.5 倍对盒平均：SC-INR 42.81、LTE 30.15、LIIF 23.87、抗混叠 bicubic 39.32、最近邻 26.13 dB。
+- 修正案 3 登记了精确版本的新预测 T6–T8；论文 Table 2、3 与图 fig_grid、fig_policy、fig_beyond 已按真实数据生成（`studies/footprint/02-training/figures.py`、`tables.py`）。
+- 阶段 03（扭曲评测，`studies/footprint/03-warp/`）已备好：LTEW 单应与 24 组非对称协议、自建缩小 split、jac/iso/token 三种足迹模式。
+
 ## 下一步（2026-11-01 更新）
 
 - [用户] 把服务器 `runs/claude-20261029-sp-pilot-v1/` 下的 `score.json`、`results.txt`、`score.out`、`probe_*.json`、`logs/` 提交到 `studies/method-sp/01-pilot/results/`。

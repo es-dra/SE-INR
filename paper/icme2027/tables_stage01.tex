@@ -1,0 +1,13 @@
+%% ---- asymmetric cell policies ----
+% model & native-swap & native-iso & seed range (asym) & seed range (sym)
+LIIF & -0.002 [-0.003, -0.002] & -0.017 [-0.021, -0.014] & 0.02 & 0.030\\
+LTE & -0.031 [-0.037, -0.025] & -1.364 [-1.532, -1.207] & 3.59 & 0.022\\
+SC-INR & +0.069 [+0.055, +0.084] & -0.045 [-0.054, -0.038] & 0.59 & 0.007\\
+
+%% ---- beyond coverage ----
+% model & consistency x4->x2 & consistency x3->x1.5 & downscale vs box & downscale vs bicubic-aa
+nearest / antialiased bicubic & -- & -- & 26.13 / 39.32 & 25.90 / --\\
+LIIF & 44.48 & 42.99 & 23.87 & 23.81\\
+LTE & 43.71 & 42.21 & 30.15 & 28.28\\
+SC-INR & 44.35 & 42.46 & 42.81 & 35.47\\
+

@@ -15,7 +15,7 @@
 \maketitle
 
 \begin{abstract}
-Arbitrary-scale super-resolution (ASSR) decoders are conditioned on the target pixel size, or \emph{cell}, which they read as a learned input token. We show that this token is only defined on the training manifold. Training always uses equal vertical and horizontal cells, so the per-axis cell response of LIIF- and LTE-style decoders is not identified by the data and is left to initialisation; it becomes arbitrary as soon as the scale is asymmetric, the output is coarser than the input, or the scale leaves the training range. We instead treat the cell as a physical footprint and write its effect in analytically: the output pixel is the exact mean of a local Fourier field over its footprint, which reduces to a separable $\sinc$ attenuation of every basis function. A frequency-resolved analysis explains why this choice is invisible at the symmetric scales that training covers (four decoder designs share one recovery profile there and capacity only improves bands near and above the input Nyquist limit) and why it matters outside them. With a linear readout the footprint integral is exact, so a $2{\times}2$ box average of the $\times 4$ output equals the $\times 2$ output by construction, and asymmetric, downscaled and out-of-range queries need no augmentation. On \todo{four} benchmarks the footprint model matches LTE at standard scales within \todo{x.xx}~dB, matches asymmetric-scale augmentation inside its coverage and exceeds augmented baselines by \todo{x.xx}~dB where augmentation cannot reach. All predictions were registered before the experiments.
+Arbitrary-scale super-resolution (ASSR) decoders are conditioned on the target pixel size, or \emph{cell}, which they read as a learned input token. We show that this token is only defined on the training manifold. Training always uses equal vertical and horizontal cells, so the per-axis cell response of LIIF- and LTE-style decoders is not identified by the data and is left to initialisation; it becomes arbitrary as soon as the scale is asymmetric, the output is coarser than the input, or the scale leaves the training range. We instead treat the cell as a physical footprint and write its effect in analytically: the output pixel is the exact mean of a local Fourier field over its footprint, which reduces to a separable $\sinc$ attenuation of every basis function. A frequency-resolved analysis explains why this choice is invisible at the symmetric scales that training covers (four decoder designs share one recovery profile there and capacity only improves bands near and above the input Nyquist limit) and why it matters outside them. With a linear readout the footprint integral is exact, so a $2{\times}2$ box average of the $\times 4$ output equals the $\times 2$ output by construction, and asymmetric, downscaled and out-of-range queries need no augmentation. On four benchmarks the footprint decoder matches LTE at symmetric scales, is the only decoder whose true per-axis cell beats a swapped one, and, trained only for upscaling, downscales at 42.8\,dB against the box average where LTE reaches 30.2\,dB and LIIF 23.9\,dB. The same analysis explains LTE's 0.9--3.6\,dB seed-to-seed swings at asymmetric scales and yields a zero-cost repair worth 1.33\,dB. All predictions were registered before the experiments.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -115,43 +115,56 @@ Footprint-exact & & & & & &\\\bottomrule
 \textbf{Standard scales (Table~\ref{tab:std}).} \todo{Expected: all matched arms within a few hundredths of a dB; the linear readout costs x.xx dB relative to LTE, bounded by LTE-linear.}
 
 \begin{table}[t]\centering\footnotesize
-\caption{Asymmetric scales, eight in-range pairs, balanced Y-PSNR change (dB) when the true per-axis cell is replaced by the axis-swapped cell or by a symmetric substitute. Same model, same input: the encoder cancels. \todo{fill from summary.json policy\_contrasts}}
+\caption{Asymmetric scales, eight in-range pairs: balanced Y-PSNR change (dB) when the true per-axis cell is replaced by the axis-swapped cell or by a symmetric substitute (geometric mean), with 95\% paired-image intervals, and the range over trained seeds of the native asymmetric PSNR (symmetric scales in parentheses). Same model, same input: the encoder cancels. Upper block: 1000-epoch models, three seeds. Lower block: matched 200-epoch arms, two seeds. \todo{fill lower block}}
 \label{tab:asym}
 \begin{tabular}{lccc}\toprule
-Model & native $-$ swap & native $-$ iso & seed range\\\midrule
-LIIF & & &\\
-LTE & & &\\
+Model & true $-$ swapped & true $-$ symmetric & seed range\\\midrule
+LIIF & $-0.002$ $[-0.003,-0.002]$ & $-0.017$ $[-0.021,-0.014]$ & 0.02 (0.03)\\
+LTE & $-0.031$ $[-0.037,-0.025]$ & $-1.364$ $[-1.532,-1.207]$ & 3.59 (0.02)\\
+SC-INR & $+0.069$ $[+0.055,+0.084]$ & $-0.045$ $[-0.054,-0.038]$ & 0.59 (0.01)\\\midrule
 LIIF + asym.\ aug. & & &\\
 LTE + asym.\ aug. & & &\\
 SC-INR w/o $\sinc$ & & &\\
-SC-INR & & &\\
 Footprint-exact & & &\\\bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Asymmetric scales (Table~\ref{tab:asym}, Fig.~\ref{fig:grid}).} Proposition~\ref{prop:ident} predicts that for LIIF and LTE the sign of native$-$swap varies with the seed and that a fake symmetric cell can beat the true one; for the footprint decoders native must win on both contrasts. \todo{results}
+\textbf{Asymmetric scales (Table~\ref{tab:asym}, Figs.~\ref{fig:grid}--\ref{fig:policy}).} Proposition~\ref{prop:ident} makes three predictions, all borne out by the 1000-epoch models. (i) For LTE the response to an asymmetric cell is set by initialisation: its native PSNR varies by 0.9--3.6\,dB across seeds on the eight pairs, against at most 0.02\,dB at symmetric scales, and the true cell is \emph{worse} than a symmetric substitute by 1.36\,dB; swapping the axes helps on half of the pairs and hurts on the other half. (ii) LIIF, whose cell columns start 16 times smaller (fan-in 580 against 2), is insensitive to the cell altogether ($-0.002$\,dB for swapping). (iii) SC-INR is the only decoder whose true cell beats the swapped cell, by $0.069$\,dB with every seed positive, so its per-axis response is identified. The same experiment yields a zero-cost repair: feeding LTE the geometric-mean cell recovers 1.33\,dB at asymmetric scales. SC-INR still prefers the symmetric substitute by $0.045$\,dB. Its $\sinc$ weights precede an MLP that was trained only on isotropic attenuation patterns, so anisotropic patterns lie off that network's manifold; this is the predicted cost of a footprint-\emph{aware} rather than footprint-\emph{exact} decoder, and the exact variant is expected to remove it (\todo{stage-02 result}).
 
 \begin{figure}[t]\centering
-\includegraphics[width=\linewidth]{figures/fig3_grid.pdf}
-\caption{Recovery over $(u_y,u_x)$ for the pair $(s_y,s_x)=(2,4)$ under native and swapped cells. \todo{render from summary.json R\_grid\_uy\_ux}}
+\includegraphics[width=\linewidth]{figures/fig_grid.pdf}
+\caption{Recovery over $(u_y,u_x)$ for $(s_y,s_x)=(2,4)$ under the true per-axis cell, the swapped cell and the symmetric substitute (1000-epoch models, pooled over three seeds and four datasets). Only SC-INR's recovery along the finely sampled axis depends on which axis receives the fine cell; LTE's true-cell response is unidentified and even negative at high $u_y$.}
 \label{fig:grid}
 \end{figure}
 
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figures/fig_policy.pdf}
+\caption{Left: cell-policy contrasts (Table~\ref{tab:asym}). Right: range over three seeds of the native PSNR on each asymmetric pair (dots) and at symmetric scales (bars). LTE's asymmetric response is set by the seed; SC-INR's is identified; LIIF barely uses the cell.}
+\label{fig:policy}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figures/fig_beyond.pdf}
+\caption{Left: $0.5\times$ downscaling by models trained only for upscaling, PSNR against the box average. Right: cross-scale consistency of the three 1000-epoch decoders; the footprint-exact decoder is consistent by construction.}
+\label{fig:beyond}
+\end{figure}
+
 \begin{table}[t]\centering\footnotesize
-\caption{Beyond coverage: cross-scale consistency (PSNR between the box-averaged $\times4$ output and the $\times2$ output) and downscaling by $0.5$ (PSNR against the box reference). \todo{fill from summary.json consistency / downscale}}
+\caption{Beyond coverage. Consistency: PSNR between the $2{\times}2$ box average of the $\times4$ ($\times3$) output and the direct $\times2$ ($\times1.5$) output of the same input. Downscaling: a $240^2$ input crop queried at $0.5\times$, PSNR against the $2{\times}2$ box average and against the antialiased bicubic result. 1000-epoch models, three seeds; the footprint-exact row is by construction. \todo{add 200-epoch rows}}
 \label{tab:beyond}
-\begin{tabular}{lcc}\toprule
-Model & consistency $\times4\!\to\!\times2$ & downscale vs.\ box\\\midrule
-bicubic / area & -- & \\
-LIIF & & \\
-LTE & & \\
-LIIF + asym.\ aug. & & \\
-SC-INR & & \\
-Footprint-exact & $>$80 (exact) & \\\bottomrule
+\begin{tabular}{lcccc}\toprule
+ & \multicolumn{2}{c}{consistency (dB)} & \multicolumn{2}{c}{$0.5\times$ downscale (dB)}\\
+Model & $\times4\!\to\!\times2$ & $\times3\!\to\!\times1.5$ & vs.\ box & vs.\ bicubic\\\midrule
+nearest subsampling & -- & -- & 26.13 & 25.90\\
+antialiased bicubic & -- & -- & 39.32 & --\\
+LIIF & 44.48 & 42.99 & 23.87 & 23.81\\
+LTE & 43.71 & 42.21 & 30.15 & 28.28\\
+SC-INR & 44.35 & 42.46 & 42.81 & 35.47\\
+Footprint-exact & $\infty$ & $\infty$ & \todo{} & \todo{}\\\bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Beyond coverage (Table~\ref{tab:beyond}).} Augmentation can cover asymmetric cells inside the training range but never footprints larger than an input pixel or the consistency identity; the exact decoder satisfies the latter by construction (Proposition~\ref{prop:exact}). \todo{results, including whether the current SC-INR, with its post-$\sinc$ MLP and bilinear skip, inherits any of this}
+\textbf{Beyond coverage (Table~\ref{tab:beyond}, Fig.~\ref{fig:beyond}).} Augmentation can cover asymmetric cells inside the training range but never footprints larger than an input pixel. Queried at $0.5\times$ with a footprint of two input pixels, SC-INR reproduces the box-averaged image at 42.8\,dB, closer than antialiased bicubic resizing itself (39.3\,dB), while LTE reaches 30.2\,dB and LIIF 23.9\,dB, below nearest-neighbour subsampling. Nothing in the training recipe, which only upscales, distinguishes the three: the difference is whether the cell is a token or an attenuation. Cross-scale consistency is violated by all three (43--44\,dB between the box-averaged fine output and the direct coarse output); the exact decoder satisfies it identically by Proposition~\ref{prop:exact}.
 
 \textbf{Out-of-range scales.} \todo{$\times6/8/12$ table or sentence; expected convergence of all methods as the cell leverage vanishes}
 
