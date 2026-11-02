@@ -31,6 +31,8 @@ def main():
     ap.add_argument('--bsize', type=int, default=30000)
     ap.add_argument('--out', required=True)
     ap.add_argument('--device', default=None)
+    ap.add_argument('--override', nargs='*', default=[],
+                    help='model args to override at load, e.g. use_sinc_response=false (test-time ablation; weights unchanged)')
     args = ap.parse_args()
     if args.device is not None:
         os.environ['CUDA_VISIBLE_DEVICES'] = args.device
@@ -43,6 +45,9 @@ def main():
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     ck = torch.load(args.ckpt, map_location='cpu', weights_only=True)
+    for item in args.override:
+        k, v = item.split('=', 1)
+        ck['model']['args'][k] = {'true': True, 'false': False}.get(v.lower(), v if not v.replace('.', '', 1).isdigit() else float(v))
     model = models.make(ck['model'], load_sd=True).to(device).eval()
     norm_sub = torch.tensor([0.5], device=device).view(1, -1, 1, 1)
     done = set()
@@ -76,7 +81,7 @@ def main():
                     gt = batch['gt'].to(device).view(1, H, W, 3).permute(0, 3, 1, 2)
                     avg.add(metric(pred, gt).item())
             rec = {'name': args.name, 'dataset': ds, 'scale': s, 'psnr': avg.item(), 'images': len(data),
-                   'ckpt': args.ckpt, 'registry_name': ck['model']['name'], 'epoch': ck.get('epoch'),
+                   'ckpt': args.ckpt, 'registry_name': ck['model']['name'], 'epoch': ck.get('epoch'), 'override': args.override,
                    'seconds': round(time.time() - t0, 1)}
             with open(args.out, 'a') as f:
                 f.write(json.dumps(rec) + '\n')

@@ -1,0 +1,8 @@
+{
+ "amendment": 2,
+ "written": "2026-11-02, before the sc-inr-exact arm produced any evaluated checkpoint",
+ "change": "sc-inr-exact model revised from a nearest-cell piecewise field to a continuous field: the four nearest cells are blended with bilinear (tent) weights on the dual grid and the footprint integral of weight x sinusoid is taken in closed form. Reason: the nearest-cell field is discontinuous at feature-cell borders, which would show as seams at large scales where the footprint no longer straddles borders; the continuous field has the LIIF/LTE local ensemble as its zero-footprint limit, so the comparison with LTE isolates footprint integration alone. Verified on CPU: consistency identities hold to 1e-7, border and interior jumps at x16 have the same magnitude, parameters 1.681M.",
+ "arm_priority": "mandatory: liif-asym-200ep, sc-inr-exact-200ep, lte-200ep, sc-inr-200ep, lte-asym-200ep; optional tail: sc-inr-nosinc-200ep, lte-linear-200ep. The sinc mechanism is additionally probed without training by evaluating the trained SC-INR with use_sinc_response=false at test time (tools/benchmark.py --override), reported as descriptive.",
+ "if_already_started": "an sc-inr-exact job started before this amendment must be stopped, its save/ folder removed, code/src/models/sc_inr_exact.py replaced by the revised file, and the arm relaunched; all other arms are unaffected.",
+ "predictions": "unchanged (T1-T4, T5a, T5b)"
+}

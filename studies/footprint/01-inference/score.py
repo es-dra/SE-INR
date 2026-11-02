@@ -166,6 +166,27 @@ def main():
     summary['gates'] = gates
     summary['gates_passed'] = sum(int(g['pass']) for g in gates.values())
 
+    # ---------- pairwise contrasts against the primary (used by stage-02 gates T1-T3, T5b) ----------
+    def native_vec(model, seed=None):
+        return {d: np.mean([arr(model, f'asym:{p}:native', d, seed) for p in pairs_in], axis=0) for d in datasets}
+
+    def down_vec(model, ref, seed=None):
+        return {d: arr(model, f'down:psnr_vs_{ref}', d, seed) for d in datasets}
+
+    pairwise = {}
+    stats = {'asym_native_in_support': native_vec, 'consistency': cons_vec,
+             'downscale_vs_box': lambda m, s=None: down_vec(m, 'box', s), 'downscale_vs_bic': lambda m, s=None: down_vec(m, 'bic', s)}
+    for m in others:
+        pairwise[m] = {}
+        for name, fn in stats.items():
+            a, b_ = fn(sc), fn(m)
+            point, boot = balanced({d: a[d] - b_[d] for d in datasets})
+            pairwise[m][name] = {'primary_minus_model_db': point, 'ci95': interval(boot), 'corrected_lower_bound': corrected_lower(boot),
+                                 'per_seed': {s: balanced({d: fn(sc, s)[d] - fn(m, s)[d] for d in datasets})[0] for s in seeds}}
+    summary['pairwise_vs_primary'] = pairwise
+    cons_all = np.concatenate([cons_vec(sc)[d] for d in datasets])
+    summary['primary_consistency_db'] = {'min_over_images_seed_mean': float(cons_all.min()), 'balanced_mean': float(np.mean([cons_vec(sc)[d].mean() for d in datasets]))}
+
     # ---------- descriptive tables ----------
     desc = {}
     bal = {}

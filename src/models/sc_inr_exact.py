@@ -1,22 +1,24 @@
-"""SC-INR-exact: a local Fourier field whose output is the exact average over the query footprint.
+"""SC-INR-exact: a continuous local Fourier field whose output is the exact mean over the query footprint.
 
-Each LR feature cell (i, j) carries a local expansion
-    f_ij(y, x) = sum_k a_k cos(2*pi*(w_ky (y - y_i) + w_kx (x - x_j)) + phi_k)
-in LR-pixel units, and the continuous field is f(y, x) = f_{cell(y, x)}(y, x).
-A query with centre (y_q, x_q) and footprint (c_y, c_x) LR pixels returns the
-exact mean of f over its footprint rectangle. The rectangle is partitioned by
-the feature grid; on each piece the integral of a sinusoid is closed form:
-    mean over [ya, yb] x [xa, xb] of cos(A y + B x + phi)
-      = sinc(A L_y / 2) sinc(B L_x / 2) cos(A y_m + B x_m + phi),
-with L the piece side lengths and (y_m, x_m) its midpoint. The piece weights
-L_y L_x / (c_y c_x) sum to one. Because the readout is linear in these
-features, the output is exactly the footprint average, so a 2x2 box average of
-the s-scale output equals the s/2-scale output, and asymmetric footprints,
-downscaling (c > 1) and any out-of-range cell are handled by the same formula.
+Field. Each LR feature cell j (centre t_j = j + 1/2 in LR-pixel units) carries a local expansion
+    f_j(y, x) = sum_k a_jk cos(2*pi*(w_jky (y - y_j) + w_jkx (x - x_j)) + phi_jk).
+The continuous field blends the four nearest cells with bilinear (tent) weights on the dual grid,
+    f(y, x) = sum_j w_j(y, x) f_j(y, x),   w_j = (1 - |y - y_j|)(1 - |x - x_j|)_+ ,
+so it is continuous everywhere. In the limit of a vanishing footprint this is exactly the area-weighted
+local ensemble of LIIF/LTE: the ensemble is the zero-footprint case of this model.
 
-A low-frequency base term is the exact footprint average of the bilinear
-interpolant of the LR image (piecewise bilinear on the dual grid, whose
-rectangle mean equals its midpoint value). `base='none'` removes it.
+Output. A query with centre (y_q, x_q) and footprint (c_y, c_x) returns the exact mean of f over its
+footprint rectangle. The rectangle is partitioned by the dual grid; on each piece the weights are
+bilinear and the sinusoid integrates in closed form through two real 1-D kernels per axis,
+    S(A, L) = int_{-L/2}^{L/2} e^{iAt} dt = L sinc(AL/2),
+    T(A, L) = int_{-L/2}^{L/2} t e^{iAt} dt = -i (L^2/2) sinc'(AL/2),
+so that for w = (a + b t_y)(c + d t_x) in piece-centred coordinates
+    int w cos(A t_y + B t_x + theta) = Re[(aS_y + bT_y)(cS_x + dT_x) e^{i theta}].
+Because the readout is linear in these features, the output is exactly the footprint mean: an m x m box
+average of the s-scale output equals the s/m-scale output, asymmetric footprints, downscaling (c > 1) and
+out-of-range cells all use the same formula, and the field has no seams at large scales.
+
+The low-frequency base term is the exact footprint mean of the bilinear interpolant of the LR image.
 """
 import math
 
@@ -29,23 +31,41 @@ from models import register
 from models.sc_inr_adaptive import init_log_polar_freqs
 
 
-def _partition(t_q, half, n, origin):
-    """Partition footprints [t_q - half, t_q + half] by a 1-D grid of unit cells starting at `origin`.
+def _dsinc(z):
+    """d/dz [sin z / z], stable near zero (series below |z| < 1e-2)."""
+    small = z.abs() < 1e-2
+    zs = torch.where(small, torch.ones_like(z), z)
+    exact = (zs * torch.cos(zs) - torch.sin(zs)) / (zs * zs)
+    series = -z / 3 + z ** 3 / 30 - z ** 5 / 840
+    return torch.where(small, series, exact)
 
-    t_q, half: [B, Q] in LR-pixel units. Returns cell indices [B, Q, K] (clamped to [0, n-1]),
-    piece lengths L [B, Q, K] (zero for non-overlapping pieces) and piece midpoints [B, Q, K].
+
+def _pieces(t_q, half, n_dual):
+    """Partition footprints [t_q - half, t_q + half] by the dual grid (cell centres at i + 1/2) along one axis.
+
+    Returns, per piece: dual index p (unclamped, piece lies between centres p+1/2 and p+3/2), piece length L (0 if
+    empty), piece midpoint mid, and the two neighbour cell indices (clamped) with their tent weights in
+    piece-centred coordinates, w0 = a0 + b0*t and w1 = a1 + b1*t. Outside the dual grid the nearest cell gets
+    weight one (border replication). Shapes [B, Q, K].
     """
     lo, hi = t_q - half, t_q + half
-    first = torch.floor(lo - origin)
+    first = torch.floor(lo - 0.5)
     K = int(torch.ceil(2 * half.max()).item()) + 1
     k = torch.arange(K, device=t_q.device, dtype=t_q.dtype)
-    cell = first[..., None] + k                              # cell index (unclamped) along the axis
-    a = torch.maximum(lo[..., None], cell + origin)
-    b = torch.minimum(hi[..., None], cell + origin + 1)
+    p = first[..., None] + k
+    a = torch.maximum(lo[..., None], p + 0.5)
+    b = torch.minimum(hi[..., None], p + 1.5)
     L = (b - a).clamp_min(0)
     mid = 0.5 * (a + b)
-    idx = cell.long().clamp(0, n - 1)
-    return idx, L, mid
+    inside = (p >= 0) & (p <= n_dual - 1)
+    below, above = p < 0, p > n_dual - 1
+    j0 = p.clamp(0, n_dual).long()
+    j1 = (p + 1).clamp(0, n_dual).long()
+    a0 = torch.where(inside, (p + 1.5) - mid, torch.where(below, torch.ones_like(mid), torch.zeros_like(mid)))
+    b0 = torch.where(inside, -torch.ones_like(mid), torch.zeros_like(mid))
+    a1 = torch.where(inside, mid - (p + 0.5), torch.where(above, torch.ones_like(mid), torch.zeros_like(mid)))
+    b1 = torch.where(inside, torch.ones_like(mid), torch.zeros_like(mid))
+    return L, mid, (j0, a0, b0), (j1, a1, b1)
 
 
 @register('sc_inr_exact')
@@ -87,52 +107,74 @@ class SCINRExact(nn.Module):
     def query_rgb(self, coord, cell):
         B, Q = coord.shape[:2]
         fh, fw = self.feat.shape[-2:]
-        # query centre and footprint half-width in LR-pixel units (cell i covers [i, i+1))
         yq = (coord[..., 0] + 1) / 2 * fh
         xq = (coord[..., 1] + 1) / 2 * fw
         hy = cell[..., 0] * fh / 4
         hx = cell[..., 1] * fw / 4
-        iy, Ly, my = _partition(yq, hy, fh, 0.0)
-        ix, Lx, mx = _partition(xq, hx, fw, 0.0)
-        Ky, Kx = iy.shape[-1], ix.shape[-1]
-        # all piece combinations: [B, Q, Ky*Kx]
-        flat = (iy[..., :, None] * fw + ix[..., None, :]).reshape(B, Q, Ky * Kx)
-        w = (Ly[..., :, None] * Lx[..., None, :]).reshape(B, Q, Ky * Kx) / (4 * hy * hx)[..., None]
-        dy = (my - (iy.to(my.dtype) + 0.5))[..., :, None].expand(B, Q, Ky, Kx).reshape(B, Q, Ky * Kx)
-        dx = (mx - (ix.to(mx.dtype) + 0.5))[..., None, :].expand(B, Q, Ky, Kx).reshape(B, Q, Ky * Kx)
-        ly = Ly[..., :, None].expand(B, Q, Ky, Kx).reshape(B, Q, Ky * Kx)
-        lx = Lx[..., None, :].expand(B, Q, Ky, Kx).reshape(B, Q, Ky * Kx)
+        area = (4 * hy * hx)[..., None]                                   # [B, Q, 1]
+        Ly, my, (jy0, ay0, by0), (jy1, ay1, by1) = _pieces(yq, hy, fh - 1)
+        Lx, mx, (jx0, ax0, bx0), (jx1, ax1, bx1) = _pieces(xq, hx, fw - 1)
+        Ky, Kx = Ly.shape[-1], Lx.shape[-1]
+        P = Ky * Kx * 4
+
+        def grid(y, x):                                                   # [B,Q,Ky] x [B,Q,Kx] -> [B,Q,Ky*Kx]
+            return (y[..., :, None] * x[..., None, :]).reshape(B, Q, Ky * Kx)
+
+        def tile(v):                                                      # [B,Q,Ky*Kx] -> [B,Q,P]
+            return v.repeat_interleave(4, dim=-1)
+
+        ones_y, ones_x = torch.ones_like(Ly), torch.ones_like(Lx)
+        L2 = tile(grid(Ly, Lx))                                           # piece areas
+        my_t, mx_t = tile(grid(my, ones_x)), tile(grid(ones_y, mx))
+        Ly_t, Lx_t = tile(grid(Ly, ones_x)), tile(grid(ones_y, Lx))
+        # neighbour order within a piece: (y0,x0), (y0,x1), (y1,x0), (y1,x1)
+        def pick(v0, v1, axis):
+            g0, g1 = (grid(v0, ones_x), grid(v1, ones_x)) if axis == 'y' else (grid(ones_y, v0), grid(ones_y, v1))
+            order = (g0, g0, g1, g1) if axis == 'y' else (g0, g1, g0, g1)
+            return torch.stack(order, dim=-1).reshape(B, Q, P)
+        jy = pick(jy0.to(Ly.dtype), jy1.to(Ly.dtype), 'y').long()
+        jx = pick(jx0.to(Lx.dtype), jx1.to(Lx.dtype), 'x').long()
+        ay, by = pick(ay0, ay1, 'y'), pick(by0, by1, 'y')
+        ax, bx = pick(ax0, ax1, 'x'), pick(bx0, bx1, 'x')
+        flat = jy * fw + jx                                               # [B, Q, P]
 
         def gather(m):
             C = m.shape[1]
             g = m.reshape(B, C, fh * fw).gather(2, flat.reshape(B, 1, -1).expand(B, C, -1))
-            return g.reshape(B, C, Q, Ky * Kx).permute(0, 2, 3, 1)      # [B, Q, P, C]
+            return g.reshape(B, C, Q, P).permute(0, 2, 3, 1)             # [B, Q, P, C]
 
         coef = gather(self.coef_map)
-        om = gather(self.omega_map).reshape(B, Q, Ky * Kx, self.K, 2)
-        wy, wx = om[..., 0], om[..., 1]                                   # cycles per half LR pixel (LTE units)
-        theta = 2 * math.pi * (wy * dy[..., None] + wx * dx[..., None])  # 2*pi*w*(t - t_cell) with t in LR pixels
+        om = gather(self.omega_map).reshape(B, Q, P, self.K, 2)
+        wy, wx = om[..., 0], om[..., 1]                                   # cycles per LR pixel
+        dy = my_t - (jy.to(my_t.dtype) + 0.5)
+        dx = mx_t - (jx.to(mx_t.dtype) + 0.5)
+        theta = 2 * math.pi * (wy * dy[..., None] + wx * dx[..., None])
         if self.phase_map is not None:
             theta = theta + gather(self.phase_map)
-        att = torch.sinc(wy * ly[..., None]) * torch.sinc(wx * lx[..., None])   # sin(pi w L)/(pi w L): exact mean of the sinusoid over a piece of length L
-        feats = torch.cat([att * torch.cos(theta), att * torch.sin(theta)], dim=-1) * coef
-        out = (self.readout(feats) * w[..., None]).sum(dim=2)            # linear readout -> exact footprint mean
+        zy, zx = math.pi * wy * Ly_t[..., None], math.pi * wx * Lx_t[..., None]
+        Sy, Sx = Ly_t[..., None] * torch.sinc(wy * Ly_t[..., None]), Lx_t[..., None] * torch.sinc(wx * Lx_t[..., None])
+        Py, Px = ay[..., None] * Sy, ax[..., None] * Sx
+        Qy = -by[..., None] * (Ly_t[..., None] ** 2 / 2) * _dsinc(zy)
+        Qx = -bx[..., None] * (Lx_t[..., None] ** 2 / 2) * _dsinc(zx)
+        Rr = Py * Px - Qy * Qx
+        Ii = Py * Qx + Qy * Px
+        c, s = torch.cos(theta), torch.sin(theta)
+        feats = torch.cat([Rr * c - Ii * s, Rr * s + Ii * c], dim=-1) * coef   # [B, Q, P, 2K], already area-weighted
+        out = F.linear(feats / area[..., None], self.readout.weight).sum(dim=2) + self.readout.bias
         if self.base == 'bilinear':
-            out = out + self._base(yq, xq, hy, hx, fh, fw)
+            out = out + self._base(yq, xq, hy, hx, fh, fw, L2, my_t, mx_t, area)
         return out
 
-    def _base(self, yq, xq, hy, hx, fh, fw):
-        """Exact footprint mean of the bilinear interpolant of the LR image (dual grid, origin at pixel centres)."""
+    def _base(self, yq, xq, hy, hx, fh, fw, L2, my_t, mx_t, area):
+        """Exact footprint mean of the bilinear LR interpolant: bilinear on each dual-grid piece, so its mean is its midpoint value."""
         B, Q = yq.shape
-        iy, Ly, my = _partition(yq, hy, fh - 1, 0.5)
-        ix, Lx, mx = _partition(xq, hx, fw - 1, 0.5)
-        Ky, Kx = iy.shape[-1], ix.shape[-1]
-        w = (Ly[..., :, None] * Lx[..., None, :]).reshape(B, Q, Ky * Kx) / (4 * hy * hx)[..., None]
-        gy = (my[..., :, None].expand(B, Q, Ky, Kx).reshape(B, Q, -1) / fh) * 2 - 1
-        gx = (mx[..., None, :].expand(B, Q, Ky, Kx).reshape(B, Q, -1) / fw) * 2 - 1
-        grid = torch.stack([gx, gy], dim=-1).reshape(B, Q * Ky * Kx, 1, 2)
-        v = F.grid_sample(self.inp, grid, mode='bilinear', padding_mode='border', align_corners=False)
-        v = v[:, :, :, 0].permute(0, 2, 1).reshape(B, Q, Ky * Kx, -1)
+        P = L2.shape[-1]
+        w = (L2 / area)[..., ::4]                                          # one weight per piece (the 4 neighbour copies share it)
+        gy = (my_t[..., ::4] / fh) * 2 - 1
+        gx = (mx_t[..., ::4] / fw) * 2 - 1
+        g = torch.stack([gx, gy], dim=-1).reshape(B, -1, 1, 2)
+        v = F.grid_sample(self.inp, g, mode='bilinear', padding_mode='border', align_corners=False)
+        v = v[:, :, :, 0].permute(0, 2, 1).reshape(B, Q, P // 4, -1)
         return (v * w[..., None]).sum(dim=2)
 
     def forward(self, inp, coord, cell):
