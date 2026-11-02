@@ -31,6 +31,10 @@ def main():
     ap.add_argument('--source-root', default=str(HERE.parents[2] / 'src'))
     ap.add_argument('--data-root', default='/workspace/SE-INR/Data')
     ap.add_argument('--seeds', default='1,2,3')
+    ap.add_argument('--checkpoints', default=None,
+                    help='JSON file {"model:seedN": path} overriding the protocol checkpoint root (stage 02 arms)')
+    ap.add_argument('--epoch', type=int, default=None, help='expected checkpoint epoch when --checkpoints is used')
+    ap.add_argument('--tag', default=None, help='label stored in the manifest (e.g. stage02-200ep)')
     args = ap.parse_args()
     root = Path(args.run_root).resolve()
     if root.exists() and any(root.iterdir()):
@@ -61,19 +65,30 @@ def main():
         manifest['images'][ds] = rows
 
     import torch
-    seeds_present = []
-    for seed in [int(s) for s in args.seeds.split(',')]:
-        paths = {m: Path(protocol['checkpoint_root'].format(seed=seed, model=m)) for m in protocol['models']}
-        if all(p.exists() for p in paths.values()):
-            seeds_present.append(seed)
-            for m, p in paths.items():
-                ck = torch.load(p, map_location='cpu', weights_only=True)
-                assert ck['epoch'] == protocol['checkpoint_epoch'], (p, ck['epoch'])
-                n = int(sum(v.numel() for v in ck['model']['sd'].values()))
-                manifest['checkpoints'][f'{m}:seed{seed}'] = {'path': str(p), 'sha256': sha(p), 'registry_name': ck['model']['name'],
-                                                              'epoch': ck['epoch'], 'parameters': n}
-    assert seeds_present, 'no complete seed found'
-    manifest['seeds'] = seeds_present
+    expected_epoch = args.epoch or protocol['checkpoint_epoch']
+    if args.checkpoints:
+        listed = {k: Path(v) for k, v in json.loads(Path(args.checkpoints).read_text()).items()}
+        manifest['checkpoint_list'] = str(Path(args.checkpoints).resolve())
+    else:
+        listed = {f'{m}:seed{seed}': Path(protocol['checkpoint_root'].format(seed=seed, model=m))
+                  for seed in [int(x) for x in args.seeds.split(',')] for m in protocol['models']}
+        by_seed = {}
+        for k, p in listed.items():
+            by_seed.setdefault(k.split(':seed')[1], []).append(p.exists())
+        listed = {k: p for k, p in listed.items() if all(by_seed[k.split(':seed')[1]])}
+    for key, p in listed.items():
+        assert p.exists(), p
+        ck = torch.load(p, map_location='cpu', weights_only=True)
+        assert ck['epoch'] == expected_epoch, (p, ck['epoch'], expected_epoch)
+        n = int(sum(v.numel() for v in ck['model']['sd'].values()))
+        manifest['checkpoints'][key] = {'path': str(p), 'sha256': sha(p), 'registry_name': ck['model']['name'],
+                                        'epoch': ck['epoch'], 'parameters': n}
+    assert manifest['checkpoints'], 'no checkpoint found'
+    manifest['seeds'] = sorted({int(k.split(':seed')[1]) for k in manifest['checkpoints']})
+    manifest['checkpoint_epoch'] = expected_epoch
+    manifest['tag'] = args.tag
+    protocol['checkpoint_epoch'] = expected_epoch
+    (root / 'protocol.json').write_text(json.dumps(protocol, indent=1, ensure_ascii=False) + '\n')
     (root / 'input_manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
 
     lines = []
@@ -82,7 +97,7 @@ def main():
     for path in sorted((root / 'src').rglob('*.py')):
         lines.append(f'{sha(path)}  {path.relative_to(root)}')
     (root / 'FROZEN.sha256').write_text('\n'.join(lines) + '\n')
-    print(json.dumps({'run_root': str(root), 'seeds': seeds_present, 'images': {k: len(v) for k, v in manifest['images'].items()},
+    print(json.dumps({'run_root': str(root), 'seeds': manifest['seeds'], 'images': {k: len(v) for k, v in manifest['images'].items()},
                       'checkpoints': list(manifest['checkpoints']), 'frozen_sha256': sha(root / 'FROZEN.sha256')}, indent=1))
 
 

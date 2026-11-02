@@ -29,6 +29,12 @@
 
 两种解释：A，cell 是物理足迹，解析 sinc 响应使尺度条件在训练流形之外仍有定义，对称倍率上各解码器相等是同一理论的第一条预测；B，学到的 token 在非对称 cell 上也能按轴泛化，可辨识性论证在实践中不成立。协议、五条冻结预测（G1–G4）与判定规则见 `studies/footprint/01-inference/protocol.json`；现有 LIIF/LTE/SC-INR 1000 epoch checkpoint 上的推理，约数小时双卡。只有 A 成立时才投入训练（线性读出的精确版本与从未训练的 no-sinc 消融）。10-29 试点降为附录，结果仍按原协议判定。
 
+## 2026-11-02 小论文实验清单（目标 ICME 2027，12 月 30 日截稿）
+
+- 第 0 级（推理）：足迹外推阶段 01；1000 epoch 三解码器标准基准表（`tools/benchmark.py`，×2/3/4/6/8/12）。
+- 第 1、2 级（训练，`studies/footprint/02-training/`，200 epoch 配方、2 种子）：lte、sc-inr、sc-inr-nosinc、liif-asym、lte-asym、sc-inr-exact（足迹精确线性读出，`src/models/sc_inr_exact.py`，参数 1.68M 与 LTE 对齐）、lte-linear。冻结预测 T1–T5 见该目录 protocol.json。
+- 新模型已在 CPU 上验证：盒平均 ×4 输出等于 ×2 输出、(4,2) 等于 (2,2)、×1 等于 ×0.5，误差 1e-7。
+
 ## 下一步（2026-11-01 更新）
 
 - [用户] 把服务器 `runs/claude-20261029-sp-pilot-v1/` 下的 `score.json`、`results.txt`、`score.out`、`probe_*.json`、`logs/` 提交到 `studies/method-sp/01-pilot/results/`。

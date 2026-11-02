@@ -117,3 +117,12 @@ class LTE(nn.Module):
     def forward(self, inp, coord, cell):
         self.gen_feat(inp)
         return self.query_rgb(coord, cell)
+
+
+@register('lte_linear')
+class LTELinear(LTE):
+    """LTE with a linear readout in place of the MLP: isolates what the post-basis nonlinearity contributes."""
+
+    def __init__(self, encoder_spec, imnet_spec=None, hidden_dim=256, **kwargs):
+        super().__init__(encoder_spec, imnet_spec={'name': 'mlp', 'args': {'out_dim': 3, 'hidden_list': []}},
+                         hidden_dim=hidden_dim, **kwargs)

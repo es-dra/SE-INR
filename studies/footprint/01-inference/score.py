@@ -43,6 +43,7 @@ def key_of(r):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--run-root', required=True)
+    ap.add_argument('--primary', default='sc-inr', help='model whose footprint response the gates test')
     args = ap.parse_args()
     root = Path(args.run_root).resolve()
     protocol = json.loads((root / 'protocol.json').read_text())
@@ -122,15 +123,16 @@ def main():
 
     # ---------- gates ----------
     gates = {}
-    sc = 'sc-inr'
-    assert sc in models, models
+    sc = args.primary
+    assert sc in models, (sc, models)
+    summary['primary'] = sc
     others = [m for m in models if m != sc]
 
     v = contrast(sc, pairs_in, 'native', 'swap')
     point, boot = balanced(v)
     per_seed = {s: balanced(contrast(sc, pairs_in, 'native', 'swap', s))[0] for s in seeds}
     gates['G1_scinr_axis_identified'] = {
-        'statistic': 'SC-INR native - swap PSNR-Y, eight in-support pairs', 'point_db': point,
+        'statistic': f'{sc} native - swap PSNR-Y, eight in-support pairs', 'point_db': point,
         'corrected_lower_bound': corrected_lower(boot), 'ci95': interval(boot), 'per_seed_balanced': per_seed,
         'pass': corrected_lower(boot) > 0 and all(x > 0 for x in per_seed.values())}
 
@@ -139,13 +141,13 @@ def main():
         diff = {d: v[d] - vm[d] for d in datasets}
         point, boot = balanced(diff)
         gates[f'G2_scinr_exceeds_{m}'] = {
-            'statistic': f'(native - swap)[SC-INR] - (native - swap)[{m}]', 'point_db': point,
+            'statistic': f'(native - swap)[{sc}] - (native - swap)[{m}]', 'point_db': point,
             'corrected_lower_bound': corrected_lower(boot), 'ci95': interval(boot), 'pass': corrected_lower(boot) > 0}
 
     v3 = contrast(sc, pairs_in, 'native', 'iso')
     point, boot = balanced(v3)
     gates['G3_scinr_native_beats_iso'] = {
-        'statistic': 'SC-INR native - iso PSNR-Y, eight in-support pairs', 'point_db': point,
+        'statistic': f'{sc} native - iso PSNR-Y, eight in-support pairs', 'point_db': point,
         'corrected_lower_bound': corrected_lower(boot), 'ci95': interval(boot),
         'per_seed_balanced': {s: balanced(contrast(sc, pairs_in, 'native', 'iso', s))[0] for s in seeds},
         'pass': corrected_lower(boot) > 0}
@@ -153,7 +155,7 @@ def main():
     def cons_vec(model, seed=None):
         return {d: np.mean([arr(model, k, d, seed) for k in cons_keys], axis=0) for d in datasets}
 
-    g4 = {'statistic': 'SC-INR consistency PSNR (box(hi) vs lo) minus each other model, two pairs', 'contrasts': {}}
+    g4 = {'statistic': f'{sc} consistency PSNR (box(hi) vs lo) minus each other model, two pairs', 'contrasts': {}}
     vs = cons_vec(sc)
     for m in others:
         vm = cons_vec(m)

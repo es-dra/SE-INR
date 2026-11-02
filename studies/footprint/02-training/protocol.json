@@ -1,0 +1,32 @@
+{
+ "version": "claude-20261102-footprint-training-v1",
+ "question": "Does writing the cell in analytically (SC-INR, and its footprint-exact linear-readout variant) match data augmentation where augmentation covers (asymmetric scales within the training range) and exceed it where augmentation cannot cover (downscaling, cross-scale consistency), and what does exactness cost at standard symmetric scales?",
+ "recipe": "configs/train-div2k/train-liif-edsr-200ep.yaml: DIV2K, EDSR-baseline, 48x48 LR crops, 2304 queries, scales U(1,4) per axis, 200 epochs, Adam 1e-4, milestones 100/150, seeds 1 and 2; epoch-200 checkpoint regardless of validation",
+ "arms": {
+  "liif-200ep": "existing (studies/two-coordinates/05, 08): native LIIF",
+  "lte-200ep": "LTE under the matched recipe",
+  "sc-inr-200ep": "SC-INR (signed omega, feature phase, analytic sinc) under the matched recipe",
+  "sc-inr-nosinc-200ep": "SC-INR without the sinc response: the mechanism ablation that was never trained",
+  "liif-asym-200ep": "LIIF trained with independent s_y, s_x ~ U(1,4): the data-augmentation control",
+  "lte-asym-200ep": "LTE with the same augmentation",
+  "sc-inr-exact-200ep": "footprint-exact local Fourier field with linear readout (src/models/sc_inr_exact.py)",
+  "lte-linear-200ep": "LTE with a linear readout: what the post-basis MLP contributes at symmetric scales"
+ },
+ "evaluation": {
+  "standard": "tools/benchmark.py: Set5/Set14/BSD100/Urban100 x2/3/4/6/8/12 (Y-PSNR, shave = scale) and DIV2K validation (RGB, shave scale+6)",
+  "footprint": "studies/footprint/01-inference/run.py over all arms via freeze.py --checkpoints, scored with --primary sc-inr-exact and again with --primary sc-inr"
+ },
+ "predictions_frozen_before_training": {
+  "T1_exactness": "sc-inr-exact: consistency PSNR (box of x4 output vs x2 output) exceeds 80 dB on every image; every other arm stays below 60 dB.",
+  "T2_augmentation_parity": "Eight in-support asymmetric pairs, native cell: sc-inr-exact balanced PSNR-Y is within 0.05 dB of liif-asym (two-sided 95% interval of the difference inside [-0.05, +inf)). Prior: analytic footprint matches augmentation where augmentation covers.",
+  "T3_beyond_coverage": "Downscale (x0.5) PSNR against the box reference: sc-inr-exact exceeds liif-asym and lte-asym with corrected lower bounds > 0 (alpha 0.05/4 one-sided). Augmentation never saw c > 1.",
+  "T4_cost_of_exactness": "Standard symmetric x2/3/4 balanced Y-PSNR over the four benchmarks: sc-inr-exact is within 0.10 dB of lte-200ep. Prior uncertain; a failure is reported as the price of exactness and bounded by lte-linear.",
+  "T5_mechanism": "sc-inr-nosinc: native-minus-swap on the eight in-support pairs has |point| < 0.02 dB and its 95% interval covers zero, while sc-inr-200ep's is positive with corrected lower bound > 0."
+ },
+ "interpretations": {
+  "A": "T1-T3 pass: the analytic footprint is as good as augmentation inside its coverage and the only well-defined option outside it; the method paper's main claim holds.",
+  "B": "T2 fails with sc-inr-exact clearly below liif-asym: augmentation extracts asymmetric information the fixed sinc cannot; report and restrict the claim to coverage-free settings.",
+  "C": "T4 fails by more than lte-linear's own loss: exactness costs expressivity beyond the readout; report the trade-off and keep sc-inr-200ep as the practical variant."
+ },
+ "compute": "seven new arms x two seeds x about 17 GPU-hours (sc-inr-exact may be slower); benchmark and footprint inference add a few GPU-hours; no other training."
+}
