@@ -66,8 +66,11 @@ def main():
 
     import torch
     expected_epoch = args.epoch or protocol['checkpoint_epoch']
+    overrides = {}
     if args.checkpoints:
-        listed = {k: Path(v) for k, v in json.loads(Path(args.checkpoints).read_text()).items()}
+        raw = json.loads(Path(args.checkpoints).read_text())
+        listed = {k: Path(v['path'] if isinstance(v, dict) else v) for k, v in raw.items()}
+        overrides = {k: v.get('override', {}) for k, v in raw.items() if isinstance(v, dict)}
         manifest['checkpoint_list'] = str(Path(args.checkpoints).resolve())
     else:
         listed = {f'{m}:seed{seed}': Path(protocol['checkpoint_root'].format(seed=seed, model=m))
@@ -82,7 +85,7 @@ def main():
         assert ck['epoch'] == expected_epoch, (p, ck['epoch'], expected_epoch)
         n = int(sum(v.numel() for v in ck['model']['sd'].values()))
         manifest['checkpoints'][key] = {'path': str(p), 'sha256': sha(p), 'registry_name': ck['model']['name'],
-                                        'epoch': ck['epoch'], 'parameters': n}
+                                        'epoch': ck['epoch'], 'parameters': n, 'override': overrides.get(key, {})}
     assert manifest['checkpoints'], 'no checkpoint found'
     manifest['seeds'] = sorted({int(k.split(':seed')[1]) for k in manifest['checkpoints']})
     manifest['checkpoint_epoch'] = expected_epoch

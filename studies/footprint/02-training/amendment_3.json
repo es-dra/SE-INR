@@ -1,0 +1,13 @@
+{
+ "amendment": 3,
+ "written": "2026-11-02, after stage-01 results and before any stage-02 arm was evaluated",
+ "stage01_facts_used": "G1, G2 pass (SC-INR native-swap +0.069 dB, exceeds LIIF by 0.071 and LTE by 0.100); G3 fails (SC-INR native-iso -0.045 dB); LTE native-iso -1.364 dB with seed ranges of 0.9 to 3.6 dB on asymmetric pairs versus 0.003 to 0.022 dB on symmetric scales; LIIF native-swap -0.002, native-iso -0.017; downscale x0.5 versus the box reference: SC-INR 42.81, LTE 30.15, LIIF 23.87, nearest 26.13, antialiased bicubic 39.32 dB; consistency box(x4) vs x2: LIIF 44.48, SC-INR 44.35, LTE 43.71 dB.",
+ "interpretation_recorded": "The axis is identified by the sinc response (G1, G2), but the MLP after the sinc was trained only on isotropic attenuation patterns, so anisotropic patterns are off its manifold and the isotropic substitute cell scores higher (G3). This is the predicted limitation of a footprint-aware but not footprint-exact decoder.",
+ "added_predictions_for_stage02": {
+  "T6_exact_native_beats_iso": "sc-inr-exact: native - iso on the eight in-support pairs has corrected lower bound > -0.01 dB (no isotropic preference), while sc-inr-200ep retains a negative value.",
+  "T7_exact_seed_spread": "sc-inr-exact: seed range of native asymmetric PSNR on the in-support pairs is at most 0.05 dB on every pair (LIIF level), versus up to 0.6 dB for SC-INR and up to 3.6 dB for LTE at 1000 epochs.",
+  "T8_mechanism_at_test_time": "evaluating the trained sc-inr (1000 ep, seeds 1-3) with use_sinc_response=false in the stage-01 pipeline: downscale PSNR versus box falls below 32 dB and native-minus-swap falls to |.| < 0.01 dB; descriptive, reported with the mechanism discussion."
+ },
+ "gate_count_for_correction": "T1, T2, T3, T4, T5a, T5b, T6, T7: eight one-sided gates, alpha 0.05/8",
+ "practical_note": "For LTE at asymmetric scales, feeding the geometric-mean cell recovers 1.33 dB at zero cost; this test-time fix follows from Proposition 1 and is reported as such."
+}

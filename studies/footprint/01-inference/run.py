@@ -261,6 +261,8 @@ def worker(args, protocol, manifest):
         assert sha(checkpoint['path']) == checkpoint['sha256'], 'Checkpoint changed after freeze'
         ck = torch.load(checkpoint['path'], map_location='cpu', weights_only=True)
         assert ck['epoch'] == protocol['checkpoint_epoch'], ck['epoch']
+        for k, v in checkpoint.get('override', {}).items():   # test-time ablation: model args changed, weights unchanged
+            ck['model']['args'][k] = v
         model = models.make(ck['model'], load_sd=True).to(device).eval()
         engine = Engine(protocol, device)
         metadata = {'model': args.model, 'seed': args.seed, 'registry_name': ck['model']['name'],

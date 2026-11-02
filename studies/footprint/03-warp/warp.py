@@ -10,6 +10,7 @@ Three protocols share one geometry core (backward homography mapping with closed
 
 Each model is queried with a per-pixel footprint derived from the Jacobian J = d(LR row, col)/d(out row, col):
   token   LIIF/LTE/SC-INR as trained: axis-aligned cell = bounding box of the parallelogram J[-1/2,1/2]^2
+  iso     symmetric substitute cell (geometric mean of the two extents): the in-manifold value a token model was trained on
   jac     SC-INR and SC-INR-exact: parallelogram footprint through the sinc response (query_rgb(..., jac=J))
 Baselines: bicubic point warp and 8x8 supersampled bicubic (the reference's own construction, an upper bound).
 
@@ -133,6 +134,9 @@ def predict(model, inp, src, J, mode, chunk=20000):
     ext_y = J[:, 0, 0].abs() + J[:, 0, 1].abs()           # LR-row extent of the parallelogram
     ext_x = J[:, 1, 0].abs() + J[:, 1, 1].abs()
     cell = torch.stack([2 * ext_y / h, 2 * ext_x / w], -1)  # LIIF convention: rel_cell = cell * feat.shape = 2 * extent
+    if mode == 'iso':                                          # symmetric substitute: geometric mean of the two extents
+        g = (ext_y * ext_x).sqrt()
+        cell = torch.stack([2 * g / h, 2 * g / w], -1)
     out = []
     with torch.no_grad():
         model.gen_feat(inp)
@@ -178,7 +182,7 @@ def run_case(models_, hr, inp, m, H, W, device, record, out, gt_override=None, s
         rows.append({'model': f'bicubic-ss{ss}', 'mode': 'baseline', **psnrs(supersampled_reference(inp, m, H, W, ss, device), gt, mask)})
     x = inp * 2 - 1
     for name, (model, reg) in models_.items():
-        modes = ['token'] + (['jac'] if reg.startswith('sc_inr') else [])
+        modes = ['token', 'iso'] + (['jac'] if reg.startswith('sc_inr') else [])
         for mode in modes:
             t0 = time.time()
             pred = predict(model, x, src, J, mode)
