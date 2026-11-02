@@ -1,0 +1,12 @@
+{
+ "amendment": 1,
+ "written": "2026-11-02, before any stage-02 arm had finished training or been evaluated",
+ "reason": "T5 as frozen compares native-minus-swap for sc-inr-nosinc, but that arm has no cell input at all (its frequency and phase maps depend only on features), so native and swap are identical by construction and the gate is vacuous.",
+ "replaces": "T5_mechanism",
+ "T5a_cell_value": "Standard symmetric x2/3/4 balanced Y-PSNR: sc-inr-200ep exceeds sc-inr-nosinc-200ep with corrected lower bound > 0 (the analytic footprint is what lets SC-INR use the cell at all; expected magnitude comparable to the native-vs-no-cell gap of about 0.1 dB).",
+ "T5b_downscale": "Downscale x0.5 PSNR against the box reference: sc-inr-200ep exceeds sc-inr-nosinc-200ep with corrected lower bound > 0 (without the sinc response the model has no anti-aliasing mechanism).",
+ "descriptive_added": [
+  "cell-weight audit (tools/cell_weight_audit.py) on every LIIF and LTE checkpoint: RMS of w_x - w_y versus its Kaiming-uniform initial RMS. Proposition 1 predicts the trained difference stays at its initial value under symmetric training; the asymmetric-augmented arms should move it. LTE's phase layer has fan-in 2 (initial RMS of the difference about 0.58) and LIIF's first layer fan-in 580 (about 0.034), which predicts a much larger asymmetric-scale penalty for LTE than for LIIF."
+ ],
+ "gate_count_for_correction": "T1, T2, T3, T4, T5a, T5b: six one-sided gates, alpha 0.05/6"
+}
